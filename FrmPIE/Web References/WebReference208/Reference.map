@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx?wsdl" filename="UserLoginCheck.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx?disco" filename="UserLoginCheck.disco" />
+  </Results>
+</DiscoveryClientResultsFile>
