@@ -66,9 +66,12 @@ namespace FrmPIE
 
         PIE.Model.sys_user _sys_user_model = new PIE.Model.sys_user();
 
-        Thread _uploadERP;
-        Thread _uploadExcel;
-        Thread _printCtn;
+        public Thread _tuploadERP;
+        public Thread _tuploadExcel;
+        public Thread _tprintCtn;
+        public Thread _tinitDataGVThread;
+        public Thread _tDoWorkBackClorThread;
+        public Thread _tinitStateVoidColorThread;
 
 
 
@@ -83,6 +86,7 @@ namespace FrmPIE
             _sys_user_model = sys_user_model;
 
             InitializeComponent();
+
         }
 
 
@@ -116,16 +120,14 @@ namespace FrmPIE
 
         private void FrmPIE_Load(object sender, EventArgs e)
         {
-            //隐藏dTimePicker
-            dTimePicker.Visible = false;
 
             try
             {
+                //隐藏dTimePicker
+                dTimePicker.Visible = false;
 
                 _custip = Program.getClientIP();
-                this.txtBatchID.Focus();
 
-                initDataGV();
                 tab1AllPacklingList1.Controls.Remove(tabPackingListDetailInfoPDF3);
                 tab1AllPacklingList1.Controls.Remove(tabPackingListOCR4);
                 tab2AllCartonDetail2.Controls.Remove(tab2PoCheckPackingListError2);
@@ -135,12 +137,29 @@ namespace FrmPIE
 
                 //dataGVPackingListDetailTransferInfo3添加控件dTimePicker
                 data1GV2PackingListDetailTransferInfo2.Controls.Add(dTimePicker);
+                txtBatchID.Focus();
 
-                _uploadExcel = new Thread(UploadExcel);
 
-                _uploadERP = new Thread(UploadERP);
+                _tuploadExcel = new Thread(UploadExcel);
 
-                _printCtn = new Thread(new ParameterizedThreadStart(PrinTXTFile));
+                _tuploadERP = new Thread(UploadERP);
+
+                _tprintCtn = new Thread(new ParameterizedThreadStart(PrinTXTFile));
+
+                _tinitDataGVThread = new Thread(new ParameterizedThreadStart(initDGVdelegate));
+
+                _tDoWorkBackClorThread = new Thread(new ParameterizedThreadStart(DoWorkdelegate));
+
+                _tinitStateVoidColorThread = new Thread(new ParameterizedThreadStart(initStateVoidColorDelegate));
+
+
+                // initDataGV();
+
+                if (_tinitDataGVThread.ThreadState == ThreadState.Stopped || _tinitDataGVThread.ThreadState == ThreadState.Unstarted)
+                {
+                    CartonFromTo ctft = new CartonFromTo(0, 0, "", 1, "", 0, "");
+                    _tinitDataGVThread.Start(ctft);
+                }
 
             }
             catch (Exception ex)
@@ -216,16 +235,16 @@ namespace FrmPIE
                     }
 
                 }
-                this.data1GV1PackingListMasterInfo1.DataSource = plr_batch_mstr_ds1.Tables[0].DefaultView;
+                data1GV1PackingListMasterInfo1.DataSource = plr_batch_mstr_ds1.Tables[0].DefaultView;
 
                 initHeaderTextPlrBatchMstr1(data1GV1PackingListMasterInfo1);
 
-                this.data1GV1PackingListMasterInfo1.Refresh();
-                //MessageBox.Show(this.dataGVPackingListMasterInfo1.Columns["Batch_ID"].HeaderText); 
+                data1GV1PackingListMasterInfo1.Refresh();
+                //MessageBox.Show(dataGVPackingListMasterInfo1.Columns["Batch_ID"].HeaderText); 
 
                 if (_intVoidRightMenu1row > 0 && data1GV1PackingListMasterInfo1.DataSource != null)
                 {
-                    this.data1GV1PackingListMasterInfo1.Rows[_intVoidRightMenu1row].Cells[0].Selected = true;
+                    data1GV1PackingListMasterInfo1.Rows[_intVoidRightMenu1row].Cells[0].Selected = true;
                 }
 
                 _dsbatch1 = plr_batch_mstr_ds1;
@@ -235,7 +254,7 @@ namespace FrmPIE
             {
                 MessageBox.Show(ex.Message);
                 //intPackMainSelect = 0;
-                //this.dataGVPackingListMasterInfo1.Rows[intPackMainSelect].Cells[0].Selected = true;
+                //dataGVPackingListMasterInfo1.Rows[intPackMainSelect].Cells[0].Selected = true;
             }
 
         }
@@ -248,16 +267,16 @@ namespace FrmPIE
             }
             dgv.Columns[0].Frozen = true;
             dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
-            //this.dataGVPackingListMasterInfo1.Columns["plr_suppliers_id"].HeaderText = "Suppliers";
+            //dataGVPackingListMasterInfo1.Columns["plr_suppliers_id"].HeaderText = "Suppliers";
             dgv.Columns["batch_doc"].HeaderText = "Batch Type";
             dgv.Columns["batch_status"].HeaderText = "Void";//"Status";
-            //this.dataGVPackingListMasterInfo1.Columns["batch_void"].HeaderText = "Void";
+            //dataGVPackingListMasterInfo1.Columns["batch_void"].HeaderText = "Void";
 
             dgv.Columns["batch_cre_date"].HeaderText = "Create Date";
-            //this.dataGVPackingListMasterInfo1.Columns["batch_update_date"].HeaderText = "Update Date";
-            //this.dataGVPackingListMasterInfo1.Columns["batch_cre_user"].HeaderText = "User Id";
-            //this.dataGVPackingListMasterInfo1.Columns["batch_user_ip"].HeaderText = "Client IP";
-            //this.dataGVPackingListMasterInfo1.Columns["batch_chr01"].HeaderText = "other";
+            //dataGVPackingListMasterInfo1.Columns["batch_update_date"].HeaderText = "Update Date";
+            //dataGVPackingListMasterInfo1.Columns["batch_cre_user"].HeaderText = "User Id";
+            //dataGVPackingListMasterInfo1.Columns["batch_user_ip"].HeaderText = "Client IP";
+            //dataGVPackingListMasterInfo1.Columns["batch_chr01"].HeaderText = "other";
             dgv.Columns["batch_dec01"].HeaderText = "Items Count";
             dgv.Columns["batch_user_ip"].HeaderText = "Create IP";
         }
@@ -266,7 +285,7 @@ namespace FrmPIE
             DataSet ocr_mstr_ds2;
 
             ocr_mstr_ds2 = new PIE.BLL.OCR_mstr().GetList(100, "", "Ocr_cre_date desc");
-            this.dataGVPackingListDetailInfo2.DataSource = ocr_mstr_ds2.Tables[0].DefaultView;
+            dataGVPackingListDetailInfo2.DataSource = ocr_mstr_ds2.Tables[0].DefaultView;
 
 
         }
@@ -279,8 +298,8 @@ namespace FrmPIE
                 if (string.IsNullOrEmpty(batchid))
                 {
                     _dsePacking2 = null;
-                    this.data1GV2PackingListDetailTransferInfo2.DataSource = null;
-                    this.data1GV2PackingListDetailTransferInfo2.Refresh();
+                    data1GV2PackingListDetailTransferInfo2.DataSource = null;
+                    data1GV2PackingListDetailTransferInfo2.Refresh();
                     return;
                 }
                 else
@@ -302,13 +321,13 @@ namespace FrmPIE
                 _ds_plr_mstr3.Tables[0].AcceptChanges();
                 _dsePacking2 = _ds_plr_mstr3;
 
-                this.data1GV2PackingListDetailTransferInfo2.DataSource = _ds_plr_mstr3.Tables[0].DefaultView;
+                data1GV2PackingListDetailTransferInfo2.DataSource = _ds_plr_mstr3.Tables[0].DefaultView;
                 initHeaderTextPlrMstr2(data1GV2PackingListDetailTransferInfo2);
-                this.data1GV2PackingListDetailTransferInfo2.Refresh();
+                data1GV2PackingListDetailTransferInfo2.Refresh();
 
                 if (_intVoidRightMenu2row > 0)
                 {
-                    this.data1GV2PackingListDetailTransferInfo2.Rows[_intVoidRightMenu2row].Cells[0].Selected = true;
+                    data1GV2PackingListDetailTransferInfo2.Rows[_intVoidRightMenu2row].Cells[0].Selected = true;
                 }
                 if (_maxactive)
                 {
@@ -325,7 +344,7 @@ namespace FrmPIE
             {
                 intePackselectRowIndex = 0;
                 _intVoidRightMenu2row = -1;
-                //this.dataGVPackingListDetailTransferInfo3.Rows[intePackselect].Cells[0].Selected = true;
+                //dataGVPackingListDetailTransferInfo3.Rows[intePackselect].Cells[0].Selected = true;
             }
 
 
@@ -476,8 +495,8 @@ namespace FrmPIE
             }
 
 
-            this.dataGVPackingListDetailPDFInfo5.DataSource = plr_mstr_ds3.Tables[0].DefaultView;
-            this.dataGVPackingListDetailPDFInfo5.Refresh();
+            dataGVPackingListDetailPDFInfo5.DataSource = plr_mstr_ds3.Tables[0].DefaultView;
+            dataGVPackingListDetailPDFInfo5.Refresh();
 
 
         }
@@ -506,9 +525,9 @@ namespace FrmPIE
 
                 _dsCarton3 = plr_mstr_tran4;
 
-                this.data2GV1CartonDetailInfo3.DataSource = plr_mstr_tran4.Tables[0].DefaultView;
+                data2GV1CartonDetailInfo3.DataSource = plr_mstr_tran4.Tables[0].DefaultView;
                 initHeaderTextCartonDetails3(data2GV1CartonDetailInfo3);
-                this.data2GV1CartonDetailInfo3.Refresh();
+                data2GV1CartonDetailInfo3.Refresh();
                 initWECPrintFromTo(plr_mstr_tran4);
 
             }
@@ -545,9 +564,9 @@ namespace FrmPIE
                 _dsCarton3 = plr_mstr_tran4;
 
 
-                this.data2GV1CartonDetailInfo3.DataSource = plr_mstr_tran4.Tables[0].DefaultView;
+                data2GV1CartonDetailInfo3.DataSource = plr_mstr_tran4.Tables[0].DefaultView;
                 initHeaderTextCartonDetails3(data2GV1CartonDetailInfo3);
-                this.data2GV1CartonDetailInfo3.Refresh();
+                data2GV1CartonDetailInfo3.Refresh();
                 initWECPrintFromTo(plr_mstr_tran4);
             }
 
@@ -578,16 +597,16 @@ namespace FrmPIE
                 strSql.Append("  order by Wec_Ctn asc");
                 plr_mstr_tran4 = DbHelperSQL.Query(strSql.ToString());
 
-                this.data2GV1CartonDetailInfo3.DataSource = plr_mstr_tran4.Tables[0].DefaultView;
+                data2GV1CartonDetailInfo3.DataSource = plr_mstr_tran4.Tables[0].DefaultView;
 
                 initHeaderTextCartonDetails3(data2GV1CartonDetailInfo3);
 
-                this.data2GV1CartonDetailInfo3.Refresh();
+                data2GV1CartonDetailInfo3.Refresh();
             }
             else
             {
-                this.data2GV1CartonDetailInfo3.DataSource = plr_mstr_tran4;
-                this.data2GV1CartonDetailInfo3.Refresh();
+                data2GV1CartonDetailInfo3.DataSource = plr_mstr_tran4;
+                data2GV1CartonDetailInfo3.Refresh();
             }
             _dsCarton3 = plr_mstr_tran4;
             //if (_maximunfrm != null)
@@ -670,46 +689,46 @@ namespace FrmPIE
             {
                 strwhere = "Batch_ID='" + batchid + "' and LineID='" + lineID + "'";
                 plr_mstr_error5 = new PIE.BLL.plr_mstr_err().GetList(strwhere);
-                this.data2GV1CartonDetailInfo3.DataSource = plr_mstr_error5.Tables[0].DefaultView;
-                this.data2GV1CartonDetailInfo3.Refresh();
+                data2GV1CartonDetailInfo3.DataSource = plr_mstr_error5.Tables[0].DefaultView;
+                data2GV1CartonDetailInfo3.Refresh();
             }
             else
             {
                 plr_mstr_error5 = new PIE.BLL.plr_mstr_err().GetAllList();
-                this.dataGVPOCheckPackingListError7.DataSource = plr_mstr_error5.Tables[0].DefaultView;
-                this.dataGVPOCheckPackingListError7.Refresh();
+                dataGVPOCheckPackingListError7.DataSource = plr_mstr_error5.Tables[0].DefaultView;
+                dataGVPOCheckPackingListError7.Refresh();
             }
 
 
         }
         private void initWidth()
         {
-            this.tab1AllPacklingList1.Width = this.Width - this.tab1AllPacklingList1.Left - 30;
-            this.tab2AllCartonDetail2.Width = this.tab1AllPacklingList1.Width;
+            tab1AllPacklingList1.Width = Width - tab1AllPacklingList1.Left - 30;
+            tab2AllCartonDetail2.Width = tab1AllPacklingList1.Width;
 
-            this.groupBox1.Width = this.tab1AllPacklingList1.Width - this.groupBox1.Left - 15;
+            groupBox1.Width = tab1AllPacklingList1.Width - groupBox1.Left - 15;
 
-            this.groupBox2.Width = this.groupBox1.Width;
-            this.groupBox3.Width = this.groupBox1.Width;
-            this.groupBox4.Width = this.groupBox1.Width;
-            this.groupBox5.Width = this.groupBox1.Width;
-            this.groupBox6.Width = this.groupBox1.Width;
-            this.groupBox7.Width = this.groupBox1.Width;
+            groupBox2.Width = groupBox1.Width;
+            groupBox3.Width = groupBox1.Width;
+            groupBox4.Width = groupBox1.Width;
+            groupBox5.Width = groupBox1.Width;
+            groupBox6.Width = groupBox1.Width;
+            groupBox7.Width = groupBox1.Width;
 
-            this.data2GV1CartonDetailInfo3.Width = this.groupBox1.Width - this.data2GV1CartonDetailInfo3.Left - 10;
-            this.dataGVPackingListDetailInfo2.Width = this.data2GV1CartonDetailInfo3.Width;
-            this.data1GV2PackingListDetailTransferInfo2.Width = this.data2GV1CartonDetailInfo3.Width;
-            this.data1GV1PackingListMasterInfo1.Width = this.data2GV1CartonDetailInfo3.Width;
-            this.dataGVPackingListDetailPDFInfo5.Width = this.data2GV1CartonDetailInfo3.Width;
-            this.dataGVPOCheckPackingListError7.Width = this.data2GV1CartonDetailInfo3.Width;
+            data2GV1CartonDetailInfo3.Width = groupBox1.Width - data2GV1CartonDetailInfo3.Left - 10;
+            dataGVPackingListDetailInfo2.Width = data2GV1CartonDetailInfo3.Width;
+            data1GV2PackingListDetailTransferInfo2.Width = data2GV1CartonDetailInfo3.Width;
+            data1GV1PackingListMasterInfo1.Width = data2GV1CartonDetailInfo3.Width;
+            dataGVPackingListDetailPDFInfo5.Width = data2GV1CartonDetailInfo3.Width;
+            dataGVPOCheckPackingListError7.Width = data2GV1CartonDetailInfo3.Width;
 
-            this.tab2AllCartonDetail2.Height = this.Height - this.tab2AllCartonDetail2.Top - 50;
-            this.groupBox4.Height = this.tab2AllCartonDetail2.Height - this.groupBox4.Top - 30;
-            this.data2GV1CartonDetailInfo3.Height = this.groupBox4.Height - this.data2GV1CartonDetailInfo3.Top - 10;
-            this.groupBox7.Height = this.groupBox4.Height;
-            this.dataGVPOCheckPackingListError7.Height = this.data2GV1CartonDetailInfo3.Height;
+            tab2AllCartonDetail2.Height = Height - tab2AllCartonDetail2.Top - 50;
+            groupBox4.Height = tab2AllCartonDetail2.Height - groupBox4.Top - 30;
+            data2GV1CartonDetailInfo3.Height = groupBox4.Height - data2GV1CartonDetailInfo3.Top - 10;
+            groupBox7.Height = groupBox4.Height;
+            dataGVPOCheckPackingListError7.Height = data2GV1CartonDetailInfo3.Height;
 
-            // this.toolStripProgressBarUplad.Width = this.statusStrip1.Width;// this.toolStripStatusLabelMessage.Width;
+            // toolStripProgressBarUplad.Width = statusStrip1.Width;// toolStripStatusLabelMessage.Width;
 
         }
 
@@ -726,10 +745,10 @@ namespace FrmPIE
             _intVoidRightMenu3col = -1;
             try
             {
-                if (string.IsNullOrEmpty(this.txtBatchID.Text.Trim()))
+                if (string.IsNullOrEmpty(txtBatchID.Text.Trim()))
                 {
                     toolStripStatusLabelMessage.Text = "Error1: BatchID 为空";
-                    this.txtBatchID.Focus();
+                    txtBatchID.Focus();
                     return;
 
                 }
@@ -769,7 +788,7 @@ namespace FrmPIE
                         "and plr_po='" + ocr_mstr_model.Ocr_po + "'";
 
                     plr_mstr_ds = new PIE.BLL.plr_mstr().GetList(wherestr);
-                    this.data1GV2PackingListDetailTransferInfo2.DataSource = plr_mstr_ds.Tables[0].DefaultView;
+                    data1GV2PackingListDetailTransferInfo2.DataSource = plr_mstr_ds.Tables[0].DefaultView;
 
                     SqlParameter[] parameters = {
                                                 new SqlParameter("@BatchID",SqlDbType.VarChar,20),
@@ -782,7 +801,7 @@ namespace FrmPIE
                     parameters[2].Value = ocr_mstr_model.Ocr_po;
                     get_pl_info_Specify_proc_ds = DbHelperSQL.RunProcedure("gen_pl_info_Specify", parameters, "Plr_collect_mstr");
 
-                    this.data2GV1CartonDetailInfo3.DataSource = get_pl_info_Specify_proc_ds.Tables["Plr_collect_mstr"].DefaultView;
+                    data2GV1CartonDetailInfo3.DataSource = get_pl_info_Specify_proc_ds.Tables["Plr_collect_mstr"].DefaultView;
                 }
 
             }
@@ -800,14 +819,14 @@ namespace FrmPIE
             try
             {
                 PIE.Model.OCR_mstr ocr_mstr_model = new PIE.Model.OCR_mstr();
-                ocr_mstr_model.Ocr_BatchID = this.dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_BatchID"].Value.ToString().Trim();
-                ocr_mstr_model.Ocr_PackinglistID = this.dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["ocr_mstr_model.Ocr_PackinglistID"].Value.ToString().Trim();
+                ocr_mstr_model.Ocr_BatchID = dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_BatchID"].Value.ToString().Trim();
+                ocr_mstr_model.Ocr_PackinglistID = dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["ocr_mstr_model.Ocr_PackinglistID"].Value.ToString().Trim();
 
-                ocr_mstr_model.Ocr_lineID = this.dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_lineID"].Value.ToString().Trim();
-                ocr_mstr_model.Ocr_ctnID = this.dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_ctnID"].Value.ToString().Trim();
-                ocr_mstr_model.Ocr_po = this.dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_po"].Value.ToString().Trim();
-                ocr_mstr_model.Ocr_partno = this.dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_partno"].Value.ToString().Trim();
-                ocr_mstr_model.Ocr_qty = this.dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_qty"].Value.ToString().Trim();
+                ocr_mstr_model.Ocr_lineID = dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_lineID"].Value.ToString().Trim();
+                ocr_mstr_model.Ocr_ctnID = dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_ctnID"].Value.ToString().Trim();
+                ocr_mstr_model.Ocr_po = dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_po"].Value.ToString().Trim();
+                ocr_mstr_model.Ocr_partno = dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_partno"].Value.ToString().Trim();
+                ocr_mstr_model.Ocr_qty = dataGVPackingListDetailInfo2.Rows[e.RowIndex].Cells["Ocr_qty"].Value.ToString().Trim();
 
                 var frmplMain_show = new frmplMain(ocr_mstr_model, this);
 
@@ -979,14 +998,14 @@ namespace FrmPIE
             SqlParameter[] parameters = { };
             pl_info_ds4 = DbHelperSQL.RunProcedure("gen_pl_info", parameters, "pl_info");
 
-            this.data1GV2PackingListDetailTransferInfo2.DataSource = plr_mstr_ds3.Tables[0].DefaultView;
-            this.data2GV1CartonDetailInfo3.DataSource = pl_info_ds4.Tables["pl_info"].DefaultView;
+            data1GV2PackingListDetailTransferInfo2.DataSource = plr_mstr_ds3.Tables[0].DefaultView;
+            data2GV1CartonDetailInfo3.DataSource = pl_info_ds4.Tables["pl_info"].DefaultView;
 
             plr_batch_mstr_ds1 = new PIE.BLL.plr_batch_mstr().GetList(strwhere_plr_batch_mstr_ds);
-            this.data1GV1PackingListMasterInfo1.DataSource = plr_batch_mstr_ds1.Tables[0].DefaultView;
+            data1GV1PackingListMasterInfo1.DataSource = plr_batch_mstr_ds1.Tables[0].DefaultView;
 
             ocr_mstr_ds2 = new PIE.BLL.OCR_mstr().GetList(500, "", "Ocr_cre_date desc");
-            this.dataGVPackingListDetailInfo2.DataSource = ocr_mstr_ds2.Tables[0].DefaultView;
+            dataGVPackingListDetailInfo2.DataSource = ocr_mstr_ds2.Tables[0].DefaultView;
 
 
         }
@@ -1003,20 +1022,20 @@ namespace FrmPIE
             //}
             _strsuppliers = txtSuppliersID.Text.Trim();
 
-            this.txtExcelFile.Text = "";
-            this.btnSelectfile.Enabled = false;
+            txtExcelFile.Text = "";
+            btnSelectfile.Enabled = false;
             try
             {
                 openFileDialog1.Filter = "Excel文件(*.xls)|*.xls|Excel文件(*.xlsx)|*.xlsx";
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    this.txtExcelFile.Text = openFileDialog1.FileName;
+                    txtExcelFile.Text = openFileDialog1.FileName;
                 }
-                this.btnSelectfile.Enabled = true;
+                btnSelectfile.Enabled = true;
             }
             catch (Exception ex)
             {
-                this.btnSelectfile.Enabled = true;
+                btnSelectfile.Enabled = true;
                 MessageBox.Show(ex.Message, "Error");
             }
 
@@ -1025,8 +1044,16 @@ namespace FrmPIE
         {
             ctl.Text = strMsg;
             ctl.Enabled = enable;
-
             ctl.Visible = visible;
+
+
+        }
+        public void setDataGVds(System.Windows.Forms.DataGridView ctl, DataSet ds, int selectIndexRow, int intselectIndexCol)
+        {
+            ctl.DataSource = ds.Tables[0].DefaultView;
+            ctl.Refresh();
+            ctl.Rows[selectIndexRow].Cells[intselectIndexCol].Selected = true;
+
         }
         public void setToolText(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible)
         {
@@ -1034,29 +1061,45 @@ namespace FrmPIE
             ctl.Enabled = enable;
             ctl.Visible = visible;
         }
-        public void InitDGV(int dgvIndex)
+        public void InitDGV(object ctftobj)
         {
+            CartonFromTo ctft = (CartonFromTo)ctftobj;
+            var dgvIndex = ctft._dgvNumber;
+            var batchid = ctft._batchID;
+            var lineid = ctft._lineID;
+            var cartonid = ctft._cartonID;
+
             if (dgvIndex == 1)
             {
-                initDataGVBM0("");
+                initDataGVBM0(batchid);
             }
             else if (dgvIndex == 2)
             {
-                initDataGV_e_Packing3("");
+                initDataGV_e_Packing3(batchid);
             }
             else if (dgvIndex == 3)
             {
-                initDataGV_Tran4("");
+                initDataGV_Tran4(batchid);
+            }
+            else if (dgvIndex == 4)
+            {
+                initDataGV_Tran4(batchid, lineid);
+            }
+            else if (dgvIndex == 5)
+            {
+                initDataGV_Tran4(batchid, cartonid);
             }
         }
         public delegate void SafeSetCtlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible);
+        public delegate void SafeSetDataGVds(System.Windows.Forms.DataGridView ctl, DataSet ds, int selectIndexRow, int intselectIndexCol);
         public delegate void SafeSetToolText(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible);
-        public delegate void initDataGridViewSource(int dgvIndex);
+        public delegate void initDataGridViewSource(object ctftobj);
 
-        public void initDGVdelegate(int dgvIndex)
+        public void initDGVdelegate(object ctftobj)
         {
+            CartonFromTo ctft = (CartonFromTo)ctftobj;
             initDataGridViewSource initdgv = new initDataGridViewSource(InitDGV);
-            this.BeginInvoke(initdgv, new object[] { dgvIndex });
+            BeginInvoke(initdgv, ctft);
 
         }
         public void SetToolTextdelegate(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible)
@@ -1071,7 +1114,13 @@ namespace FrmPIE
         {
             SafeSetCtlText objSet = new SafeSetCtlText(setControlText);
 
-            this.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
+            BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
+        }
+        public void SetDataGridViewdelegate(System.Windows.Forms.DataGridView ctl, DataSet ds, int selectIndexRow, int intselectIndexCol)
+        {
+            SafeSetDataGVds objSet = new SafeSetDataGVds(setDataGVds);
+
+            BeginInvoke(objSet, new object[] { ctl, ds, selectIndexRow, intselectIndexCol });
         }
         private void UploadExcel()
         {
@@ -1084,7 +1133,7 @@ namespace FrmPIE
             catch (Exception ex)
             {
 
-                _uploadExcel.Abort();
+                // _tuploadExcel.Abort();
                 //MessageBox.Show(ex.Message);
             }
             finally
@@ -1094,7 +1143,7 @@ namespace FrmPIE
         }
         private void btnCmdUpd_Click(object sender, EventArgs e)
         {
-            _uploadExcel = new Thread(UploadExcel);
+            //
 
             if (txtExcelFile.Text.Trim() == "")
             {
@@ -1104,10 +1153,19 @@ namespace FrmPIE
             }
             else
             {
-
-                if (_uploadExcel.ThreadState == ThreadState.Unstarted || _uploadExcel.ThreadState == ThreadState.Stopped)
+                if (_tuploadExcel.ThreadState == ThreadState.Running)
                 {
-                    _uploadExcel.Start();
+                    _tuploadExcel.Abort();
+                }
+
+                if (_tuploadExcel.ThreadState == ThreadState.Unstarted)
+                {
+                    _tuploadExcel.Start();
+                }
+                if (_tuploadExcel.ThreadState == ThreadState.Stopped)
+                {
+                    _tuploadExcel = new Thread(UploadExcel);
+                    _tuploadExcel.Start();
                 }
             }
 
@@ -1116,7 +1174,7 @@ namespace FrmPIE
 
         private void Excel_Upload(string supplier)
         {
-            //this.Cursor = Cursors.WaitCursor;
+            //Cursor = Cursors.WaitCursor;
 
             int row = 2;
             int col = 1;
@@ -1185,7 +1243,7 @@ namespace FrmPIE
             plr_batch_mstr_model.batch_id = strBatchID;
             plr_batch_mstr_model.plr_suppliers_id = supplier;
             plr_batch_mstr_model.batch_doc = "e-Packing";
-            plr_batch_mstr_model.batch_dec01 = row - 1;
+            //plr_batch_mstr_model.batch_dec01 = row - 1;
             plr_batch_mstr_model.batch_void = 0;
             plr_batch_mstr_model.batch_status = "No";
             plr_batch_mstr_model.batch_cre_date = DbHelperSQL.getServerGetDate();
@@ -1310,10 +1368,15 @@ namespace FrmPIE
                 else
                 {
                     intUploadSuccess++;
-
                     SetToolTextdelegate(toolLabel2ThreadMsg, "$UploadToERP: 第:" + intUploadSuccess + "条上传成功", true, true);
 
+                    plr_batch_mstr_model.batch_dec01 = intUploadSuccess;
+                    plr_batch_mstr_model.batch_update_date = DateTime.Now;
+
+                    var addRowCount = new PIE.BLL.plr_batch_mstr().Update(plr_batch_mstr_model);
+
                     var intresutl = Program.GenCartonNo(plr_mstr_model);
+
 
 
                     //strpocheck = Program.POchecking(plr_mstr_model);
@@ -1341,11 +1404,14 @@ namespace FrmPIE
 
             //txtExcelFile.Text = "";
             //initDataGVBM0(strBatchID);
-            //this.tab1AllPacklingList1.SelectedTab = tabPackingListDetailInfoEPacking2;
+            //tab1AllPacklingList1.SelectedTab = tabPackingListDetailInfoEPacking2;
             //initDataGV_e_Packing3(strBatchID);
-            InitDGV(1);
+            CartonFromTo ctft = new CartonFromTo(0, 0, "", 1, "", 0, "");
+            InitDGV(ctft);
+            //_initDataGVThread = new Thread(new ParameterizedThreadStart(initDGVdelegate));
 
-            // this.Cursor = Cursors.Default;
+
+            // Cursor = Cursors.Default;
             #region demo
             //取得数据范围区域（不包标题列）
             //Range rag1 = xSt.Cells.get_Range("A2", "A" + row); //Batch_ID
@@ -1363,12 +1429,12 @@ namespace FrmPIE
             //}
             //catch (Exception ex)
             //{
-            //    //this.Cursor = Cursors.Default;
+            //    //Cursor = Cursors.Default;
             //    MessageBox.Show(strUploadResult + "\nError:" + ex.Message);
             //}
             //finally
             //{
-            //this.Cursor = Cursors.Default;
+            //Cursor = Cursors.Default;
             #region  结束Excel进程
 
             //需要对Excel的DCOM对象进行配置:dcomcnfg
@@ -1430,17 +1496,21 @@ namespace FrmPIE
             CartonFromTo _cartonfromto = (CartonFromTo)cartonfromto;
 
             int intPrintCount = 0;
+            int intPrintErrorCount = 0;
             string strSaveLabelFile = "", strWhere = "";
             string resultmsg = "";
             string messageBox = "";
-            decimal wec_ctn_Fr = _cartonfromto.wec_ctn_Fr;
-            decimal wec_ctn_To = _cartonfromto.wec_ctn_To;
-            string print_Type = _cartonfromto.print_Type;
+            string messageBoxError = "";
+
+            decimal wec_ctn_Fr = _cartonfromto._wec_ctn_Fr;
+            decimal wec_ctn_To = _cartonfromto._wec_ctn_To;
+            string print_Type = _cartonfromto._print_Type;
+            string print_port = _cartonfromto._print_port;
 
             StringBuilder strtxt = new StringBuilder();
 
 
-            //this.btnPrint.Enabled = false;
+            //btnPrint.Enabled = false;
             SetCtlTextdelegate(btnPrint, "Print...", false, true);
             SetToolTextdelegate(toolLabel2ThreadMsg, "Printing ......", true, true);
 
@@ -1546,10 +1616,29 @@ namespace FrmPIE
                         strtxt.AppendLine("{U1;0030|}");
                         #endregion
                     }
+                    SetToolTextdelegate(toolLabel2ThreadMsg, "$Print 生成第" + wec_ctn_Fr.ToString() + "条打印文件Success.", true, true);
+                }
+                else
+                {
+                    intPrintErrorCount++;
+                    messageBoxError = messageBoxError + wec_ctn_Fr.ToString() + ",\t";
 
                 }
                 wec_ctn_Fr++;
                 intPrintCount++;
+            }
+            string strfromto = txtCartonIDFrom.Text + "-" + txtCartonIDTo.Text;
+            if (intPrintErrorCount == intPrintCount)
+            {
+                SetToolTextdelegate(toolStripStatusLabelMessage, "$Print: 无" + strfromto + "的记录。", true, true);
+                SetCtlTextdelegate(btnPrint, "&Print", true, true);
+                SetToolTextdelegate(toolLabel2ThreadMsg, "$Print: Printing End", true, true);
+                return;
+            }
+            else if (intPrintErrorCount > 0)
+            {
+
+                SetToolTextdelegate(toolStripStatusLabelMessage, "$Print: 无" + messageBoxError + "的记录。", true, true);
             }
             string strprefix = print_Type;
             if (checkBox1.Checked)
@@ -1564,9 +1653,10 @@ namespace FrmPIE
                 {
 
                     resultmsg = "Notice: 打印 " + strprefix + txtCartonIDFrom.Text.Trim() + "-" + wec_ctn_To;
-                    if (MessageBox.Show(messageBox + " Success.\n\t是否打印些文件？", "Notice:Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+                    var dialogbutton = MessageBox.Show(messageBox + " Success.\n\t是否打印些文件？", "Notice:Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    if (dialogbutton == DialogResult.Yes)
                     {
-                        if (Xprint.XPrint.Print(strtxt.ToString(), cmbPort.Text))
+                        if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
                         {
                             //toolStripStatusLabelMessage.Text = resultmsg + " 成功。";
                             SetToolTextdelegate(toolLabel2ThreadMsg, resultmsg + " 成功。", true, true);
@@ -1574,7 +1664,7 @@ namespace FrmPIE
                         else
                         {
                             //toolStripStatusLabelMessage.Text = resultmsg + " 。";
-                            SetToolTextdelegate(toolLabel2ThreadMsg, resultmsg + " 失败功。", true, true);
+                            SetToolTextdelegate(toolLabel2ThreadMsg, resultmsg + " 失败,本地打印端口:"+print_port+"打开失败或打印机未就绪。", true, true);
                         }
                     }
                     else
@@ -1591,7 +1681,8 @@ namespace FrmPIE
             else
             {
                 resultmsg = "Notice: 打印 " + strprefix + txtCartonIDFrom.Text.Trim() + "-" + wec_ctn_To;
-                if (Xprint.XPrint.Print(strtxt.ToString(), cmbPort.Text))
+
+                if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
                 {
                     //toolStripStatusLabelMessage.Text = resultmsg + " 成功。";
                     SetToolTextdelegate(toolLabel2ThreadMsg, resultmsg + " 成功。", true, true);
@@ -1599,11 +1690,11 @@ namespace FrmPIE
                 else
                 {
                     //toolStripStatusLabelMessage.Text = resultmsg + " 。";
-                    SetToolTextdelegate(toolLabel2ThreadMsg, resultmsg + " 失败功。", true, true);
+                    SetToolTextdelegate(toolLabel2ThreadMsg, resultmsg + " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。", true, true);
                 }
             }
 
-            //this.btnPrint.Enabled = true;
+            //btnPrint.Enabled = true;
             SetCtlTextdelegate(btnPrint, "&Print", true, true);
 
         }
@@ -1632,14 +1723,25 @@ namespace FrmPIE
                 txtCartonIDFrom.Focus();
                 return;
             }
-            _printCtn = new Thread(new ParameterizedThreadStart(PrinTXTFile));
 
-            CartonFromTo cft = new CartonFromTo(wec_ctn_Fr, wec_ctn_To, cmbPrinter.Text);
-            if (_printCtn.ThreadState == ThreadState.Stopped || _printCtn.ThreadState == ThreadState.Unstarted)
+            CartonFromTo cft = new CartonFromTo(wec_ctn_Fr, wec_ctn_To, cmbPrinter.Text, cmbPort.Text);
+            if (_tprintCtn.ThreadState == ThreadState.Running)
             {
-                _printCtn.Start(cft);
+                _tprintCtn.Abort();
             }
 
+            if (_tprintCtn.ThreadState == ThreadState.Unstarted)
+            {
+
+                _tprintCtn.Start(cft);
+            }
+
+            if (_tprintCtn.ThreadState == ThreadState.Stopped)
+            {
+                //
+                _tprintCtn = new Thread(new ParameterizedThreadStart(PrinTXTFile));
+                _tprintCtn.Start(cft);
+            }
 
 
         }
@@ -1668,24 +1770,24 @@ namespace FrmPIE
                     dataNewRow(data1GV2PackingListDetailTransferInfo2, _ds_plr_mstr3);
 
                 }
-                if (this.tab1AllPacklingList1.SelectedTab == tabPackingListMasterInfo1)
+                if (tab1AllPacklingList1.SelectedTab == tabPackingListMasterInfo1)
                 {
 
                     initDataGVBM0("");
                 }
-                else if (this.tab1AllPacklingList1.SelectedTab == tabPackingListDetailInfoEPacking2)
+                else if (tab1AllPacklingList1.SelectedTab == tabPackingListDetailInfoEPacking2)
                 {
                     initDataGV_e_Packing3(_strbatchidSelect);
                 }
-                else if (this.tab1AllPacklingList1.SelectedTab == tabPackingListOCR4)
+                else if (tab1AllPacklingList1.SelectedTab == tabPackingListOCR4)
                 {
                     initDataGVOCR1();
                 }
-                else if (this.tab2AllCartonDetail2.SelectedTab == tab2PoCheckPackingListError2)
+                else if (tab2AllCartonDetail2.SelectedTab == tab2PoCheckPackingListError2)
                 {
                     initDataGV_Error5("", 0);
                 }
-                if (this.tab2AllCartonDetail2.SelectedTab == tab2CartonDetailInfo1)
+                if (tab2AllCartonDetail2.SelectedTab == tab2CartonDetailInfo1)
                 {
                     initDataGV_Tran4(_strbatchidSelect, _strCartonID);
                 }
@@ -1763,7 +1865,7 @@ namespace FrmPIE
 
         private void dataGVPackingListDetailTransferInfo3_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            initfrmplMainShow(e, this.data1GV2PackingListDetailTransferInfo2, "e-Packing list Maintenance");
+            initfrmplMainShow(e, data1GV2PackingListDetailTransferInfo2, "e-Packing list Maintenance");
         }
 
         private void initfrmplMainShow(DataGridViewCellEventArgs e, DataGridView dgv, string strText)
@@ -1793,14 +1895,14 @@ namespace FrmPIE
 
         private void dataGVPackingListMasterInfo1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            toolLabelPointXY.Text = "总计:" + (data1GV1PackingListMasterInfo1.Rows.Count-1) + ",当前行:" + (e.RowIndex + 1) + ",当前列:" + (e.ColumnIndex + 1);
+            toolLabelPointXY.Text = "总计:" + (data1GV1PackingListMasterInfo1.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",当前列:" + (e.ColumnIndex + 1);
 
             try
             {
                 string batchdoc = "";
                 string batch_status;
                 string batch_id;
-                if (e.RowIndex >= 0 && e.RowIndex < this.data1GV1PackingListMasterInfo1.RowCount - 1)
+                if (e.RowIndex >= 0 && e.RowIndex < data1GV1PackingListMasterInfo1.RowCount - 1)
                 {
                     _intVoidRightMenu1row = e.RowIndex;
                     batch_status = data1GV1PackingListMasterInfo1.Rows[e.RowIndex].Cells["batch_status"].Value.ToString().Trim();
@@ -1809,14 +1911,7 @@ namespace FrmPIE
                     {
                         intPackMainSelect = e.RowIndex;
                         _strbatchidSelect = batch_id;
-
                         _strCartonID = "";
-
-                        if (!string.IsNullOrEmpty(_strbatchidSelect))
-                        {
-                            //initDataGV_e_Packing3(strbatchidSelect);
-                            initDataGV_Tran4(_strbatchidSelect);
-                        }
 
                     }
                     else
@@ -1825,9 +1920,27 @@ namespace FrmPIE
                         toolStripStatusLabelMessage.Text = batch_id + " has Void.";
                         _strbatchidSelect = "";
                         //initDataGV_e_Packing3(strbatchidSelect);
-                        initDataGV_Tran4(_strbatchidSelect);
+                        //initDataGV_Tran4(_strbatchidSelect);
                     }
 
+                    //
+                    if (_tinitDataGVThread.ThreadState == ThreadState.Running)
+                    {
+                        _tinitDataGVThread.Abort();
+                    }
+
+                    // initDataGV();
+                    if (_tinitDataGVThread.ThreadState == ThreadState.Unstarted)
+                    {
+                        CartonFromTo ctft = new CartonFromTo(0, 0, "", 3, _strbatchidSelect, 0, "");
+                        _tinitDataGVThread.Start(ctft);
+                    }
+                    if (_tinitDataGVThread.ThreadState == ThreadState.Stopped)
+                    {
+                        _tinitDataGVThread = new Thread(new ParameterizedThreadStart(initDGVdelegate));
+                        CartonFromTo ctft = new CartonFromTo(0, 0, "", 3, _strbatchidSelect, 0, "");
+                        _tinitDataGVThread.Start(ctft);
+                    }
 
                 }
 
@@ -1872,18 +1985,37 @@ namespace FrmPIE
                     _strbatchidSelect = batch_id;
                     batchdoc = dgv.Rows[eindex].Cells["batch_doc"].Value.ToString().Trim();
 
-                    initDataGV_e_Packing3(_strbatchidSelect);
+                    //
+
+                    if (_tinitDataGVThread.ThreadState == ThreadState.Running)
+                    {
+                        _tinitDataGVThread.Abort();
+
+                    }
+                    if (_tinitDataGVThread.ThreadState == ThreadState.Unstarted)
+                    {
+                        CartonFromTo ctfo = new CartonFromTo(0, 0, "", 2, _strbatchidSelect, 0, "");
+                        _tinitDataGVThread.Start(ctfo);
+                    }
+                    if (_tinitDataGVThread.ThreadState == ThreadState.Stopped)
+                    {
+                        _tinitDataGVThread = new Thread(new ParameterizedThreadStart(initDGVdelegate));
+                        CartonFromTo ctfo = new CartonFromTo(0, 0, "", 2, _strbatchidSelect, 0, "");
+                        _tinitDataGVThread.Start(ctfo);
+                    }
+                    //initDataGV_e_Packing3(_strbatchidSelect);
+
                     tabcontrlFrom.SelectedTab = totabpage;
 
                     //switch (batchdoc)
                     //{
                     //    case "e-Packing":
                     //        initDataGV_e_Packing3(strbatchidSelect);
-                    //        this.tab1AllPacklingList1.SelectedTab = tabPackingListDetailInfoEPacking4;
+                    //        tab1AllPacklingList1.SelectedTab = tabPackingListDetailInfoEPacking4;
                     //        break;
                     //    case "PDF":
                     //        initDataGV_PDF3(strbatchidSelect);
-                    //        this.tab1AllPacklingList1.SelectedTab = tabPackingListDetailInfoPDF3;
+                    //        tab1AllPacklingList1.SelectedTab = tabPackingListDetailInfoPDF3;
                     //        break;
                     //    case "OCR":
                     //        break;
@@ -1902,13 +2034,13 @@ namespace FrmPIE
 
         private void ContextMenuDataGV_Opening(object sender, CancelEventArgs e)
         {
-            //if (this.tab1AllPacklingList1.SelectedTab == tabPackingListMasterInfo1)
+            //if (tab1AllPacklingList1.SelectedTab == tabPackingListMasterInfo1)
             //{
-            //    this.voidToolStripMenuItem.Visible = true;
+            //    voidToolStripMenuItem.Visible = true;
             //}
             //else
             //{
-            //    this.voidToolStripMenuItem.Visible = false;
+            //    voidToolStripMenuItem.Visible = false;
             //}
 
         }
@@ -1945,7 +2077,7 @@ namespace FrmPIE
         private void dataGVPackingListDetailTransferInfo3_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
 
-            e.Row.Cells["Batch_Id"].Value = this.data1GV2PackingListDetailTransferInfo2[0, 0].Value;
+            e.Row.Cells["Batch_Id"].Value = data1GV2PackingListDetailTransferInfo2[0, 0].Value;
             e.Row.Cells["LineId"].Value = getMaxOrMinColumnFromDataTable(_ds_plr_mstr3.Tables[0], "LineId", true) + 1;
 
             e.Row.Cells["plr_status"].Value = "No";
@@ -1966,7 +2098,7 @@ namespace FrmPIE
             args[0] = dgv;
             args[1] = selectedindex;
             args[2] = e;
-            this.BeginInvoke(dodel, args);
+            BeginInvoke(dodel, args);
         }
 
         private void cellselectdefault(DataGridView dgv, int selectedindex, DataGridViewRowEventArgs e)
@@ -1981,35 +2113,36 @@ namespace FrmPIE
                 dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
             }
         }
-        private void cellSelect(DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors)
+        private void cellSelect(object dwko)
         {
-            if (eIndex >= 0 && eIndex < dgv.RowCount - 1)
+            DoWrokObject dwo = (DoWrokObject)dwko;
+            if (dwo._eIndex >= 0 && dwo._eIndex < dwo._dgv.RowCount - 1)
             {
-                var cartonidenter = dgv.Rows[eIndex].Cells[sameColumnName].Value;
+                var cartonidenter = dwo._dgv.Rows[dwo._eIndex].Cells[dwo._sameColumnName].Value;
 
                 //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
 
                 //m
-                for (int i = 0; i < dgv.RowCount - 1; i++)
+                for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
                 {
-                    if (dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
+                    if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
                     {
-                        dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
-                        if (dgv.Rows[i].Cells[deffCellName].Value.ToString().Equals(deffCellValue))
+                        dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                        if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
                         {
-                            dgv.Rows[i].Cells[deffCellName].Style.BackColor = Deffcolors;
+                            dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
                         }
 
                     }
-                    var cartonid = dgv.Rows[i].Cells[sameColumnName].Value;
+                    var cartonid = dwo._dgv.Rows[i].Cells[dwo._sameColumnName].Value;
                     if (cartonid != DBNull.Value)
                     {
                         if (cartonid.ToString() == cartonidenter.ToString())
                         {
-                            dgv.Rows[i].DefaultCellStyle.BackColor = colors;
-                            if (dgv.Rows[i].Cells[deffCellName].Value.ToString().Equals(deffCellValue))
+                            dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
+                            if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
                             {
-                                dgv.Rows[i].Cells[deffCellName].Style.BackColor = Deffcolors;
+                                dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
                             }
                         }
                     }
@@ -2019,21 +2152,13 @@ namespace FrmPIE
 
         }
 
-        private delegate void MyInvoke(DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors);
+        private delegate void MyInvoke(object dwko);
 
-        public void DoWorkdelegate(DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors)
+        public void DoWorkdelegate(object dwko)
         {
+            DoWrokObject dwo = (DoWrokObject)dwko;
             MyInvoke mi = new MyInvoke(cellSelect);
-            object[] args = new object[8];
-            args[0] = dgv;
-            args[1] = selectedindex;
-            args[2] = eIndex;
-            args[3] = colors;
-            args[4] = sameColumnName;
-            args[5] = deffCellName;
-            args[6] = deffCellValue;
-            args[7] = Deffcolors;
-            this.BeginInvoke(mi, args);
+            BeginInvoke(mi, dwo);
         }
         private void dataGVPackingListDetailTransferInfo3_Leave(object sender, EventArgs e)
         {
@@ -2174,7 +2299,27 @@ namespace FrmPIE
 
                 var returnnew = dataNewRow(data1GV2PackingListDetailTransferInfo2, _ds_plr_mstr3);
 
-                DoWorkdelegate(data1GV2PackingListDetailTransferInfo2, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
+
+                //
+                if (_tDoWorkBackClorThread.ThreadState == ThreadState.Running)
+                {
+                    _tDoWorkBackClorThread.Abort();
+                }
+                if (_tDoWorkBackClorThread.ThreadState == ThreadState.Unstarted)
+                {
+                    DoWrokObject dwo = new DoWrokObject(data1GV2PackingListDetailTransferInfo2, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
+                    _tDoWorkBackClorThread.Start(dwo);
+
+                }
+                if (_tDoWorkBackClorThread.ThreadState == ThreadState.Stopped)
+                {
+                    _tDoWorkBackClorThread = new Thread(new ParameterizedThreadStart(DoWorkdelegate));
+                    DoWrokObject dwo = new DoWrokObject(data1GV2PackingListDetailTransferInfo2, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
+                    _tDoWorkBackClorThread.Start(dwo);
+
+                }
+                //DoWorkdelegate(dwo);
+
                 if (data1GV2PackingListDetailTransferInfo2.Rows[e.RowIndex].IsNewRow)
                 {
                     return;
@@ -2218,8 +2363,8 @@ namespace FrmPIE
             {
 
                 //toolStripStatusLabelMessage.Text = "Notice: Uploading to ERP Start";
-                //this.btnUploadtoERP.Text = "Uploading...";
-                //this.btnUploadtoERP.Enabled = false;
+                //btnUploadtoERP.Text = "Uploading...";
+                //btnUploadtoERP.Enabled = false;
                 SetToolTextdelegate(toolLabel2ThreadMsg, "$UploadExcel: Notice: Uploading to ERP Start", true, true);
                 SetCtlTextdelegate(btnUploadtoERP, "Uploading...", false, true);
                 string strresult;
@@ -2233,7 +2378,9 @@ namespace FrmPIE
                 //MessageBox.Show(strresult);
                 //toolStripStatusLabelMessage.Text = "Notice: Uploading to ERP END";
                 SetToolTextdelegate(toolLabel2ThreadMsg, strresult, true, true);
-                initDGVdelegate(3);
+
+                CartonFromTo ctfo = new CartonFromTo(0, 0, "", 3, "", 0, "");
+                initDGVdelegate(ctfo);
 
             }
             catch (Exception ex)
@@ -2249,11 +2396,21 @@ namespace FrmPIE
         }
         private void btnUploadtoERP_Click(object sender, EventArgs e)
         {
-            _uploadERP = new Thread(UploadERP);
-            if (_uploadERP.ThreadState == ThreadState.Unstarted || _uploadERP.ThreadState == ThreadState.Stopped)
+            //_tuploadERP = new Thread(UploadERP);
+            if (_tuploadERP.ThreadState == ThreadState.Running)
             {
-                _uploadERP.Start();
+                _tuploadERP.Abort();
             }
+            if (_tuploadERP.ThreadState == ThreadState.Unstarted)
+            {
+                _tuploadERP.Start();
+            }
+            else if (_tuploadERP.ThreadState == ThreadState.Stopped)
+            {
+                _tuploadERP = new Thread(UploadERP);
+                _tuploadERP.Start();
+            }
+
 
 
         }
@@ -2294,25 +2451,37 @@ namespace FrmPIE
 
         private void dataGVCartonDetailInfo4_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            initfrmplMainShow(e, this.data2GV1CartonDetailInfo3, "e-Packing list Maintenance");
+            initfrmplMainShow(e, data2GV1CartonDetailInfo3, "e-Packing list Maintenance");
         }
 
         private void FrmPIE_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_uploadERP.ThreadState == ThreadState.Running)
+            if (_tuploadERP.ThreadState == ThreadState.Running)
             {
-                this._uploadERP.Abort();
+                _tuploadERP.Abort();
             }
-            if (_uploadExcel.ThreadState == ThreadState.Running)
+            if (_tuploadExcel.ThreadState == ThreadState.Running)
             {
-                this._uploadERP.Abort();
+                _tuploadERP.Abort();
             }
-            if (_printCtn.ThreadState == ThreadState.Running)
+            if (_tprintCtn.ThreadState == ThreadState.Running)
             {
-                this._printCtn.Abort();
+                _tprintCtn.Abort();
             }
-            this._logonDomain.Dispose();
-            this.Dispose();
+            if (_tDoWorkBackClorThread.ThreadState == ThreadState.Running)
+            {
+                _tDoWorkBackClorThread.Abort();
+            }
+            if (_tinitDataGVThread.ThreadState == ThreadState.Running)
+            {
+                _tinitDataGVThread.Abort();
+            }
+            if (_tinitStateVoidColorThread.ThreadState == ThreadState.Running)
+            {
+                _tinitStateVoidColorThread.Abort();
+            }
+            _logonDomain.Dispose();
+            Dispose();
             GC.Collect();
         }
 
@@ -2423,18 +2592,42 @@ namespace FrmPIE
 
 
         private void dataGVPackingListMasterInfo1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            initStateVoidColor(data1GV1PackingListMasterInfo1, "batch_status");
+        {//initStateVoidColor();
+            if (data1GV1PackingListMasterInfo1.RowCount > 1)
+            {
+                _tinitStateVoidColorThread = new Thread(new ParameterizedThreadStart(initStateVoidColor));
+                if (_tinitStateVoidColorThread.ThreadState == ThreadState.Running)
+                {
+                    _tinitStateVoidColorThread.Abort();
+                }
+                if (_tinitStateVoidColorThread.ThreadState == ThreadState.Stopped || _tinitStateVoidColorThread.ThreadState == ThreadState.Unstarted)
+                {
+                    DoWrokObject dwoj = new DoWrokObject(data1GV1PackingListMasterInfo1, 0, 0, Color.LightGray, "batch_status", "", "", Color.Yellow);
+                    _tinitStateVoidColorThread.Start(dwoj);
+                }
+            }
+
         }
 
-        private void initStateVoidColor(DataGridView dgv, string columnname)
+        delegate void initStateVoidColordel(object colobj);
+        public void initStateVoidColorDelegate(object colobj)
         {
-            for (int i = 0; i < dgv.RowCount; i++)
+            initStateVoidColordel isvc = new initStateVoidColordel(initStateVoidColor);
+
+            BeginInvoke(isvc, colobj);
+        }
+        private void initStateVoidColor(object colobj)
+        {
+            DoWrokObject dwobj = (DoWrokObject)colobj;
+            var dgv = dwobj._dgv;
+            var columnname = dwobj._sameColumnName;
+
+            for (int i = 0; i < dgv.RowCount - 1; i++)
             {
                 var voidstatus = dgv.Rows[i].Cells[columnname].Value;
                 if (voidstatus != null && voidstatus.ToString() == "Yes")
                 {
-                    dgv.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgv.Rows[i].DefaultCellStyle.BackColor = dwobj._colors;
 
                 }
             }
@@ -2443,7 +2636,28 @@ namespace FrmPIE
         private void dataGVCartonDetailInfo4_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
 
-            DoWorkdelegate(data2GV1CartonDetailInfo3, 3, e.RowIndex, Color.LightGreen, "CartonID", "plr_status", "Yes", Color.LightGray);
+            // DoWorkdelegate(data2GV1CartonDetailInfo3, 3, e.RowIndex, Color.LightGreen, "CartonID", "plr_status", "Yes", Color.LightGray);
+
+            //_tDoWorkBackClorThread = new Thread(new ParameterizedThreadStart(DoWorkdelegate));
+            if (_tDoWorkBackClorThread.ThreadState == ThreadState.Running)
+            {
+                _tDoWorkBackClorThread.Abort();
+            }
+            if (_tDoWorkBackClorThread.ThreadState == ThreadState.Unstarted)
+            {
+                DoWrokObject dwo = new DoWrokObject(data2GV1CartonDetailInfo3, 3, e.RowIndex, Color.LightGreen, "CartonID", "plr_status", "Yes", Color.LightGray);
+
+                _tDoWorkBackClorThread.Start(dwo);
+
+            }
+            if (_tDoWorkBackClorThread.ThreadState == ThreadState.Stopped)
+            {
+                _tDoWorkBackClorThread = new Thread(new ParameterizedThreadStart(DoWorkdelegate));
+                DoWrokObject dwo = new DoWrokObject(data2GV1CartonDetailInfo3, 3, e.RowIndex, Color.LightGreen, "CartonID", "plr_status", "Yes", Color.LightGray);
+
+                _tDoWorkBackClorThread.Start(dwo);
+
+            }
         }
 
 
@@ -2462,8 +2676,13 @@ namespace FrmPIE
             {
                 if (tab1AllPacklingList1.SelectedTab == tabPackingListMasterInfo1)
                 {
+                    if (data1GV1PackingListMasterInfo1.RowCount < 2)
+                    {
+                        toolStripStatusLabelMessage.Text = "1.NO Record.";
+                        return;
+                    }
                     initmi = new initdgv(initHeaderTextPlrBatchMstr1);
-                    selectedindexCurrent = data1GV1PackingListMasterInfo1.DataSource == null ? 0 : data1GV1PackingListMasterInfo1.CurrentRow.Index;
+                    selectedindexCurrent = data1GV1PackingListMasterInfo1.CurrentRow.Index;
                     colors = Color.LightGreen;
                     strcolumn = "batch_status";
                     strSameColumns = "batch_user_ip";
@@ -2474,12 +2693,17 @@ namespace FrmPIE
                 }
                 else if (tab1AllPacklingList1.SelectedTab == tabPackingListDetailInfoEPacking2)
                 {
+                    if (data1GV2PackingListDetailTransferInfo2.RowCount < 2)
+                    {
+                        toolStripStatusLabelMessage.Text = "2.NO Record.";
+                        return;
+                    }
                     initmi = new initdgv(initHeaderTextPlrMstr2);
                     strcolumn = "plr_status";
                     strSameColumns = "CartonID";
                     _maxsizeToDataGridView = 2;
                     _strcurrMax = 1;
-                    selectedindexCurrent = data1GV2PackingListDetailTransferInfo2.DataSource == null ? 0 : data1GV2PackingListDetailTransferInfo2.CurrentRow.Index;
+                    selectedindexCurrent = data1GV2PackingListDetailTransferInfo2.CurrentRow.Index;
                     ds = _dsePacking2;
                 }
 
@@ -2488,8 +2712,13 @@ namespace FrmPIE
             {
                 if (tab2AllCartonDetail2.SelectedTab == tab2CartonDetailInfo1)
                 {
+                    if (data2GV1CartonDetailInfo3.RowCount < 2)
+                    {
+                        toolStripStatusLabelMessage.Text = "3.NO Record.";
+                        return;
+                    }
                     initmi = new initdgv(initHeaderTextCartonDetails3);
-                    selectedindexCurrent = data2GV1CartonDetailInfo3.DataSource == null ? 0 : data2GV1CartonDetailInfo3.CurrentRow.Index;
+                    selectedindexCurrent = data2GV1CartonDetailInfo3.CurrentRow.Index;
                     strcolumn = "plr_status";
                     _maxsizeToDataGridView = 3;
                     strSameColumns = "CartonID";
@@ -2519,7 +2748,7 @@ namespace FrmPIE
             if (e.Button == MouseButtons.Right)
             {
                 _strcurrTab = 1;
-                toolStripStatusLabelMessage.Text = this.tab1AllPacklingList1.SelectedTab.Text;
+                toolStripStatusLabelMessage.Text = tab1AllPacklingList1.SelectedTab.Text;
             }
         }
 
@@ -2528,13 +2757,13 @@ namespace FrmPIE
             if (e.Button == MouseButtons.Right)
             {
                 _strcurrTab = 2;
-                toolStripStatusLabelMessage.Text = this.tab2AllCartonDetail2.SelectedTab.Text;
+                toolStripStatusLabelMessage.Text = tab2AllCartonDetail2.SelectedTab.Text;
             }
         }
 
         private void dataGVCartonDetailInfo4_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            toolLabelPointXY.Text = "总计:" + (data2GV1CartonDetailInfo3.Rows.Count-1) + ",当前行:" + (e.RowIndex + 1) + ",当前列:" + (e.ColumnIndex + 1);
+            toolLabelPointXY.Text = "总计:" + (data2GV1CartonDetailInfo3.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",当前列:" + (e.ColumnIndex + 1);
             if (e.RowIndex >= 0 && e.RowIndex > data2GV1CartonDetailInfo3.Rows.Count - 1)
             {
                 _intVoidRightMenu3row = e.RowIndex;
@@ -2722,8 +2951,33 @@ namespace FrmPIE
                 {
 
                     var returnnew = dataNewRow(data1GV2PackingListDetailTransferInfo2, _ds_plr_mstr3);
-                    DoWorkdelegate(data1GV2PackingListDetailTransferInfo2, 2, enterindex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
-                    initDataGV_Tran4(_strbatchidSelect, _strCartonID);
+                    //DoWorkdelegate();
+                    DoWrokObject dwo = new DoWrokObject(data1GV2PackingListDetailTransferInfo2, 2, enterindex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
+
+                    Thread dowork3 = new Thread(new ParameterizedThreadStart(DoWorkdelegate));
+                    if (dowork3.ThreadState == ThreadState.Stopped || dowork3.ThreadState == ThreadState.Unstarted)
+                    {
+                        dowork3.Start(dwo);
+
+                    }
+                    //initDataGV_Tran4(_strbatchidSelect, _strCartonID);
+                    //_tinitDataGVThread = new Thread(new ParameterizedThreadStart(initDGVdelegate));
+                    if (_tinitDataGVThread.ThreadState == ThreadState.Running)
+                    {
+                        _tinitDataGVThread.Abort();
+                    }
+                    if (_tinitDataGVThread.ThreadState == ThreadState.Unstarted)
+                    {
+                        CartonFromTo ctfo = new CartonFromTo(0, 0, "", 5, _strbatchidSelect, 0, _strCartonID);
+                        _tinitDataGVThread.Start(ctfo);
+                    }
+                    if (_tinitDataGVThread.ThreadState == ThreadState.Stopped)
+                    {
+                        _tinitDataGVThread = new Thread(new ParameterizedThreadStart(initDGVdelegate));
+                        CartonFromTo ctfo = new CartonFromTo(0, 0, "", 5, _strbatchidSelect, 0, _strCartonID);
+                        _tinitDataGVThread.Start(ctfo);
+                    }
+
 
                 }
             }
@@ -2806,6 +3060,15 @@ namespace FrmPIE
         {
             toolLabel2ThreadMsg.Text = "";
             toolStripStatusLabelMessage.Text = "";
+        }
+
+        private void FrmPIE_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!IsDisposed)
+            {
+                Dispose();
+                GC.Collect();
+            }
         }
 
 

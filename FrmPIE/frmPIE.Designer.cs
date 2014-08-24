@@ -881,6 +881,7 @@
             this.Text = "Packing Information Entry";
             this.Activated += new System.EventHandler(this.FrmPIE_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPIE_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmPIE_FormClosed);
             this.Load += new System.EventHandler(this.FrmPIE_Load);
             this.SizeChanged += new System.EventHandler(this.FrmPIE_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1PackingListMasterInfo1)).EndInit();

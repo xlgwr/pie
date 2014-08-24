@@ -12,6 +12,7 @@ using System.Net.Sockets;
 
 using System.DirectoryServices;
 using System.Text.RegularExpressions;
+using System.Drawing;
 
 namespace FrmPIE
 {
@@ -27,7 +28,7 @@ namespace FrmPIE
         [STAThread]
         static void Main()
         {
-            frmVersion = "@V2014-08-24-01-dev";
+            frmVersion = "@V2014-08-24-15-dev";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -41,7 +42,13 @@ namespace FrmPIE
 
             var LogonOn = new LogonDomain();
             LogonOn.Text += frmVersion;
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
             Application.Run(LogonOn);
+        }
+
+        private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            throw new NotImplementedException("error thread.");
         }
         public static string ADValidate(string ADPath, string Uname, string Password)
         {
@@ -340,7 +347,7 @@ namespace FrmPIE
 
                         currint++;
 
-                        frmpie.SetToolTextdelegate(frmpie.toolLabel2ThreadMsg, "$UploadToERP 第：" + currint + " 条开始上传", true, true);
+                        frmpie.SetToolTextdelegate(frmpie.toolLabel2ThreadMsg, "$UploadToERP: Notice: 第 " + currint + " 条开始上传", true, true);
 
                         var returnWeb = initWebServer(item.plr_po, server100, "wsas013", strPO, out ds);
                         if (returnWeb)
@@ -360,7 +367,7 @@ namespace FrmPIE
 
                                     intUploadCount++;
 
-                                    frmpie.SetToolTextdelegate(frmpie.toolLabel2ThreadMsg, "$UploadToERP 第：" + intUploadCount + " 条上传Success。", true, true);
+                                    frmpie.SetToolTextdelegate(frmpie.toolLabel2ThreadMsg, "$UploadToERP: Notice: 第 " + intUploadCount + " 条上传Success。", true, true);
 
                                 }
                                 else if (strResultWebser.Equals("1"))
@@ -407,11 +414,15 @@ namespace FrmPIE
                         }
                         else
                         {
-                            strResult = "$UploadToERP Error:Webservice连接超时.";
+                            strResult = "$UploadToERP: Error: Webservice 连接超时.";
                             break;
                         }
 
                     }
+                }
+                else
+                {
+                    strResult = "$UploadToERP: Error: 系统数据库中没有可上传的（C状态）记录。";
                 }
                 _uploaderpmsg = strResult;
 
@@ -420,7 +431,7 @@ namespace FrmPIE
             catch (Exception ex)
             {
 
-                _uploaderpmsg = "Error:" + ex.Message;
+                _uploaderpmsg = "$UploadToERP: Error:" + ex.Message;
             }
 
 
@@ -533,14 +544,54 @@ namespace FrmPIE
 }
 class CartonFromTo
 {
-    public decimal wec_ctn_Fr;
-    public decimal wec_ctn_To;
-    public string print_Type;
-    public CartonFromTo(decimal wec_ctn_Fr, decimal wec_ctn_To, string print_type)
+    public decimal _wec_ctn_Fr;
+    public decimal _wec_ctn_To;
+    public string _print_Type;
+    public string _print_port;
+    public int _dgvNumber;
+    public string _batchID;
+    public int _lineID;
+    public string _cartonID;
+    public CartonFromTo(decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, int dgvIndex, string batchid, int lineid, string cartonid)
     {
         // TODO: Complete member initialization
-        this.wec_ctn_Fr = wec_ctn_Fr;
-        this.wec_ctn_To = wec_ctn_To;
-        this.print_Type = print_type;
+        _wec_ctn_Fr = wec_ctn_fr;
+        _wec_ctn_To = wec_ctn_to;
+        _print_Type = print_type;
+        _dgvNumber = dgvIndex;
+        _batchID = batchid;
+        _lineID = lineid;
+        _cartonID = cartonid;
+    }
+    public CartonFromTo(decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, string print_port)
+    {
+        // TODO: Complete member initialization
+        _wec_ctn_Fr = wec_ctn_fr;
+        _wec_ctn_To = wec_ctn_to;
+        _print_Type = print_type;
+        _print_port = print_port;
+    }
+}
+class DoWrokObject
+{
+    public DataGridView _dgv;
+    public int _selectedindex;
+    public int _eIndex;
+    public Color _colors;
+    public string _sameColumnName;
+    public string _deffCellName;
+    public string _deffCellValue;
+    public Color _deffcolors;
+    public DoWrokObject(DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors)
+    {
+        _dgv = dgv;
+        _selectedindex = selectedindex;
+        _eIndex = eIndex;
+        _colors = colors;
+        _sameColumnName = sameColumnName;
+        _deffCellName = deffCellName;
+        _deffCellValue = deffCellValue;
+        _deffcolors = Deffcolors;
+
     }
 }

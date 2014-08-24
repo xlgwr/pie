@@ -67,6 +67,7 @@ namespace FrmPIE
                             this.Hide();
                             var FrmPIE = new FrmPIE(this, system_user_model);
                             FrmPIE.Text += Program.frmVersion;
+                            //Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
                             FrmPIE.Show();
 
                         }
@@ -276,5 +277,7 @@ namespace FrmPIE
 
 
 
+
+        public System.Threading.ThreadExceptionEventHandler Application_ThreadException { get; set; }
     }
 }

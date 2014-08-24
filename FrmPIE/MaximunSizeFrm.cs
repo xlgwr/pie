@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace FrmPIE
@@ -21,17 +22,17 @@ namespace FrmPIE
         public FrmPIE _FrmPIE_show;
         public MaximunSizeFrm(DataSet ds, string formText, int selectedindex, string strSamecolumn, string strcolumn, Color colors, FrmPIE FrmPIE_show)
         {
-            this._selectedindexrow = selectedindex;
+            _selectedindexrow = selectedindex;
             _strcolumn = strcolumn;
             _ds = ds;
             _strSameColumn = strSamecolumn;
             _colors = colors;
 
-            this._FrmPIE_show = FrmPIE_show;
+            _FrmPIE_show = FrmPIE_show;
 
             InitializeComponent();
 
-            this.Text = formText;
+            Text = formText;
             dataGVMax.DataSource = ds.Tables[0].DefaultView;
 
             dataGVMax.Refresh();
@@ -52,18 +53,18 @@ namespace FrmPIE
             }
             dataGVMax.Columns[0].Frozen = true;
             dataGVMax.Columns[1].Frozen = true;
-            this.lblmessage.Text = "RowsCount:" + _ds.Tables[0].Rows.Count;
+            lblmessage.Text = "RowsCount:" + _ds.Tables[0].Rows.Count;
         }
 
         private void initWithHeight()
         {
-            this.groupBox1.Width = this.Width - this.groupBox1.Left - 30;
+            groupBox1.Width = Width - groupBox1.Left - 30;
 
-            this.groupBox1.Height = this.Height - this.groupBox1.Top - 50;
+            groupBox1.Height = Height - groupBox1.Top - 50;
 
-            this.dataGVMax.Width = this.groupBox1.Width - this.dataGVMax.Left - 10;
+            dataGVMax.Width = groupBox1.Width - dataGVMax.Left - 10;
 
-            this.dataGVMax.Height = this.groupBox1.Height - 20;
+            dataGVMax.Height = groupBox1.Height - 20;
         }
 
         private void MaximunSizeFrm_Resize(object sender, EventArgs e)
@@ -110,14 +111,34 @@ namespace FrmPIE
         {
 
             lblmessage.Text = "总计:" + (dataGVMax.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",当前列:" + (e.ColumnIndex + 1);
-            string frmflag = this.Text.Substring(this.Text.Length - 1, 1);
+            string frmflag = Text.Substring(Text.Length - 1, 1);
 
             if (e.RowIndex >= 0 && e.RowIndex < dataGVMax.Rows.Count - 1)
             {
                 string selectBatchID = dataGVMax.Rows[e.RowIndex].Cells["Batch_ID"].Value.ToString();
 
 
-                _FrmPIE_show.DoWorkdelegate(dataGVMax, 3, e.RowIndex, _colors, _strSameColumn, _strcolumn, "Yes", Color.LightGray);
+                //
+                if (_FrmPIE_show._tDoWorkBackClorThread.ThreadState == ThreadState.Running)
+                {
+                    _FrmPIE_show._tDoWorkBackClorThread.Abort();
+                }
+                if (_FrmPIE_show._tDoWorkBackClorThread.ThreadState == ThreadState.Unstarted)
+                {
+                    DoWrokObject dwo = new DoWrokObject(dataGVMax, 3, e.RowIndex, _colors, _strSameColumn, _strcolumn, "Yes", Color.LightGray);
+                    _FrmPIE_show._tDoWorkBackClorThread.Start(dwo);
+
+                }
+                if (_FrmPIE_show._tDoWorkBackClorThread.ThreadState == ThreadState.Stopped)
+                {
+                    _FrmPIE_show._tDoWorkBackClorThread = new Thread(new ParameterizedThreadStart(_FrmPIE_show.DoWorkdelegate));
+                    DoWrokObject dwo = new DoWrokObject(dataGVMax, 3, e.RowIndex, _colors, _strSameColumn, _strcolumn, "Yes", Color.LightGray);
+                    _FrmPIE_show._tDoWorkBackClorThread.Start(dwo);
+
+                }
+                // _FrmPIE_show.DoWorkdelegate(dataGVMax, 3, e.RowIndex, _colors, _strSameColumn, _strcolumn, "Yes", Color.LightGray);
+
+
                 if (frmflag.Equals("2"))
                 {
                     string selectCartonID = dataGVMax.Rows[e.RowIndex].Cells["CartonID"].Value.ToString();

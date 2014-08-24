@@ -253,6 +253,7 @@ namespace FrmPIE
 
             try
             {
+                initCartonFromTo();
                 #region null text
                 //if (string.IsNullOrEmpty(txtplr_suppliers_id.Text.Trim()))
                 //{
@@ -264,7 +265,6 @@ namespace FrmPIE
                 {
                     return;
                 };
-
                 #endregion
                 if (btnUpadeAdd.Text == "&Update")
                 {
