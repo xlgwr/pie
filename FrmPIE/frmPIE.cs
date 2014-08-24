@@ -48,10 +48,14 @@ namespace FrmPIE
         int _intMeKeysDown = 0;
 
         string _custip = "";
-        string _strbatchidSelect = "";
+
+        public string _strbatchidSelect = "";
+        public int _strLineIDSelect = 0;
+
         string _strsuppliers = "";
 
         string _strCartonID = "";
+
         int intPackMainSelect = 0;
         int intePackselectRowIndex = 0;
 
@@ -1878,8 +1882,14 @@ namespace FrmPIE
                 if (e.RowIndex >= 0 && e.RowIndex < dgv.RowCount - 1)
                 {
                     _intVoidRightMenu2row = e.RowIndex;
+                    _intVoidRightMenu2col = e.ColumnIndex;
+
                     plr_mstr_model.Batch_ID = dgv.Rows[e.RowIndex].Cells["Batch_ID"].Value.ToString().Trim();
                     plr_mstr_model.LineID = Convert.ToInt32(dgv.Rows[e.RowIndex].Cells["LineID"].Value);
+
+                    _strbatchidSelect = plr_mstr_model.Batch_ID;
+                    _strLineIDSelect = plr_mstr_model.LineID;
+                    
                     plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model.Batch_ID, plr_mstr_model.LineID);
                     var frmplMain_show = new frmplMain(plr_mstr_model, this);
                     frmplMain_show.Text = strText;

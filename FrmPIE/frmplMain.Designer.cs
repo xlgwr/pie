@@ -43,7 +43,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPre = new System.Windows.Forms.Button();
             this.btngo = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtGorow = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtPalletNo = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -84,6 +84,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCurrRowCol = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStripMain.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -194,6 +195,7 @@
             this.btnNext.TabIndex = 91;
             this.btnNext.Text = "N&ext";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPre
             // 
@@ -203,6 +205,7 @@
             this.btnPre.TabIndex = 92;
             this.btnPre.Text = "P&re";
             this.btnPre.UseVisualStyleBackColor = true;
+            this.btnPre.Click += new System.EventHandler(this.btnPre_Click);
             // 
             // btngo
             // 
@@ -212,15 +215,16 @@
             this.btngo.TabIndex = 95;
             this.btngo.Text = "&Go";
             this.btngo.UseVisualStyleBackColor = true;
+            this.btngo.Click += new System.EventHandler(this.btngo_Click);
             // 
-            // textBox1
+            // txtGorow
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(272, 9);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(42, 21);
-            this.textBox1.TabIndex = 95;
-            this.textBox1.Text = "0";
+            this.txtGorow.BackColor = System.Drawing.Color.White;
+            this.txtGorow.Location = new System.Drawing.Point(272, 9);
+            this.txtGorow.Name = "txtGorow";
+            this.txtGorow.Size = new System.Drawing.Size(42, 21);
+            this.txtGorow.TabIndex = 95;
+            this.txtGorow.Text = "0";
             // 
             // groupBox1
             // 
@@ -579,18 +583,18 @@
             this.groupBox2.Controls.Add(this.btnNext);
             this.groupBox2.Controls.Add(this.btnPre);
             this.groupBox2.Controls.Add(this.btngo);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.txtGorow);
             this.groupBox2.Location = new System.Drawing.Point(57, 420);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(549, 35);
             this.groupBox2.TabIndex = 97;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Visible = false;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabelCurrRowCol});
             this.statusStrip1.Location = new System.Drawing.Point(0, 456);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(663, 22);
@@ -602,6 +606,11 @@
             this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Red;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabelCurrRowCol
+            // 
+            this.toolStripStatusLabelCurrRowCol.Name = "toolStripStatusLabelCurrRowCol";
+            this.toolStripStatusLabelCurrRowCol.Size = new System.Drawing.Size(0, 17);
             // 
             // frmplMain
             // 
@@ -656,7 +665,7 @@
         protected internal System.Windows.Forms.Button btnNext;
         protected internal System.Windows.Forms.Button btnPre;
         protected internal System.Windows.Forms.Button btngo;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtGorow;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtCartonprifix;
         private System.Windows.Forms.Label label17;
@@ -697,6 +706,7 @@
         protected internal System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.TextBox txtPalletNo;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCurrRowCol;
     }
 }
 

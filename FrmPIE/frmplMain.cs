@@ -97,13 +97,8 @@ namespace FrmPIE
                 this.txtPart.Text = ocr_mstr_model.Ocr_partno;
             }
 
-            string strwhere = "Batch_ID='" + this.txtBatchID.Text + "' and LineID='" + this.txtLineID.Text + "'";
-            intCartonGen = new PIE.BLL.plr_mstr_tran().GetRecordCount(strwhere);
-            if (intCartonGen > 0)
-            {
-                this.lbl_CartonGen.Visible = true;
-            }
-            initCartonFromTo();
+           
+            currRowCol();
         }
 
         private void initModelForTextBox(PIE.Model.plr_mstr plr_mstr_model)
@@ -134,6 +129,14 @@ namespace FrmPIE
             this.txtCartonIDTo.Text = plr_mstr_model.carton_id_to.ToString();
 
             this.txtRemark.Text = plr_mstr_model.re_mark;
+
+            string strwhere = "Batch_ID='" + this.txtBatchID.Text + "' and LineID='" + this.txtLineID.Text + "'";
+            intCartonGen = new PIE.BLL.plr_mstr_tran().GetRecordCount(strwhere);
+            if (intCartonGen > 0)
+            {
+                this.lbl_CartonGen.Visible = true;
+            }
+            initCartonFromTo();
         }
 
 
@@ -813,6 +816,62 @@ namespace FrmPIE
             }
             return base.ProcessCmdKey(ref msg, keyData);
 
+        }
+        public void getBatchiLineId(DataGridView dgv, int eIndex)
+        {
+            plr_mstr_model.Batch_ID = dgv.Rows[eIndex].Cells["Batch_ID"].Value.ToString().Trim();
+            plr_mstr_model.LineID = Convert.ToInt32(dgv.Rows[eIndex].Cells["LineID"].Value);
+            FrmPIE_visit._strbatchidSelect = plr_mstr_model.Batch_ID;
+            FrmPIE_visit._strLineIDSelect = plr_mstr_model.LineID;
+            FrmPIE_visit._intVoidRightMenu2row = eIndex;
+            dgv.Rows[eIndex].Cells[FrmPIE_visit._intVoidRightMenu2col].Selected = true;
+        }
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            var currindex = FrmPIE_visit._intVoidRightMenu2row + 1;
+            var countrow = FrmPIE_visit.data1GV2PackingListDetailTransferInfo2.RowCount - 1;
+            if (currindex >= 0 && currindex < countrow)
+            {
+
+                getBatchiLineId(FrmPIE_visit.data1GV2PackingListDetailTransferInfo2,currindex);
+                plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model.Batch_ID, plr_mstr_model.LineID);
+                initModelForTextBox(plr_mstr_model);
+                
+            }
+            currRowCol();
+        }
+
+        private void btnPre_Click(object sender, EventArgs e)
+        {
+            var currindex = FrmPIE_visit._intVoidRightMenu2row - 1;
+            var countrow = FrmPIE_visit.data1GV2PackingListDetailTransferInfo2.RowCount - 1;
+            if (currindex >= 0 && currindex < countrow)
+            {
+                getBatchiLineId(FrmPIE_visit.data1GV2PackingListDetailTransferInfo2, currindex);
+                plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model.Batch_ID, plr_mstr_model.LineID);
+                initModelForTextBox(plr_mstr_model);
+            }
+            currRowCol();
+        }
+
+        private void btngo_Click(object sender, EventArgs e)
+        {
+            if (isNumber(txtGorow))
+            {
+                var currindex = Convert.ToInt32(txtGorow.Text) - 1;
+                var countrow = FrmPIE_visit.data1GV2PackingListDetailTransferInfo2.RowCount - 1;
+                if (currindex >= 0 && currindex < countrow)
+                {
+                    getBatchiLineId(FrmPIE_visit.data1GV2PackingListDetailTransferInfo2, currindex);
+                    plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model.Batch_ID, plr_mstr_model.LineID);
+                    initModelForTextBox(plr_mstr_model);
+                }
+            }
+            currRowCol();
+        }
+        private void currRowCol()
+        {
+            toolStripStatusLabelCurrRowCol.Text = "\t当前 BatchID: " + plr_mstr_model.Batch_ID + " ,LineID: " + plr_mstr_model.LineID + ", 在第 " + (FrmPIE_visit._intVoidRightMenu2row+1) + " 行,第 " + (FrmPIE_visit._intVoidRightMenu2col+1) + " 列.";
         }
 
 
