@@ -1811,7 +1811,7 @@ namespace FrmPIE
 
         private void initprocds(DataGridViewCellEventArgs e, DataGridView dgv, string dgvflag)
         {
-            toolLabelPointXY.Text = "总计:" + (dgv.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",当前列:" + (e.ColumnIndex + 1);
+            toolLabelPointXY.Text = "总计:" + (dgv.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",列:" + (e.ColumnIndex + 1);
             try
             {
                 if (e.RowIndex >= 0 && e.RowIndex < dgv.RowCount - 1)
@@ -1905,7 +1905,7 @@ namespace FrmPIE
 
         private void dataGVPackingListMasterInfo1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            toolLabelPointXY.Text = "总计:" + (data1GV1PackingListMasterInfo1.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",当前列:" + (e.ColumnIndex + 1);
+            toolLabelPointXY.Text = "总计:" + (data1GV1PackingListMasterInfo1.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",列:" + (e.ColumnIndex + 1);
 
             try
             {
@@ -2773,7 +2773,7 @@ namespace FrmPIE
 
         private void dataGVCartonDetailInfo4_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            toolLabelPointXY.Text = "总计:" + (data2GV1CartonDetailInfo3.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",当前列:" + (e.ColumnIndex + 1);
+            toolLabelPointXY.Text = "总计:" + (data2GV1CartonDetailInfo3.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",列:" + (e.ColumnIndex + 1);
             if (e.RowIndex >= 0 && e.RowIndex > data2GV1CartonDetailInfo3.Rows.Count - 1)
             {
                 _intVoidRightMenu3row = e.RowIndex;

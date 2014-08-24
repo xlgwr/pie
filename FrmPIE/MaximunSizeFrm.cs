@@ -110,7 +110,7 @@ namespace FrmPIE
         private void dataGVMax_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            lblmessage.Text = "总计:" + (dataGVMax.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",当前列:" + (e.ColumnIndex + 1);
+            lblmessage.Text = "总计:" + (dataGVMax.Rows.Count - 1) + ",当前行:" + (e.RowIndex + 1) + ",列:" + (e.ColumnIndex + 1);
             string frmflag = Text.Substring(Text.Length - 1, 1);
 
             if (e.RowIndex >= 0 && e.RowIndex < dataGVMax.Rows.Count - 1)

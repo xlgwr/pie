@@ -108,6 +108,12 @@
     <Compile Include="frmUpload.Designer.cs">
       <DependentUpon>frmUpload.cs</DependentUpon>
     </Compile>
+    <Compile Include="IndexTemple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IndexTemple.Designer.cs">
+      <DependentUpon>IndexTemple.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogonDomain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmUpload.resx">
       <DependentUpon>frmUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IndexTemple.resx">
+      <DependentUpon>IndexTemple.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogonDomain.resx">
       <DependentUpon>LogonDomain.cs</DependentUpon>

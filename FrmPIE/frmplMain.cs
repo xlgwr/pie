@@ -867,11 +867,15 @@ namespace FrmPIE
                     initModelForTextBox(plr_mstr_model);
                 }
             }
+            else
+            {
+                toolStripStatusLabel1.Text = "请输入正确的数据字";
+            }
             currRowCol();
         }
         private void currRowCol()
         {
-            toolStripStatusLabelCurrRowCol.Text = "\t当前 BatchID: " + plr_mstr_model.Batch_ID + " ,LineID: " + plr_mstr_model.LineID + ", 在第 " + (FrmPIE_visit._intVoidRightMenu2row+1) + " 行,第 " + (FrmPIE_visit._intVoidRightMenu2col+1) + " 列.";
+            toolStripStatusLabelCurrRowCol.Text = "\t当前 BatchID: " + plr_mstr_model.Batch_ID + " ,LineID: " + plr_mstr_model.LineID + ", 在第 " + (FrmPIE_visit._intVoidRightMenu2row+1) + " 行," + (FrmPIE_visit._intVoidRightMenu2col+1) + " 列.";
         }
 
 
