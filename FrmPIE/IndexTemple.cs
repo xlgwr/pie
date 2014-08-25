@@ -24,11 +24,28 @@ namespace FrmPIE
 
 
         }
+        private void IndexTemple_Load(object sender, EventArgs e)
+        {
+            initHideImage(new object[] { hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3, toolBtnleft1 }, 1);
 
+            initHideImage(new object[] { hideToolBarToolStripMenuItem1 }, 2);
+        }
+
+        private void toolBtnleft1_ButtonClick(object sender, EventArgs e)
+        {
+            HideOrShowLeftBar(splitContainer2, 1, hideLeftToolStripMenuItem3, "Hide Left &Bar", "Show Left &Bar");
+
+            HideOrShowleftorToolImg(splitContainer2, new object[] { toolBtnleft1, hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3 }, 1);
+       
+        }
         private void hideToolBarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
             HideOrShowLeftBar(splitContainer1, 1, hideToolBarToolStripMenuItem1, "&Hide Tool Bar", "&Show Tool Bar");
+            HideOrShowleftorToolImg(splitContainer1, new object[] { hideToolBarToolStripMenuItem1  }, 2);
+        
+
+           
         }
 
         private void hideLeftBarToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -218,10 +235,8 @@ namespace FrmPIE
             tabCtlRight1.SelectedIndex = tabCtlRight1.TabCount - 1;
         }
 
-        private void IndexTemple_Load(object sender, EventArgs e)
-        {
-            initHideImage(new object[] { hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3, toolBtnleft1 }, 1);
-        }
+
+       
 
 
     }

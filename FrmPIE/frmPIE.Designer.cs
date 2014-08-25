@@ -56,7 +56,6 @@
             this.editToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.btnEnquiry = new System.Windows.Forms.Button();
-            this.btnCmdGenPlrInfo = new System.Windows.Forms.Button();
             this.btnSelectfile = new System.Windows.Forms.Button();
             this.btnCmdUpd = new System.Windows.Forms.Button();
             this.txtBatchID = new System.Windows.Forms.TextBox();
@@ -105,6 +104,7 @@
             this.toolLabel2ThreadMsg = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.clearNoticeMsgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openPrintFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolLabelPointXY = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1PackingListMasterInfo1)).BeginInit();
             this.contextMenuStripDataGVEdit.SuspendLayout();
@@ -136,7 +136,7 @@
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -145,7 +145,7 @@
             this.data1GV1PackingListMasterInfo1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -157,14 +157,14 @@
             this.data1GV1PackingListMasterInfo1.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data1GV1PackingListMasterInfo1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.data1GV1PackingListMasterInfo1.RowTemplate.Height = 23;
-            this.data1GV1PackingListMasterInfo1.Size = new System.Drawing.Size(802, 191);
+            this.data1GV1PackingListMasterInfo1.Size = new System.Drawing.Size(739, 191);
             this.data1GV1PackingListMasterInfo1.TabIndex = 6;
             this.data1GV1PackingListMasterInfo1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGVPackingListMasterInfo1_CellClick);
             this.data1GV1PackingListMasterInfo1.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.data1GV1PackingListMasterInfo1_CellContextMenuStripNeeded);
@@ -216,7 +216,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(10, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 12);
@@ -225,7 +225,7 @@
             // 
             // btnEnquiry
             // 
-            this.btnEnquiry.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEnquiry.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnEnquiry.Location = new System.Drawing.Point(210, 9);
             this.btnEnquiry.Name = "btnEnquiry";
             this.btnEnquiry.Size = new System.Drawing.Size(75, 36);
@@ -234,21 +234,10 @@
             this.btnEnquiry.UseVisualStyleBackColor = true;
             this.btnEnquiry.Click += new System.EventHandler(this.btnEnquiry_Click);
             // 
-            // btnCmdGenPlrInfo
-            // 
-            this.btnCmdGenPlrInfo.Location = new System.Drawing.Point(637, 12);
-            this.btnCmdGenPlrInfo.Name = "btnCmdGenPlrInfo";
-            this.btnCmdGenPlrInfo.Size = new System.Drawing.Size(51, 36);
-            this.btnCmdGenPlrInfo.TabIndex = 17;
-            this.btnCmdGenPlrInfo.Text = "&Gen Plr Info";
-            this.btnCmdGenPlrInfo.UseVisualStyleBackColor = true;
-            this.btnCmdGenPlrInfo.Visible = false;
-            this.btnCmdGenPlrInfo.Click += new System.EventHandler(this.btnCmdGenPlrInfo_Click);
-            // 
             // btnSelectfile
             // 
-            this.btnSelectfile.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSelectfile.Location = new System.Drawing.Point(325, 9);
+            this.btnSelectfile.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSelectfile.Location = new System.Drawing.Point(291, 9);
             this.btnSelectfile.Name = "btnSelectfile";
             this.btnSelectfile.Size = new System.Drawing.Size(75, 36);
             this.btnSelectfile.TabIndex = 2;
@@ -258,10 +247,10 @@
             // 
             // btnCmdUpd
             // 
-            this.btnCmdUpd.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCmdUpd.Location = new System.Drawing.Point(718, 9);
+            this.btnCmdUpd.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCmdUpd.Location = new System.Drawing.Point(684, 9);
             this.btnCmdUpd.Name = "btnCmdUpd";
-            this.btnCmdUpd.Size = new System.Drawing.Size(114, 36);
+            this.btnCmdUpd.Size = new System.Drawing.Size(75, 36);
             this.btnCmdUpd.TabIndex = 4;
             this.btnCmdUpd.Text = "&Upload";
             this.btnCmdUpd.UseVisualStyleBackColor = true;
@@ -269,7 +258,7 @@
             // 
             // txtBatchID
             // 
-            this.txtBatchID.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtBatchID.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtBatchID.Location = new System.Drawing.Point(77, 14);
             this.txtBatchID.Name = "txtBatchID";
             this.txtBatchID.Size = new System.Drawing.Size(127, 26);
@@ -278,7 +267,7 @@
             // 
             // txtExcelFile
             // 
-            this.txtExcelFile.Location = new System.Drawing.Point(403, 17);
+            this.txtExcelFile.Location = new System.Drawing.Point(369, 17);
             this.txtExcelFile.Name = "txtExcelFile";
             this.txtExcelFile.Size = new System.Drawing.Size(309, 21);
             this.txtExcelFile.TabIndex = 3;
@@ -288,7 +277,7 @@
             this.groupBox1.Controls.Add(this.data1GV1PackingListMasterInfo1);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(817, 217);
+            this.groupBox1.Size = new System.Drawing.Size(746, 217);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             // 
@@ -305,7 +294,7 @@
             // 
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -314,7 +303,7 @@
             this.dataGVPackingListDetailInfo2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -326,7 +315,7 @@
             this.dataGVPackingListDetailInfo2.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -346,21 +335,20 @@
             this.groupBox5.Controls.Add(this.btnPrint);
             this.groupBox5.Controls.Add(this.txtCartonIDTo);
             this.groupBox5.Controls.Add(this.txtCartonIDFrom);
-            this.groupBox5.Controls.Add(this.btnCmdGenPlrInfo);
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.label2);
             this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Location = new System.Drawing.Point(12, 301);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(831, 53);
+            this.groupBox5.Size = new System.Drawing.Size(757, 53);
             this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Carton Label Manual Printing";
             // 
             // btnUploadtoERP
             // 
-            this.btnUploadtoERP.Location = new System.Drawing.Point(694, 13);
+            this.btnUploadtoERP.Location = new System.Drawing.Point(634, 13);
             this.btnUploadtoERP.Name = "btnUploadtoERP";
             this.btnUploadtoERP.Size = new System.Drawing.Size(114, 36);
             this.btnUploadtoERP.TabIndex = 14;
@@ -396,7 +384,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(532, 23);
+            this.checkBox1.Location = new System.Drawing.Point(526, 23);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(102, 16);
             this.checkBox1.TabIndex = 13;
@@ -405,8 +393,8 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPrint.Location = new System.Drawing.Point(452, 13);
+            this.btnPrint.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPrint.Location = new System.Drawing.Point(446, 13);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 36);
             this.btnPrint.TabIndex = 12;
@@ -431,7 +419,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(176, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 12);
@@ -450,7 +438,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(6, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(117, 12);
@@ -476,7 +464,7 @@
             this.tab1AllPacklingList1.Location = new System.Drawing.Point(12, 51);
             this.tab1AllPacklingList1.Name = "tab1AllPacklingList1";
             this.tab1AllPacklingList1.SelectedIndex = 0;
-            this.tab1AllPacklingList1.Size = new System.Drawing.Size(833, 249);
+            this.tab1AllPacklingList1.Size = new System.Drawing.Size(757, 249);
             this.tab1AllPacklingList1.TabIndex = 5;
             this.tab1AllPacklingList1.SelectedIndexChanged += new System.EventHandler(this.tab1AllPacklingList1_SelectedIndexChanged);
             this.tab1AllPacklingList1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tab1AllPacklingList1_MouseDown);
@@ -518,7 +506,7 @@
             this.tabPackingListMasterInfo1.Location = new System.Drawing.Point(4, 22);
             this.tabPackingListMasterInfo1.Name = "tabPackingListMasterInfo1";
             this.tabPackingListMasterInfo1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPackingListMasterInfo1.Size = new System.Drawing.Size(825, 223);
+            this.tabPackingListMasterInfo1.Size = new System.Drawing.Size(749, 223);
             this.tabPackingListMasterInfo1.TabIndex = 0;
             this.tabPackingListMasterInfo1.Text = "Backing List Master Info";
             this.tabPackingListMasterInfo1.UseVisualStyleBackColor = true;
@@ -529,7 +517,7 @@
             this.tabPackingListDetailInfoEPacking2.Location = new System.Drawing.Point(4, 22);
             this.tabPackingListDetailInfoEPacking2.Name = "tabPackingListDetailInfoEPacking2";
             this.tabPackingListDetailInfoEPacking2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPackingListDetailInfoEPacking2.Size = new System.Drawing.Size(825, 223);
+            this.tabPackingListDetailInfoEPacking2.Size = new System.Drawing.Size(749, 223);
             this.tabPackingListDetailInfoEPacking2.TabIndex = 2;
             this.tabPackingListDetailInfoEPacking2.Text = "e-Packing List Detail Info";
             this.tabPackingListDetailInfoEPacking2.UseVisualStyleBackColor = true;
@@ -539,7 +527,7 @@
             this.groupBox3.Controls.Add(this.data1GV2PackingListDetailTransferInfo2);
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(817, 217);
+            this.groupBox3.Size = new System.Drawing.Size(749, 217);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             // 
@@ -547,7 +535,7 @@
             // 
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -556,7 +544,7 @@
             this.data1GV2PackingListDetailTransferInfo2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -567,14 +555,14 @@
             this.data1GV2PackingListDetailTransferInfo2.Name = "data1GV2PackingListDetailTransferInfo2";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data1GV2PackingListDetailTransferInfo2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.data1GV2PackingListDetailTransferInfo2.RowTemplate.Height = 23;
-            this.data1GV2PackingListDetailTransferInfo2.Size = new System.Drawing.Size(802, 191);
+            this.data1GV2PackingListDetailTransferInfo2.Size = new System.Drawing.Size(739, 191);
             this.data1GV2PackingListDetailTransferInfo2.TabIndex = 7;
             this.data1GV2PackingListDetailTransferInfo2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGVPackingListDetailTransferInfo3_CellClick);
             this.data1GV2PackingListDetailTransferInfo2.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.data1GV2PackingListDetailTransferInfo2_CellContextMenuStripNeeded);
@@ -610,7 +598,7 @@
             // 
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -619,7 +607,7 @@
             this.dataGVPackingListDetailPDFInfo5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -631,7 +619,7 @@
             this.dataGVPackingListDetailPDFInfo5.ReadOnly = true;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -661,7 +649,7 @@
             this.tab2AllCartonDetail2.Location = new System.Drawing.Point(12, 355);
             this.tab2AllCartonDetail2.Name = "tab2AllCartonDetail2";
             this.tab2AllCartonDetail2.SelectedIndex = 0;
-            this.tab2AllCartonDetail2.Size = new System.Drawing.Size(833, 246);
+            this.tab2AllCartonDetail2.Size = new System.Drawing.Size(757, 246);
             this.tab2AllCartonDetail2.TabIndex = 15;
             this.tab2AllCartonDetail2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tab2AllCartonDetail2_MouseDown);
             // 
@@ -671,7 +659,7 @@
             this.tab2CartonDetailInfo1.Location = new System.Drawing.Point(4, 22);
             this.tab2CartonDetailInfo1.Name = "tab2CartonDetailInfo1";
             this.tab2CartonDetailInfo1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2CartonDetailInfo1.Size = new System.Drawing.Size(825, 220);
+            this.tab2CartonDetailInfo1.Size = new System.Drawing.Size(749, 220);
             this.tab2CartonDetailInfo1.TabIndex = 0;
             this.tab2CartonDetailInfo1.Text = "Carton Detail Info";
             this.tab2CartonDetailInfo1.UseVisualStyleBackColor = true;
@@ -681,7 +669,7 @@
             this.groupBox4.Controls.Add(this.data2GV1CartonDetailInfo3);
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(817, 214);
+            this.groupBox4.Size = new System.Drawing.Size(749, 214);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             // 
@@ -689,7 +677,7 @@
             // 
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -698,7 +686,7 @@
             this.data2GV1CartonDetailInfo3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -710,14 +698,14 @@
             this.data2GV1CartonDetailInfo3.ReadOnly = true;
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data2GV1CartonDetailInfo3.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.data2GV1CartonDetailInfo3.RowTemplate.Height = 23;
-            this.data2GV1CartonDetailInfo3.Size = new System.Drawing.Size(802, 192);
+            this.data2GV1CartonDetailInfo3.Size = new System.Drawing.Size(739, 192);
             this.data2GV1CartonDetailInfo3.TabIndex = 16;
             this.data2GV1CartonDetailInfo3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGVCartonDetailInfo4_CellClick);
             this.data2GV1CartonDetailInfo3.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.data2GV1CartonDetailInfo3_CellContextMenuStripNeeded);
@@ -750,7 +738,7 @@
             // 
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -759,7 +747,7 @@
             this.dataGVPOCheckPackingListError7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -771,7 +759,7 @@
             this.dataGVPOCheckPackingListError7.ReadOnly = true;
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -799,7 +787,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label14.Location = new System.Drawing.Point(485, -6);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(75, 12);
@@ -816,7 +804,7 @@
             this.toolLabelPointXY});
             this.statusStrip1.Location = new System.Drawing.Point(0, 592);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(856, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(778, 22);
             this.statusStrip1.TabIndex = 85;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -838,7 +826,8 @@
             // 
             this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearNoticeMsgToolStripMenuItem});
+            this.clearNoticeMsgToolStripMenuItem,
+            this.openPrintFileToolStripMenuItem});
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
             this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
@@ -852,6 +841,13 @@
             this.clearNoticeMsgToolStripMenuItem.Text = "&ClearNoticeMessage";
             this.clearNoticeMsgToolStripMenuItem.Click += new System.EventHandler(this.clearNoticeMsgToolStripMenuItem_Click);
             // 
+            // openPrintFileToolStripMenuItem
+            // 
+            this.openPrintFileToolStripMenuItem.Name = "openPrintFileToolStripMenuItem";
+            this.openPrintFileToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.openPrintFileToolStripMenuItem.Text = "&Open Print File";
+            this.openPrintFileToolStripMenuItem.Click += new System.EventHandler(this.openPrintFileToolStripMenuItem_Click);
+            // 
             // toolLabelPointXY
             // 
             this.toolLabelPointXY.Name = "toolLabelPointXY";
@@ -862,7 +858,7 @@
             this.AcceptButton = this.btnEnquiry;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(856, 614);
+            this.ClientSize = new System.Drawing.Size(778, 614);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.tab2AllCartonDetail2);
@@ -919,7 +915,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnEnquiry;
-        private System.Windows.Forms.Button btnCmdGenPlrInfo;
         private System.Windows.Forms.Button btnSelectfile;
         private System.Windows.Forms.Button btnCmdUpd;
         private System.Windows.Forms.TextBox txtBatchID;
@@ -975,5 +970,6 @@
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
         private System.Windows.Forms.ToolStripMenuItem clearNoticeMsgToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolLabelPointXY;
+        private System.Windows.Forms.ToolStripMenuItem openPrintFileToolStripMenuItem;
     }
 }

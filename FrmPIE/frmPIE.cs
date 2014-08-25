@@ -51,6 +51,7 @@ namespace FrmPIE
 
         public string _strbatchidSelect = "";
         public int _strLineIDSelect = 0;
+        string strSaveLabelFile = "";
 
         string _strsuppliers = "";
 
@@ -707,10 +708,10 @@ namespace FrmPIE
         }
         private void initWidth()
         {
-            tab1AllPacklingList1.Width = Width - tab1AllPacklingList1.Left - 30;
+            tab1AllPacklingList1.Width = Width - tab1AllPacklingList1.Left - 28;
             tab2AllCartonDetail2.Width = tab1AllPacklingList1.Width;
 
-            groupBox1.Width = tab1AllPacklingList1.Width - groupBox1.Left - 15;
+            groupBox1.Width = tab1AllPacklingList1.Width - groupBox1.Left - 10;
 
             groupBox2.Width = groupBox1.Width;
             groupBox3.Width = groupBox1.Width;
@@ -719,7 +720,7 @@ namespace FrmPIE
             groupBox6.Width = groupBox1.Width;
             groupBox7.Width = groupBox1.Width;
 
-            data2GV1CartonDetailInfo3.Width = groupBox1.Width - data2GV1CartonDetailInfo3.Left - 10;
+            data2GV1CartonDetailInfo3.Width = groupBox1.Width - data2GV1CartonDetailInfo3.Left-5;
             dataGVPackingListDetailInfo2.Width = data2GV1CartonDetailInfo3.Width;
             data1GV2PackingListDetailTransferInfo2.Width = data2GV1CartonDetailInfo3.Width;
             data1GV1PackingListMasterInfo1.Width = data2GV1CartonDetailInfo3.Width;
@@ -850,122 +851,9 @@ namespace FrmPIE
             //}
 
             //Gen_plrctnInfo();
-            ctnlabel_print();
+            //ctnlabel_print();
         }
 
-        private void ctnlabel_print()
-        {
-            int intOutEffected;
-            int intPrintCount = 0;
-            string strSaveLabelFile = "", strWhere = "";
-            Decimal wec_ctn_Fr = 0, wec_ctn_To = 0;
-
-            SqlParameter[] parameters ={
-                                           new SqlParameter("@wec_ctn_Fr",SqlDbType.NVarChar,30),
-                                           new SqlParameter("@wec_ctn_To",SqlDbType.NVarChar,30)
-                                       };
-            parameters[0].Direction = ParameterDirection.Output;
-            parameters[1].Direction = ParameterDirection.Output;
-            DbHelperSQL.RunProcedure("sp_GetWecCtn", parameters, out intOutEffected);
-
-            wec_ctn_Fr = parameters[0].Value != DBNull.Value ? Convert.ToDecimal(parameters[0].Value) : 0;
-            wec_ctn_To = parameters[1].Value != DBNull.Value ? Convert.ToDecimal(parameters[1].Value) : 0;
-
-            if (wec_ctn_Fr == 0 || wec_ctn_Fr > wec_ctn_To)
-            {
-                MessageBox.Show("没有可打印的记录.");
-                return;
-            }
-
-            while (wec_ctn_Fr <= wec_ctn_To)
-            {
-
-                if (checkBox1.Checked)
-                {
-                    strSaveLabelFile = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "0labeltxt\\" + wec_ctn_Fr + ".txt";
-                }
-                else
-                {
-                    strSaveLabelFile = "LPT1";
-                }
-
-                strWhere = "Wec_Ctn='" + wec_ctn_Fr + "'";
-
-                List<PIE.Model.plr_mstr_tran> plr_mstr_tran_list = new PIE.BLL.plr_mstr_tran().GetModelList(strWhere);
-                if (plr_mstr_tran_list.Count > 0)
-                {
-                    StringBuilder strZpltxt = new StringBuilder();
-                    FileStream fileZpltxt = new FileStream(strSaveLabelFile, FileMode.OpenOrCreate);
-                    StreamWriter fileWrite = new StreamWriter(fileZpltxt, Encoding.UTF8);
-                    #region zpl
-                    strZpltxt.AppendLine("^XA");
-                    strZpltxt.AppendLine("^EG");
-                    strZpltxt.AppendLine("^XZ");
-                    strZpltxt.AppendLine("^XA");
-
-                    strZpltxt.AppendLine("^MCY");
-                    strZpltxt.AppendLine("^XZ");
-                    strZpltxt.AppendLine("^XA");
-
-                    strZpltxt.AppendLine("^FWN^CFD,24^PW905^LH0,0");
-                    strZpltxt.AppendLine("^CI3^PR2^MNY^MTT^MMT^MD3.5^JJ0,0^PON^PMN^LRN");
-                    strZpltxt.AppendLine("^LT-9");
-                    strZpltxt.AppendLine("^XZ");
-                    strZpltxt.AppendLine("^XA");
-
-                    strZpltxt.AppendLine("^DFR:TEMP_FMT.ZPL");
-                    strZpltxt.AppendLine("^LRN");
-                    strZpltxt.AppendLine("^XZ");
-                    strZpltxt.AppendLine("^XA");
-
-                    strZpltxt.AppendLine("^XFR:TEMP_FMT.ZPL");
-                    strZpltxt.AppendLine("^A0N,161,104^FO573,14^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
-                    strZpltxt.AppendLine("^A0N,42,42^FO601,191^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO39,30^FD" + plr_mstr_tran_list[0].plr_partno + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO39,82^FD" + plr_mstr_tran_list[0].plr_partno + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO39,186^FD" + plr_mstr_tran_list[0].plr_partno + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO39,238^FD" + plr_mstr_tran_list[0].plr_partno + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO39,136^FD" + plr_mstr_tran_list[0].plr_partno + "^FS");
-                    strZpltxt.AppendLine("^BY2,2.0^FO433,273^B3N,Y,104,N^FD" + plr_mstr_tran_list[0].Wec_Ctn + "^FS");
-
-                    strZpltxt.AppendLine("^A0N,44,30^FO339,32^FD" + plr_mstr_tran_list[0].plr_qty + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO339,83^FD" + plr_mstr_tran_list[0].plr_qty + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO339,134^FD" + plr_mstr_tran_list[0].plr_qty + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO339,185^FD" + plr_mstr_tran_list[0].plr_qty + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO339,236^FD" + plr_mstr_tran_list[0].plr_qty + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO39,289^FD" + plr_mstr_tran_list[0].plr_partno + "^FS");
-
-                    strZpltxt.AppendLine("^A0N,44,30^FO351,286^FD" + plr_mstr_tran_list[0].plr_qty + "^FS");
-
-                    strZpltxt.AppendLine("^A0N,44,30^FO39,341^FD" + plr_mstr_tran_list[0].plr_partno + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO339,337^FD" + plr_mstr_tran_list[0].plr_qty + "^FS");
-
-                    strZpltxt.AppendLine("^A0N,44,30^FO36,392^FDT0TAL " + plr_mstr_tran_list[0].CartonID + "^FS");
-                    strZpltxt.AppendLine("^A0N,44,30^FO344,391^FD" + plr_mstr_tran_list[0].plr_qty + "^FS");
-
-                    strZpltxt.AppendLine("^A0N,42,42^FO566,230^FD" + plr_mstr_tran_list[0].packingListID + "^FS");
-                    strZpltxt.AppendLine("^PQ1,0,1,Y");
-
-                    strZpltxt.AppendLine("^XZ");
-                    strZpltxt.AppendLine("^XA");
-
-                    strZpltxt.AppendLine("^IDR:TEMP_FMT.ZPL");
-                    strZpltxt.AppendLine("^XZ");
-                    #endregion
-
-                    fileWrite.Write(strZpltxt.ToString());
-                    fileWrite.Flush();
-                    intPrintCount++;
-                    fileWrite.Close();
-                    fileZpltxt.Close();
-
-                }
-                wec_ctn_Fr++;
-
-            }
-            MessageBox.Show("总打印：" + intPrintCount + "条记录。");
-
-        }
 
         private int Plrmstr_proc()
         {
@@ -1501,7 +1389,7 @@ namespace FrmPIE
 
             int intPrintCount = 0;
             int intPrintErrorCount = 0;
-            string strSaveLabelFile = "", strWhere = "";
+            string  strWhere = "";
             string resultmsg = "";
             string messageBox = "";
             string messageBoxError = "";
@@ -1622,9 +1510,9 @@ namespace FrmPIE
                             strtxt.AppendLine(@"{RC005;..............|}");
                         }
                         strtxt.AppendLine(@"{PC" + listcount.ToString("000") + ";0065,0315,05,05,D,00,B|}");
-                        strtxt.AppendLine(@"{RC" + listcount.ToString("000") + ";Count: " + listcount.ToString()+"|}");
-                        strtxt.AppendLine(@"{PC" + (listcount+1).ToString("000") + ";0065,0355,05,05,D,00,B|}");
-                        strtxt.AppendLine(@"{RC" + (listcount+1).ToString("000") + ";TOTAL: " + totoal.ToString("#,##0") + "|}");
+                        strtxt.AppendLine(@"{RC" + listcount.ToString("000") + ";Count: " + listcount.ToString() + "|}");
+                        strtxt.AppendLine(@"{PC" + (listcount + 1).ToString("000") + ";0065,0355,05,05,D,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 1).ToString("000") + ";TOTAL: " + totoal.ToString("#,##0") + "|}");
 
                         strtxt.AppendLine(@"{PC" + (listcount + 10).ToString("000") + ";0560,0080,05,05,M,00,B|}");
                         strtxt.AppendLine(@"{RC" + (listcount + 10).ToString("000") + ";" + plr_mstr_tran_list[0].CartonID + "|}");
@@ -1693,7 +1581,9 @@ namespace FrmPIE
                     }
                     else
                     {
+
                         SetToolTextdelegate(toolLabel2ThreadMsg, messageBox + " 成功。", true, true);
+
                     }
                 }
                 else
@@ -3101,6 +2991,29 @@ namespace FrmPIE
             }
         }
 
+        private void openPrintFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string allfileNamepath;
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "0labeltxt";
+            if (string.IsNullOrEmpty(strSaveLabelFile))
+            {
+
+                allfileNamepath = pathname;
+            }
+            else
+            {
+
+                allfileNamepath = System.IO.Path.Combine(pathname, strSaveLabelFile);
+            }
+            OpenFolderAndSelectFile(allfileNamepath);
+        }
+
+        private void OpenFolderAndSelectFile(String fileFullName)
+        {
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
+            psi.Arguments = "/e,/select," + fileFullName;
+            System.Diagnostics.Process.Start(psi);
+        }
 
 
 
