@@ -15,6 +15,8 @@
 /FrmPIE/obj/*
 /FrmPIE/bin/*
 
+/FrmPIE/app.config
+
 /BLL/obj/*
 /BLL/bin/*
 
