@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IndexTemple));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,10 +67,11 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.hideLeftToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.tabCtlRight1 = new System.Windows.Forms.TabControl();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolBtnleft1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.hideLeftToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolSStatusLblMsg = new System.Windows.Forms.ToolStripStatusLabel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.button9 = new System.Windows.Forms.Button();
@@ -86,10 +88,14 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnSearch = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.ctmenusClose = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.closeAllToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeAllButThisToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabCtlRight1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -97,6 +103,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.ctmenusClose.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -360,7 +367,7 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(598, 15);
             this.comboBox1.Name = "comboBox1";
@@ -398,16 +405,40 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabControl1
+            // tabCtlRight1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(603, 472);
-            this.tabControl1.TabIndex = 2;
+            this.tabCtlRight1.Controls.Add(this.tabPage1);
+            this.tabCtlRight1.Controls.Add(this.tabPage2);
+            this.tabCtlRight1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabCtlRight1.Location = new System.Drawing.Point(0, 0);
+            this.tabCtlRight1.Name = "tabCtlRight1";
+            this.tabCtlRight1.SelectedIndex = 0;
+            this.tabCtlRight1.Size = new System.Drawing.Size(603, 472);
+            this.tabCtlRight1.TabIndex = 2;
+            this.tabCtlRight1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabCtlRight1_MouseMove);
+            this.tabCtlRight1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tabCtlRight1_MouseUp);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolBtnleft1,
+            this.toolSStatusLblMsg});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 472);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(603, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolBtnleft1
+            // 
+            this.toolBtnleft1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolBtnleft1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hideLeftToolStripMenuItem3});
+            this.toolBtnleft1.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnleft1.Image")));
+            this.toolBtnleft1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolBtnleft1.Name = "toolBtnleft1";
+            this.toolBtnleft1.Size = new System.Drawing.Size(32, 20);
+            this.toolBtnleft1.Text = "&Hide Left Bar";
             // 
             // hideLeftToolStripMenuItem3
             // 
@@ -416,30 +447,14 @@
             this.hideLeftToolStripMenuItem3.Text = "Hide Left Bar";
             this.hideLeftToolStripMenuItem3.Click += new System.EventHandler(this.hideLeftToolStripMenuItem3_Click);
             // 
-            // toolStripSplitButton1
+            // toolSStatusLblMsg
             // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hideLeftToolStripMenuItem3});
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 20);
-            this.toolStripSplitButton1.Text = "&Hide Left Bar";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSplitButton1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 472);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(603, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
+            this.toolSStatusLblMsg.Name = "toolSStatusLblMsg";
+            this.toolSStatusLblMsg.Size = new System.Drawing.Size(0, 17);
             // 
             // textBox1
             // 
-            this.textBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(492, 14);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 26);
@@ -462,7 +477,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.tabControl1);
+            this.splitContainer2.Panel2.Controls.Add(this.tabCtlRight1);
             this.splitContainer2.Panel2.Controls.Add(this.statusStrip1);
             this.splitContainer2.Size = new System.Drawing.Size(735, 494);
             this.splitContainer2.SplitterDistance = 128;
@@ -476,6 +491,7 @@
             this.button9.TabIndex = 1;
             this.button9.Text = "button9";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
@@ -614,7 +630,37 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // Index
+            // ctmenusClose
+            // 
+            this.ctmenusClose.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.closeToolStripMenuItem1,
+            this.closeAllToolStripMenuItem2,
+            this.closeAllButThisToolStripMenuItem3});
+            this.ctmenusClose.Name = "contextMenuStrip1";
+            this.ctmenusClose.Size = new System.Drawing.Size(177, 70);
+            // 
+            // closeAllToolStripMenuItem2
+            // 
+            this.closeAllToolStripMenuItem2.Name = "closeAllToolStripMenuItem2";
+            this.closeAllToolStripMenuItem2.Size = new System.Drawing.Size(176, 22);
+            this.closeAllToolStripMenuItem2.Text = "Close All";
+            this.closeAllToolStripMenuItem2.Click += new System.EventHandler(this.closeAllToolStripMenuItem_Click);
+            // 
+            // closeToolStripMenuItem1
+            // 
+            this.closeToolStripMenuItem1.Name = "closeToolStripMenuItem1";
+            this.closeToolStripMenuItem1.Size = new System.Drawing.Size(176, 22);
+            this.closeToolStripMenuItem1.Text = "Close";
+            this.closeToolStripMenuItem1.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // closeAllButThisToolStripMenuItem3
+            // 
+            this.closeAllButThisToolStripMenuItem3.Name = "closeAllButThisToolStripMenuItem3";
+            this.closeAllButThisToolStripMenuItem3.Size = new System.Drawing.Size(176, 22);
+            this.closeAllButThisToolStripMenuItem3.Text = "Close All But This";
+            this.closeAllButThisToolStripMenuItem3.Click += new System.EventHandler(this.closeAllButThisToolStripMenuItem3_Click);
+            // 
+            // IndexTemple
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -623,12 +669,13 @@
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Index";
+            this.Name = "IndexTemple";
+            this.Load += new System.EventHandler(this.IndexTemple_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.tabCtlRight1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -639,6 +686,7 @@
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
+            this.ctmenusClose.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -681,9 +729,9 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabCtlRight1;
         private System.Windows.Forms.ToolStripMenuItem hideLeftToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripSplitButton toolBtnleft1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.SplitContainer splitContainer2;
@@ -703,6 +751,11 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem hideToolBarToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem hideLeftBarToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripStatusLabel toolSStatusLblMsg;
+        private System.Windows.Forms.ContextMenuStrip ctmenusClose;
+        private System.Windows.Forms.ToolStripMenuItem closeAllToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem closeAllButThisToolStripMenuItem3;
 
 
 
