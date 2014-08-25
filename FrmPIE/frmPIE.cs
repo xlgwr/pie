@@ -1605,33 +1605,35 @@ namespace FrmPIE
                         for (int i = 0; i < listcount; i++)
                         {
                             totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
-                            if (listcount > 5)
+                            if (i >= 5)
                             {
                                 continue;
                             }
                             //partno
-                            strtxt.AppendLine(@"{PC" + i.ToString("000") + ";0050," + (y + yoff * i).ToString("0000") + ",05,05,D,00,B|}");
+                            strtxt.AppendLine(@"{PC" + i.ToString("000") + ";0055," + (y + yoff * i).ToString("0000") + ",05,05,A,00,B|}");
                             strtxt.AppendLine(@"{RC" + i.ToString("000") + ";" + plr_mstr_tran_list[i].plr_partno + "|}");
                             //number/qty
-                            strtxt.AppendLine(@"{PC" + i.ToString("000") + ";0380," + (y + yoff * i).ToString("0000") + ",05,05,D,00,B|}");
-                            strtxt.AppendLine(@"{RC" + i.ToString("000") + ";" + plr_mstr_tran_list[i].plr_carton_qty + "|}");
+                            strtxt.AppendLine(@"{PC" + (i + 100).ToString("000") + ";0290," + (y + yoff * i).ToString("0000") + ",05,05,A,00,B|}");
+                            strtxt.AppendLine(@"{RC" + (i + 100).ToString("000") + ";" + Convert.ToInt32(plr_mstr_tran_list[i].plr_carton_qty).ToString("#,##0") + "|}");
                         }
                         if (listcount > 5)
                         {
-                            strtxt.AppendLine(@"{PC005;0050,0300,05,05,D,00,B|}");
+                            strtxt.AppendLine(@"{PC005;0050,0280,05,05,D,00,B|}");
                             strtxt.AppendLine(@"{RC005;..............|}");
                         }
-                        strtxt.AppendLine(@"{PC" + listcount.ToString("000") + ";0050,0360,05,05,D,00,B|}");
-                        strtxt.AppendLine(@"{RC" + listcount.ToString("000") + ";TOTAL:" + totoal.ToString() + "|}");
+                        strtxt.AppendLine(@"{PC" + listcount.ToString("000") + ";0065,0315,05,05,D,00,B|}");
+                        strtxt.AppendLine(@"{RC" + listcount.ToString("000") + ";Count: " + listcount.ToString()+"|}");
+                        strtxt.AppendLine(@"{PC" + (listcount+1).ToString("000") + ";0065,0355,05,05,D,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount+1).ToString("000") + ";TOTAL: " + totoal.ToString("#,##0") + "|}");
 
-                        strtxt.AppendLine(@"{PC" + (listcount + 1).ToString("000") + ";0560,0080,05,05,M,00,B|}");
-                        strtxt.AppendLine(@"{RC" + (listcount + 1).ToString("000") + ";" + plr_mstr_tran_list[0].CartonID + "|}");
-                        strtxt.AppendLine(@"{PC" + (listcount + 2).ToString("000") + ";0560,0140,05,05,D,00,B|}");
-                        strtxt.AppendLine(@"{RC" + (listcount + 2).ToString("000") + ";" + plr_mstr_tran_list[0].plr_vend_mfgr + "|}");
-                        strtxt.AppendLine(@"{PC" + (listcount + 2).ToString("000") + ";0560,0200,05,05,D,00,B|}");
-                        strtxt.AppendLine(@"{RC" + (listcount + 2).ToString("000") + ";" + plr_mstr_tran_list[0].plr_co + "|}");
+                        strtxt.AppendLine(@"{PC" + (listcount + 10).ToString("000") + ";0560,0080,05,05,M,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 10).ToString("000") + ";" + plr_mstr_tran_list[0].CartonID + "|}");
+                        strtxt.AppendLine(@"{PC" + (listcount + 20).ToString("000") + ";0560,0140,05,05,D,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 20).ToString("000") + ";" + plr_mstr_tran_list[0].plr_vend_mfgr + "|}");
+                        strtxt.AppendLine(@"{PC" + (listcount + 30).ToString("000") + ";0560,0200,05,05,D,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 30).ToString("000") + ";" + plr_mstr_tran_list[0].plr_co + "|}");
 
-                        strtxt.AppendLine("{XB01;0350,0290,A,3,02,0,0045,+0000000000,000,1,00|}");
+                        strtxt.AppendLine("{XB01;0450,0230,9,3,02,0,0105,+0000000000,000,1,00|}");
                         strtxt.AppendLine("{RB01;>7" + plr_mstr_tran_list[0].plr_wec_ctn + "|}");
 
                         strtxt.AppendLine("{XS;I,0001,0002C3200|}");
