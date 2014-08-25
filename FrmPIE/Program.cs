@@ -28,7 +28,7 @@ namespace FrmPIE
         [STAThread]
         static void Main()
         {
-            frmVersion = "@V2014-08-25-10-dev";
+            frmVersion = "@V2014-08-25-14-dev";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

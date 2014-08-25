@@ -1591,7 +1591,7 @@ namespace FrmPIE
                     else if (print_Type.Equals("TEC"))
                     {
                         int x = 0;
-                        int y = 106;
+                        int y = 60;
                         int xoff = 0;
                         int yoff = 40;
 
@@ -1601,21 +1601,39 @@ namespace FrmPIE
                         strtxt.AppendLine("{U2;0030|}");
                         strtxt.AppendLine("{AX;+000,+000,+00|}");
                         strtxt.AppendLine("{AY;+10,0|}");
+                        int totoal = 0;
                         for (int i = 0; i < listcount; i++)
                         {
-
-                            string strPC = @"{PC" + i.ToString("000") + ";0050," + (y + yoff * i).ToString("0000") + ",05,05,D,00,B|}";
-                            string strRC = @"{RC" + i.ToString("000") + ";" + plr_mstr_tran_list[i].plr_partno + "|}";
-                            strtxt.AppendLine(strPC);
-                            strtxt.AppendLine(strRC);
+                            totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
+                            if (listcount > 5)
+                            {
+                                continue;
+                            }
+                            //partno
+                            strtxt.AppendLine(@"{PC" + i.ToString("000") + ";0050," + (y + yoff * i).ToString("0000") + ",05,05,D,00,B|}");
+                            strtxt.AppendLine(@"{RC" + i.ToString("000") + ";" + plr_mstr_tran_list[i].plr_partno + "|}");
+                            //number/qty
+                            strtxt.AppendLine(@"{PC" + i.ToString("000") + ";0380," + (y + yoff * i).ToString("0000") + ",05,05,D,00,B|}");
+                            strtxt.AppendLine(@"{RC" + i.ToString("000") + ";" + plr_mstr_tran_list[i].plr_carton_qty + "|}");
                         }
-                        string strPCctn = @"{PC" + listcount.ToString("000") + ";0300,0140,05,05,D,00,B|}";
-                        string strRCctn = @"{RC" + listcount.ToString("000") + ";" + plr_mstr_tran_list[0].CartonID + "|}";
-                        strtxt.AppendLine(strPCctn);
-                        strtxt.AppendLine(strRCctn);
+                        if (listcount > 5)
+                        {
+                            strtxt.AppendLine(@"{PC005;0050,0300,05,05,D,00,B|}");
+                            strtxt.AppendLine(@"{RC005;..............|}");
+                        }
+                        strtxt.AppendLine(@"{PC" + listcount.ToString("000") + ";0050,0360,05,05,D,00,B|}");
+                        strtxt.AppendLine(@"{RC" + listcount.ToString("000") + ";TOTAL:" + totoal.ToString() + "|}");
 
-                        strtxt.AppendLine("{XB01;0280,0290,A,3,02,0,0045,+0000000000,000,1,00|}");
+                        strtxt.AppendLine(@"{PC" + (listcount + 1).ToString("000") + ";0560,0080,05,05,M,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 1).ToString("000") + ";" + plr_mstr_tran_list[0].CartonID + "|}");
+                        strtxt.AppendLine(@"{PC" + (listcount + 2).ToString("000") + ";0560,0140,05,05,D,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 2).ToString("000") + ";" + plr_mstr_tran_list[0].plr_vend_mfgr + "|}");
+                        strtxt.AppendLine(@"{PC" + (listcount + 2).ToString("000") + ";0560,0200,05,05,D,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 2).ToString("000") + ";" + plr_mstr_tran_list[0].plr_co + "|}");
+
+                        strtxt.AppendLine("{XB01;0350,0290,A,3,02,0,0045,+0000000000,000,1,00|}");
                         strtxt.AppendLine("{RB01;>7" + plr_mstr_tran_list[0].plr_wec_ctn + "|}");
+
                         strtxt.AppendLine("{XS;I,0001,0002C3200|}");
                         strtxt.AppendLine("{U1;0030|}");
                         #endregion
@@ -1668,7 +1686,7 @@ namespace FrmPIE
                         else
                         {
                             //toolStripStatusLabelMessage.Text = resultmsg + " 。";
-                            SetToolTextdelegate(toolLabel2ThreadMsg, resultmsg + " 失败,本地打印端口:"+print_port+"打开失败或打印机未就绪。", true, true);
+                            SetToolTextdelegate(toolLabel2ThreadMsg, resultmsg + " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。", true, true);
                         }
                     }
                     else
@@ -1889,7 +1907,7 @@ namespace FrmPIE
 
                     _strbatchidSelect = plr_mstr_model.Batch_ID;
                     _strLineIDSelect = plr_mstr_model.LineID;
-                    
+
                     plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model.Batch_ID, plr_mstr_model.LineID);
                     var frmplMain_show = new frmplMain(plr_mstr_model, this);
                     frmplMain_show.Text = strText;
