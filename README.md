@@ -3,12 +3,11 @@ pie
 
 Packing Information Entry(C# WinForm)
 ***
-initDB:
+## initDB:
 
-> MSSql2008
-setup DBinit.sql
+### MSSql2008
+* setup DBinit.sql
 
-***
-test
-user name: demo
-passwd	: demo
+## test
+* user name: demo
+* passwd	: demo
