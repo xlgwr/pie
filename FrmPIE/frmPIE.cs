@@ -1593,7 +1593,7 @@ namespace FrmPIE
                         int x = 0;
                         int y = 106;
                         int xoff = 0;
-                        int yoff = 30;
+                        int yoff = 40;
 
                         #region TEC
                         strtxt.AppendLine("{D0410,0762,0380|}");
@@ -1604,18 +1604,18 @@ namespace FrmPIE
                         for (int i = 0; i < listcount; i++)
                         {
 
-                            string strPC = @"{PC" + i.ToString("000") + ";0077," + (y + yoff * i).ToString("0000") + ",05,05,D,00,B|}";
+                            string strPC = @"{PC" + i.ToString("000") + ";0050," + (y + yoff * i).ToString("0000") + ",05,05,D,00,B|}";
                             string strRC = @"{RC" + i.ToString("000") + ";" + plr_mstr_tran_list[i].plr_partno + "|}";
                             strtxt.AppendLine(strPC);
                             strtxt.AppendLine(strRC);
                         }
-                        string strPCctn = @"{PC" + listcount.ToString("000") + ";0177,0888,05,05,D,00,B|}";
+                        string strPCctn = @"{PC" + listcount.ToString("000") + ";0300,0140,05,05,D,00,B|}";
                         string strRCctn = @"{RC" + listcount.ToString("000") + ";" + plr_mstr_tran_list[0].CartonID + "|}";
                         strtxt.AppendLine(strPCctn);
                         strtxt.AppendLine(strRCctn);
 
-                        strtxt.AppendLine("{XB02;0380,0110,A,3,01,0,0035,+0000000000,000,1,00|}");
-                        strtxt.AppendLine("{RB00;>7" + plr_mstr_tran_list[0].plr_wec_ctn + "|}");
+                        strtxt.AppendLine("{XB01;0280,0290,A,3,02,0,0045,+0000000000,000,1,00|}");
+                        strtxt.AppendLine("{RB01;>7" + plr_mstr_tran_list[0].plr_wec_ctn + "|}");
                         strtxt.AppendLine("{XS;I,0001,0002C3200|}");
                         strtxt.AppendLine("{U1;0030|}");
                         #endregion

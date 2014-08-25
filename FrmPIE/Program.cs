@@ -28,7 +28,7 @@ namespace FrmPIE
         [STAThread]
         static void Main()
         {
-            frmVersion = "@V2014-08-25-00-dev";
+            frmVersion = "@V2014-08-25-10-dev";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -40,13 +40,13 @@ namespace FrmPIE
 
             //logon on
 
-            //var LogonOn = new LogonDomain();
-            //LogonOn.Text += frmVersion;
-            //Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
-            //Application.Run(LogonOn);
+            var LogonOn = new LogonDomain();
+            LogonOn.Text += frmVersion;
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            Application.Run(LogonOn);
 
-            var index = new IndexTemple();
-            Application.Run(index);
+            //var index = new IndexTemple();
+            //Application.Run(index);
 
         }
 
@@ -413,8 +413,7 @@ namespace FrmPIE
                                 strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + "WebServer 没有返回值" + "\n";
                                 intUploadErrCount++;
                             }
-                            strResult = strResult == "" ? "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" : "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" + "\t5.失败的记录:\n" + strResult;
-
+                           
                         }
                         else
                         {
@@ -423,13 +422,16 @@ namespace FrmPIE
                         }
 
                     }
+                    strResult = strResult == "" ? "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" : "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" + "\t5.失败的记录:\n" + strResult;
+
+                    
                 }
                 else
                 {
                     strResult = "$UploadToERP: Error: 系统数据库中没有可上传的（C状态）记录。";
                 }
-                _uploaderpmsg = strResult;
-
+                MessageBox.Show(strResult);
+                _uploaderpmsg = "$UploadToERP: 上传ERP完成。";
 
             }
             catch (Exception ex)
