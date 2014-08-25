@@ -6,9 +6,9 @@ Packing Information Entry(C# WinForm)
 initDB:
 
 > MSSql2008
-~setup DBinit.sql
+setup DBinit.sql
 
 ***
 test
-~user name: demo
-~passwd	: demo
+user name: demo
+passwd	: demo
