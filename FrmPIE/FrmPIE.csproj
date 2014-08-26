@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FrmPIE</RootNamespace>
-    <AssemblyName>0PackingInformationEntry</AssemblyName>
+    <AssemblyName>0IDR System</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -54,7 +54,7 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>20140801103645492_easyicon_net_128.ico</ApplicationIcon>
+    <ApplicationIcon>irobot256.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="COM.Excel, Version=1.1.1606.17082, Culture=neutral">
@@ -78,52 +78,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminManage.cs">
+    <Compile Include="0API\CartonFromTo.cs" />
+    <Compile Include="0API\DoWrokObject.cs" />
+    <Compile Include="Logon\AdminManage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminManage.Designer.cs">
+    <Compile Include="Logon\AdminManage.Designer.cs">
       <DependentUpon>AdminManage.cs</DependentUpon>
     </Compile>
-    <Compile Include="EnterPassword.cs">
+    <Compile Include="0API\commfunction.cs" />
+    <Compile Include="Logon\EnterPassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EnterPassword.Designer.cs">
+    <Compile Include="Logon\EnterPassword.Designer.cs">
       <DependentUpon>EnterPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPIE.cs">
+    <Compile Include="OldPIE\frmPIE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPIE.Designer.cs">
+    <Compile Include="OldPIE\frmPIE.Designer.cs">
       <DependentUpon>frmPIE.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmplMain.cs">
+    <Compile Include="OldPIE\frmplMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmplMain.Designer.cs">
+    <Compile Include="OldPIE\frmplMain.Designer.cs">
       <DependentUpon>frmplMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmUpload.cs">
+    <Compile Include="PIE\frmUpload.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUpload.Designer.cs">
+    <Compile Include="PIE\frmUpload.Designer.cs">
       <DependentUpon>frmUpload.cs</DependentUpon>
     </Compile>
-    <Compile Include="IndexTemple.cs">
+    <Compile Include="0temple\indextemple.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IndexTemple.Designer.cs">
-      <DependentUpon>IndexTemple.cs</DependentUpon>
+    <Compile Include="0temple\indextemple.Designer.cs">
+      <DependentUpon>indextemple.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogonDomain.cs">
+    <Compile Include="IDR.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogonDomain.Designer.cs">
+    <Compile Include="IDR.Designer.cs">
+      <DependentUpon>IDR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logon\LogonDomain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logon\LogonDomain.Designer.cs">
       <DependentUpon>LogonDomain.cs</DependentUpon>
     </Compile>
-    <Compile Include="MaximunSizeFrm.cs">
+    <Compile Include="OldPIE\MaximunSizeFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MaximunSizeFrm.Designer.cs">
+    <Compile Include="OldPIE\MaximunSizeFrm.Designer.cs">
       <DependentUpon>MaximunSizeFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -138,28 +147,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AdminManage.resx">
+    <EmbeddedResource Include="Logon\AdminManage.resx">
       <DependentUpon>AdminManage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EnterPassword.resx">
+    <EmbeddedResource Include="Logon\EnterPassword.resx">
       <DependentUpon>EnterPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPIE.resx">
+    <EmbeddedResource Include="OldPIE\frmPIE.resx">
       <DependentUpon>frmPIE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmplMain.resx">
+    <EmbeddedResource Include="OldPIE\frmplMain.resx">
       <DependentUpon>frmplMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUpload.resx">
+    <EmbeddedResource Include="PIE\frmUpload.resx">
       <DependentUpon>frmUpload.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IndexTemple.resx">
-      <DependentUpon>IndexTemple.cs</DependentUpon>
+    <EmbeddedResource Include="0temple\indextemple.resx">
+      <DependentUpon>indextemple.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogonDomain.resx">
+    <EmbeddedResource Include="IDR.resx">
+      <DependentUpon>IDR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logon\LogonDomain.resx">
       <DependentUpon>LogonDomain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MaximunSizeFrm.resx">
+    <EmbeddedResource Include="OldPIE\MaximunSizeFrm.resx">
       <DependentUpon>MaximunSizeFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -239,7 +251,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="20140801103645492_easyicon_net_128.ico" />
+    <Content Include="irobot256.ico" />
+    <None Include="Resources\irobotLogo.png" />
+    <None Include="Resources\irobot256.png" />
+    <None Include="Resources\irobot128.png" />
+    <None Include="Resources\irobot48.png" />
+    <None Include="Resources\irobot32.png" />
+    <None Include="Resources\scanBar.png" />
     <None Include="Resources\47.ico" />
     <None Include="Resources\logo.png" />
     <None Include="Web References\WebReference208\UserLoginCheck.disco" />

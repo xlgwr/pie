@@ -28,7 +28,7 @@ namespace FrmPIE
         [STAThread]
         static void Main()
         {
-            frmVersion = "@V2014-08-26-01-dev";
+            frmVersion = "@V2014-08-26-10-dev";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -40,13 +40,17 @@ namespace FrmPIE
 
             //logon on
 
-            var LogonOn = new LogonDomain();
-            LogonOn.Text += frmVersion;
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
-            Application.Run(LogonOn);
+            //var LogonOn = new LogonDomain();
+            //LogonOn.Text += frmVersion;
+            //Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            //Application.Run(LogonOn);
 
             //var index = new IndexTemple();
             //Application.Run(index);
+
+            var frmIDR = new frmIDR();
+            frmIDR.Text += frmVersion;
+            Application.Run(frmIDR);
 
         }
 
@@ -546,58 +550,7 @@ namespace FrmPIE
             result = Convert.ToInt16(parameters[12].Value);
             return result;
         }
+        
     }
-}
-class CartonFromTo
-{
-    public decimal _wec_ctn_Fr;
-    public decimal _wec_ctn_To;
-    public string _print_Type;
-    public string _print_port;
-    public int _dgvNumber;
-    public string _batchID;
-    public int _lineID;
-    public string _cartonID;
-    public CartonFromTo(decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, int dgvIndex, string batchid, int lineid, string cartonid)
-    {
-        // TODO: Complete member initialization
-        _wec_ctn_Fr = wec_ctn_fr;
-        _wec_ctn_To = wec_ctn_to;
-        _print_Type = print_type;
-        _dgvNumber = dgvIndex;
-        _batchID = batchid;
-        _lineID = lineid;
-        _cartonID = cartonid;
-    }
-    public CartonFromTo(decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, string print_port)
-    {
-        // TODO: Complete member initialization
-        _wec_ctn_Fr = wec_ctn_fr;
-        _wec_ctn_To = wec_ctn_to;
-        _print_Type = print_type;
-        _print_port = print_port;
-    }
-}
-class DoWrokObject
-{
-    public DataGridView _dgv;
-    public int _selectedindex;
-    public int _eIndex;
-    public Color _colors;
-    public string _sameColumnName;
-    public string _deffCellName;
-    public string _deffCellValue;
-    public Color _deffcolors;
-    public DoWrokObject(DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors)
-    {
-        _dgv = dgv;
-        _selectedindex = selectedindex;
-        _eIndex = eIndex;
-        _colors = colors;
-        _sameColumnName = sameColumnName;
-        _deffCellName = deffCellName;
-        _deffCellValue = deffCellValue;
-        _deffcolors = Deffcolors;
 
-    }
 }

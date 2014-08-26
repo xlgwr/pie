@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FrmPIE.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FrmIDR.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="FrmPIE_WebReference100_Service" Type="(Web Service URL)" Scope="Application">
@@ -7,6 +7,9 @@
     </Setting>
     <Setting Name="_0PackingInformationEnfry_WebReference_UserLoginCheck" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx</Value>
+    </Setting>
+    <Setting Name="FrmOCRDM_WebReference100_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://142.2.70.100/mfgpgm/Service.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

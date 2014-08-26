@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("xlgwr.PackingInformationEntry PIE")]
-[assembly: AssemblyDescription("xlgwr.PackingInformationEntry PIE")]
+[assembly: AssemblyTitle("IDR.System")]
+[assembly: AssemblyDescription("IDR.System")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Wong's")]
-[assembly: AssemblyProduct("xlgwr.PackingInformationEntry")]
+[assembly: AssemblyProduct("xlgwr.IDR.System")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
