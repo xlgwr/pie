@@ -31,6 +31,7 @@ namespace FrmPIE
             frmVersion = "@V2014-08-26-10-dev";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
 
             // Application.Run(new frmplMain());
 
@@ -42,7 +43,6 @@ namespace FrmPIE
 
             //var LogonOn = new LogonDomain();
             //LogonOn.Text += frmVersion;
-            //Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
             //Application.Run(LogonOn);
 
             //var index = new IndexTemple();

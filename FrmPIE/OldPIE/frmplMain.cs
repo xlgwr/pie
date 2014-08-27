@@ -97,7 +97,7 @@ namespace FrmPIE
                 this.txtPart.Text = ocr_mstr_model.Ocr_partno;
             }
 
-           
+
             currRowCol();
         }
 
@@ -269,6 +269,7 @@ namespace FrmPIE
                     return;
                 };
                 #endregion
+                #region update
                 if (btnUpadeAdd.Text == "&Update")
                 {
 
@@ -313,7 +314,9 @@ namespace FrmPIE
                         lblShowMsg("Update fail", "Error");
                     }
                 }
-                else if (btnUpadeAdd.Text == "&Add")
+                #endregion
+                #region add
+                if (btnUpadeAdd.Text == "&Add")
                 {
                     string strBatchID = "";
                     int intOutAffected;
@@ -398,6 +401,8 @@ namespace FrmPIE
                     {
                         lblShowMsg("Add fail", "Error");
                     }
+
+                #endregion
 
                 }
 
@@ -833,10 +838,10 @@ namespace FrmPIE
             if (currindex >= 0 && currindex < countrow)
             {
 
-                getBatchiLineId(FrmPIE_visit.data1GV2PackingListDetailTransferInfo2,currindex);
+                getBatchiLineId(FrmPIE_visit.data1GV2PackingListDetailTransferInfo2, currindex);
                 plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model.Batch_ID, plr_mstr_model.LineID);
                 initModelForTextBox(plr_mstr_model);
-                
+
             }
             currRowCol();
         }
@@ -875,7 +880,7 @@ namespace FrmPIE
         }
         private void currRowCol()
         {
-            toolStripStatusLabelCurrRowCol.Text = "\t当前 BatchID: " + plr_mstr_model.Batch_ID + " ,LineID: " + plr_mstr_model.LineID + ", 在第 " + (FrmPIE_visit._intVoidRightMenu2row+1) + " 行," + (FrmPIE_visit._intVoidRightMenu2col+1) + " 列.";
+            toolStripStatusLabelCurrRowCol.Text = "\t当前 BatchID: " + plr_mstr_model.Batch_ID + " ,LineID: " + plr_mstr_model.LineID + ", 在第 " + (FrmPIE_visit._intVoidRightMenu2row + 1) + " 行," + (FrmPIE_visit._intVoidRightMenu2col + 1) + " 列.";
         }
 
 

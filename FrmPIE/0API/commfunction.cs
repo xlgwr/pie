@@ -20,10 +20,10 @@ namespace FrmPIE._0API
     class commfunction
     {
 
-        public delegate void initDataGridViewSource(object ctftobj);
-        public delegate void SafeSetCtlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible);
-        public delegate void SafeSetToolText(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible);
-        public delegate void SafeSetDataGVds(System.Windows.Forms.DataGridView ctl, DataSet ds, int selectIndexRow, int intselectIndexCol);
+        public delegate void dinitDataGridViewSource(object obj);
+        public delegate void dSafeSetCtlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible);
+        public delegate void dSafeSetToolText(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible);
+        public delegate void dSafeSetDataGVds(System.Windows.Forms.DataGridView ctl, DataSet ds, int selectIndexRow, int intselectIndexCol);
         public commfunction()
         {
         }

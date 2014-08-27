@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace FrmPIE._0API
@@ -61,6 +62,53 @@ namespace FrmPIE._0API
             _dotype = dotype;
             _userid = userid;
             _userip = userip;
+        }
+
+
+        public static string[] initCartonFromTo(string CartonId, string CartonType, out string carprefix)
+        {
+            Regex RegPrefix = new Regex(@"[a-zA-Z\.,@?^=%&amp;:/~\+#]+");
+            var iPos = CartonId.IndexOf('-');
+            var strCtnId = CartonId;
+
+            string[] strCtnIdArr = new string[2];
+
+            Match m = RegPrefix.Match(strCtnId);
+            if (m.Success)
+            {
+                carprefix = m.Value;
+
+            }
+            else
+            {
+                carprefix = "";
+            }
+            if (!string.IsNullOrEmpty(carprefix))
+            {
+
+                strCtnId = strCtnId.Replace(carprefix, " ");
+            }
+            if (iPos > 0)
+            {
+                strCtnIdArr = strCtnId.Split('-');
+                if (string.IsNullOrEmpty(strCtnIdArr[0]))
+                {
+                    strCtnIdArr[0] = "0";
+                }
+                if (string.IsNullOrEmpty(strCtnIdArr[1]))
+                {
+                    strCtnIdArr[0] = "0";
+                }
+            }
+            else
+            {
+
+
+                strCtnIdArr[0] = strCtnId;
+                strCtnIdArr[1] = strCtnId;
+            }
+
+            return strCtnIdArr;
         }
     }
 }

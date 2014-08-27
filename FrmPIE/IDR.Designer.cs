@@ -469,8 +469,7 @@
             // status13toolStripStatusLabel
             // 
             this.status13toolStripStatusLabel.Name = "status13toolStripStatusLabel";
-            this.status13toolStripStatusLabel.Size = new System.Drawing.Size(151, 17);
-            this.status13toolStripStatusLabel.Text = "toolSStatusLblCurrPoint2";
+            this.status13toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // textBox1
             // 
@@ -705,7 +704,8 @@
             this.toolcMenu12AddOneByOneBatchID.Image = global::FrmPIE.Properties.Resources.add;
             this.toolcMenu12AddOneByOneBatchID.Name = "toolcMenu12AddOneByOneBatchID";
             this.toolcMenu12AddOneByOneBatchID.Size = new System.Drawing.Size(239, 22);
-            this.toolcMenu12AddOneByOneBatchID.Text = "&Add One By One(BatchID)";
+            this.toolcMenu12AddOneByOneBatchID.Text = "&Add New(BatchID)";
+            this.toolcMenu12AddOneByOneBatchID.Click += new System.EventHandler(this.toolcMenu12AddOneByOneBatchID_Click);
             // 
             // toolcMenu13SearchePackingList
             // 
@@ -1317,7 +1317,6 @@
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
         private System.Windows.Forms.ToolStripStatusLabel toolSatusLableft1;
-        private System.Windows.Forms.TabControl tabCtlRight1;
         private System.Windows.Forms.TabPage tabPageHome1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
@@ -1362,6 +1361,7 @@
         private System.Windows.Forms.LinkLabel linkLabel5;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.LinkLabel linkLabel6;
+        protected internal System.Windows.Forms.TabControl tabCtlRight1;
 
 
 
