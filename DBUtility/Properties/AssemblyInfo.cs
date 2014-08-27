@@ -2,11 +2,11 @@
 using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("PIE.DBUtility")]
-[assembly: AssemblyDescription("Data Access Application Model By Maticsoft")]
-[assembly: AssemblyConfiguration("Maticsoft")]
-[assembly: AssemblyCompany("Maticsoft")]
+[assembly: AssemblyDescription("xlgwr")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("xlgwr")]
 [assembly: AssemblyProduct("PIE.DBUtility")]
-[assembly: AssemblyCopyright("Copyright (C) Maticsoft 2004-2010")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("3.5.0")]

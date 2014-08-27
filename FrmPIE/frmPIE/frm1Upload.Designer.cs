@@ -1,4 +1,4 @@
-﻿namespace FrmPIE
+﻿namespace FrmPIE.frmPIE
 {
     partial class frmUploadExcel
     {

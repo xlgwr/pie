@@ -13,7 +13,7 @@ using Excel;
 
 
 
-namespace FrmPIE
+namespace FrmPIE.frmPIE
 {
     public partial class frmUploadExcel : Form
     {
