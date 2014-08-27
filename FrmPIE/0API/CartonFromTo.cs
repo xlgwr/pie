@@ -42,7 +42,7 @@ namespace FrmPIE._0API
             _print_Type = print_type;
             _print_port = print_port;
         }
-        public CartonFromTo(DataGridView dgv, string batchid, string dotype, string userid, string userip, int lineid)
+        public CartonFromTo(DataGridView dgv, string batchid, int lineid, string dotype, string userid, string userip)
         {
             // TODO: Complete member initialization
             _dgv = dgv;
@@ -52,7 +52,7 @@ namespace FrmPIE._0API
             _userid = userid;
             _userip = userip;
         }
-        public CartonFromTo(DataGridView dgv, string batchid, string dotype, string userid, string userip, string cartonid)
+        public CartonFromTo(DataGridView dgv, string batchid, string cartonid, string dotype, string userid, string userip)
         {
             // TODO: Complete member initialization
             _dgv = dgv;

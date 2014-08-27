@@ -1,19 +1,32 @@
-﻿using FrmPIE.Properties;
+﻿using FrmPIE._0API;
+using FrmPIE.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace FrmPIE
 {
 
+
     public partial class frmIDR : Form
     {
-        int currTabMouseUpIndex = 1;
+        
 
+        public Thread _tuploadExcel;
+        public Thread _tuploadExcelInitGDV;
+
+        public DataSet _batchMstr;
+
+        public PIE.Model.plr_batch_mstr _plr_batch_mstr_model;
+
+        public string _custip=Program.getClientIP();
+
+        int currTabMouseUpIndex = 1;
         int currMouseX = 0;
         int currMouseY = 0;
         public frmIDR()
@@ -30,11 +43,10 @@ namespace FrmPIE
         private void frmIDR_Load(object sender, EventArgs e)
         {
             initHideImage(new object[] { hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3, status11toolBtnleft }, 1);
-
             initHideImage(new object[] { hideToolBarToolStripMenuItem1 }, 2);
 
             initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3 });
-            Control.CheckForIllegalCrossThreadCalls = false;
+            //Control.CheckForIllegalCrossThreadCalls = false;
 
         }
 
@@ -327,9 +339,19 @@ namespace FrmPIE
         private void toolcMenu11UploadEPackingListExcel_Click(object sender, EventArgs e)
         {
             addNewTabPage("Upload EPacking List From Excel");
-            frmUpload fu = new frmUpload();
-            GroupBox gb = fu.groupBox1frmUpload;
+            frmUpload fu = new frmUpload(this);
+            GroupBox gb = fu.groupBox0frmUpload;
+            DataGridView dgv = new DataGridView();
             tabCtlRight1.SelectedTab.Controls.Add(gb);
+            tabCtlRight1.SelectedTab.Controls.Add(dgv);
+        }
+
+        private void frmIDR_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_tuploadExcel.ThreadState== ThreadState.Running)
+            {
+                _tuploadExcel.Abort();
+            }
         }
 
 

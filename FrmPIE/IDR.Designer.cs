@@ -1216,6 +1216,7 @@
             this.Name = "frmIDR";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IDR Solution";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmIDR_FormClosing);
             this.Load += new System.EventHandler(this.frmIDR_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

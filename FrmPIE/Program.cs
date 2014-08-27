@@ -417,7 +417,7 @@ namespace FrmPIE
                                 strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + "WebServer 没有返回值" + "\n";
                                 intUploadErrCount++;
                             }
-                           
+
                         }
                         else
                         {
@@ -428,7 +428,7 @@ namespace FrmPIE
                     }
                     strResult = strResult == "" ? "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" : "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" + "\t5.失败的记录:\n" + strResult;
 
-                    
+
                 }
                 else
                 {
@@ -550,7 +550,13 @@ namespace FrmPIE
             result = Convert.ToInt16(parameters[12].Value);
             return result;
         }
-        
+        public static void OpenFolderAndSelectFile(String fileFullName)
+        {
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
+            psi.Arguments = "/e,/select," + fileFullName;
+            System.Diagnostics.Process.Start(psi);
+        }
+
     }
 
 }
