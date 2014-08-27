@@ -11,7 +11,7 @@ namespace PIE.Model
         { }
         #region Model
         private string _batch_id;
-        private int _lineid;
+        private int _lineid=0;
         private string _plr_suppliers_id;
         private string _invoiceid;
         private string _plr_po;
@@ -24,8 +24,8 @@ namespace PIE.Model
         private DateTime _plr_rcp_date = DateTime.Now;
         private DateTime _plr_deli_date = DateTime.Now;
         private string _carton_id_prifix;
-        private decimal? _carton_id_from;
-        private decimal? _carton_id_to;
+        private decimal? _carton_id_from=0;
+        private decimal? _carton_id_to=0;
         private string _re_mark;
         private string _plr_site;
         private string _plr_pallet_no;
@@ -34,12 +34,12 @@ namespace PIE.Model
         private string _plr_vend_mfgr;
         private string _plr_vm_partno;
         private string _plr_doc_type;
-        private int? _plr_ttl;
+        private int? _plr_ttl=0;
         private string _plr_um;
         private string _plr_nw;
         private string _plr_gw;
         private string _plr_um_w;
-        private decimal? _plr_unitprice;
+        private decimal? _plr_unitprice=0;
         private string _plr_msm;
         private string _plr_doc_no1;
         private string _plr_status;
@@ -51,8 +51,8 @@ namespace PIE.Model
         private int? _plr_void_status = 1;
         private string _plr_chr01;
         private string _plr_chr02;
-        private int? _plr_deci1;
-        private decimal? _plr_deci2;
+        private int? _plr_deci1=0;
+        private decimal? _plr_deci2=0;
         /// <summary>
         /// 
         /// </summary>

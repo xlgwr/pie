@@ -58,6 +58,24 @@ namespace FrmPIE
             //Control.CheckForIllegalCrossThreadCalls = false;
 
         }
+        protected override bool ProcessCmdKey(ref   Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Down)
+            {
+
+                //keybd_event(9, 0, 0, 0);
+                SendKeys.Send("{TAB}");
+
+            }
+            if (keyData == Keys.Up)
+            {
+
+                SendKeys.Send("+{TAB}");
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+
+        }
         private void frmIDR_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_tuploadExcel != null)
@@ -193,7 +211,7 @@ namespace FrmPIE
         private TabPage addNewTabPage(string pagename)
         {
             tabCtlRight1.TabPages.Add(pagename + tabCtlRight1.TabCount, pagename + tabCtlRight1.TabCount);
-            
+
             tabCtlRight1.SelectedIndex = tabCtlRight1.TabCount - 1;
             status12toolSStatusLblMsg.Text = tabCtlRight1.SelectedIndex.ToString() + "," + pagename;
 
@@ -381,15 +399,6 @@ namespace FrmPIE
 
             this.AcceptButton = fanb.btn1UpadeAddAddNewBatchID;
             addGBToTC(tabpagenew, fanb.groupBox0AddNewBatchID);
-        }
-        public void addBatchInfotoTabCurr(PIE.Model.plr_batch_mstr plr_batch_mstr)
-        {
-            //var tabnew = addNewTabPage("list");
-            _plr_batch_mstr_model = plr_batch_mstr;
-            frm0BatchInfo fbi = new frm0BatchInfo(this);
-            var gb = fbi.groupBox0BatchInfo0;
-            addGBToTC(tabCtlRight1, gb);
-
         }
 
     }

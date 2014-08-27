@@ -20,8 +20,10 @@ namespace FrmPIE.frmPIE
         frmIDR _idr_show;
         commfunction cf;
 
-        PIE.Model.plr_mstr plr_mstr_model = new PIE.Model.plr_mstr();
-
+        PIE.Model.plr_mstr _plr_mstr_model = new PIE.Model.plr_mstr();
+        bool _addNewFalg = false;
+        bool _updateflag = false;
+        int _nextlineid;
         public frm2AddNewBatchID(frmIDR idr)
         {
             _idr_show = idr;
@@ -33,12 +35,21 @@ namespace FrmPIE.frmPIE
 
             initWithHeight();
         }
+        private void AddNewBatchID_Load(object sender, EventArgs e)
+        {
+
+            _idr_show._tuploadExcelInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
+        }
 
         private void initWithHeight()
         {
-            // groupBox2AddNewBatchID.Width = groupBox0AddNewBatchID.Width - groupBox2AddNewBatchID.Left - 5;
+            groupBox1.Width = groupBox0AddNewBatchID.Width - groupBox1.Left - 5;
+            groupBox2.Width = groupBox1.Width;
+            groupBox3mstr_addnewbatch.Width = groupBox1.Width;
+            groupBox4det_addnewbatch.Width = groupBox1.Width;
 
-            // groupBox2AddNewBatchID.Height = groupBox0AddNewBatchID.Height - groupBox2AddNewBatchID.Top - 5;
+
+            groupBox4det_addnewbatch.Height = groupBox0AddNewBatchID.Height - groupBox4det_addnewbatch.Top;
         }
         private void groupBox0AddNewBatchID_Resize(object sender, EventArgs e)
         {
@@ -158,6 +169,14 @@ namespace FrmPIE.frmPIE
         private void initTxtToModel(PIE.Model.plr_mstr plr_mstr_model)
         {
             //plr_mstr_model.plr_suppliers_id = txtplr_suppliers_id.Text.Trim();
+
+            if (_addNewFalg)
+            {
+                plr_mstr_model.Batch_ID = txt1BatchIDAddNewBatchID.Text.Trim();
+
+                plr_mstr_model.LineID = Convert.ToInt32(txt2LineIDAddNewBatchID.Text.Trim());
+            }
+
             plr_mstr_model.plr_pallet_no = txt3PalletNoAddNewBatchID.Text.Trim();
             plr_mstr_model.InvoiceID = txt4InvoiceIDAddNewBatchID.Text.Trim();
             plr_mstr_model.plr_po = txt5POAddNewBatchID.Text.Trim();
@@ -183,6 +202,8 @@ namespace FrmPIE.frmPIE
         }
         private void initModelForTextBox(PIE.Model.plr_mstr plr_mstr_model)
         {
+            txt1BatchIDAddNewBatchID.Text = plr_mstr_model.Batch_ID;
+            txt2LineIDAddNewBatchID.Text = plr_mstr_model.LineID.ToString();
             txt3PalletNoAddNewBatchID.Text = plr_mstr_model.plr_pallet_no;
             txt4InvoiceIDAddNewBatchID.Text = plr_mstr_model.InvoiceID;
             txt5POAddNewBatchID.Text = plr_mstr_model.plr_po;
@@ -207,7 +228,37 @@ namespace FrmPIE.frmPIE
             //initCartonFromTo();
         }
 
+        private void initDatasetToTxt(PIE.Model.plr_batch_mstr model, bool breadonly)
+        {
+            txtb1batch_id_AddNewBatchID.Text = model.batch_id;
+            txtb2batch_do_AddNewBatchID.Text = model.batch_doc;
+            txtb3batch_statu_AddNewBatchID.Text = model.batch_status;
+            txtb4batch_dec01_AddNewBatchID.Text = model.batch_dec01.ToString();
+            txtb5batch_cre_date_AddNewBatchID.Text = model.batch_cre_date.ToString();
 
+            txtb1batch_id_AddNewBatchID.ReadOnly = breadonly;
+            txtb2batch_do_AddNewBatchID.ReadOnly = breadonly;
+            txtb3batch_statu_AddNewBatchID.ReadOnly = breadonly;
+            txtb4batch_dec01_AddNewBatchID.ReadOnly = breadonly;
+            txtb5batch_cre_date_AddNewBatchID.ReadOnly = breadonly;
+        }
+        private void initDGV(object strBatchID)
+        {
+            CartonFromTo ctft = new CartonFromTo(data1GV1ePackingDet1_AddNewBatchID, (string)strBatchID, 0, "add", _idr_show._custip, _idr_show._custip);
+            var reobjmstr = cf.initDataGVPlrBatchMstr(ctft, false, "model");
+            var reobjdet = cf.initDataGVplr_mstr(ctft, true, "nothing");
+            if (reobjmstr != null)
+            {
+                _idr_show._plr_batch_mstr_model = (PIE.Model.plr_batch_mstr)reobjmstr;
+                initDatasetToTxt(_idr_show._plr_batch_mstr_model, true);
+            }
+        }
+
+        private void initDGVDelegate(object strBatchID)
+        {
+            commfunction.dinitDataGridViewSource me = new commfunction.dinitDataGridViewSource(initDGV);
+            _idr_show.BeginInvoke(me, strBatchID);
+        }
         private void btn1UpadeAddAddNewBatchID_Click(object sender, EventArgs e)
         {
             initCartonFromTo();
@@ -219,21 +270,22 @@ namespace FrmPIE.frmPIE
             if (btn1UpadeAddAddNewBatchID.Text == "&Update")
             {
 
-                plr_mstr_model = new PIE.DAL.plr_mstr().GetModel(txt1BatchIDAddNewBatchID.Text.Trim(), Convert.ToInt32(txt2LineIDAddNewBatchID.Text.Trim()));
+                _plr_mstr_model = new PIE.DAL.plr_mstr().GetModel(txt1BatchIDAddNewBatchID.Text.Trim(), Convert.ToInt32(txt2LineIDAddNewBatchID.Text.Trim()));
 
 
-                initTxtToModel(plr_mstr_model);
+                initTxtToModel(_plr_mstr_model);
 
 
-                plr_mstr_model.plr_update_date = DbHelperSQL.getServerGetDate();
-                plr_mstr_model.plr_user_ip = _idr_show._custip;
+                _plr_mstr_model.plr_update_date = DbHelperSQL.getServerGetDate();
+                _plr_mstr_model.plr_user_ip = _idr_show._custip;
                 //plr_mstr_model.plr_status = "";
 
-                var result_plr_mstr = new PIE.DAL.plr_mstr().Update(plr_mstr_model);
+                var result_plr_mstr = new PIE.DAL.plr_mstr().Update(_plr_mstr_model);
 
                 if (result_plr_mstr)
                 {
-
+                    _updateflag = true;
+                    threadinitDVdelegate();
                     lblShowMsg("Update success", "Success");
 
                 }
@@ -246,74 +298,80 @@ namespace FrmPIE.frmPIE
             #region add
             if (btn1UpadeAddAddNewBatchID.Text == "&Add")
             {
-                string strBatchID = "";
+
                 int intOutAffected;
 
+                if (!_addNewFalg || _plr_mstr_model.LineID <= 0)
+                {
+                    #region add New BatchID
 
-                PIE.Model.plr_batch_mstr plr_bathmstr_model = new PIE.Model.plr_batch_mstr();
-
-                plr_mstr_model = new PIE.Model.plr_mstr();
-
-                initTxtToModel(plr_mstr_model);
-
-                plr_mstr_model.plr_doc_type = "New";
-                plr_mstr_model.plr_cre_date = DbHelperSQL.getServerGetDate();
-                plr_mstr_model.plr_user_ip = _idr_show._custip;
-                plr_mstr_model.plr_status = "No";
-
-
-                SqlParameter[] parameters = {
+                    string strBatchID = "";
+                    PIE.Model.plr_batch_mstr plr_bathmstr_model = new PIE.Model.plr_batch_mstr();
+                    SqlParameter[] parameters = {
                                             new SqlParameter("@BatchID",SqlDbType.NVarChar,11)
                                         };
-                parameters[0].Direction = ParameterDirection.Output;
+                    parameters[0].Direction = ParameterDirection.Output;
 
-                DbHelperSQL.RunProcedure("sp_GetBatchID", parameters, out intOutAffected);
-                strBatchID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
-                if (string.IsNullOrEmpty(strBatchID))
-                {
-                    lblShowMsg("生成BatchID,出错，无法新增。", "Error");
-                    return;
+                    DbHelperSQL.RunProcedure("sp_GetBatchID", parameters, out intOutAffected);
+                    strBatchID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
+                    if (string.IsNullOrEmpty(strBatchID))
+                    {
+                        lblShowMsg("生成BatchID,出错，无法新增。", "Error");
+                        return;
+                    }
+                    plr_bathmstr_model.batch_id = strBatchID;
+                    plr_bathmstr_model.plr_suppliers_id = txt13plr_suppliers_id.Text.Trim();
+                    plr_bathmstr_model.batch_doc = "New";
+                    plr_bathmstr_model.batch_dec01 = 1;
+                    plr_bathmstr_model.batch_cre_date = DbHelperSQL.getServerGetDate();
+                    plr_bathmstr_model.batch_update_date = plr_bathmstr_model.batch_cre_date;
+                    plr_bathmstr_model.batch_user_ip = _idr_show._custip;
+                    plr_bathmstr_model.batch_status = "No";
+                    plr_bathmstr_model.batch_void = 1;
+
+                    var result_plr_batch = new PIE.DAL.plr_batch_mstr().Add(plr_bathmstr_model);
+                    if (!result_plr_batch)
+                    {
+                        lblShowMsg("Add Batch Mstr info fail", "Error");
+                        return;
+                    }
+                    _plr_mstr_model.Batch_ID = strBatchID;
+                    _plr_mstr_model.LineID = 1;
+                    #endregion
+
+                    _idr_show._plr_batch_mstr_model = plr_bathmstr_model;
                 }
 
-                plr_mstr_model.Batch_ID = strBatchID;
-                plr_mstr_model.LineID = 1;
 
-                plr_bathmstr_model.batch_id = strBatchID;
-                plr_bathmstr_model.plr_suppliers_id = txt13plr_suppliers_id.Text.Trim();
-                plr_bathmstr_model.batch_doc = "New";
-                plr_bathmstr_model.batch_dec01 = 1;
-                plr_bathmstr_model.batch_cre_date = plr_mstr_model.plr_cre_date;
-                plr_bathmstr_model.batch_update_date = plr_mstr_model.plr_cre_date;
-                plr_bathmstr_model.batch_user_ip = _idr_show._custip;
-                plr_bathmstr_model.batch_status = "No";
-                plr_bathmstr_model.batch_void = 1;
+                //plr_mstr_model = new PIE.Model.plr_mstr();
+               
+
+                initTxtToModel(_plr_mstr_model);
+
+                _plr_mstr_model.plr_doc_type = "New";
+                _plr_mstr_model.plr_cre_date = DbHelperSQL.getServerGetDate();
+                _plr_mstr_model.plr_user_ip = _idr_show._custip;
+                _plr_mstr_model.plr_status = "No";
 
 
-                var result_plr_batch = new PIE.DAL.plr_batch_mstr().Add(plr_bathmstr_model);
-                if (!result_plr_batch)
-                {
-                    lblShowMsg("Add Batch Mstr info fail", "Error");
-                    return;
-                }
-                var result_plr_mstr = new PIE.DAL.plr_mstr().Add(plr_mstr_model);
+                var result_plr_mstr = new PIE.DAL.plr_mstr().Add(_plr_mstr_model);
 
-                _idr_show._plr_batch_mstr_model = plr_bathmstr_model;
 
-                //frm0BatchInfo fbi = new frm0BatchInfo(_idr_show);
-                //_idr_show.addGBToTC(_idr_show.tabCtlRight1, fbi.groupBox0BatchInfo0);
+
+
+
 
                 if (result_plr_mstr)
                 {
+                    threadinitDVdelegate();
 
-                    _idr_show.addBatchInfotoTabCurr(plr_bathmstr_model);
-
-                    Program.GenCartonNo(plr_mstr_model);
+                    Program.GenCartonNo(_plr_mstr_model);
                     //MessageBox.Show("Add BatchID:" + strBatchID + " success,", "Success");
 
                     this.txt3PalletNoAddNewBatchID.Focus();
 
 
-                    if (string.IsNullOrEmpty(plr_mstr_model.Batch_ID))
+                    if (string.IsNullOrEmpty(_plr_mstr_model.Batch_ID))
                     {
 
                         lblShowMsg("新增新的BatchID", "Notice");
@@ -321,8 +379,13 @@ namespace FrmPIE.frmPIE
                     else
                     {
                         PIE.Model.plr_mstr plr_mstr_new = new PIE.Model.plr_mstr();
+                        plr_mstr_new.Batch_ID = _plr_mstr_model.Batch_ID;
+                        plr_mstr_new.LineID = _plr_mstr_model.LineID + 1;
+                        _nextlineid = plr_mstr_new.LineID;
+
                         initModelForTextBox(plr_mstr_new);
-                        lblShowMsg("新增新的BatchID,\t上次新增的为：" + plr_mstr_model.Batch_ID, "Notice");
+                        _addNewFalg = true;
+                        lblShowMsg("新增新的相同BatchID,\t上次新增的为：" + _plr_mstr_model.Batch_ID + ",LineID:" + _plr_mstr_model.LineID.ToString(), "Notice");
                     }
 
                 }
@@ -334,21 +397,77 @@ namespace FrmPIE.frmPIE
             #endregion
         }
 
-        private void AddNewBatchID_Load(object sender, EventArgs e)
+        private void threadinitDVdelegate()
         {
+            _idr_show._tuploadExcelInitGDV = new Thread(initDGVDelegate);
+            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Running)
+            {
+                _idr_show._tuploadExcelInitGDV.Abort();
+            }
 
+            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Unstarted)
+            {
+                _idr_show._tuploadExcelInitGDV.Start(_plr_mstr_model.Batch_ID);
+            }
+            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Stopped)
+            {
+                _idr_show._tuploadExcelInitGDV = new Thread(initDGVDelegate);
+                _idr_show._tuploadExcelInitGDV.Start(_plr_mstr_model.Batch_ID);
+            }
         }
 
         private void btn3NewAddNewBatchID_Click(object sender, EventArgs e)
         {
-            List<PIE.Model.plr_batch_mstr> lis = new PIE.BLL.plr_batch_mstr().GetModelList("batch_id like '%7'");
-            _idr_show.addBatchInfotoTabCurr(lis[0]);
+            lblShowMsg("新增新的BatchID,LineID 从1开始计算.", "Notice");
+            _addNewFalg = false;
+            _plr_mstr_model = new PIE.Model.plr_mstr();
+            _plr_mstr_model.LineID = 1;
+            initModelForTextBox(_plr_mstr_model);
+            txt3PalletNoAddNewBatchID.Focus();
         }
 
-        private void btn5PoCheckAddNewBatchID_Click(object sender, EventArgs e)
+        private void data1GV1ePackingDet1_AddNewBatchID_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0 && e.RowIndex < data1GV1ePackingDet1_AddNewBatchID.Rows.Count - 1)
+            {
+
+                btn1UpadeAddAddNewBatchID.Text = "&Update";
+                string strbatchid = data1GV1ePackingDet1_AddNewBatchID.Rows[e.RowIndex].Cells["Batch_ID"].Value.ToString();
+                int lineid = Convert.ToInt32(data1GV1ePackingDet1_AddNewBatchID.Rows[e.RowIndex].Cells["LineID"].Value);
+
+                _plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(strbatchid, lineid);
+                initModelForTextBox(_plr_mstr_model);
+                txt3PalletNoAddNewBatchID.Focus();
+                lblShowMsg("修改BatchID:" + strbatchid + "," + lineid + ".", "Notice");
+
+
+            }
 
         }
+
+        private void btnConton_Click(object sender, EventArgs e)
+        {
+            if (_nextlineid > 1)
+            {
+                lblShowMsg("Add Continue,", "");
+                _addNewFalg = true;
+                btn1UpadeAddAddNewBatchID.Text = "&Add";
+
+                string nextBatchid = _plr_mstr_model.Batch_ID;
+                _plr_mstr_model = new PIE.Model.plr_mstr();
+
+                _plr_mstr_model.Batch_ID = nextBatchid;
+                _plr_mstr_model.LineID = _nextlineid;
+
+                initModelForTextBox(_plr_mstr_model);
+
+                txt3PalletNoAddNewBatchID.Focus();
+            }
+        }
+
+
+
+
 
 
     }

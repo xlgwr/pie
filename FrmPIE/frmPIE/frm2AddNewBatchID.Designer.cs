@@ -28,14 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox0AddNewBatchID = new System.Windows.Forms.GroupBox();
-            this.lblMsg = new System.Windows.Forms.Label();
-            this.lbl_CartonGen = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txt3PalletNoAddNewBatchID = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.lblMsg = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.txt16RemarkAddNewBatchID = new System.Windows.Forms.TextBox();
+            this.lbl_CartonGen = new System.Windows.Forms.Label();
             this.txt13plr_suppliers_id = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txt12CartonprifixAddNewBatchID = new System.Windows.Forms.TextBox();
@@ -67,62 +70,55 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn3NewAddNewBatchID = new System.Windows.Forms.Button();
             this.btn5PoCheckAddNewBatchID = new System.Windows.Forms.Button();
             this.btn2GenCartonNo2AddNewBatchID = new System.Windows.Forms.Button();
-            this.btn4ExitAddNewBatchID = new System.Windows.Forms.Button();
             this.btn1UpadeAddAddNewBatchID = new System.Windows.Forms.Button();
+            this.groupBox3mstr_addnewbatch = new System.Windows.Forms.GroupBox();
+            this.txtb5batch_cre_date_AddNewBatchID = new System.Windows.Forms.TextBox();
+            this.txtb4batch_dec01_AddNewBatchID = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtb3batch_statu_AddNewBatchID = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtb2batch_do_AddNewBatchID = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtb1batch_id_AddNewBatchID = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.groupBox4det_addnewbatch = new System.Windows.Forms.GroupBox();
+            this.data1GV1ePackingDet1_AddNewBatchID = new System.Windows.Forms.DataGridView();
+            this.btnConton = new System.Windows.Forms.Button();
             this.groupBox0AddNewBatchID.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3mstr_addnewbatch.SuspendLayout();
+            this.groupBox4det_addnewbatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingDet1_AddNewBatchID)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox0AddNewBatchID
             // 
-            this.groupBox0AddNewBatchID.Controls.Add(this.lblMsg);
-            this.groupBox0AddNewBatchID.Controls.Add(this.lbl_CartonGen);
             this.groupBox0AddNewBatchID.Controls.Add(this.groupBox1);
-            this.groupBox0AddNewBatchID.Controls.Add(this.btn3NewAddNewBatchID);
-            this.groupBox0AddNewBatchID.Controls.Add(this.btn5PoCheckAddNewBatchID);
-            this.groupBox0AddNewBatchID.Controls.Add(this.btn2GenCartonNo2AddNewBatchID);
-            this.groupBox0AddNewBatchID.Controls.Add(this.btn4ExitAddNewBatchID);
-            this.groupBox0AddNewBatchID.Controls.Add(this.btn1UpadeAddAddNewBatchID);
-            this.groupBox0AddNewBatchID.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox0AddNewBatchID.Controls.Add(this.groupBox2);
+            this.groupBox0AddNewBatchID.Controls.Add(this.groupBox3mstr_addnewbatch);
+            this.groupBox0AddNewBatchID.Controls.Add(this.groupBox4det_addnewbatch);
+            this.groupBox0AddNewBatchID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox0AddNewBatchID.Location = new System.Drawing.Point(0, 0);
             this.groupBox0AddNewBatchID.Name = "groupBox0AddNewBatchID";
-            this.groupBox0AddNewBatchID.Size = new System.Drawing.Size(617, 382);
+            this.groupBox0AddNewBatchID.Size = new System.Drawing.Size(697, 694);
             this.groupBox0AddNewBatchID.TabIndex = 0;
             this.groupBox0AddNewBatchID.TabStop = false;
             this.groupBox0AddNewBatchID.Resize += new System.EventHandler(this.groupBox0AddNewBatchID_Resize);
-            // 
-            // lblMsg
-            // 
-            this.lblMsg.AutoSize = true;
-            this.lblMsg.ForeColor = System.Drawing.Color.Red;
-            this.lblMsg.Location = new System.Drawing.Point(18, 14);
-            this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(47, 12);
-            this.lblMsg.TabIndex = 106;
-            this.lblMsg.Text = "Notice:";
-            this.lblMsg.Visible = false;
-            // 
-            // lbl_CartonGen
-            // 
-            this.lbl_CartonGen.AutoSize = true;
-            this.lbl_CartonGen.Font = new System.Drawing.Font("SimSun", 39F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_CartonGen.ForeColor = System.Drawing.Color.Red;
-            this.lbl_CartonGen.Location = new System.Drawing.Point(575, 9);
-            this.lbl_CartonGen.Name = "lbl_CartonGen";
-            this.lbl_CartonGen.Size = new System.Drawing.Size(49, 52);
-            this.lbl_CartonGen.TabIndex = 99;
-            this.lbl_CartonGen.Text = "G";
-            this.lbl_CartonGen.Visible = false;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txt3PalletNoAddNewBatchID);
             this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.lblMsg);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.txt16RemarkAddNewBatchID);
+            this.groupBox1.Controls.Add(this.lbl_CartonGen);
             this.groupBox1.Controls.Add(this.txt13plr_suppliers_id);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.txt12CartonprifixAddNewBatchID);
@@ -154,17 +150,17 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(20, 34);
+            this.groupBox1.Location = new System.Drawing.Point(4, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(549, 297);
-            this.groupBox1.TabIndex = 98;
+            this.groupBox1.Size = new System.Drawing.Size(685, 323);
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add New Batch";
             // 
             // txt3PalletNoAddNewBatchID
             // 
             this.txt3PalletNoAddNewBatchID.AcceptsTab = true;
-            this.txt3PalletNoAddNewBatchID.Location = new System.Drawing.Point(373, 17);
+            this.txt3PalletNoAddNewBatchID.Location = new System.Drawing.Point(399, 51);
             this.txt3PalletNoAddNewBatchID.Name = "txt3PalletNoAddNewBatchID";
             this.txt3PalletNoAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt3PalletNoAddNewBatchID.TabIndex = 0;
@@ -172,16 +168,27 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(303, 20);
+            this.label18.Location = new System.Drawing.Point(329, 54);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(71, 12);
             this.label18.TabIndex = 87;
             this.label18.Text = " Pallet No:";
             // 
+            // lblMsg
+            // 
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblMsg.Location = new System.Drawing.Point(102, 17);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(47, 12);
+            this.lblMsg.TabIndex = 106;
+            this.lblMsg.Text = "Notice:";
+            this.lblMsg.Visible = false;
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(61, 254);
+            this.label15.Location = new System.Drawing.Point(87, 288);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(47, 12);
             this.label15.TabIndex = 85;
@@ -189,16 +196,28 @@
             // 
             // txt16RemarkAddNewBatchID
             // 
-            this.txt16RemarkAddNewBatchID.Location = new System.Drawing.Point(114, 253);
+            this.txt16RemarkAddNewBatchID.Location = new System.Drawing.Point(140, 287);
             this.txt16RemarkAddNewBatchID.Multiline = true;
             this.txt16RemarkAddNewBatchID.Name = "txt16RemarkAddNewBatchID";
             this.txt16RemarkAddNewBatchID.Size = new System.Drawing.Size(411, 35);
             this.txt16RemarkAddNewBatchID.TabIndex = 80;
             // 
+            // lbl_CartonGen
+            // 
+            this.lbl_CartonGen.AutoSize = true;
+            this.lbl_CartonGen.Font = new System.Drawing.Font("宋体", 39F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_CartonGen.ForeColor = System.Drawing.Color.Red;
+            this.lbl_CartonGen.Location = new System.Drawing.Point(557, 14);
+            this.lbl_CartonGen.Name = "lbl_CartonGen";
+            this.lbl_CartonGen.Size = new System.Drawing.Size(49, 52);
+            this.lbl_CartonGen.TabIndex = 99;
+            this.lbl_CartonGen.Text = "G";
+            this.lbl_CartonGen.Visible = false;
+            // 
             // txt13plr_suppliers_id
             // 
             this.txt13plr_suppliers_id.Enabled = false;
-            this.txt13plr_suppliers_id.Location = new System.Drawing.Point(373, 196);
+            this.txt13plr_suppliers_id.Location = new System.Drawing.Point(399, 230);
             this.txt13plr_suppliers_id.Name = "txt13plr_suppliers_id";
             this.txt13plr_suppliers_id.Size = new System.Drawing.Size(152, 21);
             this.txt13plr_suppliers_id.TabIndex = 61;
@@ -209,7 +228,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Enabled = false;
-            this.label14.Location = new System.Drawing.Point(284, 200);
+            this.label14.Location = new System.Drawing.Point(310, 234);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(83, 12);
             this.label14.TabIndex = 83;
@@ -219,7 +238,7 @@
             // txt12CartonprifixAddNewBatchID
             // 
             this.txt12CartonprifixAddNewBatchID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txt12CartonprifixAddNewBatchID.Location = new System.Drawing.Point(114, 196);
+            this.txt12CartonprifixAddNewBatchID.Location = new System.Drawing.Point(140, 230);
             this.txt12CartonprifixAddNewBatchID.Name = "txt12CartonprifixAddNewBatchID";
             this.txt12CartonprifixAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt12CartonprifixAddNewBatchID.TabIndex = 60;
@@ -227,7 +246,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(21, 200);
+            this.label17.Location = new System.Drawing.Point(47, 234);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(89, 12);
             this.label17.TabIndex = 81;
@@ -235,14 +254,14 @@
             // 
             // dateTime2DeliDateAddNewBatchID
             // 
-            this.dateTime2DeliDateAddNewBatchID.Location = new System.Drawing.Point(373, 166);
+            this.dateTime2DeliDateAddNewBatchID.Location = new System.Drawing.Point(399, 200);
             this.dateTime2DeliDateAddNewBatchID.Name = "dateTime2DeliDateAddNewBatchID";
             this.dateTime2DeliDateAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.dateTime2DeliDateAddNewBatchID.TabIndex = 51;
             // 
             // dateTime1RecDateAddNewBatchID
             // 
-            this.dateTime1RecDateAddNewBatchID.Location = new System.Drawing.Point(114, 166);
+            this.dateTime1RecDateAddNewBatchID.Location = new System.Drawing.Point(140, 200);
             this.dateTime1RecDateAddNewBatchID.Name = "dateTime1RecDateAddNewBatchID";
             this.dateTime1RecDateAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.dateTime1RecDateAddNewBatchID.TabIndex = 50;
@@ -250,7 +269,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(39, 110);
+            this.label13.Location = new System.Drawing.Point(65, 144);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(71, 12);
             this.label13.TabIndex = 78;
@@ -258,7 +277,7 @@
             // 
             // txt8CartonQtyAddNewBatchID
             // 
-            this.txt8CartonQtyAddNewBatchID.Location = new System.Drawing.Point(114, 106);
+            this.txt8CartonQtyAddNewBatchID.Location = new System.Drawing.Point(140, 140);
             this.txt8CartonQtyAddNewBatchID.Name = "txt8CartonQtyAddNewBatchID";
             this.txt8CartonQtyAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt8CartonQtyAddNewBatchID.TabIndex = 30;
@@ -266,7 +285,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(278, 140);
+            this.label12.Location = new System.Drawing.Point(304, 174);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(89, 12);
             this.label12.TabIndex = 75;
@@ -275,7 +294,7 @@
             // txt14CartonIDFromAddNewBatchID
             // 
             this.txt14CartonIDFromAddNewBatchID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txt14CartonIDFromAddNewBatchID.Location = new System.Drawing.Point(114, 226);
+            this.txt14CartonIDFromAddNewBatchID.Location = new System.Drawing.Point(140, 260);
             this.txt14CartonIDFromAddNewBatchID.Name = "txt14CartonIDFromAddNewBatchID";
             this.txt14CartonIDFromAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt14CartonIDFromAddNewBatchID.TabIndex = 70;
@@ -284,7 +303,7 @@
             // txt15CartonIDToAddNewBatchID
             // 
             this.txt15CartonIDToAddNewBatchID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txt15CartonIDToAddNewBatchID.Location = new System.Drawing.Point(373, 226);
+            this.txt15CartonIDToAddNewBatchID.Location = new System.Drawing.Point(399, 260);
             this.txt15CartonIDToAddNewBatchID.Name = "txt15CartonIDToAddNewBatchID";
             this.txt15CartonIDToAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt15CartonIDToAddNewBatchID.TabIndex = 71;
@@ -292,21 +311,21 @@
             // 
             // txt11CartonTypeAddNewBatchID
             // 
-            this.txt11CartonTypeAddNewBatchID.Location = new System.Drawing.Point(373, 136);
+            this.txt11CartonTypeAddNewBatchID.Location = new System.Drawing.Point(399, 170);
             this.txt11CartonTypeAddNewBatchID.Name = "txt11CartonTypeAddNewBatchID";
             this.txt11CartonTypeAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt11CartonTypeAddNewBatchID.TabIndex = 41;
             // 
             // txt9QTYAddNewBatchID
             // 
-            this.txt9QTYAddNewBatchID.Location = new System.Drawing.Point(373, 106);
+            this.txt9QTYAddNewBatchID.Location = new System.Drawing.Point(399, 140);
             this.txt9QTYAddNewBatchID.Name = "txt9QTYAddNewBatchID";
             this.txt9QTYAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt9QTYAddNewBatchID.TabIndex = 31;
             // 
             // txt10CartonIDAddNewBatchID
             // 
-            this.txt10CartonIDAddNewBatchID.Location = new System.Drawing.Point(114, 136);
+            this.txt10CartonIDAddNewBatchID.Location = new System.Drawing.Point(140, 170);
             this.txt10CartonIDAddNewBatchID.Name = "txt10CartonIDAddNewBatchID";
             this.txt10CartonIDAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt10CartonIDAddNewBatchID.TabIndex = 40;
@@ -314,21 +333,21 @@
             // txt2LineIDAddNewBatchID
             // 
             this.txt2LineIDAddNewBatchID.Enabled = false;
-            this.txt2LineIDAddNewBatchID.Location = new System.Drawing.Point(237, 16);
+            this.txt2LineIDAddNewBatchID.Location = new System.Drawing.Point(263, 50);
             this.txt2LineIDAddNewBatchID.Name = "txt2LineIDAddNewBatchID";
             this.txt2LineIDAddNewBatchID.Size = new System.Drawing.Size(29, 21);
             this.txt2LineIDAddNewBatchID.TabIndex = 3;
             // 
             // txt7PartAddNewBatchID
             // 
-            this.txt7PartAddNewBatchID.Location = new System.Drawing.Point(373, 76);
+            this.txt7PartAddNewBatchID.Location = new System.Drawing.Point(399, 110);
             this.txt7PartAddNewBatchID.Name = "txt7PartAddNewBatchID";
             this.txt7PartAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt7PartAddNewBatchID.TabIndex = 21;
             // 
             // txt5POAddNewBatchID
             // 
-            this.txt5POAddNewBatchID.Location = new System.Drawing.Point(373, 46);
+            this.txt5POAddNewBatchID.Location = new System.Drawing.Point(399, 80);
             this.txt5POAddNewBatchID.Name = "txt5POAddNewBatchID";
             this.txt5POAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt5POAddNewBatchID.TabIndex = 11;
@@ -336,14 +355,14 @@
             // txt4InvoiceIDAddNewBatchID
             // 
             this.txt4InvoiceIDAddNewBatchID.AcceptsTab = true;
-            this.txt4InvoiceIDAddNewBatchID.Location = new System.Drawing.Point(114, 46);
+            this.txt4InvoiceIDAddNewBatchID.Location = new System.Drawing.Point(140, 80);
             this.txt4InvoiceIDAddNewBatchID.Name = "txt4InvoiceIDAddNewBatchID";
             this.txt4InvoiceIDAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt4InvoiceIDAddNewBatchID.TabIndex = 10;
             // 
             // txt6PackingListIDAddNewBatchID
             // 
-            this.txt6PackingListIDAddNewBatchID.Location = new System.Drawing.Point(114, 76);
+            this.txt6PackingListIDAddNewBatchID.Location = new System.Drawing.Point(140, 110);
             this.txt6PackingListIDAddNewBatchID.Name = "txt6PackingListIDAddNewBatchID";
             this.txt6PackingListIDAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt6PackingListIDAddNewBatchID.TabIndex = 20;
@@ -351,7 +370,7 @@
             // txt1BatchIDAddNewBatchID
             // 
             this.txt1BatchIDAddNewBatchID.Enabled = false;
-            this.txt1BatchIDAddNewBatchID.Location = new System.Drawing.Point(114, 16);
+            this.txt1BatchIDAddNewBatchID.Location = new System.Drawing.Point(140, 50);
             this.txt1BatchIDAddNewBatchID.Name = "txt1BatchIDAddNewBatchID";
             this.txt1BatchIDAddNewBatchID.Size = new System.Drawing.Size(117, 21);
             this.txt1BatchIDAddNewBatchID.TabIndex = 2;
@@ -359,7 +378,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(344, 231);
+            this.label11.Location = new System.Drawing.Point(370, 265);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(23, 12);
             this.label11.TabIndex = 71;
@@ -368,7 +387,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 229);
+            this.label9.Location = new System.Drawing.Point(41, 263);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(95, 12);
             this.label9.TabIndex = 72;
@@ -377,7 +396,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(302, 170);
+            this.label16.Location = new System.Drawing.Point(328, 204);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(65, 12);
             this.label16.TabIndex = 70;
@@ -386,7 +405,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(51, 172);
+            this.label10.Location = new System.Drawing.Point(77, 206);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 12);
             this.label10.TabIndex = 69;
@@ -395,7 +414,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(302, 109);
+            this.label5.Location = new System.Drawing.Point(328, 143);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
             this.label5.TabIndex = 67;
@@ -404,7 +423,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(332, 80);
+            this.label6.Location = new System.Drawing.Point(358, 114);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 65;
@@ -413,7 +432,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(45, 139);
+            this.label7.Location = new System.Drawing.Point(71, 173);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 12);
             this.label7.TabIndex = 62;
@@ -422,7 +441,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(338, 50);
+            this.label8.Location = new System.Drawing.Point(364, 84);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 60;
@@ -431,7 +450,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(39, 49);
+            this.label3.Location = new System.Drawing.Point(65, 83);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 12);
             this.label3.TabIndex = 56;
@@ -440,7 +459,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 80);
+            this.label2.Location = new System.Drawing.Point(33, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 12);
             this.label2.TabIndex = 55;
@@ -449,18 +468,31 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 20);
+            this.label1.Location = new System.Drawing.Point(75, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 53;
             this.label1.Text = "Batch ID:";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btn3NewAddNewBatchID);
+            this.groupBox2.Controls.Add(this.btn5PoCheckAddNewBatchID);
+            this.groupBox2.Controls.Add(this.btn2GenCartonNo2AddNewBatchID);
+            this.groupBox2.Controls.Add(this.btnConton);
+            this.groupBox2.Controls.Add(this.btn1UpadeAddAddNewBatchID);
+            this.groupBox2.Location = new System.Drawing.Point(4, 337);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(685, 55);
+            this.groupBox2.TabIndex = 81;
+            this.groupBox2.TabStop = false;
+            // 
             // btn3NewAddNewBatchID
             // 
-            this.btn3NewAddNewBatchID.Location = new System.Drawing.Point(133, 337);
+            this.btn3NewAddNewBatchID.Location = new System.Drawing.Point(136, 20);
             this.btn3NewAddNewBatchID.Name = "btn3NewAddNewBatchID";
             this.btn3NewAddNewBatchID.Size = new System.Drawing.Size(94, 28);
-            this.btn3NewAddNewBatchID.TabIndex = 103;
+            this.btn3NewAddNewBatchID.TabIndex = 92;
             this.btn3NewAddNewBatchID.Text = "&New BatchID";
             this.btn3NewAddNewBatchID.UseVisualStyleBackColor = true;
             this.btn3NewAddNewBatchID.Click += new System.EventHandler(this.btn3NewAddNewBatchID_Click);
@@ -468,59 +500,205 @@
             // btn5PoCheckAddNewBatchID
             // 
             this.btn5PoCheckAddNewBatchID.Enabled = false;
-            this.btn5PoCheckAddNewBatchID.Location = new System.Drawing.Point(18, 337);
+            this.btn5PoCheckAddNewBatchID.Location = new System.Drawing.Point(6, 20);
             this.btn5PoCheckAddNewBatchID.Name = "btn5PoCheckAddNewBatchID";
             this.btn5PoCheckAddNewBatchID.Size = new System.Drawing.Size(94, 28);
-            this.btn5PoCheckAddNewBatchID.TabIndex = 105;
+            this.btn5PoCheckAddNewBatchID.TabIndex = 94;
             this.btn5PoCheckAddNewBatchID.Text = "&POCheck";
             this.btn5PoCheckAddNewBatchID.UseVisualStyleBackColor = true;
             this.btn5PoCheckAddNewBatchID.Visible = false;
-            this.btn5PoCheckAddNewBatchID.Click += new System.EventHandler(this.btn5PoCheckAddNewBatchID_Click);
             // 
             // btn2GenCartonNo2AddNewBatchID
             // 
-            this.btn2GenCartonNo2AddNewBatchID.Location = new System.Drawing.Point(363, 337);
+            this.btn2GenCartonNo2AddNewBatchID.Location = new System.Drawing.Point(526, 20);
             this.btn2GenCartonNo2AddNewBatchID.Name = "btn2GenCartonNo2AddNewBatchID";
             this.btn2GenCartonNo2AddNewBatchID.Size = new System.Drawing.Size(94, 28);
-            this.btn2GenCartonNo2AddNewBatchID.TabIndex = 102;
+            this.btn2GenCartonNo2AddNewBatchID.TabIndex = 91;
             this.btn2GenCartonNo2AddNewBatchID.Text = "&GenCartonNo";
             this.btn2GenCartonNo2AddNewBatchID.UseVisualStyleBackColor = true;
             // 
-            // btn4ExitAddNewBatchID
-            // 
-            this.btn4ExitAddNewBatchID.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn4ExitAddNewBatchID.Location = new System.Drawing.Point(478, 337);
-            this.btn4ExitAddNewBatchID.Name = "btn4ExitAddNewBatchID";
-            this.btn4ExitAddNewBatchID.Size = new System.Drawing.Size(94, 28);
-            this.btn4ExitAddNewBatchID.TabIndex = 104;
-            this.btn4ExitAddNewBatchID.Text = "&Cancel";
-            this.btn4ExitAddNewBatchID.UseVisualStyleBackColor = true;
-            // 
             // btn1UpadeAddAddNewBatchID
             // 
-            this.btn1UpadeAddAddNewBatchID.Location = new System.Drawing.Point(248, 337);
+            this.btn1UpadeAddAddNewBatchID.Location = new System.Drawing.Point(266, 20);
             this.btn1UpadeAddAddNewBatchID.Name = "btn1UpadeAddAddNewBatchID";
             this.btn1UpadeAddAddNewBatchID.Size = new System.Drawing.Size(94, 28);
-            this.btn1UpadeAddAddNewBatchID.TabIndex = 101;
+            this.btn1UpadeAddAddNewBatchID.TabIndex = 90;
             this.btn1UpadeAddAddNewBatchID.Text = "&Add";
             this.btn1UpadeAddAddNewBatchID.UseVisualStyleBackColor = true;
             this.btn1UpadeAddAddNewBatchID.Click += new System.EventHandler(this.btn1UpadeAddAddNewBatchID_Click);
             // 
+            // groupBox3mstr_addnewbatch
+            // 
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.txtb5batch_cre_date_AddNewBatchID);
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.txtb4batch_dec01_AddNewBatchID);
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.label4);
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.label19);
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.txtb3batch_statu_AddNewBatchID);
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.label20);
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.txtb2batch_do_AddNewBatchID);
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.label21);
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.txtb1batch_id_AddNewBatchID);
+            this.groupBox3mstr_addnewbatch.Controls.Add(this.label22);
+            this.groupBox3mstr_addnewbatch.Location = new System.Drawing.Point(4, 392);
+            this.groupBox3mstr_addnewbatch.Name = "groupBox3mstr_addnewbatch";
+            this.groupBox3mstr_addnewbatch.Size = new System.Drawing.Size(685, 55);
+            this.groupBox3mstr_addnewbatch.TabIndex = 99;
+            this.groupBox3mstr_addnewbatch.TabStop = false;
+            this.groupBox3mstr_addnewbatch.Text = "BatchID Info Mstr";
+            // 
+            // txtb5batch_cre_date_AddNewBatchID
+            // 
+            this.txtb5batch_cre_date_AddNewBatchID.Location = new System.Drawing.Point(545, 21);
+            this.txtb5batch_cre_date_AddNewBatchID.Name = "txtb5batch_cre_date_AddNewBatchID";
+            this.txtb5batch_cre_date_AddNewBatchID.Size = new System.Drawing.Size(131, 21);
+            this.txtb5batch_cre_date_AddNewBatchID.TabIndex = 104;
+            // 
+            // txtb4batch_dec01_AddNewBatchID
+            // 
+            this.txtb4batch_dec01_AddNewBatchID.Location = new System.Drawing.Point(431, 21);
+            this.txtb4batch_dec01_AddNewBatchID.Name = "txtb4batch_dec01_AddNewBatchID";
+            this.txtb4batch_dec01_AddNewBatchID.Size = new System.Drawing.Size(37, 21);
+            this.txtb4batch_dec01_AddNewBatchID.TabIndex = 103;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(468, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 12);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Create Date:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(354, 25);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(77, 12);
+            this.label19.TabIndex = 6;
+            this.label19.Text = "Items Count:";
+            // 
+            // txtb3batch_statu_AddNewBatchID
+            // 
+            this.txtb3batch_statu_AddNewBatchID.Location = new System.Drawing.Point(317, 21);
+            this.txtb3batch_statu_AddNewBatchID.Name = "txtb3batch_statu_AddNewBatchID";
+            this.txtb3batch_statu_AddNewBatchID.Size = new System.Drawing.Size(37, 21);
+            this.txtb3batch_statu_AddNewBatchID.TabIndex = 102;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(282, 25);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(35, 12);
+            this.label20.TabIndex = 4;
+            this.label20.Text = "Void:";
+            // 
+            // txtb2batch_do_AddNewBatchID
+            // 
+            this.txtb2batch_do_AddNewBatchID.Location = new System.Drawing.Point(188, 21);
+            this.txtb2batch_do_AddNewBatchID.Name = "txtb2batch_do_AddNewBatchID";
+            this.txtb2batch_do_AddNewBatchID.Size = new System.Drawing.Size(94, 21);
+            this.txtb2batch_do_AddNewBatchID.TabIndex = 101;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(153, 25);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(35, 12);
+            this.label21.TabIndex = 2;
+            this.label21.Text = "Type:";
+            // 
+            // txtb1batch_id_AddNewBatchID
+            // 
+            this.txtb1batch_id_AddNewBatchID.Location = new System.Drawing.Point(59, 21);
+            this.txtb1batch_id_AddNewBatchID.Name = "txtb1batch_id_AddNewBatchID";
+            this.txtb1batch_id_AddNewBatchID.Size = new System.Drawing.Size(94, 21);
+            this.txtb1batch_id_AddNewBatchID.TabIndex = 100;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 25);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(53, 12);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "BatchID:";
+            // 
+            // groupBox4det_addnewbatch
+            // 
+            this.groupBox4det_addnewbatch.Controls.Add(this.data1GV1ePackingDet1_AddNewBatchID);
+            this.groupBox4det_addnewbatch.Location = new System.Drawing.Point(3, 457);
+            this.groupBox4det_addnewbatch.Name = "groupBox4det_addnewbatch";
+            this.groupBox4det_addnewbatch.Size = new System.Drawing.Size(685, 237);
+            this.groupBox4det_addnewbatch.TabIndex = 109;
+            this.groupBox4det_addnewbatch.TabStop = false;
+            this.groupBox4det_addnewbatch.Text = "Batch ePacking Det";
+            // 
+            // data1GV1ePackingDet1_AddNewBatchID
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1ePackingDet1_AddNewBatchID.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.data1GV1ePackingDet1_AddNewBatchID.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data1GV1ePackingDet1_AddNewBatchID.DefaultCellStyle = dataGridViewCellStyle14;
+            this.data1GV1ePackingDet1_AddNewBatchID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.data1GV1ePackingDet1_AddNewBatchID.Location = new System.Drawing.Point(3, 17);
+            this.data1GV1ePackingDet1_AddNewBatchID.MultiSelect = false;
+            this.data1GV1ePackingDet1_AddNewBatchID.Name = "data1GV1ePackingDet1_AddNewBatchID";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1ePackingDet1_AddNewBatchID.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            this.data1GV1ePackingDet1_AddNewBatchID.RowTemplate.Height = 23;
+            this.data1GV1ePackingDet1_AddNewBatchID.Size = new System.Drawing.Size(679, 217);
+            this.data1GV1ePackingDet1_AddNewBatchID.TabIndex = 110;
+            this.data1GV1ePackingDet1_AddNewBatchID.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.data1GV1ePackingDet1_AddNewBatchID_CellClick);
+            // 
+            // btnConton
+            // 
+            this.btnConton.Location = new System.Drawing.Point(396, 20);
+            this.btnConton.Name = "btnConton";
+            this.btnConton.Size = new System.Drawing.Size(94, 28);
+            this.btnConton.TabIndex = 90;
+            this.btnConton.Text = "Add &Continue";
+            this.btnConton.UseVisualStyleBackColor = true;
+            this.btnConton.Click += new System.EventHandler(this.btnConton_Click);
+            // 
             // frm2AddNewBatchID
             // 
-            this.AcceptButton = this.btn1UpadeAddAddNewBatchID;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btn4ExitAddNewBatchID;
-            this.ClientSize = new System.Drawing.Size(617, 394);
+            this.ClientSize = new System.Drawing.Size(697, 694);
             this.Controls.Add(this.groupBox0AddNewBatchID);
             this.Name = "frm2AddNewBatchID";
             this.Text = "AddNewBatchID";
             this.Load += new System.EventHandler(this.AddNewBatchID_Load);
             this.groupBox0AddNewBatchID.ResumeLayout(false);
-            this.groupBox0AddNewBatchID.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3mstr_addnewbatch.ResumeLayout(false);
+            this.groupBox3mstr_addnewbatch.PerformLayout();
+            this.groupBox4det_addnewbatch.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingDet1_AddNewBatchID)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -565,11 +743,25 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        protected internal System.Windows.Forms.GroupBox groupBox0AddNewBatchID;
+        private System.Windows.Forms.GroupBox groupBox2;
         protected internal System.Windows.Forms.Button btn3NewAddNewBatchID;
         protected internal System.Windows.Forms.Button btn5PoCheckAddNewBatchID;
         protected internal System.Windows.Forms.Button btn2GenCartonNo2AddNewBatchID;
-        private System.Windows.Forms.Button btn4ExitAddNewBatchID;
         protected internal System.Windows.Forms.Button btn1UpadeAddAddNewBatchID;
-        protected internal System.Windows.Forms.GroupBox groupBox0AddNewBatchID;
+        private System.Windows.Forms.GroupBox groupBox3mstr_addnewbatch;
+        private System.Windows.Forms.TextBox txtb5batch_cre_date_AddNewBatchID;
+        private System.Windows.Forms.TextBox txtb4batch_dec01_AddNewBatchID;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtb3batch_statu_AddNewBatchID;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox txtb2batch_do_AddNewBatchID;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtb1batch_id_AddNewBatchID;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.GroupBox groupBox4det_addnewbatch;
+        protected internal System.Windows.Forms.DataGridView data1GV1ePackingDet1_AddNewBatchID;
+        protected internal System.Windows.Forms.Button btnConton;
     }
 }
