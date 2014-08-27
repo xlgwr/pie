@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FrmPIE</RootNamespace>
+    <AssemblyName>0IDR System</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>irobot256.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="COM.Excel, Version=1.1.1606.17082, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\COM.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel, Version=1.5.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Lib\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="0API\CartonFromTo.cs" />
+    <Compile Include="0API\DoWrokObject.cs" />
+    <Compile Include="frmPIE\frm0BatchInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPIE\frm0BatchInfo.Designer.cs">
+      <DependentUpon>frm0BatchInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPIE\frm1Upload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPIE\frm1Upload.Designer.cs">
+      <DependentUpon>frm1Upload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPIE\frm2AddNewBatchID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPIE\frm2AddNewBatchID.Designer.cs">
+      <DependentUpon>frm2AddNewBatchID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logon\AdminManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logon\AdminManage.Designer.cs">
+      <DependentUpon>AdminManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="0API\commfunction.cs" />
+    <Compile Include="Logon\EnterPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logon\EnterPassword.Designer.cs">
+      <DependentUpon>EnterPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OldPIE\frmPIE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OldPIE\frmPIE.Designer.cs">
+      <DependentUpon>frmPIE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OldPIE\frmplMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OldPIE\frmplMain.Designer.cs">
+      <DependentUpon>frmplMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="0temple\indextemple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="0temple\indextemple.Designer.cs">
+      <DependentUpon>indextemple.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IDR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IDR.Designer.cs">
+      <DependentUpon>IDR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logon\LogonDomain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logon\LogonDomain.Designer.cs">
+      <DependentUpon>LogonDomain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OldPIE\MaximunSizeFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OldPIE\MaximunSizeFrm.Designer.cs">
+      <DependentUpon>MaximunSizeFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web References\WebReference100\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WebReference208\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmPIE\frm0BatchInfo.resx">
+      <DependentUpon>frm0BatchInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPIE\frm1Upload.resx">
+      <DependentUpon>frm1Upload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPIE\frm2AddNewBatchID.resx">
+      <DependentUpon>frm2AddNewBatchID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logon\AdminManage.resx">
+      <DependentUpon>AdminManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logon\EnterPassword.resx">
+      <DependentUpon>EnterPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldPIE\frmPIE.resx">
+      <DependentUpon>frmPIE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldPIE\frmplMain.resx">
+      <DependentUpon>frmplMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="0temple\indextemple.resx">
+      <DependentUpon>indextemple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDR.resx">
+      <DependentUpon>IDR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logon\LogonDomain.resx">
+      <DependentUpon>LogonDomain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldPIE\MaximunSizeFrm.resx">
+      <DependentUpon>MaximunSizeFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="0temple\temples.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="app.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Web References\WebReference100\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebReference100\Service.wsdl" />
+    <None Include="Web References\WebReference208\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebReference208\UserLoginCheck.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\IDR.BLL.csproj">
+      <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
+      <Name>IDR.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\IDR.Common.csproj">
+      <Project>{e3d8759a-c5eb-402d-9f10-f5c6029a8d1a}</Project>
+      <Name>IDR.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\IDR.DAL.csproj">
+      <Project>{9fe00521-3a8b-42b1-814e-585e99407b2e}</Project>
+      <Name>IDR.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\IDR.DBUtility.csproj">
+      <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
+      <Name>IDR.DBUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\IDR.Model.csproj">
+      <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
+      <Name>IDR.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Print\ClassLibrary1\Xprint.csproj">
+      <Project>{76c2a76d-23b4-454d-a8c8-ca83343cd2fe}</Project>
+      <Name>Xprint</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="irobot256.ico" />
+    <None Include="Resources\irobotLogo.png" />
+    <None Include="Resources\irobot256.png" />
+    <None Include="Resources\irobot128.png" />
+    <None Include="Resources\irobot48.png" />
+    <None Include="Resources\irobot32.png" />
+    <None Include="Resources\scanBar.png" />
+    <None Include="Resources\47.ico" />
+    <None Include="Resources\logo.png" />
+    <None Include="Web References\WebReference208\UserLoginCheck.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://142.2.70.100/mfgpgm/Service.asmx%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebReference100\</RelPath>
+      <UpdateFromURL>http://142.2.70.100/mfgpgm/Service.asmx%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>FrmOCRDM_WebReference100_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx%3fop=WFUserSecondPwdChk">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebReference208\</RelPath>
+      <UpdateFromURL>http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx%3fop=WFUserSecondPwdChk</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>_0PackingInformationEnfry_WebReference_UserLoginCheck</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
