@@ -42,7 +42,7 @@ namespace FrmPIE
                 TabPage tp = (TabPage)item;
                 tp.MouseDown += tp_MouseDown;
             }
-
+            
 
         }
         public class iform
@@ -52,6 +52,7 @@ namespace FrmPIE
         }
         private void frmIDR_Load(object sender, EventArgs e)
         {
+            
             initHideImage(new object[] { hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3, status11toolBtnleft }, 1);
             initHideImage(new object[] { hideToolBarToolStripMenuItem1 }, 2);
 

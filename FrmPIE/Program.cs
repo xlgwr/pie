@@ -28,7 +28,7 @@ namespace FrmPIE
         [STAThread]
         static void Main()
         {
-            frmVersion = "@V2014-08-26-10-dev";
+            frmVersion = "@V2014-08-28-16-dev";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
@@ -364,6 +364,12 @@ namespace FrmPIE
                             {
                                 string strResultWebser = ds.Tables[0].Rows[0][4].ToString();
                                 string strErrMessage = ds.Tables[0].Rows[0][5].ToString();
+                                string strABC = ds.Tables[0].Rows[0][6].ToString();
+                                string strcheck = ds.Tables[0].Rows[0][7].ToString();
+
+                                item.plr_chr01 = strABC;
+                                item.plr_chr02 = strcheck;
+
                                 if (strResultWebser.Equals("2"))
                                 {
                                     item.plr_status = "U";

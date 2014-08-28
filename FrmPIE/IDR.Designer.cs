@@ -75,8 +75,6 @@
             this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn1Home1 = new System.Windows.Forms.Button();
-            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolSatusLableft1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
@@ -107,6 +105,8 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn21ScanCartronLabel21 = new System.Windows.Forms.Button();
+            this.cMenuStrip21ScanCartronLabel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tool1StripMenuItem21ScanCartronLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
@@ -131,8 +131,8 @@
             this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllButThisToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMenuStrip21ScanCartronLabel = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tool1StripMenuItem21ScanCartronLabel = new System.Windows.Forms.ToolStripMenuItem();
+            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
+            this.btn1Home1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -154,6 +154,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
+            this.cMenuStrip21ScanCartronLabel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.flowLayoutPanel8.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
@@ -162,7 +163,6 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.ctmenusClose.SuspendLayout();
-            this.cMenuStrip21ScanCartronLabel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -514,29 +514,29 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.86865F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.34326F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.6655F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(128, 571);
-            this.tableLayoutPanel2.TabIndex = 1;
+            this.tableLayoutPanel2.TabIndex = 20;
             // 
             // flowLayoutPanel11
             // 
             this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel11.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel11.Location = new System.Drawing.Point(3, 231);
+            this.flowLayoutPanel11.Location = new System.Drawing.Point(3, 284);
             this.flowLayoutPanel11.Name = "flowLayoutPanel11";
-            this.flowLayoutPanel11.Size = new System.Drawing.Size(122, 165);
+            this.flowLayoutPanel11.Size = new System.Drawing.Size(122, 112);
             this.flowLayoutPanel11.TabIndex = 2;
             // 
             // flowLayoutPanel10
             // 
             this.flowLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel10.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel10.Location = new System.Drawing.Point(3, 117);
+            this.flowLayoutPanel10.Location = new System.Drawing.Point(3, 145);
             this.flowLayoutPanel10.Name = "flowLayoutPanel10";
-            this.flowLayoutPanel10.Size = new System.Drawing.Size(122, 108);
+            this.flowLayoutPanel10.Size = new System.Drawing.Size(122, 133);
             this.flowLayoutPanel10.TabIndex = 1;
             // 
             // flowLayoutPanel9
@@ -546,34 +546,8 @@
             this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel9.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(122, 108);
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(122, 136);
             this.flowLayoutPanel9.TabIndex = 0;
-            // 
-            // btn1Home1
-            // 
-            this.btn1Home1.BackgroundImage = global::FrmPIE.Properties.Resources.j__11_;
-            this.btn1Home1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn1Home1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn1Home1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn1Home1.Location = new System.Drawing.Point(3, 3);
-            this.btn1Home1.Name = "btn1Home1";
-            this.btn1Home1.Size = new System.Drawing.Size(119, 69);
-            this.btn1Home1.TabIndex = 11;
-            this.btn1Home1.Text = "1";
-            this.btn1Home1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn1Home1.UseVisualStyleBackColor = true;
-            this.btn1Home1.Click += new System.EventHandler(this.btn1Home1_Click);
-            // 
-            // linkLabel9
-            // 
-            this.linkLabel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel9.Location = new System.Drawing.Point(3, 75);
-            this.linkLabel9.Name = "linkLabel9";
-            this.linkLabel9.Size = new System.Drawing.Size(100, 23);
-            this.linkLabel9.TabIndex = 12;
-            this.linkLabel9.TabStop = true;
-            this.linkLabel9.Text = "HOME";
-            this.linkLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // statusStrip2
             // 
@@ -611,7 +585,7 @@
             this.tabCtlRight1.Name = "tabCtlRight1";
             this.tabCtlRight1.SelectedIndex = 0;
             this.tabCtlRight1.Size = new System.Drawing.Size(719, 571);
-            this.tabCtlRight1.TabIndex = 2;
+            this.tabCtlRight1.TabIndex = 50;
             this.tabCtlRight1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabCtlRight1_MouseMove);
             this.tabCtlRight1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tabCtlRight1_MouseUp);
             // 
@@ -657,7 +631,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(705, 539);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.TabIndex = 51;
             // 
             // flowLayoutPanel1
             // 
@@ -909,6 +883,20 @@
             this.btn21ScanCartronLabel21.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btn21ScanCartronLabel21.UseVisualStyleBackColor = true;
             this.btn21ScanCartronLabel21.Click += new System.EventHandler(this.btn1ScanCartronLabel21_Click);
+            // 
+            // cMenuStrip21ScanCartronLabel
+            // 
+            this.cMenuStrip21ScanCartronLabel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tool1StripMenuItem21ScanCartronLabel});
+            this.cMenuStrip21ScanCartronLabel.Name = "cMenuStrip1ScanCartronLabel";
+            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(159, 26);
+            // 
+            // tool1StripMenuItem21ScanCartronLabel
+            // 
+            this.tool1StripMenuItem21ScanCartronLabel.Name = "tool1StripMenuItem21ScanCartronLabel";
+            this.tool1StripMenuItem21ScanCartronLabel.Size = new System.Drawing.Size(158, 22);
+            this.tool1StripMenuItem21ScanCartronLabel.Text = "&Scan Ctn lable";
+            this.tool1StripMenuItem21ScanCartronLabel.Click += new System.EventHandler(this.tool1StripMenuItem21ScanCartronLabel_Click);
             // 
             // linkLabel4
             // 
@@ -1208,19 +1196,31 @@
             this.closeAllButThisToolStripMenuItem3.Text = "Close All But This";
             this.closeAllButThisToolStripMenuItem3.Click += new System.EventHandler(this.closeAllButThisToolStripMenuItem3_Click);
             // 
-            // cMenuStrip21ScanCartronLabel
+            // linkLabel9
             // 
-            this.cMenuStrip21ScanCartronLabel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tool1StripMenuItem21ScanCartronLabel});
-            this.cMenuStrip21ScanCartronLabel.Name = "cMenuStrip1ScanCartronLabel";
-            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(159, 48);
+            this.linkLabel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.linkLabel9.Location = new System.Drawing.Point(3, 111);
+            this.linkLabel9.Name = "linkLabel9";
+            this.linkLabel9.Size = new System.Drawing.Size(100, 23);
+            this.linkLabel9.TabIndex = 12;
+            this.linkLabel9.TabStop = true;
+            this.linkLabel9.Text = "HOME";
+            this.linkLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tool1StripMenuItem21ScanCartronLabel
+            // btn1Home1
             // 
-            this.tool1StripMenuItem21ScanCartronLabel.Name = "tool1StripMenuItem21ScanCartronLabel";
-            this.tool1StripMenuItem21ScanCartronLabel.Size = new System.Drawing.Size(158, 22);
-            this.tool1StripMenuItem21ScanCartronLabel.Text = "&Scan Ctn lable";
-            this.tool1StripMenuItem21ScanCartronLabel.Click += new System.EventHandler(this.tool1StripMenuItem21ScanCartronLabel_Click);
+            this.btn1Home1.BackgroundImage = global::FrmPIE.Properties.Resources.j__11_;
+            this.btn1Home1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn1Home1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn1Home1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn1Home1.Location = new System.Drawing.Point(3, 3);
+            this.btn1Home1.Name = "btn1Home1";
+            this.btn1Home1.Size = new System.Drawing.Size(119, 105);
+            this.btn1Home1.TabIndex = 21;
+            this.btn1Home1.Text = "1";
+            this.btn1Home1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn1Home1.UseVisualStyleBackColor = true;
+            this.btn1Home1.Click += new System.EventHandler(this.btn1Home1_Click);
             // 
             // frmIDR
             // 
@@ -1235,6 +1235,7 @@
             this.Name = "frmIDR";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IDR Solution";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmIDR_FormClosing);
             this.Load += new System.EventHandler(this.frmIDR_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -1264,6 +1265,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
+            this.cMenuStrip21ScanCartronLabel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.flowLayoutPanel8.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
@@ -1273,7 +1275,6 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.ctmenusClose.ResumeLayout(false);
-            this.cMenuStrip21ScanCartronLabel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1340,8 +1341,6 @@
         private System.Windows.Forms.TabPage tabPageHome1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
-        private System.Windows.Forms.Button btn1Home1;
-        private System.Windows.Forms.LinkLabel linkLabel9;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel11;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel10;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -1384,6 +1383,8 @@
         protected internal System.Windows.Forms.TabControl tabCtlRight1;
         private System.Windows.Forms.ContextMenuStrip cMenuStrip21ScanCartronLabel;
         private System.Windows.Forms.ToolStripMenuItem tool1StripMenuItem21ScanCartronLabel;
+        private System.Windows.Forms.Button btn1Home1;
+        private System.Windows.Forms.LinkLabel linkLabel9;
 
 
 

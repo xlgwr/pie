@@ -219,6 +219,33 @@ namespace PI.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
+        public PI.Model.pi_det GetModel(string PI_ID, int pi_LineID)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 from pi_det ");
+            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
+					new SqlParameter("@pi_LineID", SqlDbType.Int,4) 		};
+            parameters[0].Value = PI_ID;
+            parameters[1].Value = pi_LineID; 
+
+            PI.Model.pi_det model = new PI.Model.pi_det();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
         public PI.Model.pi_det GetModel(string PI_ID, int pi_LineID, string pi_wec_ctn)
         {
 
@@ -244,7 +271,6 @@ namespace PI.DAL
                 return null;
             }
         }
-
 
         /// <summary>
         /// 得到一个对象实体
