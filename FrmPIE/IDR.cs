@@ -26,7 +26,7 @@ namespace FrmPIE
 
         public DataSet _batchMstr;
 
-        public models.plr_batch_mstr _plr_batch_mstr_model;
+        public models.plr_batch_mstr _plr_batch_mstr_model = new models.plr_batch_mstr();
 
         public string _custip = Program.getClientIP();
 
@@ -42,7 +42,7 @@ namespace FrmPIE
                 TabPage tp = (TabPage)item;
                 tp.MouseDown += tp_MouseDown;
             }
-            
+
 
         }
         public class iform
@@ -52,11 +52,11 @@ namespace FrmPIE
         }
         private void frmIDR_Load(object sender, EventArgs e)
         {
-            
+
             initHideImage(new object[] { hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3, status11toolBtnleft }, 1);
             initHideImage(new object[] { hideToolBarToolStripMenuItem1 }, 2);
 
-            initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3 ,btn21ScanCartronLabel21,btn22PISystem,btn23ERPDB,btn24PIReports});
+            initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3, btn21ScanCartronLabel21, btn22PISystem, btn23ERPDB, btn24PIReports });
             //Control.CheckForIllegalCrossThreadCalls = false;
 
         }
@@ -377,7 +377,30 @@ namespace FrmPIE
 
         private void btn0Find9_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Find Result");
+            if (!string.IsNullOrEmpty(txt0SearchID.Text.Trim()))
+            {
+                if (cmb1SearchType.Text.ToLower().Equals("batchid"))
+                {
+                    var exist = new PIE.BLL.plr_batch_mstr().Exists(txt0SearchID.Text.Trim());
+                    if (exist)
+                    {
+                        string strtitle = "Find " + cmb1SearchType.Text + ":" + txt0SearchID.Text.Trim() + "Result";
+
+
+                        var tpg = addNewTabPage(strtitle);
+
+                        this._plr_batch_mstr_model.batch_id = txt0SearchID.Text.Trim();
+                        frm0BatchInfo bi = new frm0BatchInfo(this);
+
+                        addGBToTC(tpg, bi.groupBox0BatchInfo0);
+                    }
+                    else
+                    {
+                        lbl0SearchError.Text = txt0SearchID.Text + " is not exist.";
+                    }
+
+                }
+            }
         }
         public void addGBToTC(TabControl tc, GroupBox gb)
         {
@@ -414,6 +437,15 @@ namespace FrmPIE
             frmPI0ScanWECCtnLable swcl = new frmPI0ScanWECCtnLable(this);
             addGBToTC(tabCtlRight1, swcl.groupBox1ScanWECCtnLable);
         }
+
+        private void txt0SearchID_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn0Find9_Click(sender, e);
+            }
+        }
+
 
     }
 }

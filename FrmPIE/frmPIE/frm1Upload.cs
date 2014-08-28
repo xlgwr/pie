@@ -39,7 +39,7 @@ namespace FrmPIE.frmPIE
             groupBox2mstrUploadExcel.Width = groupBox0frmUploadExcel.Width - groupBox2mstrUploadExcel.Left - 5;
             groupBox3detUploadExcel.Width = groupBox2mstrUploadExcel.Width;
 
-            groupBox3detUploadExcel.Height = groupBox0frmUploadExcel.Height - groupBox3detUploadExcel.Top-10;
+            groupBox3detUploadExcel.Height = groupBox0frmUploadExcel.Height - groupBox3detUploadExcel.Top - 10;
 
         }
         private void btnSelectfileUploadExcel_Click(object sender, EventArgs e)
@@ -109,7 +109,7 @@ namespace FrmPIE.frmPIE
             finally
             {
                 btnCmdUpdUploadExcel.Enabled = true;
-                 //cf.setControlText(btnCmdUpd, "&Upload", true, true);
+                //cf.setControlText(btnCmdUpd, "&Upload", true, true);
             }
         }
 
@@ -119,7 +119,7 @@ namespace FrmPIE.frmPIE
         }
 
         private void initExcelDGV(object strBatchID)
-        {   
+        {
             CartonFromTo ctft = new CartonFromTo(data1GV1ePackingDet1UploadExcel, (string)strBatchID, 0, "upload", _idr_show._custip, _idr_show._custip);
             var reobjmstr = cf.initDataGVPlrBatchMstr(ctft, false, "model");
             var reobjdet = cf.initDataGVplr_mstr(ctft, true, "nothing");
@@ -139,10 +139,8 @@ namespace FrmPIE.frmPIE
         {
             commfunction.dSafeSetCtlText objSet = new commfunction.dSafeSetCtlText(cf.setControlText);
 
-            if (this.IsHandleCreated)
-            {
-               this.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
-            }
+            _idr_show.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
+
         }
 
         private void Excel_Upload(string supplier)
@@ -160,9 +158,9 @@ namespace FrmPIE.frmPIE
 
             string strpocheck = "", strpocheckErr = "";
 
-            //cf.setControlText(lbl1UploadExcelThreadMsg, "$UploadExcel: 初始化Excel文件...", true, true);
+            SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadExcel: 初始化Excel文件...", true, true);
 
-            lbl1UploadExcelThreadMsg.Text = "$UploadExcel: 初始化Excel文件...";
+            //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: 初始化Excel文件...";
 
             PIE.Model.plr_batch_mstr plr_batch_mstr_model = new PIE.Model.plr_batch_mstr();
             PIE.Model.plr_mstr plr_mstr_model = new PIE.Model.plr_mstr();
@@ -177,8 +175,8 @@ namespace FrmPIE.frmPIE
             if (string.IsNullOrEmpty(strBatchID))
             {
                 //MessageBox.Show("生成BatchID,出错，无法导入。");
-                //cf.setControlText(lbl1UploadExcelThreadMsg, "$UploadExcel: Error,生成BatchID,出错，无法导入。", true, true);
-                lbl1UploadExcelThreadMsg.Text = "$UploadExcel: Error,生成BatchID,出错，无法导入。";
+                SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadExcel: Error,生成BatchID,出错，无法导入。", true, true);
+                //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: Error,生成BatchID,出错，无法导入。";
                 return;
             }
             object missing = System.Reflection.Missing.Value;
@@ -192,8 +190,8 @@ namespace FrmPIE.frmPIE
             if (excel == null)
             {
                 //MessageBox.Show("不能访问Excel", "Error");
-                //cf.setControlText(lbl1UploadExcelThreadMsg, "$UploadExcel: Error,不能访问Excel。", true, true);
-                lbl1UploadExcelThreadMsg.Text = "$UploadExcel: Error,不能访问Excel。";
+                SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadExcel: Error,不能访问Excel。", true, true);
+                //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: Error,不能访问Excel。";
 
                 return;
             }
@@ -231,15 +229,15 @@ namespace FrmPIE.frmPIE
             if (!result_batch)
             {
                 //MessageBox.Show("生成批号出错，请重新导入。谢谢", "Error");
-                //cf.setControlText(lbl1UploadExcelThreadMsg, "$UploadExcel: Error,生成批号出错，请重新导入。", true, true);
-                lbl1UploadExcelThreadMsg.Text = "$UploadExcel: Error,生成批号出错，请重新导入。";
+                SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadExcel: Error,生成批号出错，请重新导入。", true, true);
+                //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: Error,生成批号出错，请重新导入。";
                 return;
             }
             //toolStripProgressBarUplad.Maximum = row - 1;
             //toolStripProgressBarUplad.Visible = true;
             //toolStripStatusLabelMessage.Text = "开始导入Excel文件...";
-            //cf.setControlText(lbl1UploadExcelThreadMsg, "$UploadExcel: 开始导入Excel文件...", true, true);
-            lbl1UploadExcelThreadMsg.Text = "$UploadExcel: 开始导入Excel文件... ";
+            SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadExcel: 开始导入Excel文件...", true, true);
+            //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: 开始导入Excel文件... ";
             for (int i = 1; i < row; i++)
             {
                 //toolStripProgressBarUplad.Value = i;
@@ -344,8 +342,8 @@ namespace FrmPIE.frmPIE
                 else
                 {
                     intUploadSuccess++;
-                    //cf.setControlText(lbl1UploadExcelThreadMsg, "$UploadToERP: 第:" + intUploadSuccess + "条上传成功", true, true);
-                    lbl1UploadExcelThreadMsg.Text = "$UploadExcel: 第:" + intUploadSuccess + "条上传成功";
+                    SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadToERP: 第:" + intUploadSuccess + "条上传成功", true, true);
+                    //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: 第:" + intUploadSuccess + "条上传成功";
 
                     plr_batch_mstr_model.batch_dec01 = intUploadSuccess;
                     plr_batch_mstr_model.batch_update_date = DateTime.Now;
@@ -353,7 +351,7 @@ namespace FrmPIE.frmPIE
                     var addRowCount = new PIE.BLL.plr_batch_mstr().Update(plr_batch_mstr_model);
 
                     var intresutl = Program.GenCartonNo(plr_mstr_model);
-
+                   
 
 
                     //strpocheck = Program.POchecking(plr_mstr_model);
@@ -373,10 +371,10 @@ namespace FrmPIE.frmPIE
 
             //toolStripStatusLabelMessage.Text = strUploadResult;
             // toolStripStatusLabelMessage.Text
-            var msg = "$UploadToERP:\t BatchID: " + strBatchID + ",\t 总记录: " + (row - 1) + " 条,\t 上传:" + intUploadSuccess + "条成功，\t 失败: " + intNullCount + "条." + strresult;
+            var msg = "$UploadToERP:\t BatchID: " + strBatchID + ",\t 总记录: " + (row - 1) + " 条,\t 上传:" + intUploadSuccess + "条成功，\t 失败: " + intNullCount + "条. 生成 CartonNo Success." + strresult;
 
-            //cf.setControlText(lbl1UploadExcelThreadMsg, msg, true, true);
-            lbl1UploadExcelThreadMsg.Text = msg;          
+            SetCtlTextdelegate(lbl1UploadExcelThreadMsg, msg, true, true);
+             //lbl1UploadExcelThreadMsg.Text = msg;
 
             txtExcelFileUploadExcel.Text = "";
             //cf.setControlText(txtExcelFile, "", true, true);  
@@ -476,7 +474,7 @@ namespace FrmPIE.frmPIE
 
         }
 
-       
+
         private void initDatasetToTxt(DataSet ds)
         {
             if (ds != null)
@@ -491,7 +489,7 @@ namespace FrmPIE.frmPIE
                 }
             }
         }
-        private void initDatasetToTxt(PIE.Model.plr_batch_mstr model,bool breadonly)
+        private void initDatasetToTxt(PIE.Model.plr_batch_mstr model, bool breadonly)
         {
             txt1batch_idUploadExcel.Text = model.batch_id;
             txt2batch_docUploadExcel.Text = model.batch_doc;

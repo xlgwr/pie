@@ -19,10 +19,14 @@ namespace FrmPIE.frmPIE
         {
             cf = new commfunction();
             _idr_show = idr;
-            string strBatchID = _idr_show._plr_batch_mstr_model.batch_id;
-
             InitializeComponent();
 
+            initWidth();
+
+            data1GV1ePackingDet1_BatchInfo.ReadOnly = true;
+            data2GV2CartonNO.ReadOnly = true;
+
+            DoWrokObject obj = new DoWrokObject(data1GV1ePackingDet1_BatchInfo, data2GV2CartonNO, _idr_show._plr_batch_mstr_model.batch_id);
             _idr_show._tuploadExcelInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
 
             if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Running)
@@ -32,14 +36,23 @@ namespace FrmPIE.frmPIE
 
             if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Unstarted)
             {
-                _idr_show._tuploadExcelInitGDV.Start(strBatchID);
+                _idr_show._tuploadExcelInitGDV.Start(obj);
             }
             if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Stopped)
             {
                 _idr_show._tuploadExcelInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
-                _idr_show._tuploadExcelInitGDV.Start(strBatchID);
+                _idr_show._tuploadExcelInitGDV.Start(obj);
             }
 
+        }
+
+        private void initWidth()
+        {
+            gb3CartonNo.Width = groupBox0BatchInfo0.Width - gb3CartonNo.Left;
+            gb1mstr_BatchInfo.Width = gb3CartonNo.Width;
+            gb2det_BatchInfo.Width = gb3CartonNo.Width;
+
+            gb3CartonNo.Height = groupBox0BatchInfo0.Height - gb3CartonNo.Top;
         }
 
 
@@ -47,7 +60,35 @@ namespace FrmPIE.frmPIE
         {
 
         }
-        private void initDatasetToTxt(PIE.Model.plr_batch_mstr model, bool breadonly)
+        #region PlrBatchMast Plr_mstr
+
+        private void initDGV(object doWorkobj)
+        {
+            DoWrokObject obj = (DoWrokObject)doWorkobj;
+
+            CartonFromTo ctftPlrMstr = new CartonFromTo(obj._dgv, obj._strBatchId, 0, "upload", _idr_show._custip, _idr_show._custip);
+
+            CartonFromTo ctftPlrMstrTran = new CartonFromTo(obj._dgv1, obj._strBatchId, 0, "upload", _idr_show._custip, _idr_show._custip);
+
+            var reobjmstr = cf.initDataGVPlrBatchMstr(ctftPlrMstr, false, "model");
+            var reobjdet = cf.initDataGVplr_mstr(ctftPlrMstr, true, "nothing");
+
+            if (reobjmstr != null)
+            {
+                _idr_show._plr_batch_mstr_model = (PIE.Model.plr_batch_mstr)reobjmstr;
+                initModelToTxtPlrBatchMast(_idr_show._plr_batch_mstr_model, true);
+                var reobjCarton = cf.initDataGVplr_mstr_tran(ctftPlrMstrTran, true, "nothing");
+            }
+
+        }
+
+        private void initDGVDelegate(object doWorkobj)
+        {
+            commfunction.dinitDataGridViewSource me = new commfunction.dinitDataGridViewSource(initDGV);
+            _idr_show.BeginInvoke(me, doWorkobj);
+        }
+
+        private void initModelToTxtPlrBatchMast(PIE.Model.plr_batch_mstr model, bool breadonly)
         {
             txt1batch_id_BatchInfo.Text = model.batch_id;
             txt2batch_do_BatchInfo.Text = model.batch_doc;
@@ -61,22 +102,15 @@ namespace FrmPIE.frmPIE
             txt4batch_dec01_BatchInfo.ReadOnly = breadonly;
             txt5batch_cre_date_BatchInfo.ReadOnly = breadonly;
         }
-        private void initDGV(object strBatchID)
+        #endregion
+
+        private void groupBox0BatchInfo0_Resize(object sender, EventArgs e)
         {
-            CartonFromTo ctft = new CartonFromTo(data1GV1ePackingDet1_BatchInfo, (string)strBatchID, 0, "upload", _idr_show._custip, _idr_show._custip);
-            var reobjmstr = cf.initDataGVPlrBatchMstr(ctft, false, "model");
-            var reobjdet = cf.initDataGVplr_mstr(ctft, true, "nothing");
-            if (reobjmstr != null)
-            {
-                _idr_show._plr_batch_mstr_model = (PIE.Model.plr_batch_mstr)reobjmstr;
-                initDatasetToTxt(_idr_show._plr_batch_mstr_model, true);
-            }
+            initWidth();
         }
 
-        private void initDGVDelegate(object strBatchID)
-        {
-            commfunction.dinitDataGridViewSource me = new commfunction.dinitDataGridViewSource(initDGV);
-            _idr_show.BeginInvoke(me, strBatchID);
-        }
+
+
+
     }
 }

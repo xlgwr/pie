@@ -206,11 +206,6 @@ namespace FrmPIE._0API
                     return plr_mstr_ds;
                 }
 
-                if (reurntype.Equals("model"))
-                {
-                    plr_mstr = new PIE.BLL.plr_mstr().GetModel(batchid, lineid);
-                    return plr_mstr;
-                }
                 return null;
             }
             catch (Exception ex)
@@ -220,7 +215,109 @@ namespace FrmPIE._0API
             }
 
         }
+        /// <summary>
+        /// plr_batch_mstr
+        /// </summary>
+        /// <param name="ctftobj">CartonFromTo</param>
+        /// <param name="isRefresh">ture,false</param>
+        /// <param name="reurntype">datasets 50 or dataset1 or model(all,ds,model,nothing(if only refresh))</param>
+        /// <returns>datasets 50 or dataset1 or model(all,ds,model,nothing(if only refresh))</returns>
+        public object initDataGVplr_mstr_tran(object ctftobj, bool isRefresh, string reurntype)
+        {
+            CartonFromTo ctft = (CartonFromTo)ctftobj;
+            var batchid = ctft._batchID;
+            var lineid = ctft._lineID;
+            var wecid = ctft._wec_ctn_Fr;
+            var carton = ctft._cartonID;
 
+            try
+            {
+                string strwhere;
+                StringBuilder strSql;
+                DataSet plr_mstr_tran_ds;
+
+                PIE.Model.plr_mstr_tran plr_mstr_tran = new PIE.Model.plr_mstr_tran();
+
+                strwhere = " Batch_ID='" + batchid + "' ";
+
+                if (isRefresh)
+                {
+                    if (lineid != 0)
+                    {
+                        strwhere += " and LineID='" + lineid + "' ";
+                    }
+                    strSql = new StringBuilder();
+                    strSql.Append("select ");
+                    strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,plr_wec_ctn,plr_po,");
+                    strSql.Append("plr_partno,CartonType,plr_carton_qty,plr_qty,packingListID,InvoiceID,");
+                    strSql.Append("plr_rcp_date,plr_deli_date,");
+                    strSql.Append("Plr_vm_partno,carton_id_prifix,re_mark,plr_cre_date");
+                    strSql.Append(" FROM plr_mstr_tran");
+                    strSql.Append(" where ");
+                    strSql.Append(strwhere);
+
+                    plr_mstr_tran_ds = DbHelperSQL.Query(strSql.ToString());
+
+
+                    var dgv = ctft._dgv;
+                    dgv.DataSource = plr_mstr_tran_ds.Tables[0].DefaultView;
+
+                    initHeaderTextCartonDetails3(dgv);
+
+                    dgv.Refresh();
+
+                    if (reurntype.Equals("ds"))
+                    {
+                        return plr_mstr_tran_ds;
+                    }
+                }
+                if (reurntype.Equals("model"))
+                {
+                    plr_mstr_tran = new PIE.DAL.plr_mstr_tran().GetModel(batchid, lineid);
+                    return plr_mstr_tran;
+                }
+                if (reurntype.Equals("ds"))
+                {
+                    if (lineid != 0)
+                    {
+                        strwhere += " and LineID='" + lineid + "' ";
+                    }
+                    strSql = new StringBuilder();
+                    strSql.Append("select ");
+                    strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,plr_wec_ctn,plr_po,");
+                    strSql.Append("plr_partno,CartonType,plr_carton_qty,plr_qty,packingListID,InvoiceID,");
+                    strSql.Append("plr_rcp_date,plr_deli_date,");
+                    strSql.Append("Plr_vm_partno,carton_id_prifix,re_mark,plr_cre_date");
+                    strSql.Append(" FROM plr_mstr_tran");
+                    strSql.Append(" where ");
+                    strSql.Append(strwhere);
+
+                    plr_mstr_tran_ds = DbHelperSQL.Query(strSql.ToString());
+                    return plr_mstr_tran_ds;
+                }
+                if (reurntype.Equals("all"))
+                {
+                    strSql = new StringBuilder();
+                    strSql.Append("select ");
+                    strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,plr_wec_ctn,plr_po,");
+                    strSql.Append("plr_partno,CartonType,plr_carton_qty,plr_qty,packingListID,InvoiceID,");
+                    strSql.Append("plr_rcp_date,plr_deli_date,");
+                    strSql.Append("Plr_vm_partno,carton_id_prifix,re_mark,plr_cre_date");
+                    strSql.Append(" FROM plr_mstr_tran");
+
+                    plr_mstr_tran_ds = DbHelperSQL.Query(strSql.ToString());
+                    return plr_mstr_tran_ds;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+
+        }
         /// <summary>
         /// pi_mstr
         /// </summary>
@@ -367,8 +464,8 @@ namespace FrmPIE._0API
 
                     var dgv = ctft._dgv;
                     dgv.DataSource = pi_det_ds.Tables[0].DefaultView;
-
-                    initHeaderTextPlrMstr2(dgv);
+///***************
+                    //initHeaderTextCartonDetails3(dgv);
 
                     dgv.Refresh();
 
@@ -512,6 +609,50 @@ namespace FrmPIE._0API
         }
 
 
+        private void initHeaderTextCartonDetails3(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+            dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
+            dgv.Columns["LineID"].HeaderText = "Line";
+
+            dgv.Columns["Wec_Ctn"].HeaderText = "WEC Ctn ID";
+            dgv.Columns["plr_status"].HeaderText = "Status";
+            dgv.Columns["plr_status_msg"].HeaderText = "Msg";
+            dgv.Columns["plr_wec_ctn"].HeaderText = "WEC CTN";
+
+            dgv.Columns["plr_pallet_no"].HeaderText = "Pallet No";
+
+            //dgv.Columns["plr_suppliers_id"].HeaderText = "Suppliers ID";
+            dgv.Columns["InvoiceID"].HeaderText = "Invoice ID";
+            dgv.Columns["plr_po"].HeaderText = "PO#";
+            dgv.Columns["packingListID"].HeaderText = "PackingListID";
+            dgv.Columns["plr_partno"].HeaderText = "Part";
+            dgv.Columns["plr_qty"].HeaderText = "Total/QTY";
+            dgv.Columns["CartonType"].HeaderText = "Number Carton";
+            dgv.Columns["CartonID"].HeaderText = "Carton ID";
+            dgv.Columns["plr_carton_qty"].HeaderText = "Qty/Carton";
+            dgv.Columns["carton_id_prifix"].HeaderText = "Carton Prefix";
+
+
+            dgv.Columns["re_mark"].HeaderText = "Remark";
+            dgv.Columns["Plr_vm_partno"].HeaderText = "MFGR-Part";
+            dgv.Columns["plr_rcp_date"].HeaderText = "Rcp Date";
+            dgv.Columns["plr_deli_date"].HeaderText = "Deli Date";
+
+            dgv.Columns["plr_cre_date"].HeaderText = "Create Date";
+            //dgv.Columns["plr_update_date"].HeaderText = "Update Date";
+            //dgv.Columns["plr_cre_userid"].HeaderText = "User Id";
+            //dgv.Columns["plr_user_ip"].HeaderText = "Client IP";
+
+            //dgv.Columns["LineID"].Width = 20;
+            dgv.Columns["plr_status"].Width = 50;
+            dgv.Columns["plr_pallet_no"].Width = 50;
+        }
         private void initHeaderTextPIDet(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
@@ -584,6 +725,70 @@ namespace FrmPIE._0API
                 plr_mstr_model.Batch_ID = dgv.Rows[eIndex].Cells["Batch_ID"].Value.ToString().Trim();
                 plr_mstr_model.LineID = Convert.ToInt32(dgv.Rows[eIndex].Cells["LineID"].Value);
             }
+        }
+        public int getMaxOrMinColumnFromDataTable(System.Data.DataTable dt, string columnname, bool getmax)
+        {
+            int count = dt.Rows.Count;
+            int max = 0;
+            int min = 0;
+            int result = 0;
+
+            if (count > 0)
+            {
+                var dtvalueinit = dt.Rows[0][columnname];
+                if (dtvalueinit != DBNull.Value)
+                {
+                    max = Convert.ToInt32(dtvalueinit);
+                    min = max;
+                }
+                else
+                {
+                    min = 10000000;
+                }
+
+                if (getmax)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        var dtvalue = dt.Rows[i][columnname];
+                        if (dtvalue == DBNull.Value)
+                        {
+                            continue;
+                        }
+                        result = Convert.ToInt32(dtvalue);
+                        if (result - max > 1)
+                        {
+                            break;
+                        }
+                        if (result > max)
+                        {
+                            max = result;
+                        }
+                    }
+                    return max;
+                }
+                else
+                {
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        var dtvalue = dt.Rows[i][columnname];
+                        if (dtvalue == DBNull.Value)
+                        {
+                            continue;
+                        }
+                        result = Convert.ToInt32(dtvalue);
+                        if (result < min)
+                        {
+                            min = result;
+                        }
+                    }
+                    return min;
+                }
+
+            }
+            return 0;
+
         }
     }
 

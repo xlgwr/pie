@@ -42,15 +42,6 @@
             this.打印预览VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.退出XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.编辑EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.撤消UToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.重复RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.剪切TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.复制CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.粘贴PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.全选AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.工具TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.自定义CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选项OToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,18 +54,20 @@
             this.搜索SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmb1SearchType = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.status11toolBtnleft = new System.Windows.Forms.ToolStripSplitButton();
             this.hideLeftToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.status12toolSStatusLblMsg = new System.Windows.Forms.ToolStripStatusLabel();
             this.status13toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt0SearchID = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn1Home1 = new System.Windows.Forms.Button();
+            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolSatusLableft1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
@@ -86,12 +79,10 @@
             this.cMenuStrip1PacklingListMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolcMenu11UploadEPackingListExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolcMenu12AddOneByOneBatchID = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolcMenu13SearchePackingList = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn2GenCarton2 = new System.Windows.Forms.Button();
             this.cMenuStrip2CartonIDMain = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenu21SearchCartonID = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem22UploadCartonIDToERP = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -119,6 +110,7 @@
             this.btn23ERPDB = new System.Windows.Forms.Button();
             this.linkLabel6 = new System.Windows.Forms.LinkLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lbl0SearchError = new System.Windows.Forms.Label();
             this.btn0Find9 = new System.Windows.Forms.Button();
             this.btn0Down8 = new System.Windows.Forms.Button();
             this.btn0Print6 = new System.Windows.Forms.Button();
@@ -131,8 +123,6 @@
             this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllButThisToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
-            this.btn1Home1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -169,7 +159,6 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.文件FToolStripMenuItem,
-            this.编辑EToolStripMenuItem,
             this.工具TToolStripMenuItem,
             this.窗口WToolStripMenuItem,
             this.帮助HToolStripMenuItem});
@@ -267,78 +256,6 @@
             this.退出XToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.退出XToolStripMenuItem.Text = "退出(&X)";
             // 
-            // 编辑EToolStripMenuItem
-            // 
-            this.编辑EToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.撤消UToolStripMenuItem,
-            this.重复RToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.剪切TToolStripMenuItem,
-            this.复制CToolStripMenuItem,
-            this.粘贴PToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.全选AToolStripMenuItem});
-            this.编辑EToolStripMenuItem.Name = "编辑EToolStripMenuItem";
-            this.编辑EToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
-            this.编辑EToolStripMenuItem.Text = "编辑(&E)";
-            // 
-            // 撤消UToolStripMenuItem
-            // 
-            this.撤消UToolStripMenuItem.Name = "撤消UToolStripMenuItem";
-            this.撤消UToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.撤消UToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.撤消UToolStripMenuItem.Text = "撤消(&U)";
-            // 
-            // 重复RToolStripMenuItem
-            // 
-            this.重复RToolStripMenuItem.Name = "重复RToolStripMenuItem";
-            this.重复RToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.重复RToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.重复RToolStripMenuItem.Text = "重复(&R)";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(158, 6);
-            // 
-            // 剪切TToolStripMenuItem
-            // 
-            this.剪切TToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("剪切TToolStripMenuItem.Image")));
-            this.剪切TToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.剪切TToolStripMenuItem.Name = "剪切TToolStripMenuItem";
-            this.剪切TToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.剪切TToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.剪切TToolStripMenuItem.Text = "剪切(&T)";
-            // 
-            // 复制CToolStripMenuItem
-            // 
-            this.复制CToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("复制CToolStripMenuItem.Image")));
-            this.复制CToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.复制CToolStripMenuItem.Name = "复制CToolStripMenuItem";
-            this.复制CToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.复制CToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.复制CToolStripMenuItem.Text = "复制(&C)";
-            // 
-            // 粘贴PToolStripMenuItem
-            // 
-            this.粘贴PToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("粘贴PToolStripMenuItem.Image")));
-            this.粘贴PToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.粘贴PToolStripMenuItem.Name = "粘贴PToolStripMenuItem";
-            this.粘贴PToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.粘贴PToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.粘贴PToolStripMenuItem.Text = "粘贴(&P)";
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(158, 6);
-            // 
-            // 全选AToolStripMenuItem
-            // 
-            this.全选AToolStripMenuItem.Name = "全选AToolStripMenuItem";
-            this.全选AToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.全选AToolStripMenuItem.Text = "全选(&A)";
-            // 
             // 工具TToolStripMenuItem
             // 
             this.工具TToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -351,13 +268,13 @@
             // 自定义CToolStripMenuItem
             // 
             this.自定义CToolStripMenuItem.Name = "自定义CToolStripMenuItem";
-            this.自定义CToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.自定义CToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.自定义CToolStripMenuItem.Text = "自定义(&C)";
             // 
             // 选项OToolStripMenuItem
             // 
             this.选项OToolStripMenuItem.Name = "选项OToolStripMenuItem";
-            this.选项OToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.选项OToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.选项OToolStripMenuItem.Text = "选项(&O)";
             // 
             // 窗口WToolStripMenuItem
@@ -424,14 +341,17 @@
             this.关于AToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.关于AToolStripMenuItem.Text = "关于(&A)...";
             // 
-            // comboBox1
+            // cmb1SearchType
             // 
-            this.comboBox1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(463, 15);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(49, 24);
-            this.comboBox1.TabIndex = 9;
+            this.cmb1SearchType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb1SearchType.FormattingEnabled = true;
+            this.cmb1SearchType.Items.AddRange(new object[] {
+            "BatchID"});
+            this.cmb1SearchType.Location = new System.Drawing.Point(356, 13);
+            this.cmb1SearchType.Name = "cmb1SearchType";
+            this.cmb1SearchType.Size = new System.Drawing.Size(82, 24);
+            this.cmb1SearchType.TabIndex = 9;
+            this.cmb1SearchType.Text = "BatchID";
             // 
             // statusStrip1
             // 
@@ -474,13 +394,14 @@
             this.status13toolStripStatusLabel.Name = "status13toolStripStatusLabel";
             this.status13toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
-            // textBox1
+            // txt0SearchID
             // 
-            this.textBox1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(357, 14);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 26);
-            this.textBox1.TabIndex = 8;
+            this.txt0SearchID.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0SearchID.Location = new System.Drawing.Point(444, 13);
+            this.txt0SearchID.Name = "txt0SearchID";
+            this.txt0SearchID.Size = new System.Drawing.Size(132, 26);
+            this.txt0SearchID.TabIndex = 8;
+            this.txt0SearchID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt0SearchID_KeyUp);
             // 
             // splitContainer2
             // 
@@ -548,6 +469,32 @@
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
             this.flowLayoutPanel9.Size = new System.Drawing.Size(122, 136);
             this.flowLayoutPanel9.TabIndex = 0;
+            // 
+            // btn1Home1
+            // 
+            this.btn1Home1.BackgroundImage = global::FrmPIE.Properties.Resources.j__11_;
+            this.btn1Home1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn1Home1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn1Home1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn1Home1.Location = new System.Drawing.Point(3, 3);
+            this.btn1Home1.Name = "btn1Home1";
+            this.btn1Home1.Size = new System.Drawing.Size(119, 105);
+            this.btn1Home1.TabIndex = 21;
+            this.btn1Home1.Text = "1";
+            this.btn1Home1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn1Home1.UseVisualStyleBackColor = true;
+            this.btn1Home1.Click += new System.EventHandler(this.btn1Home1_Click);
+            // 
+            // linkLabel9
+            // 
+            this.linkLabel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.linkLabel9.Location = new System.Drawing.Point(3, 111);
+            this.linkLabel9.Name = "linkLabel9";
+            this.linkLabel9.Size = new System.Drawing.Size(100, 23);
+            this.linkLabel9.TabIndex = 12;
+            this.linkLabel9.TabStop = true;
+            this.linkLabel9.Text = "HOME";
+            this.linkLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // statusStrip2
             // 
@@ -663,8 +610,7 @@
             // 
             this.cMenuStrip1PacklingListMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolcMenu11UploadEPackingListExcel,
-            this.toolcMenu12AddOneByOneBatchID,
-            this.toolcMenu13SearchePackingList});
+            this.toolcMenu12AddOneByOneBatchID});
             this.cMenuStrip1PacklingListMain.Name = "cMenuPacklingListMain1";
             this.cMenuStrip1PacklingListMain.Size = new System.Drawing.Size(240, 70);
             // 
@@ -681,15 +627,8 @@
             this.toolcMenu12AddOneByOneBatchID.Image = global::FrmPIE.Properties.Resources.add;
             this.toolcMenu12AddOneByOneBatchID.Name = "toolcMenu12AddOneByOneBatchID";
             this.toolcMenu12AddOneByOneBatchID.Size = new System.Drawing.Size(239, 22);
-            this.toolcMenu12AddOneByOneBatchID.Text = "&Add New(BatchID)";
+            this.toolcMenu12AddOneByOneBatchID.Text = "&Add New(Edit BatchID)";
             this.toolcMenu12AddOneByOneBatchID.Click += new System.EventHandler(this.toolcMenu12AddOneByOneBatchID_Click);
-            // 
-            // toolcMenu13SearchePackingList
-            // 
-            this.toolcMenu13SearchePackingList.Image = global::FrmPIE.Properties.Resources.find;
-            this.toolcMenu13SearchePackingList.Name = "toolcMenu13SearchePackingList";
-            this.toolcMenu13SearchePackingList.Size = new System.Drawing.Size(239, 22);
-            this.toolcMenu13SearchePackingList.Text = "&Search ePacking List";
             // 
             // linkLabel1
             // 
@@ -731,17 +670,9 @@
             // cMenuStrip2CartonIDMain
             // 
             this.cMenuStrip2CartonIDMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenu21SearchCartonID,
             this.toolStripMenuItem22UploadCartonIDToERP});
             this.cMenuStrip2CartonIDMain.Name = "cMenuStrip2CartonIDMain";
-            this.cMenuStrip2CartonIDMain.Size = new System.Drawing.Size(221, 48);
-            // 
-            // toolStripMenu21SearchCartonID
-            // 
-            this.toolStripMenu21SearchCartonID.Image = global::FrmPIE.Properties.Resources.find;
-            this.toolStripMenu21SearchCartonID.Name = "toolStripMenu21SearchCartonID";
-            this.toolStripMenu21SearchCartonID.Size = new System.Drawing.Size(220, 22);
-            this.toolStripMenu21SearchCartonID.Text = "&Search CartonID";
+            this.cMenuStrip2CartonIDMain.Size = new System.Drawing.Size(221, 26);
             // 
             // toolStripMenuItem22UploadCartonIDToERP
             // 
@@ -817,7 +748,7 @@
             // 
             this.lblSystemName.AutoSize = true;
             this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSystemName.Font = new System.Drawing.Font("SimSun", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSystemName.Font = new System.Drawing.Font("宋体", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSystemName.Location = new System.Drawing.Point(249, 0);
             this.lblSystemName.Name = "lblSystemName";
             this.lblSystemName.Size = new System.Drawing.Size(205, 86);
@@ -1036,9 +967,10 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lbl0SearchError);
             this.splitContainer1.Panel1.Controls.Add(this.btn0Find9);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.cmb1SearchType);
+            this.splitContainer1.Panel1.Controls.Add(this.txt0SearchID);
             this.splitContainer1.Panel1.Controls.Add(this.btn0Down8);
             this.splitContainer1.Panel1.Controls.Add(this.btn0Print6);
             this.splitContainer1.Panel1.Controls.Add(this.btn0Lock5);
@@ -1053,6 +985,15 @@
             this.splitContainer1.Size = new System.Drawing.Size(851, 647);
             this.splitContainer1.TabIndex = 1;
             // 
+            // lbl0SearchError
+            // 
+            this.lbl0SearchError.AutoSize = true;
+            this.lbl0SearchError.ForeColor = System.Drawing.Color.Red;
+            this.lbl0SearchError.Location = new System.Drawing.Point(641, 21);
+            this.lbl0SearchError.Name = "lbl0SearchError";
+            this.lbl0SearchError.Size = new System.Drawing.Size(0, 12);
+            this.lbl0SearchError.TabIndex = 11;
+            // 
             // btn0Find9
             // 
             this.btn0Find9.BackgroundImage = global::FrmPIE.Properties.Resources.find_file;
@@ -1060,7 +1001,7 @@
             this.btn0Find9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn0Find9.FlatAppearance.BorderSize = 0;
             this.btn0Find9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn0Find9.Location = new System.Drawing.Point(518, 3);
+            this.btn0Find9.Location = new System.Drawing.Point(582, 3);
             this.btn0Find9.Name = "btn0Find9";
             this.btn0Find9.Size = new System.Drawing.Size(43, 44);
             this.btn0Find9.TabIndex = 10;
@@ -1196,34 +1137,9 @@
             this.closeAllButThisToolStripMenuItem3.Text = "Close All But This";
             this.closeAllButThisToolStripMenuItem3.Click += new System.EventHandler(this.closeAllButThisToolStripMenuItem3_Click);
             // 
-            // linkLabel9
-            // 
-            this.linkLabel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel9.Location = new System.Drawing.Point(3, 111);
-            this.linkLabel9.Name = "linkLabel9";
-            this.linkLabel9.Size = new System.Drawing.Size(100, 23);
-            this.linkLabel9.TabIndex = 12;
-            this.linkLabel9.TabStop = true;
-            this.linkLabel9.Text = "HOME";
-            this.linkLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btn1Home1
-            // 
-            this.btn1Home1.BackgroundImage = global::FrmPIE.Properties.Resources.j__11_;
-            this.btn1Home1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn1Home1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn1Home1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn1Home1.Location = new System.Drawing.Point(3, 3);
-            this.btn1Home1.Name = "btn1Home1";
-            this.btn1Home1.Size = new System.Drawing.Size(119, 105);
-            this.btn1Home1.TabIndex = 21;
-            this.btn1Home1.Text = "1";
-            this.btn1Home1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn1Home1.UseVisualStyleBackColor = true;
-            this.btn1Home1.Click += new System.EventHandler(this.btn1Home1_Click);
-            // 
             // frmIDR
             // 
+            this.AcceptButton = this.btn0Find9;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(851, 672);
@@ -1294,15 +1210,6 @@
         private System.Windows.Forms.ToolStripMenuItem 打印预览VToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem 退出XToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 编辑EToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 撤消UToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 重复RToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem 剪切TToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 复制CToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 粘贴PToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem 全选AToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 工具TToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 自定义CToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 选项OToolStripMenuItem;
@@ -1313,11 +1220,11 @@
         private System.Windows.Forms.ToolStripMenuItem 搜索SToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmb1SearchType;
         private System.Windows.Forms.ToolStripMenuItem hideLeftToolStripMenuItem3;
         private System.Windows.Forms.ToolStripSplitButton status11toolBtnleft;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt0SearchID;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button btn0Edit2;
         private System.Windows.Forms.Button btn0Down8;
@@ -1362,9 +1269,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolcMenu11UploadEPackingListExcel;
         private System.Windows.Forms.ToolStripMenuItem toolcMenu12AddOneByOneBatchID;
         private System.Windows.Forms.ToolStripStatusLabel status13toolStripStatusLabel;
-        private System.Windows.Forms.ToolStripMenuItem toolcMenu13SearchePackingList;
         private System.Windows.Forms.ContextMenuStrip cMenuStrip2CartonIDMain;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenu21SearchCartonID;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ContextMenuStrip cMenuStrip3PrintCartonLabel;
@@ -1385,6 +1290,7 @@
         private System.Windows.Forms.ToolStripMenuItem tool1StripMenuItem21ScanCartronLabel;
         private System.Windows.Forms.Button btn1Home1;
         private System.Windows.Forms.LinkLabel linkLabel9;
+        private System.Windows.Forms.Label lbl0SearchError;
 
 
 

@@ -9,6 +9,8 @@ namespace FrmPIE._0API
     class DoWrokObject
     {
         public DataGridView _dgv;
+        public DataGridView _dgv1;
+        public string _strBatchId;
         public int _selectedindex;
         public int _eIndex;
         public Color _colors;
@@ -26,6 +28,13 @@ namespace FrmPIE._0API
             _deffCellName = deffCellName;
             _deffCellValue = deffCellValue;
             _deffcolors = Deffcolors;
+
+        }
+        public DoWrokObject(DataGridView dgv,DataGridView dgv1,string strBatchId)
+        {
+            _dgv = dgv;
+            _dgv1 = dgv1;
+            _strBatchId = strBatchId;
 
         }
     }

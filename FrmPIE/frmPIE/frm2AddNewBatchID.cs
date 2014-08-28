@@ -34,8 +34,16 @@ namespace FrmPIE.frmPIE
             InitializeComponent();
 
             btn1UpadeAddAddNewBatchID.Focus();
-            _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
 
+            _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
+            _idr_show.tabCtlRight1.SelectedTab.Layout += _idr_show_Layout;
+
+        }
+
+        void _idr_show_Layout(object sender, LayoutEventArgs e)
+        {
+            txt3PalletNoAddNewBatchID.Focus();
+            initWithHeight();
         }
 
         void SelectedTab_Resize(object sender, EventArgs e)
@@ -50,7 +58,7 @@ namespace FrmPIE.frmPIE
 
         private void initWithHeight()
         {
-            groupBox0AddNewBatchID.Width = _idr_show.tabCtlRight1.SelectedTab.Width - groupBox0AddNewBatchID.Left - 50;
+            groupBox0AddNewBatchID.Width = _idr_show.tabCtlRight1.SelectedTab.Width - groupBox0AddNewBatchID.Left - 20;
 
             groupBox1.Width = groupBox0AddNewBatchID.Width - groupBox1.Left - 5;
             groupBox2.Width = groupBox1.Width;
@@ -398,7 +406,7 @@ namespace FrmPIE.frmPIE
                     if (string.IsNullOrEmpty(_plr_mstr_model.Batch_ID))
                     {
 
-                        ShowMsg("新增新的BatchID", "Notice");
+                        ShowMsg("Add New BatchID", "Notice");
                     }
                     else
                     {
@@ -409,7 +417,7 @@ namespace FrmPIE.frmPIE
 
                         initModelForTextBox(plr_mstr_new);
                         _addNewFalg = true;
-                        ShowMsg("新增新的相同BatchID,\t上次新增的为：" + _plr_mstr_model.Batch_ID + ",LineID:" + _plr_mstr_model.LineID.ToString(), "Notice");
+                        ShowMsg("Add the Same BatchID,\t上次新增的为：" + _plr_mstr_model.Batch_ID + ",LineID:" + _plr_mstr_model.LineID.ToString(), "Notice");
                     }
 
                 }
@@ -420,7 +428,16 @@ namespace FrmPIE.frmPIE
             }
             #endregion
         }
+        private void btn2GenCartonNo2AddNewBatchID_Click(object sender, EventArgs e)
+        {
+            initCartonFromTo();
+            if (!isnulltxt())
+            {
+                return;
+            };
+            Program.GenCartonNo(_plr_mstr_model);
 
+        }
         private void threadinitDVdelegate()
         {
             _idr_show._tuploadExcelInitGDV = new Thread(initDGVDelegate);
@@ -443,6 +460,7 @@ namespace FrmPIE.frmPIE
         private void btn3NewAddNewBatchID_Click(object sender, EventArgs e)
         {
             ShowMsg("新增新的BatchID,LineID 从1开始计算.", "Notice");
+            btn1UpadeAddAddNewBatchID.Text = "&Add";
             _addNewFalg = false;
             _plr_mstr_model = new PIE.Model.plr_mstr();
             _plr_mstr_model.LineID = 1;
@@ -469,12 +487,42 @@ namespace FrmPIE.frmPIE
                 int lineid = Convert.ToInt32(data1GV1ePackingDet1_AddNewBatchID.Rows[eIndex].Cells["LineID"].Value);
 
                 _plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(strbatchid, lineid);
+
                 initModelForTextBox(_plr_mstr_model);
                 txt3PalletNoAddNewBatchID.Focus();
                 ShowMsg("修改BatchID:" + strbatchid + "," + lineid + ".", "Notice");
 
 
             }
+        }
+        private void init0Update(string strbatchid)
+        {
+
+            PIE.Model.plr_batch_mstr plr_barch_mast_model = new PIE.BLL.plr_batch_mstr().GetModel(strbatchid);
+            if (plr_barch_mast_model != null)
+            {
+
+                initDatasetToTxt(plr_barch_mast_model, true);
+                
+
+                var _plr_mstr_model_ds = new PIE.BLL.plr_mstr().GetList("Batch_ID='" + strbatchid + "'");
+                var dst=_plr_mstr_model_ds.Tables[0];
+
+                _plr_mstr_model.Batch_ID = strbatchid;
+                _nextlineid = cf.getMaxOrMinColumnFromDataTable(dst,"LineID",true)+1;
+
+                data1GV1ePackingDet1_AddNewBatchID.DataSource = dst.DefaultView;
+                data1GV1ePackingDet1_AddNewBatchID.Refresh();
+
+
+                init0Update(0);
+            }
+            else
+            {
+                lblPosition_AddNewBatchID.Text = "Error: BatchID " + strbatchid + " is not exist.";
+            }
+
+
         }
         private void init0Update(int eIndex, bool updatetypeEindex)
         {
@@ -485,11 +533,10 @@ namespace FrmPIE.frmPIE
             }
 
         }
-        private void btnConton_Click(object sender, EventArgs e)
+        private void btn2AddContinue_Click(object sender, EventArgs e)
         {
             if (_nextlineid > 1)
-            {
-                ShowMsg("Add Continue,", "");
+            {                
                 _addNewFalg = true;
                 btn1UpadeAddAddNewBatchID.Text = "&Add";
 
@@ -502,6 +549,8 @@ namespace FrmPIE.frmPIE
                 initModelForTextBox(_plr_mstr_model);
 
                 txt3PalletNoAddNewBatchID.Focus();
+
+                ShowMsg("Notice: Add Continue,Batchid:"+nextBatchid, "");
             }
         }
         private void currRowCol(PIE.Model.plr_mstr currmodel, int initcurrindex, DataGridView dgv)
@@ -510,8 +559,8 @@ namespace FrmPIE.frmPIE
             _currRowIndex = initcurrindex;
             dgv.Rows[_currRowIndex].Cells[_currColIndex].Selected = true;
             var msg = "\t当前 BatchID: " + currmodel.Batch_ID + " ,LineID: " + currmodel.LineID + ", 在第 " + (_currRowIndex + 1) + " 行," + (_currColIndex + 1) + " 列.";
-            ShowMsg(lblPosition__AddNewBatchID, msg, "Notice");
-            init0Update(_currColIndex,true);
+            ShowMsg(lblPosition_AddNewBatchID, msg, "Notice");
+            init0Update(_currColIndex, true);
 
         }
         private void btnNext_Click(object sender, EventArgs e)
@@ -566,9 +615,20 @@ namespace FrmPIE.frmPIE
             {
                 txtGorow.Focus();
                 txtGorow.Text = countrow.ToString();
-                ShowMsg(lblPosition__AddNewBatchID, "请输入正确的数据字", "Error");
+                ShowMsg(lblPosition_AddNewBatchID, "请输入正确的数据字", "Error");
             }
         }
+
+        private void btn8Search_Click(object sender, EventArgs e)
+        {
+            var strbatchid = txt88Batchid.Text;
+            if (!string.IsNullOrEmpty(strbatchid))
+            {
+                init0Update(strbatchid);
+            }
+        }
+
+        
 
 
 
