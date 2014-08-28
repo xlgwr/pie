@@ -24,6 +24,8 @@ namespace FrmPIE.frmPIE
         bool _addNewFalg = false;
         bool _updateflag = false;
         int _nextlineid;
+        int _currRowIndex;
+        int _currColIndex;
         public frm2AddNewBatchID(frmIDR idr)
         {
             _idr_show = idr;
@@ -32,7 +34,12 @@ namespace FrmPIE.frmPIE
             InitializeComponent();
 
             btn1UpadeAddAddNewBatchID.Focus();
+            _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
 
+        }
+
+        void SelectedTab_Resize(object sender, EventArgs e)
+        {
             initWithHeight();
         }
         private void AddNewBatchID_Load(object sender, EventArgs e)
@@ -43,22 +50,30 @@ namespace FrmPIE.frmPIE
 
         private void initWithHeight()
         {
+            groupBox0AddNewBatchID.Width = _idr_show.tabCtlRight1.SelectedTab.Width - groupBox0AddNewBatchID.Left - 50;
+
             groupBox1.Width = groupBox0AddNewBatchID.Width - groupBox1.Left - 5;
             groupBox2.Width = groupBox1.Width;
+            groupBox3.Width = groupBox1.Width;
             groupBox3mstr_addnewbatch.Width = groupBox1.Width;
             groupBox4det_addnewbatch.Width = groupBox1.Width;
 
 
-            groupBox4det_addnewbatch.Height = groupBox0AddNewBatchID.Height - groupBox4det_addnewbatch.Top;
+            groupBox4det_addnewbatch.Height = groupBox0AddNewBatchID.Height - groupBox4det_addnewbatch.Top - groupBox3.Height;
         }
         private void groupBox0AddNewBatchID_Resize(object sender, EventArgs e)
         {
             initWithHeight();
         }
-        private void lblShowMsg(string msg, string title)
+        private void ShowMsg(string msg, string title)
         {
             this.lblMsg.Visible = true;
             this.lblMsg.Text = title + ":" + msg;
+        }
+        private void ShowMsg(Control ct, string msg, string title)
+        {
+            ct.Visible = true;
+            ct.Text = title + ":" + msg;
         }
         public bool isNumber(TextBox tb)
         {
@@ -66,7 +81,7 @@ namespace FrmPIE.frmPIE
             {
                 tb.Focus();
                 tb.SelectAll();
-                lblShowMsg("请输入正确的数字，谢谢.", "Notice");
+                ShowMsg("请输入正确的数字，谢谢.", "Notice");
 
                 return true;
             }
@@ -76,7 +91,7 @@ namespace FrmPIE.frmPIE
         {
             if (string.IsNullOrEmpty(tb.Text))
             {
-                lblShowMsg(msg, title);
+                ShowMsg(msg, title);
                 tb.Focus();
                 return true;
             }
@@ -139,7 +154,7 @@ namespace FrmPIE.frmPIE
 
             if (!PageValidate.IsNumber(txt14CartonIDFromAddNewBatchID.Text) || !PageValidate.IsNumber(txt15CartonIDToAddNewBatchID.Text))
             {
-                lblShowMsg("Carton ID must like Numert or NumA-NumB,example C1-10 or 10 or 1-10.", "Error");
+                ShowMsg("Carton ID must like Numert or NumA-NumB,example C1-10 or 10 or 1-10.", "Error");
                 txt10CartonIDAddNewBatchID.SelectAll();
                 txt10CartonIDAddNewBatchID.Focus();
                 return false;
@@ -149,7 +164,7 @@ namespace FrmPIE.frmPIE
 
             if (cartonfrom > cartonto)
             {
-                lblShowMsg("Carton ID must like 10 or 1-10", "Error");
+                ShowMsg("Carton ID must like 10 or 1-10", "Error");
                 txt10CartonIDAddNewBatchID.SelectAll();
                 txt10CartonIDAddNewBatchID.Focus();
                 return false;
@@ -225,7 +240,7 @@ namespace FrmPIE.frmPIE
 
             plr_mstr_model.re_mark = txt16RemarkAddNewBatchID.Text.Trim();
 
-            //initCartonFromTo();
+            initCartonFromTo();
         }
 
         private void initDatasetToTxt(PIE.Model.plr_batch_mstr model, bool breadonly)
@@ -286,12 +301,12 @@ namespace FrmPIE.frmPIE
                 {
                     _updateflag = true;
                     threadinitDVdelegate();
-                    lblShowMsg("Update success", "Success");
+                    ShowMsg("Update success", "Success");
 
                 }
                 else
                 {
-                    lblShowMsg("Update fail", "Error");
+                    ShowMsg("Update fail", "Error");
                 }
             }
             #endregion
@@ -316,7 +331,7 @@ namespace FrmPIE.frmPIE
                     strBatchID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
                     if (string.IsNullOrEmpty(strBatchID))
                     {
-                        lblShowMsg("生成BatchID,出错，无法新增。", "Error");
+                        ShowMsg("生成BatchID,出错，无法新增。", "Error");
                         return;
                     }
                     plr_bathmstr_model.batch_id = strBatchID;
@@ -332,7 +347,7 @@ namespace FrmPIE.frmPIE
                     var result_plr_batch = new PIE.DAL.plr_batch_mstr().Add(plr_bathmstr_model);
                     if (!result_plr_batch)
                     {
-                        lblShowMsg("Add Batch Mstr info fail", "Error");
+                        ShowMsg("Add Batch Mstr info fail", "Error");
                         return;
                     }
                     _plr_mstr_model.Batch_ID = strBatchID;
@@ -344,7 +359,7 @@ namespace FrmPIE.frmPIE
 
 
                 //plr_mstr_model = new PIE.Model.plr_mstr();
-               
+
 
                 initTxtToModel(_plr_mstr_model);
 
@@ -353,13 +368,22 @@ namespace FrmPIE.frmPIE
                 _plr_mstr_model.plr_user_ip = _idr_show._custip;
                 _plr_mstr_model.plr_status = "No";
 
+                var existBatchidLine = true;
+                while (existBatchidLine)
+                {
+                    existBatchidLine = new PIE.BLL.plr_mstr().Exists(_plr_mstr_model.Batch_ID, _plr_mstr_model.LineID);
+                    if (existBatchidLine)
+                    {
+                        ShowMsg("系统中已存在BatchID：" + _plr_mstr_model.Batch_ID + ",LineID:" + _plr_mstr_model.LineID.ToString() + "，将修改LineID+1.", "Notice");
+
+                        _plr_mstr_model.LineID += 1;
+                        txt2LineIDAddNewBatchID.Text = _plr_mstr_model.LineID.ToString();
+                    }
+
+
+                }
 
                 var result_plr_mstr = new PIE.DAL.plr_mstr().Add(_plr_mstr_model);
-
-
-
-
-
 
                 if (result_plr_mstr)
                 {
@@ -374,7 +398,7 @@ namespace FrmPIE.frmPIE
                     if (string.IsNullOrEmpty(_plr_mstr_model.Batch_ID))
                     {
 
-                        lblShowMsg("新增新的BatchID", "Notice");
+                        ShowMsg("新增新的BatchID", "Notice");
                     }
                     else
                     {
@@ -385,13 +409,13 @@ namespace FrmPIE.frmPIE
 
                         initModelForTextBox(plr_mstr_new);
                         _addNewFalg = true;
-                        lblShowMsg("新增新的相同BatchID,\t上次新增的为：" + _plr_mstr_model.Batch_ID + ",LineID:" + _plr_mstr_model.LineID.ToString(), "Notice");
+                        ShowMsg("新增新的相同BatchID,\t上次新增的为：" + _plr_mstr_model.Batch_ID + ",LineID:" + _plr_mstr_model.LineID.ToString(), "Notice");
                     }
 
                 }
                 else
                 {
-                    lblShowMsg("Add fail", "Error");
+                    ShowMsg("Add fail", "Error");
                 }
             }
             #endregion
@@ -418,7 +442,7 @@ namespace FrmPIE.frmPIE
 
         private void btn3NewAddNewBatchID_Click(object sender, EventArgs e)
         {
-            lblShowMsg("新增新的BatchID,LineID 从1开始计算.", "Notice");
+            ShowMsg("新增新的BatchID,LineID 从1开始计算.", "Notice");
             _addNewFalg = false;
             _plr_mstr_model = new PIE.Model.plr_mstr();
             _plr_mstr_model.LineID = 1;
@@ -428,28 +452,44 @@ namespace FrmPIE.frmPIE
 
         private void data1GV1ePackingDet1_AddNewBatchID_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex < data1GV1ePackingDet1_AddNewBatchID.Rows.Count - 1)
+            _currRowIndex = e.RowIndex;
+            _currColIndex = e.ColumnIndex;
+            init0Update(e.RowIndex);
+
+        }
+
+        private void init0Update(int eIndex)
+        {
+            if (eIndex >= 0 && eIndex < data1GV1ePackingDet1_AddNewBatchID.Rows.Count - 1)
             {
 
+
                 btn1UpadeAddAddNewBatchID.Text = "&Update";
-                string strbatchid = data1GV1ePackingDet1_AddNewBatchID.Rows[e.RowIndex].Cells["Batch_ID"].Value.ToString();
-                int lineid = Convert.ToInt32(data1GV1ePackingDet1_AddNewBatchID.Rows[e.RowIndex].Cells["LineID"].Value);
+                string strbatchid = data1GV1ePackingDet1_AddNewBatchID.Rows[eIndex].Cells["Batch_ID"].Value.ToString();
+                int lineid = Convert.ToInt32(data1GV1ePackingDet1_AddNewBatchID.Rows[eIndex].Cells["LineID"].Value);
 
                 _plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(strbatchid, lineid);
                 initModelForTextBox(_plr_mstr_model);
                 txt3PalletNoAddNewBatchID.Focus();
-                lblShowMsg("修改BatchID:" + strbatchid + "," + lineid + ".", "Notice");
+                ShowMsg("修改BatchID:" + strbatchid + "," + lineid + ".", "Notice");
 
 
             }
+        }
+        private void init0Update(int eIndex, bool updatetypeEindex)
+        {
+            if (updatetypeEindex)
+            {
+                btn1UpadeAddAddNewBatchID.Text = "&Update";
+                txt3PalletNoAddNewBatchID.Focus();
+            }
 
         }
-
         private void btnConton_Click(object sender, EventArgs e)
         {
             if (_nextlineid > 1)
             {
-                lblShowMsg("Add Continue,", "");
+                ShowMsg("Add Continue,", "");
                 _addNewFalg = true;
                 btn1UpadeAddAddNewBatchID.Text = "&Add";
 
@@ -464,7 +504,71 @@ namespace FrmPIE.frmPIE
                 txt3PalletNoAddNewBatchID.Focus();
             }
         }
+        private void currRowCol(PIE.Model.plr_mstr currmodel, int initcurrindex, DataGridView dgv)
+        {
 
+            _currRowIndex = initcurrindex;
+            dgv.Rows[_currRowIndex].Cells[_currColIndex].Selected = true;
+            var msg = "\t当前 BatchID: " + currmodel.Batch_ID + " ,LineID: " + currmodel.LineID + ", 在第 " + (_currRowIndex + 1) + " 行," + (_currColIndex + 1) + " 列.";
+            ShowMsg(lblPosition__AddNewBatchID, msg, "Notice");
+            init0Update(_currColIndex,true);
+
+        }
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            var currindex = _currRowIndex + 1;
+            var countrow = data1GV1ePackingDet1_AddNewBatchID.RowCount - 1;
+            if (currindex >= 0 && currindex < countrow)
+            {
+
+                var plr_mstr_model_temp = new PIE.Model.plr_mstr();
+                commfunction.getBatchiLineId(data1GV1ePackingDet1_AddNewBatchID, currindex, plr_mstr_model_temp);
+                plr_mstr_model_temp = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model_temp.Batch_ID, plr_mstr_model_temp.LineID);
+                initModelForTextBox(plr_mstr_model_temp);
+                currRowCol(plr_mstr_model_temp, currindex, data1GV1ePackingDet1_AddNewBatchID);
+            }
+
+
+        }
+
+
+        private void btnPre_Click(object sender, EventArgs e)
+        {
+            var currindex = _currRowIndex - 1;
+            var countrow = data1GV1ePackingDet1_AddNewBatchID.RowCount - 1;
+            if (currindex >= 0 && currindex < countrow)
+            {
+                var plr_mstr_model_temp = new PIE.Model.plr_mstr();
+                commfunction.getBatchiLineId(data1GV1ePackingDet1_AddNewBatchID, currindex, plr_mstr_model_temp);
+                plr_mstr_model_temp = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model_temp.Batch_ID, plr_mstr_model_temp.LineID);
+                initModelForTextBox(plr_mstr_model_temp);
+                currRowCol(plr_mstr_model_temp, currindex, data1GV1ePackingDet1_AddNewBatchID);
+            }
+        }
+
+        private void btngo_Click(object sender, EventArgs e)
+        {
+            var countrow = data1GV1ePackingDet1_AddNewBatchID.RowCount - 1;
+
+            if (isNumber(txtGorow))
+            {
+                var currindex = Convert.ToInt32(txtGorow.Text) - 1;
+                if (currindex >= 0 && currindex < countrow)
+                {
+                    var plr_mstr_model_temp = new PIE.Model.plr_mstr();
+                    commfunction.getBatchiLineId(data1GV1ePackingDet1_AddNewBatchID, currindex, plr_mstr_model_temp);
+                    plr_mstr_model_temp = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model_temp.Batch_ID, plr_mstr_model_temp.LineID);
+                    initModelForTextBox(plr_mstr_model_temp);
+                    currRowCol(plr_mstr_model_temp, currindex, data1GV1ePackingDet1_AddNewBatchID);
+                }
+            }
+            else
+            {
+                txtGorow.Focus();
+                txtGorow.Text = countrow.ToString();
+                ShowMsg(lblPosition__AddNewBatchID, "请输入正确的数据字", "Error");
+            }
+        }
 
 
 

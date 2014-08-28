@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using models = PIE.Model;
 
 using FrmPIE.frmPIE;
+using FrmPIE.frmPI;
 
 namespace FrmPIE
 {
@@ -54,7 +55,7 @@ namespace FrmPIE
             initHideImage(new object[] { hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3, status11toolBtnleft }, 1);
             initHideImage(new object[] { hideToolBarToolStripMenuItem1 }, 2);
 
-            initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3 });
+            initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3 ,btn21ScanCartronLabel21,btn22PISystem,btn23ERPDB,btn24PIReports});
             //Control.CheckForIllegalCrossThreadCalls = false;
 
         }
@@ -399,6 +400,18 @@ namespace FrmPIE
 
             this.AcceptButton = fanb.btn1UpadeAddAddNewBatchID;
             addGBToTC(tabpagenew, fanb.groupBox0AddNewBatchID);
+        }
+
+        private void btn1ScanCartronLabel21_Click(object sender, EventArgs e)
+        {
+            cMenuStrip21ScanCartronLabel.Show(btn21ScanCartronLabel21, _icurrMouseX, _icurrMouseY);
+        }
+
+        private void tool1StripMenuItem21ScanCartronLabel_Click(object sender, EventArgs e)
+        {
+            addNewTabPage("Upload EPacking List From Excel");
+            frmPI0ScanWECCtnLable swcl = new frmPI0ScanWECCtnLable(this);
+            addGBToTC(tabCtlRight1, swcl.groupBox1ScanWECCtnLable);
         }
 
     }

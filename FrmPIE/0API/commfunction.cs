@@ -308,6 +308,16 @@ namespace FrmPIE._0API
             dgv.Columns["plr_rcp_date"].ValueType = Type.GetType("System.DateTime");
             dgv.Columns["plr_deli_date"].ValueType = Type.GetType("System.DateTime");
         }
+
+        public static void getBatchiLineId(DataGridView dgv, int eIndex, PIE.Model.plr_mstr plr_mstr_model)
+        {
+            if (eIndex >= 0 && eIndex < dgv.Rows.Count - 1)
+            {
+
+                plr_mstr_model.Batch_ID = dgv.Rows[eIndex].Cells["Batch_ID"].Value.ToString().Trim();
+                plr_mstr_model.LineID = Convert.ToInt32(dgv.Rows[eIndex].Cells["LineID"].Value);
+            }
+        }
     }
 
 }

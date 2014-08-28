@@ -98,6 +98,12 @@
     <Compile Include="frmPIE\frm2AddNewBatchID.Designer.cs">
       <DependentUpon>frm2AddNewBatchID.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPI\frmPI0ScanWECCtnLable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPI\frmPI0ScanWECCtnLable.Designer.cs">
+      <DependentUpon>frmPI0ScanWECCtnLable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logon\AdminManage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPIE\frm2AddNewBatchID.resx">
       <DependentUpon>frm2AddNewBatchID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPI\frmPI0ScanWECCtnLable.resx">
+      <DependentUpon>frmPI0ScanWECCtnLable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logon\AdminManage.resx">
       <DependentUpon>AdminManage.cs</DependentUpon>
