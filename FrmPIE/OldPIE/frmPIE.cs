@@ -1465,7 +1465,7 @@ namespace FrmPIE
                         }
                         if (listcount > limitCount)
                         {
-                            strtxt.AppendLine(@"^A0N,44,30^FO30,392^FD more " + limitCount + "..............");
+                            strtxt.AppendLine(@"^A0N,44,30^FO30,392^FD ..................");
                         }
                         strtxt.AppendLine("^A0N,44,30^FO36,392^FDT0TAL: " + listcount.ToString() + "^FS");
 

@@ -27,7 +27,7 @@ namespace FrmPIE
         public DataSet _batchMstr;
 
         public models.plr_batch_mstr _plr_batch_mstr_model = new models.plr_batch_mstr();
-
+        commfunction cf = new commfunction();
         public string _custip = Program.getClientIP();
 
         int _icurrTabMouseUpIndex = 1;
@@ -60,24 +60,29 @@ namespace FrmPIE
             //Control.CheckForIllegalCrossThreadCalls = false;
 
         }
-        protected override bool ProcessCmdKey(ref   Message msg, Keys keyData)
+        private void txt0SearchID_TextChanged(object sender, EventArgs e)
         {
-            if (keyData == Keys.Down)
-            {
-
-                //keybd_event(9, 0, 0, 0);
-                SendKeys.Send("{TAB}");
-
-            }
-            if (keyData == Keys.Up)
-            {
-
-                SendKeys.Send("+{TAB}");
-
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-
+            lbl0SearchError.Text = txt0SearchID.Text.Length.ToString();
+            cf.initScanTXT(txt0SearchID, 20, 12);
         }
+        //protected override bool ProcessCmdKey(ref   Message msg, Keys keyData)
+        //{
+        //    if (keyData == Keys.Down)
+        //    {
+
+        //        //keybd_event(9, 0, 0, 0);
+        //        SendKeys.Send("{TAB}");
+
+        //    }
+        //    if (keyData == Keys.Up)
+        //    {
+
+        //        SendKeys.Send("+{TAB}");
+
+        //    }
+        //    return base.ProcessCmdKey(ref msg, keyData);
+
+        //}
         private void frmIDR_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_tuploadExcel != null)
@@ -396,7 +401,8 @@ namespace FrmPIE
                     }
                     else
                     {
-                        lbl0SearchError.Text = txt0SearchID.Text + " is not exist.";
+                        lbl0SearchError.Text = "Error:Batch Mstr " + txt0SearchID.Text + " is not exist.";
+                        txt0SearchID.SelectionStart = txt0SearchID.Text.Length;
                     }
 
                 }
@@ -433,7 +439,7 @@ namespace FrmPIE
 
         private void tool1StripMenuItem21ScanCartronLabel_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Upload EPacking List From Excel");
+            addNewTabPage("Scan Cartron Label");
             frmPI0ScanWECCtnLable swcl = new frmPI0ScanWECCtnLable(this);
             addGBToTC(tabCtlRight1, swcl.groupBox1ScanWECCtnLable);
         }
@@ -445,6 +451,8 @@ namespace FrmPIE
                 btn0Find9_Click(sender, e);
             }
         }
+
+
 
 
     }

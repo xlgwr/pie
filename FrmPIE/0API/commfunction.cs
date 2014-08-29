@@ -19,7 +19,7 @@ namespace FrmPIE._0API
 {
     class commfunction
     {
-
+        public delegate void voidMethod();
         public delegate void dinitDataGridViewSource(object obj);
         public delegate void dSafeSetCtlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible);
         public delegate void dSafeSetToolText(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible);
@@ -464,7 +464,7 @@ namespace FrmPIE._0API
 
                     var dgv = ctft._dgv;
                     dgv.DataSource = pi_det_ds.Tables[0].DefaultView;
-///***************
+                    ///***************
                     //initHeaderTextCartonDetails3(dgv);
 
                     dgv.Refresh();
@@ -790,6 +790,93 @@ namespace FrmPIE._0API
             return 0;
 
         }
+
+        public int getMaxOrMinColumnFromDataTable(System.Data.DataTable dt, string columnname, bool getmax, bool onebyone)
+        {
+            int count = dt.Rows.Count;
+            int max = 0;
+            int min = 0;
+            int result = 0;
+
+            if (count > 0)
+            {
+                var dtvalueinit = dt.Rows[0][columnname];
+                if (dtvalueinit != DBNull.Value)
+                {
+                    max = Convert.ToInt32(dtvalueinit);
+                    min = max;
+                }
+                else
+                {
+                    min = 10000000;
+                }
+
+                if (getmax)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        var dtvalue = dt.Rows[i][columnname];
+                        if (dtvalue == DBNull.Value)
+                        {
+                            continue;
+                        }
+                        result = Convert.ToInt32(dtvalue);
+                        if (onebyone)
+                        {
+                            if (result - max > 1)
+                            {
+                                break;
+                            }
+                        }
+
+                        if (result > max)
+                        {
+                            max = result;
+                        }
+                    }
+                    return max;
+                }
+                else
+                {
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        var dtvalue = dt.Rows[i][columnname];
+                        if (dtvalue == DBNull.Value)
+                        {
+                            continue;
+                        }
+                        result = Convert.ToInt32(dtvalue);
+                        if (result < min)
+                        {
+                            min = result;
+                        }
+                    }
+                    return min;
+                }
+
+            }
+            return 0;
+
+        }
+        public void initScanTXT(TextBox tb, int secMorelen, int substringlen)
+        {
+            if (tb.Text.Length >= substringlen)
+            {
+                char ckey = '\'';
+                string skey = "<|>";
+                string str12 = tb.Text.Replace(ckey, ' ');
+                if (tb.Text.IndexOf(skey) > 0 && tb.Text.Length >= secMorelen)
+                {
+                    str12 = str12.Replace(skey, " ");
+                }
+                tb.Text = str12.Substring(str12.Length - substringlen, substringlen);
+                tb.SelectionStart = tb.Text.Length;
+            }
+        }
+        /////////////////////////////////////
+        //start place
+        /////////////////////////////////
     }
 
 }

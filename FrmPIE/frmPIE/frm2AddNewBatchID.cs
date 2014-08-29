@@ -489,7 +489,7 @@ namespace FrmPIE.frmPIE
                 _plr_mstr_model = new PIE.BLL.plr_mstr().GetModel(strbatchid, lineid);
 
                 initModelForTextBox(_plr_mstr_model);
-                txt3PalletNoAddNewBatchID.Focus();
+                //txt3PalletNoAddNewBatchID.Focus();
                 ShowMsg("修改BatchID:" + strbatchid + "," + lineid + ".", "Notice");
 
 
@@ -503,13 +503,13 @@ namespace FrmPIE.frmPIE
             {
 
                 initDatasetToTxt(plr_barch_mast_model, true);
-                
+
 
                 var _plr_mstr_model_ds = new PIE.BLL.plr_mstr().GetList("Batch_ID='" + strbatchid + "'");
-                var dst=_plr_mstr_model_ds.Tables[0];
+                var dst = _plr_mstr_model_ds.Tables[0];
 
                 _plr_mstr_model.Batch_ID = strbatchid;
-                _nextlineid = cf.getMaxOrMinColumnFromDataTable(dst,"LineID",true)+1;
+                _nextlineid = cf.getMaxOrMinColumnFromDataTable(dst, "LineID", true) + 1;
 
                 data1GV1ePackingDet1_AddNewBatchID.DataSource = dst.DefaultView;
                 data1GV1ePackingDet1_AddNewBatchID.Refresh();
@@ -529,14 +529,14 @@ namespace FrmPIE.frmPIE
             if (updatetypeEindex)
             {
                 btn1UpadeAddAddNewBatchID.Text = "&Update";
-                txt3PalletNoAddNewBatchID.Focus();
+                //txt3PalletNoAddNewBatchID.Focus();
             }
 
         }
         private void btn2AddContinue_Click(object sender, EventArgs e)
         {
             if (_nextlineid > 1)
-            {                
+            {
                 _addNewFalg = true;
                 btn1UpadeAddAddNewBatchID.Text = "&Add";
 
@@ -550,7 +550,7 @@ namespace FrmPIE.frmPIE
 
                 txt3PalletNoAddNewBatchID.Focus();
 
-                ShowMsg("Notice: Add Continue,Batchid:"+nextBatchid, "");
+                ShowMsg("Notice: Add Continue,Batchid:" + nextBatchid, "");
             }
         }
         private void currRowCol(PIE.Model.plr_mstr currmodel, int initcurrindex, DataGridView dgv)
@@ -599,7 +599,7 @@ namespace FrmPIE.frmPIE
         {
             var countrow = data1GV1ePackingDet1_AddNewBatchID.RowCount - 1;
 
-            if (isNumber(txtGorow))
+            if (!isNumber(txtGorow))
             {
                 var currindex = Convert.ToInt32(txtGorow.Text) - 1;
                 if (currindex >= 0 && currindex < countrow)
@@ -609,6 +609,12 @@ namespace FrmPIE.frmPIE
                     plr_mstr_model_temp = new PIE.BLL.plr_mstr().GetModel(plr_mstr_model_temp.Batch_ID, plr_mstr_model_temp.LineID);
                     initModelForTextBox(plr_mstr_model_temp);
                     currRowCol(plr_mstr_model_temp, currindex, data1GV1ePackingDet1_AddNewBatchID);
+                }
+                else
+                {
+                    txtGorow.Focus();
+                    txtGorow.Text = countrow.ToString();
+                    lblPosition_AddNewBatchID.Text = "more then " + countrow;
                 }
             }
             else
@@ -628,7 +634,7 @@ namespace FrmPIE.frmPIE
             }
         }
 
-        
+
 
 
 

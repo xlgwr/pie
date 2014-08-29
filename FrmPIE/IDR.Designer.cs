@@ -268,13 +268,13 @@
             // 自定义CToolStripMenuItem
             // 
             this.自定义CToolStripMenuItem.Name = "自定义CToolStripMenuItem";
-            this.自定义CToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.自定义CToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.自定义CToolStripMenuItem.Text = "自定义(&C)";
             // 
             // 选项OToolStripMenuItem
             // 
             this.选项OToolStripMenuItem.Name = "选项OToolStripMenuItem";
-            this.选项OToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.选项OToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.选项OToolStripMenuItem.Text = "选项(&O)";
             // 
             // 窗口WToolStripMenuItem
@@ -343,13 +343,14 @@
             // 
             // cmb1SearchType
             // 
-            this.cmb1SearchType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb1SearchType.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmb1SearchType.FormattingEnabled = true;
             this.cmb1SearchType.Items.AddRange(new object[] {
-            "BatchID"});
-            this.cmb1SearchType.Location = new System.Drawing.Point(356, 13);
+            "BatchID",
+            "WecCtnID"});
+            this.cmb1SearchType.Location = new System.Drawing.Point(342, 13);
             this.cmb1SearchType.Name = "cmb1SearchType";
-            this.cmb1SearchType.Size = new System.Drawing.Size(82, 24);
+            this.cmb1SearchType.Size = new System.Drawing.Size(96, 24);
             this.cmb1SearchType.TabIndex = 9;
             this.cmb1SearchType.Text = "BatchID";
             // 
@@ -396,11 +397,12 @@
             // 
             // txt0SearchID
             // 
-            this.txt0SearchID.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0SearchID.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txt0SearchID.Location = new System.Drawing.Point(444, 13);
             this.txt0SearchID.Name = "txt0SearchID";
-            this.txt0SearchID.Size = new System.Drawing.Size(132, 26);
+            this.txt0SearchID.Size = new System.Drawing.Size(159, 26);
             this.txt0SearchID.TabIndex = 8;
+            this.txt0SearchID.TextChanged += new System.EventHandler(this.txt0SearchID_TextChanged);
             this.txt0SearchID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt0SearchID_KeyUp);
             // 
             // splitContainer2
@@ -612,7 +614,7 @@
             this.toolcMenu11UploadEPackingListExcel,
             this.toolcMenu12AddOneByOneBatchID});
             this.cMenuStrip1PacklingListMain.Name = "cMenuPacklingListMain1";
-            this.cMenuStrip1PacklingListMain.Size = new System.Drawing.Size(240, 70);
+            this.cMenuStrip1PacklingListMain.Size = new System.Drawing.Size(240, 48);
             // 
             // toolcMenu11UploadEPackingListExcel
             // 
@@ -748,7 +750,7 @@
             // 
             this.lblSystemName.AutoSize = true;
             this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSystemName.Font = new System.Drawing.Font("宋体", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSystemName.Font = new System.Drawing.Font("SimSun", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSystemName.Location = new System.Drawing.Point(249, 0);
             this.lblSystemName.Name = "lblSystemName";
             this.lblSystemName.Size = new System.Drawing.Size(205, 86);
@@ -1001,7 +1003,8 @@
             this.btn0Find9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn0Find9.FlatAppearance.BorderSize = 0;
             this.btn0Find9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn0Find9.Location = new System.Drawing.Point(582, 3);
+            this.btn0Find9.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btn0Find9.Location = new System.Drawing.Point(609, 3);
             this.btn0Find9.Name = "btn0Find9";
             this.btn0Find9.Size = new System.Drawing.Size(43, 44);
             this.btn0Find9.TabIndex = 10;

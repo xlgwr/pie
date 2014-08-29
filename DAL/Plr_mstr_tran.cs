@@ -42,7 +42,20 @@ namespace PIE.DAL
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
+        /// <summary>
+        /// 是否存在该记录
+        /// </summary>
+        public bool Exists(string plr_wec_ctn)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from plr_mstr_tran");
+            strSql.Append(" where plr_wec_ctn=@plr_wec_ctn ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@plr_wec_ctn", SqlDbType.NVarChar,50)};
+            parameters[0].Value = plr_wec_ctn;
 
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
 
         /// <summary>
         /// 增加一条数据

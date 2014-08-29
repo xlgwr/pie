@@ -89,6 +89,7 @@ namespace FrmPIE.frmPIE
                     _idr_show._tuploadExcel = new Thread(UploadExcelDelegate);
                     _idr_show._tuploadExcel.Start();
                 }
+                lbl1UploadExcelThreadMsg.Text = " Notice: 上传中。。。。";
             }
         }
 
@@ -112,10 +113,11 @@ namespace FrmPIE.frmPIE
                 //cf.setControlText(btnCmdUpd, "&Upload", true, true);
             }
         }
-
+        
         private void UploadExcelDelegate()
         {
-            _idr_show.BeginInvoke(new MethodInvoker(UploadExcel));
+            commfunction.voidMethod me = new commfunction.voidMethod(UploadExcel);
+            _idr_show.BeginInvoke(me);
         }
 
         private void initExcelDGV(object strBatchID)
@@ -139,7 +141,7 @@ namespace FrmPIE.frmPIE
         {
             commfunction.dSafeSetCtlText objSet = new commfunction.dSafeSetCtlText(cf.setControlText);
 
-            _idr_show.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
+            _idr_show.Invoke(objSet, new object[] { ctl, strMsg, enable, visible });
 
         }
 

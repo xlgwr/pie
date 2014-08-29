@@ -153,12 +153,38 @@ namespace PIE.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
+        public PIE.Model.pkey_ctl GetModel(string t_name, string t_value,bool t_value_desc)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 t_name,t_value,t_desc,t_yyww,prefix,ctl_fro,ctl_to,ctl_curr,ctl_curr_len,ctl_len from pkey_ctl ");
+            strSql.Append(" where t_name=@t_name and (LOWER(t_value+':'+t_desc)=@t_value  or  LOWER(t_value)=@t_value) ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@t_name", SqlDbType.NVarChar,50),
+					new SqlParameter("@t_value", SqlDbType.NVarChar,50)			};
+            parameters[0].Value = t_name;
+            parameters[1].Value = t_value;
+
+            PIE.Model.pkey_ctl model = new PIE.Model.pkey_ctl();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
         public PIE.Model.pkey_ctl GetModel(string t_name, string t_value)
         {
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  top 1 t_name,t_value,t_desc,t_yyww,prefix,ctl_fro,ctl_to,ctl_curr,ctl_curr_len,ctl_len from pkey_ctl ");
-            strSql.Append(" where t_name=@t_name and t_value=@t_value ");
+            strSql.Append(" where t_name=@t_name and LOWER(t_value)=@t_value ");
             SqlParameter[] parameters = {
 					new SqlParameter("@t_name", SqlDbType.NVarChar,50),
 					new SqlParameter("@t_value", SqlDbType.NVarChar,50)			};
@@ -236,7 +262,7 @@ namespace PIE.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select t_name,t_value,t_desc,t_yyww,prefix,ctl_fro,ctl_to,ctl_curr,ctl_curr_len,ctl_len ");
+            strSql.Append("select t_name,(t_value+':'+t_desc) as t_value,t_desc,t_yyww,prefix,ctl_fro,ctl_to,ctl_curr,ctl_curr_len,ctl_len ");
             strSql.Append(" FROM pkey_ctl ");
             if (strWhere.Trim() != "")
             {
