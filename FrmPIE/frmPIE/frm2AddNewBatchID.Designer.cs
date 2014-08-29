@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox0AddNewBatchID = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt88Batchid = new System.Windows.Forms.TextBox();
@@ -98,6 +98,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.groupBox4det_addnewbatch = new System.Windows.Forms.GroupBox();
             this.data1GV1ePackingDet1_AddNewBatchID = new System.Windows.Forms.DataGridView();
+            this.lbl0GenCenResult = new System.Windows.Forms.Label();
             this.groupBox0AddNewBatchID.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -577,6 +578,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lbl0GenCenResult);
             this.groupBox2.Controls.Add(this.btn3NewAddNewBatchID);
             this.groupBox2.Controls.Add(this.btn5PoCheckAddNewBatchID);
             this.groupBox2.Controls.Add(this.btn2GenCartonNo2AddNewBatchID);
@@ -590,7 +592,7 @@
             // 
             // btn3NewAddNewBatchID
             // 
-            this.btn3NewAddNewBatchID.Location = new System.Drawing.Point(136, 20);
+            this.btn3NewAddNewBatchID.Location = new System.Drawing.Point(98, 20);
             this.btn3NewAddNewBatchID.Name = "btn3NewAddNewBatchID";
             this.btn3NewAddNewBatchID.Size = new System.Drawing.Size(94, 28);
             this.btn3NewAddNewBatchID.TabIndex = 92;
@@ -611,7 +613,7 @@
             // 
             // btn2GenCartonNo2AddNewBatchID
             // 
-            this.btn2GenCartonNo2AddNewBatchID.Location = new System.Drawing.Point(526, 20);
+            this.btn2GenCartonNo2AddNewBatchID.Location = new System.Drawing.Point(416, 20);
             this.btn2GenCartonNo2AddNewBatchID.Name = "btn2GenCartonNo2AddNewBatchID";
             this.btn2GenCartonNo2AddNewBatchID.Size = new System.Drawing.Size(94, 28);
             this.btn2GenCartonNo2AddNewBatchID.TabIndex = 91;
@@ -621,7 +623,7 @@
             // 
             // btn2AddContinue
             // 
-            this.btn2AddContinue.Location = new System.Drawing.Point(396, 20);
+            this.btn2AddContinue.Location = new System.Drawing.Point(310, 20);
             this.btn2AddContinue.Name = "btn2AddContinue";
             this.btn2AddContinue.Size = new System.Drawing.Size(94, 28);
             this.btn2AddContinue.TabIndex = 90;
@@ -631,7 +633,7 @@
             // 
             // btn1UpadeAddAddNewBatchID
             // 
-            this.btn1UpadeAddAddNewBatchID.Location = new System.Drawing.Point(266, 20);
+            this.btn1UpadeAddAddNewBatchID.Location = new System.Drawing.Point(204, 20);
             this.btn1UpadeAddAddNewBatchID.Name = "btn1UpadeAddAddNewBatchID";
             this.btn1UpadeAddAddNewBatchID.Size = new System.Drawing.Size(94, 28);
             this.btn1UpadeAddAddNewBatchID.TabIndex = 90;
@@ -750,39 +752,48 @@
             // 
             // data1GV1ePackingDet1_AddNewBatchID
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1ePackingDet1_AddNewBatchID.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1ePackingDet1_AddNewBatchID.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.data1GV1ePackingDet1_AddNewBatchID.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data1GV1ePackingDet1_AddNewBatchID.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data1GV1ePackingDet1_AddNewBatchID.DefaultCellStyle = dataGridViewCellStyle5;
             this.data1GV1ePackingDet1_AddNewBatchID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.data1GV1ePackingDet1_AddNewBatchID.Location = new System.Drawing.Point(3, 17);
             this.data1GV1ePackingDet1_AddNewBatchID.MultiSelect = false;
             this.data1GV1ePackingDet1_AddNewBatchID.Name = "data1GV1ePackingDet1_AddNewBatchID";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1ePackingDet1_AddNewBatchID.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1ePackingDet1_AddNewBatchID.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.data1GV1ePackingDet1_AddNewBatchID.RowTemplate.Height = 23;
             this.data1GV1ePackingDet1_AddNewBatchID.Size = new System.Drawing.Size(679, 200);
             this.data1GV1ePackingDet1_AddNewBatchID.TabIndex = 110;
             this.data1GV1ePackingDet1_AddNewBatchID.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.data1GV1ePackingDet1_AddNewBatchID_CellClick);
+            // 
+            // lbl0GenCenResult
+            // 
+            this.lbl0GenCenResult.AutoSize = true;
+            this.lbl0GenCenResult.ForeColor = System.Drawing.Color.Red;
+            this.lbl0GenCenResult.Location = new System.Drawing.Point(516, 28);
+            this.lbl0GenCenResult.Name = "lbl0GenCenResult";
+            this.lbl0GenCenResult.Size = new System.Drawing.Size(0, 12);
+            this.lbl0GenCenResult.TabIndex = 107;
             // 
             // frm2AddNewBatchID
             // 
@@ -799,6 +810,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox3mstr_addnewbatch.ResumeLayout(false);
             this.groupBox3mstr_addnewbatch.PerformLayout();
             this.groupBox4det_addnewbatch.ResumeLayout(false);
@@ -876,5 +888,6 @@
         private System.Windows.Forms.TextBox txt88Batchid;
         private System.Windows.Forms.Label label23;
         protected internal System.Windows.Forms.Button btn8Search;
+        private System.Windows.Forms.Label lbl0GenCenResult;
     }
 }

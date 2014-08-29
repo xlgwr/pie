@@ -430,12 +430,22 @@ namespace FrmPIE.frmPIE
         }
         private void btn2GenCartonNo2AddNewBatchID_Click(object sender, EventArgs e)
         {
+            btn2GenCartonNo2AddNewBatchID.Enabled = false;
             initCartonFromTo();
             if (!isnulltxt())
             {
                 return;
             };
-            Program.GenCartonNo(_plr_mstr_model);
+            int intresult = Program.GenCartonNo(_plr_mstr_model);
+            if (intresult == 0)
+            {
+                lbl0GenCenResult.Text = "Success:" + _plr_mstr_model.Batch_ID + " Generate Wec CartonNo Success.";
+            }
+            else
+            {
+                lbl0GenCenResult.Text = "Fail:" + _plr_mstr_model.Batch_ID + " Generate Wec CartonNo Fail.";
+            }
+            btn2GenCartonNo2AddNewBatchID.Enabled = true;
 
         }
         private void threadinitDVdelegate()

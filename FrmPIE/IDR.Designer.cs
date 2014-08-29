@@ -763,10 +763,11 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::FrmPIE.Properties.Resources._22;
+            this.pictureBox1.Image = global::FrmPIE.Properties.Resources._14;
             this.pictureBox1.Location = new System.Drawing.Point(179, 89);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(64, 112);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
@@ -777,7 +778,6 @@
             this.pictureBox2.Location = new System.Drawing.Point(460, 89);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(64, 112);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
             // 
@@ -788,7 +788,6 @@
             this.pictureBox3.Location = new System.Drawing.Point(179, 271);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(64, 112);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
             // 
@@ -850,7 +849,6 @@
             this.pictureBox4.Location = new System.Drawing.Point(460, 271);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(64, 112);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox4.TabIndex = 13;
             this.pictureBox4.TabStop = false;
             // 
