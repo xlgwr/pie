@@ -19,13 +19,87 @@ namespace FrmPIE._0API
 {
     class commfunction
     {
+
+        public static string _uploaderpmsg = "";
+        public static string _uploaderrows = "";
+
         public delegate void voidMethod();
-        public delegate void dinitDataGridViewSource(object obj);
+        public delegate void dinitDataGVSource(object obj);
         public delegate void dSafeSetCtlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible);
         public delegate void dSafeSetToolText(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible);
         public delegate void dSafeSetDataGVds(System.Windows.Forms.DataGridView ctl, DataSet ds, int selectIndexRow, int intselectIndexCol);
         public commfunction()
         {
+        }
+        public static string getClientIP()
+        {
+            IPAddress[] arrIPAddresses = Dns.GetHostAddresses(Dns.GetHostName());
+            foreach (IPAddress ip in arrIPAddresses)
+            {
+                if (ip.AddressFamily.Equals(AddressFamily.InterNetwork))
+                {
+                    return ip.ToString();
+                }
+            }
+            return "Nothing";
+        }
+        private static bool initWebServer(string plr_po, WebReference100.Service server100, string intable, string strPO, out DataSet ds)
+        {
+            int returnValueNumber;
+            string wec_ctn_pre;
+            string strServer;
+
+
+            SqlParameter[] parameters ={
+                new SqlParameter("@po_nbr",SqlDbType.VarChar,30),
+                new SqlParameter("@wec_ctn_pre",SqlDbType.VarChar,30)
+                };
+
+            parameters[0].Value = plr_po;
+
+            parameters[1].Direction = ParameterDirection.Output;
+
+            DbHelperSQL.RunProcedure("sp_Get_WecCtnPre", parameters, out returnValueNumber);
+
+            wec_ctn_pre = parameters[1].Value.ToString().Trim();
+
+
+
+            if (wec_ctn_pre == "WWTS")
+            {
+                strServer = "TESTOLDWEC";
+            }
+            else if (wec_ctn_pre == "WEC")
+            {
+                strServer = "P1";
+            }
+            else if (wec_ctn_pre == "WTSZ")
+            {
+                strServer = "TESTOLDWEC";
+            }
+            else if (wec_ctn_pre == "Wellop")
+            {
+                strServer = "TESTOLDWEC";
+            }
+            else
+            {
+                strServer = "P1";
+            }
+            try
+            {
+
+                ds = server100.GetTable_n(strServer, intable, strPO);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                ds = null;
+                return false;
+                //MessageBox.Show(ex.Message);
+
+            }
+
         }
 
         public void setControlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
@@ -242,10 +316,8 @@ namespace FrmPIE._0API
 
                 if (isRefresh)
                 {
-                    if (lineid != 0)
-                    {
-                        strwhere += " and LineID='" + lineid + "' ";
-                    }
+
+
                     strSql = new StringBuilder();
                     strSql.Append("select ");
                     strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,plr_wec_ctn,plr_po,");
@@ -253,6 +325,19 @@ namespace FrmPIE._0API
                     strSql.Append("plr_rcp_date,plr_deli_date,");
                     strSql.Append("Plr_vm_partno,carton_id_prifix,re_mark,plr_cre_date");
                     strSql.Append(" FROM plr_mstr_tran");
+
+                    if (!reurntype.Equals("all"))
+                    {
+                        if (lineid != 0)
+                        {
+                            strwhere += " and LineID='" + lineid + "' ";
+                        }
+                    }
+                    else
+                    {
+                        strwhere = " plr_status <>'U' ";
+                    }
+
                     strSql.Append(" where ");
                     strSql.Append(strwhere);
 
@@ -266,7 +351,7 @@ namespace FrmPIE._0API
 
                     dgv.Refresh();
 
-                    if (reurntype.Equals("ds"))
+                    if (!reurntype.Equals("model"))
                     {
                         return plr_mstr_tran_ds;
                     }
@@ -873,6 +958,152 @@ namespace FrmPIE._0API
                 tb.Text = str12.Substring(str12.Length - substringlen, substringlen);
                 tb.SelectionStart = tb.Text.Length;
             }
+        }
+        public static void UploadtoERP(frmPIE.frm4UploadToERP frm4uploadToERP)
+        {
+            try
+            {
+                string strWheretran = "plr_status = 'C'";
+                string strWhereMast = "";
+                string strPO = "";
+                string strPO_mstr = "";
+
+                int intUploadSum = 0;
+                int intUploadCount = 0;
+                int intUploadDup = 0;
+                int intUploadErrCount = 0;
+
+
+                string strResult = "";
+
+                WebReference100.Service server100 = new WebReference100.Service();
+                server100.Timeout = 9000000;
+
+                DataSet ds = null;
+
+                List<PIE.Model.plr_mstr> plr_mstr_ls = null;
+
+                List<PIE.Model.plr_mstr_tran> plr_mstr_tran_ls = new PIE.BLL.plr_mstr_tran().GetModelList(strWheretran);
+
+
+
+                if (plr_mstr_tran_ls != null && plr_mstr_tran_ls.Count > 0)
+                {
+
+                    intUploadSum = plr_mstr_tran_ls.Count;
+                    var currint = 0;
+                    foreach (PIE.Model.plr_mstr_tran item in plr_mstr_tran_ls)
+                    {
+                        char ckey = '@';
+                        strPO = item.Batch_ID + "@" + "" + "@" + "" + "@" +
+                                                     item.InvoiceID + "@" + item.plr_po + "@" + "" + "@" +
+                                                     item.plr_partno + "@" + item.plr_site + "@" + item.Plr_vm_partno + "@" + item.plr_vend_mfgr + "@" + "" + "@" +
+                                                     item.plr_co + "@" + item.plr_date_code + "@" + "" + "@" + "" + "@" +
+                                                     item.plr_qty + "@" + "" + "@" +
+                                                     item.Wec_Ctn + "@" + item.CartonNo + "@" + item.plr_carton_qty + "@" +
+                                                     "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" +
+                                                     item.CartonID + "@" + item.plr_pallet_no;
+                        strPO = @strPO.ToString();
+
+                        currint++;
+
+                        frm4uploadToERP.SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + currint + " 条开始上传", true, true);
+
+                        var returnWeb = initWebServer(item.plr_po, server100, "wsas013", strPO, out ds);
+                        if (returnWeb)
+                        {
+                            if (ds != null && ds.Tables[0].Rows.Count > 0)
+                            {
+                                string strResultWebser = ds.Tables[0].Rows[0][4].ToString();
+                                string strErrMessage = ds.Tables[0].Rows[0][5].ToString();
+                                string strABC = ds.Tables[0].Rows[0][6].ToString();
+                                string strcheck = ds.Tables[0].Rows[0][7].ToString();
+
+                                item.plr_chr01 = strABC;
+                                item.plr_chr02 = strcheck;
+
+                                if (strResultWebser.Equals("2"))
+                                {
+                                    item.plr_status = "U";
+                                    item.plr_status_msg = strErrMessage;
+                                    item.plr_update_date = DateTime.Now;
+                                    item.plr_user_ip = getClientIP();
+
+                                    var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+
+                                    intUploadCount++;
+
+                                    frm4uploadToERP.SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + intUploadCount + " 条上传Success。", true, true);
+
+                                }
+                                else if (strResultWebser.Equals("1"))
+                                {
+
+                                    item.plr_status = "U";
+                                    item.plr_status_msg = strErrMessage;
+                                    item.plr_update_date = DateTime.Now;
+                                    item.plr_user_ip = getClientIP();
+
+                                    var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+
+                                    intUploadDup++;
+                                }
+                                else
+                                {
+                                    item.plr_status = "E";
+                                    item.plr_status_msg = strErrMessage;
+
+                                    item.plr_update_date = DateTime.Now;
+                                    item.plr_user_ip = getClientIP();
+
+                                    var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+                                    strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + strErrMessage + "\n";
+                                    intUploadErrCount++;
+                                }
+
+                            }
+                            else
+                            {
+
+                                item.plr_status = "N";
+                                item.plr_status_msg = "WebServer Error 没有返回值";
+
+                                item.plr_update_date = DateTime.Now;
+                                item.plr_user_ip = getClientIP();
+
+                                var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+                                strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + "WebServer 没有返回值" + "\n";
+                                intUploadErrCount++;
+                            }
+
+                        }
+                        else
+                        {
+                            strResult = "$UploadToERP: Error: Webservice 连接超时.";
+                            break;
+                        }
+
+                    }
+                    strResult = strResult == "" ? "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" : "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" + "\t5.失败的记录:\n" + strResult;
+
+
+                }
+                else
+                {
+                    strResult = "$UploadToERP: Error: 系统数据库中没有可上传的（C状态）记录。";
+                }
+                frm4uploadToERP.SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, strResult, true, true);
+                MessageBox.Show(strResult);
+                _uploaderpmsg = "$UploadToERP: 上传ERP完成。";
+
+            }
+            catch (Exception ex)
+            {
+
+                _uploaderpmsg = "$UploadToERP: Error:" + ex.Message;
+            }
+
+
         }
         /////////////////////////////////////
         //start place

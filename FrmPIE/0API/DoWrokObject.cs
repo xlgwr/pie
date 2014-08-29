@@ -37,5 +37,11 @@ namespace FrmPIE._0API
             _strBatchId = strBatchId;
 
         }
+        public DoWrokObject(DataGridView dgv,string strBatchId)
+        {
+            _dgv = dgv;
+            _strBatchId = strBatchId;
+
+        }
     }
 }

@@ -343,11 +343,12 @@
             // 
             // cmb1SearchType
             // 
-            this.cmb1SearchType.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb1SearchType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmb1SearchType.FormattingEnabled = true;
             this.cmb1SearchType.Items.AddRange(new object[] {
             "BatchID",
-            "WecCtnID"});
+            "WecCtnID",
+            "PIID"});
             this.cmb1SearchType.Location = new System.Drawing.Point(342, 13);
             this.cmb1SearchType.Name = "cmb1SearchType";
             this.cmb1SearchType.Size = new System.Drawing.Size(96, 24);
@@ -397,7 +398,7 @@
             // 
             // txt0SearchID
             // 
-            this.txt0SearchID.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0SearchID.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txt0SearchID.Location = new System.Drawing.Point(444, 13);
             this.txt0SearchID.Name = "txt0SearchID";
             this.txt0SearchID.Size = new System.Drawing.Size(159, 26);
@@ -683,6 +684,7 @@
             this.toolStripMenuItem22UploadCartonIDToERP.Name = "toolStripMenuItem22UploadCartonIDToERP";
             this.toolStripMenuItem22UploadCartonIDToERP.Size = new System.Drawing.Size(220, 22);
             this.toolStripMenuItem22UploadCartonIDToERP.Text = "&Upload CartonID To ERP";
+            this.toolStripMenuItem22UploadCartonIDToERP.Click += new System.EventHandler(this.toolStripMenuItem22UploadCartonIDToERP_Click);
             // 
             // linkLabel2
             // 
@@ -750,7 +752,7 @@
             // 
             this.lblSystemName.AutoSize = true;
             this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSystemName.Font = new System.Drawing.Font("SimSun", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSystemName.Font = new System.Drawing.Font("宋体", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSystemName.Location = new System.Drawing.Point(249, 0);
             this.lblSystemName.Name = "lblSystemName";
             this.lblSystemName.Size = new System.Drawing.Size(205, 86);
@@ -765,7 +767,6 @@
             this.pictureBox1.Location = new System.Drawing.Point(179, 89);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(64, 112);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
@@ -991,7 +992,7 @@
             // 
             this.lbl0SearchError.AutoSize = true;
             this.lbl0SearchError.ForeColor = System.Drawing.Color.Red;
-            this.lbl0SearchError.Location = new System.Drawing.Point(641, 21);
+            this.lbl0SearchError.Location = new System.Drawing.Point(676, 23);
             this.lbl0SearchError.Name = "lbl0SearchError";
             this.lbl0SearchError.Size = new System.Drawing.Size(0, 12);
             this.lbl0SearchError.TabIndex = 11;
@@ -1004,7 +1005,7 @@
             this.btn0Find9.FlatAppearance.BorderSize = 0;
             this.btn0Find9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn0Find9.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn0Find9.Location = new System.Drawing.Point(609, 3);
+            this.btn0Find9.Location = new System.Drawing.Point(620, 3);
             this.btn0Find9.Name = "btn0Find9";
             this.btn0Find9.Size = new System.Drawing.Size(43, 44);
             this.btn0Find9.TabIndex = 10;
@@ -1142,7 +1143,6 @@
             // 
             // frmIDR
             // 
-            this.AcceptButton = this.btn0Find9;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(851, 672);

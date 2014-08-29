@@ -27,21 +27,21 @@ namespace FrmPIE.frmPIE
             data2GV2CartonNO.ReadOnly = true;
 
             DoWrokObject obj = new DoWrokObject(data1GV1ePackingDet1_BatchInfo, data2GV2CartonNO, _idr_show._plr_batch_mstr_model.batch_id);
-            _idr_show._tuploadExcelInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
+            _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
 
-            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Running)
+            if (_idr_show._tInitGDV.ThreadState == ThreadState.Running)
             {
-                _idr_show._tuploadExcelInitGDV.Abort();
+                _idr_show._tInitGDV.Abort();
             }
 
-            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Unstarted)
+            if (_idr_show._tInitGDV.ThreadState == ThreadState.Unstarted)
             {
-                _idr_show._tuploadExcelInitGDV.Start(obj);
+                _idr_show._tInitGDV.Start(obj);
             }
-            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Stopped)
+            if (_idr_show._tInitGDV.ThreadState == ThreadState.Stopped)
             {
-                _idr_show._tuploadExcelInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
-                _idr_show._tuploadExcelInitGDV.Start(obj);
+                _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
+                _idr_show._tInitGDV.Start(obj);
             }
 
         }
@@ -84,7 +84,7 @@ namespace FrmPIE.frmPIE
 
         private void initDGVDelegate(object doWorkobj)
         {
-            commfunction.dinitDataGridViewSource me = new commfunction.dinitDataGridViewSource(initDGV);
+            commfunction.dinitDataGVSource me = new commfunction.dinitDataGVSource(initDGV);
             _idr_show.BeginInvoke(me, doWorkobj);
         }
 

@@ -22,7 +22,8 @@ namespace FrmPIE
     {
 
         public Thread _tuploadExcel;
-        public Thread _tuploadExcelInitGDV;
+        public Thread _tInitGDV;
+        public Thread _tuploadERP;
 
         public DataSet _batchMstr;
 
@@ -62,7 +63,10 @@ namespace FrmPIE
         }
         private void txt0SearchID_TextChanged(object sender, EventArgs e)
         {
-            lbl0SearchError.Text = txt0SearchID.Text.Length.ToString();
+            if (txt0SearchID.Text.Length > 0)
+            {
+                lbl0SearchError.Text = txt0SearchID.Text.Length.ToString();
+            }
             cf.initScanTXT(txt0SearchID, 20, 12);
         }
         //protected override bool ProcessCmdKey(ref   Message msg, Keys keyData)
@@ -92,11 +96,11 @@ namespace FrmPIE
                     _tuploadExcel.Abort();
                 }
             }
-            if (_tuploadExcelInitGDV != null)
+            if (_tInitGDV != null)
             {
-                if (_tuploadExcelInitGDV.ThreadState == ThreadState.Running)
+                if (_tInitGDV.ThreadState == ThreadState.Running)
                 {
-                    _tuploadExcelInitGDV.Abort();
+                    _tInitGDV.Abort();
                 }
             }
 
@@ -450,6 +454,13 @@ namespace FrmPIE
             {
                 btn0Find9_Click(sender, e);
             }
+        }
+
+        private void toolStripMenuItem22UploadCartonIDToERP_Click(object sender, EventArgs e)
+        {
+            addNewTabPage("Upload WEC Carton ID To ERP");
+            frm4UploadToERP ute = new frm4UploadToERP(this);
+            addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
         }
 
 

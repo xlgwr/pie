@@ -22,6 +22,7 @@ namespace FrmPIE.frmPIE
         public frmUploadExcel(frmIDR idr)
         {
             InitializeComponent();
+
             _idr_show = idr;
             txtExcelFileUploadExcel.Focus();
             initwidthUploadExcel();
@@ -31,7 +32,7 @@ namespace FrmPIE.frmPIE
         private void frmUpload_Load(object sender, EventArgs e)
         {
             _idr_show._tuploadExcel = new Thread(UploadExcelDelegate);
-            _idr_show._tuploadExcelInitGDV = new Thread(new ParameterizedThreadStart(initExcelDGVDelegate));
+            _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initExcelDGVDelegate));
             initwidthUploadExcel();
         }
         private void initwidthUploadExcel()
@@ -134,7 +135,7 @@ namespace FrmPIE.frmPIE
 
         private void initExcelDGVDelegate(object strBatchID)
         {
-            commfunction.dinitDataGridViewSource me = new commfunction.dinitDataGridViewSource(initExcelDGV);
+            commfunction.dinitDataGVSource me = new commfunction.dinitDataGVSource(initExcelDGV);
             _idr_show.BeginInvoke(me, strBatchID);
         }
         public void SetCtlTextdelegate(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
@@ -388,20 +389,20 @@ namespace FrmPIE.frmPIE
             //initExcelDGV(strBatchID);
 
 
-            _idr_show._tuploadExcelInitGDV = new Thread(initExcelDGVDelegate);
-            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Running)
+            _idr_show._tInitGDV = new Thread(initExcelDGVDelegate);
+            if (_idr_show._tInitGDV.ThreadState == ThreadState.Running)
             {
-                _idr_show._tuploadExcelInitGDV.Abort();
+                _idr_show._tInitGDV.Abort();
             }
 
-            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Unstarted)
+            if (_idr_show._tInitGDV.ThreadState == ThreadState.Unstarted)
             {
-                _idr_show._tuploadExcelInitGDV.Start(strBatchID);
+                _idr_show._tInitGDV.Start(strBatchID);
             }
-            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Stopped)
+            if (_idr_show._tInitGDV.ThreadState == ThreadState.Stopped)
             {
-                _idr_show._tuploadExcelInitGDV = new Thread(initExcelDGVDelegate);
-                _idr_show._tuploadExcelInitGDV.Start(strBatchID);
+                _idr_show._tInitGDV = new Thread(initExcelDGVDelegate);
+                _idr_show._tInitGDV.Start(strBatchID);
             }
 
             //_initDataGVThread = new Thread(new ParameterizedThreadStart(initDGVdelegate));

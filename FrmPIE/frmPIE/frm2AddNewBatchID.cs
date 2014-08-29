@@ -53,7 +53,7 @@ namespace FrmPIE.frmPIE
         private void AddNewBatchID_Load(object sender, EventArgs e)
         {
 
-            _idr_show._tuploadExcelInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
+            _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
         }
 
         private void initWithHeight()
@@ -279,7 +279,7 @@ namespace FrmPIE.frmPIE
 
         private void initDGVDelegate(object strBatchID)
         {
-            commfunction.dinitDataGridViewSource me = new commfunction.dinitDataGridViewSource(initDGV);
+            commfunction.dinitDataGVSource me = new commfunction.dinitDataGVSource(initDGV);
             _idr_show.BeginInvoke(me, strBatchID);
         }
         private void btn1UpadeAddAddNewBatchID_Click(object sender, EventArgs e)
@@ -440,20 +440,20 @@ namespace FrmPIE.frmPIE
         }
         private void threadinitDVdelegate()
         {
-            _idr_show._tuploadExcelInitGDV = new Thread(initDGVDelegate);
-            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Running)
+            _idr_show._tInitGDV = new Thread(initDGVDelegate);
+            if (_idr_show._tInitGDV.ThreadState == ThreadState.Running)
             {
-                _idr_show._tuploadExcelInitGDV.Abort();
+                _idr_show._tInitGDV.Abort();
             }
 
-            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Unstarted)
+            if (_idr_show._tInitGDV.ThreadState == ThreadState.Unstarted)
             {
-                _idr_show._tuploadExcelInitGDV.Start(_plr_mstr_model.Batch_ID);
+                _idr_show._tInitGDV.Start(_plr_mstr_model.Batch_ID);
             }
-            if (_idr_show._tuploadExcelInitGDV.ThreadState == ThreadState.Stopped)
+            if (_idr_show._tInitGDV.ThreadState == ThreadState.Stopped)
             {
-                _idr_show._tuploadExcelInitGDV = new Thread(initDGVDelegate);
-                _idr_show._tuploadExcelInitGDV.Start(_plr_mstr_model.Batch_ID);
+                _idr_show._tInitGDV = new Thread(initDGVDelegate);
+                _idr_show._tInitGDV.Start(_plr_mstr_model.Batch_ID);
             }
         }
 
