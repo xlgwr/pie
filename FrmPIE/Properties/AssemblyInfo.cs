@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("IDR.System")]
 [assembly: AssemblyDescription("IDR.System")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Wong's")]
+[assembly: AssemblyCompany("xlgwr")]
 [assembly: AssemblyProduct("xlgwr.IDR.System")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
