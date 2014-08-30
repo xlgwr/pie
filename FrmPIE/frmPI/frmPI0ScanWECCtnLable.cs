@@ -19,7 +19,7 @@ namespace FrmPIE.frmPI
     public partial class frmPI0ScanWECCtnLable : Form
     {
         frmIDR _idr_show;
-        commfunction cf;
+        Commfunction cf;
 
         bool _addNextNewFalg = false;
         int _nextlineid = 1;
@@ -34,7 +34,7 @@ namespace FrmPIE.frmPI
         public frmPI0ScanWECCtnLable(frmIDR idr)
         {
             _idr_show = idr;
-            cf = new commfunction();
+            cf = new Commfunction(idr);
 
             InitializeComponent();
             _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Enter;
@@ -151,7 +151,7 @@ namespace FrmPIE.frmPI
         }
         private void initDGVDelegate(object strBatchID)
         {
-            commfunction.dinitDataGVSource me = new commfunction.dinitDataGVSource(initDGV);
+            Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initDGV);
             _idr_show.BeginInvoke(me, strBatchID);
         }
         private void threadinitDVdelegate()

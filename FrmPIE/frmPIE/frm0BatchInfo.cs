@@ -13,11 +13,13 @@ namespace FrmPIE.frmPIE
     public partial class frm0BatchInfo : Form
     {
         frmIDR _idr_show;
-        commfunction cf;
+        Commfunction cf;
 
+        //定义一个DateTimePicker控件
+        private DateTimePicker dTimePicker = new DateTimePicker();
         public frm0BatchInfo(frmIDR idr)
         {
-            cf = new commfunction();
+            cf = new Commfunction(idr);
             _idr_show = idr;
             InitializeComponent();
 
@@ -44,7 +46,40 @@ namespace FrmPIE.frmPIE
                 _idr_show._tInitGDV.Start(obj);
             }
 
+            data1GV1ePackingDet1_BatchInfo.RowEnter += data1GV1ePackingDet1_BatchInfo_RowEnter;
+            data1GV1ePackingDet1_BatchInfo.CellClick += data1GV1ePackingDet1_BatchInfo_CellClick;
+
+            data2GV2CartonNO.RowEnter += data2GV2CartonNO_RowEnter;
+            data2GV2CartonNO.CellClick += data2GV2CartonNO_CellClick;
+
         }
+
+        void data2GV2CartonNO_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data2GV2CartonNO, e.RowIndex, e.ColumnIndex);
+            cf.selectCellMethod(dwo);
+        }
+
+        void data2GV2CartonNO_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data2GV2CartonNO, 3, e.RowIndex, Color.LightGreen, "CartonID", "plr_status", "Yes", Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
+        }
+        
+
+        void data1GV1ePackingDet1_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1_BatchInfo, data2GV2CartonNO, e.RowIndex, e.ColumnIndex);
+            cf.selectCellMethod(dwo, true);
+        }
+
+        void data1GV1ePackingDet1_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1_BatchInfo, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
+        }
+
+
 
         private void initWidth()
         {
@@ -84,7 +119,7 @@ namespace FrmPIE.frmPIE
 
         private void initDGVDelegate(object doWorkobj)
         {
-            commfunction.dinitDataGVSource me = new commfunction.dinitDataGVSource(initDGV);
+            Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initDGV);
             _idr_show.BeginInvoke(me, doWorkobj);
         }
 
@@ -108,6 +143,7 @@ namespace FrmPIE.frmPIE
         {
             initWidth();
         }
+
 
 
 

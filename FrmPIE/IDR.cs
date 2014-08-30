@@ -24,11 +24,13 @@ namespace FrmPIE
         public Thread _tuploadExcel;
         public Thread _tInitGDV;
         public Thread _tuploadERP;
+        public Thread _tprintCtn;
+        public Thread _tDoWorkBackClorThread;
 
         public DataSet _batchMstr;
 
         public models.plr_batch_mstr _plr_batch_mstr_model = new models.plr_batch_mstr();
-        commfunction cf = new commfunction();
+        Commfunction cf;
         public string _custip = Program.getClientIP();
 
         int _icurrTabMouseUpIndex = 1;
@@ -43,7 +45,7 @@ namespace FrmPIE
                 TabPage tp = (TabPage)item;
                 tp.MouseDown += tp_MouseDown;
             }
-
+            cf = new Commfunction(this);
 
         }
         public class iform
@@ -61,11 +63,50 @@ namespace FrmPIE
             //Control.CheckForIllegalCrossThreadCalls = false;
 
         }
+        private void frmIDR_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_tuploadExcel != null)
+            {
+                if (_tuploadExcel.ThreadState == ThreadState.Running)
+                {
+                    _tuploadExcel.Abort();
+                }
+            }
+            if (_tInitGDV != null)
+            {
+                if (_tInitGDV.ThreadState == ThreadState.Running)
+                {
+                    _tInitGDV.Abort();
+                }
+            }
+            if (_tuploadERP != null)
+            {
+                if (_tuploadERP.ThreadState == ThreadState.Running)
+                {
+                    _tuploadERP.Abort();
+                }
+            }
+            if (_tprintCtn != null)
+            {
+                if (_tprintCtn.ThreadState == ThreadState.Running)
+                {
+                    _tprintCtn.Abort();
+                }
+            }
+            if (_tDoWorkBackClorThread != null)
+            {
+                if (_tDoWorkBackClorThread.ThreadState == ThreadState.Running)
+                {
+                    _tDoWorkBackClorThread.Abort();
+                }
+            }
+
+        }
         private void txt0SearchID_TextChanged(object sender, EventArgs e)
         {
             if (txt0SearchID.Text.Length > 0)
             {
-                lbl0SearchError.Text = txt0SearchID.Text.Length.ToString();
+                lbl0SearchError.Text = "Length:" + txt0SearchID.Text.Length.ToString();
             }
             cf.initScanTXT(txt0SearchID, 20, 12);
         }
@@ -87,24 +128,7 @@ namespace FrmPIE
         //    return base.ProcessCmdKey(ref msg, keyData);
 
         //}
-        private void frmIDR_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (_tuploadExcel != null)
-            {
-                if (_tuploadExcel.ThreadState == ThreadState.Running)
-                {
-                    _tuploadExcel.Abort();
-                }
-            }
-            if (_tInitGDV != null)
-            {
-                if (_tInitGDV.ThreadState == ThreadState.Running)
-                {
-                    _tInitGDV.Abort();
-                }
-            }
 
-        }
 
         private void toolBtnleft1_ButtonClick(object sender, EventArgs e)
         {
@@ -227,7 +251,7 @@ namespace FrmPIE
             status12toolSStatusLblMsg.Text = tabCtlRight1.SelectedIndex.ToString() + "," + pagename;
 
             tabCtlRight1.SelectedTab.AutoScroll = true;
-
+            
             return tabCtlRight1.SelectedTab;
 
         }
@@ -266,6 +290,7 @@ namespace FrmPIE
                 ctmenusClose.Show(this.tabCtlRight1, e.X, e.Y);
                 // TabPage tp = (TabPage)sender;
                 status12toolSStatusLblMsg.Text = tabCtlRight1.TabPages[_icurrTabMouseUpIndex].Name;
+                status14toolLabelCellRowColXY.Text = "";
             }
         }
 
@@ -279,6 +304,7 @@ namespace FrmPIE
                 {
                     _icurrTabMouseUpIndex = i;
                     status12toolSStatusLblMsg.Text = i.ToString() + "," + tabCtlRight1.TabPages[i].Name;
+                    status14toolLabelCellRowColXY.Text = "";
                     break;
                 }
             }
@@ -465,9 +491,9 @@ namespace FrmPIE
 
         private void toolStripMenuItem31btnPrintCartonLabel3_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Upload WEC Carton ID To ERP");
-            frm412UploadToERP ute = new frm412UploadToERP(this);
-            addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
+            addNewTabPage("Print Carton Label");
+            frm513PrintCartonLabel ute = new frm513PrintCartonLabel(this);
+            addGBToTC(tabCtlRight1, ute.gb0PrintCartonLabel);
 
         }
 

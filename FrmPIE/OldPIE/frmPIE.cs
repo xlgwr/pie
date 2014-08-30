@@ -2073,9 +2073,9 @@ namespace FrmPIE
         private void cellSelect(object dwko)
         {
             DoWrokObject dwo = (DoWrokObject)dwko;
-            if (dwo._eIndex >= 0 && dwo._eIndex < dwo._dgv.RowCount - 1)
+            if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
             {
-                var cartonidenter = dwo._dgv.Rows[dwo._eIndex].Cells[dwo._sameColumnName].Value;
+                var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
 
                 //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
 

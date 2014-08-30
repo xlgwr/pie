@@ -13,6 +13,7 @@ namespace FrmPIE._0API
         public decimal _wec_ctn_To;
         public string _print_Type;
         public string _print_port;
+        public object _objclass;
 
         public int _dgvNumber;
         public string _batchID;
@@ -38,6 +39,15 @@ namespace FrmPIE._0API
         public CartonFromTo(decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, string print_port)
         {
             // TODO: Complete member initialization
+            _wec_ctn_Fr = wec_ctn_fr;
+            _wec_ctn_To = wec_ctn_to;
+            _print_Type = print_type;
+            _print_port = print_port;
+        } 
+        public CartonFromTo(object obj,decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, string print_port)
+        {
+            // TODO: Complete member initialization
+            _objclass = obj;
             _wec_ctn_Fr = wec_ctn_fr;
             _wec_ctn_To = wec_ctn_to;
             _print_Type = print_type;

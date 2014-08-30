@@ -122,7 +122,7 @@
     <Compile Include="Logon\AdminManage.Designer.cs">
       <DependentUpon>AdminManage.cs</DependentUpon>
     </Compile>
-    <Compile Include="0API\commfunction.cs" />
+    <Compile Include="0API\Commfunction.cs" />
     <Compile Include="Logon\EnterPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPIE\frm412UploadToERP.resx">
       <DependentUpon>frm412UploadToERP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPIE\frm513PrintCartonLabel.resx">
+      <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPI\frmPI0ScanWECCtnLable.resx">
       <DependentUpon>frmPI0ScanWECCtnLable.cs</DependentUpon>

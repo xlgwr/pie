@@ -60,6 +60,7 @@
             this.hideLeftToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.status12toolSStatusLblMsg = new System.Windows.Forms.ToolStripStatusLabel();
             this.status13toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.status14toolLabelCellRowColXY = new System.Windows.Forms.ToolStripStatusLabel();
             this.txt0SearchID = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -375,7 +376,8 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.status11toolBtnleft,
             this.status12toolSStatusLblMsg,
-            this.status13toolStripStatusLabel});
+            this.status13toolStripStatusLabel,
+            this.status14toolLabelCellRowColXY});
             this.statusStrip1.Location = new System.Drawing.Point(0, 571);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(719, 22);
@@ -410,6 +412,11 @@
             // 
             this.status13toolStripStatusLabel.Name = "status13toolStripStatusLabel";
             this.status13toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // status14toolLabelCellRowColXY
+            // 
+            this.status14toolLabelCellRowColXY.Name = "status14toolLabelCellRowColXY";
+            this.status14toolLabelCellRowColXY.Size = new System.Drawing.Size(0, 17);
             // 
             // txt0SearchID
             // 
@@ -743,7 +750,7 @@
             this.cMenuStrip3PrintCartonLabel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem31btnPrintCartonLabel3});
             this.cMenuStrip3PrintCartonLabel.Name = "cMenuStrip3PrintCartonLabel";
-            this.cMenuStrip3PrintCartonLabel.Size = new System.Drawing.Size(181, 48);
+            this.cMenuStrip3PrintCartonLabel.Size = new System.Drawing.Size(181, 26);
             // 
             // toolStripMenuItem31btnPrintCartonLabel3
             // 
@@ -1315,8 +1322,6 @@
         private System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem;
         private System.Windows.Forms.ComboBox cmb1SearchType;
         private System.Windows.Forms.ToolStripMenuItem hideLeftToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripSplitButton status11toolBtnleft;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TextBox txt0SearchID;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button btn0Edit2;
@@ -1330,7 +1335,6 @@
         private System.Windows.Forms.Button btn0Add1;
         private System.Windows.Forms.ToolStripMenuItem hideToolBarToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem hideLeftBarToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripStatusLabel status12toolSStatusLblMsg;
         private System.Windows.Forms.ContextMenuStrip ctmenusClose;
         private System.Windows.Forms.ToolStripMenuItem closeAllToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem1;
@@ -1361,7 +1365,6 @@
         private System.Windows.Forms.ContextMenuStrip cMenuStrip1PacklingListMain;
         private System.Windows.Forms.ToolStripMenuItem toolcMenu11UploadEPackingListExcel;
         private System.Windows.Forms.ToolStripMenuItem toolcMenu12AddOneByOneBatchID;
-        private System.Windows.Forms.ToolStripStatusLabel status13toolStripStatusLabel;
         private System.Windows.Forms.ContextMenuStrip cMenuStrip2CartonIDMain;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
@@ -1394,6 +1397,11 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        protected internal System.Windows.Forms.ToolStripStatusLabel status14toolLabelCellRowColXY;
+        protected internal System.Windows.Forms.ToolStripSplitButton status11toolBtnleft;
+        protected internal System.Windows.Forms.StatusStrip statusStrip1;
+        protected internal System.Windows.Forms.ToolStripStatusLabel status12toolSStatusLblMsg;
+        protected internal System.Windows.Forms.ToolStripStatusLabel status13toolStripStatusLabel;
 
 
 

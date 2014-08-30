@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Services.Description;
 using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 using PIE.DBUtility;
 using System.Data.SqlClient;
@@ -14,22 +15,52 @@ using System.DirectoryServices;
 using System.Text.RegularExpressions;
 using System.Drawing;
 using System.Text;
+using PIE.Common;
+using System.Threading;
 
 namespace FrmPIE._0API
 {
-    class commfunction
+    class Commfunction
     {
-
+        frmIDR _idr_show;
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
+        public string strSaveLabelFile = "";
 
         public delegate void voidMethod();
         public delegate void dinitDataGVSource(object obj);
+        public delegate void dDoWorkCellSelectColor(object dwko);
         public delegate void dSafeSetCtlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible);
         public delegate void dSafeSetToolText(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible);
         public delegate void dSafeSetDataGVds(System.Windows.Forms.DataGridView ctl, DataSet ds, int selectIndexRow, int intselectIndexCol);
-        public commfunction()
+
+
+        //定义一个DateTimePicker控件
+        private DateTimePicker dTimePicker = new DateTimePicker();
+        public DataGridView _shareDgv;
+        PIE.Model.plr_mstr _plr_mstr_model = new PIE.Model.plr_mstr();
+        public Commfunction(frmIDR idr)
         {
+            _idr_show = idr;
+        }
+
+        public void DoWorkCellSelectColordelegate(object dwko)
+        {
+            DoWrokObject dwo = (DoWrokObject)dwko;
+            dDoWorkCellSelectColor mi = new dDoWorkCellSelectColor(cellSelectMethod);
+            _idr_show.BeginInvoke(mi, dwo);
+        }
+        public void SetToolTextdelegate(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible)
+        {
+            dSafeSetToolText objSet = new dSafeSetToolText(setToolText);
+
+            _idr_show.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
+        }
+        public void SetCtlTextdelegate(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
+        {
+            dSafeSetCtlText objSet = new dSafeSetCtlText(setControlText);
+
+            _idr_show.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
         }
         public static string getClientIP()
         {
@@ -101,6 +132,45 @@ namespace FrmPIE._0API
             }
 
         }
+        public void cellSelectMethod(object dwko)
+        {
+            DoWrokObject dwo = (DoWrokObject)dwko;
+            if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
+            {
+                var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
+
+                //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
+
+                //m
+                for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
+                {
+                    if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
+                    {
+                        dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                        if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
+                        {
+                            dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
+                        }
+
+                    }
+                    var cartonid = dwo._dgv.Rows[i].Cells[dwo._sameColumnName].Value;
+                    if (cartonid != DBNull.Value)
+                    {
+                        if (cartonid.ToString() == cartonidenter.ToString())
+                        {
+                            dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
+                            if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
+                            {
+                                dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+
 
         public void setControlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
         {
@@ -141,8 +211,17 @@ namespace FrmPIE._0API
 
                 if (isRefresh)
                 {
-                    strwhere = "select top 1 batch_id,batch_doc,batch_status,batch_cre_date," +
-                        "batch_dec01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
+                    if (reurntype.Equals("all"))
+                    {
+                        strwhere = "select top 100 batch_id,batch_doc,batch_status,batch_cre_date," +
+                            "batch_dec01,batch_user_ip FROM plr_batch_mstr";
+                    }
+                    else
+                    {
+                        strwhere = "select top 1 batch_id,batch_doc,batch_status,batch_cre_date," +
+                                        "batch_dec01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
+                    }
+
                     plr_batch_mstr_ds1 = DbHelperSQL.Query(strwhere);
 
                     dgv.DataSource = plr_batch_mstr_ds1.Tables[0].DefaultView;
@@ -959,11 +1038,17 @@ namespace FrmPIE._0API
                 tb.SelectionStart = tb.Text.Length;
             }
         }
-        public static void UploadtoERP(frmPIE.frm412UploadToERP frm4uploadToERP)
+        public void UploadtoERP(frmPIE.frm412UploadToERP frm4uploadToERP)
         {
             try
             {
                 string strWheretran = "plr_status = 'C'";
+                if (!string.IsNullOrEmpty(frm4uploadToERP._strbatchid))
+                {
+
+                    strWheretran += " and Batch_ID='" + frm4uploadToERP._strbatchid + "' ";
+                }
+
                 string strWhereMast = "";
                 string strPO = "";
                 string strPO_mstr = "";
@@ -1007,7 +1092,7 @@ namespace FrmPIE._0API
 
                         currint++;
 
-                        frm4uploadToERP.SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + currint + " 条开始上传", true, true);
+                        SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + currint + " 条开始上传", true, true);
 
                         var returnWeb = initWebServer(item.plr_po, server100, "wsas013", strPO, out ds);
                         if (returnWeb)
@@ -1033,7 +1118,7 @@ namespace FrmPIE._0API
 
                                     intUploadCount++;
 
-                                    frm4uploadToERP.SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + intUploadCount + " 条上传Success。", true, true);
+                                    SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + intUploadCount + " 条上传Success。", true, true);
 
                                 }
                                 else if (strResultWebser.Equals("1"))
@@ -1092,7 +1177,7 @@ namespace FrmPIE._0API
                 {
                     strResult = "$UploadToERP: Error: 系统数据库中没有可上传的（C状态）记录。";
                 }
-                frm4uploadToERP.SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, strResult, true, true);
+                SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, strResult, true, true);
                 MessageBox.Show(strResult);
                 _uploaderpmsg = "$UploadToERP: 上传ERP完成。";
 
@@ -1104,6 +1189,368 @@ namespace FrmPIE._0API
             }
 
 
+        }
+        public bool isNumber(System.Windows.Forms.TextBox tb, Control cl)
+        {
+            if (!PageValidate.IsNumber(tb.Text))
+            {
+                tb.Focus();
+                tb.SelectAll();
+                cl.Text = "Notice:请输入正确的数字，谢谢.";
+                return false;
+            }
+            return true;
+        }
+
+        public void PrinTXTFile(object cartonfromto)
+        {
+            CartonFromTo _cartonfromto = (CartonFromTo)cartonfromto;
+
+            int intPrintCount = 0;
+            int intPrintErrorCount = 0;
+            int limitCount = 5;
+
+            string strWhere = "";
+            string resultmsg = "";
+            string messageBox = "";
+            string messageBoxError = "";
+
+            frmPIE.frm513PrintCartonLabel frm513PCL = (frmPIE.frm513PrintCartonLabel)_cartonfromto._objclass;
+            decimal wec_ctn_Fr = _cartonfromto._wec_ctn_Fr;
+            decimal wec_ctn_To = _cartonfromto._wec_ctn_To;
+            string print_Type = _cartonfromto._print_Type;
+            string print_port = _cartonfromto._print_port;
+
+            StringBuilder strtxt = new StringBuilder();
+
+
+            string strfromto = wec_ctn_Fr.ToString() + "-" + wec_ctn_To.ToString();
+
+            //btnPrint.Enabled = false;
+            SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "Print...", false, true);
+            SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "Printing ......", true, true);
+
+            while (wec_ctn_Fr <= wec_ctn_To)
+            {
+
+                strWhere = "Wec_Ctn='" + wec_ctn_Fr + "'";
+
+                List<PIE.Model.plr_mstr_tran> plr_mstr_tran_list = new PIE.BLL.plr_mstr_tran().GetModelList(strWhere);
+                int listcount = plr_mstr_tran_list.Count;
+                if (listcount > 0)
+                {
+
+                    if (print_Type.Equals("ZPL"))
+                    {
+                        int x = 39;
+                        int y = 30;
+                        int xoff = 0;
+                        int yoff = 50;
+
+                        #region zpl
+                        strtxt.AppendLine("^XA");
+                        strtxt.AppendLine("^EG");
+                        strtxt.AppendLine("^XZ");
+                        strtxt.AppendLine("^XA");
+
+                        strtxt.AppendLine("^MCY");
+                        strtxt.AppendLine("^XZ");
+                        strtxt.AppendLine("^XA");
+
+                        strtxt.AppendLine("^FWN^CFD,24^PW905^LH0,0");
+                        strtxt.AppendLine("^CI3^PR2^MNY^MTT^MMT^MD3.5^JJ0,0^PON^PMN^LRN");
+                        strtxt.AppendLine("^LT-9");
+                        strtxt.AppendLine("^XZ");
+                        strtxt.AppendLine("^XA");
+
+                        strtxt.AppendLine("^DFR:TEMP_FMT.ZPL");
+                        strtxt.AppendLine("^LRN");
+                        strtxt.AppendLine("^XZ");
+                        strtxt.AppendLine("^XA");
+
+                        strtxt.AppendLine("^XFR:TEMP_FMT.ZPL");
+                        strtxt.AppendLine("^A0N,161,104^FO573,14^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
+                        strtxt.AppendLine("^A0N,42,42^FO601,191^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
+                        int totoal = 0;
+                        for (int i = 0; i < listcount; i++)
+                        {
+                            totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
+                            if (i >= limitCount)
+                            {
+                                continue;
+                            }
+                            strtxt.AppendLine("^A0N,44,30^FO" + (x) + "," + (y + yoff * i) + "^FD" + plr_mstr_tran_list[i].plr_partno + "^FS");
+                            strtxt.AppendLine("^A0N,44,30^FO" + (x + 300) + "," + (y + yoff * i + 2) + "^FD" + plr_mstr_tran_list[i].plr_qty + "^FS");
+
+                        }
+                        if (listcount > limitCount)
+                        {
+                            strtxt.AppendLine(@"^A0N,44,30^FO30,392^FD ..................");
+                        }
+                        strtxt.AppendLine("^A0N,44,30^FO36,392^FDT0TAL: " + listcount.ToString() + "^FS");
+
+                        strtxt.AppendLine("^A0N,44,30^FO344,391^FD" + totoal.ToString() + "^FS");
+
+                        strtxt.AppendLine("^BY2,2.0^FO433,273^B3N,Y,104,N^FD" + plr_mstr_tran_list[0].plr_wec_ctn + "^FS");
+
+
+                        strtxt.AppendLine("^PQ1,0,1,Y");
+
+                        strtxt.AppendLine("^XZ");
+                        strtxt.AppendLine("^XA");
+
+                        strtxt.AppendLine("^IDR:TEMP_FMT.ZPL");
+                        strtxt.AppendLine("^XZ");
+                        #endregion
+
+                    }
+                    else if (print_Type.Equals("TEC"))
+                    {
+                        int x = 0;
+                        int y = 60;
+                        int xoff = 0;
+                        int yoff = 35;
+                        #region TEC
+                        strtxt.AppendLine("{D0410,0762,0380|}");
+                        strtxt.AppendLine("{C|}");
+                        strtxt.AppendLine("{U2;0030|}");
+                        strtxt.AppendLine("{AX;+000,+000,+00|}");
+                        strtxt.AppendLine("{AY;+10,0|}");
+                        int totoal = 0;
+                        string strSJ = "";
+                        for (int i = 0; i < listcount; i++)
+                        {
+                            totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
+                            if (plr_mstr_tran_list[i].plr_chr02.ToString().ToLower().Equals("yes"))
+                            {
+                                strSJ = plr_mstr_tran_list[i].plr_chr02.ToString();
+                            }
+                            if (i >= limitCount)
+                            {
+                                continue;
+                            }
+                            //partno
+                            strtxt.AppendLine(@"{PC" + i.ToString("000") + ";0063," + (y + yoff * i).ToString("0000") + ",05,05,B,00,B|}");
+                            strtxt.AppendLine(@"{RC" + i.ToString("000") + ";" + plr_mstr_tran_list[i].plr_partno + "|}");
+                            //number/qty
+                            strtxt.AppendLine(@"{PC" + (i + 50).ToString("000") + ";0365," + (y + yoff * i).ToString("0000") + ",05,05,B,00,B|}");
+                            strtxt.AppendLine(@"{RC" + (i + 50).ToString("000") + ";" + Convert.ToInt32(plr_mstr_tran_list[i].plr_carton_qty).ToString() + "|}");
+                            //ABC/
+                            strtxt.AppendLine(@"{PC" + (i + 100).ToString("000") + ";0480," + (y + yoff * i).ToString("0000") + ",05,05,B,00,B|}");
+                            if (plr_mstr_tran_list[i].plr_chr01.Equals("A"))
+                            {
+                                strtxt.AppendLine(@"{RC" + (i + 100).ToString("000") + ";" + plr_mstr_tran_list[i].plr_chr01 + "|}");
+                            }
+                            else
+                            {
+                                strtxt.AppendLine(@"{RC" + (i + 100).ToString("000") + "; |}");
+                            }
+
+
+                        }
+                        if (listcount > limitCount)
+                        {
+                            strtxt.AppendLine(@"{PC005;0065,0300,07,07,D,00,B|}");
+                            // strtxt.AppendLine(@"{RC005;more " + limitCount + " to ..............|}");
+                            strtxt.AppendLine(@"{RC005;.......................|}");
+                        }
+
+                        strtxt.AppendLine(@"{PC" + (listcount + 1).ToString("000") + ";0063,0355,05,05,B,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 1).ToString("000") + ";CNT:" + listcount.ToString() + ", TTL: " + totoal.ToString() + "|}");
+
+
+                        strtxt.AppendLine(@"{PC" + (listcount + 10).ToString("000") + ";0560,0080,05,05,M,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 10).ToString("000") + ";" + plr_mstr_tran_list[0].CartonID + "|}");
+                        strtxt.AppendLine(@"{PC" + (listcount + 20).ToString("000") + ";0560,0140,05,05,D,00,B|}");
+                        strtxt.AppendLine(@"{RC" + (listcount + 20).ToString("000") + ";" + plr_mstr_tran_list[0].plr_vend_mfgr + "|}");
+
+
+                        if (!string.IsNullOrEmpty(strSJ))
+                        {
+                            strtxt.AppendLine(@"{PC" + (listcount + 30).ToString("000") + ";0520,0200,05,05,D,00,B|}");
+                            strtxt.AppendLine(@"{RC" + (listcount + 30).ToString("000") + "; * |}");
+                            strtxt.AppendLine(@"{PC" + (listcount + 35).ToString("000") + ";0560,0200,05,05,D,00,B|}");
+                            strtxt.AppendLine(@"{RC" + (listcount + 35).ToString("000") + "; " + plr_mstr_tran_list[0].plr_co + "|}");
+                        }
+                        else
+                        {
+                            strtxt.AppendLine(@"{PC" + (listcount + 30).ToString("000") + ";0560,0200,05,05,D,00,B|}");
+                            strtxt.AppendLine(@"{RC" + (listcount + 30).ToString("000") + ";" + plr_mstr_tran_list[0].plr_co + "|}");
+
+                        }
+                        strtxt.AppendLine("{XB01;0450,0230,9,3,02,0,0105,+0000000000,000,1,00|}");
+                        strtxt.AppendLine("{RB01;>8" + plr_mstr_tran_list[0].plr_wec_ctn + "|}");
+
+                        strtxt.AppendLine("{XS;I,0001,0002C3200|}");
+                        strtxt.AppendLine("{U1;0030|}");
+                        #endregion
+                    }
+
+                    SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print 生成第" + wec_ctn_Fr.ToString() + "条打印文件Success.", true, true);
+                }
+                else
+                {
+                    intPrintErrorCount++;
+                    messageBoxError = messageBoxError + wec_ctn_Fr.ToString() + ",\t";
+
+                }
+                wec_ctn_Fr++;
+                intPrintCount++;
+            }
+            if (intPrintErrorCount == intPrintCount)
+            {
+                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: 无" + strfromto + "的记录。", true, true);
+                SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
+                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: Printing End", true, true);
+                return;
+            }
+            else if (intPrintErrorCount > 0)
+            {
+
+                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: 无" + messageBoxError + "的记录。", true, true);
+            }
+            string strprefix = print_Type;
+            if (frm513PCL.chk0PrintToFile_PrintCartonLabel.Checked)
+            {
+
+                strSaveLabelFile = strprefix + strfromto + ".txt";
+                var returnresult = Xprint.XPrint.WriteTxT(strSaveLabelFile, strtxt);
+
+                messageBox = "\tSuccess: 总打印：" + intPrintCount + "条记录。TXT文件存于: \n" + returnresult;
+
+                if (!string.IsNullOrEmpty(returnresult))
+                {
+
+                    resultmsg = "Notice: 打印 " + strprefix + strfromto;
+                    var dialogbutton = MessageBox.Show(messageBox + " Success.\n\t是否打印些文件？", "Notice:Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    if (dialogbutton == DialogResult.Yes)
+                    {
+                        if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+                        {
+                            //toolStripStatusLabelMessage.Text = resultmsg + " 成功。";
+                            SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg + " 成功。", true, true);
+                        }
+                        else
+                        {
+                            //toolStripStatusLabelMessage.Text = resultmsg + " 。";
+                            SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg + " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。", true, true);
+                        }
+                    }
+                    else
+                    {
+
+                        SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, messageBox + " 成功。", true, true);
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(messageBox + " Fail.");
+                }
+
+            }
+            else
+            {
+                resultmsg = "Notice: 打印 " + strprefix + strfromto;
+
+                if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+                {
+                    //toolStripStatusLabelMessage.Text = resultmsg + " 成功。";
+                    SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg + " 成功。", true, true);
+                }
+                else
+                {
+                    //toolStripStatusLabelMessage.Text = resultmsg + " 。";
+                    SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg + " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。", true, true);
+                }
+            }
+
+            //btnPrint.Enabled = true;
+            SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
+
+        }
+        public void initThreadDowrokColor(DoWrokObject dwo)
+        {
+            if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount)
+            {
+
+
+                _idr_show._tDoWorkBackClorThread = new Thread(new ParameterizedThreadStart(DoWorkCellSelectColordelegate));
+                if (_idr_show._tDoWorkBackClorThread.ThreadState == ThreadState.Running)
+                {
+                    _idr_show._tDoWorkBackClorThread.Abort();
+                }
+                if (_idr_show._tDoWorkBackClorThread.ThreadState == ThreadState.Unstarted)
+                {
+                    _idr_show._tDoWorkBackClorThread.Start(dwo);
+
+                }
+                if (_idr_show._tDoWorkBackClorThread.ThreadState == ThreadState.Stopped)
+                {
+                    _idr_show._tDoWorkBackClorThread = new Thread(new ParameterizedThreadStart(DoWorkCellSelectColordelegate));
+                    _idr_show._tDoWorkBackClorThread.Start(dwo);
+
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// set dgv,dgv1,ex,ey;
+        /// </summary>
+        /// <param name="dwo">dgv,dgv1,ex,ey</param>
+        public void selectCellMethod(DoWrokObject dwo, bool mainDataGV)
+        {
+
+
+            _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
+            try
+            {
+                if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
+                {
+                    _plr_mstr_model.Batch_ID = dwo._dgv.Rows[dwo._eX].Cells["Batch_ID"].Value.ToString().Trim();
+
+                    _plr_mstr_model.LineID = Convert.ToInt32(dwo._dgv.Rows[dwo._eX].Cells["LineID"].Value);
+                    _plr_mstr_model.CartonID = dwo._dgv.Rows[dwo._eX].Cells["CartonID"].Value.ToString().Trim();
+
+                    selectNextDGVRow(dwo._dgv1, "LineID", _plr_mstr_model.LineID.ToString());
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public string selectCellMethod(DoWrokObject dwo)
+        {
+            _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
+            try
+            {
+                if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
+                {
+                    _plr_mstr_model.Batch_ID = dwo._dgv.Rows[dwo._eX].Cells["Batch_ID"].Value.ToString().Trim();
+                    return _plr_mstr_model.Batch_ID;
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return "";
+            }
+
+        }
+        public void selectNextDGVRow(DataGridView dgv, string colName, string colValue)
+        {
+            for (int i = 0; i < dgv.RowCount - 1; i++)
+            {
+                if (dgv.Rows[i].Cells[colName].Value.ToString().Equals(colValue))
+                {
+                    dgv.Rows[i].Cells[0].Selected = true;
+                    break;
+                }
+            }
         }
         /////////////////////////////////////
         //start place
