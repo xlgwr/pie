@@ -86,23 +86,29 @@
     <Compile Include="frmPIE\frm0BatchInfo.Designer.cs">
       <DependentUpon>frm0BatchInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPIE\frm1UploadExcel.cs">
+    <Compile Include="frmPIE\frm111UploadExcel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPIE\frm1UploadExcel.Designer.cs">
-      <DependentUpon>frm1UploadExcel.cs</DependentUpon>
+    <Compile Include="frmPIE\frm111UploadExcel.Designer.cs">
+      <DependentUpon>frm111UploadExcel.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPIE\frm2AddNewBatchID.cs">
+    <Compile Include="frmPIE\frm211AddNewBatchID.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPIE\frm2AddNewBatchID.Designer.cs">
-      <DependentUpon>frm2AddNewBatchID.cs</DependentUpon>
+    <Compile Include="frmPIE\frm211AddNewBatchID.Designer.cs">
+      <DependentUpon>frm211AddNewBatchID.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPIE\frm4UploadToERP.cs">
+    <Compile Include="frmPIE\frm412UploadToERP.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPIE\frm4UploadToERP.Designer.cs">
-      <DependentUpon>frm4UploadToERP.cs</DependentUpon>
+    <Compile Include="frmPIE\frm412UploadToERP.Designer.cs">
+      <DependentUpon>frm412UploadToERP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPIE\frm513PrintCartonLabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPIE\frm513PrintCartonLabel.Designer.cs">
+      <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPI\frmPI0ScanWECCtnLable.cs">
       <SubType>Form</SubType>
@@ -174,14 +180,14 @@
     <EmbeddedResource Include="frmPIE\frm0BatchInfo.resx">
       <DependentUpon>frm0BatchInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPIE\frm1UploadExcel.resx">
-      <DependentUpon>frm1UploadExcel.cs</DependentUpon>
+    <EmbeddedResource Include="frmPIE\frm111UploadExcel.resx">
+      <DependentUpon>frm111UploadExcel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPIE\frm2AddNewBatchID.resx">
-      <DependentUpon>frm2AddNewBatchID.cs</DependentUpon>
+    <EmbeddedResource Include="frmPIE\frm211AddNewBatchID.resx">
+      <DependentUpon>frm211AddNewBatchID.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPIE\frm4UploadToERP.resx">
-      <DependentUpon>frm4UploadToERP.cs</DependentUpon>
+    <EmbeddedResource Include="frmPIE\frm412UploadToERP.resx">
+      <DependentUpon>frm412UploadToERP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPI\frmPI0ScanWECCtnLable.resx">
       <DependentUpon>frmPI0ScanWECCtnLable.cs</DependentUpon>

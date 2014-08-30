@@ -123,6 +123,16 @@
             this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllButThisToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.c22MenuStripPiSystem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip5 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -153,6 +163,11 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.ctmenusClose.SuspendLayout();
+            this.c22MenuStripPiSystem.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
+            this.contextMenuStrip3.SuspendLayout();
+            this.contextMenuStrip4.SuspendLayout();
+            this.contextMenuStrip5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -728,7 +743,7 @@
             this.cMenuStrip3PrintCartonLabel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem31btnPrintCartonLabel3});
             this.cMenuStrip3PrintCartonLabel.Name = "cMenuStrip3PrintCartonLabel";
-            this.cMenuStrip3PrintCartonLabel.Size = new System.Drawing.Size(181, 26);
+            this.cMenuStrip3PrintCartonLabel.Size = new System.Drawing.Size(181, 48);
             // 
             // toolStripMenuItem31btnPrintCartonLabel3
             // 
@@ -736,6 +751,7 @@
             this.toolStripMenuItem31btnPrintCartonLabel3.Name = "toolStripMenuItem31btnPrintCartonLabel3";
             this.toolStripMenuItem31btnPrintCartonLabel3.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem31btnPrintCartonLabel3.Text = "&Print Carton Label";
+            this.toolStripMenuItem31btnPrintCartonLabel3.Click += new System.EventHandler(this.toolStripMenuItem31btnPrintCartonLabel3_Click);
             // 
             // linkLabel3
             // 
@@ -774,7 +790,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Image = global::FrmPIE.Properties.Resources._22;
+            this.pictureBox2.Image = global::FrmPIE.Properties.Resources._14;
             this.pictureBox2.Location = new System.Drawing.Point(460, 89);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(64, 112);
@@ -784,7 +800,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Image = global::FrmPIE.Properties.Resources._22;
+            this.pictureBox3.Image = global::FrmPIE.Properties.Resources._14;
             this.pictureBox3.Location = new System.Drawing.Point(179, 271);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(64, 112);
@@ -826,6 +842,7 @@
             // 
             // tool1StripMenuItem21ScanCartronLabel
             // 
+            this.tool1StripMenuItem21ScanCartronLabel.Image = global::FrmPIE.Properties.Resources.bar1;
             this.tool1StripMenuItem21ScanCartronLabel.Name = "tool1StripMenuItem21ScanCartronLabel";
             this.tool1StripMenuItem21ScanCartronLabel.Size = new System.Drawing.Size(158, 22);
             this.tool1StripMenuItem21ScanCartronLabel.Text = "&Scan Ctn lable";
@@ -845,7 +862,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox4.Image = global::FrmPIE.Properties.Resources._22;
+            this.pictureBox4.Image = global::FrmPIE.Properties.Resources._14;
             this.pictureBox4.Location = new System.Drawing.Point(460, 271);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(64, 112);
@@ -1139,6 +1156,76 @@
             this.closeAllButThisToolStripMenuItem3.Text = "Close All But This";
             this.closeAllButThisToolStripMenuItem3.Click += new System.EventHandler(this.closeAllButThisToolStripMenuItem3_Click);
             // 
+            // c22MenuStripPiSystem
+            // 
+            this.c22MenuStripPiSystem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.c22MenuStripPiSystem.Name = "cMenuStrip1ScanCartronLabel";
+            this.c22MenuStripPiSystem.Size = new System.Drawing.Size(159, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Image = global::FrmPIE.Properties.Resources.bar1;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.toolStripMenuItem1.Text = "&Scan Ctn lable";
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2});
+            this.contextMenuStrip2.Name = "cMenuStrip1ScanCartronLabel";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 26);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Image = global::FrmPIE.Properties.Resources.bar1;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(158, 22);
+            this.toolStripMenuItem2.Text = "&Scan Ctn lable";
+            // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3});
+            this.contextMenuStrip3.Name = "cMenuStrip1ScanCartronLabel";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(159, 26);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Image = global::FrmPIE.Properties.Resources.bar1;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(158, 22);
+            this.toolStripMenuItem3.Text = "&Scan Ctn lable";
+            // 
+            // contextMenuStrip4
+            // 
+            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem4});
+            this.contextMenuStrip4.Name = "cMenuStrip1ScanCartronLabel";
+            this.contextMenuStrip4.Size = new System.Drawing.Size(159, 26);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Image = global::FrmPIE.Properties.Resources.bar1;
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(158, 22);
+            this.toolStripMenuItem4.Text = "&Scan Ctn lable";
+            // 
+            // contextMenuStrip5
+            // 
+            this.contextMenuStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem5});
+            this.contextMenuStrip5.Name = "cMenuStrip1ScanCartronLabel";
+            this.contextMenuStrip5.Size = new System.Drawing.Size(159, 26);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Image = global::FrmPIE.Properties.Resources.bar1;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(158, 22);
+            this.toolStripMenuItem5.Text = "&Scan Ctn lable";
+            // 
             // frmIDR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1192,6 +1279,11 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.ctmenusClose.ResumeLayout(false);
+            this.c22MenuStripPiSystem.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
+            this.contextMenuStrip3.ResumeLayout(false);
+            this.contextMenuStrip4.ResumeLayout(false);
+            this.contextMenuStrip5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1292,6 +1384,16 @@
         private System.Windows.Forms.Button btn1Home1;
         private System.Windows.Forms.LinkLabel linkLabel9;
         private System.Windows.Forms.Label lbl0SearchError;
+        private System.Windows.Forms.ContextMenuStrip c22MenuStripPiSystem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
 
 
 

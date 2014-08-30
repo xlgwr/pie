@@ -429,7 +429,7 @@ namespace FrmPIE
         private void toolcMenu12AddOneByOneBatchID_Click(object sender, EventArgs e)
         {
             var tabpagenew = addNewTabPage("Add New(BatchID)");
-            frm2AddNewBatchID fanb = new frm2AddNewBatchID(this);
+            frm211AddNewBatchID fanb = new frm211AddNewBatchID(this);
             _icurrAddGBtop = fanb.groupBox0AddNewBatchID.Height;
 
             this.AcceptButton = fanb.btn1UpadeAddAddNewBatchID;
@@ -459,8 +459,16 @@ namespace FrmPIE
         private void toolStripMenuItem22UploadCartonIDToERP_Click(object sender, EventArgs e)
         {
             addNewTabPage("Upload WEC Carton ID To ERP");
-            frm4UploadToERP ute = new frm4UploadToERP(this);
+            frm412UploadToERP ute = new frm412UploadToERP(this);
             addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
+        }
+
+        private void toolStripMenuItem31btnPrintCartonLabel3_Click(object sender, EventArgs e)
+        {
+            addNewTabPage("Upload WEC Carton ID To ERP");
+            frm412UploadToERP ute = new frm412UploadToERP(this);
+            addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
+
         }
 
 
