@@ -25,7 +25,6 @@ namespace FrmPIE._0API
         frmIDR _idr_show;
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
-        public string strSaveLabelFile = "";
 
         public delegate void voidMethod();
         public delegate void dinitDataGVSource(object obj);
@@ -49,6 +48,7 @@ namespace FrmPIE._0API
             DoWrokObject dwo = (DoWrokObject)dwko;
             dDoWorkCellSelectColor mi = new dDoWorkCellSelectColor(cellSelectMethod);
             _idr_show.BeginInvoke(mi, dwo);
+
         }
         public void SetToolTextdelegate(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible)
         {
@@ -62,6 +62,12 @@ namespace FrmPIE._0API
 
             _idr_show.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
         }
+        public void initWECPrintFromToDeleteaget(CartonFromTo cft)
+        {
+            dinitDataGVSource me = new dinitDataGVSource(initWECPrintFromTo);
+            _idr_show.BeginInvoke(me, cft);
+        }
+
         public static string getClientIP()
         {
             IPAddress[] arrIPAddresses = Dns.GetHostAddresses(Dns.GetHostName());
@@ -132,7 +138,7 @@ namespace FrmPIE._0API
             }
 
         }
-        public void cellSelectMethod(object dwko)
+        public void cellSelectMethod(object dwko, bool oldflag)
         {
             DoWrokObject dwo = (DoWrokObject)dwko;
             if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
@@ -159,18 +165,93 @@ namespace FrmPIE._0API
                         if (cartonid.ToString() == cartonidenter.ToString())
                         {
                             dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
+
                             if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
                             {
                                 dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
                             }
                         }
                     }
+
                 }
 
             }
 
         }
+        public void cellSelectMethod(object dwko)
+        {
 
+            DoWrokObject dwo = (DoWrokObject)dwko;
+            int mcount = 0;
+            int minValue = 0;
+            int maxValue = 0;
+            int minresult = 0;
+            int maxreuslt = 0;
+
+            if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
+            {
+                var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
+
+
+                //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
+
+                //m
+                for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
+                {
+                    if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
+                    {
+                        dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                        if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
+                        {
+                            dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
+                        }
+
+                    }
+                    var cartonid = dwo._dgv.Rows[i].Cells[dwo._sameColumnName].Value;
+                    if (cartonid != DBNull.Value)
+                    {
+                        if (cartonid.ToString() == cartonidenter.ToString())
+                        {
+                            mcount++;
+                            dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
+
+                            if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
+                            {
+                                dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
+                            }
+                            if (!string.IsNullOrEmpty(dwo._compMaxMin))
+                            {
+                                if (mcount == 1)
+                                {
+                                    minValue = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
+                                    maxValue = minValue;
+                                }
+                                else
+                                {
+                                    minresult = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
+                                    maxreuslt = minresult;
+                                    if (minresult < minValue)
+                                    {
+                                        minValue = minresult;
+                                    }
+                                    if (maxreuslt > maxValue)
+                                    {
+                                        maxValue = maxreuslt;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+                _idr_show._intFrom = minValue;
+                _idr_show._intTo = maxValue;
+
+
+            }
+
+
+        }
 
         public void setControlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
         {
@@ -1178,6 +1259,7 @@ namespace FrmPIE._0API
                     strResult = "$UploadToERP: Error: 系统数据库中没有可上传的（C状态）记录。";
                 }
                 SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, strResult, true, true);
+                SetToolTextdelegate(_idr_show.status15toolLabelstrResult, strResult, true, true);
                 MessageBox.Show(strResult);
                 _uploaderpmsg = "$UploadToERP: 上传ERP完成。";
 
@@ -1413,8 +1495,8 @@ namespace FrmPIE._0API
             if (frm513PCL.chk0PrintToFile_PrintCartonLabel.Checked)
             {
 
-                strSaveLabelFile = strprefix + strfromto + ".txt";
-                var returnresult = Xprint.XPrint.WriteTxT(strSaveLabelFile, strtxt);
+                _idr_show._strSaveLabelFile = strprefix + strfromto + ".txt";
+                var returnresult = Xprint.XPrint.WriteTxT(_idr_show._strSaveLabelFile, strtxt);
 
                 messageBox = "\tSuccess: 总打印：" + intPrintCount + "条记录。TXT文件存于: \n" + returnresult;
 
@@ -1427,19 +1509,17 @@ namespace FrmPIE._0API
                     {
                         if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
                         {
-                            //toolStripStatusLabelMessage.Text = resultmsg + " 成功。";
-                            SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg + " 成功。", true, true);
+                            resultmsg += " 成功。";
                         }
                         else
                         {
-                            //toolStripStatusLabelMessage.Text = resultmsg + " 。";
-                            SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg + " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。", true, true);
+                            resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
                         }
                     }
                     else
                     {
 
-                        SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, messageBox + " 成功。", true, true);
+                        resultmsg += messageBox;
 
                     }
                 }
@@ -1455,18 +1535,18 @@ namespace FrmPIE._0API
 
                 if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
                 {
-                    //toolStripStatusLabelMessage.Text = resultmsg + " 成功。";
-                    SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg + " 成功。", true, true);
+                    resultmsg += " 成功。";
                 }
                 else
                 {
-                    //toolStripStatusLabelMessage.Text = resultmsg + " 。";
-                    SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg + " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。", true, true);
+                    resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
                 }
             }
 
             //btnPrint.Enabled = true;
             SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
+            SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg, true, true);
+            SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
 
         }
         public void initThreadDowrokColor(DoWrokObject dwo)
@@ -1551,6 +1631,33 @@ namespace FrmPIE._0API
                     break;
                 }
             }
+        }
+        public void initWECPrintFromTo(object objCartonFromTo)
+        {
+            CartonFromTo cfo = (CartonFromTo)objCartonFromTo;
+            if (cfo._ds != null)
+            {
+                var count = cfo._ds.Tables[0].Rows.Count;
+                if (count > 0)
+                {
+                    cfo._clfrom.Text = getMaxOrMinColumnFromDataTable(cfo._ds.Tables[0], "Wec_Ctn", false).ToString();
+
+                    cfo._clto.Text = getMaxOrMinColumnFromDataTable(cfo._ds.Tables[0], "Wec_Ctn", true).ToString();
+
+                }
+            }
+            else
+            {
+                cfo._clfrom.Text = "";
+                cfo._clto.Text = "";
+            }
+        }
+
+        public void OpenFolderAndSelectFile(String fileFullName)
+        {
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
+            psi.Arguments = "/e,/select," + fileFullName;
+            System.Diagnostics.Process.Start(psi);
         }
         /////////////////////////////////////
         //start place

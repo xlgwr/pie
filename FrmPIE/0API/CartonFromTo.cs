@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -14,6 +15,10 @@ namespace FrmPIE._0API
         public string _print_Type;
         public string _print_port;
         public object _objclass;
+
+        public DataSet _ds;
+        public Control _clfrom;
+        public Control _clto;
 
         public int _dgvNumber;
         public string _batchID;
@@ -35,6 +40,12 @@ namespace FrmPIE._0API
             _batchID = batchid;
             _lineID = lineid;
             _cartonID = cartonid;
+        }
+        public CartonFromTo(DataSet ds, Control clfrom, Control clto)
+        {
+            _ds = ds;
+            _clfrom = clfrom;
+            _clto = clto;
         }
         public CartonFromTo(decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, string print_port)
         {

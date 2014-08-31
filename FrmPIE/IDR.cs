@@ -37,6 +37,11 @@ namespace FrmPIE
         int _icurrAddGBtop = 0;
         int _icurrMouseX = 0;
         int _icurrMouseY = 0;
+
+        public int _intFrom = 0;
+        public int _intTo = 0;
+
+        public string _strSaveLabelFile = "";
         public frmIDR()
         {
             InitializeComponent();
@@ -48,11 +53,7 @@ namespace FrmPIE
             cf = new Commfunction(this);
 
         }
-        public class iform
-        {
 
-            public iform(frmIDR idr) { }
-        }
         private void frmIDR_Load(object sender, EventArgs e)
         {
 
@@ -248,10 +249,10 @@ namespace FrmPIE
             tabCtlRight1.TabPages.Add(pagename + tabCtlRight1.TabCount, pagename + tabCtlRight1.TabCount);
 
             tabCtlRight1.SelectedIndex = tabCtlRight1.TabCount - 1;
-            status12toolSStatusLblMsg.Text = tabCtlRight1.SelectedIndex.ToString() + "," + pagename;
+            status13toolSStatusLblMsg.Text = tabCtlRight1.SelectedIndex.ToString() + "," + pagename;
 
             tabCtlRight1.SelectedTab.AutoScroll = true;
-            
+
             return tabCtlRight1.SelectedTab;
 
         }
@@ -269,7 +270,7 @@ namespace FrmPIE
             {
 
                 TabPage tp = (TabPage)sender;
-                status12toolSStatusLblMsg.Text = tp.Name;
+                status13toolSStatusLblMsg.Text = tp.Name;
             }
         }
 
@@ -289,7 +290,7 @@ namespace FrmPIE
                 }
                 ctmenusClose.Show(this.tabCtlRight1, e.X, e.Y);
                 // TabPage tp = (TabPage)sender;
-                status12toolSStatusLblMsg.Text = tabCtlRight1.TabPages[_icurrTabMouseUpIndex].Name;
+                status13toolSStatusLblMsg.Text = tabCtlRight1.TabPages[_icurrTabMouseUpIndex].Name;
                 status14toolLabelCellRowColXY.Text = "";
             }
         }
@@ -303,7 +304,7 @@ namespace FrmPIE
                 if (rect.Contains(e.Location))
                 {
                     _icurrTabMouseUpIndex = i;
-                    status12toolSStatusLblMsg.Text = i.ToString() + "," + tabCtlRight1.TabPages[i].Name;
+                    status13toolSStatusLblMsg.Text = i.ToString() + "," + tabCtlRight1.TabPages[i].Name;
                     status14toolLabelCellRowColXY.Text = "";
                     break;
                 }
@@ -495,6 +496,30 @@ namespace FrmPIE
             frm513PrintCartonLabel ute = new frm513PrintCartonLabel(this);
             addGBToTC(tabCtlRight1, ute.gb0PrintCartonLabel);
 
+        }
+
+        private void openPrintFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string allfileNamepath;
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "0labeltxt";
+            if (string.IsNullOrEmpty(_strSaveLabelFile))
+            {
+
+                allfileNamepath = pathname;
+            }
+            else
+            {
+
+                allfileNamepath = System.IO.Path.Combine(pathname, _strSaveLabelFile);
+            }
+            cf.OpenFolderAndSelectFile(allfileNamepath);
+        }
+
+        private void clearNoticeMsgToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //status13toolSStatusLblMsg.Text = "";
+            status15toolLabelstrResult.Text = "";
+            //status14toolLabelCellRowColXY.Text = "";
         }
 
 

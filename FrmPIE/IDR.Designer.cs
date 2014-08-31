@@ -58,9 +58,12 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.status11toolBtnleft = new System.Windows.Forms.ToolStripSplitButton();
             this.hideLeftToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.status12toolSStatusLblMsg = new System.Windows.Forms.ToolStripStatusLabel();
-            this.status13toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.status125toolBtnClear = new System.Windows.Forms.ToolStripSplitButton();
+            this.clearNoticeMsgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openPrintFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.status13toolSStatusLblMsg = new System.Windows.Forms.ToolStripStatusLabel();
             this.status14toolLabelCellRowColXY = new System.Windows.Forms.ToolStripStatusLabel();
+            this.status15toolLabelstrResult = new System.Windows.Forms.ToolStripStatusLabel();
             this.txt0SearchID = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -375,9 +378,10 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.status11toolBtnleft,
-            this.status12toolSStatusLblMsg,
-            this.status13toolStripStatusLabel,
-            this.status14toolLabelCellRowColXY});
+            this.status125toolBtnClear,
+            this.status13toolSStatusLblMsg,
+            this.status14toolLabelCellRowColXY,
+            this.status15toolLabelstrResult});
             this.statusStrip1.Location = new System.Drawing.Point(0, 571);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(719, 22);
@@ -403,20 +407,47 @@
             this.hideLeftToolStripMenuItem3.Text = "Hide Left Bar";
             this.hideLeftToolStripMenuItem3.Click += new System.EventHandler(this.hideLeftToolStripMenuItem3_Click);
             // 
-            // status12toolSStatusLblMsg
+            // status125toolBtnClear
             // 
-            this.status12toolSStatusLblMsg.Name = "status12toolSStatusLblMsg";
-            this.status12toolSStatusLblMsg.Size = new System.Drawing.Size(0, 17);
+            this.status125toolBtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.status125toolBtnClear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearNoticeMsgToolStripMenuItem,
+            this.openPrintFileToolStripMenuItem});
+            this.status125toolBtnClear.Image = ((System.Drawing.Image)(resources.GetObject("status125toolBtnClear.Image")));
+            this.status125toolBtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.status125toolBtnClear.Name = "status125toolBtnClear";
+            this.status125toolBtnClear.Size = new System.Drawing.Size(32, 20);
+            this.status125toolBtnClear.Text = "toolStripSplitButton1";
             // 
-            // status13toolStripStatusLabel
+            // clearNoticeMsgToolStripMenuItem
             // 
-            this.status13toolStripStatusLabel.Name = "status13toolStripStatusLabel";
-            this.status13toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
+            this.clearNoticeMsgToolStripMenuItem.Name = "clearNoticeMsgToolStripMenuItem";
+            this.clearNoticeMsgToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.clearNoticeMsgToolStripMenuItem.Text = "&ClearNoticeMessage";
+            this.clearNoticeMsgToolStripMenuItem.Click += new System.EventHandler(this.clearNoticeMsgToolStripMenuItem_Click);
+            // 
+            // openPrintFileToolStripMenuItem
+            // 
+            this.openPrintFileToolStripMenuItem.Name = "openPrintFileToolStripMenuItem";
+            this.openPrintFileToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.openPrintFileToolStripMenuItem.Text = "&Open Print File";
+            this.openPrintFileToolStripMenuItem.Click += new System.EventHandler(this.openPrintFileToolStripMenuItem_Click);
+            // 
+            // status13toolSStatusLblMsg
+            // 
+            this.status13toolSStatusLblMsg.Name = "status13toolSStatusLblMsg";
+            this.status13toolSStatusLblMsg.Size = new System.Drawing.Size(0, 17);
             // 
             // status14toolLabelCellRowColXY
             // 
             this.status14toolLabelCellRowColXY.Name = "status14toolLabelCellRowColXY";
             this.status14toolLabelCellRowColXY.Size = new System.Drawing.Size(0, 17);
+            // 
+            // status15toolLabelstrResult
+            // 
+            this.status15toolLabelstrResult.ForeColor = System.Drawing.Color.Red;
+            this.status15toolLabelstrResult.Name = "status15toolLabelstrResult";
+            this.status15toolLabelstrResult.Size = new System.Drawing.Size(0, 17);
             // 
             // txt0SearchID
             // 
@@ -1400,8 +1431,11 @@
         protected internal System.Windows.Forms.ToolStripStatusLabel status14toolLabelCellRowColXY;
         protected internal System.Windows.Forms.ToolStripSplitButton status11toolBtnleft;
         protected internal System.Windows.Forms.StatusStrip statusStrip1;
-        protected internal System.Windows.Forms.ToolStripStatusLabel status12toolSStatusLblMsg;
-        protected internal System.Windows.Forms.ToolStripStatusLabel status13toolStripStatusLabel;
+        protected internal System.Windows.Forms.ToolStripStatusLabel status13toolSStatusLblMsg;
+        protected internal System.Windows.Forms.ToolStripStatusLabel status15toolLabelstrResult;
+        private System.Windows.Forms.ToolStripSplitButton status125toolBtnClear;
+        private System.Windows.Forms.ToolStripMenuItem clearNoticeMsgToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openPrintFileToolStripMenuItem;
 
 
 

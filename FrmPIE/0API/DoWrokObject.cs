@@ -20,6 +20,11 @@ namespace FrmPIE._0API
         public string _deffCellValue;
         public Color _deffcolors;
 
+        frmIDR _idr_show;
+        public int _maxValue;
+        public int _minValue;
+        public string _compMaxMin;
+
 
         public DoWrokObject(DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors)
         {
@@ -31,6 +36,20 @@ namespace FrmPIE._0API
             _deffCellName = deffCellName;
             _deffCellValue = deffCellValue;
             _deffcolors = Deffcolors;
+
+        }
+        public DoWrokObject(frmIDR idr_show,DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors, string compMaxMin)
+        {
+            _dgv = dgv;
+            _selectedindex = selectedindex;
+            _eX = eIndex;
+            _colors = colors;
+            _sameColumnName = sameColumnName;
+            _deffCellName = deffCellName;
+            _deffCellValue = deffCellValue;
+            _deffcolors = Deffcolors;
+            _compMaxMin = compMaxMin;
+            _idr_show=idr_show;
 
         }
         public DoWrokObject(DataGridView dgv, DataGridView dgv1, string strBatchId)
