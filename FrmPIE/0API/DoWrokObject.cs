@@ -14,6 +14,9 @@ namespace FrmPIE._0API
         public int _selectedindex;
         public int _eX;
         public int _eY;
+        public bool _hasLineID;
+        public string _voidColumn;
+
         public Color _colors;
         public string _sameColumnName;
         public string _deffCellName;
@@ -73,12 +76,22 @@ namespace FrmPIE._0API
             _eX = ex;
             _eY = ey;
 
-        }
+        } 
+        public DoWrokObject(DataGridView dgv, int ex, int ey,bool haslineid,string voidColumn)
+        {
+            _dgv = dgv;
+            _eX = ex;
+            _eY = ey;
+            _hasLineID = haslineid;
+            _voidColumn = voidColumn;
+
+        } 
         public DoWrokObject(DataGridView dgv, string strBatchId)
         {
             _dgv = dgv;
             _strBatchId = strBatchId;
 
         }
+        
     }
 }

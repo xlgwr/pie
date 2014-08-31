@@ -20,6 +20,8 @@ namespace FrmPIE
 
     public partial class frmIDR : Form
     {
+        LogonDomain _logonDomain = new LogonDomain();
+        PIE.Model.sys_user _sys_user_model = new PIE.Model.sys_user();
 
         public Thread _tuploadExcel;
         public Thread _tInitGDV;
@@ -28,6 +30,12 @@ namespace FrmPIE
         public Thread _tDoWorkBackClorThread;
 
         public DataSet _batchMstr;
+
+        public DataGridView _voidDGV;
+        public int _voideX;
+        public int _voideY;
+        public Boolean _voidhasLineID;
+        public Boolean _voidRefresh;
 
         public models.plr_batch_mstr _plr_batch_mstr_model = new models.plr_batch_mstr();
         Commfunction cf;
@@ -42,8 +50,11 @@ namespace FrmPIE
         public int _intTo = 0;
 
         public string _strSaveLabelFile = "";
-        public frmIDR()
+        public frmIDR(LogonDomain logonDomain, PIE.Model.sys_user sys_user_model)
         {
+            _logonDomain = logonDomain;
+            _sys_user_model = sys_user_model;
+
             InitializeComponent();
             foreach (var item in tabCtlRight1.TabPages)
             {
@@ -53,7 +64,18 @@ namespace FrmPIE
             cf = new Commfunction(this);
 
         }
+        public frmIDR()
+        {
 
+            InitializeComponent();
+            foreach (var item in tabCtlRight1.TabPages)
+            {
+                TabPage tp = (TabPage)item;
+                tp.MouseDown += tp_MouseDown;
+            }
+            cf = new Commfunction(this);
+
+        }
         private void frmIDR_Load(object sender, EventArgs e)
         {
 
@@ -101,7 +123,13 @@ namespace FrmPIE
                     _tDoWorkBackClorThread.Abort();
                 }
             }
+            if (_logonDomain != null)
+            {
+                _logonDomain.Close();
+                _logonDomain.Dispose();
 
+            }
+            GC.Collect();
         }
         private void txt0SearchID_TextChanged(object sender, EventArgs e)
         {
@@ -246,12 +274,30 @@ namespace FrmPIE
 
         private TabPage addNewTabPage(string pagename)
         {
-            tabCtlRight1.TabPages.Add(pagename + tabCtlRight1.TabCount, pagename + tabCtlRight1.TabCount);
+            tabCtlRight1.TabPages.Add(tabCtlRight1.TabCount + pagename, tabCtlRight1.TabCount + pagename);
 
             tabCtlRight1.SelectedIndex = tabCtlRight1.TabCount - 1;
             status13toolSStatusLblMsg.Text = tabCtlRight1.SelectedIndex.ToString() + "," + pagename;
 
             tabCtlRight1.SelectedTab.AutoScroll = true;
+
+            return tabCtlRight1.SelectedTab;
+
+        }
+        private TabPage addNewTabPage(string pagename, bool develop)
+        {
+            tabCtlRight1.TabPages.Add(tabCtlRight1.TabCount + pagename, tabCtlRight1.TabCount + pagename);
+
+            tabCtlRight1.SelectedIndex = tabCtlRight1.TabCount - 1;
+            status13toolSStatusLblMsg.Text = tabCtlRight1.SelectedIndex.ToString() + "," + pagename;
+
+            tabCtlRight1.SelectedTab.AutoScroll = true;
+
+            Label lb = new Label();
+            lb.ForeColor = Color.Red;
+            lb.Text = "Develop...";
+
+            addGBToTC(tabCtlRight1, lb);
 
             return tabCtlRight1.SelectedTab;
 
@@ -378,37 +424,38 @@ namespace FrmPIE
 
         private void btn0Add_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Add New");
+            addNewTabPage("Add New", true);
+
         }
 
         private void btn0Edit2_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Edit");
+            addNewTabPage("Edit", true);
         }
 
         private void btn0Del3_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Delete");
+            addNewTabPage("Delete", true);
         }
 
         private void btn0OK4_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Audit");
+            addNewTabPage("Audit", true);
         }
 
         private void btn0Lock5_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Lock");
+            addNewTabPage("Lock", true);
         }
 
         private void btn0Print6_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Printing");
+            addNewTabPage("Printing", true);
         }
 
         private void btn0Down8_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Download");
+            addNewTabPage("Download", true);
         }
 
         private void btn0Find9_Click(object sender, EventArgs e)
@@ -442,6 +489,10 @@ namespace FrmPIE
         public void addGBToTC(TabControl tc, GroupBox gb)
         {
             tc.SelectedTab.Controls.Add(gb);
+        }
+        public void addGBToTC(TabControl tc, Control cl)
+        {
+            tc.SelectedTab.Controls.Add(cl);
         }
         public void addGBToTC(TabPage tp, GroupBox gb)
         {
@@ -520,6 +571,16 @@ namespace FrmPIE
             //status13toolSStatusLblMsg.Text = "";
             status15toolLabelstrResult.Text = "";
             //status14toolLabelCellRowColXY.Text = "";
+        }
+
+        private void tool110StripMenuItemVoid_Click(object sender, EventArgs e)
+        {
+            if (_voidDGV != null)
+            {
+                DoWrokObject dwo = new DoWrokObject(_voidDGV, _voideX, _voideX, _voidhasLineID,"plr_status");
+                cf.initVoid(dwo);
+                _voidRefresh = true;
+            }
         }
 
 

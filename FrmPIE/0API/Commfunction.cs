@@ -1659,6 +1659,88 @@ namespace FrmPIE._0API
             psi.Arguments = "/e,/select," + fileFullName;
             System.Diagnostics.Process.Start(psi);
         }
+        /// <summary>
+        /// dgv,ex,haslineid
+        /// </summary>
+        /// <param name="dwo">dgv,ex,haslineid</param>
+        public void initVoid(DoWrokObject dwo)
+        {
+            string resultmsg;
+            string strwhere;
+            string msg;
+
+            var batchid = dwo._dgv.Rows[dwo._eX].Cells["Batch_ID"].Value == DBNull.Value ? "" : dwo._dgv.Rows[dwo._eX].Cells["Batch_ID"].Value.ToString();
+            //plr_status,batch_status
+            var batch_status = dwo._dgv.Rows[dwo._eX].Cells[dwo._voidColumn].Value == DBNull.Value ? "" : dwo._dgv.Rows[dwo._eX].Cells[dwo._voidColumn].Value.ToString();
+
+
+            strwhere = "Batch_ID='" + batchid + "' ";
+            msg = "是否作废 BatchID: " + batchid;
+            if (dwo._hasLineID)
+            {
+                var strlineID = dwo._dgv.Rows[dwo._eX].Cells["LineID"].Value == DBNull.Value ? "" : dwo._dgv.Rows[dwo._eX].Cells["LineID"].Value.ToString();
+                strwhere += " and LineID='" + strlineID + "' ";
+                msg += ", LineID: " + strlineID;
+                if (!string.IsNullOrEmpty(batch_status) && batch_status == "Yes")
+                {
+                    resultmsg = strwhere + " 早已作废";
+                    SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
+                    return;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(batchid))
+            {
+                if (MessageBox.Show(msg, "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    string strupdateplr_mstr = @"update plr_mstr set plr_status='Yes' where " + strwhere;
+                    string strupdateplr_mstr_tran = @"update plr_mstr_tran set plr_status='Yes',plr_status_msg='Void' where plr_status<>'U' and " + strwhere;
+                    if (!dwo._hasLineID)
+                    {
+                        PIE.Model.plr_batch_mstr plr_bath_mstr_model_update = new PIE.BLL.plr_batch_mstr().GetModel(batchid);
+                        plr_bath_mstr_model_update.batch_status = "Yes";
+                        plr_bath_mstr_model_update.batch_update_date = DbHelperSQL.getServerGetDate();
+                        plr_bath_mstr_model_update.batch_user_ip = Program.getClientIP();
+                        var resutlupdate = new PIE.BLL.plr_batch_mstr().Update(plr_bath_mstr_model_update);
+
+                        if (resutlupdate)
+                        {
+                            var resultmstr = DbHelperSQL.ExecuteSql(strupdateplr_mstr);
+                            var resultmstr_tran = DbHelperSQL.ExecuteSql(strupdateplr_mstr_tran);
+                            if (resultmstr > 0 || resultmstr_tran > 0)
+                            {
+                                resultmsg = " 作废 " + strwhere + " Success";
+                            }
+                            else
+                            {
+                                resultmsg = " 作废 " + strwhere + " 部分Success";
+                            }
+
+                        }
+                        else
+                        {
+                            resultmsg = " 作废 " + strwhere + " Fail";
+                        }
+                    }
+                    else
+                    {
+                        var resultmstr = DbHelperSQL.ExecuteSql(strupdateplr_mstr);
+                        var resultmstr_tran = DbHelperSQL.ExecuteSql(strupdateplr_mstr_tran);
+                        if (resultmstr > 0 || resultmstr_tran > 0)
+                        {
+                            resultmsg = " 作废 " + strwhere + " Success";
+                        }
+                        else
+                        {
+                            resultmsg = " 作废 " + strwhere + " 部分Success";
+                        }
+                    }
+
+
+                    SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
+                }
+            }
+        }
         /////////////////////////////////////
         //start place
         /////////////////////////////////

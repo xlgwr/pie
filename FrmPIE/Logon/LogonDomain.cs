@@ -65,11 +65,14 @@ namespace FrmPIE
                         else
                         {
                             this.Hide();
-                            var FrmPIE = new FrmPIE(this, system_user_model);
-                            FrmPIE.Text += Program.frmVersion;
-                            //Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
-                            FrmPIE.Show();
 
+                            //var FrmPIE = new FrmPIE(this, system_user_model);
+                            //FrmPIE.Text += Program.frmVersion;
+                            //FrmPIE.Show();
+
+                            var frmIDR = new frmIDR(this, system_user_model);
+                            frmIDR.Text += Program.frmVersion;
+                            frmIDR.Show();
                         }
 
                         return;
@@ -153,10 +156,17 @@ namespace FrmPIE
                         else
                         {
                             this.Hide();
-                            var FrmPIE = new FrmPIE(this, system_user_model);
-                            FrmPIE.Text += Program.frmVersion;
-                            FrmPIE.Show();
+
+                            //var FrmPIE = new FrmPIE(this, system_user_model);
+                            //FrmPIE.Text += Program.frmVersion;
+                            //FrmPIE.Show();
+
+                            var frmIDR = new frmIDR(this, system_user_model);
+                            frmIDR.Text += Program.frmVersion;
+                            frmIDR.Show();
+
                         }
+
 
 
 

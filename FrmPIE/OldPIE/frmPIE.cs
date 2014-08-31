@@ -31,6 +31,8 @@ namespace FrmPIE
 
 
         LogonDomain _logonDomain = new LogonDomain();
+        PIE.Model.sys_user _sys_user_model = new PIE.Model.sys_user();
+
         public MaximunSizeFrm _maximunfrm = null;
 
         public bool _maxactive = false;
@@ -70,7 +72,6 @@ namespace FrmPIE
         DataSet _dsePacking2 = null;
         DataSet _dsCarton3 = null;
 
-        PIE.Model.sys_user _sys_user_model = new PIE.Model.sys_user();
 
         public Thread _tuploadERP;
         public Thread _tuploadExcel;
