@@ -7,9 +7,9 @@
 
 <configuration>
 	<appSettings>
-		<add key="ConStringEncrypt" value="true"/>
-		<add key="ConnectionString" value="E5B7FDCFFC4C2EC55639DDE7E2D975CCD1C7C7766FD1D69F69E2A3E2828479BB3C0EC1C32C08B58FEC4CD0EDCCD63CADD5262E31F574521BDC4C6F7931EC4CB1"/>
 
+    <add key="ConStringEncrypt" value="false"/>
+    <add key="ConnectionString" value="server=.;database=PIE;uid=sa;pwd=xielin"/>
 	</appSettings>
 	<system.web>
 		<compilation debug="true" targetFramework="4.0" />
