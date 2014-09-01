@@ -18,6 +18,18 @@ namespace FrmPIE
             InitializeComponent();
         }
 
+        private void initfrmShow()
+        {
+            this.Hide();
+
+            var FrmPIE = new FrmPIE(this, system_user_model);
+            FrmPIE.Text += Program.frmVersion;
+            FrmPIE.Show();
+
+            //var frmIDR = new frmIDR(this, system_user_model);
+            //frmIDR.Text += Program.frmVersion;
+            //frmIDR.Show();
+        }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             string strdomain = combDomain.Text;
@@ -64,15 +76,7 @@ namespace FrmPIE
                         }
                         else
                         {
-                            this.Hide();
-
-                            //var FrmPIE = new FrmPIE(this, system_user_model);
-                            //FrmPIE.Text += Program.frmVersion;
-                            //FrmPIE.Show();
-
-                            var frmIDR = new frmIDR(this, system_user_model);
-                            frmIDR.Text += Program.frmVersion;
-                            frmIDR.Show();
+                            initfrmShow();
                         }
 
                         return;
@@ -155,15 +159,9 @@ namespace FrmPIE
                         }
                         else
                         {
-                            this.Hide();
 
-                            //var FrmPIE = new FrmPIE(this, system_user_model);
-                            //FrmPIE.Text += Program.frmVersion;
-                            //FrmPIE.Show();
 
-                            var frmIDR = new frmIDR(this, system_user_model);
-                            frmIDR.Text += Program.frmVersion;
-                            frmIDR.Show();
+                            initfrmShow();
 
                         }
 
@@ -203,6 +201,7 @@ namespace FrmPIE
                 this.btnSubmit.Text = "&Submit";
             }
         }
+
 
         private bool getrole()
         {
