@@ -1423,67 +1423,72 @@ namespace FrmPIE
 
                     if (print_Type.Equals("ZPL"))
                     {
-                        int x = 39;
-                        int y = 30;
+                        int x = 13;
+                        int y = 34;
                         int xoff = 0;
-                        int yoff = 50;
+                        int yoff = 31;
 
-                        #region zpl
-                        strtxt.AppendLine("^XA");
-                        strtxt.AppendLine("^EG");
-                        strtxt.AppendLine("^XZ");
-                        strtxt.AppendLine("^XA");
+                        #region zpl 2824
+                        strtxt.AppendLine(@"^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2~SD15^JUS^LRN^CI0^XZ");
 
-                        strtxt.AppendLine("^MCY");
-                        strtxt.AppendLine("^XZ");
                         strtxt.AppendLine("^XA");
+                        strtxt.AppendLine("^MMT");
+                        strtxt.AppendLine("^LL0406");
+                        strtxt.AppendLine("^PW448");
+                        strtxt.AppendLine("^LS0");
 
-                        strtxt.AppendLine("^FWN^CFD,24^PW905^LH0,0");
-                        strtxt.AppendLine("^CI3^PR2^MNY^MTT^MMT^MD3.5^JJ0,0^PON^PMN^LRN");
-                        strtxt.AppendLine("^LT-9");
-                        strtxt.AppendLine("^XZ");
-                        strtxt.AppendLine("^XA");
-
-                        strtxt.AppendLine("^DFR:TEMP_FMT.ZPL");
-                        strtxt.AppendLine("^LRN");
-                        strtxt.AppendLine("^XZ");
-                        strtxt.AppendLine("^XA");
-
-                        strtxt.AppendLine("^XFR:TEMP_FMT.ZPL");
-                        strtxt.AppendLine("^A0N,161,104^FO573,14^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
-                        strtxt.AppendLine("^A0N,42,42^FO601,191^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
                         int totoal = 0;
+                        string strSJ = "";
+
                         for (int i = 0; i < listcount; i++)
                         {
                             totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
+                            if (plr_mstr_tran_list[i].plr_chr02.ToString().ToLower().Equals("yes"))
+                            {
+                                strSJ = plr_mstr_tran_list[i].plr_chr02.ToString();
+                            }
                             if (i >= limitCount)
                             {
                                 continue;
                             }
-                            strtxt.AppendLine("^A0N,44,30^FO" + (x) + "," + (y + yoff * i) + "^FD" + plr_mstr_tran_list[i].plr_partno + "^FS");
-                            strtxt.AppendLine("^A0N,44,30^FO" + (x + 300) + "," + (y + yoff * i + 2) + "^FD" + plr_mstr_tran_list[i].plr_qty + "^FS");
+
+                            if (plr_mstr_tran_list[i].plr_chr01.Equals("A"))
+                            {
+                                //partno
+                                strtxt.AppendLine(@"^FT13," + (y + (i * yoff)).ToString() + @"^A0N,20,19^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "  " + plr_mstr_tran_list[i].plr_carton_qty.ToString() + "  A^FS");
+                            }
+                            else
+                            {
+                                strtxt.AppendLine(@"^FT13," + (y + (i * yoff)).ToString() + @"^A0N,20,19^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "  " + plr_mstr_tran_list[i].plr_carton_qty.ToString() + " ^FS");
+
+                            }
+
 
                         }
                         if (listcount > limitCount)
                         {
-                            strtxt.AppendLine(@"^A0N,44,30^FO30,392^FD ..................");
+                            strtxt.AppendLine(@"^FT13,189^A0N,21,33^FH\^FD.........^FS");
                         }
-                        strtxt.AppendLine("^A0N,44,30^FO36,392^FDT0TAL: " + listcount.ToString() + "^FS");
-
-                        strtxt.AppendLine("^A0N,44,30^FO344,391^FD" + totoal.ToString() + "^FS");
-
-                        strtxt.AppendLine("^BY2,2.0^FO433,273^B3N,Y,104,N^FD" + plr_mstr_tran_list[0].plr_wec_ctn + "^FS");
+                        strtxt.AppendLine(@"^FT13,224^A0N,23,24^FH\^FDCnt: " + listcount.ToString() + "/ TTL: " + totoal.ToString() + "^FS");
 
 
-                        strtxt.AppendLine("^PQ1,0,1,Y");
+                        strtxt.AppendLine(@"^FT309,81^A0N,56,55^FH\^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
+                        strtxt.AppendLine(@"^FT316,139^A0N,28,28^FH\^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
 
-                        strtxt.AppendLine("^XZ");
-                        strtxt.AppendLine("^XA");
+                        if (!string.IsNullOrEmpty(strSJ))
+                        {
+                            strtxt.AppendLine(@"^FT309,81^A0N,56,55^FH\^FD * " + plr_mstr_tran_list[0].plr_co + "^FS");
+                        }
+                        else
+                        {
+                            strtxt.AppendLine(@"^FT309,81^A0N,56,55^FH\^FD" + plr_mstr_tran_list[0].plr_co + "^FS");
 
-                        strtxt.AppendLine("^IDR:TEMP_FMT.ZPL");
-                        strtxt.AppendLine("^XZ");
+                        }
+                        strtxt.AppendLine(@"^BY4,3,103^FT25,351^BCN,,Y,N");
+                        strtxt.AppendLine(@"^FD>;" + plr_mstr_tran_list[0].plr_wec_ctn + "^FS");
+
+                        strtxt.AppendLine("^PQ1,0,1,Y^XZ");
                         #endregion
-
                     }
                     else if (print_Type.Equals("TEC"))
                     {
@@ -1532,7 +1537,7 @@ namespace FrmPIE
                         if (listcount > limitCount)
                         {
                             strtxt.AppendLine(@"{PC005;0065,0300,07,07,D,00,B|}");
-                           // strtxt.AppendLine(@"{RC005;more " + limitCount + " to ..............|}");
+                            // strtxt.AppendLine(@"{RC005;more " + limitCount + " to ..............|}");
                             strtxt.AppendLine(@"{RC005;.......................|}");
                         }
 
