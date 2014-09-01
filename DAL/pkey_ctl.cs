@@ -184,7 +184,7 @@ namespace PIE.DAL
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  top 1 t_name,t_value,t_desc,t_yyww,prefix,ctl_fro,ctl_to,ctl_curr,ctl_curr_len,ctl_len from pkey_ctl ");
-            strSql.Append(" where t_name=@t_name and LOWER(t_value)=@t_value ");
+            strSql.Append(" where t_name=@t_name and LOWER(t_value)=LOWER(@t_value) ");
             SqlParameter[] parameters = {
 					new SqlParameter("@t_name", SqlDbType.NVarChar,50),
 					new SqlParameter("@t_value", SqlDbType.NVarChar,50)			};

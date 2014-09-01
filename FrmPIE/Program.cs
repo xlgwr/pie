@@ -41,16 +41,16 @@ namespace FrmPIE
 
             //logon on
 
-            //var LogonOn = new LogonDomain();
-            //LogonOn.Text += frmVersion;
-            //Application.Run(LogonOn);
+            var LogonOn = new LogonDomain();
+            LogonOn.Text += frmVersion;
+            Application.Run(LogonOn);
 
             //var index = new IndexTemple();
             //Application.Run(index);
 
-            var frmIDR = new frmIDR();
-            frmIDR.Text += frmVersion;
-            Application.Run(frmIDR);
+            //var frmIDR = new frmIDR();
+            //frmIDR.Text += frmVersion;
+            //Application.Run(frmIDR);
 
         }
 

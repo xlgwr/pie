@@ -1119,159 +1119,159 @@ namespace FrmPIE._0API
                 tb.SelectionStart = tb.Text.Length;
             }
         }
-        public void UploadtoERP(frmPIE.frm412UploadToERP frm4uploadToERP)
-        {
-            try
-            {
-                string strWheretran = "plr_status = 'C'";
-                if (!string.IsNullOrEmpty(frm4uploadToERP._strbatchid))
-                {
+        //public void UploadtoERP(frmPIE.frm412UploadToERP frm4uploadToERP)
+        //{
+        //    try
+        //    {
+        //        string strWheretran = "plr_status = 'C'";
+        //        if (!string.IsNullOrEmpty(frm4uploadToERP._strbatchid))
+        //        {
 
-                    strWheretran += " and Batch_ID='" + frm4uploadToERP._strbatchid + "' ";
-                }
+        //            strWheretran += " and Batch_ID='" + frm4uploadToERP._strbatchid + "' ";
+        //        }
 
-                string strWhereMast = "";
-                string strPO = "";
-                string strPO_mstr = "";
+        //        string strWhereMast = "";
+        //        string strPO = "";
+        //        string strPO_mstr = "";
 
-                int intUploadSum = 0;
-                int intUploadCount = 0;
-                int intUploadDup = 0;
-                int intUploadErrCount = 0;
-
-
-                string strResult = "";
-
-                WebReference100.Service server100 = new WebReference100.Service();
-                server100.Timeout = 9000000;
-
-                DataSet ds = null;
-
-                List<PIE.Model.plr_mstr> plr_mstr_ls = null;
-
-                List<PIE.Model.plr_mstr_tran> plr_mstr_tran_ls = new PIE.BLL.plr_mstr_tran().GetModelList(strWheretran);
+        //        int intUploadSum = 0;
+        //        int intUploadCount = 0;
+        //        int intUploadDup = 0;
+        //        int intUploadErrCount = 0;
 
 
+        //        string strResult = "";
 
-                if (plr_mstr_tran_ls != null && plr_mstr_tran_ls.Count > 0)
-                {
+        //        WebReference100.Service server100 = new WebReference100.Service();
+        //        server100.Timeout = 9000000;
 
-                    intUploadSum = plr_mstr_tran_ls.Count;
-                    var currint = 0;
-                    foreach (PIE.Model.plr_mstr_tran item in plr_mstr_tran_ls)
-                    {
-                        char ckey = '@';
-                        strPO = item.Batch_ID + "@" + "" + "@" + "" + "@" +
-                                                     item.InvoiceID + "@" + item.plr_po + "@" + "" + "@" +
-                                                     item.plr_partno + "@" + item.plr_site + "@" + item.Plr_vm_partno + "@" + item.plr_vend_mfgr + "@" + "" + "@" +
-                                                     item.plr_co + "@" + item.plr_date_code + "@" + "" + "@" + "" + "@" +
-                                                     item.plr_qty + "@" + "" + "@" +
-                                                     item.Wec_Ctn + "@" + item.CartonNo + "@" + item.plr_carton_qty + "@" +
-                                                     "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" +
-                                                     item.CartonID + "@" + item.plr_pallet_no;
-                        strPO = @strPO.ToString();
+        //        DataSet ds = null;
 
-                        currint++;
+        //        List<PIE.Model.plr_mstr> plr_mstr_ls = null;
 
-                        SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + currint + " 条开始上传", true, true);
-
-                        var returnWeb = initWebServer(item.plr_po, server100, "wsas013", strPO, out ds);
-                        if (returnWeb)
-                        {
-                            if (ds != null && ds.Tables[0].Rows.Count > 0)
-                            {
-                                string strResultWebser = ds.Tables[0].Rows[0][4].ToString();
-                                string strErrMessage = ds.Tables[0].Rows[0][5].ToString();
-                                string strABC = ds.Tables[0].Rows[0][6].ToString();
-                                string strcheck = ds.Tables[0].Rows[0][7].ToString();
-
-                                item.plr_chr01 = strABC;
-                                item.plr_chr02 = strcheck;
-
-                                if (strResultWebser.Equals("2"))
-                                {
-                                    item.plr_status = "U";
-                                    item.plr_status_msg = strErrMessage;
-                                    item.plr_update_date = DateTime.Now;
-                                    item.plr_user_ip = getClientIP();
-
-                                    var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
-
-                                    intUploadCount++;
-
-                                    SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + intUploadCount + " 条上传Success。", true, true);
-
-                                }
-                                else if (strResultWebser.Equals("1"))
-                                {
-
-                                    item.plr_status = "U";
-                                    item.plr_status_msg = strErrMessage;
-                                    item.plr_update_date = DateTime.Now;
-                                    item.plr_user_ip = getClientIP();
-
-                                    var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
-
-                                    intUploadDup++;
-                                }
-                                else
-                                {
-                                    item.plr_status = "E";
-                                    item.plr_status_msg = strErrMessage;
-
-                                    item.plr_update_date = DateTime.Now;
-                                    item.plr_user_ip = getClientIP();
-
-                                    var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
-                                    strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + strErrMessage + "\n";
-                                    intUploadErrCount++;
-                                }
-
-                            }
-                            else
-                            {
-
-                                item.plr_status = "N";
-                                item.plr_status_msg = "WebServer Error 没有返回值";
-
-                                item.plr_update_date = DateTime.Now;
-                                item.plr_user_ip = getClientIP();
-
-                                var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
-                                strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + "WebServer 没有返回值" + "\n";
-                                intUploadErrCount++;
-                            }
-
-                        }
-                        else
-                        {
-                            strResult = "$UploadToERP: Error: Webservice 连接超时.";
-                            break;
-                        }
-
-                    }
-                    strResult = strResult == "" ? "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" : "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" + "\t5.失败的记录:\n" + strResult;
+        //        List<PIE.Model.plr_mstr_tran> plr_mstr_tran_ls = new PIE.BLL.plr_mstr_tran().GetModelList(strWheretran);
 
 
-                }
-                else
-                {
-                    strResult = "$UploadToERP: Error: 系统数据库中没有可上传的（C状态）记录。";
-                }
-                SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, strResult, true, true);
-                SetToolTextdelegate(_idr_show.status15toolLabelstrResult, strResult, true, true);
-                MessageBox.Show(strResult);
-                _uploaderpmsg = "$UploadToERP: 上传ERP完成。";
 
-            }
-            catch (Exception ex)
-            {
+        //        if (plr_mstr_tran_ls != null && plr_mstr_tran_ls.Count > 0)
+        //        {
 
-                _uploaderpmsg = "$UploadToERP: Error:" + ex.Message;
-            }
+        //            intUploadSum = plr_mstr_tran_ls.Count;
+        //            var currint = 0;
+        //            foreach (PIE.Model.plr_mstr_tran item in plr_mstr_tran_ls)
+        //            {
+        //                char ckey = '@';
+        //                strPO = item.Batch_ID + "@" + "" + "@" + "" + "@" +
+        //                                             item.InvoiceID + "@" + item.plr_po + "@" + "" + "@" +
+        //                                             item.plr_partno + "@" + item.plr_site + "@" + item.Plr_vm_partno + "@" + item.plr_vend_mfgr + "@" + "" + "@" +
+        //                                             item.plr_co + "@" + item.plr_date_code + "@" + "" + "@" + "" + "@" +
+        //                                             item.plr_qty + "@" + "" + "@" +
+        //                                             item.Wec_Ctn + "@" + item.CartonNo + "@" + item.plr_carton_qty + "@" +
+        //                                             "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" +
+        //                                             item.CartonID + "@" + item.plr_pallet_no;
+        //                strPO = @strPO.ToString();
+
+        //                currint++;
+
+        //                SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + currint + " 条开始上传", true, true);
+
+        //                var returnWeb = initWebServer(item.plr_po, server100, "wsas013", strPO, out ds);
+        //                if (returnWeb)
+        //                {
+        //                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+        //                    {
+        //                        string strResultWebser = ds.Tables[0].Rows[0][4].ToString();
+        //                        string strErrMessage = ds.Tables[0].Rows[0][5].ToString();
+        //                        string strABC = ds.Tables[0].Rows[0][6].ToString();
+        //                        string strcheck = ds.Tables[0].Rows[0][7].ToString();
+
+        //                        item.plr_chr01 = strABC;
+        //                        item.plr_chr02 = strcheck;
+
+        //                        if (strResultWebser.Equals("2"))
+        //                        {
+        //                            item.plr_status = "U";
+        //                            item.plr_status_msg = strErrMessage;
+        //                            item.plr_update_date = DateTime.Now;
+        //                            item.plr_user_ip = getClientIP();
+
+        //                            var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+
+        //                            intUploadCount++;
+
+        //                            SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, "$UploadToERP: Notice: 第 " + intUploadCount + " 条上传Success。", true, true);
+
+        //                        }
+        //                        else if (strResultWebser.Equals("1"))
+        //                        {
+
+        //                            item.plr_status = "U";
+        //                            item.plr_status_msg = strErrMessage;
+        //                            item.plr_update_date = DateTime.Now;
+        //                            item.plr_user_ip = getClientIP();
+
+        //                            var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+
+        //                            intUploadDup++;
+        //                        }
+        //                        else
+        //                        {
+        //                            item.plr_status = "E";
+        //                            item.plr_status_msg = strErrMessage;
+
+        //                            item.plr_update_date = DateTime.Now;
+        //                            item.plr_user_ip = getClientIP();
+
+        //                            var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+        //                            strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + strErrMessage + "\n";
+        //                            intUploadErrCount++;
+        //                        }
+
+        //                    }
+        //                    else
+        //                    {
+
+        //                        item.plr_status = "N";
+        //                        item.plr_status_msg = "WebServer Error 没有返回值";
+
+        //                        item.plr_update_date = DateTime.Now;
+        //                        item.plr_user_ip = getClientIP();
+
+        //                        var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+        //                        strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + "WebServer 没有返回值" + "\n";
+        //                        intUploadErrCount++;
+        //                    }
+
+        //                }
+        //                else
+        //                {
+        //                    strResult = "$UploadToERP: Error: Webservice 连接超时.";
+        //                    break;
+        //                }
+
+        //            }
+        //            strResult = strResult == "" ? "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" : "\t1. 需要上传：" + intUploadSum + "条,\n\t2. 上传：" + intUploadCount + "条记录OK.\n\t3. 有" + intUploadDup + "条重复。\n\t4. 有" + intUploadErrCount + "条上传失败。\n" + "\t5.失败的记录:\n" + strResult;
 
 
-        }
+        //        }
+        //        else
+        //        {
+        //            strResult = "$UploadToERP: Error: 系统数据库中没有可上传的（C状态）记录。";
+        //        }
+        //        SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, strResult, true, true);
+        //        SetToolTextdelegate(_idr_show.status15toolLabelstrResult, strResult, true, true);
+        //        MessageBox.Show(strResult);
+        //        _uploaderpmsg = "$UploadToERP: 上传ERP完成。";
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        _uploaderpmsg = "$UploadToERP: Error:" + ex.Message;
+        //    }
+
+
+        //}
         public bool isNumber(System.Windows.Forms.TextBox tb, Control cl)
         {
             if (!PageValidate.IsNumber(tb.Text))
@@ -1284,271 +1284,271 @@ namespace FrmPIE._0API
             return true;
         }
 
-        public void PrinTXTFile(object cartonfromto)
-        {
-            CartonFromTo _cartonfromto = (CartonFromTo)cartonfromto;
+        //public void PrinTXTFile(object cartonfromto)
+        //{
+        //    CartonFromTo _cartonfromto = (CartonFromTo)cartonfromto;
 
-            int intPrintCount = 0;
-            int intPrintErrorCount = 0;
-            int limitCount = 5;
+        //    int intPrintCount = 0;
+        //    int intPrintErrorCount = 0;
+        //    int limitCount = 5;
 
-            string strWhere = "";
-            string resultmsg = "";
-            string messageBox = "";
-            string messageBoxError = "";
+        //    string strWhere = "";
+        //    string resultmsg = "";
+        //    string messageBox = "";
+        //    string messageBoxError = "";
 
-            frmPIE.frm513PrintCartonLabel frm513PCL = (frmPIE.frm513PrintCartonLabel)_cartonfromto._objclass;
-            decimal wec_ctn_Fr = _cartonfromto._wec_ctn_Fr;
-            decimal wec_ctn_To = _cartonfromto._wec_ctn_To;
-            string print_Type = _cartonfromto._print_Type;
-            string print_port = _cartonfromto._print_port;
+        //    frmPIE.frm513PrintCartonLabel frm513PCL = (frmPIE.frm513PrintCartonLabel)_cartonfromto._objclass;
+        //    decimal wec_ctn_Fr = _cartonfromto._wec_ctn_Fr;
+        //    decimal wec_ctn_To = _cartonfromto._wec_ctn_To;
+        //    string print_Type = _cartonfromto._print_Type;
+        //    string print_port = _cartonfromto._print_port;
 
-            StringBuilder strtxt = new StringBuilder();
-
-
-            string strfromto = wec_ctn_Fr.ToString() + "-" + wec_ctn_To.ToString();
-
-            //btnPrint.Enabled = false;
-            SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "Print...", false, true);
-            SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "Printing ......", true, true);
-
-            while (wec_ctn_Fr <= wec_ctn_To)
-            {
-
-                strWhere = "Wec_Ctn='" + wec_ctn_Fr + "'";
-
-                List<PIE.Model.plr_mstr_tran> plr_mstr_tran_list = new PIE.BLL.plr_mstr_tran().GetModelList(strWhere);
-                int listcount = plr_mstr_tran_list.Count;
-                if (listcount > 0)
-                {
-
-                    if (print_Type.Equals("ZPL"))
-                    {
-                        int x = 39;
-                        int y = 30;
-                        int xoff = 0;
-                        int yoff = 50;
-
-                        #region zpl
-                        strtxt.AppendLine("^XA");
-                        strtxt.AppendLine("^EG");
-                        strtxt.AppendLine("^XZ");
-                        strtxt.AppendLine("^XA");
-
-                        strtxt.AppendLine("^MCY");
-                        strtxt.AppendLine("^XZ");
-                        strtxt.AppendLine("^XA");
-
-                        strtxt.AppendLine("^FWN^CFD,24^PW905^LH0,0");
-                        strtxt.AppendLine("^CI3^PR2^MNY^MTT^MMT^MD3.5^JJ0,0^PON^PMN^LRN");
-                        strtxt.AppendLine("^LT-9");
-                        strtxt.AppendLine("^XZ");
-                        strtxt.AppendLine("^XA");
-
-                        strtxt.AppendLine("^DFR:TEMP_FMT.ZPL");
-                        strtxt.AppendLine("^LRN");
-                        strtxt.AppendLine("^XZ");
-                        strtxt.AppendLine("^XA");
-
-                        strtxt.AppendLine("^XFR:TEMP_FMT.ZPL");
-                        strtxt.AppendLine("^A0N,161,104^FO573,14^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
-                        strtxt.AppendLine("^A0N,42,42^FO601,191^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
-                        int totoal = 0;
-                        for (int i = 0; i < listcount; i++)
-                        {
-                            totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
-                            if (i >= limitCount)
-                            {
-                                continue;
-                            }
-                            strtxt.AppendLine("^A0N,44,30^FO" + (x) + "," + (y + yoff * i) + "^FD" + plr_mstr_tran_list[i].plr_partno + "^FS");
-                            strtxt.AppendLine("^A0N,44,30^FO" + (x + 300) + "," + (y + yoff * i + 2) + "^FD" + plr_mstr_tran_list[i].plr_qty + "^FS");
-
-                        }
-                        if (listcount > limitCount)
-                        {
-                            strtxt.AppendLine(@"^A0N,44,30^FO30,392^FD ..................");
-                        }
-                        strtxt.AppendLine("^A0N,44,30^FO36,392^FDT0TAL: " + listcount.ToString() + "^FS");
-
-                        strtxt.AppendLine("^A0N,44,30^FO344,391^FD" + totoal.ToString() + "^FS");
-
-                        strtxt.AppendLine("^BY2,2.0^FO433,273^B3N,Y,104,N^FD" + plr_mstr_tran_list[0].plr_wec_ctn + "^FS");
+        //    StringBuilder strtxt = new StringBuilder();
 
 
-                        strtxt.AppendLine("^PQ1,0,1,Y");
+        //    string strfromto = wec_ctn_Fr.ToString() + "-" + wec_ctn_To.ToString();
 
-                        strtxt.AppendLine("^XZ");
-                        strtxt.AppendLine("^XA");
+        //    //btnPrint.Enabled = false;
+        //    SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "Print...", false, true);
+        //    SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "Printing ......", true, true);
 
-                        strtxt.AppendLine("^IDR:TEMP_FMT.ZPL");
-                        strtxt.AppendLine("^XZ");
-                        #endregion
+        //    while (wec_ctn_Fr <= wec_ctn_To)
+        //    {
 
-                    }
-                    else if (print_Type.Equals("TEC"))
-                    {
-                        int x = 0;
-                        int y = 60;
-                        int xoff = 0;
-                        int yoff = 35;
-                        #region TEC
-                        strtxt.AppendLine("{D0410,0762,0380|}");
-                        strtxt.AppendLine("{C|}");
-                        strtxt.AppendLine("{U2;0030|}");
-                        strtxt.AppendLine("{AX;+000,+000,+00|}");
-                        strtxt.AppendLine("{AY;+10,0|}");
-                        int totoal = 0;
-                        string strSJ = "";
-                        for (int i = 0; i < listcount; i++)
-                        {
-                            totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
-                            if (plr_mstr_tran_list[i].plr_chr02.ToString().ToLower().Equals("yes"))
-                            {
-                                strSJ = plr_mstr_tran_list[i].plr_chr02.ToString();
-                            }
-                            if (i >= limitCount)
-                            {
-                                continue;
-                            }
-                            //partno
-                            strtxt.AppendLine(@"{PC" + i.ToString("000") + ";0063," + (y + yoff * i).ToString("0000") + ",05,05,B,00,B|}");
-                            strtxt.AppendLine(@"{RC" + i.ToString("000") + ";" + plr_mstr_tran_list[i].plr_partno + "|}");
-                            //number/qty
-                            strtxt.AppendLine(@"{PC" + (i + 50).ToString("000") + ";0365," + (y + yoff * i).ToString("0000") + ",05,05,B,00,B|}");
-                            strtxt.AppendLine(@"{RC" + (i + 50).ToString("000") + ";" + Convert.ToInt32(plr_mstr_tran_list[i].plr_carton_qty).ToString() + "|}");
-                            //ABC/
-                            strtxt.AppendLine(@"{PC" + (i + 100).ToString("000") + ";0480," + (y + yoff * i).ToString("0000") + ",05,05,B,00,B|}");
-                            if (plr_mstr_tran_list[i].plr_chr01.Equals("A"))
-                            {
-                                strtxt.AppendLine(@"{RC" + (i + 100).ToString("000") + ";" + plr_mstr_tran_list[i].plr_chr01 + "|}");
-                            }
-                            else
-                            {
-                                strtxt.AppendLine(@"{RC" + (i + 100).ToString("000") + "; |}");
-                            }
+        //        strWhere = "Wec_Ctn='" + wec_ctn_Fr + "'";
 
+        //        List<PIE.Model.plr_mstr_tran> plr_mstr_tran_list = new PIE.BLL.plr_mstr_tran().GetModelList(strWhere);
+        //        int listcount = plr_mstr_tran_list.Count;
+        //        if (listcount > 0)
+        //        {
 
-                        }
-                        if (listcount > limitCount)
-                        {
-                            strtxt.AppendLine(@"{PC005;0065,0300,07,07,D,00,B|}");
-                            // strtxt.AppendLine(@"{RC005;more " + limitCount + " to ..............|}");
-                            strtxt.AppendLine(@"{RC005;.......................|}");
-                        }
+        //            if (print_Type.Equals("ZPL"))
+        //            {
+        //                int x = 39;
+        //                int y = 30;
+        //                int xoff = 0;
+        //                int yoff = 50;
 
-                        strtxt.AppendLine(@"{PC" + (listcount + 1).ToString("000") + ";0063,0355,05,05,B,00,B|}");
-                        strtxt.AppendLine(@"{RC" + (listcount + 1).ToString("000") + ";CNT:" + listcount.ToString() + ", TTL: " + totoal.ToString() + "|}");
+        //                #region zpl
+        //                strtxt.AppendLine("^XA");
+        //                strtxt.AppendLine("^EG");
+        //                strtxt.AppendLine("^XZ");
+        //                strtxt.AppendLine("^XA");
 
+        //                strtxt.AppendLine("^MCY");
+        //                strtxt.AppendLine("^XZ");
+        //                strtxt.AppendLine("^XA");
 
-                        strtxt.AppendLine(@"{PC" + (listcount + 10).ToString("000") + ";0560,0080,05,05,M,00,B|}");
-                        strtxt.AppendLine(@"{RC" + (listcount + 10).ToString("000") + ";" + plr_mstr_tran_list[0].CartonID + "|}");
-                        strtxt.AppendLine(@"{PC" + (listcount + 20).ToString("000") + ";0560,0140,05,05,D,00,B|}");
-                        strtxt.AppendLine(@"{RC" + (listcount + 20).ToString("000") + ";" + plr_mstr_tran_list[0].plr_vend_mfgr + "|}");
+        //                strtxt.AppendLine("^FWN^CFD,24^PW905^LH0,0");
+        //                strtxt.AppendLine("^CI3^PR2^MNY^MTT^MMT^MD3.5^JJ0,0^PON^PMN^LRN");
+        //                strtxt.AppendLine("^LT-9");
+        //                strtxt.AppendLine("^XZ");
+        //                strtxt.AppendLine("^XA");
+
+        //                strtxt.AppendLine("^DFR:TEMP_FMT.ZPL");
+        //                strtxt.AppendLine("^LRN");
+        //                strtxt.AppendLine("^XZ");
+        //                strtxt.AppendLine("^XA");
+
+        //                strtxt.AppendLine("^XFR:TEMP_FMT.ZPL");
+        //                strtxt.AppendLine("^A0N,161,104^FO573,14^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
+        //                strtxt.AppendLine("^A0N,42,42^FO601,191^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
+        //                int totoal = 0;
+        //                for (int i = 0; i < listcount; i++)
+        //                {
+        //                    totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
+        //                    if (i >= limitCount)
+        //                    {
+        //                        continue;
+        //                    }
+        //                    strtxt.AppendLine("^A0N,44,30^FO" + (x) + "," + (y + yoff * i) + "^FD" + plr_mstr_tran_list[i].plr_partno + "^FS");
+        //                    strtxt.AppendLine("^A0N,44,30^FO" + (x + 300) + "," + (y + yoff * i + 2) + "^FD" + plr_mstr_tran_list[i].plr_qty + "^FS");
+
+        //                }
+        //                if (listcount > limitCount)
+        //                {
+        //                    strtxt.AppendLine(@"^A0N,44,30^FO30,392^FD ..................");
+        //                }
+        //                strtxt.AppendLine("^A0N,44,30^FO36,392^FDT0TAL: " + listcount.ToString() + "^FS");
+
+        //                strtxt.AppendLine("^A0N,44,30^FO344,391^FD" + totoal.ToString() + "^FS");
+
+        //                strtxt.AppendLine("^BY2,2.0^FO433,273^B3N,Y,104,N^FD" + plr_mstr_tran_list[0].plr_wec_ctn + "^FS");
 
 
-                        if (!string.IsNullOrEmpty(strSJ))
-                        {
-                            strtxt.AppendLine(@"{PC" + (listcount + 30).ToString("000") + ";0520,0200,05,05,D,00,B|}");
-                            strtxt.AppendLine(@"{RC" + (listcount + 30).ToString("000") + "; * |}");
-                            strtxt.AppendLine(@"{PC" + (listcount + 35).ToString("000") + ";0560,0200,05,05,D,00,B|}");
-                            strtxt.AppendLine(@"{RC" + (listcount + 35).ToString("000") + "; " + plr_mstr_tran_list[0].plr_co + "|}");
-                        }
-                        else
-                        {
-                            strtxt.AppendLine(@"{PC" + (listcount + 30).ToString("000") + ";0560,0200,05,05,D,00,B|}");
-                            strtxt.AppendLine(@"{RC" + (listcount + 30).ToString("000") + ";" + plr_mstr_tran_list[0].plr_co + "|}");
+        //                strtxt.AppendLine("^PQ1,0,1,Y");
 
-                        }
-                        strtxt.AppendLine("{XB01;0450,0230,9,3,02,0,0105,+0000000000,000,1,00|}");
-                        strtxt.AppendLine("{RB01;>8" + plr_mstr_tran_list[0].plr_wec_ctn + "|}");
+        //                strtxt.AppendLine("^XZ");
+        //                strtxt.AppendLine("^XA");
 
-                        strtxt.AppendLine("{XS;I,0001,0002C3200|}");
-                        strtxt.AppendLine("{U1;0030|}");
-                        #endregion
-                    }
+        //                strtxt.AppendLine("^IDR:TEMP_FMT.ZPL");
+        //                strtxt.AppendLine("^XZ");
+        //                #endregion
 
-                    SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print 生成第" + wec_ctn_Fr.ToString() + "条打印文件Success.", true, true);
-                }
-                else
-                {
-                    intPrintErrorCount++;
-                    messageBoxError = messageBoxError + wec_ctn_Fr.ToString() + ",\t";
+        //            }
+        //            else if (print_Type.Equals("TEC"))
+        //            {
+        //                int x = 0;
+        //                int y = 60;
+        //                int xoff = 0;
+        //                int yoff = 35;
+        //                #region TEC
+        //                strtxt.AppendLine("{D0410,0762,0380|}");
+        //                strtxt.AppendLine("{C|}");
+        //                strtxt.AppendLine("{U2;0030|}");
+        //                strtxt.AppendLine("{AX;+000,+000,+00|}");
+        //                strtxt.AppendLine("{AY;+10,0|}");
+        //                int totoal = 0;
+        //                string strSJ = "";
+        //                for (int i = 0; i < listcount; i++)
+        //                {
+        //                    totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
+        //                    if (plr_mstr_tran_list[i].plr_chr02.ToString().ToLower().Equals("yes"))
+        //                    {
+        //                        strSJ = plr_mstr_tran_list[i].plr_chr02.ToString();
+        //                    }
+        //                    if (i >= limitCount)
+        //                    {
+        //                        continue;
+        //                    }
+        //                    //partno
+        //                    strtxt.AppendLine(@"{PC" + i.ToString("000") + ";0063," + (y + yoff * i).ToString("0000") + ",05,05,B,00,B|}");
+        //                    strtxt.AppendLine(@"{RC" + i.ToString("000") + ";" + plr_mstr_tran_list[i].plr_partno + "|}");
+        //                    //number/qty
+        //                    strtxt.AppendLine(@"{PC" + (i + 50).ToString("000") + ";0365," + (y + yoff * i).ToString("0000") + ",05,05,B,00,B|}");
+        //                    strtxt.AppendLine(@"{RC" + (i + 50).ToString("000") + ";" + Convert.ToInt32(plr_mstr_tran_list[i].plr_carton_qty).ToString() + "|}");
+        //                    //ABC/
+        //                    strtxt.AppendLine(@"{PC" + (i + 100).ToString("000") + ";0480," + (y + yoff * i).ToString("0000") + ",05,05,B,00,B|}");
+        //                    if (plr_mstr_tran_list[i].plr_chr01.Equals("A"))
+        //                    {
+        //                        strtxt.AppendLine(@"{RC" + (i + 100).ToString("000") + ";" + plr_mstr_tran_list[i].plr_chr01 + "|}");
+        //                    }
+        //                    else
+        //                    {
+        //                        strtxt.AppendLine(@"{RC" + (i + 100).ToString("000") + "; |}");
+        //                    }
 
-                }
-                wec_ctn_Fr++;
-                intPrintCount++;
-            }
-            if (intPrintErrorCount == intPrintCount)
-            {
-                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: 无" + strfromto + "的记录。", true, true);
-                SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
-                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: Printing End", true, true);
-                return;
-            }
-            else if (intPrintErrorCount > 0)
-            {
 
-                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: 无" + messageBoxError + "的记录。", true, true);
-            }
-            string strprefix = print_Type;
-            if (frm513PCL.chk0PrintToFile_PrintCartonLabel.Checked)
-            {
+        //                }
+        //                if (listcount > limitCount)
+        //                {
+        //                    strtxt.AppendLine(@"{PC005;0065,0300,07,07,D,00,B|}");
+        //                    // strtxt.AppendLine(@"{RC005;more " + limitCount + " to ..............|}");
+        //                    strtxt.AppendLine(@"{RC005;.......................|}");
+        //                }
 
-                _idr_show._strSaveLabelFile = strprefix + strfromto + ".txt";
-                var returnresult = Xprint.XPrint.WriteTxT(_idr_show._strSaveLabelFile, strtxt);
+        //                strtxt.AppendLine(@"{PC" + (listcount + 1).ToString("000") + ";0063,0355,05,05,B,00,B|}");
+        //                strtxt.AppendLine(@"{RC" + (listcount + 1).ToString("000") + ";CNT:" + listcount.ToString() + ", TTL: " + totoal.ToString() + "|}");
 
-                messageBox = "\tSuccess: 总打印：" + intPrintCount + "条记录。TXT文件存于: \n" + returnresult;
 
-                if (!string.IsNullOrEmpty(returnresult))
-                {
+        //                strtxt.AppendLine(@"{PC" + (listcount + 10).ToString("000") + ";0560,0080,05,05,M,00,B|}");
+        //                strtxt.AppendLine(@"{RC" + (listcount + 10).ToString("000") + ";" + plr_mstr_tran_list[0].CartonID + "|}");
+        //                strtxt.AppendLine(@"{PC" + (listcount + 20).ToString("000") + ";0560,0140,05,05,D,00,B|}");
+        //                strtxt.AppendLine(@"{RC" + (listcount + 20).ToString("000") + ";" + plr_mstr_tran_list[0].plr_vend_mfgr + "|}");
 
-                    resultmsg = "Notice: 打印 " + strprefix + strfromto;
-                    var dialogbutton = MessageBox.Show(messageBox + " Success.\n\t是否打印些文件？", "Notice:Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-                    if (dialogbutton == DialogResult.Yes)
-                    {
-                        if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
-                        {
-                            resultmsg += " 成功。";
-                        }
-                        else
-                        {
-                            resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
-                        }
-                    }
-                    else
-                    {
 
-                        resultmsg += messageBox;
+        //                if (!string.IsNullOrEmpty(strSJ))
+        //                {
+        //                    strtxt.AppendLine(@"{PC" + (listcount + 30).ToString("000") + ";0520,0200,05,05,D,00,B|}");
+        //                    strtxt.AppendLine(@"{RC" + (listcount + 30).ToString("000") + "; * |}");
+        //                    strtxt.AppendLine(@"{PC" + (listcount + 35).ToString("000") + ";0560,0200,05,05,D,00,B|}");
+        //                    strtxt.AppendLine(@"{RC" + (listcount + 35).ToString("000") + "; " + plr_mstr_tran_list[0].plr_co + "|}");
+        //                }
+        //                else
+        //                {
+        //                    strtxt.AppendLine(@"{PC" + (listcount + 30).ToString("000") + ";0560,0200,05,05,D,00,B|}");
+        //                    strtxt.AppendLine(@"{RC" + (listcount + 30).ToString("000") + ";" + plr_mstr_tran_list[0].plr_co + "|}");
 
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(messageBox + " Fail.");
-                }
+        //                }
+        //                strtxt.AppendLine("{XB01;0450,0230,9,3,02,0,0105,+0000000000,000,1,00|}");
+        //                strtxt.AppendLine("{RB01;>8" + plr_mstr_tran_list[0].plr_wec_ctn + "|}");
 
-            }
-            else
-            {
-                resultmsg = "Notice: 打印 " + strprefix + strfromto;
+        //                strtxt.AppendLine("{XS;I,0001,0002C3200|}");
+        //                strtxt.AppendLine("{U1;0030|}");
+        //                #endregion
+        //            }
 
-                if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
-                {
-                    resultmsg += " 成功。";
-                }
-                else
-                {
-                    resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
-                }
-            }
+        //            SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print 生成第" + wec_ctn_Fr.ToString() + "条打印文件Success.", true, true);
+        //        }
+        //        else
+        //        {
+        //            intPrintErrorCount++;
+        //            messageBoxError = messageBoxError + wec_ctn_Fr.ToString() + ",\t";
 
-            //btnPrint.Enabled = true;
-            SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
-            SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg, true, true);
-            SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
+        //        }
+        //        wec_ctn_Fr++;
+        //        intPrintCount++;
+        //    }
+        //    if (intPrintErrorCount == intPrintCount)
+        //    {
+        //        SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: 无" + strfromto + "的记录。", true, true);
+        //        SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
+        //        SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: Printing End", true, true);
+        //        return;
+        //    }
+        //    else if (intPrintErrorCount > 0)
+        //    {
 
-        }
+        //        SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: 无" + messageBoxError + "的记录。", true, true);
+        //    }
+        //    string strprefix = print_Type;
+        //    if (frm513PCL.chk0PrintToFile_PrintCartonLabel.Checked)
+        //    {
+
+        //        _idr_show._strSaveLabelFile = strprefix + strfromto + ".txt";
+        //        var returnresult = Xprint.XPrint.WriteTxT(_idr_show._strSaveLabelFile, strtxt);
+
+        //        messageBox = "\tSuccess: 总打印：" + intPrintCount + "条记录。TXT文件存于: \n" + returnresult;
+
+        //        if (!string.IsNullOrEmpty(returnresult))
+        //        {
+
+        //            resultmsg = "Notice: 打印 " + strprefix + strfromto;
+        //            var dialogbutton = MessageBox.Show(messageBox + " Success.\n\t是否打印些文件？", "Notice:Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+        //            if (dialogbutton == DialogResult.Yes)
+        //            {
+        //                if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+        //                {
+        //                    resultmsg += " 成功。";
+        //                }
+        //                else
+        //                {
+        //                    resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
+        //                }
+        //            }
+        //            else
+        //            {
+
+        //                resultmsg += messageBox;
+
+        //            }
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show(messageBox + " Fail.");
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        resultmsg = "Notice: 打印 " + strprefix + strfromto;
+
+        //        if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+        //        {
+        //            resultmsg += " 成功。";
+        //        }
+        //        else
+        //        {
+        //            resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
+        //        }
+        //    }
+
+        //    //btnPrint.Enabled = true;
+        //    SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
+        //    SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg, true, true);
+        //    SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
+
+        //}
         public void initThreadDowrokColor(DoWrokObject dwo)
         {
             if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount)

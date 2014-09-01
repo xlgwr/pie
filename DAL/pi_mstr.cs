@@ -40,7 +40,22 @@ namespace PI.DAL
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
+        /// <summary>
+        /// 是否存在该记录
+        /// </summary>
+        public bool Exists(string PI_ID, int pi_LineID)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from pi_det");
+            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID");
+            SqlParameter[] parameters = {
+					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
+					new SqlParameter("@pi_LineID", SqlDbType.Int,4)		};
+            parameters[0].Value = PI_ID;
+            parameters[1].Value = pi_LineID;
 
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
 
         /// <summary>
         /// 增加一条数据
