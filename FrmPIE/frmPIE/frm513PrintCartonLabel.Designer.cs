@@ -310,7 +310,7 @@
             this.cmb0Printer_PrintCartonLabel.Name = "cmb0Printer_PrintCartonLabel";
             this.cmb0Printer_PrintCartonLabel.Size = new System.Drawing.Size(132, 22);
             this.cmb0Printer_PrintCartonLabel.TabIndex = 20;
-            this.cmb0Printer_PrintCartonLabel.Text = "TEC";
+            this.cmb0Printer_PrintCartonLabel.Text = "ZPL";
             // 
             // chk0PrintToFile_PrintCartonLabel
             // 

@@ -501,17 +501,17 @@ namespace FrmPIE
         private void toolcMenu11UploadEPackingListExcel_Click(object sender, EventArgs e)
         {
             addNewTabPage("Upload EPacking List From Excel");
-            //frmUploadExcel fu = new frmUploadExcel(this);
-            //addGBToTC(tabCtlRight1, fu.groupBox0frmUploadExcel);
+            frmUploadExcel fu = new frmUploadExcel(this);
+            addGBToTC(tabCtlRight1, fu.groupBox0frmUploadExcel);
         }
         private void toolcMenu12AddOneByOneBatchID_Click(object sender, EventArgs e)
         {
             var tabpagenew = addNewTabPage("Add New(BatchID)");
-            //frm211AddNewBatchID fanb = new frm211AddNewBatchID(this);
-            //_icurrAddGBtop = fanb.groupBox0AddNewBatchID.Height;
+            frm211AddNewBatchID fanb = new frm211AddNewBatchID(this);
+            _icurrAddGBtop = fanb.groupBox0AddNewBatchID.Height;
 
-            //this.AcceptButton = fanb.btn1UpadeAddAddNewBatchID;
-            //addGBToTC(tabpagenew, fanb.groupBox0AddNewBatchID);
+            this.AcceptButton = fanb.btn1UpadeAddAddNewBatchID;
+            addGBToTC(tabpagenew, fanb.groupBox0AddNewBatchID);
         }
 
         private void btn1ScanCartronLabel21_Click(object sender, EventArgs e)
@@ -537,15 +537,15 @@ namespace FrmPIE
         private void toolStripMenuItem22UploadCartonIDToERP_Click(object sender, EventArgs e)
         {
             addNewTabPage("Upload WEC Carton ID To ERP");
-            //frm412UploadToERP ute = new frm412UploadToERP(this);
-            //addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
+            frm412UploadToERP ute = new frm412UploadToERP(this);
+            addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
         }
 
         private void toolStripMenuItem31btnPrintCartonLabel3_Click(object sender, EventArgs e)
         {
             addNewTabPage("Print Carton Label");
-            //frm513PrintCartonLabel ute = new frm513PrintCartonLabel(this);
-            //addGBToTC(tabCtlRight1, ute.gb0PrintCartonLabel);
+            frm513PrintCartonLabel ute = new frm513PrintCartonLabel(this);
+            addGBToTC(tabCtlRight1, ute.gb0PrintCartonLabel);
 
         }
 

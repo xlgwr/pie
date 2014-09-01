@@ -22,13 +22,13 @@ namespace FrmPIE
         {
             this.Hide();
 
-            var FrmPIE = new FrmPIE(this, system_user_model);
-            FrmPIE.Text += Program.frmVersion;
-            FrmPIE.Show();
+            //var FrmPIE = new FrmPIE(this, system_user_model);
+            //FrmPIE.Text += Program.frmVersion;
+            //FrmPIE.Show();
 
-            //var frmIDR = new frmIDR(this, system_user_model);
-            //frmIDR.Text += Program.frmVersion;
-            //frmIDR.Show();
+            var frmIDR = new frmIDR(this, system_user_model);
+            frmIDR.Text += Program.frmVersion;
+            frmIDR.Show();
         }
         private void btnSubmit_Click(object sender, EventArgs e)
         {

@@ -119,6 +119,9 @@
             this.btn0Down8 = new System.Windows.Forms.Button();
             this.btn0Print6 = new System.Windows.Forms.Button();
             this.btn0Lock5 = new System.Windows.Forms.Button();
+            this.btn0OK4 = new System.Windows.Forms.Button();
+            this.btn0Del3 = new System.Windows.Forms.Button();
+            this.btn0Edit2 = new System.Windows.Forms.Button();
             this.btn0Add1 = new System.Windows.Forms.Button();
             this.ctmenusClose = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -350,7 +353,7 @@
             // 
             // cmb1SearchType
             // 
-            this.cmb1SearchType.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb1SearchType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmb1SearchType.FormattingEnabled = true;
             this.cmb1SearchType.Items.AddRange(new object[] {
             "BatchID",
@@ -439,7 +442,7 @@
             // 
             // txt0SearchID
             // 
-            this.txt0SearchID.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0SearchID.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txt0SearchID.Location = new System.Drawing.Point(444, 13);
             this.txt0SearchID.Name = "txt0SearchID";
             this.txt0SearchID.Size = new System.Drawing.Size(159, 26);
@@ -794,7 +797,7 @@
             // 
             this.lblSystemName.AutoSize = true;
             this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSystemName.Font = new System.Drawing.Font("SimSun", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSystemName.Font = new System.Drawing.Font("宋体", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSystemName.Location = new System.Drawing.Point(249, 0);
             this.lblSystemName.Name = "lblSystemName";
             this.lblSystemName.Size = new System.Drawing.Size(205, 86);
@@ -1018,6 +1021,9 @@
             this.splitContainer1.Panel1.Controls.Add(this.btn0Down8);
             this.splitContainer1.Panel1.Controls.Add(this.btn0Print6);
             this.splitContainer1.Panel1.Controls.Add(this.btn0Lock5);
+            this.splitContainer1.Panel1.Controls.Add(this.btn0OK4);
+            this.splitContainer1.Panel1.Controls.Add(this.btn0Del3);
+            this.splitContainer1.Panel1.Controls.Add(this.btn0Edit2);
             this.splitContainer1.Panel1.Controls.Add(this.btn0Add1);
             // 
             // splitContainer1.Panel2
@@ -1058,7 +1064,7 @@
             this.btn0Down8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn0Down8.FlatAppearance.BorderSize = 0;
             this.btn0Down8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn0Down8.Location = new System.Drawing.Point(150, 5);
+            this.btn0Down8.Location = new System.Drawing.Point(273, 5);
             this.btn0Down8.Name = "btn0Down8";
             this.btn0Down8.Size = new System.Drawing.Size(43, 44);
             this.btn0Down8.TabIndex = 7;
@@ -1072,7 +1078,7 @@
             this.btn0Print6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn0Print6.FlatAppearance.BorderSize = 0;
             this.btn0Print6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn0Print6.Location = new System.Drawing.Point(101, 3);
+            this.btn0Print6.Location = new System.Drawing.Point(224, 3);
             this.btn0Print6.Name = "btn0Print6";
             this.btn0Print6.Size = new System.Drawing.Size(43, 44);
             this.btn0Print6.TabIndex = 6;
@@ -1086,12 +1092,54 @@
             this.btn0Lock5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn0Lock5.FlatAppearance.BorderSize = 0;
             this.btn0Lock5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn0Lock5.Location = new System.Drawing.Point(52, 3);
+            this.btn0Lock5.Location = new System.Drawing.Point(175, 3);
             this.btn0Lock5.Name = "btn0Lock5";
             this.btn0Lock5.Size = new System.Drawing.Size(43, 44);
             this.btn0Lock5.TabIndex = 5;
             this.btn0Lock5.UseVisualStyleBackColor = false;
             this.btn0Lock5.Click += new System.EventHandler(this.btn0Lock5_Click);
+            // 
+            // btn0OK4
+            // 
+            this.btn0OK4.BackgroundImage = global::FrmPIE.Properties.Resources.j__2_;
+            this.btn0OK4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn0OK4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn0OK4.FlatAppearance.BorderSize = 0;
+            this.btn0OK4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn0OK4.Location = new System.Drawing.Point(132, 3);
+            this.btn0OK4.Name = "btn0OK4";
+            this.btn0OK4.Size = new System.Drawing.Size(43, 44);
+            this.btn0OK4.TabIndex = 4;
+            this.btn0OK4.UseVisualStyleBackColor = false;
+            this.btn0OK4.Click += new System.EventHandler(this.btn0OK4_Click);
+            // 
+            // btn0Del3
+            // 
+            this.btn0Del3.BackgroundImage = global::FrmPIE.Properties.Resources.j__13_;
+            this.btn0Del3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn0Del3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn0Del3.FlatAppearance.BorderSize = 0;
+            this.btn0Del3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn0Del3.Location = new System.Drawing.Point(89, 3);
+            this.btn0Del3.Name = "btn0Del3";
+            this.btn0Del3.Size = new System.Drawing.Size(43, 44);
+            this.btn0Del3.TabIndex = 3;
+            this.btn0Del3.UseVisualStyleBackColor = false;
+            this.btn0Del3.Click += new System.EventHandler(this.btn0Del3_Click);
+            // 
+            // btn0Edit2
+            // 
+            this.btn0Edit2.BackgroundImage = global::FrmPIE.Properties.Resources.j__56_;
+            this.btn0Edit2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn0Edit2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn0Edit2.FlatAppearance.BorderSize = 0;
+            this.btn0Edit2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn0Edit2.Location = new System.Drawing.Point(46, 3);
+            this.btn0Edit2.Name = "btn0Edit2";
+            this.btn0Edit2.Size = new System.Drawing.Size(43, 44);
+            this.btn0Edit2.TabIndex = 2;
+            this.btn0Edit2.UseVisualStyleBackColor = false;
+            this.btn0Edit2.Click += new System.EventHandler(this.btn0Edit2_Click);
             // 
             // btn0Add1
             // 
@@ -1164,7 +1212,7 @@
             this.c11MenuStripVoid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tool110StripMenuItemVoid});
             this.c11MenuStripVoid.Name = "cMenuStrip1ScanCartronLabel";
-            this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 26);
+            this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 48);
             // 
             // frmIDR
             // 
@@ -1254,9 +1302,12 @@
         private System.Windows.Forms.ToolStripMenuItem hideLeftToolStripMenuItem3;
         private System.Windows.Forms.TextBox txt0SearchID;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Button btn0Edit2;
         private System.Windows.Forms.Button btn0Down8;
         private System.Windows.Forms.Button btn0Print6;
         private System.Windows.Forms.Button btn0Lock5;
+        private System.Windows.Forms.Button btn0OK4;
+        private System.Windows.Forms.Button btn0Del3;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button btn0Find9;
         private System.Windows.Forms.Button btn0Add1;
