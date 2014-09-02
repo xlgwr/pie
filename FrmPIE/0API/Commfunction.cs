@@ -606,7 +606,8 @@ namespace FrmPIE._0API
                     var dgv = ctft._dgv;
                     dgv.DataSource = pi_mstr_ds.Tables[0].DefaultView;
 
-                    initHeaderTextPlrMstr2(dgv);
+                    //////
+                    initHeaderTextPIMstr(dgv);
 
                     dgv.Refresh();
 
@@ -617,7 +618,7 @@ namespace FrmPIE._0API
                 }
                 if (reurntype.Equals("model"))
                 {
-                    pi_mstr = new PI.DAL.pi_mstr().GetModel(batchid, lineid);
+                    pi_mstr = new PI.DAL.pi_mstr().GetModel(batchid, 1);
                     return pi_mstr;
                 }
                 if (reurntype.Equals("ds"))
@@ -697,9 +698,9 @@ namespace FrmPIE._0API
                     //strSql.Append(" FROM pi_mstr ");
                     //strSql.Append(" where ");
                     strSql.Append("select ");
-                    strSql.Append("PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID, ");
+                    strSql.Append("PI_ID,pi_LineID,pi_wec_ctn,pi_chr01,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID, ");
                     strSql.Append("pi_type,pi_status,pi_status_msg,pi_remark, ");
-                    strSql.Append("pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
+                    strSql.Append("pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr02,pi_deci1,pi_deci2 ");
                     strSql.Append(" FROM pi_det ");
                     strSql.Append(" where ");
                     strSql.Append(strwhere);
@@ -709,8 +710,9 @@ namespace FrmPIE._0API
 
                     var dgv = ctft._dgv;
                     dgv.DataSource = pi_det_ds.Tables[0].DefaultView;
+
                     ///***************
-                    //initHeaderTextCartonDetails3(dgv);
+                    initHeaderTextPIDet(dgv);
 
                     dgv.Refresh();
 
@@ -732,9 +734,9 @@ namespace FrmPIE._0API
                     }
                     strSql = new StringBuilder();
                     strSql.Append("select ");
-                    strSql.Append("PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID, ");
+                    strSql.Append("PI_ID,pi_LineID,pi_wec_ctn,pi_chr01,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID, ");
                     strSql.Append("pi_type,pi_status,pi_status_msg,pi_remark, ");
-                    strSql.Append("pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
+                    strSql.Append("pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr02,pi_deci1,pi_deci2 ");
                     strSql.Append(" FROM pi_det ");
                     strSql.Append(" where ");
                     strSql.Append(strwhere);
@@ -747,9 +749,9 @@ namespace FrmPIE._0API
                 {
                     strSql = new StringBuilder();
                     strSql.Append("select ");
-                    strSql.Append("PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID, ");
+                    strSql.Append("PI_ID,pi_LineID,pi_wec_ctn,pi_chr01,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID, ");
                     strSql.Append("pi_type,pi_status,pi_status_msg,pi_remark, ");
-                    strSql.Append("pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
+                    strSql.Append("pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr02,pi_deci1,pi_deci2 ");
                     strSql.Append(" FROM pi_det ");
 
                     pi_det_ds = DbHelperSQL.Query(strSql.ToString());
@@ -787,7 +789,6 @@ namespace FrmPIE._0API
             dgv.Columns["batch_user_ip"].HeaderText = "Create IP";
 
         }
-
         private void initHeaderTextPlrMstr2(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
@@ -852,8 +853,6 @@ namespace FrmPIE._0API
             dgv.Columns["plr_rcp_date"].ValueType = Type.GetType("System.DateTime");
             dgv.Columns["plr_deli_date"].ValueType = Type.GetType("System.DateTime");
         }
-
-
         private void initHeaderTextCartonDetails3(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
@@ -898,6 +897,26 @@ namespace FrmPIE._0API
             dgv.Columns["plr_status"].Width = 50;
             dgv.Columns["plr_pallet_no"].Width = 50;
         }
+        private void initHeaderTextPIMstr(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+            dgv.Columns["PI_ID"].HeaderText = "PI ID";
+            dgv.Columns["Plant"].HeaderText = "Plant";
+
+            dgv.Columns["pi_type"].HeaderText = "Type";
+
+            dgv.Columns["pi_remark"].HeaderText = "Remark";
+
+            dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
+            dgv.Columns["pi_update_date"].HeaderText = "Update Date";
+            //dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
+            //dgv.Columns["pi_user_ip"].HeaderText = "Client IP";
+        }
         private void initHeaderTextPIDet(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
@@ -906,61 +925,18 @@ namespace FrmPIE._0API
             }
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
-            dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
-            dgv.Columns["LineID"].HeaderText = "Line";
+            dgv.Columns["PI_ID"].HeaderText = "PI ID";
+            dgv.Columns["pi_LineID"].HeaderText = "Line";
 
-            dgv.Columns["plr_status"].HeaderText = "Void";
+            dgv.Columns["pi_wec_ctn"].HeaderText = "Scan SN";
+            dgv.Columns["pi_LineID"].HeaderText = "Line";
 
-            //dgv.Columns["plr_suppliers_id"].HeaderText = "Suppliers";
-            dgv.Columns["InvoiceID"].HeaderText = "Invoice ID";
-            dgv.Columns["plr_po"].HeaderText = "PO#";
-            dgv.Columns["packingListID"].HeaderText = "PackingListID";
-            dgv.Columns["plr_partno"].HeaderText = "Part";
-            dgv.Columns["plr_qty"].HeaderText = "Total/Qty";
-            dgv.Columns["CartonType"].HeaderText = "Number Carton";
-            dgv.Columns["CartonID"].HeaderText = "Carton ID";
-            dgv.Columns["plr_carton_qty"].HeaderText = "Qty/Carton";
-            dgv.Columns["carton_id_prifix"].HeaderText = "Carton Prefix";
-            dgv.Columns["carton_id_from"].HeaderText = "Carton No From";
-            dgv.Columns["carton_id_to"].HeaderText = "To";
+            dgv.Columns["pi_pallet_no"].HeaderText = "Pallet";
+            dgv.Columns["CartonNo"].HeaderText = "CartonNo";
 
-            dgv.Columns["Plr_vm_partno"].HeaderText = "MFGR-Part";
-            dgv.Columns["plr_site"].HeaderText = "MG";
-            dgv.Columns["plr_ttl"].HeaderText = "Total";
-            dgv.Columns["plr_pallet_no"].HeaderText = "Pallet No";
-            dgv.Columns["plr_co"].HeaderText = "CO";
-            dgv.Columns["plr_date_code"].HeaderText = "Date Code";
-            dgv.Columns["plr_um"].HeaderText = "UM";
-            dgv.Columns["plr_nw"].HeaderText = "Net-Wt (KG)";
-            dgv.Columns["plr_gw"].HeaderText = "Gross-Wt (KG)";
-            dgv.Columns["plr_msm"].HeaderText = "Measurement";
+            dgv.Columns["CartonID"].HeaderText = "CartonID";
 
 
-
-            dgv.Columns["plr_vend_mfgr"].HeaderText = "MFGR";
-            dgv.Columns["plr_doc_type"].HeaderText = "Batch Type";
-
-            dgv.Columns["re_mark"].HeaderText = "Remark";
-
-            dgv.Columns["plr_cre_date"].HeaderText = "Create Date";
-            dgv.Columns["plr_update_date"].HeaderText = "Update Date";
-            //dgv.Columns["plr_cre_userid"].HeaderText = "User Id";
-            //dgv.Columns["plr_user_ip"].HeaderText = "Client IP";
-
-            dgv.Columns["plr_rcp_date"].HeaderText = "Rcp Date";
-            dgv.Columns["plr_deli_date"].HeaderText = "Deli Date";
-
-
-            dgv.Columns["Batch_ID"].ReadOnly = true;
-            dgv.Columns["LineID"].ReadOnly = true;
-            dgv.Columns["plr_status"].ReadOnly = true;
-
-            //dgv.Columns["LineID"].Width = 20;
-            dgv.Columns["plr_status"].Width = 50;
-            dgv.Columns["plr_pallet_no"].Width = 50;
-
-            dgv.Columns["plr_rcp_date"].ValueType = Type.GetType("System.DateTime");
-            dgv.Columns["plr_deli_date"].ValueType = Type.GetType("System.DateTime");
         }
         public static void getBatchiLineId(DataGridView dgv, int eIndex, PIE.Model.plr_mstr plr_mstr_model)
         {
@@ -1159,14 +1135,14 @@ namespace FrmPIE._0API
                     intUploadSum = plr_mstr_tran_ls.Count;
                     var currint = 0;
                     foreach (PIE.Model.plr_mstr_tran item in plr_mstr_tran_ls)
-                    {
+                    {//item.Plr_vm_partno 
                         char ckey = '@';
                         strPO = item.Batch_ID + "@" + "" + "@" + "" + "@" +
                                                      item.InvoiceID + "@" + item.plr_po + "@" + "" + "@" +
-                                                     item.plr_partno + "@" + item.plr_site + "@" + item.Plr_vm_partno + "@" + item.plr_vend_mfgr + "@" + "" + "@" +
+                                                     item.plr_partno + "@" + item.plr_site + "@" + "" + "@" + item.plr_vend_mfgr + "@" + "" + "@" +
                                                      item.plr_co + "@" + item.plr_date_code + "@" + "" + "@" + "" + "@" +
                                                      item.plr_qty + "@" + "" + "@" +
-                                                     item.Wec_Ctn + "@" + item.CartonNo + "@" + item.plr_carton_qty + "@" +
+                                                     item.plr_wec_ctn + "@" + item.CartonNo + "@" + item.plr_carton_qty + "@" +
                                                      "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" +
                                                      item.CartonID + "@" + item.plr_pallet_no;
                         strPO = @strPO.ToString();
@@ -1617,6 +1593,25 @@ namespace FrmPIE._0API
                 {
                     _plr_mstr_model.Batch_ID = dwo._dgv.Rows[dwo._eX].Cells["Batch_ID"].Value.ToString().Trim();
                     return _plr_mstr_model.Batch_ID;
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return "";
+            }
+
+        }
+        public string selectCellMethod(DoWrokObject dwo,string strPIID)
+        {
+            _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
+            try
+            {
+                if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
+                {
+                    _idr_show._pi_mstr_model.PI_ID = dwo._dgv.Rows[dwo._eX].Cells["PI_ID"].Value.ToString().Trim();
+                    return _idr_show._pi_mstr_model.PI_ID;
                 }
                 return "";
             }

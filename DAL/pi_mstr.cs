@@ -43,6 +43,21 @@ namespace PI.DAL
         /// <summary>
         /// 是否存在该记录
         /// </summary>
+        public bool Exists( string pi_wec_ctn)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from pi_det");
+            strSql.Append(" where pi_wec_ctn=@pi_wec_ctn ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50)			};
+            
+            parameters[0].Value = pi_wec_ctn;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+        /// <summary>
+        /// 是否存在该记录
+        /// </summary>
         public bool Exists(string PI_ID, int pi_LineID)
         {
             StringBuilder strSql = new StringBuilder();

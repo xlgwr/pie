@@ -36,8 +36,10 @@
             this.data1GVSanWecCtnLable = new System.Windows.Forms.DataGridView();
             this.btn0Scan = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbl5lengthWecCtn = new System.Windows.Forms.Label();
             this.lbl3COScanWECCtnLable = new System.Windows.Forms.Label();
             this.txt2SanWecCtnLable = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cmb3CO_ScanWECCtnLable = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -51,7 +53,6 @@
             this.txt1PIID_ScanWECCtnLable = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbl5lengthWecCtn = new System.Windows.Forms.Label();
             this.groupBox1ScanWECCtnLable.SuspendLayout();
             this.group3BXdataGV1ScanList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GVSanWecCtnLable)).BeginInit();
@@ -124,7 +125,7 @@
             this.btn0Scan.Name = "btn0Scan";
             this.btn0Scan.Size = new System.Drawing.Size(145, 34);
             this.btn0Scan.TabIndex = 200;
-            this.btn0Scan.Text = "&Scan";
+            this.btn0Scan.Text = "&OK";
             this.btn0Scan.UseVisualStyleBackColor = true;
             this.btn0Scan.Click += new System.EventHandler(this.btn0Scan_Click);
             // 
@@ -133,6 +134,7 @@
             this.groupBox2.Controls.Add(this.lbl5lengthWecCtn);
             this.groupBox2.Controls.Add(this.lbl3COScanWECCtnLable);
             this.groupBox2.Controls.Add(this.txt2SanWecCtnLable);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.cmb3CO_ScanWECCtnLable);
             this.groupBox2.Location = new System.Drawing.Point(12, 160);
@@ -141,6 +143,16 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Scan Wec Ctn Lable";
+            // 
+            // lbl5lengthWecCtn
+            // 
+            this.lbl5lengthWecCtn.AutoSize = true;
+            this.lbl5lengthWecCtn.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl5lengthWecCtn.ForeColor = System.Drawing.Color.Red;
+            this.lbl5lengthWecCtn.Location = new System.Drawing.Point(545, 28);
+            this.lbl5lengthWecCtn.Name = "lbl5lengthWecCtn";
+            this.lbl5lengthWecCtn.Size = new System.Drawing.Size(0, 12);
+            this.lbl5lengthWecCtn.TabIndex = 205;
             // 
             // lbl3COScanWECCtnLable
             // 
@@ -155,13 +167,24 @@
             // txt2SanWecCtnLable
             // 
             this.txt2SanWecCtnLable.Font = new System.Drawing.Font("SimSun", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt2SanWecCtnLable.Location = new System.Drawing.Point(93, 20);
+            this.txt2SanWecCtnLable.Location = new System.Drawing.Point(222, 20);
+            this.txt2SanWecCtnLable.MaxLength = 12;
             this.txt2SanWecCtnLable.Name = "txt2SanWecCtnLable";
-            this.txt2SanWecCtnLable.Size = new System.Drawing.Size(433, 27);
+            this.txt2SanWecCtnLable.Size = new System.Drawing.Size(154, 27);
             this.txt2SanWecCtnLable.TabIndex = 203;
             this.txt2SanWecCtnLable.TextChanged += new System.EventHandler(this.txt2SanWecCtnLable_TextChanged);
             this.txt2SanWecCtnLable.Enter += new System.EventHandler(this.txt2SanWecCtnLable_Enter);
             this.txt2SanWecCtnLable.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt2SanWecCtnLable_KeyUp);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(144, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 16);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Scan SN:";
             // 
             // label4
             // 
@@ -253,14 +276,14 @@
             this.cmb2Type_ScanWECCTN.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmb2Type_ScanWECCTN.FormattingEnabled = true;
             this.cmb2Type_ScanWECCTN.Items.AddRange(new object[] {
-            "Rua",
             "Normal",
+            "Rma",
             "Mech"});
             this.cmb2Type_ScanWECCTN.Location = new System.Drawing.Point(224, 83);
             this.cmb2Type_ScanWECCTN.Name = "cmb2Type_ScanWECCTN";
             this.cmb2Type_ScanWECCTN.Size = new System.Drawing.Size(156, 24);
             this.cmb2Type_ScanWECCTN.TabIndex = 200;
-            this.cmb2Type_ScanWECCTN.Text = "Rua";
+            this.cmb2Type_ScanWECCTN.Text = "Normal";
             // 
             // cmb1Plant_ScanWECCtnLable
             // 
@@ -316,16 +339,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Plant:";
             // 
-            // lbl5lengthWecCtn
-            // 
-            this.lbl5lengthWecCtn.AutoSize = true;
-            this.lbl5lengthWecCtn.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl5lengthWecCtn.ForeColor = System.Drawing.Color.Red;
-            this.lbl5lengthWecCtn.Location = new System.Drawing.Point(545, 28);
-            this.lbl5lengthWecCtn.Name = "lbl5lengthWecCtn";
-            this.lbl5lengthWecCtn.Size = new System.Drawing.Size(0, 12);
-            this.lbl5lengthWecCtn.TabIndex = 205;
-            // 
             // frmPI0ScanWECCtnLable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -369,5 +382,6 @@
         private System.Windows.Forms.GroupBox group3BXdataGV1ScanList;
         protected internal System.Windows.Forms.DataGridView data1GVSanWecCtnLable;
         private System.Windows.Forms.Label lbl5lengthWecCtn;
+        private System.Windows.Forms.Label label5;
     }
 }

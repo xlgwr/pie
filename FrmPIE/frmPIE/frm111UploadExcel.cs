@@ -264,23 +264,23 @@ namespace FrmPIE.frmPIE
                 plr_mstr_model.packingListID = arryItem[i, 1] != null ? arryItem[i, 1].ToString().Trim() : "";
                 plr_mstr_model.InvoiceID = arryItem[i, 2] != null ? arryItem[i, 2].ToString().Trim() : "";
 
-                plr_mstr_model.plr_site = arryItem[i, 3] != null ? arryItem[i, 3].ToString().Trim() : "";
-                plr_mstr_model.plr_pallet_no = arryItem[i, 4] != null ? arryItem[i, 4].ToString().Trim() : "";
+                //plr_mstr_model.plr_site = arryItem[i, 3] != null ? arryItem[i, 3].ToString().Trim() : "";
+                plr_mstr_model.plr_pallet_no = arryItem[i, 3] != null ? arryItem[i, 3].ToString().Trim() : "";
 
 
-                plr_mstr_model.CartonType = arryItem[i, 5] != null ? arryItem[i, 5].ToString().Trim() : "0";
-                plr_mstr_model.CartonID = arryItem[i, 6] != null ? arryItem[i, 6].ToString().Trim() : "";
+                plr_mstr_model.CartonType = arryItem[i, 4] != null ? arryItem[i, 4].ToString().Trim() : "0";
+                plr_mstr_model.CartonID = arryItem[i, 5] != null ? arryItem[i, 5].ToString().Trim() : "";
 
-                plr_mstr_model.plr_po = arryItem[i, 7] != null ? arryItem[i, 7].ToString().Trim() : "";
-                plr_mstr_model.plr_co = arryItem[i, 8] != null ? arryItem[i, 8].ToString().Trim() : "";
-                plr_mstr_model.plr_partno = arryItem[i, 9] != null ? arryItem[i, 9].ToString().Trim() : "";
+                plr_mstr_model.plr_po = arryItem[i, 6] != null ? arryItem[i, 6].ToString().Trim() : "";
+                plr_mstr_model.plr_co = arryItem[i, 7] != null ? arryItem[i, 7].ToString().Trim() : "";
+                plr_mstr_model.plr_partno = arryItem[i, 8] != null ? arryItem[i, 8].ToString().Trim() : "";
 
-                plr_mstr_model.plr_date_code = arryItem[i, 10] != null ? arryItem[i, 10].ToString().Trim() : "";
-                plr_mstr_model.plr_vend_mfgr = arryItem[i, 11] != null ? arryItem[i, 11].ToString().Trim() : "";
-                plr_mstr_model.Plr_vm_partno = arryItem[i, 12] != null ? arryItem[i, 12].ToString().Trim() : "";
+                plr_mstr_model.plr_date_code = arryItem[i, 9] != null ? arryItem[i, 9].ToString().Trim() : "";
+                plr_mstr_model.plr_vend_mfgr = arryItem[i, 10] != null ? arryItem[i, 10].ToString().Trim() : "";
+                plr_mstr_model.Plr_vm_partno = arryItem[i, 11] != null ? arryItem[i, 11].ToString().Trim() : "";
 
-                plr_mstr_model.plr_carton_qty = arryItem[i, 13] != null ? Convert.ToDecimal(arryItem[i, 13].ToString().Trim()) : 0;
-                plr_mstr_model.plr_qty = arryItem[i, 14] != null ? Convert.ToDecimal(arryItem[i, 14].ToString().Trim()) : 0;
+                plr_mstr_model.plr_carton_qty = arryItem[i, 12] != null ? Convert.ToDecimal(arryItem[i, 12].ToString().Trim()) : 0;
+                plr_mstr_model.plr_qty = arryItem[i, 13] != null ? Convert.ToDecimal(arryItem[i, 13].ToString().Trim()) : 0;
 
                 #region check right
                 if (string.IsNullOrEmpty(plr_mstr_model.packingListID) && string.IsNullOrEmpty(plr_mstr_model.InvoiceID) && string.IsNullOrEmpty(plr_mstr_model.CartonID) && string.IsNullOrEmpty(plr_mstr_model.plr_po) && string.IsNullOrEmpty(plr_mstr_model.plr_partno))

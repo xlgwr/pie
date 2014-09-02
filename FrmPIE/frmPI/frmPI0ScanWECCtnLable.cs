@@ -23,6 +23,7 @@ namespace FrmPIE.frmPI
 
         bool _addNextNewFalg = false;
         int _nextlineid = 1;
+        string _strCO;
         DataSet cods;
 
         PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
@@ -242,7 +243,7 @@ namespace FrmPIE.frmPI
                         _pi_det_model.CartonNo = tran.CartonNo;
                         _pi_det_model.CartonID = tran.CartonID;
 
-                        _pi_det_model.pi_chr01 = cmb3CO_ScanWECCtnLable.Text;
+                        _pi_det_model.pi_chr01 = _strCO;
                         _pi_det_model.pi_remark = "New";
                         _pi_det_model.pi_cre_date = DbHelperSQL.getServerGetDate();
                         _pi_det_model.pi_user_ip = _idr_show._custip;
@@ -354,28 +355,72 @@ namespace FrmPIE.frmPI
                         if (!string.IsNullOrEmpty(_plr_mstr_tran_model_list[0].plr_chr01) && _plr_mstr_tran_model_list[0].plr_chr01.Equals("S"))
                         {
                             ShowMsg(txt2SanWecCtnLable.Text + " has being Scaning.", "Error");
-                            initfalse();
+                            //initfalse();
                             return false;
 
                         }
                         var strco = _plr_mstr_tran_model_list[0].plr_co;
                         if (string.IsNullOrEmpty(strco))
                         {
-                            ShowMsg(txt2SanWecCtnLable.Text + " has no Co.", "Error");
-                            cmb3CO_ScanWECCtnLable.Focus();
-                            initfalse();
-                            return false;
-                        }
-                        for (int i = 0; i < cmb3CO_ScanWECCtnLable.Items.Count; i++)
-                        {
-
-                            var dindex = cmb3CO_ScanWECCtnLable.Items[i].ToString().StartsWith(strco);
-                            if (dindex)
+                            //initfalse();
+                            if (string.IsNullOrEmpty(cmb3CO_ScanWECCtnLable.Text))
                             {
-                                cmb3CO_ScanWECCtnLable.SelectedIndex = i;
-                                break;
+                                ShowMsg(txt2SanWecCtnLable.Text + " has no CO.", "Error");
+                                cmb3CO_ScanWECCtnLable.Focus();
+                                return false;
+                            }
+                            else
+                            {
+                                PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", cmb3CO_ScanWECCtnLable.Text,true);
+                                if (existco != null)
+                                {
+                                    cmb3CO_ScanWECCtnLable.Text = existco.t_value + ":" + existco.t_desc;
+                                    strco = existco.t_value + "," + existco.t_desc;
+                                    _strCO = strco;
+                                    //return false;
+                                }
+                                else
+                                {
+                                    ShowMsg(cmb3CO_ScanWECCtnLable.Text + " has no Desc.", "Error: ");
+                                    strco = "";
+                                    cmb3CO_ScanWECCtnLable.Focus();
+                                    return false;
+                                }
                             }
                         }
+                        else
+                        {
+                            cmb3CO_ScanWECCtnLable.Text = strco;
+                            for (int i = 0; i < cmb3CO_ScanWECCtnLable.Items.Count; i++)
+                            {
+
+                                var dindex = cmb3CO_ScanWECCtnLable.Items[i].ToString().StartsWith(strco);
+                                if (dindex)
+                                {
+                                    cmb3CO_ScanWECCtnLable.SelectedIndex = i;
+                                    break;
+                                }
+                            }
+                            if (cmb3CO_ScanWECCtnLable.Text.Length > 0)
+                            {
+                                PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", cmb3CO_ScanWECCtnLable.Text,true);
+                                if (existco != null)
+                                {
+                                    lbl3COScanWECCtnLable.Text = existco.t_value + ":" + existco.t_desc;
+                                    strco = existco.t_value + "," + existco.t_desc;
+                                    _strCO = strco;
+                                }
+                                else
+                                {
+                                    ShowMsg(cmb3CO_ScanWECCtnLable.Text + " has no Desc.", "Error: ");
+                                    cmb3CO_ScanWECCtnLable.Text = "";
+                                    strco = "";
+                                    cmb3CO_ScanWECCtnLable.Focus();
+                                    return false;
+                                }
+                            }
+                        }
+
                         return true;
                     }
                     else
@@ -458,11 +503,11 @@ namespace FrmPIE.frmPI
         }
         private void cmb3CO_ScanWECCtnLable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            initCoDesc(sender, e);
+            // initCoDesc(sender, e);
         }
         private void cmb3CO_ScanWECCtnLable_SelectedValueChanged(object sender, EventArgs e)
         {
-            initCoDesc(sender, e);
+            // initCoDesc(sender, e);
         }
         private void initCoDesc()
         {
@@ -496,7 +541,7 @@ namespace FrmPIE.frmPI
             {
                 lbl3COScanWECCtnLable.Text = "";
             }
-            initCoDesc(sender, e);
+           // initCoDesc(sender, e);
         }
 
         private void cmb3CO_ScanWECCtnLable_KeyUp(object sender, KeyEventArgs e)
@@ -541,6 +586,34 @@ namespace FrmPIE.frmPI
                 }
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string strmsg = "";
+            if (txt2SanWecCtnLable.Text.Length > 0)
+            {
+                string strwhere = "pi_wec_ctn = '" + txt2SanWecCtnLable.Text.Trim() + "'";
+                var pidetds = new PI.BLL.pi_det().GetList(strwhere);
+                if (pidetds != null)
+                {
+                    data1GVSanWecCtnLable.DataSource = pidetds.Tables[0].DefaultView;
+                    data1GVSanWecCtnLable.Refresh();
+                    strmsg = "Notice: Inquire " + txt2SanWecCtnLable.Text + ", success.";
+                }
+                else
+                {
+                    data1GVSanWecCtnLable.DataSource = null;
+                    data1GVSanWecCtnLable.Refresh();
+                    strmsg = "Error: " + txt2SanWecCtnLable.Text + " is not exist.";
+                }
+            }
+            else
+            {
+
+                strmsg = "Error: Scan SN is not exist.";
+            }
+            lbl0msg.Text = strmsg;
         }
 
 

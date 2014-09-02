@@ -38,6 +38,7 @@ namespace FrmPIE
         public Boolean _voidRefresh;
 
         public models.plr_batch_mstr _plr_batch_mstr_model = new models.plr_batch_mstr();
+        public PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
         Commfunction cf;
         public string _custip = Program.getClientIP();
 
@@ -78,11 +79,11 @@ namespace FrmPIE
         }
         private void frmIDR_Load(object sender, EventArgs e)
         {
-
+            
             initHideImage(new object[] { hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3, status11toolBtnleft }, 1);
             initHideImage(new object[] { hideToolBarToolStripMenuItem1 }, 2);
 
-            initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3, btn21ScanCartronLabel21, btn22PISystem, btn23ERPDB, btn24PIReports });
+            initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3, btn21ScanCartronLabel21, btn24PIReports });
             //Control.CheckForIllegalCrossThreadCalls = false;
 
         }
@@ -424,13 +425,15 @@ namespace FrmPIE
 
         private void btn0Add_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Add New", true);
+            //addNewTabPage("Add New", true);
+            toolcMenu12AddOneByOneBatchID_Click(sender, e);
 
         }
 
         private void btn0Edit2_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Edit", true);
+            //addNewTabPage("Edit", true);
+            toolcMenu11UploadEPackingListExcel_Click(sender, e);
         }
 
         private void btn0Del3_Click(object sender, EventArgs e)
@@ -450,7 +453,8 @@ namespace FrmPIE
 
         private void btn0Print6_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Printing", true);
+            //addNewTabPage("Printing", true);
+            toolStripMenuItem31btnPrintCartonLabel3_Click(sender, e);
         }
 
         private void btn0Down8_Click(object sender, EventArgs e)
@@ -462,19 +466,15 @@ namespace FrmPIE
         {
             if (!string.IsNullOrEmpty(txt0SearchID.Text.Trim()))
             {
-                if (cmb1SearchType.Text.ToLower().Equals("batchid"))
+                if (cmb1SearchType.Text.Equals("BatchID"))
                 {
                     var exist = new PIE.BLL.plr_batch_mstr().Exists(txt0SearchID.Text.Trim());
                     if (exist)
                     {
                         string strtitle = "Find " + cmb1SearchType.Text + ":" + txt0SearchID.Text.Trim() + "Result";
-
-
                         var tpg = addNewTabPage(strtitle);
-
                         this._plr_batch_mstr_model.batch_id = txt0SearchID.Text.Trim();
                         frm0BatchInfo bi = new frm0BatchInfo(this);
-
                         addGBToTC(tpg, bi.groupBox0BatchInfo0);
                     }
                     else
@@ -483,6 +483,23 @@ namespace FrmPIE
                         txt0SearchID.SelectionStart = txt0SearchID.Text.Length;
                     }
 
+                }
+                else if (cmb1SearchType.Text.Equals("PI ID"))
+                {
+                    var exist = new PI.BLL.pi_mstr().Exists(txt0SearchID.Text.Trim(), 1);
+                    if (exist)
+                    {
+                        string strtitle = "Find " + cmb1SearchType.Text + ":" + txt0SearchID.Text.Trim() + "Result";
+                        var tpg = addNewTabPage(strtitle);
+                        this._pi_mstr_model.PI_ID = txt0SearchID.Text.Trim();
+                        frmPI1ScanDataInquire bi = new frmPI1ScanDataInquire(this);
+                        addGBToTC(tpg, bi.gb00PIScanPIDataitemInquire);
+                    }
+                    else
+                    {
+                        lbl0SearchError.Text = "Error:PI Mstr " + txt0SearchID.Text + " is not exist.";
+                        txt0SearchID.SelectionStart = txt0SearchID.Text.Length;
+                    }
                 }
             }
         }
@@ -581,6 +598,11 @@ namespace FrmPIE
                 cf.initVoid(dwo);
                 _voidRefresh = true;
             }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
 
 

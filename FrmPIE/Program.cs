@@ -28,7 +28,7 @@ namespace FrmPIE
         [STAThread]
         static void Main()
         {
-            frmVersion = "@V2014-09-02-07-dev";
+            frmVersion = "@V2014-09-02-16-dev";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
