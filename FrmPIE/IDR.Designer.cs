@@ -34,6 +34,7 @@
             this.窗口WToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideToolBarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hideLeftBarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmb1SearchType = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.status11toolBtnleft = new System.Windows.Forms.ToolStripSplitButton();
@@ -100,7 +101,6 @@
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -166,9 +166,15 @@
             this.hideLeftBarToolStripMenuItem2.Text = "Hide &Left Bar";
             this.hideLeftBarToolStripMenuItem2.Click += new System.EventHandler(this.hideLeftBarToolStripMenuItem2_Click);
             // 
+            // 关于AToolStripMenuItem
+            // 
+            this.关于AToolStripMenuItem.Name = "关于AToolStripMenuItem";
+            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
+            this.关于AToolStripMenuItem.Text = "关于(&A)";
+            // 
             // cmb1SearchType
             // 
-            this.cmb1SearchType.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb1SearchType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmb1SearchType.FormattingEnabled = true;
             this.cmb1SearchType.Items.AddRange(new object[] {
             "BatchID",
@@ -256,7 +262,7 @@
             // 
             // txt0SearchID
             // 
-            this.txt0SearchID.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0SearchID.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txt0SearchID.Location = new System.Drawing.Point(282, 13);
             this.txt0SearchID.Name = "txt0SearchID";
             this.txt0SearchID.Size = new System.Drawing.Size(159, 26);
@@ -597,7 +603,7 @@
             // 
             this.lblSystemName.AutoSize = true;
             this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSystemName.Font = new System.Drawing.Font("SimSun", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSystemName.Font = new System.Drawing.Font("宋体", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSystemName.Location = new System.Drawing.Point(249, 0);
             this.lblSystemName.Name = "lblSystemName";
             this.lblSystemName.Size = new System.Drawing.Size(205, 86);
@@ -752,7 +758,7 @@
             // 
             this.lbl0SearchError.AutoSize = true;
             this.lbl0SearchError.ForeColor = System.Drawing.Color.Red;
-            this.lbl0SearchError.Location = new System.Drawing.Point(480, 20);
+            this.lbl0SearchError.Location = new System.Drawing.Point(513, 20);
             this.lbl0SearchError.Name = "lbl0SearchError";
             this.lbl0SearchError.Size = new System.Drawing.Size(0, 12);
             this.lbl0SearchError.TabIndex = 11;
@@ -765,7 +771,7 @@
             this.btn0Find9.FlatAppearance.BorderSize = 0;
             this.btn0Find9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn0Find9.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn0Find9.Location = new System.Drawing.Point(447, 4);
+            this.btn0Find9.Location = new System.Drawing.Point(447, 3);
             this.btn0Find9.Name = "btn0Find9";
             this.btn0Find9.Size = new System.Drawing.Size(43, 44);
             this.btn0Find9.TabIndex = 10;
@@ -877,12 +883,6 @@
             this.tool110StripMenuItemVoid});
             this.c11MenuStripVoid.Name = "cMenuStrip1ScanCartronLabel";
             this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 26);
-            // 
-            // 关于AToolStripMenuItem
-            // 
-            this.关于AToolStripMenuItem.Name = "关于AToolStripMenuItem";
-            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
-            this.关于AToolStripMenuItem.Text = "关于(&A)";
             // 
             // frmIDR
             // 
