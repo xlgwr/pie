@@ -183,7 +183,7 @@ namespace FrmPIE.frmPIE
             PIE.Model.plr_mstr plr_mstr_model = new PIE.Model.plr_mstr();
 
             SqlParameter[] parameters = {
-                                            new SqlParameter("@BatchID",SqlDbType.NVarChar,11)
+                                            new SqlParameter("@BatchID",SqlDbType.NVarChar,20)
                                         };
             parameters[0].Direction = ParameterDirection.Output;
 

@@ -1378,11 +1378,11 @@ namespace FrmPIE._0API
 
                         if (!string.IsNullOrEmpty(strSJ))
                         {
-                            strtxt.AppendLine(@"^FT309,81^A0N,56,55^FH\^FD * " + plr_mstr_tran_list[0].plr_co + "^FS");
+                            strtxt.AppendLine(@"^FT289,191^A0N,25,24^FH\^FD * " + plr_mstr_tran_list[0].plr_co + "^FS");
                         }
                         else
                         {
-                            strtxt.AppendLine(@"^FT309,81^A0N,56,55^FH\^FD" + plr_mstr_tran_list[0].plr_co + "^FS");
+                            strtxt.AppendLine(@"^FT289,191^A0N,25,24^FH\^FD" + plr_mstr_tran_list[0].plr_co + "^FS");
 
                         }
                         strtxt.AppendLine(@"^BY4,3,103^FT25,351^BCN,,Y,N");

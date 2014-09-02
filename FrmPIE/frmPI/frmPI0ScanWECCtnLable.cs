@@ -441,10 +441,12 @@ namespace FrmPIE.frmPI
                         //lbl0noticePiId.Text = "changed";
                         //////////////************************
                         threadinitDVdelegate();
+
+
                     }
                     else
                     {
-
+                        ShowMsg(txt1PIID_ScanWECCtnLable.Text + " is not exist.", "Notice");
                         lbl0noticePiId.Text = txt1PIID_ScanWECCtnLable.Text + " is not exist.";
                     }
                 }
