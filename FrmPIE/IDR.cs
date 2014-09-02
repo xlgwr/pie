@@ -274,7 +274,7 @@ namespace FrmPIE
 
         private TabPage addNewTabPage(string pagename)
         {
-            tabCtlRight1.TabPages.Add(tabCtlRight1.TabCount + pagename, tabCtlRight1.TabCount + pagename);
+            tabCtlRight1.TabPages.Add(tabCtlRight1.TabCount + ":" + pagename, tabCtlRight1.TabCount + ":" + pagename);
 
             tabCtlRight1.SelectedIndex = tabCtlRight1.TabCount - 1;
             status13toolSStatusLblMsg.Text = tabCtlRight1.SelectedIndex.ToString() + "," + pagename;
@@ -577,7 +577,7 @@ namespace FrmPIE
         {
             if (_voidDGV != null)
             {
-                DoWrokObject dwo = new DoWrokObject(_voidDGV, _voideX, _voideX, _voidhasLineID,"plr_status");
+                DoWrokObject dwo = new DoWrokObject(_voidDGV, _voideX, _voideX, _voidhasLineID, "plr_status");
                 cf.initVoid(dwo);
                 _voidRefresh = true;
             }
