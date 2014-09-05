@@ -28,7 +28,7 @@ namespace FrmPIE
         [STAThread]
         static void Main()
         {
-            frmVersion = "@V2014-09-02-16-dev";
+            frmVersion = "@V2014-09-04-09-dev";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
@@ -56,7 +56,8 @@ namespace FrmPIE
 
         private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
-            throw new NotImplementedException("error thread.");
+            //throw new NotImplementedException("error thread:"+e.Exception.Message);
+            MessageBox.Show(e.Exception.Message);
         }
         public static string ADValidate(string ADPath, string Uname, string Password)
         {
@@ -247,7 +248,6 @@ namespace FrmPIE
 
 
         }
-
         private static bool initWebServer(string plr_po, WebReference100.Service server100, string intable, string strPO, out DataSet ds)
         {
             int returnValueNumber;

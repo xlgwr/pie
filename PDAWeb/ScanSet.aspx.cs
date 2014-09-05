@@ -38,7 +38,7 @@ public partial class ScanSet : System.Web.UI.Page
             lblMessage.Text = "PI ID is null,if you sure,this will be generate a New one.";
 
         }
-        
+
         var existpiid = new PI.DAL.pi_mstr().Exists(strPIID, 1);
         if (!existpiid)
         {
@@ -103,7 +103,10 @@ public partial class ScanSet : System.Web.UI.Page
         Session["plant"] = ddlPlant.Text;
         Session["type"] = ddlType.Text;
 
-        Response.Redirect("Default.aspx");
+        //Response.Redirect("Default.aspx");
+
+        Response.Write("<script language='javascript'>window.open('Default.aspx', '_blank', 'fullscreen=yes,toolbar=no,titlebar=no');</script>");
+
 
     }
     protected void BtnClear_Click(object sender, EventArgs e)
@@ -120,5 +123,6 @@ public partial class ScanSet : System.Web.UI.Page
         Session["plant"] = null;
         Session["type"] = null;
         Response.Write("<script language='javascript'>top.location.href='Login.aspx';</script>");
+
     }
 }

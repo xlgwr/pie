@@ -26,6 +26,8 @@ namespace FrmPIE.frmPI
         string _strCO;
         DataSet cods;
 
+        string _strWecCtnSn = "";
+
         PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
         PI.Model.pi_det _pi_det_model = new PI.Model.pi_det();
 
@@ -128,8 +130,10 @@ namespace FrmPIE.frmPI
         }
         private void ShowMsg(string msg, string title)
         {
-            lbl0msg.Visible = true;
-            lbl0msg.Text = title + ":" + msg;
+
+            cf.SetCtlTextdelegate(lbl0msg, title+":"+msg, true, true);
+            //lbl0msg.Visible = true;
+            //lbl0msg.Text = title + ":" + msg;
         }
         private void initDatasetToTxt(PI.Model.pi_mstr model)
         {
@@ -150,10 +154,33 @@ namespace FrmPIE.frmPI
                 initDatasetToTxt((PI.Model.pi_mstr)reobjmstr);
             }
         }
+        private void pirefreshDelegate()
+        {
+            Commfunction.dvoidMethod me = new Commfunction.dvoidMethod(pirefresh);
+            _idr_show.BeginInvoke(me);
+        }
         private void initDGVDelegate(object strBatchID)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initDGV);
             _idr_show.BeginInvoke(me, strBatchID);
+        }
+        private void threadPiRefreshdeleget()
+        {
+            _idr_show._tRefresh = new Thread(pirefreshDelegate);
+            if (_idr_show._tRefresh.ThreadState == ThreadState.Running)
+            {
+                _idr_show._tRefresh.Abort();
+            }
+
+            if (_idr_show._tRefresh.ThreadState == ThreadState.Unstarted)
+            {
+                _idr_show._tRefresh.Start();
+            }
+            if (_idr_show._tRefresh.ThreadState == ThreadState.Stopped)
+            {
+                _idr_show._tRefresh = new Thread(pirefreshDelegate);
+                _idr_show._tRefresh.Start();
+            }
         }
         private void threadinitDVdelegate()
         {
@@ -187,6 +214,7 @@ namespace FrmPIE.frmPI
             {
                 return;
             }
+            _strWecCtnSn = txt2SanWecCtnLable.Text.Trim();
             if (!_addNextNewFalg || !_pi_mstr_model.PI_ID.Equals(txt1PIID_ScanWECCtnLable.Text.Trim()))
             {
                 #region add New PIID
@@ -229,10 +257,12 @@ namespace FrmPIE.frmPI
             }
             if (_plr_mstr_tran_model_list.Count > 0)
             {
+
                 foreach (var tran in _plr_mstr_tran_model_list)
                 {
                     if (tran.plr_wec_ctn.Equals(txt2SanWecCtnLable.Text))
                     {
+
                         _pi_det_model.PI_ID = _pi_mstr_model.PI_ID;
                         _pi_det_model.pi_type = _pi_mstr_model.pi_type;
                         _pi_det_model.pi_LineID = _nextlineid;
@@ -244,6 +274,7 @@ namespace FrmPIE.frmPI
                         _pi_det_model.CartonID = tran.CartonID;
 
                         _pi_det_model.pi_chr01 = _strCO;
+                        _pi_det_model.pi_chr02 = tran.plr_po;
                         _pi_det_model.pi_remark = "New";
                         _pi_det_model.pi_cre_date = DbHelperSQL.getServerGetDate();
                         _pi_det_model.pi_user_ip = _idr_show._custip;
@@ -269,8 +300,11 @@ namespace FrmPIE.frmPI
                             tran.plr_chr01 = "S";
                             tran.plr_update_date = DateTime.Now;
                             var updatescan = new PIE.BLL.plr_mstr_tran().Update(tran);
+
+
                         }
                         _nextlineid = _pi_det_model.pi_LineID;
+                        _strWecCtnSn = _pi_det_model.pi_wec_ctn;
                     }
                 }
             }
@@ -371,11 +405,11 @@ namespace FrmPIE.frmPI
                             }
                             else
                             {
-                                PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", cmb3CO_ScanWECCtnLable.Text,true);
+                                PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", cmb3CO_ScanWECCtnLable.Text, true);
                                 if (existco != null)
                                 {
                                     cmb3CO_ScanWECCtnLable.Text = existco.t_value + ":" + existco.t_desc;
-                                    strco = existco.t_value + "," + existco.t_desc;
+                                    strco = existco.t_value + ":" + existco.t_desc;
                                     _strCO = strco;
                                     //return false;
                                 }
@@ -403,11 +437,11 @@ namespace FrmPIE.frmPI
                             }
                             if (cmb3CO_ScanWECCtnLable.Text.Length > 0)
                             {
-                                PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", cmb3CO_ScanWECCtnLable.Text,true);
+                                PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", cmb3CO_ScanWECCtnLable.Text, true);
                                 if (existco != null)
                                 {
                                     lbl3COScanWECCtnLable.Text = existco.t_value + ":" + existco.t_desc;
-                                    strco = existco.t_value + "," + existco.t_desc;
+                                    strco = existco.t_value + ":" + existco.t_desc;
                                     _strCO = strco;
                                 }
                                 else
@@ -541,7 +575,7 @@ namespace FrmPIE.frmPI
             {
                 lbl3COScanWECCtnLable.Text = "";
             }
-           // initCoDesc(sender, e);
+            // initCoDesc(sender, e);
         }
 
         private void cmb3CO_ScanWECCtnLable_KeyUp(object sender, KeyEventArgs e)
@@ -614,6 +648,130 @@ namespace FrmPIE.frmPI
                 strmsg = "Error: Scan SN is not exist.";
             }
             lbl0msg.Text = strmsg;
+        }
+
+        private void pirefresh()
+        {
+            ShowMsg(" Refresh ......", "Notice");
+            DataSet ds;
+            WebReference100.Service server100 = new WebReference100.Service();
+            server100.Timeout = 9000000;
+            try
+            {
+                if (!string.IsNullOrEmpty(_pi_mstr_model.PI_ID))
+                {
+                    List<PI.Model.pi_det> pi_det_list = new PI.BLL.pi_det().GetModelList("PI_ID='" + _pi_mstr_model.PI_ID + "'", true);
+                    PI.Model.pisr_grr pisr_grr_model = new PI.Model.pisr_grr();
+
+
+                    if (pi_det_list.Count > 0)
+                    {
+                        for (int i = 0; i < pi_det_list.Count; i++)
+                        {
+                            PIE.Model.plr_mstr_tran plr_mstr_tran_model = new PIE.DAL.plr_mstr_tran().GetModel(pi_det_list[i].pi_wec_ctn);
+                            if (plr_mstr_tran_model != null)
+                            {
+
+                                var existinit = cf.initWebServer(plr_mstr_tran_model.plr_po, server100, "wsas017", pi_det_list[i].pi_wec_ctn, out ds);
+                                if (existinit)
+                                {
+                                    if (ds != null)
+                                    {
+                                        if (ds.Tables[0].Rows.Count > 0)
+                                        {
+                                            var addPisgrr = false;
+                                            for (int y = 0; y < ds.Tables[0].Rows.Count; y++)
+                                            {
+                                                pisr_grr_model.pi_wec_ctn = ds.Tables[0].Rows[y]["wsas017_wec_id"].ToString();
+                                                pisr_grr_model.plr_LineID_tran = Convert.ToInt32(ds.Tables[0].Rows[y]["wsas017_line"]);
+
+                                                var existgrr = new PI.BLL.pisr_grr().Exists(pisr_grr_model.pi_wec_ctn, pisr_grr_model.plr_LineID_tran);
+                                                pisr_grr_model.Plant = "0";
+
+                                                if (existgrr)
+                                                {
+                                                    ShowMsg(pi_det_list[i].pi_wec_ctn + "已更新.", "Error0");
+                                                    continue;
+                                                }
+                                                pisr_grr_model.pisr_rir = ds.Tables[0].Rows[y]["wsas017_rir"].ToString();
+                                                pisr_grr_model.pisr_invoice = ds.Tables[0].Rows[y]["wsas017_invoice"].ToString();
+
+                                                pisr_grr_model.pisr_part = ds.Tables[0].Rows[y]["wsas017_part"].ToString();
+                                                pisr_grr_model.pisr_site = ds.Tables[0].Rows[y]["wsas017_site"].ToString();
+                                                pisr_grr_model.Pisr_receiver = ds.Tables[0].Rows[y]["wsas017_receiver"].ToString();
+                                                pisr_grr_model.pisr_po_nbr = ds.Tables[0].Rows[y]["wsas017_po_nbr"].ToString();
+                                                pisr_grr_model.pisr_qty = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_qty"].ToString());
+                                                pisr_grr_model.pisr_curr = ds.Tables[0].Rows[y]["wsas017_curr"].ToString();
+                                                pisr_grr_model.pisr_base_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_base_cost"].ToString());
+                                                pisr_grr_model.pisr_us_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_us_cost"].ToString());
+                                                pisr_grr_model.pisr_seq = ds.Tables[0].Rows[y]["wsas017_seq"].ToString();
+                                                pisr_grr_model.pisr_con_code = ds.Tables[0].Rows[y]["wsas017_con_code"].ToString();
+                                                pisr_grr_model.pisr_ch_desc = ds.Tables[0].Rows[y]["wsas017_ch_desc"].ToString();
+                                                pisr_grr_model.pisr_net_wt = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_net_wt"].ToString());
+                                                pisr_grr_model.pisr_rec_type = ds.Tables[0].Rows[y]["wsas017_rec_type"].ToString();
+                                                pisr_grr_model.pisr_abc = ds.Tables[0].Rows[y]["wsas017_abc"].ToString();
+                                                pisr_grr_model.pisr_code = ds.Tables[0].Rows[y]["wsas017_code"].ToString();
+                                                pisr_grr_model.pisr_lic_req = ds.Tables[0].Rows[y]["wsas017_lic_req"].ToString();
+
+                                                pisr_grr_model.pi_cre_date = DateTime.Now;
+                                                pisr_grr_model.pi_update_date = DateTime.Now;
+                                                pisr_grr_model.pi_user_ip = _idr_show._custip;
+                                                pisr_grr_model.pi_cre_userid = _idr_show._sys_user_model.user_name;
+
+                                                addPisgrr = new PI.BLL.pisr_grr().Add(pisr_grr_model);
+
+                                            }
+                                            if (addPisgrr)
+                                            {
+                                                ShowMsg(" Refresh OK.", "Notice");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            ShowMsg(pi_det_list[i].pi_wec_ctn + "没有记录.", "Error0");
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        ShowMsg(pi_det_list[i].pi_wec_ctn + "没有记录.", "Error1");
+                                    }
+                                }
+                                else
+                                {
+                                    ShowMsg("WebServer 连接错误.", "Error2");
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                ShowMsg("没有扫描记录.", "Error3");
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        ShowMsg(" is no exist.", "Error4");
+
+                    }
+
+
+                }
+                else
+                {
+                    ShowMsg("Ctn SN is null.", "Error");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            threadPiRefreshdeleget();
         }
 
 

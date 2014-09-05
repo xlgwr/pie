@@ -11,7 +11,7 @@ namespace PI.Model
         { }
         #region Model
         private string _pi_id;
-        private int _pi_lineid;
+        private int _pi_lineid=1;
         private string _pi_wec_ctn;
         private int _plr_lineid_tran;
         private string _pi_pallet_no;

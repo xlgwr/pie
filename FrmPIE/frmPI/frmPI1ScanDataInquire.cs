@@ -25,7 +25,7 @@ namespace FrmPIE.frmPI
             initWidth();
             data1GV1_PIdet.ReadOnly = true;
 
-            DoWrokObject obj = new DoWrokObject(data1GV1_PIdet, _idr_show._pi_mstr_model.PI_ID);
+            DoWrokObject obj = new DoWrokObject(data0GVPIMstr,data1GV1_PIdet, _idr_show._pi_mstr_model.PI_ID);
 
             _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
 
@@ -44,11 +44,16 @@ namespace FrmPIE.frmPI
                 _idr_show._tInitGDV.Start(obj);
             }
 
+            _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Layout;
+
+            data0GVPIMstr.RowEnter += data0GVPIMstr_RowEnter;
+            data0GVPIMstr.CellClick += data0GVPIMstr_CellClick;
+
             data1GV1_PIdet.RowEnter += data1GV1ePackingDet1_BatchInfo_RowEnter;
             data1GV1_PIdet.CellClick += data1GV1ePackingDet1_BatchInfo_CellClick;
-            _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Layout;
-        }
 
+
+        }
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
         {
             initWidth();
@@ -57,30 +62,43 @@ namespace FrmPIE.frmPI
         {
             gb2det_PIdet.Width = gb00PIScanPIDataitemInquire.Width - gb2det_PIdet.Left;
             gb1mstr_PIMstr.Width = gb2det_PIdet.Width;
+            groupBox1PIMstr.Width = gb2det_PIdet.Width;
 
             gb2det_PIdet.Height = gb00PIScanPIDataitemInquire.Height - gb2det_PIdet.Top;
         }
-
+        void data0GVPIMstr_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data0GVPIMstr,data1GV1_PIdet, e.RowIndex, e.ColumnIndex);
+            cf.selectCellMethod(dwo, _idr_show._pi_mstr_model.PI_ID,true,this);
+        }
+        void data0GVPIMstr_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data0GVPIMstr, 3, e.RowIndex, Color.Yellow, "pi_user_ip", "pi_status", "Yes", Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
+        }
         void data1GV1ePackingDet1_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(data1GV1_PIdet, e.RowIndex, e.ColumnIndex);
-            cf.selectCellMethod(dwo,_idr_show._pi_mstr_model.PI_ID);
+            cf.selectCellMethod(dwo, _idr_show._pi_mstr_model.PI_ID);
         }
 
         void data1GV1ePackingDet1_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-          DoWrokObject dwo = new DoWrokObject(data1GV1_PIdet, 3, e.RowIndex, Color.Yellow, "pi_wec_ctn", "pi_status", "Yes", Color.LightGray);
-          cf.initThreadDowrokColor(dwo);
+            DoWrokObject dwo = new DoWrokObject(data1GV1_PIdet, 3, e.RowIndex, Color.LightGreen, "pi_wec_ctn", "pi_status", "Yes", Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
         }
         private void initDGV(object doWorkobj)
         {
             DoWrokObject obj = (DoWrokObject)doWorkobj;
 
             CartonFromTo ctftPlrMstr = new CartonFromTo(obj._dgv, obj._strBatchId, 1, "upload", _idr_show._custip, _idr_show._custip);
+            CartonFromTo ctftPlrMstrall = new CartonFromTo(obj._dgv, obj._strBatchId, 0, "upload", _idr_show._custip, _idr_show._custip,100);
 
-            CartonFromTo ctftPlrMstrTran = new CartonFromTo(obj._dgv, obj._strBatchId, 0, "upload", _idr_show._custip, _idr_show._custip);
+            CartonFromTo ctftPlrMstrTran = new CartonFromTo(obj._dgv1, obj._strBatchId, 0, "upload", _idr_show._custip, _idr_show._custip);
 
             var reobjmstr = cf.initDataGVpi_mstr(ctftPlrMstr, false, "model");
+
+            var reobjmstrDGVreflash = cf.initDataGVpi_mstr(ctftPlrMstrall, true, "all");
             var reobjdet = cf.initDataGVpi_det(ctftPlrMstrTran, true, "nothing");
 
             if (reobjmstr != null)
@@ -91,7 +109,7 @@ namespace FrmPIE.frmPI
             }
 
         }
-        private void initModelToTxtPlrBatchMast(PI.Model.pi_mstr model, bool breadonly)
+        public void initModelToTxtPlrBatchMast(PI.Model.pi_mstr model, bool breadonly)
         {
             txt1PI_id_PIMstr.Text = model.PI_ID;
             txt2_Plant_PIMstr.Text = model.Plant;

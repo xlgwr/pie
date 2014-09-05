@@ -13,6 +13,7 @@ public partial class _Default : System.Web.UI.Page
     string strpiid = "";
     string strSN = "";
     string _strco = "";
+    string _strmsg = "";
     PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
     PI.Model.pi_det _pi_det_model = new PI.Model.pi_det();
 
@@ -44,7 +45,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void BtnClear_Click(object sender, EventArgs e)
     {
-        initfalse();
+        initfalse("", "");
     }
     protected void BtnOK_Click(object sender, EventArgs e)
     {
@@ -60,10 +61,11 @@ public partial class _Default : System.Web.UI.Page
         {
             return;
         }
+
         if (string.IsNullOrWhiteSpace(txtCo.Text))
         {
             txtCo.Focus();
-            lblMessage.Text = "Error: Co is null.";
+            ShowMsg("Error: CO is null.", "Error");
             return;
         }
 
@@ -83,7 +85,7 @@ public partial class _Default : System.Web.UI.Page
                     _pi_det_model.CartonNo = tran.CartonNo;
                     _pi_det_model.CartonID = tran.CartonID;
 
-                    _pi_det_model.pi_chr01 = txtCo.Text.ToUpper();
+                    _pi_det_model.pi_chr01 = _strco;
                     _pi_det_model.pi_remark = "New";
                     _pi_det_model.pi_cre_date = DbHelperSQL.getServerGetDate();
                     _pi_det_model.pi_update_date = _pi_det_model.pi_cre_date;
@@ -97,7 +99,8 @@ public partial class _Default : System.Web.UI.Page
                         existBatchidLine = new PI.DAL.pi_det().Exists(_pi_det_model.PI_ID, _pi_det_model.pi_LineID);
                         if (existBatchidLine)
                         {
-                            ShowMsg("系统中已存在PIID：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "，将修改LineID+1.", "Notice");
+                            //ShowMsg("系统中已存在PIID：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "，将修改LineID+1.", "Notice");
+                            lblMessage.Text = "Notice:系统中已存在PIID：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "，将修改LineID+1.";
 
                             _pi_det_model.pi_LineID += 1;
                             //lbl3COScanWECCtnLable.Text = "下个为：PI ID:" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString();
@@ -142,7 +145,7 @@ public partial class _Default : System.Web.UI.Page
 
                 //initModelForTextBox(pi_det_new);
                 _addNextNewFalg = true;
-                ShowMsg("上次新增的为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "," + _strco + "," + txtboxid.Text, "Notice");
+                ShowMsg("继续扫描，上次为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "," + _strco + "," + txtboxid.Text, "Notice");
 
 
             }
@@ -156,22 +159,25 @@ public partial class _Default : System.Web.UI.Page
             ShowMsg("Scan Add fail", "Error");
         }
 
+        //Response.Write("<script language='javascript'>alert('" + _strmsg + "');</script>");
     }
     private void ShowMsg(string msg, string title)
     {
         lblMessage.Visible = true;
         lblMessage.Text = title + ":" + msg;
+        _strmsg = title + ":" + msg;
+        Response.Write("<script language='javascript'>alert('" + _strmsg + "');</script>");
     }
     private bool getCoValiteWecCtnID()
     {
+
         lblMessage.Text = "";
         if (txtboxid.Text.Length >= 12)
         {
             var exist = new PIE.DAL.plr_mstr_tran().Exists(txtboxid.Text);
             if (!exist)
             {
-                lblMessage.Text = txtboxid.Text + " is not exist.";
-                initfalse();
+                initfalse(txtboxid.Text + " is not exist.", "Error");
                 return false;
             }
             _plr_mstr_tran_model_list = new PIE.BLL.plr_mstr_tran().GetModelList("plr_wec_ctn='" + txtboxid.Text + "'");
@@ -182,19 +188,17 @@ public partial class _Default : System.Web.UI.Page
                 {
                     if (!string.IsNullOrEmpty(_plr_mstr_tran_model_list[0].plr_chr01) && _plr_mstr_tran_model_list[0].plr_chr01.Equals("S"))
                     {
-                        ShowMsg(txtboxid.Text + " has being Scaning.", "Error");
-                        initfalse();
+                        initfalse(txtboxid.Text + " has being Scaning.", "Error");
                         return false;
 
                     }
                     var strco = _plr_mstr_tran_model_list[0].plr_co;
                     if (string.IsNullOrEmpty(strco))
                     {
-                        ShowMsg(txtboxid.Text + " has no Co.", "Error");
-                        txtCo.Focus();
-                        //initfalse();
                         if (string.IsNullOrWhiteSpace(txtCo.Text))
                         {
+                            ShowMsg(txtboxid.Text + " has no Co.", "Error");
+                            txtCo.Focus();
                             return false;
                         }
                         else
@@ -203,7 +207,7 @@ public partial class _Default : System.Web.UI.Page
                             if (existco != null)
                             {
                                 lbl3co.Text = existco.t_value + ":" + existco.t_desc;
-                                _strco = existco.t_value + "," + existco.t_desc;
+                                _strco = existco.t_value + ":" + existco.t_desc;
                             }
                             else
                             {
@@ -225,7 +229,7 @@ public partial class _Default : System.Web.UI.Page
                             if (existco != null)
                             {
                                 lbl3co.Text = existco.t_value + ":" + existco.t_desc;
-                                _strco = existco.t_value + "," + existco.t_desc;
+                                _strco = existco.t_value + ":" + existco.t_desc;
                             }
                             else
                             {
@@ -243,8 +247,7 @@ public partial class _Default : System.Web.UI.Page
                 }
                 else
                 {
-                    ShowMsg(txtboxid.Text + " has be Scaning over.", "Notice");
-                    initfalse();
+                    initfalse(txtboxid.Text + " has be Scaning over.", "Notice");
                     return false;
                 }
 
@@ -252,8 +255,7 @@ public partial class _Default : System.Web.UI.Page
             else
             {
 
-                ShowMsg(txtboxid.Text + " is not exist.", "Error");
-                initfalse();
+                initfalse(txtboxid.Text + " is not exist.", "Error");
                 return false;
             }
 
@@ -264,12 +266,13 @@ public partial class _Default : System.Web.UI.Page
         }
 
 
-        initfalse();
+        initfalse(txtboxid.Text + " is not exist.", "Error");
         return false;
     }
 
-    private void initfalse()
+    private void initfalse(string strmsg, string title)
     {
+        ShowMsg(strmsg, title);
         txtboxid.Text = "";
         txtCo.Text = "";
         txtboxid.Focus();

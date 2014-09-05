@@ -77,6 +77,7 @@ public partial class Login : System.Web.UI.Page
             Session["pallet"] = "";
             Session["type"] = "";
             Response.Redirect("ScanSet.aspx");
+            
         }
         else
         {

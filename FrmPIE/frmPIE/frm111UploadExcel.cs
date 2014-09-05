@@ -11,6 +11,11 @@ using PIE.DBUtility;
 using System.Data.SqlClient;
 using Excel;
 
+//xls
+using System.IO;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+
 
 
 namespace FrmPIE.frmPIE
@@ -19,18 +24,76 @@ namespace FrmPIE.frmPIE
     {
         frmIDR _idr_show;
         Commfunction cf;
+        SqlConnection connection;
+        StringBuilder strsql;
+
+        bool _hasrun = false;
+        string _strBatchID = "";
+        DateTime oldtime;
+
+        PIE.Model.plr_batch_mstr _plr_batch_mstr_model = new PIE.Model.plr_batch_mstr();
         public frmUploadExcel(frmIDR idr)
         {
             InitializeComponent();
 
             _idr_show = idr;
-            txtExcelFileUploadExcel.Focus();
+            txt0ExcelFileUploadExcel.Focus();
             initwidthUploadExcel();
-            cf = new Commfunction(idr);
-            data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
-            data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
-        }
 
+            cf = new Commfunction(idr);
+
+            //data1GV1ePackingDet1UploadExcel.ReadOnly = true;
+
+            // data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
+            // data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
+        }
+        //xls
+        DataSet data0set_npoi;
+        SqlDataAdapter command;
+        SqlCommandBuilder cmdb;
+        void getDataGV()
+        {
+            connection = new SqlConnection(PubConstant.ConnectionString);
+
+            string strwhere = " Batch_ID='xlgwr' ";
+            strsql = new StringBuilder();
+            strsql.Append("select ");
+            strsql.Append(" Batch_ID,LineID,plr_status, ");
+            strsql.Append(" packingListID,InvoiceID,plr_pallet_no,CartonType, ");
+            strsql.Append(" CartonID,plr_po,plr_co,plr_partno,plr_date_code, ");
+            strsql.Append(" plr_vend_mfgr,Plr_vm_partno,plr_carton_qty,plr_qty, ");
+            strsql.Append(" plr_doc_type,plr_rcp_date,plr_deli_date,plr_cre_date,plr_update_date,plr_user_ip ");
+            strsql.Append(" from plr_mstr ");
+            strsql.Append(" where ");
+            strsql.Append(strwhere);
+            data0set_npoi = new DataSet();
+            try
+            {
+                connection.Open();
+                command = new SqlDataAdapter(strsql.ToString(), connection);
+                command.Fill(data0set_npoi);
+                data0set_npoi.Tables[0].PrimaryKey = new DataColumn[] { data0set_npoi.Tables[0].Columns[0], data0set_npoi.Tables[0].Columns[1] };
+
+                data1GV1ePackingDet1UploadExcel.DataSource = data0set_npoi.Tables[0].DefaultView;
+                data1GV1ePackingDet1UploadExcel.Refresh();
+
+                data0set_npoi.AcceptChanges();
+
+                cf.initHeaderTextPlrMstr2ExcelUpload(data1GV1ePackingDet1UploadExcel);
+
+                cmdb = new SqlCommandBuilder(command);
+
+                //command.InsertCommand = cmdb.GetInsertCommand();
+                //command.UpdateCommand = cmdb.GetUpdateCommand();
+                //command.DeleteCommand = cmdb.GetDeleteCommand();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+
+        }
         void data1GV1ePackingDet1UploadExcel_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1UploadExcel, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
@@ -59,7 +122,8 @@ namespace FrmPIE.frmPIE
         }
         private void btnSelectfileUploadExcel_Click(object sender, EventArgs e)
         {
-            txtExcelFileUploadExcel.Text = "";
+
+            txt0ExcelFileUploadExcel.Text = "";
             btnSelectfileUploadExcel.Enabled = false;
             OpenFileDialog ofd = new OpenFileDialog();
             try
@@ -67,8 +131,11 @@ namespace FrmPIE.frmPIE
                 ofd.Filter = "Excel文件(*.xls)|*.xls|Excel文件(*.xlsx)|*.xlsx";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    txtExcelFileUploadExcel.Text = ofd.FileName;
+                    txt0ExcelFileUploadExcel.Text = ofd.FileName;
                 }
+                ///
+                // initLoadExcelFile();
+                ///
                 btnSelectfileUploadExcel.Enabled = true;
             }
             catch (Exception ex)
@@ -81,7 +148,8 @@ namespace FrmPIE.frmPIE
 
         private void btnCmdUpdUploadExcel_Click(object sender, EventArgs e)
         {
-            if (txtExcelFileUploadExcel.Text.Trim() == "")
+
+            if (txt0ExcelFileUploadExcel.Text.Trim() == "")
             {
                 // MessageBox.Show("没选择Excel文件， 不能完成上传操作！", "Error");
                 lbl1UploadExcelThreadMsg.Text = "Error,没选择Excel， 不能完成上传操作,请选择正确的文件，谢谢！";
@@ -89,6 +157,7 @@ namespace FrmPIE.frmPIE
             }
             else
             {
+                oldtime = DateTime.Now;
                 _idr_show._tuploadExcel = new Thread(UploadExcelDelegate);
                 if (_idr_show._tuploadExcel.ThreadState == ThreadState.Running)
                 {
@@ -128,10 +197,10 @@ namespace FrmPIE.frmPIE
                 //cf.setControlText(btnCmdUpd, "&Upload", true, true);
             }
         }
-        
+
         private void UploadExcelDelegate()
         {
-            Commfunction.voidMethod me = new Commfunction.voidMethod(UploadExcel);
+            Commfunction.dvoidMethod me = new Commfunction.dvoidMethod(UploadExcel);
             _idr_show.BeginInvoke(me);
         }
 
@@ -167,9 +236,8 @@ namespace FrmPIE.frmPIE
             int row = 2;
             int col = 1;
             int intNullCount = 0, intUploadSuccess = 0;
-            int intOutAffected;
+
             string strCTNID = "999";
-            string strBatchID = "";
 
             string strresult = "", strUploadResult = "";
 
@@ -179,17 +247,14 @@ namespace FrmPIE.frmPIE
 
             //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: 初始化Excel文件...";
 
-            PIE.Model.plr_batch_mstr plr_batch_mstr_model = new PIE.Model.plr_batch_mstr();
             PIE.Model.plr_mstr plr_mstr_model = new PIE.Model.plr_mstr();
 
-            SqlParameter[] parameters = {
-                                            new SqlParameter("@BatchID",SqlDbType.NVarChar,20)
-                                        };
-            parameters[0].Direction = ParameterDirection.Output;
+            if (!getNewBatchID(ref _strBatchID))
+            {
+                return;
+            };
 
-            DbHelperSQL.RunProcedure("sp_GetBatchID", parameters, out intOutAffected);
-            strBatchID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
-            if (string.IsNullOrEmpty(strBatchID))
+            if (string.IsNullOrEmpty(_strBatchID))
             {
                 //MessageBox.Show("生成BatchID,出错，无法导入。");
                 SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadExcel: Error,生成BatchID,出错，无法导入。", true, true);
@@ -215,7 +280,7 @@ namespace FrmPIE.frmPIE
             excel.Visible = false;
             excel.UserControl = true;
             //只读的形工打开Excel文件
-            xBk = excel.Application.Workbooks.Open(txtExcelFileUploadExcel.Text.Trim(), missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing);
+            xBk = excel.Application.Workbooks.Open(txt0ExcelFileUploadExcel.Text.Trim(), missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing);
 
             xSt = (Worksheet)xBk.Worksheets.get_Item(1);
             //try
@@ -229,27 +294,7 @@ namespace FrmPIE.frmPIE
             Range rag1 = xSt.Cells.get_Range("A2", "N" + row); //Batch_ID
             object[,] arryItem = (object[,])rag1.Value2;
 
-            //batch master
-            plr_batch_mstr_model.batch_id = strBatchID;
-            plr_batch_mstr_model.plr_suppliers_id = supplier;
-            plr_batch_mstr_model.batch_doc = "e-Packing";
-            //plr_batch_mstr_model.batch_dec01 = row - 1;
-            plr_batch_mstr_model.batch_void = 0;
-            plr_batch_mstr_model.batch_status = "No";
-            plr_batch_mstr_model.batch_cre_date = DbHelperSQL.getServerGetDate();
-            plr_batch_mstr_model.batch_update_date = plr_batch_mstr_model.batch_cre_date;
 
-            plr_batch_mstr_model.batch_user_ip = _idr_show._custip;
-
-            var result_batch = new PIE.BLL.plr_batch_mstr().Add(plr_batch_mstr_model);
-
-            if (!result_batch)
-            {
-                //MessageBox.Show("生成批号出错，请重新导入。谢谢", "Error");
-                SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadExcel: Error,生成批号出错，请重新导入。", true, true);
-                //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: Error,生成批号出错，请重新导入。";
-                return;
-            }
             //toolStripProgressBarUplad.Maximum = row - 1;
             //toolStripProgressBarUplad.Visible = true;
             //toolStripStatusLabelMessage.Text = "开始导入Excel文件...";
@@ -258,7 +303,7 @@ namespace FrmPIE.frmPIE
             for (int i = 1; i < row; i++)
             {
                 //toolStripProgressBarUplad.Value = i;
-                plr_mstr_model.Batch_ID = strBatchID;
+                plr_mstr_model.Batch_ID = _strBatchID;
                 plr_mstr_model.plr_suppliers_id = supplier;
 
                 plr_mstr_model.packingListID = arryItem[i, 1] != null ? arryItem[i, 1].ToString().Trim() : "";
@@ -362,13 +407,14 @@ namespace FrmPIE.frmPIE
                     SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadToERP: 第:" + intUploadSuccess + "条上传成功", true, true);
                     //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: 第:" + intUploadSuccess + "条上传成功";
 
-                    plr_batch_mstr_model.batch_dec01 = intUploadSuccess;
-                    plr_batch_mstr_model.batch_update_date = DateTime.Now;
+                    _plr_batch_mstr_model.batch_dec01 = intUploadSuccess;
+                    _plr_batch_mstr_model.batch_update_date = DateTime.Now;
+                    _idr_show._plr_batch_mstr_model.batch_dec01 = intUploadSuccess;
 
-                    var addRowCount = new PIE.BLL.plr_batch_mstr().Update(plr_batch_mstr_model);
+                    var addRowCount = new PIE.BLL.plr_batch_mstr().Update(_plr_batch_mstr_model);
 
                     var intresutl = Program.GenCartonNo(plr_mstr_model);
-                   
+
 
 
                     //strpocheck = Program.POchecking(plr_mstr_model);
@@ -383,17 +429,19 @@ namespace FrmPIE.frmPIE
 
             // strUploadResult = intNullCount > 0 ? "BatchID: " + strBatchID + "\n\n总记录: " + (row - 1) + " 条,\t上传:" + intUploadSuccess + "条成功，\t失败: " + intNullCount + " 条\n未上传记录：\n" + strresult + "\n取出未上的的记录，查看后重新上传。谢谢。\n" : "BatchID:  " + strBatchID + "\n 总记录:" + (row - 1) + "条,\t上传:" + intUploadSuccess + "条成功，\t失败:" + intNullCount + "条.\n";
 
-            plr_batch_mstr_model.batch_dec01 = intUploadSuccess;
-            var updatresultBatch = new PIE.BLL.plr_batch_mstr().Update(plr_batch_mstr_model);
+            _plr_batch_mstr_model.batch_dec01 = intUploadSuccess;
+            var updatresultBatch = new PIE.BLL.plr_batch_mstr().Update(_plr_batch_mstr_model);
 
             //toolStripStatusLabelMessage.Text = strUploadResult;
             // toolStripStatusLabelMessage.Text
-            var msg = "$UploadToERP:\t BatchID: " + strBatchID + ",\t 总记录: " + (row - 1) + " 条,\t 上传:" + intUploadSuccess + "条成功，\t 失败: " + intNullCount + "条. 生成 CartonNo Success." + strresult;
-
+            var currtime = DateTime.Now - oldtime;
+            string difftime = " Use Time: " + currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
+            var msg = "$UploadToERP:\t BatchID: " + _strBatchID + ",\t 总记录: " + (row - 1) + " 条,\t 上传:" + intUploadSuccess + "条成功，\t 失败: " + intNullCount + "条. 生成 CartonNo Success." + strresult;
+            msg += difftime;
             SetCtlTextdelegate(lbl1UploadExcelThreadMsg, msg, true, true);
-             //lbl1UploadExcelThreadMsg.Text = msg;
+            //lbl1UploadExcelThreadMsg.Text = msg;
 
-            txtExcelFileUploadExcel.Text = "";
+            txt0ExcelFileUploadExcel.Text = "";
             //cf.setControlText(txtExcelFile, "", true, true);  
 
             //initDataGVBM0(strBatchID);
@@ -411,12 +459,12 @@ namespace FrmPIE.frmPIE
 
             if (_idr_show._tInitGDV.ThreadState == ThreadState.Unstarted)
             {
-                _idr_show._tInitGDV.Start(strBatchID);
+                _idr_show._tInitGDV.Start(_strBatchID);
             }
             if (_idr_show._tInitGDV.ThreadState == ThreadState.Stopped)
             {
                 _idr_show._tInitGDV = new Thread(initExcelDGVDelegate);
-                _idr_show._tInitGDV.Start(strBatchID);
+                _idr_show._tInitGDV.Start(_strBatchID);
             }
 
             //_initDataGVThread = new Thread(new ParameterizedThreadStart(initDGVdelegate));
@@ -491,6 +539,57 @@ namespace FrmPIE.frmPIE
 
         }
 
+        public bool getNewBatchID(ref string strBatchID)
+        {
+            int intOutAffected;
+            SqlParameter[] parameters = {
+                                            new SqlParameter("@BatchID",SqlDbType.NVarChar,20)
+                                        };
+            parameters[0].Direction = ParameterDirection.Output;
+
+            DbHelperSQL.RunProcedure("sp_GetBatchID", parameters, out intOutAffected);
+            strBatchID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
+
+            if (string.IsNullOrEmpty(_strBatchID))
+            {
+                return false;
+            }
+            //batch master
+            if (!insertNewplr_batch_mstr())
+            {
+                return false;
+            }
+            return true;
+        }
+        bool insertNewplr_batch_mstr()
+        {
+            //batch master
+
+            _plr_batch_mstr_model.batch_id = _strBatchID;
+            //_plr_batch_mstr_model.plr_suppliers_id = "";
+            _plr_batch_mstr_model.batch_doc = "e-Packing";
+            //plr_batch_mstr_model.batch_dec01 = row - 1;
+            //_plr_batch_mstr_model.batch_void = 0;
+            _plr_batch_mstr_model.batch_status = "No";
+            _plr_batch_mstr_model.batch_cre_date = DbHelperSQL.getServerGetDate();
+            _plr_batch_mstr_model.batch_update_date = _plr_batch_mstr_model.batch_cre_date;
+            _plr_batch_mstr_model.batch_cre_date = _plr_batch_mstr_model.batch_cre_date;
+
+            _plr_batch_mstr_model.batch_user_ip = _idr_show._custip;
+
+            var result_batch = new PIE.BLL.plr_batch_mstr().Add(_plr_batch_mstr_model);
+
+            if (!result_batch)
+            {
+                //MessageBox.Show("生成批号出错，请重新导入。谢谢", "Error");
+                SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "$UploadExcel: Error,生成批号出错，请重新导入。", true, true);
+                //lbl1UploadExcelThreadMsg.Text = "$UploadExcel: Error,生成批号出错，请重新导入。";
+                return false;
+            }
+            _idr_show._plr_batch_mstr_model = _plr_batch_mstr_model;
+            initDatasetToTxt(_idr_show._plr_batch_mstr_model, true);
+            return true;
+        }
 
         private void initDatasetToTxt(DataSet ds)
         {
@@ -529,6 +628,182 @@ namespace FrmPIE.frmPIE
         {
             string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0temple\temples.xls";
             Program.OpenFolderAndSelectFile(pathname);
+        }
+        void Init0ializeWorkbook(object path)
+        {
+            //read xls
+            using (FileStream file = new FileStream((string)path, FileMode.Open, FileAccess.Read))
+            {
+                _idr_show._hssfworkbook = new HSSFWorkbook(file);
+            }
+
+            Convert0ToDataTable();
+
+            if (data0set_npoi.Tables[0].Rows.Count > 0)
+            {
+                command.InsertCommand = cmdb.GetInsertCommand();
+                command.UpdateCommand = cmdb.GetUpdateCommand();
+                command.DeleteCommand = cmdb.GetDeleteCommand();
+                command.Update(data0set_npoi);
+                data0set_npoi.AcceptChanges();
+                
+                foreach (DataRow dr in data0set_npoi.Tables[0].Rows)
+                {
+                    PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr().DataRowToModel(dr, true);
+                    var intresutl = Program.GenCartonNo(plr_mstr_model);
+                }
+            }
+            data1GV1ePackingDet1UploadExcel.DataSource = data0set_npoi.Tables[0];
+            data1GV1ePackingDet1UploadExcel.Refresh();
+
+            var currtime = DateTime.Now - oldtime;
+            string difftime = currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
+            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "Success: Update " + (data1GV1ePackingDet1UploadExcel.Rows.Count - 1) + " Rows  Success, Use Time: " + difftime, true, true);
+        }
+        void Convert0ToDataTable()
+        {
+            ISheet sheet = _idr_show._hssfworkbook.GetSheetAt(0);
+            System.Collections.IEnumerator rows = sheet.GetRowEnumerator();
+
+            data0set_npoi.Tables[0].Clear();
+            data0set_npoi.Tables[0].AcceptChanges();
+
+
+            System.Data.DataTable dt = data0set_npoi.Tables[0];
+
+            if (!getNewBatchID(ref _strBatchID))
+            {
+                return;
+            };
+
+            //for (int j = 0; j < 13; j++)
+            //{
+            //    dt.Columns.Add(Convert.ToChar(((int)'A') + j).ToString());
+            //}
+            int rowscount = 0;
+            var servedate = DbHelperSQL.getServerGetDate();
+            while (rows.MoveNext())
+            {
+                if (rowscount == 0)
+                {
+                    rowscount = 1;
+                    continue;
+                }
+                IRow row = (HSSFRow)rows.Current;
+                DataRow dr = dt.NewRow();
+
+                _idr_show.status15toolLabelstrResult.Text = "Load Rows at:" + rowscount;
+
+                for (int i = 0; i < 13; i++)
+                {
+                    dr[0] = _strBatchID;
+                    dr[1] = rowscount;
+                    dr["plr_status"] = "No";
+                    dr["plr_doc_type"] = "e-Packing";
+                    dr["plr_rcp_date"] = servedate;
+                    dr["plr_deli_date"] = servedate;
+                    dr["plr_cre_date"] = servedate; // DateTime.FromOADate(double型)    如果excel为日期时
+                    dr["plr_update_date"] = servedate;
+                    dr["plr_user_ip"] = _idr_show._custip;
+
+
+                    ICell cell = row.GetCell(i);
+
+                    if (cell == null)
+                    {
+                        dr[i] = null;
+                    }
+                    else
+                    {
+                        if (i > 10)
+                        {
+
+                            dr[i + 3] = cell.NumericCellValue;
+                        }
+                        else
+                        {
+
+                            dr[i + 3] = cell.ToString().Trim();
+                        }
+
+                    }
+
+                }
+                dt.Rows.Add(dr);
+
+                rowscount++;
+            }
+            _plr_batch_mstr_model.batch_dec01 = (rowscount - 1);
+            var updatebathccount = new PIE.BLL.plr_batch_mstr().Update(_plr_batch_mstr_model);
+            if (updatebathccount)
+            {
+                _idr_show._plr_batch_mstr_model = _plr_batch_mstr_model;
+                initDatasetToTxt(_idr_show._plr_batch_mstr_model, true);
+            }
+            _idr_show.status15toolLabelstrResult.Text = "Success: Update Total: " + (rowscount - 1);
+
+            //data0set_npoi.Tables.Add(dt);
+        }
+        void Init0ializeWorkbookdelegate(object objpath)
+        {
+            Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(Init0ializeWorkbook);
+            _idr_show.BeginInvoke(me, objpath);
+        }
+        void initLoadExcelFile()
+        {
+            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "Notiec: Load Excel File ......", true, true);
+            _idr_show.status15toolLabelstrResult.Text = "Notiec: Load Excel File ......";
+
+            if (txt0ExcelFileUploadExcel.Text.Trim() == "")
+            {
+                // MessageBox.Show("没选择Excel文件， 不能完成上传操作！", "Error");
+                lbl1UploadExcelThreadMsg.Text = "Error,没选择Excel， 不能完成上传操作,请选择正确的文件，谢谢！";
+
+                btnSelectfileUploadExcel.Focus();
+            }
+            else
+            {
+
+                //Init0ializeWorkbook(txtExcelFileUploadExcel.Text);     
+                oldtime = DateTime.Now;
+                Init0ializeWorkbookdelegate(txt0ExcelFileUploadExcel.Text);
+            }
+        }
+        private void btn3QuickUploadExcel_Click(object sender, EventArgs e)
+        {
+            if (!_hasrun)
+            {
+                getDataGV();
+                _hasrun = true;
+
+            }
+
+            initLoadExcelFile();
+
+
+            txt0ExcelFileUploadExcel.Text = "";
+
+        }
+
+        private void frmUploadExcel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (data0set_npoi.Tables[0].Rows.Count > 0)
+            {
+                command.InsertCommand = cmdb.GetInsertCommand();
+                command.UpdateCommand = cmdb.GetUpdateCommand();
+                command.DeleteCommand = cmdb.GetDeleteCommand();
+                command.Update(data0set_npoi);
+                data0set_npoi.AcceptChanges();
+            }
         }
 
     }

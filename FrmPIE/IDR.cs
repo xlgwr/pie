@@ -14,6 +14,12 @@ using models = PIE.Model;
 using FrmPIE.frmPIE;
 using FrmPIE.frmPI;
 
+//xls
+using System.IO;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+
+
 namespace FrmPIE
 {
 
@@ -21,15 +27,19 @@ namespace FrmPIE
     public partial class frmIDR : Form
     {
         LogonDomain _logonDomain = new LogonDomain();
-        PIE.Model.sys_user _sys_user_model = new PIE.Model.sys_user();
+        public PIE.Model.sys_user _sys_user_model = new PIE.Model.sys_user();
 
         public Thread _tuploadExcel;
         public Thread _tInitGDV;
         public Thread _tuploadERP;
         public Thread _tprintCtn;
         public Thread _tDoWorkBackClorThread;
+        public Thread _tRefresh;
+        public Thread _tSetCtlText;
 
+        public HSSFWorkbook _hssfworkbook;           //xls
         public DataSet _batchMstr;
+        
 
         public DataGridView _voidDGV;
         public int _voideX;
@@ -128,6 +138,14 @@ namespace FrmPIE
             {
                 _logonDomain.Close();
                 _logonDomain.Dispose();
+
+            }
+            if (_tRefresh != null)
+            {
+                if (_tRefresh.ThreadState == ThreadState.Running)
+                {
+                    _tRefresh.Abort();
+                }
 
             }
             GC.Collect();

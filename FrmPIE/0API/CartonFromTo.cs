@@ -29,6 +29,7 @@ namespace FrmPIE._0API
         public string _cartonID;
         public string _userid;
         public string _userip;
+        public int _topnum = 100;
 
         public CartonFromTo(decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, int dgvIndex, string batchid, int lineid, string cartonid)
         {
@@ -54,8 +55,8 @@ namespace FrmPIE._0API
             _wec_ctn_To = wec_ctn_to;
             _print_Type = print_type;
             _print_port = print_port;
-        } 
-        public CartonFromTo(object obj,decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, string print_port)
+        }
+        public CartonFromTo(object obj, decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, string print_port)
         {
             // TODO: Complete member initialization
             _objclass = obj;
@@ -73,6 +74,17 @@ namespace FrmPIE._0API
             _dotype = dotype;
             _userid = userid;
             _userip = userip;
+        }
+        public CartonFromTo(DataGridView dgv, string batchid, int lineid, string dotype, string userid, string userip, int topnum)
+        {
+            // TODO: Complete member initialization
+            _dgv = dgv;
+            _batchID = batchid;
+            _lineID = lineid;
+            _dotype = dotype;
+            _userid = userid;
+            _userip = userip;
+            _topnum = topnum;
         }
         public CartonFromTo(DataGridView dgv, string batchid, string cartonid, string dotype, string userid, string userip)
         {

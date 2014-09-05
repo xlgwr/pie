@@ -31,7 +31,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb00PIScanPIDataitemInquire = new System.Windows.Forms.GroupBox();
+            this.groupBox1PIMstr = new System.Windows.Forms.GroupBox();
+            this.data0GVPIMstr = new System.Windows.Forms.DataGridView();
             this.gb1mstr_PIMstr = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txt5_cre_date_PIMstr = new System.Windows.Forms.TextBox();
@@ -44,6 +49,8 @@
             this.gb2det_PIdet = new System.Windows.Forms.GroupBox();
             this.data1GV1_PIdet = new System.Windows.Forms.DataGridView();
             this.gb00PIScanPIDataitemInquire.SuspendLayout();
+            this.groupBox1PIMstr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.data0GVPIMstr)).BeginInit();
             this.gb1mstr_PIMstr.SuspendLayout();
             this.gb2det_PIdet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1_PIdet)).BeginInit();
@@ -51,14 +58,60 @@
             // 
             // gb00PIScanPIDataitemInquire
             // 
+            this.gb00PIScanPIDataitemInquire.Controls.Add(this.groupBox1PIMstr);
             this.gb00PIScanPIDataitemInquire.Controls.Add(this.gb1mstr_PIMstr);
             this.gb00PIScanPIDataitemInquire.Controls.Add(this.gb2det_PIdet);
             this.gb00PIScanPIDataitemInquire.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb00PIScanPIDataitemInquire.Location = new System.Drawing.Point(0, 0);
             this.gb00PIScanPIDataitemInquire.Name = "gb00PIScanPIDataitemInquire";
-            this.gb00PIScanPIDataitemInquire.Size = new System.Drawing.Size(726, 312);
+            this.gb00PIScanPIDataitemInquire.Size = new System.Drawing.Size(726, 455);
             this.gb00PIScanPIDataitemInquire.TabIndex = 0;
             this.gb00PIScanPIDataitemInquire.TabStop = false;
+            // 
+            // groupBox1PIMstr
+            // 
+            this.groupBox1PIMstr.Controls.Add(this.data0GVPIMstr);
+            this.groupBox1PIMstr.Location = new System.Drawing.Point(6, 67);
+            this.groupBox1PIMstr.Name = "groupBox1PIMstr";
+            this.groupBox1PIMstr.Size = new System.Drawing.Size(714, 198);
+            this.groupBox1PIMstr.TabIndex = 21;
+            this.groupBox1PIMstr.TabStop = false;
+            this.groupBox1PIMstr.Text = "PI Scan Mstr Top 100";
+            // 
+            // data0GVPIMstr
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data0GVPIMstr.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.data0GVPIMstr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data0GVPIMstr.DefaultCellStyle = dataGridViewCellStyle2;
+            this.data0GVPIMstr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.data0GVPIMstr.Location = new System.Drawing.Point(3, 17);
+            this.data0GVPIMstr.MultiSelect = false;
+            this.data0GVPIMstr.Name = "data0GVPIMstr";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data0GVPIMstr.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.data0GVPIMstr.RowTemplate.Height = 23;
+            this.data0GVPIMstr.Size = new System.Drawing.Size(708, 178);
+            this.data0GVPIMstr.TabIndex = 16;
             // 
             // gb1mstr_PIMstr
             // 
@@ -147,58 +200,60 @@
             // gb2det_PIdet
             // 
             this.gb2det_PIdet.Controls.Add(this.data1GV1_PIdet);
-            this.gb2det_PIdet.Location = new System.Drawing.Point(6, 67);
+            this.gb2det_PIdet.Location = new System.Drawing.Point(6, 265);
             this.gb2det_PIdet.Name = "gb2det_PIdet";
-            this.gb2det_PIdet.Size = new System.Drawing.Size(714, 237);
+            this.gb2det_PIdet.Size = new System.Drawing.Size(714, 185);
             this.gb2det_PIdet.TabIndex = 19;
             this.gb2det_PIdet.TabStop = false;
             this.gb2det_PIdet.Text = "PI Scan Det";
             // 
             // data1GV1_PIdet
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1_PIdet.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1_PIdet.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.data1GV1_PIdet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data1GV1_PIdet.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data1GV1_PIdet.DefaultCellStyle = dataGridViewCellStyle5;
             this.data1GV1_PIdet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.data1GV1_PIdet.Location = new System.Drawing.Point(3, 17);
             this.data1GV1_PIdet.MultiSelect = false;
             this.data1GV1_PIdet.Name = "data1GV1_PIdet";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1_PIdet.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1_PIdet.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.data1GV1_PIdet.RowTemplate.Height = 23;
-            this.data1GV1_PIdet.Size = new System.Drawing.Size(708, 217);
+            this.data1GV1_PIdet.Size = new System.Drawing.Size(708, 165);
             this.data1GV1_PIdet.TabIndex = 16;
             // 
             // frmPI1ScanDataInquire
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(726, 312);
+            this.ClientSize = new System.Drawing.Size(726, 455);
             this.Controls.Add(this.gb00PIScanPIDataitemInquire);
             this.Name = "frmPI1ScanDataInquire";
             this.Text = "frmPI1ScanDataInquire";
             this.Load += new System.EventHandler(this.frmPI1ScanDataInquire_Load);
             this.gb00PIScanPIDataitemInquire.ResumeLayout(false);
+            this.groupBox1PIMstr.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.data0GVPIMstr)).EndInit();
             this.gb1mstr_PIMstr.ResumeLayout(false);
             this.gb1mstr_PIMstr.PerformLayout();
             this.gb2det_PIdet.ResumeLayout(false);
@@ -221,5 +276,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         protected internal System.Windows.Forms.GroupBox gb00PIScanPIDataitemInquire;
+        private System.Windows.Forms.GroupBox groupBox1PIMstr;
+        protected internal System.Windows.Forms.DataGridView data0GVPIMstr;
     }
 }

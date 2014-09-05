@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pisr_grr.cs" />
     <Compile Include="pi_det.cs" />
     <Compile Include="pkey_ctl.cs" />
     <Compile Include="pi_mstr.cs" />

@@ -322,7 +322,7 @@ namespace FrmPIE.frmPIE
 
                 if (_plr_mstr_model.plr_status.Equals("Yes"))
                 {
-                    ShowMsg(msg+" is void, Update fail", "Error");
+                    ShowMsg(msg + " is void, Update fail", "Error");
                     return;
                 }
                 initTxtToModel(_plr_mstr_model);
@@ -476,11 +476,15 @@ namespace FrmPIE.frmPIE
             int intresult = Program.GenCartonNo(_plr_mstr_model);
             if (intresult == 0)
             {
-                lbl0GenCenResult.Text = "Success:" + _plr_mstr_model.Batch_ID + " Generate Wec CartonNo Success.";
+                lbl0GenCenResult.Text = "Success:" + _plr_mstr_model.Batch_ID + "," + _plr_mstr_model.LineID + " Generate Wec CartonNo Success.";
             }
-            else
+            else if (intresult == 1)
             {
-                lbl0GenCenResult.Text = "Fail:" + _plr_mstr_model.Batch_ID + " Generate Wec CartonNo Fail.";
+                lbl0GenCenResult.Text = "Fail:" + _plr_mstr_model.Batch_ID + "," + _plr_mstr_model.LineID + " Generate Wec CartonNo Fail.";
+            }
+            else if (intresult == 3)
+            {
+                lbl0GenCenResult.Text = "Fail:" + _plr_mstr_model.Batch_ID + "," + _plr_mstr_model.LineID + " Generate Wec CartonNo has upload to ERP Success,can't reGenerate.";
             }
             btn2GenCartonNo2AddNewBatchID.Enabled = true;
 
@@ -622,7 +626,7 @@ namespace FrmPIE.frmPIE
             if (txtb3batch_statu_AddNewBatchID.Text.Equals("Yes"))
             {
 
-                ShowMsg("Error: All BatchID is void, Cant't Continue Add.","");
+                ShowMsg("Error: All BatchID is void, Cant't Continue Add.", "");
                 return;
             }
             if (_nextlineid > 1)

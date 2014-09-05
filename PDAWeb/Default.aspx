@@ -12,7 +12,7 @@
     <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
     <link href="Style.css" rel="stylesheet" type="text/css" />
     <script src="js/jquery-1.11.1.js"></script>
-    <script language="javascript" for="document" event="onkeydown">
+    <script lang="javascript" for="document" event="onkeydown">
 
         var e = event.srcElement;
 
@@ -29,65 +29,137 @@
             //});
         }
 
+
+    </script>
+    <script lang="javascript">
+        // 判断各种浏览器，找到正确的方法
+        function launchFullscreen(element) {
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+        }
+        // 判断浏览器种类
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+
+        // 退出全屏模式!
+        //exitFullscreen();
+        // 启动全屏!
+        //launchFullScreen(document.documentElement); // 整个网页
+        //launchFullScreen(document.getElementById("videoElement")); // 某个页面元素
     </script>
     <style type="text/css">
         .auto-style1 {
             width: 91px;
         }
-        .hiddenBtn {}
+
+        .hiddenBtn {
+        }
+
+        .auto-style2 {
+            width: 79px;
+        }
+
+        :-webkit-full-screen {
+            /* properties */
+        }
+
+        :-moz-full-screen {
+            /* properties */
+        }
+
+        :-ms-fullscreen {
+            /* properties */
+        }
+
+        :full-screen { /*pre-spec */
+            /* properties */
+        }
+
+        :fullscreen { /* spec */
+            /* properties */
+        }
+
+        /* deeper elements */
+        :-webkit-full-screen video {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* styling the backdrop*/
+        ::backdrop {
+            /* properties */
+        }
+
+        ::-ms-backdrop {
+            /* properties */
+        }
     </style>
 </head>
 <body topmargin="0" onkeydown="javascript:if(event.keyCode==13) return false;">
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <table id="Table2" style="width: 210px; border-right: #339999 thin solid; border-top: #339999 thin solid; border-left: #339999 thin solid; border-bottom: #339999 thin solid;"
+        <table id="Table2" style="width: 200px; border-right: #339999 thin solid; border-top: #339999 thin solid; border-left: #339999 thin solid; border-bottom: #339999 thin solid;"
             cellspacing="0"
             cellpadding="0" align="center" border="0">
             <tr height="25">
-                <td style="width: 210px; background-color: #339999;" align="center" bgcolor="#b0e0e6">
+                <td style="width: 200px; background-color: #339999;" align="center" bgcolor="#b0e0e6">
                     <span>扫描作业</span>
                 </td>
             </tr>
             <tr height="60">
-                <td style="width: 210px;" align="center" bgcolor="#dbeefd" valign="middle">
+                <td style="width: 200px;" align="center" bgcolor="#dbeefd" valign="middle">
                     <table>
                         <tr>
                             <td align="left" class="auto-style1">PI ID:
                             </td>
-                            <td style="width: 100px;" colspan="3">
-                                <asp:TextBox ID="txtpiid" runat="server" Width="145px" ReadOnly="True"></asp:TextBox>
+                            <td colspan="3" class="auto-style2">
+                                <asp:TextBox ID="txtpiid" runat="server" Width="97px" ReadOnly="True"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" class="auto-style1">Plant:<font style="font-size: 10pt"> </font>
                             </td>
-                            <td style="width: 100px" colspan="3">
-                                <asp:TextBox ID="txtPlant" runat="server" Width="145px" ReadOnly="True"></asp:TextBox>
+                            <td colspan="3" class="auto-style2">
+                                <asp:TextBox ID="txtPlant" runat="server" Width="97px" ReadOnly="True"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" class="auto-style1">Type:<font style="font-size: 10pt"> </font>
                             </td>
-                            <td style="width: 100px" colspan="3">
-                                <asp:TextBox ID="txtType" runat="server" Width="145px" ReadOnly="True"></asp:TextBox>
+                            <td colspan="3" class="auto-style2">
+                                <asp:TextBox ID="txtType" runat="server" Width="97px" ReadOnly="True"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" class="auto-style1">WecCtnSN:<font style="font-size: 10pt"> </font>
                             </td>
-                            <td style="width: 100px" colspan="3">
-                                <asp:TextBox ID="txtboxid" runat="server" Width="145px" AutoPostBack="True" OnTextChanged="txtboxid_TextChanged"></asp:TextBox>
+                            <td colspan="3" class="auto-style2">
+                                <asp:TextBox ID="txtboxid" runat="server" Width="97px" AutoPostBack="True" OnTextChanged="txtboxid_TextChanged"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
-                            <td align="left" class="auto-style1">Co:<font style="font-size: 10pt"> </font>
+                            <td align="left" class="auto-style1">CO:<font style="font-size: 10pt"> </font>
                             </td>
-                            <td style="width: 100px" colspan="3">
-                                <asp:TextBox ID="txtCo" runat="server" Width="145px" OnTextChanged="txtCo_TextChanged" AutoPostBack="True"></asp:TextBox>
+                            <td colspan="3" class="auto-style2">
+                                <asp:TextBox ID="txtCo" runat="server" Width="97px" OnTextChanged="txtCo_TextChanged" AutoPostBack="True"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 100px" colspan="4" align="left">
+                            <td colspan="4" align="left">
                                 <asp:Label ID="lbl3co" runat="server" Style="text-align: left"></asp:Label>
                             </td>
                         </tr>
@@ -96,7 +168,7 @@
                 </td>
             </tr>
             <tr>
-                <td align="center" bgcolor="#b0e0e6" style="width: 210px; background-color: #339999;">
+                <td align="center" bgcolor="#b0e0e6" style="width: 200px; background-color: #339999;">
                     <asp:Button ID="BtnClear" runat="server" Text="清除" OnClick="BtnClear_Click" Width="30px" />
                     <asp:Button ID="BtnOK" runat="server" Text="保存" OnClick="BtnOK_Click" CssClass="hiddenBtn" Width="43px" />
                     <asp:Button ID="BtnReturn" runat="server" OnClick="BtnReturn_Click" Text="返回设置" Width="57px" />

@@ -17,10 +17,32 @@
         if ((e == document.getElementById("txtPIID")) && (event.keyCode == 13)) {
 
             document.getElementById("BtnSure").click();
-            $(function () {
-                $("#BtnSure").click();
-            });
+            //$(function () {
+            //    $("#BtnSure").click();
+            //});
         }
+        if ((e == document.getElementById("ddlType")) && (event.keyCode == 13)) {
+
+            document.getElementById("BtnSure").click();
+            //$(function () {
+            //    $("#BtnSure").click();
+            //});
+        }
+        // 判断各种浏览器，找到正确的方法
+        function launchFullscreen(element) {
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+        }
+        // 启动全屏!
+        //launchFullScreen(document.documentElement); // 整个网页
+        //launchFullScreen(document.getElementById("videoElement")); // 某个页面元素
     </script>
     <style type="text/css">
         .style1 {
@@ -71,8 +93,8 @@
                             </td>
                             <td style="width: 100px; height: 20px;" class="table_none">
                                 <asp:DropDownList ID="ddlType" runat="server" Height="25px" Width="126px">
-                                    <asp:ListItem>Rua</asp:ListItem>
                                     <asp:ListItem>Normal</asp:ListItem>
+                                    <asp:ListItem>Rma</asp:ListItem>
                                     <asp:ListItem>Mech</asp:ListItem>
                                 </asp:DropDownList>
                             </td>

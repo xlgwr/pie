@@ -15,8 +15,8 @@ namespace PIE.Model
         private string _batch_doc;
         private string _batch_status;
         private int? _batch_void = 1;
-        private DateTime _batch_cre_date;
-        private DateTime _batch_update_date;
+        private DateTime _batch_cre_date = DateTime.Now;
+        private DateTime _batch_update_date = DateTime.Now;
         private string _batch_cre_user;
         private string _batch_user_ip;
         private string _batch_chr01;
