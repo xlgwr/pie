@@ -18,7 +18,8 @@ using FrmPIE.frmPI;
 using System.IO;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
-
+//xlsx
+using NPOI.XSSF.UserModel;
 
 namespace FrmPIE
 {
@@ -38,6 +39,7 @@ namespace FrmPIE
         public Thread _tSetCtlText;
 
         public HSSFWorkbook _hssfworkbook;           //xls
+        public XSSFWorkbook _xssfworkbook;    //xlsx;
         public DataSet _batchMstr;
         
 

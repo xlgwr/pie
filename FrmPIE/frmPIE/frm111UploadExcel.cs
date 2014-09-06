@@ -16,6 +16,10 @@ using System.IO;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 
+//xlsx
+using NPOI.XSSF.UserModel;
+
+
 
 
 namespace FrmPIE.frmPIE
@@ -26,6 +30,9 @@ namespace FrmPIE.frmPIE
         Commfunction cf;
         SqlConnection connection;
         StringBuilder strsql;
+        ISheet sheet;
+        IRow row;
+        string _strext;
 
         bool _hasrun = false;
         string _strBatchID = "";
@@ -42,10 +49,10 @@ namespace FrmPIE.frmPIE
 
             cf = new Commfunction(idr);
 
-            //data1GV1ePackingDet1UploadExcel.ReadOnly = true;
+            data1GV1ePackingDet1UploadExcel.ReadOnly = true;
 
-            // data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
-            // data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
+            data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
+            data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
         }
         //xls
         DataSet data0set_npoi;
@@ -128,11 +135,12 @@ namespace FrmPIE.frmPIE
             OpenFileDialog ofd = new OpenFileDialog();
             try
             {
-                ofd.Filter = "Excel文件(*.xls)|*.xls|Excel文件(*.xlsx)|*.xlsx";
+                ofd.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     txt0ExcelFileUploadExcel.Text = ofd.FileName;
                 }
+
                 ///
                 // initLoadExcelFile();
                 ///
@@ -634,36 +642,57 @@ namespace FrmPIE.frmPIE
             //read xls
             using (FileStream file = new FileStream((string)path, FileMode.Open, FileAccess.Read))
             {
-                _idr_show._hssfworkbook = new HSSFWorkbook(file);
+                if (Path.GetExtension((string)path).ToLower().Equals(".xls"))
+                {
+                    _strext = ".xls";
+                    _idr_show._hssfworkbook = new HSSFWorkbook(file);
+                    sheet = _idr_show._hssfworkbook.GetSheetAt(0);
+                }
+                else if (Path.GetExtension((string)path).ToLower().Equals(".xlsx"))
+                {
+                    _strext = ".xlsx";
+                    _idr_show._xssfworkbook = new XSSFWorkbook(file);
+                    sheet = _idr_show._xssfworkbook.GetSheetAt(0);
+                }
+                else
+                {
+                    throw new Exception("Error0: this file is not the xls or xlsx file.0");
+                }
             }
 
-            Convert0ToDataTable();
+            var strmsg = Convert0ToDataTable();
 
+            data1GV1ePackingDet1UploadExcel.DataSource = data0set_npoi.Tables[0];
             if (data0set_npoi.Tables[0].Rows.Count > 0)
             {
-                command.InsertCommand = cmdb.GetInsertCommand();
-                command.UpdateCommand = cmdb.GetUpdateCommand();
-                command.DeleteCommand = cmdb.GetDeleteCommand();
+                // command.InsertCommand = cmdb.GetInsertCommand();
+                // command.DeleteCommand = cmdb.GetDeleteCommand();
+                // command.UpdateCommand = cmdb.GetUpdateCommand();
                 command.Update(data0set_npoi);
                 data0set_npoi.AcceptChanges();
-                
+
                 foreach (DataRow dr in data0set_npoi.Tables[0].Rows)
                 {
                     PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr().DataRowToModel(dr, true);
                     var intresutl = Program.GenCartonNo(plr_mstr_model);
                 }
+                //for (int i = 0; i < data0set_npoi.Tables[0].Rows.Count; i++)
+                //{
+                //    DataRow dr = data0set_npoi.Tables[0].Rows[i];
+                //    PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr().DataRowToModel(dr, true);
+                //    var intresutl = Program.GenCartonNo(plr_mstr_model);
+                //}
             }
-            data1GV1ePackingDet1UploadExcel.DataSource = data0set_npoi.Tables[0];
             data1GV1ePackingDet1UploadExcel.Refresh();
 
             var currtime = DateTime.Now - oldtime;
-            string difftime = currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
-            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "Success: Update " + (data1GV1ePackingDet1UploadExcel.Rows.Count - 1) + " Rows  Success, Use Time: " + difftime, true, true);
+            string difftime = "\tUse Time: " + currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
+            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, strmsg + difftime, true, true);
         }
-        void Convert0ToDataTable()
+        string Convert0ToDataTable()
         {
-            ISheet sheet = _idr_show._hssfworkbook.GetSheetAt(0);
             System.Collections.IEnumerator rows = sheet.GetRowEnumerator();
+
 
             data0set_npoi.Tables[0].Clear();
             data0set_npoi.Tables[0].AcceptChanges();
@@ -673,7 +702,7 @@ namespace FrmPIE.frmPIE
 
             if (!getNewBatchID(ref _strBatchID))
             {
-                return;
+                return "Error: BatchID is Error";
             };
 
             //for (int j = 0; j < 13; j++)
@@ -681,15 +710,34 @@ namespace FrmPIE.frmPIE
             //    dt.Columns.Add(Convert.ToChar(((int)'A') + j).ToString());
             //}
             int rowscount = 0;
+            int rowserrscount = 0;
+            int rowscountsum = sheet.LastRowNum;
+            bool nextrow = true;
+            string strerrnullrows = "At ";
+
             var servedate = DbHelperSQL.getServerGetDate();
+
             while (rows.MoveNext())
             {
                 if (rowscount == 0)
                 {
+                    command.UpdateCommand = cmdb.GetUpdateCommand();
                     rowscount = 1;
                     continue;
                 }
-                IRow row = (HSSFRow)rows.Current;
+                if (_strext.Equals(".xls"))
+                {
+                    row = (HSSFRow)rows.Current;
+                }
+                else if (_strext.Equals(".xlsx"))
+                {
+                    row = (XSSFRow)rows.Current;
+                }
+                else
+                {
+                    throw new Exception("Error1: this file is not the xls or xlsx file .");
+                }
+
                 DataRow dr = dt.NewRow();
 
                 _idr_show.status15toolLabelstrResult.Text = "Load Rows at:" + rowscount;
@@ -709,12 +757,26 @@ namespace FrmPIE.frmPIE
 
                     ICell cell = row.GetCell(i);
 
-                    if (cell == null)
+                    if (cell == null || string.IsNullOrEmpty(cell.ToString()))
                     {
-                        dr[i] = null;
+                        if (rowserrscount == 0)
+                        {
+
+                            strerrnullrows += rowscount.ToString();
+                        }
+                        else
+                        {
+                            strerrnullrows += "," + rowscount.ToString();
+
+                        }
+                        rowserrscount++;
+                        nextrow = false;
+                        break;
+                        //dr[i] = null;
                     }
                     else
                     {
+
                         if (i > 10)
                         {
 
@@ -727,11 +789,15 @@ namespace FrmPIE.frmPIE
                         }
 
                     }
+                    nextrow = true;
 
                 }
-                dt.Rows.Add(dr);
+                if (nextrow)
+                {
 
-                rowscount++;
+                    rowscount++;
+                    dt.Rows.Add(dr);
+                }
             }
             _plr_batch_mstr_model.batch_dec01 = (rowscount - 1);
             var updatebathccount = new PIE.BLL.plr_batch_mstr().Update(_plr_batch_mstr_model);
@@ -740,7 +806,7 @@ namespace FrmPIE.frmPIE
                 _idr_show._plr_batch_mstr_model = _plr_batch_mstr_model;
                 initDatasetToTxt(_idr_show._plr_batch_mstr_model, true);
             }
-            _idr_show.status15toolLabelstrResult.Text = "Success: Update Total: " + (rowscount - 1);
+            return "Notice: Total: " + rowscountsum + " ,Update " + (rowscount - 1) + " Rows Success, Error: has " + rowserrscount + " Rows has null cell (" + strerrnullrows + ").";
 
             //data0set_npoi.Tables.Add(dt);
         }
