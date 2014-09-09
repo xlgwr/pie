@@ -40,8 +40,12 @@ namespace FrmPIE.frmPI
             cf = new Commfunction(idr);
 
             InitializeComponent();
+
+            data1GVSanWecCtnLable.ReadOnly = true;
+
             _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Enter;
             _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
+
             initWidth();
             initCoCmpData();
 
@@ -131,7 +135,7 @@ namespace FrmPIE.frmPI
         private void ShowMsg(string msg, string title)
         {
 
-            cf.SetCtlTextdelegate(lbl0msg, title+":"+msg, true, true);
+            cf.SetCtlTextdelegate(lbl0msg, title + ":" + msg, true, true);
             //lbl0msg.Visible = true;
             //lbl0msg.Text = title + ":" + msg;
         }
@@ -148,7 +152,7 @@ namespace FrmPIE.frmPI
             CartonFromTo ctftdet = new CartonFromTo(data1GVSanWecCtnLable, (string)strBatchID, 0, "add", _idr_show._custip, _idr_show._custip);
 
             var reobjmstr = cf.initDataGVpi_mstr(ctftmstr, false, "model");
-            var reobjdet = cf.initDataGVpi_det(ctftdet, true, "nothing");
+            var reobjdet = cf.initDataGVpi_det_join_grr(ctftdet, true, "nothing");
             if (reobjmstr != null)
             {
                 initDatasetToTxt((PI.Model.pi_mstr)reobjmstr);
@@ -652,10 +656,12 @@ namespace FrmPIE.frmPI
 
         private void pirefresh()
         {
+            cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh....", false, true);
             ShowMsg(" Refresh ......", "Notice");
             DataSet ds;
             WebReference100.Service server100 = new WebReference100.Service();
             server100.Timeout = 9000000;
+            string existrir = "";
             try
             {
                 if (!string.IsNullOrEmpty(_pi_mstr_model.PI_ID))
@@ -690,7 +696,7 @@ namespace FrmPIE.frmPI
 
                                                 if (existgrr)
                                                 {
-                                                    ShowMsg(pi_det_list[i].pi_wec_ctn + "已更新.", "Error0");
+                                                    ShowMsg(pi_det_list[i].pi_wec_ctn + " RiR 已更新.", "Error0");
                                                     continue;
                                                 }
                                                 pisr_grr_model.pisr_rir = ds.Tables[0].Rows[y]["wsas017_rir"].ToString();
@@ -723,18 +729,19 @@ namespace FrmPIE.frmPI
                                             }
                                             if (addPisgrr)
                                             {
-                                                ShowMsg(" Refresh OK.", "Notice");
+                                                ShowMsg(" Refresh RiR OK.", "Notice");
                                             }
                                         }
                                         else
                                         {
-                                            ShowMsg(pi_det_list[i].pi_wec_ctn + "没有记录.", "Error0");
+                                            existrir += pi_det_list[i].pi_wec_ctn + ",";
+                                            ShowMsg(existrir + " ERP 中 无 RiR 记录.", "Error0");
                                         }
 
                                     }
                                     else
                                     {
-                                        ShowMsg(pi_det_list[i].pi_wec_ctn + "没有记录.", "Error1");
+                                        ShowMsg(pi_det_list[i].pi_wec_ctn + " ERP 中 无 RiR 没有记录.", "Error1");
                                     }
                                 }
                                 else
@@ -763,15 +770,33 @@ namespace FrmPIE.frmPI
                     ShowMsg("Ctn SN is null.", "Error");
                 }
 
+                cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh", true, true);
+                //////////////************************
+                threadinitDVdelegate();
             }
             catch (Exception ex)
             {
+
+                cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh", true, true);
                 MessageBox.Show(ex.Message);
             }
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
             threadPiRefreshdeleget();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var pis_grr_ds = new PI.BLL.pisr_grr().GetAllList();
+            var pisr_ch_desc = pis_grr_ds.Tables[0].Rows[0]["pisr_ch_desc"].ToString();
+
+            var pisr_ch_descutf8 = Encoding.GetEncoding("utf-8");
+            var pisr_ch_desciso88 = Encoding.GetEncoding("GBK");
+            byte[] temp = pisr_ch_descutf8.GetBytes(pisr_ch_desc);
+            byte[] temp1 = Encoding.Convert(pisr_ch_descutf8, pisr_ch_desciso88, temp);
+            string result = pisr_ch_descutf8.GetString(temp1);
+            MessageBox.Show(result);
         }
 
 

@@ -740,6 +740,121 @@ namespace FrmPIE._0API
             }
 
         }
+        /// <summary>
+        /// pi_det left join pisr_grr
+        /// </summary>
+        /// <param name="ctftobj">CartonFromTo</param>
+        /// <param name="isRefresh">ture,false</param>
+        /// <param name="reurntype">datasets 50 or dataset1 or model(all,ds,model,nothing(if only refresh))</param>
+        /// <returns>datasets 50 or dataset1 or model(all,ds,model,nothing(if only refresh))</returns>
+        public object initDataGVpi_det_join_grr(object ctftobj, bool isRefresh, string reurntype)
+        {
+            CartonFromTo ctft = (CartonFromTo)ctftobj;
+            var batchid = ctft._batchID;
+            var lineid = ctft._lineID;
+            try
+            {
+                string strwhere;
+                StringBuilder strSql;
+                DataSet pi_det_ds;
+                
+                strwhere = " a.PI_ID='" + batchid + "' ";
+
+                if (isRefresh)
+                {
+                    if (lineid != 0)
+                    {
+                        strwhere += " and a.pi_LineID='" + lineid + "' ";
+                    }
+                    strSql = new StringBuilder();
+                    strSql.Append("select ");
+                    strSql.Append("a.PI_ID,a.pi_LineID,a.pi_wec_ctn,a.plr_LineID_tran, ");
+                    strSql.Append("a.pi_pallet_no,a.CartonNo,a.CartonID,a.pi_chr01, ");
+                    strSql.Append("b.pisr_rir,b.pisr_invoice,b.pisr_part,b.Pisr_receiver, ");
+                    strSql.Append(" b.pisr_site,b.pisr_po_nbr,b.pisr_qty,b.pisr_curr, ");
+
+                    strSql.Append("b.pisr_cost,b.pisr_base_cost,b.pisr_us_cost,b.pisr_seq, ");
+                    strSql.Append("b.pisr_con_code,b.pisr_ch_desc,b.pisr_net_wt,b.pisr_rec_type, ");
+                    strSql.Append("b.pisr_abc,b.pisr_code,b.pisr_lic_req ");
+                    strSql.Append(" from pi_det a ");
+                    strSql.Append(" left join pisr_grr b ");
+                    strSql.Append(" on (a.pi_wec_ctn=b.pi_wec_ctn and a.plr_LineID_tran=b.plr_LineID_tran) ");
+
+                    strSql.Append(" where ");
+                    strSql.Append(strwhere);
+
+                    pi_det_ds = DbHelperSQL.Query(strSql.ToString());
+
+
+                    var dgv = ctft._dgv;
+                    dgv.DataSource = pi_det_ds.Tables[0].DefaultView;
+
+                    ///***************
+                    initHeaderTextPIDetGrr(dgv);
+
+                    dgv.Refresh();
+
+                    if (reurntype.Equals("ds"))
+                    {
+                        return pi_det_ds;
+                    }
+                }
+                if (reurntype.Equals("ds"))
+                {
+                    if (lineid != 0)
+                    {
+                        strwhere += " and a.pi_LineID='" + lineid + "' ";
+                    }
+                    strSql = new StringBuilder();
+                    strSql.Append("select ");
+                    strSql.Append("a.PI_ID,a.pi_LineID,a.pi_wec_ctn,a.plr_LineID_tran, ");
+                    strSql.Append("a.pi_pallet_no,a.CartonNo,a.CartonID,a.pi_chr01, ");
+                    strSql.Append("b.pisr_rir,b.pisr_invoice,b.pisr_part,b.Pisr_receiver, ");
+                    strSql.Append(" b.pisr_site,b.pisr_po_nbr,b.pisr_qty,b.pisr_curr, ");
+
+                    strSql.Append("b.pisr_cost,b.pisr_base_cost,b.pisr_us_cost,b.pisr_seq, ");
+                    strSql.Append("b.pisr_con_code,b.pisr_ch_desc,b.pisr_net_wt,b.pisr_rec_type, ");
+                    strSql.Append("b.pisr_abc,b.pisr_code,b.pisr_lic_req ");
+                    strSql.Append(" from pi_det a ");
+                    strSql.Append(" left join pisr_grr b ");
+                    strSql.Append(" on (a.pi_wec_ctn=b.pi_wec_ctn and a.plr_LineID_tran=b.plr_LineID_tran) ");
+
+                    strSql.Append(" where ");
+                    strSql.Append(strwhere);
+
+
+                    pi_det_ds = DbHelperSQL.Query(strSql.ToString());
+                    return pi_det_ds;
+                }
+                if (reurntype.Equals("all"))
+                {
+                    strSql = new StringBuilder();
+                    strSql.Append("select ");
+                    strSql.Append("a.PI_ID,a.pi_LineID,a.pi_wec_ctn,a.plr_LineID_tran, ");
+                    strSql.Append("a.pi_pallet_no,a.CartonNo,a.CartonID,a.pi_chr01, ");
+                    strSql.Append("b.pisr_rir,b.pisr_invoice,b.pisr_part,b.Pisr_receiver, ");
+                    strSql.Append(" b.pisr_site,b.pisr_po_nbr,b.pisr_qty,b.pisr_curr, ");
+
+                    strSql.Append("b.pisr_cost,b.pisr_base_cost,b.pisr_us_cost,b.pisr_seq, ");
+                    strSql.Append("b.pisr_con_code,b.pisr_ch_desc,b.pisr_net_wt,b.pisr_rec_type, ");
+                    strSql.Append("b.pisr_abc,b.pisr_code,b.pisr_lic_req ");
+                    strSql.Append(" from pi_det a ");
+                    strSql.Append(" left join pisr_grr b ");
+                    strSql.Append(" on (a.pi_wec_ctn=b.pi_wec_ctn and a.plr_LineID_tran=b.plr_LineID_tran) ");
+
+                    pi_det_ds = DbHelperSQL.Query(strSql.ToString());
+                    return pi_det_ds;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+
+        }
         private void initHeaderTextPlrBatchMstr1(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
@@ -975,6 +1090,51 @@ namespace FrmPIE._0API
             dgv.Columns["CartonNo"].HeaderText = "CartonNo";
 
             dgv.Columns["CartonID"].HeaderText = "CartonID";
+
+
+        }
+        public void initHeaderTextPIDetGrr(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+            dgv.Columns["PI_ID"].HeaderText = "PI ID";
+            dgv.Columns["pi_LineID"].HeaderText = "Line";
+
+            dgv.Columns["pi_wec_ctn"].HeaderText = "Scan SN";
+            dgv.Columns["pi_LineID"].HeaderText = "Line";
+
+            dgv.Columns["pi_pallet_no"].HeaderText = "Pallet";
+            dgv.Columns["CartonNo"].HeaderText = "CartonNo";
+
+            dgv.Columns["CartonID"].HeaderText = "CartonID";
+
+            dgv.Columns["pi_chr01"].HeaderText = "CO";
+
+            dgv.Columns["pisr_rir"].HeaderText = "RIR #";
+            dgv.Columns["pisr_invoice"].HeaderText = "Invoice";
+            dgv.Columns["pisr_part"].HeaderText = "WEC-Part";
+            dgv.Columns["Pisr_receiver"].HeaderText = "Receiver";
+            dgv.Columns["pisr_site"].HeaderText = "MG";
+            dgv.Columns["pisr_po_nbr"].HeaderText = "PO-Number";
+            dgv.Columns["pisr_curr"].HeaderText = "Curr";
+            dgv.Columns["pisr_cost"].HeaderText = "U/P";
+            dgv.Columns["pisr_base_cost"].HeaderText = "U/P(Base)";
+            dgv.Columns["pisr_us_cost"].HeaderText = "U/P(USD)";
+            dgv.Columns["pisr_seq"].HeaderText = "Seq";
+
+            dgv.Columns["pisr_con_code"].HeaderText = "Custom Conn";
+            dgv.Columns["pisr_ch_desc"].HeaderText = "Description";
+            dgv.Columns["pisr_net_wt"].HeaderText = "Net Weight";
+            dgv.Columns["pisr_rec_type"].HeaderText = "STS/IQC/SI";
+            dgv.Columns["pisr_abc"].HeaderText = "ABC";
+            dgv.Columns["pisr_code"].HeaderText = "商检";
+            //
+
+            dgv.Columns["pisr_lic_req"].HeaderText = "Lic. Req";
 
 
         }

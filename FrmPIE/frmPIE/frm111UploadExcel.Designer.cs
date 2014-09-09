@@ -51,8 +51,8 @@
             this.groupBox1browseUploadExcel = new System.Windows.Forms.GroupBox();
             this.btnSelectfileUploadExcel = new System.Windows.Forms.Button();
             this.txt0ExcelFileUploadExcel = new System.Windows.Forms.TextBox();
-            this.btnCmdUpdUploadExcel = new System.Windows.Forms.Button();
             this.btn3QuickUploadExcel = new System.Windows.Forms.Button();
+            this.btnCmdUpdUploadExcel = new System.Windows.Forms.Button();
             this.groupBox0frmUploadExcel.SuspendLayout();
             this.groupBox2mstrUploadExcel.SuspendLayout();
             this.groupBox3detUploadExcel.SuspendLayout();
@@ -271,6 +271,18 @@
             this.txt0ExcelFileUploadExcel.Size = new System.Drawing.Size(506, 21);
             this.txt0ExcelFileUploadExcel.TabIndex = 8;
             // 
+            // btn3QuickUploadExcel
+            // 
+            this.btn3QuickUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn3QuickUploadExcel.Location = new System.Drawing.Point(424, 90);
+            this.btn3QuickUploadExcel.Name = "btn3QuickUploadExcel";
+            this.btn3QuickUploadExcel.Size = new System.Drawing.Size(114, 36);
+            this.btn3QuickUploadExcel.TabIndex = 12;
+            this.btn3QuickUploadExcel.Text = "&Quick Upload";
+            this.btn3QuickUploadExcel.UseVisualStyleBackColor = true;
+            this.btn3QuickUploadExcel.Visible = false;
+            this.btn3QuickUploadExcel.Click += new System.EventHandler(this.btn3QuickUploadExcel_Click);
+            // 
             // btnCmdUpdUploadExcel
             // 
             this.btnCmdUpdUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -281,17 +293,6 @@
             this.btnCmdUpdUploadExcel.Text = "&Upload";
             this.btnCmdUpdUploadExcel.UseVisualStyleBackColor = true;
             this.btnCmdUpdUploadExcel.Click += new System.EventHandler(this.btnCmdUpdUploadExcel_Click);
-            // 
-            // btn3QuickUploadExcel
-            // 
-            this.btn3QuickUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn3QuickUploadExcel.Location = new System.Drawing.Point(424, 90);
-            this.btn3QuickUploadExcel.Name = "btn3QuickUploadExcel";
-            this.btn3QuickUploadExcel.Size = new System.Drawing.Size(114, 36);
-            this.btn3QuickUploadExcel.TabIndex = 12;
-            this.btn3QuickUploadExcel.Text = "&Quick Upload";
-            this.btn3QuickUploadExcel.UseVisualStyleBackColor = true;
-            this.btn3QuickUploadExcel.Click += new System.EventHandler(this.btn3QuickUploadExcel_Click);
             // 
             // frmUploadExcel
             // 
