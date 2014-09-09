@@ -32,6 +32,16 @@ namespace PI.Model
         private string _pisr_abc;
         private string _pisr_code;
         private string _pisr_lic_req;
+        private string _pisr_sbu;
+        private string _pisr_vend;
+        private string _pisr_mfgr_name;
+        private string _pisr_char01;
+        private string _pisr_char02;
+        private string _pisr_char03;
+        private decimal? _pisr_dec01;
+        private decimal? _pisr_dec02;
+        private int? _pisr_int01;
+        private int? _pisr_int02;
         private string _pi_status;
         private string _pi_status_msg;
         private string _pi_remark;
@@ -220,6 +230,86 @@ namespace PI.Model
         {
             set { _pisr_lic_req = value; }
             get { return _pisr_lic_req; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pisr_sbu
+        {
+            set { _pisr_sbu = value; }
+            get { return _pisr_sbu; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pisr_vend
+        {
+            set { _pisr_vend = value; }
+            get { return _pisr_vend; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pisr_mfgr_name
+        {
+            set { _pisr_mfgr_name = value; }
+            get { return _pisr_mfgr_name; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pisr_char01
+        {
+            set { _pisr_char01 = value; }
+            get { return _pisr_char01; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pisr_char02
+        {
+            set { _pisr_char02 = value; }
+            get { return _pisr_char02; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pisr_char03
+        {
+            set { _pisr_char03 = value; }
+            get { return _pisr_char03; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal? pisr_dec01
+        {
+            set { _pisr_dec01 = value; }
+            get { return _pisr_dec01; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal? pisr_dec02
+        {
+            set { _pisr_dec02 = value; }
+            get { return _pisr_dec02; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? pisr_int01
+        {
+            set { _pisr_int01 = value; }
+            get { return _pisr_int01; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? pisr_int02
+        {
+            set { _pisr_int02 = value; }
+            get { return _pisr_int02; }
         }
         /// <summary>
         /// 

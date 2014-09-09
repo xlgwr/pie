@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data.Common;
 using System.Collections.Generic;
+
 namespace PIE.DBUtility
 {
     /// <summary>
@@ -15,7 +16,7 @@ namespace PIE.DBUtility
     public class DbHelperSQLP
     {
         //数据库连接字符串(web.config来配置)，可以动态更改connectionString支持多数据库.		
-        public string connectionString = PubConstant.ConnectionString;     		
+        public string connectionString = PubConstant.ConnectionStringRemote;     		
         public DbHelperSQLP()
         {            
         }

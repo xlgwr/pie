@@ -662,6 +662,7 @@ namespace FrmPIE.frmPI
             WebReference100.Service server100 = new WebReference100.Service();
             server100.Timeout = 9000000;
             string existrir = "";
+            string existrirsuccess = "";
             try
             {
                 if (!string.IsNullOrEmpty(_pi_mstr_model.PI_ID))
@@ -685,6 +686,8 @@ namespace FrmPIE.frmPI
                                     {
                                         if (ds.Tables[0].Rows.Count > 0)
                                         {
+                                            int dsexist = 0;
+                                            int dscount = ds.Tables[0].Rows.Count;
                                             var addPisgrr = false;
                                             for (int y = 0; y < ds.Tables[0].Rows.Count; y++)
                                             {
@@ -696,7 +699,31 @@ namespace FrmPIE.frmPI
 
                                                 if (existgrr)
                                                 {
-                                                    ShowMsg(pi_det_list[i].pi_wec_ctn + " RiR 已更新.", "Error0");
+                                                    //if (i % 5 == 0)
+                                                    //{
+
+                                                    //    existrirsuccess += pi_det_list[i].pi_wec_ctn + ":" + pisr_grr_model.plr_LineID_tran + ",\n\t";
+                                                    //}
+                                                    //else
+                                                    //{
+                                                    //    existrirsuccess += pi_det_list[i].pi_wec_ctn + ":" + pisr_grr_model.plr_LineID_tran + ",";
+
+                                                    //}
+                                                    //if (string.IsNullOrEmpty(existrir))
+                                                    //{
+
+                                                    //    ShowMsg(existrirsuccess + " RiR 已更新.", "Notice0");
+                                                    //}
+                                                    //else
+                                                    //{
+                                                    //    ShowMsg(existrirsuccess + " RiR 已更新.\n\t" + existrir, "Notice0");
+                                                    //}
+                                                    dsexist++;
+                                                    if (dsexist >= dscount)
+                                                    {
+
+                                                        ShowMsg(" All rows has alread Refresh RiR OK.", "Notice0");
+                                                    }
                                                     continue;
                                                 }
                                                 pisr_grr_model.pisr_rir = ds.Tables[0].Rows[y]["wsas017_rir"].ToString();
@@ -719,6 +746,13 @@ namespace FrmPIE.frmPI
                                                 pisr_grr_model.pisr_code = ds.Tables[0].Rows[y]["wsas017_code"].ToString();
                                                 pisr_grr_model.pisr_lic_req = ds.Tables[0].Rows[y]["wsas017_lic_req"].ToString();
 
+                                                pisr_grr_model.pisr_sbu = ds.Tables[0].Rows[y]["wsas017_sbu"].ToString();
+                                                pisr_grr_model.pisr_vend = ds.Tables[0].Rows[y]["wsas017_vend"].ToString();
+                                                pisr_grr_model.pisr_mfgr_name = ds.Tables[0].Rows[y]["wsas017_mfgr_name"].ToString();
+
+                                                pisr_grr_model.pisr_dec01 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_k200_nw"].ToString()) / 1000;
+                                                pisr_grr_model.pisr_dec02 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_nw"].ToString()) / 1000;
+
                                                 pisr_grr_model.pi_cre_date = DateTime.Now;
                                                 pisr_grr_model.pi_update_date = DateTime.Now;
                                                 pisr_grr_model.pi_user_ip = _idr_show._custip;
@@ -729,13 +763,30 @@ namespace FrmPIE.frmPI
                                             }
                                             if (addPisgrr)
                                             {
-                                                ShowMsg(" Refresh RiR OK.", "Notice");
+                                                ShowMsg(" Refresh RiR OK.", "Notice1");
                                             }
                                         }
                                         else
                                         {
-                                            existrir += pi_det_list[i].pi_wec_ctn + ",";
-                                            ShowMsg(existrir + " ERP 中 无 RiR 记录.", "Error0");
+                                            if (i > 0 && i % 10 == 0)
+                                            {
+                                                existrir += pi_det_list[i].pi_wec_ctn + ",\n\t";
+                                            }
+                                            else
+                                            {
+                                                existrir += pi_det_list[i].pi_wec_ctn + ",";
+
+                                            }
+
+                                            if (string.IsNullOrEmpty(existrirsuccess))
+                                            {
+                                                ShowMsg(existrir + " ERP 中 无 RiR 记录.", "Error0");
+                                            }
+                                            else
+                                            {
+
+                                                ShowMsg(existrir + " ERP 中 无 RiR 记录.\n\t" + existrirsuccess + " RiR 已更新.", "Error0");
+                                            }
                                         }
 
                                     }

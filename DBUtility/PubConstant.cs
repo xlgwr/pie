@@ -2,26 +2,41 @@
 using System.Configuration;
 namespace PIE.DBUtility
 {
-    
+
     public class PubConstant
-    {        
+    {
         /// <summary>
         /// 获取连接字符串
         /// </summary>
         public static string ConnectionString
-        {           
-            get 
+        {
+            get
             {
-                string _connectionString = ConfigurationManager.AppSettings["ConnectionString"];       
+                string _connectionString = ConfigurationManager.AppSettings["ConnectionString"];
                 string ConStringEncrypt = ConfigurationManager.AppSettings["ConStringEncrypt"];
                 if (ConStringEncrypt == "true")
                 {
                     _connectionString = DESEncrypt.Decrypt(_connectionString);
                 }
-                return _connectionString; 
+                return _connectionString;
             }
         }
-
+        /// <summary>
+        /// ConnectionStringPIRemote
+        /// </summary>
+        public static string ConnectionStringRemote
+        {
+            get
+            {
+                string _connectionString = ConfigurationManager.AppSettings["ConnectionStringRemote"];
+                string ConStringEncrypt = ConfigurationManager.AppSettings["ConStringEncrypt"];
+                if (ConStringEncrypt == "true")
+                {
+                    _connectionString = DESEncrypt.Decrypt(_connectionString);
+                }
+                return _connectionString;
+            }
+        }
         /// <summary>
         /// 得到web.config里配置项的数据库连接字符串。
         /// </summary>

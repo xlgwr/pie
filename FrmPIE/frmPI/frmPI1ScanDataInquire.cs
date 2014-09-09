@@ -99,7 +99,7 @@ namespace FrmPIE.frmPI
             var reobjmstr = cf.initDataGVpi_mstr(ctftPlrMstr, false, "model");
 
             var reobjmstrDGVreflash = cf.initDataGVpi_mstr(ctftPlrMstrall, true, "all");
-            var reobjdet = cf.initDataGVpi_det(ctftPlrMstrTran, true, "nothing");
+            var reobjdet = cf.initDataGVpi_det_join_grr(ctftPlrMstrTran, true, "nothing");
 
             if (reobjmstr != null)
             {

@@ -47,9 +47,9 @@ namespace PI.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into pisr_grr(");
-            strSql.Append("pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2)");
+            strSql.Append("pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_mfgr_name,pisr_char01,pisr_char02,pisr_char03,pisr_dec01,pisr_dec02,pisr_int01,pisr_int02,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2)");
             strSql.Append(" values (");
-            strSql.Append("@pi_wec_ctn,@plr_LineID_tran,@Plant,@pisr_rir,@pisr_invoice,@pisr_part,@Pisr_receiver,@pisr_site,@pisr_po_nbr,@pisr_qty,@pisr_curr,@pisr_cost,@pisr_base_cost,@pisr_us_cost,@pisr_seq,@pisr_con_code,@pisr_ch_desc,@pisr_net_wt,@pisr_rec_type,@pisr_abc,@pisr_code,@pisr_lic_req,@pi_status,@pi_status_msg,@pi_remark,@pi_cre_date,@pi_cre_userid,@pi_update_date,@pi_edituser_id,@pi_user_ip,@pi_void_status,@pi_chr01,@pi_chr02,@pi_deci1,@pi_deci2)");
+            strSql.Append("@pi_wec_ctn,@plr_LineID_tran,@Plant,@pisr_rir,@pisr_invoice,@pisr_part,@Pisr_receiver,@pisr_site,@pisr_po_nbr,@pisr_qty,@pisr_curr,@pisr_cost,@pisr_base_cost,@pisr_us_cost,@pisr_seq,@pisr_con_code,@pisr_ch_desc,@pisr_net_wt,@pisr_rec_type,@pisr_abc,@pisr_code,@pisr_lic_req,@pisr_sbu,@pisr_vend,@pisr_mfgr_name,@pisr_char01,@pisr_char02,@pisr_char03,@pisr_dec01,@pisr_dec02,@pisr_int01,@pisr_int02,@pi_status,@pi_status_msg,@pi_remark,@pi_cre_date,@pi_cre_userid,@pi_update_date,@pi_edituser_id,@pi_user_ip,@pi_void_status,@pi_chr01,@pi_chr02,@pi_deci1,@pi_deci2)");
             SqlParameter[] parameters = {
 					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
 					new SqlParameter("@plr_LineID_tran", SqlDbType.Int,4),
@@ -73,6 +73,16 @@ namespace PI.DAL
 					new SqlParameter("@pisr_abc", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_code", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_lic_req", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_sbu", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_vend", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_mfgr_name", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_char01", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_char02", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_char03", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_dec01", SqlDbType.Decimal,9),
+					new SqlParameter("@pisr_dec02", SqlDbType.Decimal,9),
+					new SqlParameter("@pisr_int01", SqlDbType.Int,4),
+					new SqlParameter("@pisr_int02", SqlDbType.Int,4),
 					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_status_msg", SqlDbType.NVarChar,4000),
 					new SqlParameter("@pi_remark", SqlDbType.Text),
@@ -108,19 +118,29 @@ namespace PI.DAL
             parameters[19].Value = model.pisr_abc;
             parameters[20].Value = model.pisr_code;
             parameters[21].Value = model.pisr_lic_req;
-            parameters[22].Value = model.pi_status;
-            parameters[23].Value = model.pi_status_msg;
-            parameters[24].Value = model.pi_remark;
-            parameters[25].Value = model.pi_cre_date;
-            parameters[26].Value = model.pi_cre_userid;
-            parameters[27].Value = model.pi_update_date;
-            parameters[28].Value = model.pi_edituser_id;
-            parameters[29].Value = model.pi_user_ip;
-            parameters[30].Value = model.pi_void_status;
-            parameters[31].Value = model.pi_chr01;
-            parameters[32].Value = model.pi_chr02;
-            parameters[33].Value = model.pi_deci1;
-            parameters[34].Value = model.pi_deci2;
+            parameters[22].Value = model.pisr_sbu;
+            parameters[23].Value = model.pisr_vend;
+            parameters[24].Value = model.pisr_mfgr_name;
+            parameters[25].Value = model.pisr_char01;
+            parameters[26].Value = model.pisr_char02;
+            parameters[27].Value = model.pisr_char03;
+            parameters[28].Value = model.pisr_dec01;
+            parameters[29].Value = model.pisr_dec02;
+            parameters[30].Value = model.pisr_int01;
+            parameters[31].Value = model.pisr_int02;
+            parameters[32].Value = model.pi_status;
+            parameters[33].Value = model.pi_status_msg;
+            parameters[34].Value = model.pi_remark;
+            parameters[35].Value = model.pi_cre_date;
+            parameters[36].Value = model.pi_cre_userid;
+            parameters[37].Value = model.pi_update_date;
+            parameters[38].Value = model.pi_edituser_id;
+            parameters[39].Value = model.pi_user_ip;
+            parameters[40].Value = model.pi_void_status;
+            parameters[41].Value = model.pi_chr01;
+            parameters[42].Value = model.pi_chr02;
+            parameters[43].Value = model.pi_deci1;
+            parameters[44].Value = model.pi_deci2;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -159,6 +179,16 @@ namespace PI.DAL
             strSql.Append("pisr_abc=@pisr_abc,");
             strSql.Append("pisr_code=@pisr_code,");
             strSql.Append("pisr_lic_req=@pisr_lic_req,");
+            strSql.Append("pisr_sbu=@pisr_sbu,");
+            strSql.Append("pisr_vend=@pisr_vend,");
+            strSql.Append("pisr_mfgr_name=@pisr_mfgr_name,");
+            strSql.Append("pisr_char01=@pisr_char01,");
+            strSql.Append("pisr_char02=@pisr_char02,");
+            strSql.Append("pisr_char03=@pisr_char03,");
+            strSql.Append("pisr_dec01=@pisr_dec01,");
+            strSql.Append("pisr_dec02=@pisr_dec02,");
+            strSql.Append("pisr_int01=@pisr_int01,");
+            strSql.Append("pisr_int02=@pisr_int02,");
             strSql.Append("pi_status=@pi_status,");
             strSql.Append("pi_status_msg=@pi_status_msg,");
             strSql.Append("pi_remark=@pi_remark,");
@@ -194,6 +224,16 @@ namespace PI.DAL
 					new SqlParameter("@pisr_abc", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_code", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_lic_req", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_sbu", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_vend", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_mfgr_name", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_char01", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_char02", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_char03", SqlDbType.NVarChar,50),
+					new SqlParameter("@pisr_dec01", SqlDbType.Decimal,9),
+					new SqlParameter("@pisr_dec02", SqlDbType.Decimal,9),
+					new SqlParameter("@pisr_int01", SqlDbType.Int,4),
+					new SqlParameter("@pisr_int02", SqlDbType.Int,4),
 					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_status_msg", SqlDbType.NVarChar,4000),
 					new SqlParameter("@pi_remark", SqlDbType.Text),
@@ -229,21 +269,31 @@ namespace PI.DAL
             parameters[17].Value = model.pisr_abc;
             parameters[18].Value = model.pisr_code;
             parameters[19].Value = model.pisr_lic_req;
-            parameters[20].Value = model.pi_status;
-            parameters[21].Value = model.pi_status_msg;
-            parameters[22].Value = model.pi_remark;
-            parameters[23].Value = model.pi_cre_date;
-            parameters[24].Value = model.pi_cre_userid;
-            parameters[25].Value = model.pi_update_date;
-            parameters[26].Value = model.pi_edituser_id;
-            parameters[27].Value = model.pi_user_ip;
-            parameters[28].Value = model.pi_void_status;
-            parameters[29].Value = model.pi_chr01;
-            parameters[30].Value = model.pi_chr02;
-            parameters[31].Value = model.pi_deci1;
-            parameters[32].Value = model.pi_deci2;
-            parameters[33].Value = model.pi_wec_ctn;
-            parameters[34].Value = model.plr_LineID_tran;
+            parameters[20].Value = model.pisr_sbu;
+            parameters[21].Value = model.pisr_vend;
+            parameters[22].Value = model.pisr_mfgr_name;
+            parameters[23].Value = model.pisr_char01;
+            parameters[24].Value = model.pisr_char02;
+            parameters[25].Value = model.pisr_char03;
+            parameters[26].Value = model.pisr_dec01;
+            parameters[27].Value = model.pisr_dec02;
+            parameters[28].Value = model.pisr_int01;
+            parameters[29].Value = model.pisr_int02;
+            parameters[30].Value = model.pi_status;
+            parameters[31].Value = model.pi_status_msg;
+            parameters[32].Value = model.pi_remark;
+            parameters[33].Value = model.pi_cre_date;
+            parameters[34].Value = model.pi_cre_userid;
+            parameters[35].Value = model.pi_update_date;
+            parameters[36].Value = model.pi_edituser_id;
+            parameters[37].Value = model.pi_user_ip;
+            parameters[38].Value = model.pi_void_status;
+            parameters[39].Value = model.pi_chr01;
+            parameters[40].Value = model.pi_chr02;
+            parameters[41].Value = model.pi_deci1;
+            parameters[42].Value = model.pi_deci2;
+            parameters[43].Value = model.pi_wec_ctn;
+            parameters[44].Value = model.plr_LineID_tran;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -290,7 +340,7 @@ namespace PI.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 from pisr_grr ");
+            strSql.Append("select  top 1 pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_mfgr_name,pisr_char01,pisr_char02,pisr_char03,pisr_dec01,pisr_dec02,pisr_int01,pisr_int02,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 from pisr_grr ");
             strSql.Append(" where pi_wec_ctn=@pi_wec_ctn and plr_LineID_tran=@plr_LineID_tran ");
             SqlParameter[] parameters = {
 					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
@@ -407,6 +457,46 @@ namespace PI.DAL
                 {
                     model.pisr_lic_req = row["pisr_lic_req"].ToString();
                 }
+                if (row["pisr_sbu"] != null)
+                {
+                    model.pisr_sbu = row["pisr_sbu"].ToString();
+                }
+                if (row["pisr_vend"] != null)
+                {
+                    model.pisr_vend = row["pisr_vend"].ToString();
+                }
+                if (row["pisr_mfgr_name"] != null)
+                {
+                    model.pisr_mfgr_name = row["pisr_mfgr_name"].ToString();
+                }
+                if (row["pisr_char01"] != null)
+                {
+                    model.pisr_char01 = row["pisr_char01"].ToString();
+                }
+                if (row["pisr_char02"] != null)
+                {
+                    model.pisr_char02 = row["pisr_char02"].ToString();
+                }
+                if (row["pisr_char03"] != null)
+                {
+                    model.pisr_char03 = row["pisr_char03"].ToString();
+                }
+                if (row["pisr_dec01"] != null && row["pisr_dec01"].ToString() != "")
+                {
+                    model.pisr_dec01 = decimal.Parse(row["pisr_dec01"].ToString());
+                }
+                if (row["pisr_dec02"] != null && row["pisr_dec02"].ToString() != "")
+                {
+                    model.pisr_dec02 = decimal.Parse(row["pisr_dec02"].ToString());
+                }
+                if (row["pisr_int01"] != null && row["pisr_int01"].ToString() != "")
+                {
+                    model.pisr_int01 = int.Parse(row["pisr_int01"].ToString());
+                }
+                if (row["pisr_int02"] != null && row["pisr_int02"].ToString() != "")
+                {
+                    model.pisr_int02 = int.Parse(row["pisr_int02"].ToString());
+                }
                 if (row["pi_status"] != null)
                 {
                     model.pi_status = row["pi_status"].ToString();
@@ -469,7 +559,7 @@ namespace PI.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
+            strSql.Append("select pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_mfgr_name,pisr_char01,pisr_char02,pisr_char03,pisr_dec01,pisr_dec02,pisr_int01,pisr_int02,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
             strSql.Append(" FROM pisr_grr ");
             if (strWhere.Trim() != "")
             {
@@ -489,7 +579,7 @@ namespace PI.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
+            strSql.Append(" pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_mfgr_name,pisr_char01,pisr_char02,pisr_char03,pisr_dec01,pisr_dec02,pisr_int01,pisr_int02,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
             strSql.Append(" FROM pisr_grr ");
             if (strWhere.Trim() != "")
             {
