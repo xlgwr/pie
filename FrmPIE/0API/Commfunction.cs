@@ -1847,7 +1847,7 @@ namespace FrmPIE._0API
                     CartonFromTo ctftPlrMstrTran = new CartonFromTo(dwo._dgv1, _pi_mstr_model.PI_ID, 0, "upload", _idr_show._custip, _idr_show._custip);
 
                     var reobjmstr = initDataGVpi_mstr(ctftPlrMstr, false, "model");
-                    var reobjdet = initDataGVpi_det(ctftPlrMstrTran, true, "nothing");
+                    var reobjdet = initDataGVpi_det_join_grr(ctftPlrMstrTran, true, "nothing");
 
                     if (reobjmstr != null)
                     {

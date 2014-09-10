@@ -72,7 +72,7 @@
             this.groupBox0frmUploadExcel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox0frmUploadExcel.Location = new System.Drawing.Point(0, 0);
             this.groupBox0frmUploadExcel.Name = "groupBox0frmUploadExcel";
-            this.groupBox0frmUploadExcel.Size = new System.Drawing.Size(723, 472);
+            this.groupBox0frmUploadExcel.Size = new System.Drawing.Size(683, 472);
             this.groupBox0frmUploadExcel.TabIndex = 0;
             this.groupBox0frmUploadExcel.TabStop = false;
             this.groupBox0frmUploadExcel.Resize += new System.EventHandler(this.groupBox1frmUpload_Resize);
@@ -90,23 +90,23 @@
             this.groupBox2mstrUploadExcel.Controls.Add(this.label2);
             this.groupBox2mstrUploadExcel.Controls.Add(this.txt1batch_idUploadExcel);
             this.groupBox2mstrUploadExcel.Controls.Add(this.label1);
-            this.groupBox2mstrUploadExcel.Location = new System.Drawing.Point(7, 172);
+            this.groupBox2mstrUploadExcel.Location = new System.Drawing.Point(7, 167);
             this.groupBox2mstrUploadExcel.Name = "groupBox2mstrUploadExcel";
-            this.groupBox2mstrUploadExcel.Size = new System.Drawing.Size(709, 55);
+            this.groupBox2mstrUploadExcel.Size = new System.Drawing.Size(668, 55);
             this.groupBox2mstrUploadExcel.TabIndex = 16;
             this.groupBox2mstrUploadExcel.TabStop = false;
             this.groupBox2mstrUploadExcel.Text = "BatchID Info Mstr";
             // 
             // txt5batch_cre_dateUploadExcel
             // 
-            this.txt5batch_cre_dateUploadExcel.Location = new System.Drawing.Point(545, 21);
+            this.txt5batch_cre_dateUploadExcel.Location = new System.Drawing.Point(496, 21);
             this.txt5batch_cre_dateUploadExcel.Name = "txt5batch_cre_dateUploadExcel";
             this.txt5batch_cre_dateUploadExcel.Size = new System.Drawing.Size(158, 21);
             this.txt5batch_cre_dateUploadExcel.TabIndex = 7;
             // 
             // txt4batch_dec01UploadExcel
             // 
-            this.txt4batch_dec01UploadExcel.Location = new System.Drawing.Point(431, 21);
+            this.txt4batch_dec01UploadExcel.Location = new System.Drawing.Point(382, 21);
             this.txt4batch_dec01UploadExcel.Name = "txt4batch_dec01UploadExcel";
             this.txt4batch_dec01UploadExcel.Size = new System.Drawing.Size(37, 21);
             this.txt4batch_dec01UploadExcel.TabIndex = 7;
@@ -114,7 +114,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(468, 25);
+            this.label5.Location = new System.Drawing.Point(419, 25);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 12);
             this.label5.TabIndex = 6;
@@ -123,7 +123,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(354, 25);
+            this.label4.Location = new System.Drawing.Point(305, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 6;
@@ -131,15 +131,15 @@
             // 
             // txt3batch_statusUploadExcel
             // 
-            this.txt3batch_statusUploadExcel.Location = new System.Drawing.Point(317, 21);
+            this.txt3batch_statusUploadExcel.Location = new System.Drawing.Point(274, 21);
             this.txt3batch_statusUploadExcel.Name = "txt3batch_statusUploadExcel";
-            this.txt3batch_statusUploadExcel.Size = new System.Drawing.Size(37, 21);
+            this.txt3batch_statusUploadExcel.Size = new System.Drawing.Size(31, 21);
             this.txt3batch_statusUploadExcel.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(282, 25);
+            this.label3.Location = new System.Drawing.Point(239, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 4;
@@ -147,15 +147,15 @@
             // 
             // txt2batch_docUploadExcel
             // 
-            this.txt2batch_docUploadExcel.Location = new System.Drawing.Point(188, 21);
+            this.txt2batch_docUploadExcel.Location = new System.Drawing.Point(170, 21);
             this.txt2batch_docUploadExcel.Name = "txt2batch_docUploadExcel";
-            this.txt2batch_docUploadExcel.Size = new System.Drawing.Size(94, 21);
+            this.txt2batch_docUploadExcel.Size = new System.Drawing.Size(69, 21);
             this.txt2batch_docUploadExcel.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(153, 25);
+            this.label2.Location = new System.Drawing.Point(135, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 2;
@@ -165,7 +165,7 @@
             // 
             this.txt1batch_idUploadExcel.Location = new System.Drawing.Point(59, 21);
             this.txt1batch_idUploadExcel.Name = "txt1batch_idUploadExcel";
-            this.txt1batch_idUploadExcel.Size = new System.Drawing.Size(94, 21);
+            this.txt1batch_idUploadExcel.Size = new System.Drawing.Size(76, 21);
             this.txt1batch_idUploadExcel.TabIndex = 1;
             // 
             // label1
@@ -182,7 +182,7 @@
             this.groupBox3detUploadExcel.Controls.Add(this.data1GV1ePackingDet1UploadExcel);
             this.groupBox3detUploadExcel.Location = new System.Drawing.Point(7, 229);
             this.groupBox3detUploadExcel.Name = "groupBox3detUploadExcel";
-            this.groupBox3detUploadExcel.Size = new System.Drawing.Size(709, 231);
+            this.groupBox3detUploadExcel.Size = new System.Drawing.Size(668, 231);
             this.groupBox3detUploadExcel.TabIndex = 15;
             this.groupBox3detUploadExcel.TabStop = false;
             this.groupBox3detUploadExcel.Text = "Batch ePacking Det";
@@ -219,7 +219,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data1GV1ePackingDet1UploadExcel.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.data1GV1ePackingDet1UploadExcel.RowTemplate.Height = 23;
-            this.data1GV1ePackingDet1UploadExcel.Size = new System.Drawing.Size(703, 211);
+            this.data1GV1ePackingDet1UploadExcel.Size = new System.Drawing.Size(662, 211);
             this.data1GV1ePackingDet1UploadExcel.TabIndex = 16;
             // 
             // btn2TempleFileUploadExcel
@@ -237,7 +237,7 @@
             // 
             this.lbl1UploadExcelThreadMsg.AutoSize = true;
             this.lbl1UploadExcelThreadMsg.ForeColor = System.Drawing.Color.Red;
-            this.lbl1UploadExcelThreadMsg.Location = new System.Drawing.Point(52, 143);
+            this.lbl1UploadExcelThreadMsg.Location = new System.Drawing.Point(13, 142);
             this.lbl1UploadExcelThreadMsg.Name = "lbl1UploadExcelThreadMsg";
             this.lbl1UploadExcelThreadMsg.Size = new System.Drawing.Size(0, 12);
             this.lbl1UploadExcelThreadMsg.TabIndex = 14;
@@ -248,7 +248,7 @@
             this.groupBox1browseUploadExcel.Controls.Add(this.txt0ExcelFileUploadExcel);
             this.groupBox1browseUploadExcel.Location = new System.Drawing.Point(7, 14);
             this.groupBox1browseUploadExcel.Name = "groupBox1browseUploadExcel";
-            this.groupBox1browseUploadExcel.Size = new System.Drawing.Size(709, 70);
+            this.groupBox1browseUploadExcel.Size = new System.Drawing.Size(668, 70);
             this.groupBox1browseUploadExcel.TabIndex = 13;
             this.groupBox1browseUploadExcel.TabStop = false;
             this.groupBox1browseUploadExcel.Text = "选择上传的Excel文件";
@@ -268,7 +268,7 @@
             // 
             this.txt0ExcelFileUploadExcel.Location = new System.Drawing.Point(141, 30);
             this.txt0ExcelFileUploadExcel.Name = "txt0ExcelFileUploadExcel";
-            this.txt0ExcelFileUploadExcel.Size = new System.Drawing.Size(506, 21);
+            this.txt0ExcelFileUploadExcel.Size = new System.Drawing.Size(462, 21);
             this.txt0ExcelFileUploadExcel.TabIndex = 8;
             // 
             // btn3QuickUploadExcel
@@ -298,7 +298,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 472);
+            this.ClientSize = new System.Drawing.Size(683, 472);
             this.Controls.Add(this.groupBox0frmUploadExcel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

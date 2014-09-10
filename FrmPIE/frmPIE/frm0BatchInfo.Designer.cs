@@ -74,7 +74,7 @@
             // gb3CartonNo
             // 
             this.gb3CartonNo.Controls.Add(this.data2GV2CartonNO);
-            this.gb3CartonNo.Location = new System.Drawing.Point(6, 315);
+            this.gb3CartonNo.Location = new System.Drawing.Point(6, 304);
             this.gb3CartonNo.Name = "gb3CartonNo";
             this.gb3CartonNo.Size = new System.Drawing.Size(714, 237);
             this.gb3CartonNo.TabIndex = 19;
@@ -85,7 +85,7 @@
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -94,7 +94,7 @@
             this.data2GV2CartonNO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -106,7 +106,7 @@
             this.data2GV2CartonNO.Name = "data2GV2CartonNO";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -129,7 +129,7 @@
             this.gb1mstr_BatchInfo.Controls.Add(this.label2);
             this.gb1mstr_BatchInfo.Controls.Add(this.txt1batch_id_BatchInfo);
             this.gb1mstr_BatchInfo.Controls.Add(this.label1);
-            this.gb1mstr_BatchInfo.Location = new System.Drawing.Point(6, 23);
+            this.gb1mstr_BatchInfo.Location = new System.Drawing.Point(6, 12);
             this.gb1mstr_BatchInfo.Name = "gb1mstr_BatchInfo";
             this.gb1mstr_BatchInfo.Size = new System.Drawing.Size(714, 55);
             this.gb1mstr_BatchInfo.TabIndex = 18;
@@ -138,14 +138,14 @@
             // 
             // txt5batch_cre_date_BatchInfo
             // 
-            this.txt5batch_cre_date_BatchInfo.Location = new System.Drawing.Point(545, 21);
+            this.txt5batch_cre_date_BatchInfo.Location = new System.Drawing.Point(513, 21);
             this.txt5batch_cre_date_BatchInfo.Name = "txt5batch_cre_date_BatchInfo";
             this.txt5batch_cre_date_BatchInfo.Size = new System.Drawing.Size(158, 21);
             this.txt5batch_cre_date_BatchInfo.TabIndex = 7;
             // 
             // txt4batch_dec01_BatchInfo
             // 
-            this.txt4batch_dec01_BatchInfo.Location = new System.Drawing.Point(431, 21);
+            this.txt4batch_dec01_BatchInfo.Location = new System.Drawing.Point(399, 21);
             this.txt4batch_dec01_BatchInfo.Name = "txt4batch_dec01_BatchInfo";
             this.txt4batch_dec01_BatchInfo.Size = new System.Drawing.Size(37, 21);
             this.txt4batch_dec01_BatchInfo.TabIndex = 7;
@@ -153,7 +153,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(468, 25);
+            this.label5.Location = new System.Drawing.Point(436, 25);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 12);
             this.label5.TabIndex = 6;
@@ -162,7 +162,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(354, 25);
+            this.label4.Location = new System.Drawing.Point(322, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 6;
@@ -170,7 +170,7 @@
             // 
             // txt3batch_statu_BatchInfo
             // 
-            this.txt3batch_statu_BatchInfo.Location = new System.Drawing.Point(317, 21);
+            this.txt3batch_statu_BatchInfo.Location = new System.Drawing.Point(285, 21);
             this.txt3batch_statu_BatchInfo.Name = "txt3batch_statu_BatchInfo";
             this.txt3batch_statu_BatchInfo.Size = new System.Drawing.Size(37, 21);
             this.txt3batch_statu_BatchInfo.TabIndex = 5;
@@ -178,7 +178,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(282, 25);
+            this.label3.Location = new System.Drawing.Point(250, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 4;
@@ -186,15 +186,15 @@
             // 
             // txt2batch_do_BatchInfo
             // 
-            this.txt2batch_do_BatchInfo.Location = new System.Drawing.Point(188, 21);
+            this.txt2batch_do_BatchInfo.Location = new System.Drawing.Point(182, 21);
             this.txt2batch_do_BatchInfo.Name = "txt2batch_do_BatchInfo";
-            this.txt2batch_do_BatchInfo.Size = new System.Drawing.Size(94, 21);
+            this.txt2batch_do_BatchInfo.Size = new System.Drawing.Size(68, 21);
             this.txt2batch_do_BatchInfo.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(153, 25);
+            this.label2.Location = new System.Drawing.Point(147, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 2;
@@ -204,7 +204,7 @@
             // 
             this.txt1batch_id_BatchInfo.Location = new System.Drawing.Point(59, 21);
             this.txt1batch_id_BatchInfo.Name = "txt1batch_id_BatchInfo";
-            this.txt1batch_id_BatchInfo.Size = new System.Drawing.Size(94, 21);
+            this.txt1batch_id_BatchInfo.Size = new System.Drawing.Size(88, 21);
             this.txt1batch_id_BatchInfo.TabIndex = 1;
             // 
             // label1
@@ -219,7 +219,7 @@
             // gb2det_BatchInfo
             // 
             this.gb2det_BatchInfo.Controls.Add(this.data1GV1ePackingDet1_BatchInfo);
-            this.gb2det_BatchInfo.Location = new System.Drawing.Point(6, 78);
+            this.gb2det_BatchInfo.Location = new System.Drawing.Point(6, 67);
             this.gb2det_BatchInfo.Name = "gb2det_BatchInfo";
             this.gb2det_BatchInfo.Size = new System.Drawing.Size(714, 237);
             this.gb2det_BatchInfo.TabIndex = 17;
@@ -230,7 +230,7 @@
             // 
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -239,7 +239,7 @@
             this.data1GV1ePackingDet1_BatchInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -251,7 +251,7 @@
             this.data1GV1ePackingDet1_BatchInfo.Name = "data1GV1ePackingDet1_BatchInfo";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;

@@ -64,14 +64,14 @@
             this.gb00PIScanPIDataitemInquire.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb00PIScanPIDataitemInquire.Location = new System.Drawing.Point(0, 0);
             this.gb00PIScanPIDataitemInquire.Name = "gb00PIScanPIDataitemInquire";
-            this.gb00PIScanPIDataitemInquire.Size = new System.Drawing.Size(726, 455);
+            this.gb00PIScanPIDataitemInquire.Size = new System.Drawing.Size(724, 455);
             this.gb00PIScanPIDataitemInquire.TabIndex = 0;
             this.gb00PIScanPIDataitemInquire.TabStop = false;
             // 
             // groupBox1PIMstr
             // 
             this.groupBox1PIMstr.Controls.Add(this.data0GVPIMstr);
-            this.groupBox1PIMstr.Location = new System.Drawing.Point(6, 67);
+            this.groupBox1PIMstr.Location = new System.Drawing.Point(6, 62);
             this.groupBox1PIMstr.Name = "groupBox1PIMstr";
             this.groupBox1PIMstr.Size = new System.Drawing.Size(714, 198);
             this.groupBox1PIMstr.TabIndex = 21;
@@ -124,7 +124,7 @@
             this.gb1mstr_PIMstr.Controls.Add(this.txt2_Plant_PIMstr);
             this.gb1mstr_PIMstr.Controls.Add(this.label2);
             this.gb1mstr_PIMstr.Controls.Add(this.txt1PI_id_PIMstr);
-            this.gb1mstr_PIMstr.Location = new System.Drawing.Point(6, 12);
+            this.gb1mstr_PIMstr.Location = new System.Drawing.Point(6, 7);
             this.gb1mstr_PIMstr.Name = "gb1mstr_PIMstr";
             this.gb1mstr_PIMstr.Size = new System.Drawing.Size(714, 55);
             this.gb1mstr_PIMstr.TabIndex = 20;
@@ -200,7 +200,7 @@
             // gb2det_PIdet
             // 
             this.gb2det_PIdet.Controls.Add(this.data1GV1_PIdet);
-            this.gb2det_PIdet.Location = new System.Drawing.Point(6, 265);
+            this.gb2det_PIdet.Location = new System.Drawing.Point(6, 260);
             this.gb2det_PIdet.Name = "gb2det_PIdet";
             this.gb2det_PIdet.Size = new System.Drawing.Size(714, 185);
             this.gb2det_PIdet.TabIndex = 19;
@@ -246,7 +246,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(726, 455);
+            this.ClientSize = new System.Drawing.Size(724, 455);
             this.Controls.Add(this.gb00PIScanPIDataitemInquire);
             this.Name = "frmPI1ScanDataInquire";
             this.Text = "frmPI1ScanDataInquire";

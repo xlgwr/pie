@@ -37,8 +37,9 @@ namespace FrmPIE.frmPIE
 
             btn1UpadeAddAddNewBatchID.Focus();
 
-            _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
-            _idr_show.tabCtlRight1.SelectedTab.Layout += _idr_show_Layout;
+            //_idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
+            //_idr_show.tabCtlRight1.SelectedTab.Layout += _idr_show_Layout;
+            _idr_show.tabCtlRight1.SelectedTab.AutoScroll = true;
             data1GV1ePackingDet1_AddNewBatchID.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
             data1GV1ePackingDet1_AddNewBatchID.ContextMenuStrip = _idr_show.c11MenuStripVoid;
             data1GV1ePackingDet1_AddNewBatchID.CellContextMenuStripNeeded += data1GV1ePackingDet1_AddNewBatchID_CellContextMenuStripNeeded;
@@ -96,7 +97,7 @@ namespace FrmPIE.frmPIE
         }
         private void groupBox0AddNewBatchID_Resize(object sender, EventArgs e)
         {
-            initWithHeight();
+            //initWithHeight();
         }
         private void ShowMsg(string msg, string title)
         {
