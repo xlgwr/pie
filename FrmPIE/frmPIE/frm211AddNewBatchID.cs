@@ -37,8 +37,8 @@ namespace FrmPIE.frmPIE
 
             btn1UpadeAddAddNewBatchID.Focus();
 
-            //_idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
-            //_idr_show.tabCtlRight1.SelectedTab.Layout += _idr_show_Layout;
+            _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
+            _idr_show.tabCtlRight1.SelectedTab.Layout += _idr_show_Layout;
             _idr_show.tabCtlRight1.SelectedTab.AutoScroll = true;
             data1GV1ePackingDet1_AddNewBatchID.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
             data1GV1ePackingDet1_AddNewBatchID.ContextMenuStrip = _idr_show.c11MenuStripVoid;
@@ -84,7 +84,7 @@ namespace FrmPIE.frmPIE
 
         private void initWithHeight()
         {
-            groupBox0AddNewBatchID.Width = _idr_show.tabCtlRight1.SelectedTab.Width - groupBox0AddNewBatchID.Left - 10;
+            groupBox0AddNewBatchID.Width = _idr_show.tabCtlRight1.SelectedTab.Width - groupBox0AddNewBatchID.Left - 20;
 
             groupBox1.Width = groupBox0AddNewBatchID.Width - groupBox1.Left - 5;
             groupBox2.Width = groupBox1.Width;
@@ -93,7 +93,7 @@ namespace FrmPIE.frmPIE
             groupBox4det_addnewbatch.Width = groupBox1.Width;
 
 
-            groupBox4det_addnewbatch.Height = groupBox0AddNewBatchID.Height - groupBox4det_addnewbatch.Top;
+            //groupBox4det_addnewbatch.Height = groupBox0AddNewBatchID.Height - groupBox4det_addnewbatch.Top;
         }
         private void groupBox0AddNewBatchID_Resize(object sender, EventArgs e)
         {

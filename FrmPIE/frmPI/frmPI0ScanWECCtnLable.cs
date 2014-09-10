@@ -768,7 +768,7 @@ namespace FrmPIE.frmPI
                                         }
                                         else
                                         {
-                                            if (i > 0 && i % 10 == 0)
+                                            if (i > 0 && i % 8 == 0)
                                             {
                                                 existrir += pi_det_list[i].pi_wec_ctn + ",\n\t";
                                             }
