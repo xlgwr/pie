@@ -27,7 +27,7 @@ namespace FrmPIE
             //FrmPIE.Show();
 
             var frmIDR = new frmIDR(this, system_user_model);
-            frmIDR.Text += Program.frmVersion+"    Welcome to: "+ txtUserName.Text;
+            frmIDR.Text += Program.frmVersion+"    Welcome : "+ txtUserName.Text;
             frmIDR.Show();
         }
         private void btnSubmit_Click(object sender, EventArgs e)

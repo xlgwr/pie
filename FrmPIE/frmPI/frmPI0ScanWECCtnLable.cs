@@ -46,9 +46,17 @@ namespace FrmPIE.frmPI
             _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Enter;
             _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
 
+            data1GVSanWecCtnLable.RowEnter += data1GVSanWecCtnLable_RowEnter;
+
             initWidth();
             initCoCmpData();
 
+        }
+
+        void data1GVSanWecCtnLable_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data1GVSanWecCtnLable, 3, e.RowIndex, Color.LightGreen, "CartonID", "pi_status", "Yes", Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
         }
         void initCoCmpData()
         {

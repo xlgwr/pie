@@ -37,6 +37,8 @@ namespace FrmPIE.frmPIE
 
             btn1UpadeAddAddNewBatchID.Focus();
 
+            data1GV1ePackingDet1_AddNewBatchID.ReadOnly = true;
+
             _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
             _idr_show.tabCtlRight1.SelectedTab.Layout += _idr_show_Layout;
             _idr_show.tabCtlRight1.SelectedTab.AutoScroll = true;
@@ -602,6 +604,10 @@ namespace FrmPIE.frmPIE
 
                 data1GV1ePackingDet1_AddNewBatchID.DataSource = dst.DefaultView;
                 data1GV1ePackingDet1_AddNewBatchID.Refresh();
+
+
+                data1GV1ePackingDet1_AddNewBatchID.Columns[0].Frozen = true;
+                data1GV1ePackingDet1_AddNewBatchID.Columns[1].Frozen = true;
 
                 data1GV1ePackingDet1_AddNewBatchID.Rows[_currRowIndex].Cells[0].Selected = true;
                 init0Update(_currRowIndex);

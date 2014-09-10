@@ -834,7 +834,9 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
             dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
             //dgv.Columns["plr_suppliers_id"].HeaderText = "Suppliers";
             dgv.Columns["batch_doc"].HeaderText = "Batch Type";
@@ -868,6 +870,7 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
 
@@ -923,6 +926,7 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
             dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
@@ -986,7 +990,8 @@ namespace FrmPIE._0API
             if (dgv.Rows.Count < 0)
             {
                 return;
-            }
+            } 
+            dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
             dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
@@ -1030,9 +1035,11 @@ namespace FrmPIE._0API
             if (dgv.Rows.Count < 0)
             {
                 return;
-            }
+            } 
+            dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
+
             dgv.Columns["PI_ID"].HeaderText = "PI ID";
             dgv.Columns["Plant"].HeaderText = "Plant";
 
@@ -1050,7 +1057,8 @@ namespace FrmPIE._0API
             if (dgv.Rows.Count < 0)
             {
                 return;
-            }
+            } 
+            dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
             dgv.Columns["PI_ID"].HeaderText = "PI ID";
@@ -1072,6 +1080,7 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
             dgv.Columns[2].Frozen = true;
