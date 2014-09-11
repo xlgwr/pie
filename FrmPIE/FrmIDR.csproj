@@ -335,7 +335,9 @@
     <None Include="Resources\irobot32.png" />
     <None Include="Resources\scanBar.png" />
     <None Include="Resources\47.ico" />
-    <None Include="Resources\logo.png" />
+    <None Include="Resources\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Web References\WebReference208\UserLoginCheck.disco" />
   </ItemGroup>
   <ItemGroup>

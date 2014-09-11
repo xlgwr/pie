@@ -101,11 +101,17 @@ namespace Xprint
         {
             string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "0labeltxt";
             string allfileNamepath = System.IO.Path.Combine(pathname, filePath);
+            string logofile = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"Resources\logo.png";
+
             if (!System.IO.File.Exists(pathname))
             {
 
                 System.IO.Directory.CreateDirectory(pathname);
 
+            }
+            if (System.IO.File.Exists(logofile) && !System.IO.File.Exists(@"D:\logo.png"))
+            { 
+                System.IO.File.Copy(logofile, @"D:\logo.png", true);
             }
             FileStream filetxt = new FileStream(allfileNamepath, FileMode.OpenOrCreate);
             StreamWriter fileWrite = new StreamWriter(filetxt, Encoding.UTF8);

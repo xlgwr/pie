@@ -1517,7 +1517,7 @@ namespace FrmPIE._0API
 
             int intPrintCount = 0;
             int intPrintErrorCount = 0;
-            int limitCount = 5;
+            int limitCount = 4;
 
             string strWhere = "";
             string resultmsg = "";
@@ -1551,19 +1551,23 @@ namespace FrmPIE._0API
 
                     if (print_Type.Equals("ZPL"))
                     {
-                        int x = 13;
-                        int y = 34;
+                        int x = 9;
+                        int y = 204;
                         int xoff = 0;
-                        int yoff = 31;
+                        int yoff = 25;
 
                         #region zpl 2824
                         strtxt.AppendLine(@"^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2~SD15^JUS^LRN^CI0^XZ");
+                        strtxt.AppendLine(@"~DG000.GRF,00512,008,");
 
-                        strtxt.AppendLine("^XA");
+                        strtxt.AppendLine(@",::::::::::::::K02C0,J01550,J02BA8,J05105,J0C08280,I010101,I02008080,J0H104,J0208C,J0H104,J02188,J0H104,I06EJE0,I0K540,J0H2H8,J01544,J02CAC,J0I14,I0H2188,I01010140,I02808280,I014105,J0A8AA,J01554,K0HE0,,:::::::::::::::::::::::^XA");
+
                         strtxt.AppendLine("^MMT");
-                        strtxt.AppendLine("^LL0406");
+                        strtxt.AppendLine("^LL0320");
                         strtxt.AppendLine("^PW448");
                         strtxt.AppendLine("^LS0");
+
+                        strtxt.AppendLine("^FT384,320^XG000.GRF,1,1^FS");
 
                         int totoal = 0;
                         string strSJ = "";
@@ -1583,11 +1587,11 @@ namespace FrmPIE._0API
                             if (plr_mstr_tran_list[i].plr_chr01.Equals("A"))
                             {
                                 //partno
-                                strtxt.AppendLine(@"^FT13," + (y + (i * yoff)).ToString() + @"^A0N,20,19^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "  " + plr_mstr_tran_list[i].plr_carton_qty.ToString() + "  A^FS");
+                                strtxt.AppendLine(@"^FT9," + (y + (i * yoff)).ToString() + @"^A0N,23,24^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "  " + plr_mstr_tran_list[i].plr_carton_qty.ToString() + "  A^FS");
                             }
                             else
                             {
-                                strtxt.AppendLine(@"^FT13," + (y + (i * yoff)).ToString() + @"^A0N,20,19^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "  " + plr_mstr_tran_list[i].plr_carton_qty.ToString() + " ^FS");
+                                strtxt.AppendLine(@"^FT9," + (y + (i * yoff)).ToString() + @"^A0N,23,24^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "  " + plr_mstr_tran_list[i].plr_carton_qty.ToString() + " ^FS");
 
                             }
 
@@ -1595,28 +1599,33 @@ namespace FrmPIE._0API
                         }
                         if (listcount > limitCount)
                         {
-                            strtxt.AppendLine(@"^FT13,189^A0N,21,33^FH\^FD.........^FS");
+                            strtxt.AppendLine(@"^FT9,305^A0N,23,24^FH\^FD.........^FS");
                         }
-                        strtxt.AppendLine(@"^FT13,224^A0N,23,24^FH\^FDCnt: " + listcount.ToString() + "/ TTL: " + totoal.ToString() + "^FS");
+                        strtxt.AppendLine(@"^FT180,305^A0N,23,24^FH\^FD" + listcount.ToString() + " / " + totoal.ToString() + "^FS");
 
 
-                        strtxt.AppendLine(@"^FT309,81^A0N,56,55^FH\^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
-                        strtxt.AppendLine(@"^FT316,139^A0N,28,28^FH\^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
+                        strtxt.AppendLine(@"^FT9,61^A0N,51,50^FH\^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
+                        strtxt.AppendLine(@"^FT379,33^A0N,28,26^FH\^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
+                        strtxt.AppendLine(@"^FT354,68^A0N,28,28^FH\^FD" + plr_mstr_tran_list[0].plr_pallet_no + "^FS");
 
                         if (!string.IsNullOrEmpty(strSJ))
                         {
-                            strtxt.AppendLine(@"^FT289,191^A0N,25,24^FH\^FD * " + plr_mstr_tran_list[0].plr_co + "^FS");
+                            strtxt.AppendLine(@"^FT383,250^A0N,23,24^FH\^FD * " + plr_mstr_tran_list[0].plr_co + "^FS");
                         }
                         else
                         {
-                            strtxt.AppendLine(@"^FT289,191^A0N,25,24^FH\^FD" + plr_mstr_tran_list[0].plr_co + "^FS");
+                            strtxt.AppendLine(@"^FT383,250^A0N,23,24^FH\^FD" + plr_mstr_tran_list[0].plr_co + "^FS");
 
                         }
-                        strtxt.AppendLine(@"^BY4,3,103^FT25,351^BCN,,Y,N");
+                        strtxt.AppendLine(@"^BY4,3,63^FT9,142^BCN,,Y,N");
                         strtxt.AppendLine(@"^FD>;" + plr_mstr_tran_list[0].plr_wec_ctn + "^FS");
 
                         strtxt.AppendLine("^PQ1,0,1,Y^XZ");
+
+                        strtxt.AppendLine("^XA^ID000.GRF^FS^XZ");
                         #endregion
+
+
 
                     }
                     else if (print_Type.Equals("TEC"))
@@ -1729,6 +1738,7 @@ namespace FrmPIE._0API
             {
 
                 _idr_show._strSaveLabelFile = strprefix + strfromto + ".txt";
+
                 var returnresult = Xprint.XPrint.WriteTxT(_idr_show._strSaveLabelFile, strtxt);
 
                 messageBox = "\tSuccess: 总打印：" + intPrintCount + "条记录。TXT文件存于: \n" + returnresult;
