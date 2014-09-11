@@ -669,7 +669,7 @@
             this.linkLabel4.Size = new System.Drawing.Size(145, 23);
             this.linkLabel4.TabIndex = 8;
             this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "Scan Cartron Label";
+            this.linkLabel4.Text = "Scan Carton Label";
             this.linkLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanel8

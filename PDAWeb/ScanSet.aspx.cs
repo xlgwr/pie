@@ -16,6 +16,7 @@ using PIE.DBUtility;
 public partial class ScanSet : System.Web.UI.Page
 {
     PI.Model.pi_mstr _pi_mstr_model;
+    string strPallet = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -24,6 +25,19 @@ public partial class ScanSet : System.Web.UI.Page
             {
                 Response.Write("<script language='javascript'>alert('您没有登录或登录超时，请重新登录！');top.location.href='Login.aspx';</script>");
                 return;
+            }
+            txtPalletNum.Items.Clear();
+            txtPalletNum.Items.Add(" ");
+            //Session["user_id"] = null;
+            //Session["piid"] = null;
+            //Session["plant"] = null;
+            //Session["type"] = null;
+            //Session["palletNum"] = null;
+            if (Session["piid"] != null && !string.IsNullOrWhiteSpace(Session["piid"].ToString()))
+            {
+                txtPIID.Text = Session["piid"].ToString();
+                existPIID(txtPIID.Text);
+                txtPalletNum.Focus();
             }
         }
         txtPIID.Focus();
@@ -38,6 +52,7 @@ public partial class ScanSet : System.Web.UI.Page
             lblMessage.Text = "PI ID is null,if you sure,this will be generate a New one.";
 
         }
+
 
         var existpiid = new PI.DAL.pi_mstr().Exists(strPIID, 1);
         if (!existpiid)
@@ -62,6 +77,9 @@ public partial class ScanSet : System.Web.UI.Page
             }
             _pi_mstr_model.PI_ID = strPIID;
             _pi_mstr_model.LineID = 1;
+            _pi_mstr_model.pi_deci1 = 1;
+            txtPalletNum.Items.Add("001");
+            txtPalletNum.Text = "001";
             _pi_mstr_model.Plant = ddlPlant.Text;
             _pi_mstr_model.pi_type = ddlType.Text;
 
@@ -85,29 +103,76 @@ public partial class ScanSet : System.Web.UI.Page
             }
             #endregion
 
-
-
         }
         else
         {
-            _pi_mstr_model = new PI.DAL.pi_mstr().GetModel(strPIID, 1);
-            ddlPlant.Text = _pi_mstr_model.Plant;
-            ddlType.Text = _pi_mstr_model.pi_type;
+            existPIID(strPIID);
+            if (string.IsNullOrWhiteSpace(txtPalletNum.SelectedItem.Text))
+            {
+
+                txtPalletNum.Focus();
+                lblMessage.Text = "Notice: Please select Pallet Num.";
+                return;
+            }
+
         }
+
+        initSession(strPIID);
+
+        Response.Redirect("Default.aspx");
+
+
+        //Response.Write("<script language='javascript'>window.open('Default.aspx', '_blank', 'fullscreen=yes,toolbar=no,titlebar=no');</script>");
+
+
+    }
+
+    private void existPIID(string strPIID)
+    {
+        _pi_mstr_model = new PI.DAL.pi_mstr().GetModel(strPIID, 1);
+        ddlPlant.Text = _pi_mstr_model.Plant;
+        ddlType.Text = _pi_mstr_model.pi_type;
+        var ds = new PI.BLL.pi_det().GetList("PI_ID='" + strPIID + "'");
+
+        if (ds.Tables[0].Rows.Count > 0)
+        {
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                if (ds.Tables[0].Rows[i]["pi_deci1"] == DBNull.Value)
+                {
+                    continue;
+                }
+                var pallet = Convert.ToInt32(ds.Tables[0].Rows[i]["pi_deci1"]).ToString("000");
+                ListItem li = new ListItem(pallet);
+                if (!txtPalletNum.Items.Contains(li))
+                {
+                    txtPalletNum.Items.Add(li);
+                    //var index = txtPalletNum.Items.IndexOf(li);
+                    //txtPalletNum.SelectedIndex = index;
+                }
+
+            }
+        }
+    }
+
+    private void initSession(string strPIID)
+    {
         if (string.IsNullOrEmpty(strPIID))
         {
             lblMessage.Text = "PI ID is null";
             return;
         }
+        if (string.IsNullOrWhiteSpace(txtPalletNum.SelectedItem.Text))
+        {
+            txtPalletNum.Focus();
+            lblMessage.Text = "Pallet Num is Null.";
+            return;
+
+        }
         Session["piid"] = strPIID;
+        Session["palletNum"] = txtPalletNum.Text.Trim();
         Session["plant"] = ddlPlant.Text;
         Session["type"] = ddlType.Text;
-
-        //Response.Redirect("Default.aspx");
-
-        Response.Write("<script language='javascript'>window.open('Default.aspx', '_blank', 'fullscreen=yes,toolbar=no,titlebar=no');</script>");
-
-
     }
     protected void BtnClear_Click(object sender, EventArgs e)
     {
@@ -122,7 +187,22 @@ public partial class ScanSet : System.Web.UI.Page
         Session["piid"] = null;
         Session["plant"] = null;
         Session["type"] = null;
+        Session["palletNum"] = null;
+
         Response.Write("<script language='javascript'>top.location.href='Login.aspx';</script>");
 
+    }
+    protected void txtPalletAdd_Click(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(txtPIID.Text))
+        {
+            lblMessage.Text = "PI ID is null";
+            return;
+
+        }  
+        var maxpallernum = new PI.DAL.pi_det().GetMaxId(txtPIID.Text).ToString("000");
+        txtPalletNum.Items.Add(maxpallernum);
+        txtPalletNum.SelectedIndex = txtPalletNum.Items.Count - 1;
+        lblMessage.Text = "";
     }
 }

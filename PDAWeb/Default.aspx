@@ -22,6 +22,12 @@
             //    $("#BtnOK").click();
             //});
         }
+        if ((e == document.getElementById("txtPalletNum")) && (event.keyCode == 13)) {
+            document.getElementById("txtboxid").focus();
+            //$(function () {
+            //    $("#BtnOK").click();
+            //});
+        }
         if ((e == document.getElementById("txtCo")) && (event.keyCode == 13)) {
             document.getElementById("BtnOK").click();
             //$(function () {
@@ -131,17 +137,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="left" class="auto-style1">Plant:<font style="font-size: 10pt"> </font>
+                            <td colspan="2" align="left" class="auto-style1"><asp:Label ID="txtPlant" runat="server" Width="97px"></asp:Label>
                             </td>
-                            <td colspan="3" class="auto-style2">
-                                <asp:TextBox ID="txtPlant" runat="server" Width="97px" ReadOnly="True"></asp:TextBox>
+                            <td colspan="2" class="auto-style2"><asp:Label ID="txtType" runat="server" Width="97px" ></asp:Label>
                             </td>
                         </tr>
                         <tr>
-                            <td align="left" class="auto-style1">Type:<font style="font-size: 10pt"> </font>
+                            <td align="left" class="auto-style1">Pallet#:
                             </td>
                             <td colspan="3" class="auto-style2">
-                                <asp:TextBox ID="txtType" runat="server" Width="97px" ReadOnly="True"></asp:TextBox>
+                                <asp:TextBox ID="txtPalletNum" runat="server" Width="97px" ReadOnly="True"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>

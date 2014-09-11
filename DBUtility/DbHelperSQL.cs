@@ -15,13 +15,13 @@ namespace PIE.DBUtility
     public abstract class DbHelperSQL
     {
         //数据库连接字符串(web.config来配置)，多数据库可使用DbHelperSQLP来实现.
-        public static string connectionString = PubConstant.ConnectionString;     		
+        public static string connectionString = PubConstant.ConnectionString;
         public DbHelperSQL()
-        {            
+        {
         }
 
         #region 公用方法
-		  ///
+        ///
         /// <summary>
         /// 获取服务器时间
         /// 
@@ -59,6 +59,19 @@ namespace PIE.DBUtility
         public static int GetMaxID(string FieldName, string TableName)
         {
             string strsql = "select max(" + FieldName + ")+1 from " + TableName;
+            object obj = GetSingle(strsql);
+            if (obj == null)
+            {
+                return 1;
+            }
+            else
+            {
+                return int.Parse(obj.ToString());
+            }
+        }
+        public static int GetMaxID(string FieldName, string strWhere, string TableName)
+        {
+            string strsql = "select max(" + FieldName + ")+1 from " + TableName + " where " + strWhere;
             object obj = GetSingle(strsql);
             if (obj == null)
             {
@@ -190,7 +203,7 @@ namespace PIE.DBUtility
                 }
             }
         }
-      
+
         /// <summary>
         /// 执行Sql和Oracle滴混合事务
         /// </summary>
@@ -218,7 +231,7 @@ namespace PIE.DBUtility
                             if (myDE.CommandText.ToLower().IndexOf("count(") == -1)
                             {
                                 tx.Rollback();
-                                throw new Exception("违背要求"+myDE.CommandText+"必须符合select count(..的格式");
+                                throw new Exception("违背要求" + myDE.CommandText + "必须符合select count(..的格式");
                                 //return 0;
                             }
 
@@ -297,7 +310,7 @@ namespace PIE.DBUtility
                     throw e;
                 }
             }
-        }        
+        }
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
@@ -512,7 +525,7 @@ namespace PIE.DBUtility
             catch (System.Data.SqlClient.SqlException e)
             {
                 throw e;
-            }   
+            }
 
         }
         /// <summary>
@@ -637,14 +650,15 @@ namespace PIE.DBUtility
                 {
                     SqlCommand cmd = new SqlCommand();
                     try
-                    { int count = 0;
+                    {
+                        int count = 0;
                         //循环
                         foreach (CommandInfo myDE in cmdList)
                         {
                             string cmdText = myDE.CommandText;
                             SqlParameter[] cmdParms = (SqlParameter[])myDE.Parameters;
                             PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
-                           
+
                             if (myDE.EffentNextType == EffentNextType.WhenHaveContine || myDE.EffentNextType == EffentNextType.WhenNoHaveContine)
                             {
                                 if (myDE.CommandText.ToLower().IndexOf("count(") == -1)
@@ -923,7 +937,7 @@ namespace PIE.DBUtility
             command.CommandType = CommandType.StoredProcedure;
             returnReader = command.ExecuteReader(CommandBehavior.CloseConnection);
             return returnReader;
-            
+
         }
 
 

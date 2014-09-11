@@ -1,6 +1,7 @@
 ﻿using PIE.DBUtility;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -30,8 +31,9 @@ public partial class _Default : System.Web.UI.Page
             if (Session["piid"].ToString().Trim() != "" && Session["plant"].ToString().Trim() != "" && Session["type"].ToString().Trim() != "")
             {
                 txtpiid.Text = Session["piid"].ToString();
-                txtPlant.Text = Session["plant"].ToString();
-                txtType.Text = Session["type"].ToString();
+                txtPlant.Text = "Plant:"+Session["plant"].ToString();
+                txtType.Text = "Type:"+Session["type"].ToString();
+                txtPalletNum.Text=Session["palletNum"].ToString();
                 strpiid = txtpiid.Text.Trim();
             }
             else
@@ -55,6 +57,13 @@ public partial class _Default : System.Web.UI.Page
         if (string.IsNullOrWhiteSpace(txtboxid.Text))
         {
             txtboxid.Focus();
+            ShowMsg("Error: WecCtnSN is null.", "Error");
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(txtPalletNum.Text))
+        {
+            txtPalletNum.Focus();
+            ShowMsg("Error: Pallet# is null.", "Error");
             return;
         }
         if (!getCoValiteWecCtnID())
@@ -81,7 +90,7 @@ public partial class _Default : System.Web.UI.Page
                     _pi_det_model.pi_wec_ctn = tran.plr_wec_ctn;
 
                     _pi_det_model.plr_LineID_tran = tran.LineID;
-                    _pi_det_model.pi_pallet_no = tran.plr_pallet_no;
+                    _pi_det_model.pi_deci1 =Convert.ToInt32(txtPalletNum.Text);
                     _pi_det_model.CartonNo = tran.CartonNo;
                     _pi_det_model.CartonID = tran.CartonID;
 
@@ -132,7 +141,7 @@ public partial class _Default : System.Web.UI.Page
             if (string.IsNullOrEmpty(txtpiid.ToString()))
             {
 
-                ShowMsg("新增新的PI ID", "Notice");
+                ShowMsg("新增新的PI ID", "Notice",true);
             }
             else
             {
@@ -145,7 +154,7 @@ public partial class _Default : System.Web.UI.Page
 
                 //initModelForTextBox(pi_det_new);
                 _addNextNewFalg = true;
-                ShowMsg("继续扫描，上次为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "," + _strco + "," + txtboxid.Text, "Notice");
+                ShowMsg("继续扫描，上次为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "," + _strco + "," + txtboxid.Text, "Notice",true);
 
 
             }
@@ -163,10 +172,20 @@ public partial class _Default : System.Web.UI.Page
     }
     private void ShowMsg(string msg, string title)
     {
+        
+        lblMessage.ForeColor = Color.Red;
         lblMessage.Visible = true;
         lblMessage.Text = title + ":" + msg;
         _strmsg = title + ":" + msg;
-        Response.Write("<script language='javascript'>alert('" + _strmsg + "');</script>");
+        //Response.Write("<script language='javascript'>alert('" + _strmsg + "');</script>");
+    } 
+    private void ShowMsg(string msg, string title,bool lblred)
+    {
+        lblMessage.ForeColor = Color.Black;
+        lblMessage.Visible = true;
+        lblMessage.Text = title + ":" + msg;
+        _strmsg = title + ":" + msg;
+        //Response.Write("<script language='javascript'>alert('" + _strmsg + "');</script>");
     }
     private bool getCoValiteWecCtnID()
     {
@@ -280,9 +299,9 @@ public partial class _Default : System.Web.UI.Page
 
     protected void BtnReturn_Click(object sender, EventArgs e)
     {
-        Session["piid"] = null;
-        Session["plant"] = null;
-        Session["type"] = null;
+       // Session["piid"] = null;
+      //  Session["plant"] = null;
+      //  Session["type"] = null;
         Response.Write("<script language='javascript'>top.location.href='ScanSet.aspx';</script>");
     }
     protected void txtCo_TextChanged(object sender, EventArgs e)
@@ -311,6 +330,7 @@ public partial class _Default : System.Web.UI.Page
         Session["piid"] = null;
         Session["plant"] = null;
         Session["type"] = null;
+        Session["palletNum"] = null;
         Response.Write("<script language='javascript'>top.location.href='Login.aspx';</script>");
     }
     protected void btnco_Click(object sender, EventArgs e)

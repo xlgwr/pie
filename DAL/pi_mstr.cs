@@ -21,6 +21,13 @@ namespace PI.DAL
         {
             return DbHelperSQL.GetMaxID("pi_LineID", "pi_det");
         }
+        /// <summary>
+        /// 得到最大ID
+        /// </summary>
+        public int GetMaxId(string piid)
+        {
+            return DbHelperSQL.GetMaxID("pi_deci1", "PI_ID='"+piid+"'", "pi_det");
+        }
 
         /// <summary>
         /// 是否存在该记录

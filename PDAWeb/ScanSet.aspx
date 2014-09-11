@@ -21,6 +21,13 @@
             //    $("#BtnSure").click();
             //});
         }
+        if ((e == document.getElementById("txtPalletNum")) && (event.keyCode == 13)) {
+
+            document.getElementById("BtnSure").click();
+            //$(function () {
+            //    $("#BtnSure").click();
+            //});
+        }
         if ((e == document.getElementById("ddlType")) && (event.keyCode == 13)) {
 
             document.getElementById("BtnSure").click();
@@ -73,6 +80,15 @@
                             </td>
                             <td style="width: 100px; height: 20px;" class="table_none" colspan="2">
                                 <asp:TextBox ID="txtPIID" runat="server" CssClass="txtu" Width="120px"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" style="width: 40px; height: 20px;" class="table_body">Pallet#:
+                            </td>
+                            <td align="left" style="width: 100px; height: 20px;" class="table_none" colspan="2">
+                                <asp:DropDownList ID="txtPalletNum" runat="server" Width="120px" Height="16px">
+                                </asp:DropDownList>
+                                <asp:Button ID="txtPalletAdd" runat="server" OnClick="txtPalletAdd_Click" Text="+" Width="59px" />
                             </td>
                         </tr>
                         <tr>

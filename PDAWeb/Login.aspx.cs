@@ -76,6 +76,7 @@ public partial class Login : System.Web.UI.Page
             Session["piid"] = "";
             Session["pallet"] = "";
             Session["type"] = "";
+            Session["palletNum"] = "";
             Response.Redirect("ScanSet.aspx");
             
         }
