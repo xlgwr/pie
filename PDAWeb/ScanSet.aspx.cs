@@ -40,7 +40,8 @@ public partial class ScanSet : System.Web.UI.Page
                 txtPalletNum.Focus();
             }
         }
-        txtPIID.Focus();
+        txtPIID.Focus(); 
+       // txtNW.Text = txtPalletNum.SelectedItem.Value;
 
     }
     protected void BtnSure_Click(object sender, EventArgs e)
@@ -78,7 +79,8 @@ public partial class ScanSet : System.Web.UI.Page
             _pi_mstr_model.PI_ID = strPIID;
             _pi_mstr_model.LineID = 1;
             _pi_mstr_model.pi_deci1 = 1;
-            txtPalletNum.Items.Add("001");
+            ListItem li = new ListItem("001", "0");
+            txtPalletNum.Items.Add(li);
             txtPalletNum.Text = "001";
             _pi_mstr_model.Plant = ddlPlant.Text;
             _pi_mstr_model.pi_type = ddlType.Text;
@@ -107,6 +109,7 @@ public partial class ScanSet : System.Web.UI.Page
         else
         {
             existPIID(strPIID);
+
             if (string.IsNullOrWhiteSpace(txtPalletNum.SelectedItem.Text))
             {
 
@@ -143,14 +146,14 @@ public partial class ScanSet : System.Web.UI.Page
                     continue;
                 }
                 var pallet = Convert.ToInt32(ds.Tables[0].Rows[i]["pi_deci1"]).ToString("000");
-                ListItem li = new ListItem(pallet);
+                var strnw = ds.Tables[0].Rows[i]["pi_pallet_no"].ToString();
+                ListItem li = new ListItem(pallet, strnw);
                 if (!txtPalletNum.Items.Contains(li))
                 {
                     txtPalletNum.Items.Add(li);
                     //var index = txtPalletNum.Items.IndexOf(li);
                     //txtPalletNum.SelectedIndex = index;
                 }
-
             }
         }
     }
@@ -170,8 +173,9 @@ public partial class ScanSet : System.Web.UI.Page
 
         }
         Session["piid"] = strPIID;
-        Session["palletNum"] = txtPalletNum.Text.Trim();
+        Session["palletNum"] = txtPalletNum.SelectedItem.Text;
         Session["plant"] = ddlPlant.Text;
+        Session["nw"] = txtNW.Text;
         Session["type"] = ddlType.Text;
     }
     protected void BtnClear_Click(object sender, EventArgs e)
@@ -187,6 +191,7 @@ public partial class ScanSet : System.Web.UI.Page
         Session["piid"] = null;
         Session["plant"] = null;
         Session["type"] = null;
+        Session["nw"] = null;
         Session["palletNum"] = null;
 
         Response.Write("<script language='javascript'>top.location.href='Login.aspx';</script>");
@@ -199,10 +204,30 @@ public partial class ScanSet : System.Web.UI.Page
             lblMessage.Text = "PI ID is null";
             return;
 
-        }  
+        }
         var maxpallernum = new PI.DAL.pi_det().GetMaxId(txtPIID.Text).ToString("000");
+        ListItem li = new ListItem(maxpallernum, "0");
         txtPalletNum.Items.Add(maxpallernum);
         txtPalletNum.SelectedIndex = txtPalletNum.Items.Count - 1;
+        txtNW.Text = "";
         lblMessage.Text = "";
+    }
+    protected void btnnw_Click(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(txtNW.Text) || string.IsNullOrWhiteSpace(txtPIID.Text) || string.IsNullOrWhiteSpace(txtPalletNum.SelectedItem.Text))
+        {
+            lblMessage.Text="PI ID or Pallet# or NW is null.";
+            return;
+        }
+        var strupdatenw = "update pi_det set pi_pallet_no='" + txtNW.Text + "' where PI_ID='" + txtPIID.Text.Trim() + "' and pi_deci1='" + txtPalletNum.SelectedItem.Text + "'";
+        var intresult = DbHelperSQL.ExecuteSql(strupdatenw);
+        if (intresult>0)
+        {
+            lblMessage.Text = "Update NW of Pallet#: " + txtPalletNum.SelectedItem.Text + " success.";
+        }
+    }
+    protected void txtPalletNum_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtNW.Text = txtPalletNum.SelectedItem.Value;
     }
 }

@@ -51,6 +51,8 @@ namespace FrmPIE.frmPI
             initWidth();
             initCoCmpData();
 
+            cmb4Pallet_PIScan.Items.Add(" ");
+
         }
 
         void data1GVSanWecCtnLable_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -119,11 +121,11 @@ namespace FrmPIE.frmPI
             {
                 return false;
             }
-            if (isnullempty(cmb1Plant_ScanWECCtnLable, "Plant must be has one.", "Error"))
+            if (isnullempty(cmb2Type_ScanWECCTN, "Type must be has one.", "Error"))
             {
                 return false;
             }
-            if (isnullempty(cmb2Type_ScanWECCTN, "Plant must be has one.", "Error"))
+            if (isnullempty(cmb4Pallet_PIScan, "Pallet must be has one.", "Error") && !string.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text.Trim()))
             {
                 return false;
             }
@@ -251,6 +253,10 @@ namespace FrmPIE.frmPI
                 pi_mstr_model.Plant = cmb1Plant_ScanWECCtnLable.Text.Trim();
                 pi_mstr_model.pi_type = cmb2Type_ScanWECCTN.Text.Trim();
 
+                cmb4Pallet_PIScan.Items.Clear();
+                cmb4Pallet_PIScan.Items.Add("001");
+                cmb4Pallet_PIScan.SelectedIndex = cmb4Pallet_PIScan.Items.Count - 1;
+
                 pi_mstr_model.pi_cre_date = DbHelperSQL.getServerGetDate();
                 pi_mstr_model.pi_update_date = pi_mstr_model.pi_cre_date;
                 pi_mstr_model.pi_user_ip = _idr_show._custip;
@@ -269,7 +275,12 @@ namespace FrmPIE.frmPI
             }
             if (_plr_mstr_tran_model_list.Count > 0)
             {
-
+                if (string.IsNullOrEmpty(cmb4Pallet_PIScan.Text))
+                {
+                    cmb4Pallet_PIScan.Focus();
+                    lbl0msg.Text = "Please select a Pallet Num.";
+                    return;
+                }
                 foreach (var tran in _plr_mstr_tran_model_list)
                 {
                     if (tran.plr_wec_ctn.Equals(txt2SanWecCtnLable.Text))
@@ -278,10 +289,17 @@ namespace FrmPIE.frmPI
                         _pi_det_model.PI_ID = _pi_mstr_model.PI_ID;
                         _pi_det_model.pi_type = _pi_mstr_model.pi_type;
                         _pi_det_model.pi_LineID = _nextlineid;
+
+
                         _pi_det_model.pi_wec_ctn = tran.plr_wec_ctn;
 
                         _pi_det_model.plr_LineID_tran = tran.LineID;
-                        _pi_det_model.pi_pallet_no = tran.plr_pallet_no;
+
+                        //_pi_det_model.pi_pallet_no = tran.plr_pallet_no;
+
+                        _pi_det_model.pi_deci1 = Convert.ToInt32(cmb4Pallet_PIScan.Text);
+                        _pi_det_model.pi_pallet_no = txtPalletNW.Text;
+
                         _pi_det_model.CartonNo = tran.CartonNo;
                         _pi_det_model.CartonID = tran.CartonID;
 
@@ -353,6 +371,15 @@ namespace FrmPIE.frmPI
                 }
                 //////////////************************
                 threadinitDVdelegate();
+
+                if (string.IsNullOrEmpty(txtPalletNW.Text.Trim()))
+                {
+                    if (MessageBox.Show("Pallet# "+cmb4Pallet_PIScan.Text+" TTL NW is Null, are you add that?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        txtPalletNW.Focus();
+                    }
+                }
+
 
             }
             else
@@ -440,6 +467,7 @@ namespace FrmPIE.frmPI
                             for (int i = 0; i < cmb3CO_ScanWECCtnLable.Items.Count; i++)
                             {
 
+
                                 var dindex = cmb3CO_ScanWECCtnLable.Items[i].ToString().StartsWith(strco);
                                 if (dindex)
                                 {
@@ -521,7 +549,32 @@ namespace FrmPIE.frmPI
 
                         pi_det_new.pi_LineID = _nextlineid;
 
+                        cmb4Pallet_PIScan.Items.Clear();
+                        cmb4Pallet_PIScan.Items.Add(" ");
 
+                        var ds = new PI.BLL.pi_det().GetList("PI_ID='" + txt1PIID_ScanWECCtnLable.Text.Trim() + "'");
+
+                        if (ds.Tables[0].Rows.Count > 0)
+                        {
+                            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                            {
+                                if (ds.Tables[0].Rows[i]["pi_deci1"] == DBNull.Value)
+                                {
+                                    continue;
+                                }
+                                var pallet = Convert.ToInt32(ds.Tables[0].Rows[i]["pi_deci1"]).ToString("000");
+                                var strnw = ds.Tables[0].Rows[i]["pi_pallet_no"].ToString();
+
+                                if (!cmb4Pallet_PIScan.Items.Contains(pallet))
+                                {
+                                    cmb4Pallet_PIScan.Items.Add(pallet);
+                                    //var index = txtPalletNum.Items.IndexOf(li);
+                                    //txtPalletNum.SelectedIndex = index;
+                                }
+                            }
+                        }
+                        cmb4Pallet_PIScan.SelectedIndex = -1;
+                        cmb4Pallet_PIScan.Text = "";
                         //txt1PIID_ScanWECCtnLable.Text = _pi_mstr_model.PI_ID;
                         //initModelForTextBox(pi_det_new);
 
@@ -539,11 +592,30 @@ namespace FrmPIE.frmPI
                     {
                         ShowMsg(txt1PIID_ScanWECCtnLable.Text + " is not exist.", "Notice");
                         lbl0noticePiId.Text = txt1PIID_ScanWECCtnLable.Text + " is not exist.";
+                        if (!string.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text.Trim()))
+                        {  //!string.IsNullOrEmpty(cmb4Pallet_PIScan.Text.Trim()) && 
+                            txt1PIID_ScanWECCtnLable.Focus();
+                            txt1PIID_ScanWECCtnLable.SelectionStart = txt1PIID_ScanWECCtnLable.Text.Length;
+                        }
+                        else
+                        {
+                            cmb4Pallet_PIScan.Focus();
+                        }
+
+                        return;
                     }
+                }
+                if (!string.IsNullOrEmpty(cmb4Pallet_PIScan.Text.Trim()))
+                {
+                    txt1PIID_ScanWECCtnLable.Focus();
+                    txt1PIID_ScanWECCtnLable.SelectionStart = txt1PIID_ScanWECCtnLable.Text.Length;
+                }
+                else
+                {
+                    cmb4Pallet_PIScan.Focus();
                 }
                 txt2SanWecCtnLable.Text = "";
                 cmb3CO_ScanWECCtnLable.SelectedIndex = -1;
-                txt2SanWecCtnLable.Focus();
                 //txt2SanWecCtnLable.SelectAll();
             }
         }
@@ -622,14 +694,7 @@ namespace FrmPIE.frmPI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (!getCoValiteWecCtnID())
-                {
-                    return;
-                }
-                else
-                {
-                    btn0Scan_Click(sender, e);
-                }
+                btn0Scan_Click(sender, e);
             }
 
         }
@@ -856,6 +921,89 @@ namespace FrmPIE.frmPI
             byte[] temp1 = Encoding.Convert(pisr_ch_descutf8, pisr_ch_desciso88, temp);
             string result = pisr_ch_descutf8.GetString(temp1);
             MessageBox.Show(result);
+        }
+
+        private void btnAddPalletNum_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text))
+            {
+                lbl0msg.Text = "PI ID is null";
+                return;
+
+            }
+            var maxpallernum = new PI.DAL.pi_det().GetMaxId(txt1PIID_ScanWECCtnLable.Text).ToString("000");
+            if (!cmb4Pallet_PIScan.Items.Contains(maxpallernum))
+            {
+
+                cmb4Pallet_PIScan.Items.Add(maxpallernum);
+            }
+
+            cmb4Pallet_PIScan.SelectedIndex = cmb4Pallet_PIScan.Items.Count - 1;
+            txt2SanWecCtnLable.Focus();
+            txtPalletNW.Text = "";
+        }
+
+        private void btnAddPalletNW_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmb4Pallet_PIScan.Text) || string.IsNullOrEmpty(txtPalletNW.Text))
+            {
+                lbl0msg.Text = " Please select Pallet and NW must no null";
+                return;
+            }
+            var strupdatenw = "update pi_det set pi_pallet_no='" + txtPalletNW.Text + "' where PI_ID='" + txt1PIID_ScanWECCtnLable.Text.Trim() + "' and pi_deci1='" + cmb4Pallet_PIScan.Text + "'";
+            var intresult = DbHelperSQL.ExecuteSql(strupdatenw);
+            if (intresult > 0)
+            {
+                txt2SanWecCtnLable.Focus();
+                lbl0msg.Text = "Update NW of Pallet#: " + cmb4Pallet_PIScan.Text + " success.";
+            }
+
+        }
+
+        private void cmb4Pallet_PIScan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmb4Pallet_PIScan.Text.Trim()))
+            {
+
+                txtPalletNW.Text = "";
+                return;
+            }
+            var existpidet = new PI.DAL.pi_det().GetModel(txt1PIID_ScanWECCtnLable.Text, Convert.ToInt32(cmb4Pallet_PIScan.SelectedItem), true);
+            if (existpidet != null)
+            {
+                txtPalletNW.Text = existpidet.pi_pallet_no;
+                if (string.IsNullOrEmpty(txtPalletNW.Text.Trim()))
+                {
+                    if (MessageBox.Show("Pallet TTL NW is Null, are you add that?","Notice",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes)
+                    {
+                        txtPalletNW.Focus();
+                    }
+                }
+            }
+        }
+
+        private void cmb4Pallet_PIScan_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmb4Pallet_PIScan.Text.Trim()) && !string.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text.Trim()))
+            {
+                return;
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn0Scan_Click(sender, e);
+                if (string.IsNullOrEmpty(txt2SanWecCtnLable.Text.Trim()))
+                {
+                    txt2SanWecCtnLable.Focus();
+                }
+            }
+        }
+
+        private void txtPalletNW_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnAddPalletNW_Click(sender, e);
+            }
         }
 
 

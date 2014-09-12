@@ -91,6 +91,8 @@ public partial class _Default : System.Web.UI.Page
 
                     _pi_det_model.plr_LineID_tran = tran.LineID;
                     _pi_det_model.pi_deci1 =Convert.ToInt32(txtPalletNum.Text);
+                    _pi_det_model.pi_pallet_no = Session["nw"].ToString();
+
                     _pi_det_model.CartonNo = tran.CartonNo;
                     _pi_det_model.CartonID = tran.CartonID;
 
@@ -331,6 +333,7 @@ public partial class _Default : System.Web.UI.Page
         Session["plant"] = null;
         Session["type"] = null;
         Session["palletNum"] = null;
+        Session["nw"] = null;
         Response.Write("<script language='javascript'>top.location.href='Login.aspx';</script>");
     }
     protected void btnco_Click(object sender, EventArgs e)
