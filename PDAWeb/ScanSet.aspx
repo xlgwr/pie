@@ -16,6 +16,7 @@
         var e = event.srcElement;
         if ((e == document.getElementById("txtPIID")) && (event.keyCode == 13)) {
 
+
             document.getElementById("BtnSure").click();
             //$(function () {
             //    $("#BtnSure").click();
@@ -83,7 +84,7 @@
                 <td style="width: 200px; height: 40px" align="center" bgcolor="#dbeefd" valign="middle">
                     <table>
                         <tr>
-                            <td align="right" style="width: 40px; height: 20px;" class="table_body">PI_ID:
+                            <td align="right" style="width: 40px; height: 20px;" class="table_body">PINum:
                             </td>
                             <td style="width: 100px; height: 20px;" class="table_none" colspan="2">
                                 <asp:TextBox ID="txtPIID" runat="server" CssClass="txtu" Width="120px"></asp:TextBox>
@@ -95,11 +96,11 @@
                             <td align="left" style="width: 100px; height: 20px;" class="table_none" colspan="2">
                                 <asp:DropDownList ID="txtPalletNum" runat="server" Width="120px" Height="16px" AutoPostBack="True" OnSelectedIndexChanged="txtPalletNum_SelectedIndexChanged">
                                 </asp:DropDownList>
-                                <asp:Button ID="txtPalletAdd" runat="server" OnClick="txtPalletAdd_Click" Text="+" Width="59px" />
+                                <asp:Button ID="txtPalletAdd" runat="server" OnClick="txtPalletAdd_Click" Text="+" Width="25px" Height="24px" />
                             </td>
                         </tr>
                         <tr>
-                            <td align="right" style="width: 40px; height: 20px;" class="table_body">PalletNW:
+                            <td align="right" style="width: 40px; height: 20px;" class="table_body">PNW:
                             </td>
                             <td style="width: 100px; height: 20px;" class="table_none" colspan="2">
                                 <asp:TextBox ID="txtNW" runat="server" CssClass="txtu" Width="120px"></asp:TextBox>
@@ -135,10 +136,10 @@
             </tr>
             <tr>
                 <td align="center" bgcolor="#b0e0e6" style="width: 200px; height: 20px; background-color: #339999;">
-                    <asp:Button ID="BtnSure" runat="server" Text="确认" Height="20px" OnClick="BtnSure_Click" />
-                    <asp:Button ID="btnnw" runat="server" Text="保存NW" Height="20px" OnClick="btnnw_Click" />
-                    <asp:Button ID="BtnClear" runat="server" Text="清除" Height="20px" OnClick="BtnClear_Click" />
-                    <asp:Button ID="BtnExist" runat="server" Text="退出" Height="20px" OnClick="BtnExist_Click" />
+                    <asp:Button ID="BtnSure" runat="server" Text="确认" Height="20px" OnClick="BtnSure_Click" Width="36px" />
+                    <asp:Button ID="btnnw" runat="server" Text="保存NW" Height="20px" OnClick="btnnw_Click" Width="51px" />
+                    <asp:Button ID="BtnClear" runat="server" Text="清除" Height="20px" OnClick="BtnClear_Click" Width="32px" />
+                    <asp:Button ID="BtnExist" runat="server" Text="退出" Height="20px" OnClick="BtnExist_Click" Width="30px" />
                 </td>
             </tr>
         </table>

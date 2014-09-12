@@ -17,6 +17,7 @@
         var e = event.srcElement;
 
         if ((e == document.getElementById("txtboxid")) && (event.keyCode == 13)) {
+            document.getElementById("txtboxid").focus();
             document.getElementById("BtnOK").click();
             //$(function () {
             //    $("#BtnOK").click();
@@ -113,6 +114,9 @@
         ::-ms-backdrop {
             /* properties */
         }
+        .auto-style3 {
+            width: 80px;
+        }
     </style>
 </head>
 <body topmargin="0" onkeydown="javascript:if(event.keyCode==13) return false;">
@@ -130,34 +134,34 @@
                 <td style="width: 200px;" align="center" bgcolor="#dbeefd" valign="middle">
                     <table>
                         <tr>
-                            <td align="left" class="auto-style1">PI ID:
+                            <td align="left" class="auto-style3">PINum:
                             </td>
                             <td colspan="3" class="auto-style2">
                                 <asp:TextBox ID="txtpiid" runat="server" Width="97px" ReadOnly="True"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="left" class="auto-style1"><asp:Label ID="txtPlant" runat="server" Width="97px"></asp:Label>
+                            <td colspan="2" align="left" class="auto-style1"><asp:Label ID="txtPlant" runat="server" Width="79px"></asp:Label>
                             </td>
                             <td colspan="2" class="auto-style2"><asp:Label ID="txtType" runat="server" Width="97px" ></asp:Label>
                             </td>
                         </tr>
                         <tr>
-                            <td align="left" class="auto-style1">Pallet#:
+                            <td align="left" class="auto-style3">Pallet#:
                             </td>
                             <td colspan="3" class="auto-style2">
                                 <asp:TextBox ID="txtPalletNum" runat="server" Width="97px" ReadOnly="True"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
-                            <td align="left" class="auto-style1">WecCtnSN:<font style="font-size: 10pt"> </font>
+                            <td align="left" class="auto-style3">CtnSN:<font style="font-size: 10pt"> </font>
                             </td>
                             <td colspan="3" class="auto-style2">
                                 <asp:TextBox ID="txtboxid" runat="server" Width="97px" AutoPostBack="True" OnTextChanged="txtboxid_TextChanged"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
-                            <td align="left" class="auto-style1">CO:<font style="font-size: 10pt"> </font>
+                            <td align="left" class="auto-style3">CO:<font style="font-size: 10pt"> </font>
                             </td>
                             <td colspan="3" class="auto-style2">
                                 <asp:TextBox ID="txtCo" runat="server" Width="97px" OnTextChanged="txtCo_TextChanged" AutoPostBack="True"></asp:TextBox>

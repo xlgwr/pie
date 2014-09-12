@@ -622,7 +622,14 @@ namespace FrmPIE
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            addNewTabPage("Enquire Pi Report");
+            frmPI2Report swcl = new frmPI2Report(this);
+            addGBToTC(tabCtlRight1, swcl.gb0All_PiReport);
+        }
 
+        private void btn24PIReports_Click(object sender, EventArgs e)
+        {
+            c22MenuStripPiSystem.Show(btn24PIReports, _icurrMouseX, _icurrMouseY);
         }
 
 

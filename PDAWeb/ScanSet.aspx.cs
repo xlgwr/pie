@@ -81,7 +81,7 @@ public partial class ScanSet : System.Web.UI.Page
             _pi_mstr_model.pi_deci1 = 1;
             ListItem li = new ListItem("001", "0");
             txtPalletNum.Items.Add(li);
-            txtPalletNum.Text = "001";
+            txtPalletNum.SelectedIndex=txtPalletNum.Items.Count-1;
             _pi_mstr_model.Plant = ddlPlant.Text;
             _pi_mstr_model.pi_type = ddlType.Text;
 
@@ -206,10 +206,11 @@ public partial class ScanSet : System.Web.UI.Page
 
         }
         var maxpallernum = new PI.DAL.pi_det().GetMaxId(txtPIID.Text).ToString("000");
-        ListItem li = new ListItem(maxpallernum, "0");
+        ListItem li = new ListItem(maxpallernum, " ");
         txtPalletNum.Items.Add(maxpallernum);
         txtPalletNum.SelectedIndex = txtPalletNum.Items.Count - 1;
         txtNW.Text = "";
+        //txtNW.Focus();
         lblMessage.Text = "";
     }
     protected void btnnw_Click(object sender, EventArgs e)

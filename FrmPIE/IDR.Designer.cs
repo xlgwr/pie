@@ -83,6 +83,8 @@
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn24PIReports = new System.Windows.Forms.Button();
+            this.c22MenuStripPiSystem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel8 = new System.Windows.Forms.LinkLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lbl0SearchError = new System.Windows.Forms.Label();
@@ -94,8 +96,6 @@
             this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllButThisToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.c22MenuStripPiSystem = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -122,11 +122,11 @@
             this.flowLayoutPanel4.SuspendLayout();
             this.cMenuStrip21ScanCartronLabel.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
+            this.c22MenuStripPiSystem.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.ctmenusClose.SuspendLayout();
-            this.c22MenuStripPiSystem.SuspendLayout();
             this.c11MenuStripVoid.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -687,6 +687,7 @@
             // 
             this.btn24PIReports.BackgroundImage = global::FrmPIE.Properties.Resources.doc;
             this.btn24PIReports.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn24PIReports.ContextMenuStrip = this.c22MenuStripPiSystem;
             this.btn24PIReports.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn24PIReports.Location = new System.Drawing.Point(3, 3);
             this.btn24PIReports.Name = "btn24PIReports";
@@ -695,6 +696,22 @@
             this.btn24PIReports.Text = "2";
             this.btn24PIReports.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btn24PIReports.UseVisualStyleBackColor = true;
+            this.btn24PIReports.Click += new System.EventHandler(this.btn24PIReports_Click);
+            // 
+            // c22MenuStripPiSystem
+            // 
+            this.c22MenuStripPiSystem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.c22MenuStripPiSystem.Name = "cMenuStrip1ScanCartronLabel";
+            this.c22MenuStripPiSystem.Size = new System.Drawing.Size(179, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Image = global::FrmPIE.Properties.Resources.down;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(178, 22);
+            this.toolStripMenuItem1.Text = "&Enquire Pi Report";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // linkLabel8
             // 
@@ -832,21 +849,6 @@
             this.closeAllButThisToolStripMenuItem3.Text = "Close All But This";
             this.closeAllButThisToolStripMenuItem3.Click += new System.EventHandler(this.closeAllButThisToolStripMenuItem3_Click);
             // 
-            // c22MenuStripPiSystem
-            // 
-            this.c22MenuStripPiSystem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.c22MenuStripPiSystem.Name = "cMenuStrip1ScanCartronLabel";
-            this.c22MenuStripPiSystem.Size = new System.Drawing.Size(159, 26);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Image = global::FrmPIE.Properties.Resources.bar1;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
-            this.toolStripMenuItem1.Text = "&Scan Ctn lable";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
             // tool110StripMenuItemVoid
             // 
             this.tool110StripMenuItemVoid.Image = global::FrmPIE.Properties.Resources.j__43_;
@@ -907,12 +909,12 @@
             this.flowLayoutPanel4.ResumeLayout(false);
             this.cMenuStrip21ScanCartronLabel.ResumeLayout(false);
             this.flowLayoutPanel8.ResumeLayout(false);
+            this.c22MenuStripPiSystem.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.ctmenusClose.ResumeLayout(false);
-            this.c22MenuStripPiSystem.ResumeLayout(false);
             this.c11MenuStripVoid.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
