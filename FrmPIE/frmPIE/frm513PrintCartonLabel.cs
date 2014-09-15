@@ -83,6 +83,7 @@ namespace FrmPIE.frmPIE
 
         void SelectedTab_Resize(object sender, EventArgs e)
         {
+            _idr_show.AcceptButton = btn0Print_PrintCartonLabel;
             initwith();
         }
         public void initwith()
@@ -157,6 +158,7 @@ namespace FrmPIE.frmPIE
 
         private void txt88Batchid_PrintCtnLbl_TextChanged(object sender, EventArgs e)
         {
+            _idr_show.AcceptButton = btn8SearchPrintCtnLbl;
             if (txt88Batchid_PrintCtnLbl.Text.Length > 0)
             {
                 chkTop100.Checked = false;
@@ -228,6 +230,11 @@ namespace FrmPIE.frmPIE
                 _idr_show._tprintCtn.Start(cft);
             }
 
+        }
+
+        private void txt0CartonIDFrom_PrintCartonLabel_TextChanged(object sender, EventArgs e)
+        {
+            _idr_show.AcceptButton = btn0Print_PrintCartonLabel;
         }
     }
 }

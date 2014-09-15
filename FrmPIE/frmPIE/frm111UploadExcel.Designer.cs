@@ -270,6 +270,7 @@
             this.txt0ExcelFileUploadExcel.Name = "txt0ExcelFileUploadExcel";
             this.txt0ExcelFileUploadExcel.Size = new System.Drawing.Size(462, 21);
             this.txt0ExcelFileUploadExcel.TabIndex = 8;
+            this.txt0ExcelFileUploadExcel.TextChanged += new System.EventHandler(this.txt0ExcelFileUploadExcel_TextChanged);
             // 
             // btn3QuickUploadExcel
             // 

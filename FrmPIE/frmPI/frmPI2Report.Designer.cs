@@ -111,6 +111,7 @@
             this.txt0PINum_piReport.Name = "txt0PINum_piReport";
             this.txt0PINum_piReport.Size = new System.Drawing.Size(179, 29);
             this.txt0PINum_piReport.TabIndex = 1;
+            this.txt0PINum_piReport.TextChanged += new System.EventHandler(this.txt0PINum_piReport_TextChanged);
             // 
             // label1
             // 
