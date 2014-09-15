@@ -281,7 +281,6 @@
             this.btn3QuickUploadExcel.TabIndex = 12;
             this.btn3QuickUploadExcel.Text = "&Quick Upload";
             this.btn3QuickUploadExcel.UseVisualStyleBackColor = true;
-            this.btn3QuickUploadExcel.Visible = false;
             this.btn3QuickUploadExcel.Click += new System.EventHandler(this.btn3QuickUploadExcel_Click);
             // 
             // btnCmdUpdUploadExcel
