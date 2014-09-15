@@ -48,7 +48,7 @@
             this.gb0PIReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb0PIReport.Location = new System.Drawing.Point(0, 0);
             this.gb0PIReport.Name = "gb0PIReport";
-            this.gb0PIReport.Size = new System.Drawing.Size(593, 404);
+            this.gb0PIReport.Size = new System.Drawing.Size(600, 404);
             this.gb0PIReport.TabIndex = 0;
             this.gb0PIReport.TabStop = false;
             // 
@@ -57,7 +57,7 @@
             this.groupBox2.Controls.Add(this.reportViewer1);
             this.groupBox2.Location = new System.Drawing.Point(6, 118);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(579, 274);
+            this.groupBox2.Size = new System.Drawing.Size(587, 274);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Data Report";
@@ -68,7 +68,7 @@
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "";
             this.reportViewer1.Location = new System.Drawing.Point(3, 17);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(573, 254);
+            this.reportViewer1.Size = new System.Drawing.Size(581, 254);
             this.reportViewer1.TabIndex = 0;
             // 
             // groupBox1
@@ -79,7 +79,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(6, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(579, 100);
+            this.groupBox1.Size = new System.Drawing.Size(587, 100);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enquire ";
@@ -91,14 +91,14 @@
             this.lblMsg.ForeColor = System.Drawing.Color.Red;
             this.lblMsg.Location = new System.Drawing.Point(3, 74);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(573, 23);
+            this.lblMsg.Size = new System.Drawing.Size(581, 23);
             this.lblMsg.TabIndex = 3;
             // 
             // btn_enquire_piReport
             // 
-            this.btn_enquire_piReport.Location = new System.Drawing.Point(354, 29);
+            this.btn_enquire_piReport.Location = new System.Drawing.Point(330, 20);
             this.btn_enquire_piReport.Name = "btn_enquire_piReport";
-            this.btn_enquire_piReport.Size = new System.Drawing.Size(75, 23);
+            this.btn_enquire_piReport.Size = new System.Drawing.Size(85, 34);
             this.btn_enquire_piReport.TabIndex = 2;
             this.btn_enquire_piReport.Text = "&Enquire";
             this.btn_enquire_piReport.UseVisualStyleBackColor = true;
@@ -106,15 +106,16 @@
             // 
             // txt0PINum_piReport
             // 
-            this.txt0PINum_piReport.Location = new System.Drawing.Point(169, 31);
+            this.txt0PINum_piReport.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0PINum_piReport.Location = new System.Drawing.Point(145, 22);
             this.txt0PINum_piReport.Name = "txt0PINum_piReport";
-            this.txt0PINum_piReport.Size = new System.Drawing.Size(179, 21);
+            this.txt0PINum_piReport.Size = new System.Drawing.Size(179, 29);
             this.txt0PINum_piReport.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(116, 34);
+            this.label1.Location = new System.Drawing.Point(98, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 0;
@@ -124,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 404);
+            this.ClientSize = new System.Drawing.Size(600, 404);
             this.Controls.Add(this.gb0PIReport);
             this.Name = "frmPI2Report";
             this.Text = "frmPI2Report";
@@ -146,7 +147,7 @@
         private System.Windows.Forms.TextBox txt0PINum_piReport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblMsg;
-        protected internal Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
 
     }
 }

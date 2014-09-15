@@ -1,6 +1,8 @@
 ﻿using FrmPIE._0API;
+using PIE.Common;
 using PIE.DBUtility;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,7 @@ namespace FrmPIE.frmPI
     {
         frmIDR _idr_show;
         Commfunction cf;
+        DataSet vpi_report_ds;
 
         public frmPI2Report(frmIDR idr)
         {
@@ -36,7 +39,7 @@ namespace FrmPIE.frmPI
 
         private void initWidth()
         {
-            groupBox1.Width = gb0PIReport.Width-10;
+            groupBox1.Width = gb0PIReport.Width - 10;
             groupBox2.Width = groupBox1.Width;
 
             groupBox2.Height = gb0PIReport.Height - groupBox2.Top;
@@ -58,7 +61,7 @@ namespace FrmPIE.frmPI
             }
             string strsql = @"select * from vpi_report where ";
             string strwhere = @"PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
-            var vpi_report_ds = DbHelperSQL.Query(strsql+strwhere);
+            vpi_report_ds = DbHelperSQL.Query(strsql + strwhere);
 
             //cf.initReportViewer(reportViewer1);
 
@@ -66,9 +69,11 @@ namespace FrmPIE.frmPI
 
             cf.addDataSourceToReportViewer(reportViewer1, "piReport", vpi_report_ds);
 
-            cf.ShowReportViewer(reportViewer1, txt0PINum_piReport.Text,true);
-           
+            cf.ShowReportViewer(reportViewer1, txt0PINum_piReport.Text, true);
+
 
         }
+
+        
     }
 }
