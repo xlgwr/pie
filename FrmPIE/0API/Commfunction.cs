@@ -1069,7 +1069,6 @@ namespace FrmPIE._0API
             dgv.Columns["pi_LineID"].HeaderText = "Line";
 
             dgv.Columns["pi_wec_ctn"].HeaderText = "Scan SN";
-            dgv.Columns["pi_LineID"].HeaderText = "Line";
 
             dgv.Columns["pi_pallet_no"].HeaderText = "Pallet";
             dgv.Columns["CartonNo"].HeaderText = "CartonNo";
@@ -1092,7 +1091,6 @@ namespace FrmPIE._0API
             dgv.Columns["pi_LineID"].HeaderText = "Line";
 
             dgv.Columns["pi_wec_ctn"].HeaderText = "Scan SN";
-            dgv.Columns["pi_LineID"].HeaderText = "Line";
 
             dgv.Columns["pi_pallet_no"].HeaderText = "Pallet";
             dgv.Columns["CartonNo"].HeaderText = "CartonNo";
