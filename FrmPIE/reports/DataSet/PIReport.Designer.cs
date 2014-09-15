@@ -287,7 +287,7 @@ namespace FrmPIE.reports.DataSet {
             
             private global::System.Data.DataColumn columnplr_LineID_tran;
             
-            private global::System.Data.DataColumn columnpi_deci1;
+            private global::System.Data.DataColumn columnpi_pallet_no;
             
             private global::System.Data.DataColumn columnCartonNo;
             
@@ -416,9 +416,9 @@ namespace FrmPIE.reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pi_deci1Column {
+            public global::System.Data.DataColumn pi_pallet_noColumn {
                 get {
-                    return this.columnpi_deci1;
+                    return this.columnpi_pallet_no;
                 }
             }
             
@@ -704,7 +704,7 @@ namespace FrmPIE.reports.DataSet {
                         int pi_LineID, 
                         string pi_wec_ctn, 
                         int plr_LineID_tran, 
-                        int pi_deci1, 
+                        int pi_pallet_no, 
                         string CartonNo, 
                         string CartonID, 
                         string pi_chr01, 
@@ -741,7 +741,7 @@ namespace FrmPIE.reports.DataSet {
                         pi_LineID,
                         pi_wec_ctn,
                         plr_LineID_tran,
-                        pi_deci1,
+                        pi_pallet_no,
                         CartonNo,
                         CartonID,
                         pi_chr01,
@@ -807,7 +807,7 @@ namespace FrmPIE.reports.DataSet {
                 this.columnpi_LineID = base.Columns["pi_LineID"];
                 this.columnpi_wec_ctn = base.Columns["pi_wec_ctn"];
                 this.columnplr_LineID_tran = base.Columns["plr_LineID_tran"];
-                this.columnpi_deci1 = base.Columns["pi_deci1"];
+                this.columnpi_pallet_no = base.Columns["pi_pallet_no"];
                 this.columnCartonNo = base.Columns["CartonNo"];
                 this.columnCartonID = base.Columns["CartonID"];
                 this.columnpi_chr01 = base.Columns["pi_chr01"];
@@ -851,8 +851,8 @@ namespace FrmPIE.reports.DataSet {
                 base.Columns.Add(this.columnpi_wec_ctn);
                 this.columnplr_LineID_tran = new global::System.Data.DataColumn("plr_LineID_tran", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnplr_LineID_tran);
-                this.columnpi_deci1 = new global::System.Data.DataColumn("pi_deci1", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpi_deci1);
+                this.columnpi_pallet_no = new global::System.Data.DataColumn("pi_pallet_no", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpi_pallet_no);
                 this.columnCartonNo = new global::System.Data.DataColumn("CartonNo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCartonNo);
                 this.columnCartonID = new global::System.Data.DataColumn("CartonID", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1132,17 +1132,17 @@ namespace FrmPIE.reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int pi_deci1 {
+            public int pi_pallet_no {
                 get {
                     try {
-                        return ((int)(this[this.tablevpi_report.pi_deci1Column]));
+                        return ((int)(this[this.tablevpi_report.pi_pallet_noColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'pi_deci1\' in table \'vpi_report\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'pi_pallet_no\' in table \'vpi_report\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablevpi_report.pi_deci1Column] = value;
+                    this[this.tablevpi_report.pi_pallet_noColumn] = value;
                 }
             }
             
@@ -1623,14 +1623,14 @@ namespace FrmPIE.reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Ispi_deci1Null() {
-                return this.IsNull(this.tablevpi_report.pi_deci1Column);
+            public bool Ispi_pallet_noNull() {
+                return this.IsNull(this.tablevpi_report.pi_pallet_noColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setpi_deci1Null() {
-                this[this.tablevpi_report.pi_deci1Column] = global::System.Convert.DBNull;
+            public void Setpi_pallet_noNull() {
+                this[this.tablevpi_report.pi_pallet_noColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2145,7 +2145,7 @@ namespace FrmPIE.reports.DataSet.PIReportTableAdapters {
             tableMapping.ColumnMappings.Add("pi_LineID", "pi_LineID");
             tableMapping.ColumnMappings.Add("pi_wec_ctn", "pi_wec_ctn");
             tableMapping.ColumnMappings.Add("plr_LineID_tran", "plr_LineID_tran");
-            tableMapping.ColumnMappings.Add("pi_deci1", "pi_deci1");
+            tableMapping.ColumnMappings.Add("pi_pallet_no", "pi_pallet_no");
             tableMapping.ColumnMappings.Add("CartonNo", "CartonNo");
             tableMapping.ColumnMappings.Add("CartonID", "CartonID");
             tableMapping.ColumnMappings.Add("pi_chr01", "pi_chr01");
@@ -2183,7 +2183,7 @@ namespace FrmPIE.reports.DataSet.PIReportTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = "Data Source=142.2.70.140,50000;Initial Catalog=PIE;User ID=sa";
+            this._connection.ConnectionString = "Data Source=142.2.70.140,50000;Initial Catalog=PIE;User ID=sa;Password=Eric1234";
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

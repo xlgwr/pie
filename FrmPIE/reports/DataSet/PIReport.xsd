@@ -4,12 +4,12 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection ConnectionStringObject="Data Source=142.2.70.140,50000;Initial Catalog=PIE;User ID=sa" IsAppSettingsProperty="false" Modifier="Assembly" Name="walter\mssql2008.PIE.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+          <Connection ConnectionStringObject="Data Source=142.2.70.140,50000;Initial Catalog=PIE;User ID=sa;Password=Eric1234" IsAppSettingsProperty="false" Modifier="Assembly" Name="walter\mssql2008.PIE.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vpi_reportTableAdapter" GeneratorDataComponentClassName="vpi_reportTableAdapter" Name="vpi_report" UserDataComponentName="vpi_reportTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="walter\mssql2008.PIE.dbo" DbObjectName="PIE.dbo.vpi_report" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="walter\mssql2008.PIE.dbo" DbObjectName="PIE.dbo.vpi_report" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT   vpi_report.*
@@ -24,7 +24,7 @@ FROM      vpi_report</CommandText>
               <Mapping SourceColumn="pi_LineID" DataSetColumn="pi_LineID" />
               <Mapping SourceColumn="pi_wec_ctn" DataSetColumn="pi_wec_ctn" />
               <Mapping SourceColumn="plr_LineID_tran" DataSetColumn="plr_LineID_tran" />
-              <Mapping SourceColumn="pi_deci1" DataSetColumn="pi_deci1" />
+              <Mapping SourceColumn="pi_pallet_no" DataSetColumn="pi_pallet_no" />
               <Mapping SourceColumn="CartonNo" DataSetColumn="CartonNo" />
               <Mapping SourceColumn="CartonID" DataSetColumn="CartonID" />
               <Mapping SourceColumn="pi_chr01" DataSetColumn="pi_chr01" />
@@ -85,7 +85,7 @@ FROM      vpi_report</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="plr_LineID_tran" msprop:Generator_ColumnVarNameInTable="columnplr_LineID_tran" msprop:Generator_ColumnPropNameInRow="plr_LineID_tran" msprop:Generator_ColumnPropNameInTable="plr_LineID_tranColumn" msprop:Generator_UserColumnName="plr_LineID_tran" type="xs:int" />
-              <xs:element name="pi_deci1" msprop:Generator_ColumnVarNameInTable="columnpi_deci1" msprop:Generator_ColumnPropNameInRow="pi_deci1" msprop:Generator_ColumnPropNameInTable="pi_deci1Column" msprop:Generator_UserColumnName="pi_deci1" type="xs:int" minOccurs="0" />
+              <xs:element name="pi_pallet_no" msprop:Generator_ColumnVarNameInTable="columnpi_pallet_no" msprop:Generator_ColumnPropNameInRow="pi_pallet_no" msprop:Generator_ColumnPropNameInTable="pi_pallet_noColumn" msprop:Generator_UserColumnName="pi_pallet_no" type="xs:int" minOccurs="0" />
               <xs:element name="CartonNo" msprop:Generator_ColumnVarNameInTable="columnCartonNo" msprop:Generator_ColumnPropNameInRow="CartonNo" msprop:Generator_ColumnPropNameInTable="CartonNoColumn" msprop:Generator_UserColumnName="CartonNo">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">

@@ -60,6 +60,14 @@ namespace FrmPIE.frmPI
             string strwhere = @"PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
             var vpi_report_ds = DbHelperSQL.Query(strsql+strwhere);
 
+            //cf.initReportViewer(reportViewer1);
+
+            cf.initReportViewerLoadXMLfromPath(reportViewer1, @"reports\frmPI\rpt_piReport.rdlc");
+
+            cf.addDataSourceToReportViewer(reportViewer1, "piReport", vpi_report_ds);
+
+            cf.ShowReportViewer(reportViewer1, txt0PINum_piReport.Text,true);
+           
 
         }
     }

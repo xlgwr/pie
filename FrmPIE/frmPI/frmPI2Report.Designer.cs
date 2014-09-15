@@ -32,10 +32,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblMsg = new System.Windows.Forms.Label();
             this.btn_enquire_piReport = new System.Windows.Forms.Button();
             this.txt0PINum_piReport = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblMsg = new System.Windows.Forms.Label();
             this.gb0PIReport.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -65,7 +65,7 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "FrmPIE.reports.frmPI.rpt_piReport.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "";
             this.reportViewer1.Location = new System.Drawing.Point(3, 17);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.Size = new System.Drawing.Size(573, 254);
@@ -83,6 +83,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enquire ";
+            // 
+            // lblMsg
+            // 
+            this.lblMsg.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblMsg.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblMsg.Location = new System.Drawing.Point(3, 74);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(573, 23);
+            this.lblMsg.TabIndex = 3;
             // 
             // btn_enquire_piReport
             // 
@@ -106,19 +116,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(116, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 12);
+            this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Pi Num:";
-            // 
-            // lblMsg
-            // 
-            this.lblMsg.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblMsg.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblMsg.ForeColor = System.Drawing.Color.Red;
-            this.lblMsg.Location = new System.Drawing.Point(3, 74);
-            this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(573, 23);
-            this.lblMsg.TabIndex = 3;
+            this.label1.Text = "Pi ID:";
             // 
             // frmPI2Report
             // 
@@ -142,11 +142,11 @@
         protected internal System.Windows.Forms.GroupBox gb0PIReport;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.Button btn_enquire_piReport;
         private System.Windows.Forms.TextBox txt0PINum_piReport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblMsg;
+        protected internal Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
 
     }
 }
