@@ -127,12 +127,6 @@
     <Compile Include="frmPIE\frm513PrintCartonLabel.Designer.cs">
       <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPI\frmPI2Report.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPI\frmPI2Report.Designer.cs">
-      <DependentUpon>frmPI2Report.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmPI\frmPI0ScanWECCtnLable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +138,12 @@
     </Compile>
     <Compile Include="frmPI\frmPI1ScanDataInquire.Designer.cs">
       <DependentUpon>frmPI1ScanDataInquire.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPI\frmPI2Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPI\frmPI2Report.Designer.cs">
+      <DependentUpon>frmPI2Report.cs</DependentUpon>
     </Compile>
     <Compile Include="Logon\AdminManage.cs">
       <SubType>Form</SubType>
@@ -196,11 +196,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="reports\DataSet\PIReport.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PIReport.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Web References\WebReference100\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -226,14 +221,14 @@
     <EmbeddedResource Include="frmPIE\frm513PrintCartonLabel.resx">
       <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPI\frmPI2Report.resx">
-      <DependentUpon>frmPI2Report.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPI\frmPI0ScanWECCtnLable.resx">
       <DependentUpon>frmPI0ScanWECCtnLable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPI\frmPI1ScanDataInquire.resx">
       <DependentUpon>frmPI1ScanDataInquire.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPI\frmPI2Report.resx">
+      <DependentUpon>frmPI2Report.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logon\AdminManage.resx">
       <DependentUpon>AdminManage.cs</DependentUpon>
@@ -269,9 +264,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="reports\frmPI\rpt0PiReport.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Include="0temple\temples.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -287,17 +279,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="reports\DataSet\PIReport.xsc">
-      <DependentUpon>PIReport.xsd</DependentUpon>
-    </None>
-    <None Include="reports\DataSet\PIReport.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PIReport.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="reports\DataSet\PIReport.xss">
-      <DependentUpon>PIReport.xsd</DependentUpon>
-    </None>
     <None Include="Web References\WebReference100\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -394,6 +375,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>_0PackingInformationEnfry_WebReference_UserLoginCheck</CachedSettingsPropName>
     </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="reports\DataSet\" />
+    <Folder Include="reports\frmPI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
