@@ -71,6 +71,7 @@ namespace FrmPIE.frmPIE
         void _idr_show_Layout(object sender, LayoutEventArgs e)
         {
             txt3PalletNoAddNewBatchID.Focus();
+            _idr_show.AcceptButton = btn1UpadeAddAddNewBatchID;
             initWithHeight();
         }
 
@@ -763,6 +764,11 @@ namespace FrmPIE.frmPIE
                     init0Update(_strbatch);
                 }
             }
+        }
+
+        private void txt88Batchid_TextChanged(object sender, EventArgs e)
+        {
+            _idr_show.AcceptButton = btn8Search;
         }
 
 

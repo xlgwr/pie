@@ -44,7 +44,10 @@ namespace FrmPIE.frmPIE
             InitializeComponent();
 
             _idr_show = idr;
-            txt0ExcelFileUploadExcel.Focus();
+            _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Layout;
+            
+
+
             initwidthUploadExcel();
 
             cf = new Commfunction(idr);
@@ -53,6 +56,13 @@ namespace FrmPIE.frmPIE
 
             data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
             data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
+        }
+
+        void SelectedTab_Layout(object sender, LayoutEventArgs e)
+        {
+            //txt0ExcelFileUploadExcel.Focus();
+            btnSelectfileUploadExcel.Focus();
+            //_idr_show.AcceptButton = btnCmdUpdUploadExcel;
         }
         //xls
         DataSet data0set_npoi;
@@ -870,6 +880,11 @@ namespace FrmPIE.frmPIE
                 command.Update(data0set_npoi);
                 data0set_npoi.AcceptChanges();
             }
+        }
+
+        private void txt0ExcelFileUploadExcel_TextChanged(object sender, EventArgs e)
+        {
+            _idr_show.AcceptButton = btnCmdUpdUploadExcel;
         }
 
     }
