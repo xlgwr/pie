@@ -334,6 +334,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="0DownLoadExcel\text.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="irobot256.ico" />
     <None Include="Resources\bg2.jpg" />
     <None Include="Resources\bg.jpg" />

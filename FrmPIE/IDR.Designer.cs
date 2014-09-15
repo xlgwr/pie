@@ -99,6 +99,7 @@
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.openDownLoadExcelFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -221,7 +222,8 @@
             this.status125toolBtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.status125toolBtnClear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearNoticeMsgToolStripMenuItem,
-            this.openPrintFileToolStripMenuItem});
+            this.openPrintFileToolStripMenuItem,
+            this.openDownLoadExcelFileToolStripMenuItem});
             this.status125toolBtnClear.Image = ((System.Drawing.Image)(resources.GetObject("status125toolBtnClear.Image")));
             this.status125toolBtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.status125toolBtnClear.Name = "status125toolBtnClear";
@@ -231,14 +233,14 @@
             // clearNoticeMsgToolStripMenuItem
             // 
             this.clearNoticeMsgToolStripMenuItem.Name = "clearNoticeMsgToolStripMenuItem";
-            this.clearNoticeMsgToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.clearNoticeMsgToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.clearNoticeMsgToolStripMenuItem.Text = "&ClearNoticeMessage";
             this.clearNoticeMsgToolStripMenuItem.Click += new System.EventHandler(this.clearNoticeMsgToolStripMenuItem_Click);
             // 
             // openPrintFileToolStripMenuItem
             // 
             this.openPrintFileToolStripMenuItem.Name = "openPrintFileToolStripMenuItem";
-            this.openPrintFileToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.openPrintFileToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.openPrintFileToolStripMenuItem.Text = "&Open Print File";
             this.openPrintFileToolStripMenuItem.Click += new System.EventHandler(this.openPrintFileToolStripMenuItem_Click);
             // 
@@ -864,6 +866,13 @@
             this.c11MenuStripVoid.Name = "cMenuStrip1ScanCartronLabel";
             this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 26);
             // 
+            // openDownLoadExcelFileToolStripMenuItem
+            // 
+            this.openDownLoadExcelFileToolStripMenuItem.Name = "openDownLoadExcelFileToolStripMenuItem";
+            this.openDownLoadExcelFileToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.openDownLoadExcelFileToolStripMenuItem.Text = "Open DownLoad &Excel file";
+            this.openDownLoadExcelFileToolStripMenuItem.Click += new System.EventHandler(this.openDownLoadExcelFileToolStripMenuItem_Click);
+            // 
             // frmIDR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -992,6 +1001,7 @@
         private System.Windows.Forms.LinkLabel linkLabel8;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem t1AboutAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openDownLoadExcelFileToolStripMenuItem;
 
 
 

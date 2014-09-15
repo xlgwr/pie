@@ -391,6 +391,117 @@ namespace PIE.Common
 
         }
 
+
+        /// <summary>
+        /// 将DataTable的数据导出显示为报表(不使用Excel对象)
+        /// </summary>
+        /// <param name="dt">数据DataTable</param>
+        /// <param name="strTitle">标题</param>
+        /// <param name="FilePath">生成文件的路径</param>
+        /// <param name="nameList"></param>
+        /// <returns></returns>
+        public string DataExcel(System.Data.DataTable dt, string strTitle, string FilePath, Hashtable nameList, string filenamePre)
+        {
+            COM.Excel.cExcelFile excel = new COM.Excel.cExcelFile();
+            ClearFile(FilePath);
+            string filename = filenamePre + "Date" + DateTime.Now.ToString("yyyyMMddHHmmssff") + ".xls";
+            excel.CreateFile(FilePath + @"\\" + filename);
+            excel.PrintGridLines = false;
+
+            COM.Excel.cExcelFile.MarginTypes mt1 = COM.Excel.cExcelFile.MarginTypes.xlsTopMargin;
+            COM.Excel.cExcelFile.MarginTypes mt2 = COM.Excel.cExcelFile.MarginTypes.xlsLeftMargin;
+            COM.Excel.cExcelFile.MarginTypes mt3 = COM.Excel.cExcelFile.MarginTypes.xlsRightMargin;
+            COM.Excel.cExcelFile.MarginTypes mt4 = COM.Excel.cExcelFile.MarginTypes.xlsBottomMargin;
+
+            double height = 1.5;
+            excel.SetMargin(ref mt1, ref height);
+            excel.SetMargin(ref mt2, ref height);
+            excel.SetMargin(ref mt3, ref height);
+            excel.SetMargin(ref mt4, ref height);
+
+            COM.Excel.cExcelFile.FontFormatting ff = COM.Excel.cExcelFile.FontFormatting.xlsNoFormat;
+            string font = "宋体";
+            short fontsize = 9;
+            excel.SetFont(ref font, ref fontsize, ref ff);
+
+            byte b1 = 1,
+                b2 = 12;
+            short s3 = 12;
+            excel.SetColumnWidth(ref b1, ref b2, ref s3);
+
+            string header = "页眉";
+            string footer = "页脚";
+            excel.SetHeader(ref header);
+            excel.SetFooter(ref footer);
+
+
+            COM.Excel.cExcelFile.ValueTypes vt = COM.Excel.cExcelFile.ValueTypes.xlsText;
+            COM.Excel.cExcelFile.CellFont cf = COM.Excel.cExcelFile.CellFont.xlsFont0;
+            COM.Excel.cExcelFile.CellAlignment ca = COM.Excel.cExcelFile.CellAlignment.xlsCentreAlign;
+            COM.Excel.cExcelFile.CellHiddenLocked chl = COM.Excel.cExcelFile.CellHiddenLocked.xlsNormal;
+
+            // 报表标题
+            int cellformat = 1;
+            //			int rowindex = 1,colindex = 3;					
+            //			object title = (object)strTitle;
+            //			excel.WriteValue(ref vt, ref cf, ref ca, ref chl,ref rowindex,ref colindex,ref title,ref cellformat);
+
+            int rowIndex = 1;//起始行
+            int colIndex = 0;
+
+
+
+            //取得列标题				
+            foreach (DataColumn colhead in dt.Columns)
+            {
+                colIndex++;
+                string name = colhead.ColumnName.Trim();
+                object namestr = (object)name;
+                IDictionaryEnumerator Enum = nameList.GetEnumerator();
+                while (Enum.MoveNext())
+                {
+                    if (Enum.Key.ToString().Trim() == name)
+                    {
+                        namestr = Enum.Value;
+                    }
+                }
+                excel.WriteValue(ref vt, ref cf, ref ca, ref chl, ref rowIndex, ref colIndex, ref namestr, ref cellformat);
+            }
+
+            //取得表格中的数据			
+            foreach (DataRow row in dt.Rows)
+            {
+                rowIndex++;
+                colIndex = 0;
+                foreach (DataColumn col in dt.Columns)
+                {
+                    colIndex++;
+                    if (col.DataType == System.Type.GetType("System.DateTime"))
+                    {
+                        object str = (object)(Convert.ToDateTime(row[col.ColumnName].ToString())).ToString("yyyy-MM-dd"); ;
+                        excel.WriteValue(ref vt, ref cf, ref ca, ref chl, ref rowIndex, ref colIndex, ref str, ref cellformat);
+                    }
+                    else
+                    {
+                        object str = (object)row[col.ColumnName].ToString();
+                        excel.WriteValue(ref vt, ref cf, ref ca, ref chl, ref rowIndex, ref colIndex, ref str, ref cellformat);
+                    }
+                }
+            }
+            int ret = excel.CloseFile();
+
+            //			if(ret!=0)
+            //			{
+            //				//MessageBox.Show(this,"Error!");
+            //			}
+            //			else
+            //			{
+            //				//MessageBox.Show(this,"请打开文件c:\\test.xls!");
+            //			}
+            return filename;
+
+        }
+
         #endregion
 
         #region  清理过时的Excel文件

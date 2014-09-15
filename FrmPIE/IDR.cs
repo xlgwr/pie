@@ -63,6 +63,7 @@ namespace FrmPIE
         public int _intTo = 0;
 
         public string _strSaveLabelFile = "";
+        public string _strDownLoadExcel = "";
         public frmIDR(LogonDomain logonDomain, PIE.Model.sys_user sys_user_model)
         {
             _logonDomain = logonDomain;
@@ -588,20 +589,10 @@ namespace FrmPIE
 
         private void openPrintFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string allfileNamepath;
-            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "0labeltxt";
-            if (string.IsNullOrEmpty(_strSaveLabelFile))
-            {
-
-                allfileNamepath = pathname;
-            }
-            else
-            {
-
-                allfileNamepath = System.IO.Path.Combine(pathname, _strSaveLabelFile);
-            }
-            cf.OpenFolderAndSelectFile(allfileNamepath);
+            cf.initOpenFile("0labeltxt",_strSaveLabelFile);
         }
+
+        
 
         private void clearNoticeMsgToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -630,6 +621,11 @@ namespace FrmPIE
         private void btn24PIReports_Click(object sender, EventArgs e)
         {
             c22MenuStripPiSystem.Show(btn24PIReports, _icurrMouseX, _icurrMouseY);
+        }
+
+        private void openDownLoadExcelFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cf.initOpenFile("0DownLoadExcel", _strDownLoadExcel);
         }
 
 
