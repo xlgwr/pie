@@ -34,8 +34,8 @@
             this.lbl0MsgUploadToERP = new System.Windows.Forms.Label();
             this.chk0UploadToERP = new System.Windows.Forms.CheckBox();
             this.txt0BatchIDUploadToERP = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btn1UploadToERP = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.gb0UploadToERP.SuspendLayout();
             this.gb1UploadToERP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GVUploadToERP)).BeginInit();
@@ -102,15 +102,7 @@
             this.txt0BatchIDUploadToERP.Name = "txt0BatchIDUploadToERP";
             this.txt0BatchIDUploadToERP.Size = new System.Drawing.Size(124, 21);
             this.txt0BatchIDUploadToERP.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "BatchID: ";
+            this.txt0BatchIDUploadToERP.TextChanged += new System.EventHandler(this.txt0BatchIDUploadToERP_TextChanged);
             // 
             // btn1UploadToERP
             // 
@@ -122,13 +114,22 @@
             this.btn1UploadToERP.UseVisualStyleBackColor = true;
             this.btn1UploadToERP.Click += new System.EventHandler(this.btn0UploadToERP_Click);
             // 
-            // frm4UploadToERP
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(32, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "BatchID: ";
+            // 
+            // frm412UploadToERP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(639, 529);
             this.Controls.Add(this.gb0UploadToERP);
-            this.Name = "frm4UploadToERP";
+            this.Name = "frm412UploadToERP";
             this.Text = "frm4UploadToERP";
             this.Load += new System.EventHandler(this.frm4UploadToERP_Load);
             this.gb0UploadToERP.ResumeLayout(false);

@@ -28,23 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb0PrintCartonLabel = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txt88Batchid_PrintCtnLbl = new System.Windows.Forms.TextBox();
-            this.lbl0SearchMsg = new System.Windows.Forms.Label();
-            this.btn8SearchPrintCtnLbl = new System.Windows.Forms.Button();
-            this.chkTop100 = new System.Windows.Forms.CheckBox();
-            this.gb3CartonNo_PrintCartonLabel = new System.Windows.Forms.GroupBox();
-            this.data2GV2CartonNO_PrintCtnLbl = new System.Windows.Forms.DataGridView();
-            this.gb2det_PrintCartonLabel = new System.Windows.Forms.GroupBox();
-            this.data1GV1ePackingMstr_PrintCtnLbl = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmb1Port_PrintCartonLabel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -57,13 +47,23 @@
             this.btn0Print_PrintCartonLabel = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txt1CartonIDTo_PrintCartonLabel = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txt88Batchid_PrintCtnLbl = new System.Windows.Forms.TextBox();
+            this.lbl0SearchMsg = new System.Windows.Forms.Label();
+            this.btn8SearchPrintCtnLbl = new System.Windows.Forms.Button();
+            this.chkTop100 = new System.Windows.Forms.CheckBox();
+            this.gb3CartonNo_PrintCartonLabel = new System.Windows.Forms.GroupBox();
+            this.data2GV2CartonNO_PrintCtnLbl = new System.Windows.Forms.DataGridView();
+            this.gb2det_PrintCartonLabel = new System.Windows.Forms.GroupBox();
+            this.data1GV1ePackingMstr_PrintCtnLbl = new System.Windows.Forms.DataGridView();
             this.gb0PrintCartonLabel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gb3CartonNo_PrintCartonLabel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2CartonNO_PrintCtnLbl)).BeginInit();
             this.gb2det_PrintCartonLabel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingMstr_PrintCtnLbl)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb0PrintCartonLabel
@@ -78,6 +78,139 @@
             this.gb0PrintCartonLabel.Size = new System.Drawing.Size(726, 604);
             this.gb0PrintCartonLabel.TabIndex = 1;
             this.gb0PrintCartonLabel.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cmb1Port_PrintCartonLabel);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.lbl0PrintMsg);
+            this.groupBox1.Controls.Add(this.txt0CartonIDFrom_PrintCartonLabel);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.cmb0Printer_PrintCartonLabel);
+            this.groupBox1.Controls.Add(this.chk0PrintToFile_PrintCartonLabel);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.btn0Print_PrintCartonLabel);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txt1CartonIDTo_PrintCartonLabel);
+            this.groupBox1.Location = new System.Drawing.Point(6, 1);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(714, 152);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            // 
+            // cmb1Port_PrintCartonLabel
+            // 
+            this.cmb1Port_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb1Port_PrintCartonLabel.FormattingEnabled = true;
+            this.cmb1Port_PrintCartonLabel.Items.AddRange(new object[] {
+            "LPT1"});
+            this.cmb1Port_PrintCartonLabel.Location = new System.Drawing.Point(388, 16);
+            this.cmb1Port_PrintCartonLabel.Name = "cmb1Port_PrintCartonLabel";
+            this.cmb1Port_PrintCartonLabel.Size = new System.Drawing.Size(132, 22);
+            this.cmb1Port_PrintCartonLabel.TabIndex = 22;
+            this.cmb1Port_PrintCartonLabel.Text = "LPT1";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(75, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 16);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "Printer:";
+            // 
+            // lbl0PrintMsg
+            // 
+            this.lbl0PrintMsg.AutoSize = true;
+            this.lbl0PrintMsg.ForeColor = System.Drawing.Color.Red;
+            this.lbl0PrintMsg.Location = new System.Drawing.Point(442, 110);
+            this.lbl0PrintMsg.Name = "lbl0PrintMsg";
+            this.lbl0PrintMsg.Size = new System.Drawing.Size(0, 12);
+            this.lbl0PrintMsg.TabIndex = 105;
+            // 
+            // txt0CartonIDFrom_PrintCartonLabel
+            // 
+            this.txt0CartonIDFrom_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0CartonIDFrom_PrintCartonLabel.Location = new System.Drawing.Point(161, 52);
+            this.txt0CartonIDFrom_PrintCartonLabel.Name = "txt0CartonIDFrom_PrintCartonLabel";
+            this.txt0CartonIDFrom_PrintCartonLabel.Size = new System.Drawing.Size(132, 23);
+            this.txt0CartonIDFrom_PrintCartonLabel.TabIndex = 18;
+            this.txt0CartonIDFrom_PrintCartonLabel.TextChanged += new System.EventHandler(this.txt0CartonIDFrom_PrintCartonLabel_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(3, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(152, 16);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "WEC CTN ID From:";
+            // 
+            // cmb0Printer_PrintCartonLabel
+            // 
+            this.cmb0Printer_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb0Printer_PrintCartonLabel.FormattingEnabled = true;
+            this.cmb0Printer_PrintCartonLabel.Items.AddRange(new object[] {
+            "TEC",
+            "ZPL"});
+            this.cmb0Printer_PrintCartonLabel.Location = new System.Drawing.Point(161, 16);
+            this.cmb0Printer_PrintCartonLabel.Name = "cmb0Printer_PrintCartonLabel";
+            this.cmb0Printer_PrintCartonLabel.Size = new System.Drawing.Size(132, 22);
+            this.cmb0Printer_PrintCartonLabel.TabIndex = 20;
+            this.cmb0Printer_PrintCartonLabel.Text = "ZPL";
+            // 
+            // chk0PrintToFile_PrintCartonLabel
+            // 
+            this.chk0PrintToFile_PrintCartonLabel.AutoSize = true;
+            this.chk0PrintToFile_PrintCartonLabel.Checked = true;
+            this.chk0PrintToFile_PrintCartonLabel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk0PrintToFile_PrintCartonLabel.Location = new System.Drawing.Point(306, 106);
+            this.chk0PrintToFile_PrintCartonLabel.Name = "chk0PrintToFile_PrintCartonLabel";
+            this.chk0PrintToFile_PrintCartonLabel.Size = new System.Drawing.Size(102, 16);
+            this.chk0PrintToFile_PrintCartonLabel.TabIndex = 24;
+            this.chk0PrintToFile_PrintCartonLabel.Text = "Print To File";
+            this.chk0PrintToFile_PrintCartonLabel.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(302, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 16);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "ComPort:";
+            // 
+            // btn0Print_PrintCartonLabel
+            // 
+            this.btn0Print_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn0Print_PrintCartonLabel.Location = new System.Drawing.Point(179, 87);
+            this.btn0Print_PrintCartonLabel.Name = "btn0Print_PrintCartonLabel";
+            this.btn0Print_PrintCartonLabel.Size = new System.Drawing.Size(114, 47);
+            this.btn0Print_PrintCartonLabel.TabIndex = 23;
+            this.btn0Print_PrintCartonLabel.Text = "&Print";
+            this.btn0Print_PrintCartonLabel.UseVisualStyleBackColor = true;
+            this.btn0Print_PrintCartonLabel.Click += new System.EventHandler(this.btn0Print_PrintCartonLabel_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(347, 54);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 16);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "To:";
+            // 
+            // txt1CartonIDTo_PrintCartonLabel
+            // 
+            this.txt1CartonIDTo_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt1CartonIDTo_PrintCartonLabel.Location = new System.Drawing.Point(388, 53);
+            this.txt1CartonIDTo_PrintCartonLabel.Name = "txt1CartonIDTo_PrintCartonLabel";
+            this.txt1CartonIDTo_PrintCartonLabel.Size = new System.Drawing.Size(132, 23);
+            this.txt1CartonIDTo_PrintCartonLabel.TabIndex = 19;
             // 
             // groupBox2
             // 
@@ -154,35 +287,35 @@
             // 
             // data2GV2CartonNO_PrintCtnLbl
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data2GV2CartonNO_PrintCtnLbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data2GV2CartonNO_PrintCtnLbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.data2GV2CartonNO_PrintCtnLbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data2GV2CartonNO_PrintCtnLbl.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data2GV2CartonNO_PrintCtnLbl.DefaultCellStyle = dataGridViewCellStyle2;
             this.data2GV2CartonNO_PrintCtnLbl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.data2GV2CartonNO_PrintCtnLbl.Location = new System.Drawing.Point(3, 17);
             this.data2GV2CartonNO_PrintCtnLbl.MultiSelect = false;
             this.data2GV2CartonNO_PrintCtnLbl.Name = "data2GV2CartonNO_PrintCtnLbl";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data2GV2CartonNO_PrintCtnLbl.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data2GV2CartonNO_PrintCtnLbl.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.data2GV2CartonNO_PrintCtnLbl.RowTemplate.Height = 23;
             this.data2GV2CartonNO_PrintCtnLbl.Size = new System.Drawing.Size(708, 245);
             this.data2GV2CartonNO_PrintCtnLbl.TabIndex = 16;
@@ -199,170 +332,38 @@
             // 
             // data1GV1ePackingMstr_PrintCtnLbl
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1ePackingMstr_PrintCtnLbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1ePackingMstr_PrintCtnLbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.data1GV1ePackingMstr_PrintCtnLbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data1GV1ePackingMstr_PrintCtnLbl.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data1GV1ePackingMstr_PrintCtnLbl.DefaultCellStyle = dataGridViewCellStyle5;
             this.data1GV1ePackingMstr_PrintCtnLbl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.data1GV1ePackingMstr_PrintCtnLbl.Location = new System.Drawing.Point(3, 17);
             this.data1GV1ePackingMstr_PrintCtnLbl.MultiSelect = false;
             this.data1GV1ePackingMstr_PrintCtnLbl.Name = "data1GV1ePackingMstr_PrintCtnLbl";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1ePackingMstr_PrintCtnLbl.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1ePackingMstr_PrintCtnLbl.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.data1GV1ePackingMstr_PrintCtnLbl.RowTemplate.Height = 23;
             this.data1GV1ePackingMstr_PrintCtnLbl.Size = new System.Drawing.Size(708, 113);
             this.data1GV1ePackingMstr_PrintCtnLbl.TabIndex = 16;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.cmb1Port_PrintCartonLabel);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.lbl0PrintMsg);
-            this.groupBox1.Controls.Add(this.txt0CartonIDFrom_PrintCartonLabel);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.cmb0Printer_PrintCartonLabel);
-            this.groupBox1.Controls.Add(this.chk0PrintToFile_PrintCartonLabel);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.btn0Print_PrintCartonLabel);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txt1CartonIDTo_PrintCartonLabel);
-            this.groupBox1.Location = new System.Drawing.Point(6, 1);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(714, 152);
-            this.groupBox1.TabIndex = 27;
-            this.groupBox1.TabStop = false;
-            // 
-            // cmb1Port_PrintCartonLabel
-            // 
-            this.cmb1Port_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cmb1Port_PrintCartonLabel.FormattingEnabled = true;
-            this.cmb1Port_PrintCartonLabel.Items.AddRange(new object[] {
-            "LPT1"});
-            this.cmb1Port_PrintCartonLabel.Location = new System.Drawing.Point(388, 16);
-            this.cmb1Port_PrintCartonLabel.Name = "cmb1Port_PrintCartonLabel";
-            this.cmb1Port_PrintCartonLabel.Size = new System.Drawing.Size(132, 22);
-            this.cmb1Port_PrintCartonLabel.TabIndex = 22;
-            this.cmb1Port_PrintCartonLabel.Text = "LPT1";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(75, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 16);
-            this.label4.TabIndex = 26;
-            this.label4.Text = "Printer:";
-            // 
-            // lbl0PrintMsg
-            // 
-            this.lbl0PrintMsg.AutoSize = true;
-            this.lbl0PrintMsg.ForeColor = System.Drawing.Color.Red;
-            this.lbl0PrintMsg.Location = new System.Drawing.Point(442, 110);
-            this.lbl0PrintMsg.Name = "lbl0PrintMsg";
-            this.lbl0PrintMsg.Size = new System.Drawing.Size(0, 12);
-            this.lbl0PrintMsg.TabIndex = 105;
-            // 
-            // txt0CartonIDFrom_PrintCartonLabel
-            // 
-            this.txt0CartonIDFrom_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt0CartonIDFrom_PrintCartonLabel.Location = new System.Drawing.Point(161, 52);
-            this.txt0CartonIDFrom_PrintCartonLabel.Name = "txt0CartonIDFrom_PrintCartonLabel";
-            this.txt0CartonIDFrom_PrintCartonLabel.Size = new System.Drawing.Size(132, 23);
-            this.txt0CartonIDFrom_PrintCartonLabel.TabIndex = 18;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(3, 54);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(152, 16);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "WEC CTN ID From:";
-            // 
-            // cmb0Printer_PrintCartonLabel
-            // 
-            this.cmb0Printer_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cmb0Printer_PrintCartonLabel.FormattingEnabled = true;
-            this.cmb0Printer_PrintCartonLabel.Items.AddRange(new object[] {
-            "TEC",
-            "ZPL"});
-            this.cmb0Printer_PrintCartonLabel.Location = new System.Drawing.Point(161, 16);
-            this.cmb0Printer_PrintCartonLabel.Name = "cmb0Printer_PrintCartonLabel";
-            this.cmb0Printer_PrintCartonLabel.Size = new System.Drawing.Size(132, 22);
-            this.cmb0Printer_PrintCartonLabel.TabIndex = 20;
-            this.cmb0Printer_PrintCartonLabel.Text = "ZPL";
-            // 
-            // chk0PrintToFile_PrintCartonLabel
-            // 
-            this.chk0PrintToFile_PrintCartonLabel.AutoSize = true;
-            this.chk0PrintToFile_PrintCartonLabel.Checked = true;
-            this.chk0PrintToFile_PrintCartonLabel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk0PrintToFile_PrintCartonLabel.Location = new System.Drawing.Point(306, 106);
-            this.chk0PrintToFile_PrintCartonLabel.Name = "chk0PrintToFile_PrintCartonLabel";
-            this.chk0PrintToFile_PrintCartonLabel.Size = new System.Drawing.Size(102, 16);
-            this.chk0PrintToFile_PrintCartonLabel.TabIndex = 24;
-            this.chk0PrintToFile_PrintCartonLabel.Text = "Print To File";
-            this.chk0PrintToFile_PrintCartonLabel.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(302, 17);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 16);
-            this.label5.TabIndex = 25;
-            this.label5.Text = "ComPort:";
-            // 
-            // btn0Print_PrintCartonLabel
-            // 
-            this.btn0Print_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn0Print_PrintCartonLabel.Location = new System.Drawing.Point(179, 87);
-            this.btn0Print_PrintCartonLabel.Name = "btn0Print_PrintCartonLabel";
-            this.btn0Print_PrintCartonLabel.Size = new System.Drawing.Size(114, 47);
-            this.btn0Print_PrintCartonLabel.TabIndex = 23;
-            this.btn0Print_PrintCartonLabel.Text = "&Print";
-            this.btn0Print_PrintCartonLabel.UseVisualStyleBackColor = true;
-            this.btn0Print_PrintCartonLabel.Click += new System.EventHandler(this.btn0Print_PrintCartonLabel_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(347, 54);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 16);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "To:";
-            // 
-            // txt1CartonIDTo_PrintCartonLabel
-            // 
-            this.txt1CartonIDTo_PrintCartonLabel.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt1CartonIDTo_PrintCartonLabel.Location = new System.Drawing.Point(388, 53);
-            this.txt1CartonIDTo_PrintCartonLabel.Name = "txt1CartonIDTo_PrintCartonLabel";
-            this.txt1CartonIDTo_PrintCartonLabel.Size = new System.Drawing.Size(132, 23);
-            this.txt1CartonIDTo_PrintCartonLabel.TabIndex = 19;
             // 
             // frm513PrintCartonLabel
             // 
@@ -374,14 +375,14 @@
             this.Text = "frm513PrintCartonLabel";
             this.Load += new System.EventHandler(this.frm513PrintCartonLabel_Load);
             this.gb0PrintCartonLabel.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.gb3CartonNo_PrintCartonLabel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2CartonNO_PrintCtnLbl)).EndInit();
             this.gb2det_PrintCartonLabel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingMstr_PrintCtnLbl)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }

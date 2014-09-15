@@ -47,6 +47,8 @@ namespace FrmPIE.frmPIE
         }
         void SelectedTab_Resize(object sender, EventArgs e)
         {
+            txt0BatchIDUploadToERP.Focus();
+            _idr_show.AcceptButton = btn1UploadToERP;
             initwith();
         }
         public void initwith()
@@ -62,6 +64,8 @@ namespace FrmPIE.frmPIE
 
         private void chk0UploadToERP_CheckedChanged(object sender, EventArgs e)
         {
+
+            _idr_show.AcceptButton = btn1UploadToERP;
             if (chk0UploadToERP.Checked)
             {
                 _strbatchid = "";
@@ -193,6 +197,12 @@ namespace FrmPIE.frmPIE
                 _idr_show._tuploadERP = new Thread(UploadERP);
                 _idr_show._tuploadERP.Start();
             }
+        }
+
+        private void txt0BatchIDUploadToERP_TextChanged(object sender, EventArgs e)
+        {
+
+            _idr_show.AcceptButton = btn1UploadToERP;
         }
     }
 }

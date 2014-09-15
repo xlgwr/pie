@@ -32,9 +32,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.data0GVPiReport = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn1DownLoadToExcelPi = new System.Windows.Forms.Button();
             this.lblMsg = new System.Windows.Forms.Label();
-            this.btn_enquire_piReport = new System.Windows.Forms.Button();
+            this.btn0_enquire_piReport = new System.Windows.Forms.Button();
             this.txt0PINum_piReport = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gb0PIReport.SuspendLayout();
@@ -76,9 +76,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btn1DownLoadToExcelPi);
             this.groupBox1.Controls.Add(this.lblMsg);
-            this.groupBox1.Controls.Add(this.btn_enquire_piReport);
+            this.groupBox1.Controls.Add(this.btn0_enquire_piReport);
             this.groupBox1.Controls.Add(this.txt0PINum_piReport);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(6, 20);
@@ -88,15 +88,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enquire ";
             // 
-            // button1
+            // btn1DownLoadToExcelPi
             // 
-            this.button1.Location = new System.Drawing.Point(448, 23);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 34);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "DownLoadToExcel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn1DownLoadToExcelPi.Location = new System.Drawing.Point(448, 23);
+            this.btn1DownLoadToExcelPi.Name = "btn1DownLoadToExcelPi";
+            this.btn1DownLoadToExcelPi.Size = new System.Drawing.Size(110, 34);
+            this.btn1DownLoadToExcelPi.TabIndex = 5;
+            this.btn1DownLoadToExcelPi.Text = "DownLoadToExcel";
+            this.btn1DownLoadToExcelPi.UseVisualStyleBackColor = true;
+            this.btn1DownLoadToExcelPi.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblMsg
             // 
@@ -108,15 +108,15 @@
             this.lblMsg.Size = new System.Drawing.Size(573, 23);
             this.lblMsg.TabIndex = 3;
             // 
-            // btn_enquire_piReport
+            // btn0_enquire_piReport
             // 
-            this.btn_enquire_piReport.Location = new System.Drawing.Point(354, 23);
-            this.btn_enquire_piReport.Name = "btn_enquire_piReport";
-            this.btn_enquire_piReport.Size = new System.Drawing.Size(75, 34);
-            this.btn_enquire_piReport.TabIndex = 2;
-            this.btn_enquire_piReport.Text = "&Enquire";
-            this.btn_enquire_piReport.UseVisualStyleBackColor = true;
-            this.btn_enquire_piReport.Click += new System.EventHandler(this.btn_enquire_piReport_Click);
+            this.btn0_enquire_piReport.Location = new System.Drawing.Point(354, 23);
+            this.btn0_enquire_piReport.Name = "btn0_enquire_piReport";
+            this.btn0_enquire_piReport.Size = new System.Drawing.Size(75, 34);
+            this.btn0_enquire_piReport.TabIndex = 2;
+            this.btn0_enquire_piReport.Text = "&Enquire";
+            this.btn0_enquire_piReport.UseVisualStyleBackColor = true;
+            this.btn0_enquire_piReport.Click += new System.EventHandler(this.btn_enquire_piReport_Click);
             // 
             // txt0PINum_piReport
             // 
@@ -125,6 +125,7 @@
             this.txt0PINum_piReport.Name = "txt0PINum_piReport";
             this.txt0PINum_piReport.Size = new System.Drawing.Size(179, 29);
             this.txt0PINum_piReport.TabIndex = 1;
+            this.txt0PINum_piReport.TextChanged += new System.EventHandler(this.txt0PINum_piReport_TextChanged);
             // 
             // label1
             // 
@@ -158,12 +159,12 @@
         protected internal System.Windows.Forms.GroupBox gb0PIReport;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblMsg;
-        private System.Windows.Forms.Button btn_enquire_piReport;
+        private System.Windows.Forms.Button btn0_enquire_piReport;
         private System.Windows.Forms.TextBox txt0PINum_piReport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView data0GVPiReport;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn1DownLoadToExcelPi;
 
     }
 }

@@ -25,9 +25,17 @@ namespace FrmPIE.frmPI
             cf = new Commfunction(idr);
 
             InitializeComponent();
+
+            _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Layout;
             gb0PIReport.Resize += gb0PIReport_Resize;
 
             initWidth();
+        }
+
+        void SelectedTab_Layout(object sender, LayoutEventArgs e)
+        {
+            txt0PINum_piReport.Focus();
+            _idr_show.AcceptButton = btn0_enquire_piReport;
         }
 
         void gb0PIReport_Resize(object sender, EventArgs e)
@@ -56,6 +64,12 @@ namespace FrmPIE.frmPI
             string strwhere = @"PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
             vpi_report_ds = DbHelperSQL.Query(strsql + strwhere);
 
+            if (vpi_report_ds.Tables[0].Rows.Count<=0)
+            {
+                lblMsg.Text = txt0PINum_piReport.Text + " is not exist.";
+                txt0PINum_piReport.Focus();
+                return;
+            }
             data0GVPiReport.DataSource = vpi_report_ds.Tables[0].DefaultView;
             cf.initHeaderTextPIDetGrr(data0GVPiReport);
             data0GVPiReport.Refresh();
@@ -146,6 +160,11 @@ namespace FrmPIE.frmPI
             {
                 lblMsg.Text = "Error: has 0 count data.";
             }
+        }
+
+        private void txt0PINum_piReport_TextChanged(object sender, EventArgs e)
+        {
+            _idr_show.AcceptButton = btn0_enquire_piReport;
         }
     }
 }

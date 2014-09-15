@@ -155,6 +155,7 @@ namespace FrmPIE
         }
         private void txt0SearchID_TextChanged(object sender, EventArgs e)
         {
+            this.AcceptButton = btn0Find9;
             if (txt0SearchID.Text.Length > 0)
             {
                 lbl0SearchError.Text = "Length:" + txt0SearchID.Text.Length.ToString();
