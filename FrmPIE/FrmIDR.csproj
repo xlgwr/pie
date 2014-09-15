@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FrmPIE</RootNamespace>
     <AssemblyName>IDR System</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -61,33 +61,47 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\COM.Excel.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Excel, Version=1.5.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\Lib\Excel.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\Lib\Npoi\dotnet2\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\Lib\Npoi\dotnet2\NPOI.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>..\Lib\Npoi\dotnet2\NPOI.OOXML.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\Lib\Npoi\dotnet2\NPOI.OpenXml4Net.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\Lib\Npoi\dotnet2\NPOI.OpenXmlFormats.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services">
       <Private>True</Private>
     </Reference>
@@ -127,12 +141,6 @@
     <Compile Include="frmPIE\frm513PrintCartonLabel.Designer.cs">
       <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPI\frmPI2Report.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPI\frmPI2Report.Designer.cs">
-      <DependentUpon>frmPI2Report.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmPI\frmPI0ScanWECCtnLable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +152,12 @@
     </Compile>
     <Compile Include="frmPI\frmPI1ScanDataInquire.Designer.cs">
       <DependentUpon>frmPI1ScanDataInquire.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPI\frmPI2Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPI\frmPI2Report.Designer.cs">
+      <DependentUpon>frmPI2Report.cs</DependentUpon>
     </Compile>
     <Compile Include="Logon\AdminManage.cs">
       <SubType>Form</SubType>
@@ -226,14 +240,14 @@
     <EmbeddedResource Include="frmPIE\frm513PrintCartonLabel.resx">
       <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPI\frmPI2Report.resx">
-      <DependentUpon>frmPI2Report.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPI\frmPI0ScanWECCtnLable.resx">
       <DependentUpon>frmPI0ScanWECCtnLable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPI\frmPI1ScanDataInquire.resx">
       <DependentUpon>frmPI1ScanDataInquire.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPI\frmPI2Report.resx">
+      <DependentUpon>frmPI2Report.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logon\AdminManage.resx">
       <DependentUpon>AdminManage.cs</DependentUpon>
@@ -269,15 +283,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="reports\frmPI\rpt0PiReport.rdlc">
+    <None Include="reports\frmPI\rpt_piReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </None>
     <None Include="0temple\temples.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="app.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -353,6 +366,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="0DownLoadExcel\text.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="irobot256.ico" />
     <None Include="Resources\bg2.jpg" />
     <None Include="Resources\bg.jpg" />
@@ -395,6 +411,7 @@
       <CachedSettingsPropName>_0PackingInformationEnfry_WebReference_UserLoginCheck</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

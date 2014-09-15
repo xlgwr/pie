@@ -624,7 +624,7 @@ namespace FrmPIE
         {
             addNewTabPage("Enquire Pi Report");
             frmPI2Report swcl = new frmPI2Report(this);
-            addGBToTC(tabCtlRight1, swcl.gb0All_PiReport);
+            addGBToTC(tabCtlRight1, swcl.gb0PIReport);
         }
 
         private void btn24PIReports_Click(object sender, EventArgs e)

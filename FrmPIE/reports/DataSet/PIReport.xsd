@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PIReport" targetNamespace="http://tempuri.org/PIReport.xsd" xmlns:mstns="http://tempuri.org/PIReport.xsd" xmlns="http://tempuri.org/PIReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=142.2.70.140,50000;Initial Catalog=PIE;User ID=sa;Password=Eric1234" IsAppSettingsProperty="false" Modifier="Assembly" Name="walter\mssql2008.PIE.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vpi_reportTableAdapter" GeneratorDataComponentClassName="vpi_reportTableAdapter" Name="vpi_report" UserDataComponentName="vpi_reportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="walter\mssql2008.PIE.dbo" DbObjectName="PIE.dbo.vpi_report" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT   vpi_report.*
+FROM      vpi_report</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PI_ID" DataSetColumn="PI_ID" />
+              <Mapping SourceColumn="pi_LineID" DataSetColumn="pi_LineID" />
+              <Mapping SourceColumn="pi_wec_ctn" DataSetColumn="pi_wec_ctn" />
+              <Mapping SourceColumn="plr_LineID_tran" DataSetColumn="plr_LineID_tran" />
+              <Mapping SourceColumn="pi_pallet_no" DataSetColumn="pi_pallet_no" />
+              <Mapping SourceColumn="CartonNo" DataSetColumn="CartonNo" />
+              <Mapping SourceColumn="CartonID" DataSetColumn="CartonID" />
+              <Mapping SourceColumn="pi_chr01" DataSetColumn="pi_chr01" />
+              <Mapping SourceColumn="pisr_rir" DataSetColumn="pisr_rir" />
+              <Mapping SourceColumn="pisr_invoice" DataSetColumn="pisr_invoice" />
+              <Mapping SourceColumn="pisr_part" DataSetColumn="pisr_part" />
+              <Mapping SourceColumn="Pisr_receiver" DataSetColumn="Pisr_receiver" />
+              <Mapping SourceColumn="pisr_site" DataSetColumn="pisr_site" />
+              <Mapping SourceColumn="pisr_po_nbr" DataSetColumn="pisr_po_nbr" />
+              <Mapping SourceColumn="pisr_qty" DataSetColumn="pisr_qty" />
+              <Mapping SourceColumn="pisr_curr" DataSetColumn="pisr_curr" />
+              <Mapping SourceColumn="pisr_cost" DataSetColumn="pisr_cost" />
+              <Mapping SourceColumn="pisr_base_cost" DataSetColumn="pisr_base_cost" />
+              <Mapping SourceColumn="pisr_us_cost" DataSetColumn="pisr_us_cost" />
+              <Mapping SourceColumn="pisr_seq" DataSetColumn="pisr_seq" />
+              <Mapping SourceColumn="pisr_con_code" DataSetColumn="pisr_con_code" />
+              <Mapping SourceColumn="sq_name" DataSetColumn="sq_name" />
+              <Mapping SourceColumn="pisr_net_wt" DataSetColumn="pisr_net_wt" />
+              <Mapping SourceColumn="pisr_rec_type" DataSetColumn="pisr_rec_type" />
+              <Mapping SourceColumn="pisr_abc" DataSetColumn="pisr_abc" />
+              <Mapping SourceColumn="pisr_code" DataSetColumn="pisr_code" />
+              <Mapping SourceColumn="pisr_lic_req" DataSetColumn="pisr_lic_req" />
+              <Mapping SourceColumn="pisr_sbu" DataSetColumn="pisr_sbu" />
+              <Mapping SourceColumn="pisr_vend" DataSetColumn="pisr_vend" />
+              <Mapping SourceColumn="pisr_mfgr_name" DataSetColumn="pisr_mfgr_name" />
+              <Mapping SourceColumn="pisr_dec01" DataSetColumn="pisr_dec01" />
+              <Mapping SourceColumn="pisr_dec02" DataSetColumn="pisr_dec02" />
+              <Mapping SourceColumn="pi_status" DataSetColumn="pi_status" />
+              <Mapping SourceColumn="Pallet_TTL_NW" DataSetColumn="Pallet_TTL_NW" />
+              <Mapping SourceColumn="pi_cre_date" DataSetColumn="pi_cre_date" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PIReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PIReport" msprop:Generator_UserDSName="PIReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vpi_report" msprop:Generator_TableClassName="vpi_reportDataTable" msprop:Generator_TableVarName="tablevpi_report" msprop:Generator_TablePropName="vpi_report" msprop:Generator_RowDeletingName="vpi_reportRowDeleting" msprop:Generator_RowChangingName="vpi_reportRowChanging" msprop:Generator_RowEvHandlerName="vpi_reportRowChangeEventHandler" msprop:Generator_RowDeletedName="vpi_reportRowDeleted" msprop:Generator_UserTableName="vpi_report" msprop:Generator_RowChangedName="vpi_reportRowChanged" msprop:Generator_RowEvArgName="vpi_reportRowChangeEvent" msprop:Generator_RowClassName="vpi_reportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PI_ID" msprop:Generator_ColumnVarNameInTable="columnPI_ID" msprop:Generator_ColumnPropNameInRow="PI_ID" msprop:Generator_ColumnPropNameInTable="PI_IDColumn" msprop:Generator_UserColumnName="PI_ID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pi_LineID" msprop:Generator_ColumnVarNameInTable="columnpi_LineID" msprop:Generator_ColumnPropNameInRow="pi_LineID" msprop:Generator_ColumnPropNameInTable="pi_LineIDColumn" msprop:Generator_UserColumnName="pi_LineID" type="xs:int" />
+              <xs:element name="pi_wec_ctn" msprop:Generator_ColumnVarNameInTable="columnpi_wec_ctn" msprop:Generator_ColumnPropNameInRow="pi_wec_ctn" msprop:Generator_ColumnPropNameInTable="pi_wec_ctnColumn" msprop:Generator_UserColumnName="pi_wec_ctn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="plr_LineID_tran" msprop:Generator_ColumnVarNameInTable="columnplr_LineID_tran" msprop:Generator_ColumnPropNameInRow="plr_LineID_tran" msprop:Generator_ColumnPropNameInTable="plr_LineID_tranColumn" msprop:Generator_UserColumnName="plr_LineID_tran" type="xs:int" />
+              <xs:element name="pi_pallet_no" msprop:Generator_ColumnVarNameInTable="columnpi_pallet_no" msprop:Generator_ColumnPropNameInRow="pi_pallet_no" msprop:Generator_ColumnPropNameInTable="pi_pallet_noColumn" msprop:Generator_UserColumnName="pi_pallet_no" type="xs:int" minOccurs="0" />
+              <xs:element name="CartonNo" msprop:Generator_ColumnVarNameInTable="columnCartonNo" msprop:Generator_ColumnPropNameInRow="CartonNo" msprop:Generator_ColumnPropNameInTable="CartonNoColumn" msprop:Generator_UserColumnName="CartonNo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CartonID" msprop:Generator_ColumnVarNameInTable="columnCartonID" msprop:Generator_ColumnPropNameInRow="CartonID" msprop:Generator_ColumnPropNameInTable="CartonIDColumn" msprop:Generator_UserColumnName="CartonID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pi_chr01" msprop:Generator_ColumnVarNameInTable="columnpi_chr01" msprop:Generator_ColumnPropNameInRow="pi_chr01" msprop:Generator_ColumnPropNameInTable="pi_chr01Column" msprop:Generator_UserColumnName="pi_chr01" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_rir" msprop:Generator_ColumnVarNameInTable="columnpisr_rir" msprop:Generator_ColumnPropNameInRow="pisr_rir" msprop:Generator_ColumnPropNameInTable="pisr_rirColumn" msprop:Generator_UserColumnName="pisr_rir" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_invoice" msprop:Generator_ColumnVarNameInTable="columnpisr_invoice" msprop:Generator_ColumnPropNameInRow="pisr_invoice" msprop:Generator_ColumnPropNameInTable="pisr_invoiceColumn" msprop:Generator_UserColumnName="pisr_invoice" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_part" msprop:Generator_ColumnVarNameInTable="columnpisr_part" msprop:Generator_ColumnPropNameInRow="pisr_part" msprop:Generator_ColumnPropNameInTable="pisr_partColumn" msprop:Generator_UserColumnName="pisr_part" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Pisr_receiver" msprop:Generator_ColumnVarNameInTable="columnPisr_receiver" msprop:Generator_ColumnPropNameInRow="Pisr_receiver" msprop:Generator_ColumnPropNameInTable="Pisr_receiverColumn" msprop:Generator_UserColumnName="Pisr_receiver" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_site" msprop:Generator_ColumnVarNameInTable="columnpisr_site" msprop:Generator_ColumnPropNameInRow="pisr_site" msprop:Generator_ColumnPropNameInTable="pisr_siteColumn" msprop:Generator_UserColumnName="pisr_site" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_po_nbr" msprop:Generator_ColumnVarNameInTable="columnpisr_po_nbr" msprop:Generator_ColumnPropNameInRow="pisr_po_nbr" msprop:Generator_ColumnPropNameInTable="pisr_po_nbrColumn" msprop:Generator_UserColumnName="pisr_po_nbr" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_qty" msprop:Generator_ColumnVarNameInTable="columnpisr_qty" msprop:Generator_ColumnPropNameInRow="pisr_qty" msprop:Generator_ColumnPropNameInTable="pisr_qtyColumn" msprop:Generator_UserColumnName="pisr_qty" type="xs:decimal" minOccurs="0" />
+              <xs:element name="pisr_curr" msprop:Generator_ColumnVarNameInTable="columnpisr_curr" msprop:Generator_ColumnPropNameInRow="pisr_curr" msprop:Generator_ColumnPropNameInTable="pisr_currColumn" msprop:Generator_UserColumnName="pisr_curr" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_cost" msprop:Generator_ColumnVarNameInTable="columnpisr_cost" msprop:Generator_ColumnPropNameInRow="pisr_cost" msprop:Generator_ColumnPropNameInTable="pisr_costColumn" msprop:Generator_UserColumnName="pisr_cost" type="xs:decimal" minOccurs="0" />
+              <xs:element name="pisr_base_cost" msprop:Generator_ColumnVarNameInTable="columnpisr_base_cost" msprop:Generator_ColumnPropNameInRow="pisr_base_cost" msprop:Generator_ColumnPropNameInTable="pisr_base_costColumn" msprop:Generator_UserColumnName="pisr_base_cost" type="xs:decimal" minOccurs="0" />
+              <xs:element name="pisr_us_cost" msprop:Generator_ColumnVarNameInTable="columnpisr_us_cost" msprop:Generator_ColumnPropNameInRow="pisr_us_cost" msprop:Generator_ColumnPropNameInTable="pisr_us_costColumn" msprop:Generator_UserColumnName="pisr_us_cost" type="xs:decimal" minOccurs="0" />
+              <xs:element name="pisr_seq" msprop:Generator_ColumnVarNameInTable="columnpisr_seq" msprop:Generator_ColumnPropNameInRow="pisr_seq" msprop:Generator_ColumnPropNameInTable="pisr_seqColumn" msprop:Generator_UserColumnName="pisr_seq" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_con_code" msprop:Generator_ColumnVarNameInTable="columnpisr_con_code" msprop:Generator_ColumnPropNameInRow="pisr_con_code" msprop:Generator_ColumnPropNameInTable="pisr_con_codeColumn" msprop:Generator_UserColumnName="pisr_con_code" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="sq_name" msprop:Generator_ColumnVarNameInTable="columnsq_name" msprop:Generator_ColumnPropNameInRow="sq_name" msprop:Generator_ColumnPropNameInTable="sq_nameColumn" msprop:Generator_UserColumnName="sq_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_net_wt" msprop:Generator_ColumnVarNameInTable="columnpisr_net_wt" msprop:Generator_ColumnPropNameInRow="pisr_net_wt" msprop:Generator_ColumnPropNameInTable="pisr_net_wtColumn" msprop:Generator_UserColumnName="pisr_net_wt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="pisr_rec_type" msprop:Generator_ColumnVarNameInTable="columnpisr_rec_type" msprop:Generator_ColumnPropNameInRow="pisr_rec_type" msprop:Generator_ColumnPropNameInTable="pisr_rec_typeColumn" msprop:Generator_UserColumnName="pisr_rec_type" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_abc" msprop:Generator_ColumnVarNameInTable="columnpisr_abc" msprop:Generator_ColumnPropNameInRow="pisr_abc" msprop:Generator_ColumnPropNameInTable="pisr_abcColumn" msprop:Generator_UserColumnName="pisr_abc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_code" msprop:Generator_ColumnVarNameInTable="columnpisr_code" msprop:Generator_ColumnPropNameInRow="pisr_code" msprop:Generator_ColumnPropNameInTable="pisr_codeColumn" msprop:Generator_UserColumnName="pisr_code" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_lic_req" msprop:Generator_ColumnVarNameInTable="columnpisr_lic_req" msprop:Generator_ColumnPropNameInRow="pisr_lic_req" msprop:Generator_ColumnPropNameInTable="pisr_lic_reqColumn" msprop:Generator_UserColumnName="pisr_lic_req" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_sbu" msprop:Generator_ColumnVarNameInTable="columnpisr_sbu" msprop:Generator_ColumnPropNameInRow="pisr_sbu" msprop:Generator_ColumnPropNameInTable="pisr_sbuColumn" msprop:Generator_UserColumnName="pisr_sbu" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_vend" msprop:Generator_ColumnVarNameInTable="columnpisr_vend" msprop:Generator_ColumnPropNameInRow="pisr_vend" msprop:Generator_ColumnPropNameInTable="pisr_vendColumn" msprop:Generator_UserColumnName="pisr_vend" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_mfgr_name" msprop:Generator_ColumnVarNameInTable="columnpisr_mfgr_name" msprop:Generator_ColumnPropNameInRow="pisr_mfgr_name" msprop:Generator_ColumnPropNameInTable="pisr_mfgr_nameColumn" msprop:Generator_UserColumnName="pisr_mfgr_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pisr_dec01" msprop:Generator_ColumnVarNameInTable="columnpisr_dec01" msprop:Generator_ColumnPropNameInRow="pisr_dec01" msprop:Generator_ColumnPropNameInTable="pisr_dec01Column" msprop:Generator_UserColumnName="pisr_dec01" type="xs:decimal" minOccurs="0" />
+              <xs:element name="pisr_dec02" msprop:Generator_ColumnVarNameInTable="columnpisr_dec02" msprop:Generator_ColumnPropNameInRow="pisr_dec02" msprop:Generator_ColumnPropNameInTable="pisr_dec02Column" msprop:Generator_UserColumnName="pisr_dec02" type="xs:decimal" minOccurs="0" />
+              <xs:element name="pi_status" msprop:Generator_ColumnVarNameInTable="columnpi_status" msprop:Generator_ColumnPropNameInRow="pi_status" msprop:Generator_ColumnPropNameInTable="pi_statusColumn" msprop:Generator_UserColumnName="pi_status" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Pallet_TTL_NW" msprop:Generator_ColumnVarNameInTable="columnPallet_TTL_NW" msprop:Generator_ColumnPropNameInRow="Pallet_TTL_NW" msprop:Generator_ColumnPropNameInTable="Pallet_TTL_NWColumn" msprop:Generator_UserColumnName="Pallet_TTL_NW" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pi_cre_date" msprop:Generator_ColumnVarNameInTable="columnpi_cre_date" msprop:Generator_ColumnPropNameInRow="pi_cre_date" msprop:Generator_ColumnPropNameInTable="pi_cre_dateColumn" msprop:Generator_UserColumnName="pi_cre_date" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:vpi_report" />
+      <xs:field xpath="mstns:PI_ID" />
+      <xs:field xpath="mstns:pi_LineID" />
+      <xs:field xpath="mstns:pi_wec_ctn" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
