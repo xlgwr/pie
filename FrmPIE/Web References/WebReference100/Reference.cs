@@ -42,7 +42,7 @@ namespace FrmPIE.WebReference100 {
         
         /// <remarks/>
         public Service() {
-            this.Url = global::FrmPIE.Properties.Settings.Default.FrmOCRDM_WebReference100_Service;
+            this.Url = global::FrmPIE.Properties.Settings.Default.IDR_System_WebReference100_Service;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

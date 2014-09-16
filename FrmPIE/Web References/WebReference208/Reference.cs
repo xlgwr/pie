@@ -35,7 +35,7 @@ namespace FrmPIE.WebReference208 {
         
         /// <remarks/>
         public UserLoginCheck() {
-            this.Url = global::FrmPIE.Properties.Settings.Default._0PackingInformationEnfry_WebReference_UserLoginCheck;
+            this.Url = global::FrmPIE.Properties.Settings.Default.IDR_System_WebReference208_UserLoginCheck;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
