@@ -8,49 +8,48 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FrmPIE.Properties {
-    
-    
+namespace FrmPIE.Properties
+{
+
+
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        
-        public static Settings Default {
-            get {
+
+        public static Settings Default
+        {
+            get
+            {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.100/mfgpgm/Service.asmx")]
-        public string FrmPIE_WebReference100_Service {
-            get {
-                return ((string)(this["FrmPIE_WebReference100_Service"]));
-            }
-        }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx")]
-        public string _0PackingInformationEnfry_WebReference_UserLoginCheck {
-            get {
-                return ((string)(this["_0PackingInformationEnfry_WebReference_UserLoginCheck"]));
+        public string IDR_System_WebReference208_UserLoginCheck
+        {
+            get
+            {
+                return ((string)(this["IDR_System_WebReference208_UserLoginCheck"]));
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.100/mfgpgm/Service.asmx")]
-        public string FrmOCRDM_WebReference100_Service {
-            get {
-                return ((string)(this["FrmOCRDM_WebReference100_Service"]));
+        public string IDR_System_WebReference100_Service
+        {
+            get
+            {
+                return ((string)(this["IDR_System_WebReference100_Service"]));
             }
         }
+       
     }
 }

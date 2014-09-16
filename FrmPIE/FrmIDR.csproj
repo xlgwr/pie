@@ -269,6 +269,7 @@
     </None>
     <None Include="app.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -334,6 +335,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Web References\WebReference100\Service.disco" />
+    <None Include="Web References\WebReference208\UserLoginCheck.disco" />
     <None Include="0DownLoadExcel\text.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -350,33 +353,32 @@
     <None Include="Resources\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Web References\WebReference208\UserLoginCheck.disco" />
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://142.2.70.100/mfgpgm/Service.asmx%3fwsdl">
+    <WebReferenceUrl Include="http://142.2.70.100/mfgpgm/Service.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WebReference100\</RelPath>
-      <UpdateFromURL>http://142.2.70.100/mfgpgm/Service.asmx%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://142.2.70.100/mfgpgm/Service.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>FrmOCRDM_WebReference100_Service</CachedSettingsPropName>
+      <CachedSettingsPropName>IDR_System_WebReference100_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx%3fop=WFUserSecondPwdChk">
+    <WebReferenceUrl Include="http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WebReference208\</RelPath>
-      <UpdateFromURL>http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx%3fop=WFUserSecondPwdChk</UpdateFromURL>
+      <UpdateFromURL>http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>_0PackingInformationEnfry_WebReference_UserLoginCheck</CachedSettingsPropName>
+      <CachedSettingsPropName>IDR_System_WebReference208_UserLoginCheck</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
