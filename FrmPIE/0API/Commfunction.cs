@@ -1413,9 +1413,11 @@ namespace FrmPIE._0API
                                 string strErrMessage = ds.Tables[0].Rows[0][5].ToString();
                                 string strABC = ds.Tables[0].Rows[0][6].ToString();
                                 string strcheck = ds.Tables[0].Rows[0][7].ToString();
+                                string strIQC = ds.Tables[0].Rows[0][8].ToString();
 
                                 item.plr_chr01 = strABC;
                                 item.plr_chr02 = strcheck;
+                                item.re_mark = strIQC;
 
                                 if (strResultWebser.Equals("2"))
                                 {

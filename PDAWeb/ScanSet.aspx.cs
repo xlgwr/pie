@@ -230,5 +230,9 @@ public partial class ScanSet : System.Web.UI.Page
     protected void txtPalletNum_SelectedIndexChanged(object sender, EventArgs e)
     {
         txtNW.Text = txtPalletNum.SelectedItem.Value;
+        if (string.IsNullOrWhiteSpace(txtNW.Text))
+        {
+            txtNW.Focus();
+        }
     }
 }
