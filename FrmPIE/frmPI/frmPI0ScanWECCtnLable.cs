@@ -425,6 +425,12 @@ namespace FrmPIE.frmPI
 
                     if (_plr_mstr_tran_model_list.Count > 0)
                     {
+                        if (!_plr_mstr_tran_model_list[0].plr_deci1.ToString().Equals("1"))
+                        {
+                            ShowMsg(txt2SanWecCtnLable.Text + " has not Print Label, Can't Scan.", "Error");
+                            return false;
+
+                        }
                         if (!string.IsNullOrEmpty(_plr_mstr_tran_model_list[0].plr_chr01) && _plr_mstr_tran_model_list[0].plr_chr01.Equals("S"))
                         {
                             ShowMsg(txt2SanWecCtnLable.Text + " has being Scaning.", "Error");
