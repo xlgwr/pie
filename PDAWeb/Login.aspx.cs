@@ -24,6 +24,7 @@ public partial class Login : System.Web.UI.Page
             txtUserName.Focus();
             lblMessage.Text = "";
         }
+        Session["addflag"] = "false";
     }
 
     protected void BtnLogin_Click(object sender, EventArgs e)

@@ -58,11 +58,6 @@
                 <td style="width: 200px; height: 40px; background-image: url(images/bghead1.jpg);" bgcolor="#f2f9ff" align="center">
                     <asp:Label ID="Label1" runat="server" Font-Size="10pt" Text="扫描程序登陆"></asp:Label></td>
             </tr>
-            <tr height="26">
-                <td style="width: 200px; height: 20px; background-color: #339999;" align="center" bgcolor="#b0e0e6">
-                    <asp:Label ID="Lblmsg" runat="server" Font-Bold="False" Font-Size="10pt" ForeColor="White"
-                        Height="17px" Width="71%">请使用系统账号</asp:Label></td>
-            </tr>
             <tr height="70">
                 <td style="width: 200px; height: 50px" align="center" bgcolor="#dbeefd" valign="middle">
                     <table>

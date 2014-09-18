@@ -168,7 +168,7 @@
                             </td>
                         </tr>--%>
                         <tr>
-                            <td colspan="4" align="left">
+                            <td colspan="4" align="left" class="auto-style2">
                                 <asp:Label ID="lbl3co" runat="server" Style="text-align: left"></asp:Label>
                             </td>
                         </tr>

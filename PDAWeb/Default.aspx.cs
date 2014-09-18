@@ -18,6 +18,7 @@ public partial class _Default : System.Web.UI.Page
     string strSN = "";
     string _strco = "";
     string _strmsg = "";
+
     PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
     PI.Model.pi_det _pi_det_model = new PI.Model.pi_det();
 
@@ -26,26 +27,27 @@ public partial class _Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            Session["addflag"] = "false";
             if (Session["user_id"] == null)
             {
                 Response.Write("<script language='javascript'>alert('您没有登录或登录超时，请重新登录！');top.location.href='Login.aspx';</script>");
                 return;
             }
-            if (Session["piid"].ToString().Trim() != "" && Session["plant"].ToString().Trim() != "" && Session["type"].ToString().Trim() != "")
+            if (Session["piid"].ToString().Trim() != "" && Session["plant"].ToString().Trim() != "" && Session["type"].ToString().Trim() != "" && Session["palletNum"].ToString().Trim() != "")
             {
                 txtpiid.Text = Session["piid"].ToString();
-                txtPlant.Text = "Plant:"+Session["plant"].ToString();
-                txtType.Text = "Type:"+Session["type"].ToString();
-                txtPalletNum.Text=Session["palletNum"].ToString();
+                txtPlant.Text = "Plant:" + Session["plant"].ToString();
+                txtType.Text = "Type:" + Session["type"].ToString();
+                txtPalletNum.Text = Session["palletNum"].ToString();
                 strpiid = txtpiid.Text.Trim();
             }
             else
             {
-                Response.Write("<script language='javascript'>alert('您没有PIID,plant,type，请重新输入！');top.location.href='ScanSet.aspx';</script>");
+                Response.Write("<script language='javascript'>alert('您没有PIID,plant,type,palletNum，请重新输入！');top.location.href='ScanSet.aspx';</script>");
                 return;
             }
             txtboxid.Focus();
-            if (Session["msg"]!=null)
+            if (Session["msg"] != null)
             {
                 lblMessage.Text = Session["msg"].ToString();
             }
@@ -63,13 +65,13 @@ public partial class _Default : System.Web.UI.Page
         if (string.IsNullOrWhiteSpace(txtboxid.Text))
         {
             txtboxid.Focus();
-            ShowMsg("Error: WecCtnSN is null.", "Error");
+            ShowMsg(" WecCtnSN is null.", "Error");
             return;
         }
         if (string.IsNullOrWhiteSpace(txtPalletNum.Text))
         {
             txtPalletNum.Focus();
-            ShowMsg("Error: Pallet# is null.", "Error");
+            ShowMsg(" Pallet# is null.", "Error");
             return;
         }
         if (!getCoValiteWecCtnID())
@@ -97,12 +99,12 @@ public partial class _Default : System.Web.UI.Page
                         Session["pi_wec_ctn"] = tran.plr_wec_ctn;
                     }
                     _pi_det_model.PI_ID = txtpiid.Text;
-                    _pi_det_model.pi_type = txtType.Text;
+                    _pi_det_model.pi_type = Session["plant"].ToString();
                     _pi_det_model.pi_LineID = _nextlineid;
                     _pi_det_model.pi_wec_ctn = tran.plr_wec_ctn;
 
                     _pi_det_model.plr_LineID_tran = tran.LineID;
-                    _pi_det_model.pi_deci1 =Convert.ToInt32(txtPalletNum.Text);
+                    _pi_det_model.pi_deci1 = Convert.ToInt32(txtPalletNum.Text);
                     _pi_det_model.pi_pallet_no = Session["nw"].ToString();
 
                     _pi_det_model.CartonNo = tran.CartonNo;
@@ -156,7 +158,7 @@ public partial class _Default : System.Web.UI.Page
             if (string.IsNullOrEmpty(txtpiid.ToString()))
             {
 
-                ShowMsg("新增新的PI ID", "Notice",true);
+                ShowMsg("新增新的PI ID", "Notice", true);
             }
             else
             {
@@ -166,10 +168,11 @@ public partial class _Default : System.Web.UI.Page
                 _nextlineid = pi_det_new.pi_LineID;
 
                 txtpiid.Text = Session["piid"].ToString();
-
+                Session["addflag"] = "true";
                 //initModelForTextBox(pi_det_new);
                 _addNextNewFalg = true;
-                ShowMsg("继续扫描，上次为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "," + _strco + "," + txtboxid.Text, "Notice",true);
+
+                ShowMsg("继续扫描，上次为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "\n," + _strco + "," + txtboxid.Text, "Notice", true);
 
 
             }
@@ -185,6 +188,7 @@ public partial class _Default : System.Web.UI.Page
         }
         else
         {
+            Session["addflag"] = "false";
             ShowMsg("Scan Add fail", "Error");
         }
 
@@ -192,14 +196,14 @@ public partial class _Default : System.Web.UI.Page
     }
     private void ShowMsg(string msg, string title)
     {
-        
+
         lblMessage.ForeColor = Color.Red;
         lblMessage.Visible = true;
         lblMessage.Text = title + ":" + msg;
         _strmsg = title + ":" + msg;
         //Response.Write("<script language='javascript'>alert('" + _strmsg + "');</script>");
-    } 
-    private void ShowMsg(string msg, string title,bool lblred)
+    }
+    private void ShowMsg(string msg, string title, bool lblred)
     {
         lblMessage.ForeColor = Color.Black;
         lblMessage.Visible = true;
@@ -231,55 +235,55 @@ public partial class _Default : System.Web.UI.Page
                         return false;
 
                     }
-                    //var strco = _plr_mstr_tran_model_list[0].plr_co;
-                    //if (string.IsNullOrEmpty(strco))
-                    //{
-                    //    if (string.IsNullOrWhiteSpace(txtCo.Text))
-                    //    {
-                    //        ShowMsg(txtboxid.Text + " has no Co.", "Error");
-                    //        txtCo.Focus();
-                    //        return false;
-                    //    }
-                    //    else
-                    //    {
-                    //        PIE.Model.pkey_ctl existco = new PIE.BLL.pkey_ctl().GetModel("co", txtCo.Text);
-                    //        if (existco != null)
-                    //        {
-                    //            lbl3co.Text = existco.t_value + ":" + existco.t_desc;
-                    //            _strco = existco.t_value + ":" + existco.t_desc;
-                    //        }
-                    //        else
-                    //        {
-                    //            ShowMsg(txtCo.Text + " has no Desc.", "Error: ");
-                    //            _strco = "";
-                    //            txtCo.Text = "";
-                    //            txtCo.Focus();
-                    //            return false;
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    txtCo.Text = strco;
+                    var strco = _plr_mstr_tran_model_list[0].plr_co;
+                    if (string.IsNullOrEmpty(strco))
+                    {
+                        //if (string.IsNullOrWhiteSpace(txtCo.Text))
+                        //{
+                        //    ShowMsg(txtboxid.Text + " has no Co.", "Error");
+                        //    txtCo.Focus();
+                        //    return false;
+                        //}
+                        //else
+                        //{
+                        //    PIE.Model.pkey_ctl existco = new PIE.BLL.pkey_ctl().GetModel("co", txtCo.Text);
+                        //    if (existco != null)
+                        //    {
+                        //        lbl3co.Text = existco.t_value + ":" + existco.t_desc;
+                        //        _strco = existco.t_value + ":" + existco.t_desc;
+                        //    }
+                        //    else
+                        //    {
+                        //        ShowMsg(txtCo.Text + " has no Desc.", "Error: ");
+                        //        _strco = "";
+                        //        txtCo.Text = "";
+                        //        txtCo.Focus();
+                        //        return false;
+                        //    }
+                        //}
+                    }
+                    else
+                    {
+                        // txtCo.Text = strco;
 
-                    //    if (txtCo.Text.Length > 0)
-                    //    {
-                    //        PIE.Model.pkey_ctl existco = new PIE.BLL.pkey_ctl().GetModel("co", txtCo.Text);
-                    //        if (existco != null)
-                    //        {
-                    //            lbl3co.Text = existco.t_value + ":" + existco.t_desc;
-                    //            _strco = existco.t_value + ":" + existco.t_desc;
-                    //        }
-                    //        else
-                    //        {
-                    //            ShowMsg(txtCo.Text + " has no Desc.", "Error: ");
-                    //            txtCo.Text = "";
-                    //            _strco = "";
-                    //            txtCo.Focus();
-                    //            return false;
-                    //        }
-                    //    }
-                    //}
+                        if (strco.Length > 0)
+                        {
+                            PIE.Model.pkey_ctl existco = new PIE.BLL.pkey_ctl().GetModel("co", strco);
+                            if (existco != null)
+                            {
+                                lbl3co.Text = existco.t_value + ":" + existco.t_desc;
+                                _strco = existco.t_value + ":" + existco.t_desc;
+                            }
+                            //else
+                            //{
+                            //    ShowMsg(txtCo.Text + " has no Desc.", "Error: ");
+                            //    txtCo.Text = "";
+                            //    _strco = "";
+                            //    txtCo.Focus();
+                            //    return false;
+                            //}
+                        }
+                    }
 
 
                     return true;
@@ -319,9 +323,10 @@ public partial class _Default : System.Web.UI.Page
 
     protected void BtnReturn_Click(object sender, EventArgs e)
     {
-       // Session["piid"] = null;
-      //  Session["plant"] = null;
-      //  Session["type"] = null;
+        // Session["piid"] = null;
+        //  Session["plant"] = null;
+        //  Session["type"] = null;
+
         Response.Write("<script language='javascript'>top.location.href='ScanSet.aspx';</script>");
     }
     //protected void txtCo_TextChanged(object sender, EventArgs e)
@@ -346,12 +351,12 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void BtnExit_Click(object sender, EventArgs e)
     {
-        Session["user_id"] = null;
-        Session["piid"] = null;
-        Session["plant"] = null;
-        Session["type"] = null;
-        Session["palletNum"] = null;
-        Session["nw"] = null;
+        Session["user_id"] = "";
+        Session["piid"] = "";
+        Session["plant"] = "";
+        Session["type"] = "";
+        Session["palletNum"] = "";
+        Session["nw"] = "";
         Response.Write("<script language='javascript'>top.location.href='Login.aspx';</script>");
     }
     protected void btnco_Click(object sender, EventArgs e)

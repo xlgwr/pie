@@ -17,7 +17,7 @@
         if ((e == document.getElementById("txtPIID")) && (event.keyCode == 13)) {
 
 
-            document.getElementById("BtnSure").click();
+            document.getElementById("txtPalletNum").focus();
             //$(function () {
             //    $("#BtnSure").click();
             //});
@@ -82,35 +82,12 @@
             </tr>
             <tr>
                 <td style="width: 200px; height: 40px" align="center" bgcolor="#dbeefd" valign="middle">
-                    <table>
-                        <tr>
-                            <td align="right" style="width: 40px; height: 20px;" class="table_body">PINum:
-                            </td>
-                            <td style="width: 100px; height: 20px;" class="table_none" colspan="2">
-                                <asp:TextBox ID="txtPIID" runat="server" CssClass="txtu" Width="120px"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 40px; height: 20px;" class="table_body">Pallet#:
-                            </td>
-                            <td align="left" style="width: 100px; height: 20px;" class="table_none" colspan="2">
-                                <asp:DropDownList ID="txtPalletNum" runat="server" Width="120px" Height="16px" AutoPostBack="True" OnSelectedIndexChanged="txtPalletNum_SelectedIndexChanged">
-                                </asp:DropDownList>
-                                <asp:Button ID="txtPalletAdd" runat="server" OnClick="txtPalletAdd_Click" Text="+" Width="25px" Height="24px" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 40px; height: 20px;" class="table_body">PNW:
-                            </td>
-                            <td style="width: 100px; height: 20px;" class="table_none" colspan="2">
-                                <asp:TextBox ID="txtNW" runat="server" CssClass="txtu" Width="120px"></asp:TextBox>
-                            </td>
-                        </tr>
+                    <table style="width: 200px;" cellspacing="0" cellpadding="0" align="center" border="0">
                         <tr>
                             <td align="right" style="width: 40px; height: 20px;" class="table_body">Plant:<font style="font-size: 10pt"> </font>
                             </td>
                             <td style="width: 100px; height: 20px;" class="table_none">
-                                <asp:DropDownList ID="ddlPlant" runat="server" Height="25px" Width="126px">
+                                <asp:DropDownList ID="ddlPlant" runat="server" Height="22px" Width="112px">
                                     <asp:ListItem>NW</asp:ListItem>
                                     <asp:ListItem>WWTS</asp:ListItem>
                                     <asp:ListItem>WEC</asp:ListItem>
@@ -123,23 +100,56 @@
                             <td align="right" style="width: 40px; height: 20px;" class="table_body">Type:<font style="font-size: 10pt"> </font>
                             </td>
                             <td style="width: 100px; height: 20px;" class="table_none">
-                                <asp:DropDownList ID="ddlType" runat="server" Height="25px" Width="126px">
+                                <asp:DropDownList ID="ddlType" runat="server" Height="24px" Width="112px">
                                     <asp:ListItem>Normal</asp:ListItem>
                                     <asp:ListItem>Rma</asp:ListItem>
                                     <asp:ListItem>Mech</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                         </tr>
+                        <tr>
+                            <td align="right" style="width: 40px; height: 20px;" class="table_body">PINum:
+                            </td>
+                            <td style="width: 100px; height: 20px;" class="table_none">
+                                <asp:TextBox ID="txtPIID" runat="server" CssClass="txtu" Width="112px" AutoPostBack="True" OnTextChanged="txtPIID_TextChanged"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" style="width: 40px; height: 20px;" class="table_body">Pallet#:
+                            </td>
+                            <td align="left" colspan="2" class="auto-style2">
+                                <asp:DropDownList ID="txtPalletNum" runat="server" Width="112px" Height="20px" AutoPostBack="True" OnSelectedIndexChanged="txtPalletNum_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                            <td align="left" style="width: 30px; height: 20px;" class="table_none">
+                                <asp:Button ID="txtPalletAdd" runat="server" OnClick="txtPalletAdd_Click" Text="+" Width="25px" Height="24px" />
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" style="width: 40px; height: 20px;" class="table_body">PNW:
+                            </td>
+                            <td style="width: 100px; height: 20px;" class="table_none">
+                                <asp:TextBox ID="txtNW" runat="server" CssClass="txtu" Width="112px"></asp:TextBox>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4">
+
+                                <asp:Label ID="lblMessage" runat="server" Font-Bold="True" ForeColor="Red" Font-Size="10pt"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" bgcolor="#b0e0e6" style="height: 20px; background-color: #339999;" colspan="4">
+                                <asp:Button ID="BtnSure" runat="server" Text="确认" Height="20px" OnClick="BtnSure_Click" Width="36px" />
+                                <asp:Button ID="btnnw" runat="server" Text="保存NW" Height="20px" OnClick="btnnw_Click" Width="51px" />
+                                <asp:Button ID="BtnClear" runat="server" Text="清除" Height="20px" OnClick="BtnClear_Click" Width="32px" />
+                                <asp:Button ID="BtnExist" runat="server" Text="退出" Height="20px" OnClick="BtnExist_Click" Width="30px" />
+                            </td>
+                        </tr>
+
                     </table>
-                    <asp:Label ID="lblMessage" runat="server" Font-Bold="True" ForeColor="Red" Font-Size="10pt"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="center" bgcolor="#b0e0e6" style="width: 200px; height: 20px; background-color: #339999;">
-                    <asp:Button ID="BtnSure" runat="server" Text="确认" Height="20px" OnClick="BtnSure_Click" Width="36px" />
-                    <asp:Button ID="btnnw" runat="server" Text="保存NW" Height="20px" OnClick="btnnw_Click" Width="51px" />
-                    <asp:Button ID="BtnClear" runat="server" Text="清除" Height="20px" OnClick="BtnClear_Click" Width="32px" />
-                    <asp:Button ID="BtnExist" runat="server" Text="退出" Height="20px" OnClick="BtnExist_Click" Width="30px" />
                 </td>
             </tr>
         </table>
