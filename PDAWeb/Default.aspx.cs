@@ -27,8 +27,8 @@ public partial class _Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["addflag"] = "false";
-            if (Session["user_id"] == null)
+            Session["addflag"] = "true";
+            if (Session["user_id"] == null || Session["user_id"].ToString() == "")
             {
                 Response.Write("<script language='javascript'>alert('您没有登录或登录超时，请重新登录！');top.location.href='Login.aspx';</script>");
                 return;
@@ -168,11 +168,12 @@ public partial class _Default : System.Web.UI.Page
                 _nextlineid = pi_det_new.pi_LineID;
 
                 txtpiid.Text = Session["piid"].ToString();
-                Session["addflag"] = "true";
+                Session["addflag"] = "false";
                 //initModelForTextBox(pi_det_new);
                 _addNextNewFalg = true;
+                Session["msg"] = "继续扫描,上次为:" + _pi_det_model.PI_ID + ",LID:" + _pi_det_model.pi_LineID.ToString() + ",Pt#:" + txtPalletNum.Text + "<br/>" + _strco + "," + txtboxid.Text;
 
-                ShowMsg("继续扫描，上次为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "\n," + _strco + "," + txtboxid.Text, "Notice", true);
+                ShowMsg(Session["msg"].ToString(), "->", true);
 
 
             }
@@ -188,7 +189,7 @@ public partial class _Default : System.Web.UI.Page
         }
         else
         {
-            Session["addflag"] = "false";
+            Session["addflag"] = "true";
             ShowMsg("Scan Add fail", "Error");
         }
 
@@ -229,6 +230,12 @@ public partial class _Default : System.Web.UI.Page
 
                 if (_plr_mstr_tran_model_list.Count > 0)
                 {
+                    if (!_plr_mstr_tran_model_list[0].plr_deci1.ToString().Equals("1"))
+                    {
+                        initfalse(txtboxid.Text + " has not Print Label, Can't Scan.", "Error");
+                        return false;
+
+                    }
                     if (!string.IsNullOrEmpty(_plr_mstr_tran_model_list[0].plr_chr01) && _plr_mstr_tran_model_list[0].plr_chr01.Equals("S"))
                     {
                         initfalse(txtboxid.Text + " has being Scaning.", "Error");

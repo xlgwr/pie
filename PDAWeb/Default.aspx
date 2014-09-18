@@ -78,6 +78,11 @@
 
         .auto-style2 {
             width: 79px;
+            text-align: left;
+        }
+
+        .auto-left {
+            text-align: left;
         }
 
         :-webkit-full-screen {
@@ -114,6 +119,7 @@
         ::-ms-backdrop {
             /* properties */
         }
+
         .auto-style3 {
             width: 80px;
         }
@@ -141,9 +147,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="left" class="auto-style1"><asp:Label ID="txtPlant" runat="server" Width="79px"></asp:Label>
+                            <td colspan="2" align="left" class="auto-style1">
+                                <asp:Label ID="txtPlant" runat="server" Width="79px"></asp:Label>
                             </td>
-                            <td colspan="2" class="auto-style2"><asp:Label ID="txtType" runat="server" Width="97px" ></asp:Label>
+                            <td colspan="2" class="auto-style2">
+                                <asp:Label ID="txtType" runat="server" Width="97px"></asp:Label>
                             </td>
                         </tr>
                         <tr>
@@ -160,7 +168,7 @@
                                 <asp:TextBox ID="txtboxid" runat="server" Width="97px" AutoPostBack="True"></asp:TextBox>
                             </td>
                         </tr>
-                       <%-- <tr>
+                        <%-- <tr>
                             <td align="left" class="auto-style3">CO:<font style="font-size: 10pt"> </font>
                             </td>
                             <td colspan="3" class="auto-style2">
@@ -168,12 +176,12 @@
                             </td>
                         </tr>--%>
                         <tr>
-                            <td colspan="4" align="left" class="auto-style2">
-                                <asp:Label ID="lbl3co" runat="server" Style="text-align: left"></asp:Label>
+                            <td colspan="4">
+                                <asp:Label ID="lbl3co" runat="server" CssClass="auto-left"></asp:Label>
                             </td>
                         </tr>
                     </table>
-                    <asp:Label ID="lblMessage" runat="server" Font-Bold="True" ForeColor="Red" Font-Size="10pt" CssClass="Brak"></asp:Label>
+                    <asp:Label ID="lblMessage" runat="server" Font-Bold="True" ForeColor="Red" Font-Size="10pt" CssClass="Brak auto-left"></asp:Label>
                 </td>
             </tr>
             <tr>

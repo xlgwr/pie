@@ -374,7 +374,7 @@ namespace FrmPIE.frmPI
 
                 if (string.IsNullOrEmpty(txtPalletNW.Text.Trim()))
                 {
-                    if (MessageBox.Show("Pallet# "+cmb4Pallet_PIScan.Text+" TTL NW is Null, are you add that?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("Pallet# " + cmb4Pallet_PIScan.Text + " TTL NW is Null, are you add that?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         txtPalletNW.Focus();
                     }
@@ -425,6 +425,12 @@ namespace FrmPIE.frmPI
 
                     if (_plr_mstr_tran_model_list.Count > 0)
                     {
+                        if (!_plr_mstr_tran_model_list[0].plr_deci1.ToString().Equals("1"))
+                        {
+                            ShowMsg(txt2SanWecCtnLable.Text + " has not Print Label, Can't Scan.", "Error");
+                            return false;
+
+                        }
                         if (!string.IsNullOrEmpty(_plr_mstr_tran_model_list[0].plr_chr01) && _plr_mstr_tran_model_list[0].plr_chr01.Equals("S"))
                         {
                             ShowMsg(txt2SanWecCtnLable.Text + " has being Scaning.", "Error");
@@ -974,7 +980,7 @@ namespace FrmPIE.frmPI
                 txtPalletNW.Text = existpidet.pi_pallet_no;
                 if (string.IsNullOrEmpty(txtPalletNW.Text.Trim()))
                 {
-                    if (MessageBox.Show("Pallet TTL NW is Null, are you add that?","Notice",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes)
+                    if (MessageBox.Show("Pallet TTL NW is Null, are you add that?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         txtPalletNW.Focus();
                     }

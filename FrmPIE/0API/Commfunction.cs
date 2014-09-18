@@ -1578,6 +1578,9 @@ namespace FrmPIE._0API
 
                         for (int i = 0; i < listcount; i++)
                         {
+                            plr_mstr_tran_list[i].plr_deci1 = 1;
+                            var printflag = new PIE.BLL.plr_mstr_tran().Update(plr_mstr_tran_list[i]);
+
                             totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
                             if (plr_mstr_tran_list[i].plr_chr02.ToString().ToLower().Equals("yes"))
                             {
@@ -1648,6 +1651,9 @@ namespace FrmPIE._0API
                         string strSJ = "";
                         for (int i = 0; i < listcount; i++)
                         {
+                            plr_mstr_tran_list[i].plr_deci1 = 1;
+                            var printflag = new PIE.BLL.plr_mstr_tran().Update(plr_mstr_tran_list[i]);
+
                             totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
                             if (plr_mstr_tran_list[i].plr_chr02.ToString().ToLower().Equals("yes"))
                             {

@@ -30,6 +30,7 @@ public partial class Login : System.Web.UI.Page
     protected void BtnLogin_Click(object sender, EventArgs e)
     {
         lblMessage.Text = "";
+        
         string comp = this.ddlcmp0.Text.Trim();
         string username = this.txtUserName.Text.Trim();
         string pwd = this.txtPassword.Text.Trim();

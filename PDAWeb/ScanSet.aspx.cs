@@ -71,12 +71,13 @@ public partial class ScanSet : System.Web.UI.Page
 
             txtPIID.Focus();
         }
-
+        
         // txtNW.Text = txtPalletNum.SelectedItem.Value;
 
     }
     protected void BtnSure_Click(object sender, EventArgs e)
     {
+        Session["nw"] = "";
         int intOutAffected;
         string strPIID = txtPIID.Text.Trim();
         if (string.IsNullOrEmpty(strPIID))
@@ -212,6 +213,7 @@ public partial class ScanSet : System.Web.UI.Page
                 txtPalletNum.Items.Add(linew);
                 var index = txtPalletNum.Items.IndexOf(linew);
                 txtPalletNum.SelectedIndex = index;
+                txtNW.Text = Session["nw"].ToString();
             }
 
         }
@@ -290,7 +292,8 @@ public partial class ScanSet : System.Web.UI.Page
     protected void BtnClear_Click(object sender, EventArgs e)
     {
         txtPIID.Text = "";
-        Session["palletNum"] = "";
+        txtNW.Text = "";
+        Session["palletNum"] = "";        
         txtPIID.Focus();
         txtPalletNum.Items.Clear();
         ddlPlant.SelectedIndex = 0;
@@ -311,6 +314,7 @@ public partial class ScanSet : System.Web.UI.Page
     }
     protected void txtPalletAdd_Click(object sender, EventArgs e)
     {
+        lblMessage.Text = "";
         if (string.IsNullOrWhiteSpace(txtPIID.Text))
         {
             lblMessage.Text = "PI ID is null";
@@ -329,14 +333,17 @@ public partial class ScanSet : System.Web.UI.Page
     }
     protected void btnnw_Click(object sender, EventArgs e)
     {
+        var addflag=Session["addflag"].ToString();
        
-        if (Session["addflag"].ToString().Equals("false"))
+        if (addflag.Equals("true"))
         {
             lblMessage.Text = txtPalletNum.SelectedItem.Text + "Pallet# is New,not set nw, please add by Scan later.";
-            txtNW.Text = "";
+            //txtNW.Text = "";
+            Session["nw"] = txtNW.Text;
             Response.Write("<script language='javascript'>alert('" + lblMessage.Text + "！');</script>");
             initSession(txtPIID.Text);
-            Response.Redirect("Default.aspx");
+            //Response.Redirect("Default.aspx");
+            Response.Write("<script language='javascript'>top.location.href='Default.aspx';</script>");
         }
         if (_PalletAdd)
         {
