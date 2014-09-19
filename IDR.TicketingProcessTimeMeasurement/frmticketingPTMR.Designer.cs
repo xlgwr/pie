@@ -34,6 +34,7 @@
             this.btn2Back = new System.Windows.Forms.Button();
             this.btn3Rece = new System.Windows.Forms.Button();
             this.btn4Leave = new System.Windows.Forms.Button();
+            this.btn5PrintBar = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,10 +44,11 @@
             this.flowLayoutPanel1.Controls.Add(this.btn2Back);
             this.flowLayoutPanel1.Controls.Add(this.btn3Rece);
             this.flowLayoutPanel1.Controls.Add(this.btn4Leave);
+            this.flowLayoutPanel1.Controls.Add(this.btn5PrintBar);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(302, 278);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(302, 377);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // btn1In
@@ -93,12 +95,23 @@
             this.btn4Leave.UseVisualStyleBackColor = true;
             this.btn4Leave.Click += new System.EventHandler(this.btn4Leave_Click);
             // 
+            // btn5PrintBar
+            // 
+            this.btn5PrintBar.Font = new System.Drawing.Font("SimSun", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn5PrintBar.Location = new System.Drawing.Point(3, 275);
+            this.btn5PrintBar.Name = "btn5PrintBar";
+            this.btn5PrintBar.Size = new System.Drawing.Size(292, 97);
+            this.btn5PrintBar.TabIndex = 4;
+            this.btn5PrintBar.Text = "打印条码号";
+            this.btn5PrintBar.UseVisualStyleBackColor = true;
+            this.btn5PrintBar.Click += new System.EventHandler(this.btn5PrintBar_Click);
+            // 
             // frmticketingPTMR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(302, 278);
+            this.ClientSize = new System.Drawing.Size(302, 377);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -117,6 +130,7 @@
         private System.Windows.Forms.Button btn2Back;
         private System.Windows.Forms.Button btn3Rece;
         private System.Windows.Forms.Button btn4Leave;
+        private System.Windows.Forms.Button btn5PrintBar;
     }
 }
 

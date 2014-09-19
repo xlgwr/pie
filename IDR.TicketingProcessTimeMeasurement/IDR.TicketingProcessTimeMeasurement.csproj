@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmPrintLable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintLable.Designer.cs">
+      <DependentUpon>frmPrintLable.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmticketingPTMR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     <Compile Include="ScanID.Designer.cs">
       <DependentUpon>ScanID.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmPrintLable.resx">
+      <DependentUpon>frmPrintLable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmticketingPTMR.resx">
       <DependentUpon>frmticketingPTMR.cs</DependentUpon>
     </EmbeddedResource>

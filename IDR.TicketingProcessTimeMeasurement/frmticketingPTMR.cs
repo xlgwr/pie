@@ -42,6 +42,12 @@ namespace IDR.TicketingProcessTimeMeasurement
             showScanID(4);
         }
 
+        private void btn5PrintBar_Click(object sender, EventArgs e)
+        {
+            frmPrintLable frmpl = new frmPrintLable();
+            frmpl.Show();
+        }
+
 
 
     }
