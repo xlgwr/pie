@@ -11,7 +11,7 @@ namespace PI.Model
         { }
         #region Model
         private string _pi_id;
-        private int _pi_lineid=1;
+        private int _pi_lineid;
         private string _pi_wec_ctn;
         private int _plr_lineid_tran;
         private string _pi_pallet_no;
@@ -26,10 +26,10 @@ namespace PI.Model
         private DateTime? _pi_update_date;
         private string _pi_edituser_id;
         private string _pi_user_ip;
-        private int? _pi_void_status;
+        private int _pi_void_status;
         private string _pi_chr01;
         private string _pi_chr02;
-        private int? _pi_deci1;
+        private int _pi_deci1;
         private decimal? _pi_deci2;
         /// <summary>
         /// 
@@ -162,7 +162,7 @@ namespace PI.Model
         /// <summary>
         /// 
         /// </summary>
-        public int? pi_void_status
+        public int pi_void_status
         {
             set { _pi_void_status = value; }
             get { return _pi_void_status; }
@@ -186,7 +186,7 @@ namespace PI.Model
         /// <summary>
         /// 
         /// </summary>
-        public int? pi_deci1
+        public int pi_deci1
         {
             set { _pi_deci1 = value; }
             get { return _pi_deci1; }

@@ -27,9 +27,15 @@ namespace FrmPIE.frmPI
         DataSet cods;
 
         string _strWecCtnSn = "";
+        public bool _coisnull = false;
+        public string _strconext = "";
+        public string _plr_wec_ctn = "";
 
-        PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
-        PI.Model.pi_det _pi_det_model = new PI.Model.pi_det();
+        public List<PIE.Model.plr_mstr_tran> _plr_mstr_tran_co_list = new List<PIE.Model.plr_mstr_tran>();
+        public List<PI.Model.pi_det> _pi_det_model_co_list = new List<PI.Model.pi_det>();
+
+        public PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
+        public PI.Model.pi_det _pi_det_model = new PI.Model.pi_det();
 
         List<PIE.Model.plr_mstr_tran> _plr_mstr_tran_model_list;
 
@@ -133,13 +139,13 @@ namespace FrmPIE.frmPI
             {
                 return false;
             }
-            if (cmb3CO_ScanWECCtnLable.SelectedItem == null)
-            {
-                cmb3CO_ScanWECCtnLable.Focus();
-                lbl0msg.Text = "Error:the CO is null, please enter the right one.";
+            //if (cmb3CO_ScanWECCtnLable.SelectedItem == null)
+            //{
+            //    cmb3CO_ScanWECCtnLable.Focus();
+            //    lbl0msg.Text = "Error:the CO is null, please enter the right one.";
 
-                return false;
-            }
+            //    return false;
+            //}
             return true;
         }
         private void ShowMsg(string msg, string title)
@@ -220,6 +226,11 @@ namespace FrmPIE.frmPI
             int intOutAffected;
             string strPIID = "";
             bool result_pi_det = false;
+
+            _coisnull = false;
+            _pi_det_model_co_list.Clear();
+            _plr_mstr_tran_co_list.Clear();
+
             if (!getCoValiteWecCtnID())
             {
                 return;
@@ -286,6 +297,7 @@ namespace FrmPIE.frmPI
                     if (tran.plr_wec_ctn.Equals(txt2SanWecCtnLable.Text))
                     {
 
+
                         _pi_det_model.PI_ID = _pi_mstr_model.PI_ID;
                         _pi_det_model.pi_type = _pi_mstr_model.pi_type;
                         _pi_det_model.pi_LineID = _nextlineid;
@@ -304,11 +316,13 @@ namespace FrmPIE.frmPI
                         _pi_det_model.CartonID = tran.CartonID;
 
                         _pi_det_model.pi_chr01 = _strCO;
+
                         _pi_det_model.pi_chr02 = tran.plr_po;
                         _pi_det_model.pi_remark = "New";
                         _pi_det_model.pi_cre_date = DbHelperSQL.getServerGetDate();
                         _pi_det_model.pi_user_ip = _idr_show._custip;
                         _pi_det_model.pi_status = "No";
+
 
                         var existBatchidLine = true;
                         while (existBatchidLine)
@@ -323,6 +337,13 @@ namespace FrmPIE.frmPI
                             }
 
 
+                        }
+                        if (string.IsNullOrEmpty(tran.plr_co))
+                        {
+                            _coisnull = true;
+                            _strconext = "";
+                            _plr_mstr_tran_co_list.Add(tran);
+                            _pi_det_model_co_list.Add(_pi_det_model);
                         }
                         result_pi_det = new PI.DAL.pi_det().Add(_pi_det_model);
                         if (result_pi_det)
@@ -364,17 +385,24 @@ namespace FrmPIE.frmPI
 
                     //initModelForTextBox(pi_det_new);
                     _addNextNewFalg = true;
-                    ShowMsg("新增相同的PI ID,\t上次新增的为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString(), "Notice");
+                    ShowMsg("新增相同的PI ID,\t上次新增的为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "\nScanSN:" + _pi_det_model.pi_wec_ctn + ",Pallet#:" + _pi_det_model.pi_deci1.ToString("000"), "Notice");
 
                     lbl3COScanWECCtnLable.Text = "";
 
                 }
+                // co init
+                if (_coisnull)
+                {
+                    frmCoMaint frmcomain = new frmCoMaint(this);
+                    frmcomain.ShowDialog();
+                }
                 //////////////************************
                 threadinitDVdelegate();
 
+
                 if (string.IsNullOrEmpty(txtPalletNW.Text.Trim()))
                 {
-                    if (MessageBox.Show("Pallet# "+cmb4Pallet_PIScan.Text+" TTL NW is Null, are you add that?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("Pallet# " + cmb4Pallet_PIScan.Text + " TTL NW is Null, are you add that?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         txtPalletNW.Focus();
                     }
@@ -445,8 +473,8 @@ namespace FrmPIE.frmPI
                             if (string.IsNullOrEmpty(cmb3CO_ScanWECCtnLable.Text))
                             {
                                 ShowMsg(txt2SanWecCtnLable.Text + " has no CO.", "Error");
-                                cmb3CO_ScanWECCtnLable.Focus();
-                                return false;
+                                //cmb3CO_ScanWECCtnLable.Focus();
+                                //return false;
                             }
                             else
                             {
@@ -462,8 +490,8 @@ namespace FrmPIE.frmPI
                                 {
                                     ShowMsg(cmb3CO_ScanWECCtnLable.Text + " has no Desc.", "Error: ");
                                     strco = "";
-                                    cmb3CO_ScanWECCtnLable.Focus();
-                                    return false;
+                                    //cmb3CO_ScanWECCtnLable.Focus();
+                                    //return false;
                                 }
                             }
                         }
@@ -495,8 +523,8 @@ namespace FrmPIE.frmPI
                                     ShowMsg(cmb3CO_ScanWECCtnLable.Text + " has no Desc.", "Error: ");
                                     cmb3CO_ScanWECCtnLable.Text = "";
                                     strco = "";
-                                    cmb3CO_ScanWECCtnLable.Focus();
-                                    return false;
+                                    //cmb3CO_ScanWECCtnLable.Focus();
+                                    // return false;
                                 }
                             }
                         }
@@ -585,8 +613,19 @@ namespace FrmPIE.frmPI
                         //initModelForTextBox(pi_det_new);
 
                         _addNextNewFalg = true;
-                        ShowMsg("继续新增相同的PI ID,\t上次新增的为：" + pi_det_new.PI_ID + ",LineID:" + (_nextlineid - 1), "Notice");
-                        lbl0noticePiId.Text = "Notice: 继续新增相同的PI ID,\t上次新增的为：" + pi_det_new.PI_ID + ",LineID:" + (_nextlineid - 1);
+                        var pre_pi_det = new PI.DAL.pi_det().GetModel(pi_det_new.PI_ID, (_nextlineid - 1));
+                        string premsg = "继续新增相同的PI ID";
+                        if (pre_pi_det != null)
+                        {
+                            premsg += ",继续新增相同的PI ID,\t上次新增的为：" + pre_pi_det.PI_ID + ",LineID:" + pre_pi_det.pi_LineID + "\nScanSN:" + pre_pi_det.pi_wec_ctn + ",Pallet#:" + pre_pi_det.pi_deci1.ToString("000");
+
+                        }
+                        else
+                        {
+                            premsg += "，无上次扫描记录。";
+                        }
+                        ShowMsg(premsg, "Notice");
+                        lbl0noticePiId.Text = premsg;
                         lbl3COScanWECCtnLable.Text = "";
                         //lbl0noticePiId.Text = "changed";
                         //////////////************************
@@ -698,10 +737,14 @@ namespace FrmPIE.frmPI
 
         private void txt2SanWecCtnLable_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (txt2SanWecCtnLable.Text.Length >= 12)
             {
-                btn0Scan_Click(sender, e);
+                if (e.KeyCode == Keys.Enter)
+                {
+                    btn0Scan_Click(sender, e);
+                }
             }
+
 
         }
 
@@ -980,7 +1023,7 @@ namespace FrmPIE.frmPI
                 txtPalletNW.Text = existpidet.pi_pallet_no;
                 if (string.IsNullOrEmpty(txtPalletNW.Text.Trim()))
                 {
-                    if (MessageBox.Show("Pallet TTL NW is Null, are you add that?","Notice",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes)
+                    if (MessageBox.Show("Pallet TTL NW is Null, are you add that?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         txtPalletNW.Focus();
                     }
