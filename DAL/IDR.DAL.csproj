@@ -136,6 +136,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ticketingPTMR_ext.cs" />
+    <Compile Include="ticketingPTMR.cs" />
     <Compile Include="pisr_grr.cs" />
     <Compile Include="pi_det_ext.cs" />
     <Compile Include="PI_DET_Remote.cs" />
