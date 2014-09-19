@@ -321,7 +321,7 @@ public partial class ScanSet : System.Web.UI.Page
             return;
 
         }
-        var maxpallernum = new PI.DAL.pi_det().GetMaxId(txtPIID.Text).ToString("000");
+        var maxpallernum = new PI.DAL.pi_det_ext().GetMaxId(txtPIID.Text).ToString("000");
         ListItem li = new ListItem(maxpallernum, "0");
         txtPalletNum.Items.Add(maxpallernum);
         txtPalletNum.SelectedIndex = txtPalletNum.Items.Count - 1;

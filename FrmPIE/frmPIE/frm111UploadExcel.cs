@@ -683,7 +683,7 @@ namespace FrmPIE.frmPIE
 
                 foreach (DataRow dr in data0set_npoi.Tables[0].Rows)
                 {
-                    PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr().DataRowToModel(dr, true);
+                    PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr_ext().DataRowToModel(dr, true);
                     var intresutl = Program.GenCartonNo(plr_mstr_model);
                 }
                 //for (int i = 0; i < data0set_npoi.Tables[0].Rows.Count; i++)

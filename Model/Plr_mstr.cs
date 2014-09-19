@@ -11,48 +11,48 @@ namespace PIE.Model
         { }
         #region Model
         private string _batch_id;
-        private int _lineid=0;
-        private string _plr_suppliers_id;
-        private string _invoiceid;
-        private string _plr_po;
+        private int _lineid;
+        private string _plr_status;
         private string _packinglistid;
-        private string _plr_partno;
-        private decimal? _plr_carton_qty;
-        private decimal? _plr_qty;
+        private string _invoiceid;
+        private string _plr_pallet_no;
         private string _cartontype;
         private string _cartonid;
-        private DateTime _plr_rcp_date = DateTime.Now;
-        private DateTime _plr_deli_date = DateTime.Now;
-        private string _carton_id_prifix;
-        private decimal? _carton_id_from=0;
-        private decimal? _carton_id_to=0;
-        private string _re_mark;
-        private string _plr_site;
-        private string _plr_pallet_no;
+        private string _plr_po;
         private string _plr_co;
+        private string _plr_partno;
         private string _plr_date_code;
         private string _plr_vend_mfgr;
         private string _plr_vm_partno;
+        private decimal? _plr_carton_qty;
+        private decimal? _plr_qty;
+        private DateTime? _plr_rcp_date = DateTime.Now;
+        private DateTime? _plr_deli_date = DateTime.Now;
+        private string _carton_id_prifix;
+        private decimal? _carton_id_from;
+        private decimal? _carton_id_to;
         private string _plr_doc_type;
-        private int? _plr_ttl=0;
+        private string _re_mark;
+        private string _plr_suppliers_id;
+        private string _plr_site;
+        private int? _plr_ttl;
         private string _plr_um;
         private string _plr_nw;
         private string _plr_gw;
         private string _plr_um_w;
-        private decimal? _plr_unitprice=0;
+        private decimal? _plr_unitprice;
         private string _plr_msm;
         private string _plr_doc_no1;
-        private string _plr_status;
-        private DateTime _plr_cre_date = DateTime.Now;
+        private DateTime _plr_cre_date=DateTime.Now;
         private string _plr_cre_userid;
-        private DateTime _plr_update_date = DateTime.Now;
+        private DateTime _plr_update_date=DateTime.Now;
         private string _plr_edituser_id;
         private string _plr_user_ip;
-        private int? _plr_void_status = 1;
+        private int? _plr_void_status = 0;
         private string _plr_chr01;
         private string _plr_chr02;
-        private int? _plr_deci1=0;
-        private decimal? _plr_deci2=0;
+        private int? _plr_deci1;
+        private decimal? _plr_deci2;
         /// <summary>
         /// 
         /// </summary>
@@ -70,28 +70,12 @@ namespace PIE.Model
             get { return _lineid; }
         }
         /// <summary>
-        /// Suppliets ID
+        /// Void Status
         /// </summary>
-        public string plr_suppliers_id
+        public string plr_status
         {
-            set { _plr_suppliers_id = value; }
-            get { return _plr_suppliers_id; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string InvoiceID
-        {
-            set { _invoiceid = value; }
-            get { return _invoiceid; }
-        }
-        /// <summary>
-        /// PO#
-        /// </summary>
-        public string plr_po
-        {
-            set { _plr_po = value; }
-            get { return _plr_po; }
+            set { _plr_status = value; }
+            get { return _plr_status; }
         }
         /// <summary>
         /// 
@@ -102,28 +86,20 @@ namespace PIE.Model
             get { return _packinglistid; }
         }
         /// <summary>
-        /// Part
+        /// 
         /// </summary>
-        public string plr_partno
+        public string InvoiceID
         {
-            set { _plr_partno = value; }
-            get { return _plr_partno; }
+            set { _invoiceid = value; }
+            get { return _invoiceid; }
         }
         /// <summary>
-        /// Carton Qty
+        /// 
         /// </summary>
-        public decimal? plr_carton_qty
+        public string plr_pallet_no
         {
-            set { _plr_carton_qty = value; }
-            get { return _plr_carton_qty; }
-        }
-        /// <summary>
-        /// QTY
-        /// </summary>
-        public decimal? plr_qty
-        {
-            set { _plr_qty = value; }
-            get { return _plr_qty; }
+            set { _plr_pallet_no = value; }
+            get { return _plr_pallet_no; }
         }
         /// <summary>
         /// Number Carton
@@ -142,9 +118,73 @@ namespace PIE.Model
             get { return _cartonid; }
         }
         /// <summary>
+        /// PO#
+        /// </summary>
+        public string plr_po
+        {
+            set { _plr_po = value; }
+            get { return _plr_po; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string plr_co
+        {
+            set { _plr_co = value; }
+            get { return _plr_co; }
+        }
+        /// <summary>
+        /// Part
+        /// </summary>
+        public string plr_partno
+        {
+            set { _plr_partno = value; }
+            get { return _plr_partno; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string plr_date_code
+        {
+            set { _plr_date_code = value; }
+            get { return _plr_date_code; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string plr_vend_mfgr
+        {
+            set { _plr_vend_mfgr = value; }
+            get { return _plr_vend_mfgr; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Plr_vm_partno
+        {
+            set { _plr_vm_partno = value; }
+            get { return _plr_vm_partno; }
+        }
+        /// <summary>
+        /// Carton Qty
+        /// </summary>
+        public decimal? plr_carton_qty
+        {
+            set { _plr_carton_qty = value; }
+            get { return _plr_carton_qty; }
+        }
+        /// <summary>
+        /// QTY
+        /// </summary>
+        public decimal? plr_qty
+        {
+            set { _plr_qty = value; }
+            get { return _plr_qty; }
+        }
+        /// <summary>
         /// Rec Date
         /// </summary>
-        public DateTime plr_rcp_date
+        public DateTime? plr_rcp_date
         {
             set { _plr_rcp_date = value; }
             get { return _plr_rcp_date; }
@@ -152,7 +192,7 @@ namespace PIE.Model
         /// <summary>
         /// Deli Date
         /// </summary>
-        public DateTime plr_deli_date
+        public DateTime? plr_deli_date
         {
             set { _plr_deli_date = value; }
             get { return _plr_deli_date; }
@@ -182,6 +222,14 @@ namespace PIE.Model
             get { return _carton_id_to; }
         }
         /// <summary>
+        /// 
+        /// </summary>
+        public string plr_doc_type
+        {
+            set { _plr_doc_type = value; }
+            get { return _plr_doc_type; }
+        }
+        /// <summary>
         /// ReMark
         /// </summary>
         public string re_mark
@@ -190,60 +238,20 @@ namespace PIE.Model
             get { return _re_mark; }
         }
         /// <summary>
+        /// Suppliets ID
+        /// </summary>
+        public string plr_suppliers_id
+        {
+            set { _plr_suppliers_id = value; }
+            get { return _plr_suppliers_id; }
+        }
+        /// <summary>
         /// 
         /// </summary>
         public string plr_site
         {
             set { _plr_site = value; }
             get { return _plr_site; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string plr_pallet_no
-        {
-            set { _plr_pallet_no = value; }
-            get { return _plr_pallet_no; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string plr_co
-        {
-            set { _plr_co = value; }
-            get { return _plr_co; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string plr_date_code
-        {
-            set { _plr_date_code = value; }
-            get { return _plr_date_code; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string plr_vend_mfgr
-        {
-            set { _plr_vend_mfgr = value; }
-            get { return _plr_vend_mfgr; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Plr_vm_partno
-        {
-            set { _plr_vm_partno = value; }
-            get { return _plr_vm_partno; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string plr_doc_type
-        {
-            set { _plr_doc_type = value; }
-            get { return _plr_doc_type; }
         }
         /// <summary>
         /// 
@@ -308,14 +316,6 @@ namespace PIE.Model
         {
             set { _plr_doc_no1 = value; }
             get { return _plr_doc_no1; }
-        }
-        /// <summary>
-        /// Void Status
-        /// </summary>
-        public string plr_status
-        {
-            set { _plr_status = value; }
-            get { return _plr_status; }
         }
         /// <summary>
         /// 

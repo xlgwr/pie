@@ -154,6 +154,12 @@
     <Compile Include="frmPIE\frm513PrintCartonLabel.Designer.cs">
       <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPI\frmCoMaint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPI\frmCoMaint.Designer.cs">
+      <DependentUpon>frmCoMaint.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPI\frmPI0ScanWECCtnLable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPIE\frm513PrintCartonLabel.resx">
       <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPI\frmCoMaint.resx">
+      <DependentUpon>frmCoMaint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPI\frmPI0ScanWECCtnLable.resx">
       <DependentUpon>frmPI0ScanWECCtnLable.cs</DependentUpon>
