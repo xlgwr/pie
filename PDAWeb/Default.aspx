@@ -29,12 +29,12 @@
             //    $("#BtnOK").click();
             //});
         }
-        if ((e == document.getElementById("txtCo")) && (event.keyCode == 13)) {
-            document.getElementById("BtnOK").click();
-            //$(function () {
-            //    $("#BtnOK").click();
-            //});
-        }
+        //if ((e == document.getElementById("txtCo")) && (event.keyCode == 13)) {
+        //    document.getElementById("BtnOK").click();
+        //    //$(function () {
+        //    //    $("#BtnOK").click();
+        //    //});
+        //}
 
 
     </script>
@@ -78,6 +78,11 @@
 
         .auto-style2 {
             width: 79px;
+            text-align: left;
+        }
+
+        .auto-left {
+            text-align: left;
         }
 
         :-webkit-full-screen {
@@ -114,6 +119,7 @@
         ::-ms-backdrop {
             /* properties */
         }
+
         .auto-style3 {
             width: 80px;
         }
@@ -141,9 +147,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="left" class="auto-style1"><asp:Label ID="txtPlant" runat="server" Width="79px"></asp:Label>
+                            <td colspan="2" align="left" class="auto-style1">
+                                <asp:Label ID="txtPlant" runat="server" Width="79px"></asp:Label>
                             </td>
-                            <td colspan="2" class="auto-style2"><asp:Label ID="txtType" runat="server" Width="97px" ></asp:Label>
+                            <td colspan="2" class="auto-style2">
+                                <asp:Label ID="txtType" runat="server" Width="97px"></asp:Label>
                             </td>
                         </tr>
                         <tr>
@@ -157,30 +165,30 @@
                             <td align="left" class="auto-style3">CtnSN:<font style="font-size: 10pt"> </font>
                             </td>
                             <td colspan="3" class="auto-style2">
-                                <asp:TextBox ID="txtboxid" runat="server" Width="97px" AutoPostBack="True" OnTextChanged="txtboxid_TextChanged"></asp:TextBox>
+                                <asp:TextBox ID="txtboxid" runat="server" Width="97px" AutoPostBack="True"></asp:TextBox>
                             </td>
                         </tr>
-                        <tr>
+                        <%-- <tr>
                             <td align="left" class="auto-style3">CO:<font style="font-size: 10pt"> </font>
                             </td>
                             <td colspan="3" class="auto-style2">
                                 <asp:TextBox ID="txtCo" runat="server" Width="97px" OnTextChanged="txtCo_TextChanged" AutoPostBack="True"></asp:TextBox>
                             </td>
-                        </tr>
+                        </tr>--%>
                         <tr>
-                            <td colspan="4" align="left">
-                                <asp:Label ID="lbl3co" runat="server" Style="text-align: left"></asp:Label>
+                            <td colspan="4">
+                                <asp:Label ID="lbl3co" runat="server" CssClass="auto-left"></asp:Label>
                             </td>
                         </tr>
                     </table>
-                    <asp:Label ID="lblMessage" runat="server" Font-Bold="True" ForeColor="Red" Font-Size="10pt" CssClass="Brak"></asp:Label>
+                    <asp:Label ID="lblMessage" runat="server" Font-Bold="True" ForeColor="Red" Font-Size="10pt" CssClass="Brak auto-left"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <td align="center" bgcolor="#b0e0e6" style="width: 200px; background-color: #339999;">
                     <asp:Button ID="BtnClear" runat="server" Text="清除" OnClick="BtnClear_Click" Width="30px" />
                     <asp:Button ID="BtnOK" runat="server" Text="保存" OnClick="BtnOK_Click" CssClass="hiddenBtn" Width="43px" />
-                    <asp:Button ID="BtnReturn" runat="server" OnClick="BtnReturn_Click" Text="返回设置" Width="57px" />
+                    <asp:Button ID="BtnReturn" runat="server" OnClick="BtnReturn_Click" Text="设置NW" Width="57px" />
                     <asp:Button ID="BtnExit" runat="server" Text="退出" OnClick="BtnExit_Click" Width="30px" />
                 </td>
             </tr>

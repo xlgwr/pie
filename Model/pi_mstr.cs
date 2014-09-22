@@ -17,9 +17,9 @@ namespace PI.Model
         private string _pi_status;
         private string _pi_status_msg;
         private string _pi_remark;
-        private DateTime? _pi_cre_date;
+        private DateTime? _pi_cre_date = DateTime.Now;
         private string _pi_cre_userid;
-        private DateTime? _pi_update_date;
+        private DateTime? _pi_update_date = DateTime.Now;
         private string _pi_edituser_id;
         private string _pi_user_ip;
         private int? _pi_void_status;

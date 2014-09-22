@@ -40,6 +40,12 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PDAWeb", "http://localhost:
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.WCF", "IDR.WCF\IDR.WCF.csproj", "{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.MVC", "IDR.MVC\IDR.MVC.csproj", "{806325A2-881B-4E75-BAFE-9999333E7B91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.TicketingProcessTimeMeasurement", "IDR.TicketingProcessTimeMeasurement\IDR.TicketingProcessTimeMeasurement.csproj", "{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -148,6 +154,42 @@ Global
 		{000A8C88-51B2-4C9B-A758-AD38C2E5C39B}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{000A8C88-51B2-4C9B-A758-AD38C2E5C39B}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{000A8C88-51B2-4C9B-A758-AD38C2E5C39B}.Release|x86.ActiveCfg = Debug|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Release|.NET.ActiveCfg = Release|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C3A3D2E5-5BAC-472C-A69C-52EF3DFE557C}.Release|x86.ActiveCfg = Release|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Release|.NET.ActiveCfg = Release|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{806325A2-881B-4E75-BAFE-9999333E7B91}.Release|x86.ActiveCfg = Release|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Release|.NET.ActiveCfg = Release|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -480,7 +480,7 @@ namespace FrmPIE._0API
                 }
                 if (reurntype.Equals("model"))
                 {
-                    plr_mstr_tran = new PIE.DAL.plr_mstr_tran().GetModel(batchid, lineid);
+                    plr_mstr_tran = new PIE.DAL.plr_mstr_tran_ext().GetModel(batchid, lineid);
                     return plr_mstr_tran;
                 }
                 if (reurntype.Equals("ds"))
@@ -700,7 +700,7 @@ namespace FrmPIE._0API
                 }
                 if (reurntype.Equals("model"))
                 {
-                    pi_det = new PI.DAL.pi_det().GetModel(batchid, lineid);
+                    pi_det = new PI.DAL.pi_det_ext().GetModel(batchid, lineid);
                     return pi_det;
                 }
                 if (reurntype.Equals("ds"))
@@ -1413,9 +1413,11 @@ namespace FrmPIE._0API
                                 string strErrMessage = ds.Tables[0].Rows[0][5].ToString();
                                 string strABC = ds.Tables[0].Rows[0][6].ToString();
                                 string strcheck = ds.Tables[0].Rows[0][7].ToString();
+                                string strIQC = ds.Tables[0].Rows[0][8].ToString();
 
                                 item.plr_chr01 = strABC;
                                 item.plr_chr02 = strcheck;
+                                item.re_mark = strIQC;
 
                                 if (strResultWebser.Equals("2"))
                                 {
@@ -1547,9 +1549,11 @@ namespace FrmPIE._0API
                 strWhere = "Wec_Ctn='" + wec_ctn_Fr + "'";
 
                 List<PIE.Model.plr_mstr_tran> plr_mstr_tran_list = new PIE.BLL.plr_mstr_tran().GetModelList(strWhere);
+
                 int listcount = plr_mstr_tran_list.Count;
                 if (listcount > 0)
                 {
+                   
 
                     if (print_Type.Equals("ZPL"))
                     {
@@ -1576,6 +1580,17 @@ namespace FrmPIE._0API
 
                         for (int i = 0; i < listcount; i++)
                         {
+                            if (plr_mstr_tran_list[i].plr_status.Equals("Yes"))
+                            {
+                                MessageBox.Show(strWhere + ",LineID:"+plr_mstr_tran_list[i].LineID+" is Void,Can't Print.");
+                                SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
+                                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg, true, true);
+                                SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
+                                return;
+                            }
+                            plr_mstr_tran_list[i].plr_deci1 = 1;
+                            var printflag = new PIE.BLL.plr_mstr_tran().Update(plr_mstr_tran_list[i]);
+
                             totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
                             if (plr_mstr_tran_list[i].plr_chr02.ToString().ToLower().Equals("yes"))
                             {
@@ -1646,6 +1661,18 @@ namespace FrmPIE._0API
                         string strSJ = "";
                         for (int i = 0; i < listcount; i++)
                         {
+                            if (plr_mstr_tran_list[i].plr_status.Equals("Yes"))
+                            {
+                                MessageBox.Show(strWhere + " is Void,Can't Print.");
+                                SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
+                                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg, true, true);
+                                SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
+                                return;
+                            }
+
+                            plr_mstr_tran_list[i].plr_deci1 = 1;
+                            var printflag = new PIE.BLL.plr_mstr_tran().Update(plr_mstr_tran_list[i]);
+
                             totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
                             if (plr_mstr_tran_list[i].plr_chr02.ToString().ToLower().Equals("yes"))
                             {
@@ -1729,6 +1756,7 @@ namespace FrmPIE._0API
                 SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
                 SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: Printing End", true, true);
                 return;
+
             }
             else if (intPrintErrorCount > 0)
             {

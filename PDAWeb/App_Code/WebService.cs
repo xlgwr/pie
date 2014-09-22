@@ -87,7 +87,7 @@ public class WebService : System.Web.Services.WebService
                     var existBatchidLine = true;
                     while (existBatchidLine)
                     {
-                        existBatchidLine = new PI.DAL.pi_det().Exists(_pi_det_model.PI_ID, _pi_det_model.pi_LineID);
+                        existBatchidLine = new PI.DAL.pi_det_ext().Exists(_pi_det_model.PI_ID, _pi_det_model.pi_LineID);
                         if (existBatchidLine)
                         {
                             //ShowMsg("系统中已存在PIID：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "，将修改LineID+1.", "Notice");

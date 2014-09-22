@@ -36,7 +36,7 @@ namespace PIE.Model
         private string _plr_vm_partno;
         private string _carton_id_prifix;
         private string _re_mark;
-        private DateTime _plr_cre_date;
+        private DateTime? _plr_cre_date;
         private string _plr_cre_userid;
         private DateTime? _plr_update_date;
         private string _plr_edituser_id;
@@ -257,7 +257,7 @@ namespace PIE.Model
         /// <summary>
         /// 
         /// </summary>
-        public DateTime plr_cre_date
+        public DateTime? plr_cre_date
         {
             set { _plr_cre_date = value; }
             get { return _plr_cre_date; }

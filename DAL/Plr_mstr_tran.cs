@@ -42,20 +42,7 @@ namespace PIE.DAL
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
-        /// <summary>
-        /// 是否存在该记录
-        /// </summary>
-        public bool Exists(string plr_wec_ctn)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) from plr_mstr_tran");
-            strSql.Append(" where plr_wec_ctn=@plr_wec_ctn ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@plr_wec_ctn", SqlDbType.NVarChar,50)};
-            parameters[0].Value = plr_wec_ctn;
-
-            return DbHelperSQL.Exists(strSql.ToString(), parameters);
-        }
+        
 
         /// <summary>
         /// 增加一条数据
@@ -308,32 +295,6 @@ namespace PIE.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public PIE.Model.plr_mstr_tran GetModel(string Batch_ID, int LineID)
-        {
-
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,CartonNo,CartonID,plr_wec_ctn,plr_po,plr_partno,CartonType,plr_carton_qty,plr_qty,plr_suppliers_id,packingListID,InvoiceID,plr_rcp_date,plr_pallet_no,plr_deli_date,plr_site,plr_co,plr_date_code,plr_vend_mfgr,Plr_vm_partno,carton_id_prifix,re_mark,plr_cre_date,plr_cre_userid,plr_update_date,plr_edituser_id,plr_user_ip,plr_void_status,plr_chr01,plr_chr02,plr_deci1,plr_deci2 from plr_mstr_tran ");
-            strSql.Append(" where Batch_ID=@Batch_ID and LineID=@LineID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@Batch_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@LineID", SqlDbType.Int,4)			};
-            parameters[0].Value = Batch_ID;
-            parameters[1].Value = LineID;
-
-            PIE.Model.plr_mstr_tran model = new PIE.Model.plr_mstr_tran();
-            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                return DataRowToModel(ds.Tables[0].Rows[0]);
-            }
-            else
-            {
-                return null;
-            }
-        }
-        /// <summary>
-        /// 得到一个对象实体
-        /// </summary>
         public PIE.Model.plr_mstr_tran GetModel(string Batch_ID, string plr_partno, int LineID, int Wec_Ctn)
         {
 
@@ -349,31 +310,6 @@ namespace PIE.DAL
             parameters[1].Value = plr_partno;
             parameters[2].Value = LineID;
             parameters[3].Value = Wec_Ctn;
-
-            PIE.Model.plr_mstr_tran model = new PIE.Model.plr_mstr_tran();
-            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                return DataRowToModel(ds.Tables[0].Rows[0]);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 得到一个对象实体
-        /// </summary>
-        public PIE.Model.plr_mstr_tran GetModel(string plr_wec_ctn)
-        {
-
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,CartonNo,CartonID,plr_wec_ctn,plr_po,plr_partno,CartonType,plr_carton_qty,plr_qty,plr_suppliers_id,packingListID,InvoiceID,plr_rcp_date,plr_pallet_no,plr_deli_date,plr_site,plr_co,plr_date_code,plr_vend_mfgr,Plr_vm_partno,carton_id_prifix,re_mark,plr_cre_date,plr_cre_userid,plr_update_date,plr_edituser_id,plr_user_ip,plr_void_status,plr_chr01,plr_chr02,plr_deci1,plr_deci2 from plr_mstr_tran ");
-            strSql.Append(" where plr_wec_ctn=@plr_wec_ctn ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@plr_wec_ctn", SqlDbType.NVarChar,50)};
-            parameters[0].Value = plr_wec_ctn;
 
             PIE.Model.plr_mstr_tran model = new PIE.Model.plr_mstr_tran();
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
