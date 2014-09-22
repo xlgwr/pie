@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using PIE.Common;
+
 namespace IDR.TicketingProcessTimeMeasurement
 {
     public partial class ScanID : Form
@@ -23,6 +25,7 @@ namespace IDR.TicketingProcessTimeMeasurement
             InitializeComponent();
             textBox1.Focus();
             this.AcceptButton = button1;
+            dataGridView1.ReadOnly = true;
         }
 
         private void ScanID_Load(object sender, EventArgs e)
@@ -66,6 +69,27 @@ namespace IDR.TicketingProcessTimeMeasurement
                 textBox1.Focus();
                 return;
             }
+            if (textBox1.Text.Length < 2)
+            {
+                lblMsg.Text = "Scan SN is to short.(more 2)";
+                textBox1.Focus();
+                return;
+            }
+            string strsub1 = textBox1.Text.Substring(0, 1).ToLower();
+            string strsub2 = textBox1.Text.Substring(1, 1);
+
+            if (!(strsub1.Equals("b") || strsub1.Equals("s")))
+            {
+                lblMsg.Text = "Scan SN is Error Format.";
+                textBox1.Focus();
+                return;
+            }
+            if (!PageValidate.IsNumber(strsub2))
+            {
+                lblMsg.Text = "Scan SN is Error Format.";
+                textBox1.Focus();
+                return;
+            }
             _strScanSN = textBox1.Text.Trim().ToUpper();
 
             var isUseSupperID = new PIE.DAL.ticketingPTMR_ext().GetModel(_strScanSN);
@@ -92,13 +116,13 @@ namespace IDR.TicketingProcessTimeMeasurement
                         if (savetick)
                         {
                             initDataGV();
-                            MessageBox.Show("登记成功。");
+                            lblMsg.Text = textBox1.Text + " 登记成功。";
 
                         }
                     }
                     else
                     {
-                        MessageBox.Show(textBox1.Text + " 已经登记，时间为：" + isUseSupperID.t_inDocTime.ToString());
+                        lblMsg.Text = textBox1.Text + " 已经登记，时间为：" + isUseSupperID.t_inDocTime.ToString();
                         initDataGV();
                     }
                     break;
@@ -111,7 +135,7 @@ namespace IDR.TicketingProcessTimeMeasurement
                         if (!string.IsNullOrWhiteSpace(isUseSupperID.t_backTime.ToString()))
                         {
 
-                            MessageBox.Show("早已登记。时间为：" + isUseSupperID.t_backTime.ToString());
+                            lblMsg.Text = textBox1.Text + " 早已登记。时间为：" + isUseSupperID.t_backTime.ToString();
                             initDataGV();
                             break;
                         }
@@ -119,13 +143,13 @@ namespace IDR.TicketingProcessTimeMeasurement
                         var updatetid = new PIE.BLL.ticketingPTMR().Update(isUseSupperID);
                         if (updatetid)
                         {
-                            MessageBox.Show("登记时间成功。");
+                            lblMsg.Text = textBox1.Text + " 登记时间成功。";
                             initDataGV();
                         }
                     }
                     else
                     {
-                        MessageBox.Show(textBox1.Text + " 未登记,请进入功能【入单】进行登记，谢谢。");
+                        lblMsg.Text = textBox1.Text + " 未登记,请进入功能【入单】进行登记，谢谢。";
                     }
                     break;
 
@@ -137,7 +161,7 @@ namespace IDR.TicketingProcessTimeMeasurement
                         if (!string.IsNullOrWhiteSpace(isUseSupperID.t_receTime.ToString()))
                         {
 
-                            MessageBox.Show("早已登记。时间为：" + isUseSupperID.t_receTime.ToString());
+                            lblMsg.Text = textBox1.Text + " 早已登记。时间为：" + isUseSupperID.t_receTime.ToString();
                             initDataGV();
                             break;
                         }
@@ -145,13 +169,13 @@ namespace IDR.TicketingProcessTimeMeasurement
                         var updatetid = new PIE.BLL.ticketingPTMR().Update(isUseSupperID);
                         if (updatetid)
                         {
-                            MessageBox.Show("登记时间成功。");
+                            lblMsg.Text = textBox1.Text + " 登记时间成功。";
                             initDataGV();
                         }
                     }
                     else
                     {
-                        MessageBox.Show(textBox1.Text + " 未登记,请进入功能【入单】进行登记，谢谢。");
+                        lblMsg.Text = textBox1.Text + " 未登记,请进入功能【入单】进行登记，谢谢。";
                     }
                     #endregion
                     break;
@@ -162,7 +186,7 @@ namespace IDR.TicketingProcessTimeMeasurement
                         if (!string.IsNullOrWhiteSpace(isUseSupperID.t_outAwayTime.ToString()))
                         {
 
-                            MessageBox.Show("早已登记。时间为：" + isUseSupperID.t_outAwayTime.ToString());
+                            lblMsg.Text = textBox1.Text + " 早已登记。时间为：" + isUseSupperID.t_outAwayTime.ToString();
                             initDataGV(isUseSupperID);
                             break;
                         }
@@ -173,20 +197,21 @@ namespace IDR.TicketingProcessTimeMeasurement
                         var updatetid = new PIE.BLL.ticketingPTMR().Update(isUseSupperID);
                         if (updatetid)
                         {
-                            MessageBox.Show("登记时间成功。");
+                            lblMsg.Text = textBox1.Text + " 登记时间成功。";
                             initDataGV(isUseSupperID);
                         }
                     }
                     else
                     {
-                        MessageBox.Show(textBox1.Text + " 未登记,请进入功能【入单】进行登记，谢谢。");
+                        lblMsg.Text = textBox1.Text + " 未登记,请进入功能【入单】进行登记，谢谢。";
                     }
                     #endregion
                     break;
                 default:
                     break;
             }
-
+            textBox1.Text = "";
+            textBox1.Focus();
         }
 
         private void initDataGV()
@@ -219,7 +244,7 @@ namespace IDR.TicketingProcessTimeMeasurement
 
             if (string.IsNullOrEmpty(strTID))
             {
-                MessageBox.Show("生成新记录,出错，请重新尝试。", "Error");
+                lblMsg.Text = "生成新记录,出错，请重新尝试。Error";
                 return null;
             }
             return strTID;
@@ -229,6 +254,16 @@ namespace IDR.TicketingProcessTimeMeasurement
         {
             this.Hide();
             _frmticketingPTMR.Show();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            this.textBox1.Text = "";
         }
     }
 }
