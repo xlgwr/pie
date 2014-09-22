@@ -1,0 +1,360 @@
+﻿@model EF.Model.plr_mstr
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>plr_mstr</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.packingListID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.packingListID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_pallet_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_pallet_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CartonType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CartonType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CartonID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CartonID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_po)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_po)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_co)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_co)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_partno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_partno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_date_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_date_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_vend_mfgr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_vend_mfgr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Plr_vm_partno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Plr_vm_partno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_carton_qty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_carton_qty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_qty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_qty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_rcp_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_rcp_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_deli_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_deli_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.carton_id_prifix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carton_id_prifix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.carton_id_from)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carton_id_from)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.carton_id_to)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carton_id_to)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_doc_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_doc_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.re_mark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.re_mark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_suppliers_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_suppliers_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_site)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_site)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_ttl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_ttl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_um)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_um)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_nw)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_nw)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_gw)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_gw)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_um_w)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_um_w)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Plr_unitprice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Plr_unitprice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_msm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_msm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_doc_no1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_doc_no1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_cre_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_cre_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_cre_userid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_cre_userid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_update_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_update_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_edituser_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_edituser_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_user_ip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_user_ip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_void_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_void_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_chr01)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_chr01)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_chr02)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_chr02)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_deci1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_deci1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_deci2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_deci2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.plr_batch_mstr.plr_suppliers_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plr_batch_mstr.plr_suppliers_id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

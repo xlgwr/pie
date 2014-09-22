@@ -1,0 +1,279 @@
+﻿@model IEnumerable<EF.Model.plr_mstr>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.packingListID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_pallet_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CartonType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CartonID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_po)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_co)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_partno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_date_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_vend_mfgr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Plr_vm_partno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_carton_qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_rcp_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_deli_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.carton_id_prifix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.carton_id_from)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.carton_id_to)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_doc_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.re_mark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_suppliers_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_site)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_ttl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_um)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_nw)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_gw)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_um_w)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Plr_unitprice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_msm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_doc_no1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_cre_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_cre_userid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_update_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_edituser_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_user_ip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_void_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_chr01)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_chr02)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_deci1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_deci2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plr_batch_mstr.plr_suppliers_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.packingListID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_pallet_no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CartonType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CartonID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_po)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_co)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_partno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_date_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_vend_mfgr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Plr_vm_partno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_carton_qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_rcp_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_deli_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.carton_id_prifix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.carton_id_from)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.carton_id_to)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_doc_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.re_mark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_suppliers_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_site)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_ttl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_um)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_nw)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_gw)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_um_w)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Plr_unitprice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_msm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_doc_no1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_cre_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_cre_userid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_update_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_edituser_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_user_ip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_void_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_chr01)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_chr02)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_deci1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_deci2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plr_batch_mstr.plr_suppliers_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { Batch_ID = item.Batch_ID, LineID=item.LineID /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { Batch_ID = item.Batch_ID, LineID = item.LineID/* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { Batch_ID = item.Batch_ID, LineID = item.LineID/* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

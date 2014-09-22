@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{277C3CAB-9612-426F-BE98-002526652AAF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EF.Model</RootNamespace>
+    <AssemblyName>EF.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Irh_comp.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OCR_mstr.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PIE.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PIE.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PIE.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PIE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PIE.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="pisr_grr.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pi_det.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PI_DET_Remote.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pi_mstr.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PI_MSTR_Remote.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pi_sq.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pkey_ctl.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="plr_batch_mstr.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="plr_mstr.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="plr_mstr_err.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="plr_mstr_log.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="plr_mstr_tran.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sys_role.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_user.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_userInrole.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ticketingPTMR.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vpi_detApisr_grr.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vpi_report.cs">
+      <DependentUpon>PIE.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="PIE.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PIE.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PIE.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PIE.edmx</DependentUpon>
+      <LastGenOutput>PIE.Context.cs</LastGenOutput>
+    </None>
+    <None Include="PIE.edmx.diagram">
+      <DependentUpon>PIE.edmx</DependentUpon>
+    </None>
+    <None Include="PIE.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PIE.edmx</DependentUpon>
+      <LastGenOutput>PIE.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

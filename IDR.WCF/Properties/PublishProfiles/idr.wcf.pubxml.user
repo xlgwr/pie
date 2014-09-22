@@ -9,14 +9,32 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>G:\0work\publish\idr.wcf</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>09/17/2014 17:59:56</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>09/17/2014 17:59:56</publishTime>
+    </File>
     <File Include="bin/IDR.WCF.dll">
-      <publishTime>09/17/2014 11:46:18</publishTime>
+      <publishTime>09/22/2014 10:12:34</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>09/19/2014 17:29:39</publishTime>
+    </File>
+    <File Include="bin/System.ServiceModel.dll">
+      <publishTime>03/18/2010 19:31:26</publishTime>
+    </File>
+    <File Include="bin/System.ServiceModel.Web.dll">
+      <publishTime>03/18/2010 19:31:26</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>09/17/2014 11:50:34</publishTime>
     </File>
     <File Include="Service1.svc">
       <publishTime>09/17/2014 11:44:37</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/17/2014 11:46:18</publishTime>
+      <publishTime>09/22/2014 10:12:34</publishTime>
     </File>
   </ItemGroup>
 </Project>
