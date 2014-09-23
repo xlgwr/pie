@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            var Tid = "R1409220012";
+            var lineid = 2;
+            $.ajax({
+                url: 'http://142.2.47.149:82/wcf/Service1.svc/GetPlrMstrList',
+                data: '{"Tid":"' + Tid + '","lineid":' + lineid + '}',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'text/json',
+                success: function (data) {
+                    if (data.d) {
+                        console.log("ok");
+                        console.log(data.d);
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+            $.ajax({
+                type: 'get',
+                url: "http://142.2.47.149:82/wcf/Service1.svc/GetDataJsonp",
+                data: '{"Tid":"' + Tid + '","lineid":' + lineid + '}',
+                dataType: "jsonp",
+                jsonp: "jsoncallback",
+                contentType: 'text/json',
+                success: function (data) { console.log(data); },
+                error: function (error) {
+                    console.log("调用出错");
+                }
+            });
+            $.ajax({
+                type: 'get',
+                url: "http://142.2.47.149:82/wcf/Service1.svc/GetDataJsonpGet",
+                dataType: "jsonp",
+                jsonp: "jsoncallback",
+                contentType: 'text/json',
+                success: function (data) { console.log("执行了success 3:   " + data); },
+                error: function (error) {
+                    console.log("调用出错");
+                }
+            });
+        });
+    </script>
+}

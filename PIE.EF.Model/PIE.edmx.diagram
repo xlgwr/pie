@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fd7030a0888f4a63a29c0dd400adfdc5" Name="Diagram1">
+        <EntityTypeShape EntityType="PIEModel.Irh_comp" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.pi_det" Width="1.5" PointX="2.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.PI_DET_Remote" Width="1.5" PointX="5.625" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="PIEModel.pi_mstr" Width="1.5" PointX="4" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.PI_MSTR_Remote" Width="1.5" PointX="0.75" PointY="4" IsExpanded="false" />
+        <EntityTypeShape EntityType="PIEModel.pi_sq" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="PIEModel.pisr_grr" Width="1.5" PointX="5.625" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.pkey_ctl" Width="1.5" PointX="0.75" PointY="5" IsExpanded="false" />
+        <EntityTypeShape EntityType="PIEModel.plr_batch_mstr" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.plr_mstr" Width="1.5" PointX="2.375" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.plr_mstr_err" Width="1.5" PointX="4" PointY="5.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="PIEModel.plr_mstr_log" Width="1.5" PointX="10.875" PointY="1.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="PIEModel.plr_mstr_tran" Width="1.5" PointX="4" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.sys_role" Width="1.5" PointX="7.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.sys_user" Width="1.5" PointX="9.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.sys_userInrole" Width="1.5" PointX="7.375" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.ticketingPTMR" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="PIEModel.OCR_mstr" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIEModel.vpi_detApisr_grr" Width="1.5" PointX="10.875" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="PIEModel.vpi_report" Width="1.5" PointX="10.875" PointY="1.25" IsExpanded="false" />
+        <AssociationConnector Association="PIEModel.pi_mstrpi_det" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="PIEModel.plr_batch_mstrplr_mstr" />
+        <AssociationConnector Association="PIEModel.plr_mstrplr_mstr_tran" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
