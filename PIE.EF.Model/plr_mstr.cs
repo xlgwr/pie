@@ -9,16 +9,18 @@
 
 namespace PIE.EF.Model.Dal
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
+    //[JsonObject(IsReference = true)]
     public partial class plr_mstr
     {
         public plr_mstr()
         {
             this.plr_mstr_tran = new HashSet<plr_mstr_tran>();
         }
-    
+
         public string Batch_ID { get; set; }
         public int LineID { get; set; }
         public string plr_status { get; set; }
@@ -62,8 +64,10 @@ namespace PIE.EF.Model.Dal
         public string plr_chr02 { get; set; }
         public Nullable<int> plr_deci1 { get; set; }
         public Nullable<decimal> plr_deci2 { get; set; }
-    
+
+        [JsonIgnore]
         public virtual plr_batch_mstr plr_batch_mstr { get; set; }
+        [JsonIgnore]
         public virtual ICollection<plr_mstr_tran> plr_mstr_tran { get; set; }
     }
 }

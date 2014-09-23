@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -11,6 +12,7 @@ namespace IDR.WCF
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
+    //UrlParameterName is the jsonp callback name in the request url.
     public interface IService1
     {
 
@@ -18,11 +20,23 @@ namespace IDR.WCF
         string GetData(int value);
 
         [OperationContract]
+        [WebGet(ResponseFormat=WebMessageFormat.Json)]
+        string GetDataJsonpGet();
+
+        [OperationContract]
+        [WebGet(ResponseFormat=WebMessageFormat.Json)]
+        string GetDataJsonp(string Tid, int lineid);
+
+        [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
      
 
         // TODO: Add your service operations here
+
+        [OperationContract]
+        [WebInvoke(RequestFormat=WebMessageFormat.Json,BodyStyle=WebMessageBodyStyle.WrappedRequest)]
+        string GetPlrMstrList(string Tid,int lineid);
     }
 
 

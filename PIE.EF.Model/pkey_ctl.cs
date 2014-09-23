@@ -9,9 +9,11 @@
 
 namespace PIE.EF.Model.Dal
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
+    [JsonObject(IsReference = true)]
     public partial class pkey_ctl
     {
         public string t_name { get; set; }

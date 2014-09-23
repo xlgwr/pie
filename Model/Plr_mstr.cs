@@ -398,7 +398,7 @@ namespace PIE.Model
             get { return _plr_deci2; }
         }
         #endregion Model
-
     }
+    
 }
 

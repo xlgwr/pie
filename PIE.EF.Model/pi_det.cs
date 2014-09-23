@@ -9,9 +9,11 @@
 
 namespace PIE.EF.Model.Dal
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
+    [JsonObject(IsReference = true)]
     public partial class pi_det
     {
         public string PI_ID { get; set; }
@@ -35,7 +37,7 @@ namespace PIE.EF.Model.Dal
         public string pi_chr02 { get; set; }
         public Nullable<int> pi_deci1 { get; set; }
         public Nullable<decimal> pi_deci2 { get; set; }
-    
+
         public virtual pi_mstr pi_mstr { get; set; }
     }
 }
