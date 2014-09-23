@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EF.Model
+namespace PIE.EF.Model.Dal
 {
     using System;
     using System.Collections.Generic;

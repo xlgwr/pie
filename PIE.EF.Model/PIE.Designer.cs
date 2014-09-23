@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'G:\0ling.xie\0base\0C#\code\MVC.FirstUseEF\EF.Model\PIE.edmx'. 
+﻿// T4 code generation is enabled for model 'G:\0work\OCR\textpie\branches\4.0\PIE.EF.Model\PIE.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
