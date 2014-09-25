@@ -27,7 +27,7 @@ namespace FrmPIE.frmPI
         DataSet cods;
 
         string _strWecCtnSn = "";
-        public bool _coisnull = false;
+        public  bool _coisnull = false;
         public string _strconext = "";
         public string _plr_wec_ctn = "";
 
@@ -345,6 +345,17 @@ namespace FrmPIE.frmPI
                             _plr_mstr_tran_co_list.Add(tran);
                             _pi_det_model_co_list.Add(_pi_det_model);
                         }
+                        else
+                        {
+                            PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", tran.plr_co,true);
+                            if (existco == null)
+                            {
+                                _coisnull = true;
+                                _strconext = "";
+                                _plr_mstr_tran_co_list.Add(tran);
+                                _pi_det_model_co_list.Add(_pi_det_model);
+                            }
+                        }
                         result_pi_det = new PI.DAL.pi_det().Add(_pi_det_model);
                         if (result_pi_det)
                         {
@@ -473,6 +484,7 @@ namespace FrmPIE.frmPI
                             if (string.IsNullOrEmpty(cmb3CO_ScanWECCtnLable.Text))
                             {
                                 ShowMsg(txt2SanWecCtnLable.Text + " has no CO.", "Error");
+                                //_coisnull = true;
                                 //cmb3CO_ScanWECCtnLable.Focus();
                                 //return false;
                             }
@@ -490,6 +502,7 @@ namespace FrmPIE.frmPI
                                 {
                                     ShowMsg(cmb3CO_ScanWECCtnLable.Text + " has no Desc.", "Error: ");
                                     strco = "";
+                                    //_coisnull = true;
                                     //cmb3CO_ScanWECCtnLable.Focus();
                                     //return false;
                                 }
@@ -523,6 +536,7 @@ namespace FrmPIE.frmPI
                                     ShowMsg(cmb3CO_ScanWECCtnLable.Text + " has no Desc.", "Error: ");
                                     cmb3CO_ScanWECCtnLable.Text = "";
                                     strco = "";
+                                    //_coisnull = true;
                                     //cmb3CO_ScanWECCtnLable.Focus();
                                     // return false;
                                 }
