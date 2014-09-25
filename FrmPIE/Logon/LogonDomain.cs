@@ -27,7 +27,7 @@ namespace FrmPIE
             //FrmPIE.Show();
 
             var frmIDR = new frmIDR(this, system_user_model);
-            frmIDR.Text += Program.frmVersion+"    Welcome : "+ txtUserName.Text;
+            frmIDR.Text += Program.frmVersion + "    Welcome : " + txtUserName.Text;
             frmIDR.Show();
         }
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace FrmPIE
                 var systemuserexists = new PIE.BLL.sys_user().GetModel(strUserName, strdomain);
                 if (systemuserexists != null)
                 {
-                    if (systemuserexists.user_password.Equals(DESEncrypt.Encrypt(txtPassword1.Text + txtPassPhrase2.Text)))
+                    if (systemuserexists.user_password.Equals(DESEncrypt.Encrypt(txtPassword1.Text + "," + txtPassPhrase2.Text)))
                     {
                         systemuserexists.update_time = DateTime.Now;
                         systemuserexists.re_mark = Program.getClientIP();
@@ -97,11 +97,11 @@ namespace FrmPIE
                 {
                     if (secondpasswdflag == "0")
                     {
+                        system_user_model.user_password = DESEncrypt.Encrypt(txtPassword1.Text + "," + txtPassPhrase2.Text);
                         if (systemuserexists == null)
                         {
                             system_user_model.user_name = strUserName;
                             system_user_model.user_comp = strdomain;
-                            system_user_model.user_password = DESEncrypt.Encrypt(txtPassword1.Text + "," + txtPassPhrase2.Text);
                             system_user_model.flag_status = "T";
                             system_user_model.create_time = DbHelperSQL.getServerGetDate();
                             system_user_model.update_time = DbHelperSQL.getServerGetDate();
@@ -143,19 +143,22 @@ namespace FrmPIE
 
 
                         }
-                        system_user_model = new PIE.BLL.sys_user().GetModel(strUserName, combDomain.Text);
-                        if (system_user_model.flag_status == "F")
+
+                        //system_user_model = new PIE.BLL.sys_user().GetModel(strUserName, combDomain.Text);
+
+                        systemuserexists.update_time = DbHelperSQL.getServerGetDate();
+                        systemuserexists.user_password = system_user_model.user_password;
+                        systemuserexists.re_mark = Program.getClientIP();
+                        var sysuserUpdate = new PIE.BLL.sys_user().Update(systemuserexists);
+
+                        if (systemuserexists.flag_status == "F")
                         {
-                            MessageBox.Show("User Name:" + system_user_model.user_name + "not activated,Please ask for admin.Ths");
+                            MessageBox.Show("User Name:" + systemuserexists.user_name + "not activated,Please ask for admin.Ths");
                             return;
                         }
-                        system_user_model.update_time = DbHelperSQL.getServerGetDate();
-                        system_user_model.re_mark = Program.getClientIP();
-                        var sysuserUpdate = new PIE.BLL.sys_user().Update(system_user_model);
-
                         if (!getrole())
                         {
-                            MessageBox.Show(system_user_model.user_name + " 没有授权访问Packing Information Entry，请联系管理员。");
+                            MessageBox.Show(systemuserexists.user_name + " 没有授权访问Packing Information Entry，请联系管理员。");
                         }
                         else
                         {

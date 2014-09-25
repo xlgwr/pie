@@ -68,7 +68,7 @@ namespace FrmPIE
                 PIE.Model.sys_user sys_user_model = new PIE.Model.sys_user();
                 sys_user_model.user_name = txtUserName.Text;
                 sys_user_model.user_comp = cmbcomp0.Text;
-                sys_user_model.user_password = PIE.DBUtility.DESEncrypt.Encrypt(txtUserName.Text + txtpwd.Text);
+                sys_user_model.user_password = PIE.DBUtility.DESEncrypt.Encrypt(txtUserName.Text + "," + txtpwd.Text);
                 sys_user_model.create_time = DateTime.Now;
                 sys_user_model.update_time = DateTime.Now;
                 sys_user_model.client_ip = Program.getClientIP();
@@ -92,7 +92,7 @@ namespace FrmPIE
         {
             addOrRemoveRole("add");
         }
-
+        
         private void addOrRemoveRole(string editp)
         {
             var username = cmbUsers.Text;
