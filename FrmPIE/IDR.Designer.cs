@@ -170,8 +170,9 @@
             // t1AboutAToolStripMenuItem
             // 
             this.t1AboutAToolStripMenuItem.Name = "t1AboutAToolStripMenuItem";
-            this.t1AboutAToolStripMenuItem.Size = new System.Drawing.Size(71, 21);
-            this.t1AboutAToolStripMenuItem.Text = "About(&A)";
+            this.t1AboutAToolStripMenuItem.Size = new System.Drawing.Size(64, 21);
+            this.t1AboutAToolStripMenuItem.Text = "Help(&H)";
+            this.t1AboutAToolStripMenuItem.Click += new System.EventHandler(this.t1AboutAToolStripMenuItem_Click);
             // 
             // cmb1SearchType
             // 

@@ -227,9 +227,9 @@
             this.btn2TempleFileUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2TempleFileUploadExcel.Location = new System.Drawing.Point(15, 90);
             this.btn2TempleFileUploadExcel.Name = "btn2TempleFileUploadExcel";
-            this.btn2TempleFileUploadExcel.Size = new System.Drawing.Size(91, 36);
+            this.btn2TempleFileUploadExcel.Size = new System.Drawing.Size(108, 36);
             this.btn2TempleFileUploadExcel.TabIndex = 7;
-            this.btn2TempleFileUploadExcel.Text = "&Temple File";
+            this.btn2TempleFileUploadExcel.Text = "&Template File";
             this.btn2TempleFileUploadExcel.UseVisualStyleBackColor = true;
             this.btn2TempleFileUploadExcel.Click += new System.EventHandler(this.btn2TempleFile_Click);
             // 

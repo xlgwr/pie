@@ -657,6 +657,12 @@ namespace FrmPIE
             c22MenuStripPiSystem.Show(btn24PIReports, _icurrMouseX, _icurrMouseY);
         }
 
+        private void t1AboutAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "0PackingInformationEntry.pptx";           
+            cf.OpenFolderAndSelectFile(pathname);
+        }
+
 
 
 

@@ -308,6 +308,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="0PackingInformationEntry.pptx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="0temple\templesforKYCA.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
