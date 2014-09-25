@@ -31,6 +31,17 @@ namespace FrmPIE._0API
         public string _userip;
         public int _topnum = 100;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wec_ctn_fr"></param>
+        /// <param name="wec_ctn_to"></param>
+        /// <param name="print_type"></param>
+        /// <param name="dgvIndex"></param>
+        /// <param name="batchid"></param>
+        /// <param name="lineid"></param>
+        /// <param name="cartonid"></param>
+        /// <returns></returns>
         public CartonFromTo(decimal wec_ctn_fr, decimal wec_ctn_to, string print_type, int dgvIndex, string batchid, int lineid, string cartonid)
         {
             // TODO: Complete member initialization

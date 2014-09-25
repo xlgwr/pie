@@ -138,19 +138,19 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\IDR.Common.csproj">
       <Project>{e3d8759a-c5eb-402d-9f10-f5c6029a8d1a}</Project>
-      <Name>PIE.Common</Name>
+      <Name>IDR.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAL\IDR.DAL.csproj">
       <Project>{9FE00521-3A8B-42B1-814E-585E99407B2E}</Project>
-      <Name>PIE.DAL</Name>
+      <Name>IDR.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DBUtility\IDR.DBUtility.csproj">
       <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
-      <Name>PIE.DBUtility</Name>
+      <Name>IDR.DBUtility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\IDR.Model.csproj">
       <Project>{53995DBB-9836-4647-AD22-865884FDEB9E}</Project>
-      <Name>PIE.Model</Name>
+      <Name>IDR.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

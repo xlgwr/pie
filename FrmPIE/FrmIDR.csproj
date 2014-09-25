@@ -130,6 +130,12 @@
     <Compile Include="frmPIE\frm0BatchInfo.Designer.cs">
       <DependentUpon>frm0BatchInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPIE\frm111UploadExcelForKYCA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPIE\frm111UploadExcelForKYCA.Designer.cs">
+      <DependentUpon>frm111UploadExcelForKYCA.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPIE\frm111UploadExcel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,9 @@
     <EmbeddedResource Include="frmPIE\frm0BatchInfo.resx">
       <DependentUpon>frm0BatchInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPIE\frm111UploadExcelForKYCA.resx">
+      <DependentUpon>frm111UploadExcelForKYCA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPIE\frm111UploadExcel.resx">
       <DependentUpon>frm111UploadExcel.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,6 +314,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="0temple\templesforKYCA.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="reports\frmPI\rpt_piReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

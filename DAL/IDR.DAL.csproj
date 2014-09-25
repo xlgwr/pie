@@ -123,14 +123,14 @@
     </Reference>
     <ProjectReference Include="..\Common\IDR.Common.csproj">
       <Project>{e3d8759a-c5eb-402d-9f10-f5c6029a8d1a}</Project>
-      <Name>PIE.Common</Name>
+      <Name>IDR.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DBUtility\IDR.DBUtility.csproj">
       <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
       <Name>IDR.DBUtility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\IDR.Model.csproj">
-      <Name>PIE.Model</Name>
+      <Name>IDR.Model</Name>
       <Project>{53995DBB-9836-4647-AD22-865884FDEB9E}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
