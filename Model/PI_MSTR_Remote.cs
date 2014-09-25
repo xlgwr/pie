@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace PI.Model
 {
     /// <summary>
@@ -9,45 +10,50 @@ namespace PI.Model
     {
         public PI_MSTR_Remote()
         { }
+
         #region Model
+
         private string _pi_no;
         private DateTime? _pi_date;
         private string _pi_page;
         private DateTime _msrepl_synctran_ts;
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public string PI_NO
         {
             set { _pi_no = value; }
             get { return _pi_no; }
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public DateTime? PI_Date
         {
             set { _pi_date = value; }
             get { return _pi_date; }
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public string PI_Page
         {
             set { _pi_page = value; }
             get { return _pi_page; }
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public DateTime msrepl_synctran_ts
         {
             set { _msrepl_synctran_ts = value; }
             get { return _msrepl_synctran_ts; }
         }
-        #endregion Model
 
+        #endregion Model
     }
 }
-

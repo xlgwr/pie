@@ -248,6 +248,7 @@ namespace FrmPIE.frmPIE
             plr_mstr_model.carton_id_from = Convert.ToDecimal(txt14CartonIDFromAddNewBatchID.Text.Trim());
             plr_mstr_model.carton_id_to = Convert.ToDecimal(txt15CartonIDToAddNewBatchID.Text.Trim());
 
+            plr_mstr_model.plr_co = txt13plr_suppliers_id_co.Text.Trim();
 
             plr_mstr_model.re_mark = txt16RemarkAddNewBatchID.Text.Trim();
 
@@ -274,6 +275,8 @@ namespace FrmPIE.frmPIE
             this.txt12CartonprifixAddNewBatchID.Text = plr_mstr_model.carton_id_prifix;
             txt14CartonIDFromAddNewBatchID.Text = plr_mstr_model.carton_id_from.ToString();
             txt15CartonIDToAddNewBatchID.Text = plr_mstr_model.carton_id_to.ToString();
+
+            txt13plr_suppliers_id_co.Text = plr_mstr_model.plr_co;
 
             plr_mstr_model.re_mark = txt16RemarkAddNewBatchID.Text.Trim();
 
@@ -376,7 +379,7 @@ namespace FrmPIE.frmPIE
                         return;
                     }
                     plr_bathmstr_model.batch_id = strBatchID;
-                    plr_bathmstr_model.plr_suppliers_id = txt13plr_suppliers_id.Text.Trim();
+                    plr_bathmstr_model.plr_suppliers_id = txt13plr_suppliers_id_co.Text.Trim();
                     plr_bathmstr_model.batch_doc = "New";
                     plr_bathmstr_model.batch_dec01 = 1;
                     plr_bathmstr_model.batch_cre_date = DbHelperSQL.getServerGetDate();

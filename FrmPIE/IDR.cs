@@ -41,7 +41,7 @@ namespace FrmPIE
         public HSSFWorkbook _hssfworkbook;           //xls
         public XSSFWorkbook _xssfworkbook;    //xlsx;
         public DataSet _batchMstr;
-        
+
 
         public DataGridView _voidDGV;
         public int _voideX;
@@ -91,11 +91,13 @@ namespace FrmPIE
         }
         private void frmIDR_Load(object sender, EventArgs e)
         {
-            
+
             initHideImage(new object[] { hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3, status11toolBtnleft }, 1);
             initHideImage(new object[] { hideToolBarToolStripMenuItem1 }, 2);
 
-            initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3, btn21ScanCartronLabel21, btn24PIReports });
+            initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3, btn21ScanCartronLabel21, btn24PIReports,
+                                           linkLabel1, linkLabel2,linkLabel3,linkLabel4,linkLabel8});
+            initlink(new object[] { linkLabel1, linkLabel2, linkLabel3, linkLabel4, linkLabel8 });
             //Control.CheckForIllegalCrossThreadCalls = false;
 
         }
@@ -151,6 +153,21 @@ namespace FrmPIE
 
             }
             GC.Collect();
+        }
+        private void initlink(object[] obj)
+        {
+            foreach (var item in obj)
+            {
+                var lk = (LinkLabel)item;
+                lk.Click += lk_Click;
+            }
+
+        }
+
+        private void lk_Click(object sender, EventArgs e)
+        {
+            var lk = (LinkLabel)sender;
+            lk.ContextMenuStrip.Show(lk, _icurrMouseX, _icurrMouseY);
         }
         private void txt0SearchID_TextChanged(object sender, EventArgs e)
         {
@@ -416,7 +433,7 @@ namespace FrmPIE
         {
             foreach (var btnobj in buttonobjs)
             {
-                Button btn = (Button)btnobj;
+                Control btn = (Control)btnobj;
                 btn.MouseMove += btn_MouseMove;
 
             }
@@ -541,6 +558,13 @@ namespace FrmPIE
             addNewTabPage("Upload EPacking List From Excel");
             frmUploadExcel fu = new frmUploadExcel(this);
             addGBToTC(tabCtlRight1, fu.groupBox0frmUploadExcel);
+        }
+
+        private void toolcMenu10UploadEPackingListExcelForKYCA_Click(object sender, EventArgs e)
+        {
+            addNewTabPage("Upload EPacking List From Excel For KYCA");
+            frm111UploadExcelForKYCA fus = new frm111UploadExcelForKYCA(this);
+            addGBToTC(tabCtlRight1, fus.groupBox0frmUploadExcelForKYCA);
         }
         private void toolcMenu12AddOneByOneBatchID_Click(object sender, EventArgs e)
         {

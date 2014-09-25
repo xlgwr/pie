@@ -98,6 +98,17 @@ public partial class _Default : System.Web.UI.Page
                         _strconext = "";
                         Session["pi_wec_ctn"] = tran.plr_wec_ctn;
                     }
+                    else
+                    {
+                        PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", tran.plr_co, true);
+                        if (existco == null)
+                        {
+                            _coisnull = true;
+                            _strconext = "";
+                            tran.plr_co = "";
+                            Session["pi_wec_ctn"] = tran.plr_wec_ctn;
+                        }
+                    }
                     _pi_det_model.PI_ID = txtpiid.Text;
                     _pi_det_model.pi_type = Session["plant"].ToString();
                     _pi_det_model.pi_LineID = _nextlineid;

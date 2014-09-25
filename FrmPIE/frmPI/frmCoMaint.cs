@@ -36,9 +36,11 @@ namespace FrmPIE.frmPI
             txt1PIID_CoMaint.Text = _frmPI0ScanWECCtnLable._pi_det_model.PI_ID;
             txt2Pallet_CoMaint.Text = _frmPI0ScanWECCtnLable._pi_det_model.pi_deci1.ToString();
             txt3SanWecCtnLable_CoMaint.Text = _frmPI0ScanWECCtnLable._pi_det_model.pi_wec_ctn;
-
-            txt4part_CoMaint.Text = _frmPI0ScanWECCtnLable._plr_mstr_tran_co_list[0].plr_partno;
-            _intPlrLine = _frmPI0ScanWECCtnLable._plr_mstr_tran_co_list[0].LineID;
+            if (_countAllTranList > 0)
+            {
+                txt4part_CoMaint.Text = _frmPI0ScanWECCtnLable._plr_mstr_tran_co_list[0].plr_partno;
+                _intPlrLine = _frmPI0ScanWECCtnLable._plr_mstr_tran_co_list[0].LineID;
+            }
             _intNextPlrTranPart = 0;
 
             cmb3CO_Maint.SelectedIndex = -1;
@@ -88,7 +90,7 @@ namespace FrmPIE.frmPI
                 if (updatecoPi_dec)
                 {
                     _intNextPlrTranPart++;
-                   
+
                     if (_intNextPlrTranPart >= _countAllTranList)
                     {
                         this.Hide();
@@ -99,14 +101,14 @@ namespace FrmPIE.frmPI
 
                     if (_intNextPlrTranPart < _countAllTranList)
                     {
-                        lbl0msg.Text = "\tNotice,Update: " + txt4part_CoMaint.Text + " of Co:"+ cmb3CO_Maint.Text+" Success.\nContinue next Part#: " + nextpart;
+                        lbl0msg.Text = "\tNotice,Update: " + txt4part_CoMaint.Text + " of Co:" + cmb3CO_Maint.Text + " Success.\nContinue next Part#: " + nextpart;
                         txt4part_CoMaint.Text = nextpart;
                         cmb3CO_Maint.SelectedIndex = -1;
                         cmb3CO_Maint.Text = "";
                         lbl3COScanWECCtnLable.Text = "";
                         cmb3CO_Maint.Focus();
                     }
-                   
+
                 }
                 else
                 {

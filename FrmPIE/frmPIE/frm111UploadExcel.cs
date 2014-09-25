@@ -45,7 +45,7 @@ namespace FrmPIE.frmPIE
 
             _idr_show = idr;
             _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Layout;
-            
+
 
 
             initwidthUploadExcel();
@@ -726,6 +726,7 @@ namespace FrmPIE.frmPIE
             string strerrnullrows = "At ";
 
             var servedate = DbHelperSQL.getServerGetDate();
+            
 
             while (rows.MoveNext())
             {

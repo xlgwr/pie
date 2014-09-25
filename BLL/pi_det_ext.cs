@@ -1,16 +1,15 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Collections.Generic;
-using PIE.Common;
-using PI.Model;
+
 namespace PI.BLL
 {
     /// <summary>
     /// pi_det_ext
     /// </summary>
-    public partial class pi_det_ext:pi_det
+    public partial class pi_det_ext : pi_det
     {
         private readonly PI.DAL.pi_det_ext dal = new PI.DAL.pi_det_ext();
+
         public pi_det_ext()
         { }
 
@@ -22,6 +21,7 @@ namespace PI.BLL
             DataSet ds = dal.GetList(strWhere, distinct);
             return DataTableToList(ds.Tables[0], distinct);
         }
+
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -45,4 +45,3 @@ namespace PI.BLL
         }
     }
 }
-

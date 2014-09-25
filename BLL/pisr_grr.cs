@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-using PIE.Common;
-using PI.Model;
+using System.Data;
+
 namespace PI.BLL
 {
     /// <summary>
@@ -11,9 +10,11 @@ namespace PI.BLL
     public partial class pisr_grr
     {
         private readonly PI.DAL.pisr_grr dal = new PI.DAL.pisr_grr();
+
         public pisr_grr()
         { }
-        #region  BasicMethod
+
+        #region BasicMethod
 
         /// <summary>
         /// 得到最大ID
@@ -52,7 +53,6 @@ namespace PI.BLL
         /// </summary>
         public bool Delete(string pi_wec_ctn, int plr_LineID_tran)
         {
-
             return dal.Delete(pi_wec_ctn, plr_LineID_tran);
         }
 
@@ -61,7 +61,6 @@ namespace PI.BLL
         /// </summary>
         public PI.Model.pisr_grr GetModel(string pi_wec_ctn, int plr_LineID_tran)
         {
-
             return dal.GetModel(pi_wec_ctn, plr_LineID_tran);
         }
 
@@ -70,7 +69,6 @@ namespace PI.BLL
         /// </summary>
         public PI.Model.pisr_grr GetModelByCache(string pi_wec_ctn, int plr_LineID_tran)
         {
-
             string CacheKey = "pisr_grrModel-" + pi_wec_ctn + plr_LineID_tran;
             object objModel = PIE.Common.DataCache.GetCache(CacheKey);
             if (objModel == null)
@@ -96,6 +94,7 @@ namespace PI.BLL
         {
             return dal.GetList(strWhere);
         }
+
         /// <summary>
         /// 获得前几行数据
         /// </summary>
@@ -103,6 +102,7 @@ namespace PI.BLL
         {
             return dal.GetList(Top, strWhere, filedOrder);
         }
+
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -111,6 +111,7 @@ namespace PI.BLL
             DataSet ds = dal.GetList(strWhere);
             return DataTableToList(ds.Tables[0]);
         }
+
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -148,6 +149,7 @@ namespace PI.BLL
         {
             return dal.GetRecordCount(strWhere);
         }
+
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
@@ -155,6 +157,7 @@ namespace PI.BLL
         {
             return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
         }
+
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
@@ -163,10 +166,6 @@ namespace PI.BLL
         //return dal.GetList(PageSize,PageIndex,strWhere);
         //}
 
-        #endregion  BasicMethod
-        #region  ExtensionMethod
-
-        #endregion  ExtensionMethod
+        #endregion BasicMethod
     }
 }
-

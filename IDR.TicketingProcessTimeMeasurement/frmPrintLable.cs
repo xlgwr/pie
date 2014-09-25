@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,7 +13,7 @@ namespace IDR.TicketingProcessTimeMeasurement
 {
     public partial class frmPrintLable : Form
     {
-        StringBuilder strtxt;
+        StringBuilder strtxt = new StringBuilder();
 
         public frmPrintLable()
         {
@@ -58,7 +58,6 @@ namespace IDR.TicketingProcessTimeMeasurement
                 printtwc(strBar);
                 numfrom++;
             }
-
             if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
             {
                 resultmsg += " 成功。";
@@ -72,7 +71,7 @@ namespace IDR.TicketingProcessTimeMeasurement
         public void printtwc(string strXBRB)
         {
 
-            strtxt = new StringBuilder();
+
 
             int x = 0;
             int y = 60;
@@ -85,14 +84,14 @@ namespace IDR.TicketingProcessTimeMeasurement
             strtxt.AppendLine("{AX;+000,+000,+00|}");
             strtxt.AppendLine("{AY;+10,0|}");
 
-            strtxt.AppendLine("{XB01;0065,0020,9,3,02,1,0105,+0000000000,000,1,00|}");
+            strtxt.AppendLine("{XB01;0265,0120,9,3,02,1,0105,+0000000000,000,1,00|}");
             strtxt.AppendLine("{RB01;>8" + strXBRB + "|}");
 
-            strtxt.AppendLine(@"{PC005;0165,0200,07,07,D,33,B|}");
+            strtxt.AppendLine(@"{PC005;0465,0260,07,07,D,33,B|}");
             strtxt.AppendLine(@"{RC005;WEC|}");
 
 
-            strtxt.AppendLine("{XB01;0450,0020,9,3,02,3,0105,+0000000000,000,1,00|}");
+            strtxt.AppendLine("{XB01;0605,0290,9,3,02,3,0105,+0000000000,000,1,00|}");
             strtxt.AppendLine("{RB01;>8" + strXBRB + "|}");
 
             strtxt.AppendLine("{XS;I,0001,0002C3200|}");
