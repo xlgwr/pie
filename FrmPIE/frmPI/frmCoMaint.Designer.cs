@@ -1,4 +1,4 @@
-﻿namespace FrmPIE.frmPI
+﻿namespace frmPI
 {
     partial class frmCoMaint
     {

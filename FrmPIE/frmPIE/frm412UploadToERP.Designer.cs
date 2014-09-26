@@ -1,4 +1,4 @@
-﻿namespace FrmPIE.frmPIE
+﻿namespace FrmPIE
 {
     partial class frm412UploadToERP
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gb0UploadToERP = new System.Windows.Forms.GroupBox();
             this.gb1UploadToERP = new System.Windows.Forms.GroupBox();
             this.data1GVUploadToERP = new System.Windows.Forms.DataGridView();
@@ -36,9 +37,12 @@
             this.txt0BatchIDUploadToERP = new System.Windows.Forms.TextBox();
             this.btn1UploadToERP = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gb0UploadToERP.SuspendLayout();
             this.gb1UploadToERP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GVUploadToERP)).BeginInit();
+            this.ctmenu0EnquireByPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb0UploadToERP
@@ -124,6 +128,19 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "BatchID: ";
             // 
+            // ctmenu0EnquireByPart
+            // 
+            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enquireByPartToolStripMenuItem});
+            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(166, 48);
+            // 
+            // enquireByPartToolStripMenuItem
+            // 
+            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            // 
             // frm412UploadToERP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -137,6 +154,7 @@
             this.gb0UploadToERP.PerformLayout();
             this.gb1UploadToERP.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data1GVUploadToERP)).EndInit();
+            this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -151,5 +169,7 @@
         private System.Windows.Forms.Label label1;
         protected internal System.Windows.Forms.Label lbl0MsgUploadToERP;
         private System.Windows.Forms.Button btn1UploadToERP;
+        private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
+        private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
     }
 }

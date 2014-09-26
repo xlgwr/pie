@@ -11,8 +11,7 @@ using System.Windows.Forms;
 
 using models = PIE.Model;
 
-using FrmPIE.frmPIE;
-using FrmPIE.frmPI;
+using frmPI;
 
 //xls
 using System.IO;

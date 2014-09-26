@@ -1,4 +1,4 @@
-﻿namespace FrmPIE.frmPIE
+﻿namespace FrmPIE
 {
     partial class frm513PrintCartonLabel
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -57,6 +58,8 @@
             this.data2GV2CartonNO_PrintCtnLbl = new System.Windows.Forms.DataGridView();
             this.gb2det_PrintCartonLabel = new System.Windows.Forms.GroupBox();
             this.data1GV1ePackingMstr_PrintCtnLbl = new System.Windows.Forms.DataGridView();
+            this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gb0PrintCartonLabel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -64,6 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2CartonNO_PrintCtnLbl)).BeginInit();
             this.gb2det_PrintCartonLabel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingMstr_PrintCtnLbl)).BeginInit();
+            this.ctmenu0EnquireByPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb0PrintCartonLabel
@@ -296,6 +300,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data2GV2CartonNO_PrintCtnLbl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.data2GV2CartonNO_PrintCtnLbl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.data2GV2CartonNO_PrintCtnLbl.ContextMenuStrip = this.ctmenu0EnquireByPart;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -365,6 +370,20 @@
             this.data1GV1ePackingMstr_PrintCtnLbl.Size = new System.Drawing.Size(708, 113);
             this.data1GV1ePackingMstr_PrintCtnLbl.TabIndex = 16;
             // 
+            // ctmenu0EnquireByPart
+            // 
+            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enquireByPartToolStripMenuItem});
+            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(166, 48);
+            // 
+            // enquireByPartToolStripMenuItem
+            // 
+            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            this.enquireByPartToolStripMenuItem.Click += new System.EventHandler(this.enquireByPartToolStripMenuItem_Click);
+            // 
             // frm513PrintCartonLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -383,6 +402,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2CartonNO_PrintCtnLbl)).EndInit();
             this.gb2det_PrintCartonLabel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingMstr_PrintCtnLbl)).EndInit();
+            this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -412,5 +432,7 @@
         protected internal System.Windows.Forms.CheckBox chk0PrintToFile_PrintCartonLabel;
         protected internal System.Windows.Forms.TextBox txt0CartonIDFrom_PrintCartonLabel;
         protected internal System.Windows.Forms.TextBox txt1CartonIDTo_PrintCartonLabel;
+        private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
+        private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
     }
 }

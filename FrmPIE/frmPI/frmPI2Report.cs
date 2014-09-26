@@ -1,4 +1,5 @@
-﻿using FrmPIE._0API;
+﻿using FrmPIE;
+using FrmPIE._0API;
 using PIE.Common;
 using PIE.DBUtility;
 using System;
@@ -10,7 +11,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrmPIE.frmPI
+namespace frmPI
 {
     public partial class frmPI2Report : Form
     {
