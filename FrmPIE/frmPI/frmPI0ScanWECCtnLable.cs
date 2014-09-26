@@ -339,7 +339,7 @@ namespace frmPI
 
 
                         }
-                        if (string.IsNullOrWhiteSpace(tran.plr_co))
+                        if (string.IsNullOrEmpty(tran.plr_co))
                         {
                             _coisnull = true;
                             _strconext = "";

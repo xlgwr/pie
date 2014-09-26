@@ -97,7 +97,8 @@ namespace FrmPIE
 
             initCurrMouseXY(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3, btn21ScanCartronLabel21, btn24PIReports,
                                            linkLabel1, linkLabel2,linkLabel3,linkLabel4,linkLabel8});
-            initlink(new object[] { linkLabel1, linkLabel2, linkLabel3, linkLabel4, linkLabel8 });
+            initContextMenuStrip(new object[] { btn1PackingListMaintain1, btn2GenCarton2, btn3PrintCartonLabel3, btn21ScanCartronLabel21, btn24PIReports,
+                                           linkLabel1, linkLabel2,linkLabel3,linkLabel4,linkLabel8 });
             //Control.CheckForIllegalCrossThreadCalls = false;
 
         }
@@ -154,19 +155,19 @@ namespace FrmPIE
             }
             GC.Collect();
         }
-        private void initlink(object[] obj)
+        private void initContextMenuStrip(object[] obj)
         {
             foreach (var item in obj)
             {
-                var lk = (LinkLabel)item;
-                lk.Click += lk_Click;
+                var lk = (Control)item;
+                lk.Click += initContextMenuStrip_Click;
             }
 
         }
 
-        private void lk_Click(object sender, EventArgs e)
+        private void initContextMenuStrip_Click(object sender, EventArgs e)
         {
-            var lk = (LinkLabel)sender;
+            var lk = (Control)sender;
             lk.ContextMenuStrip.Show(lk, _icurrMouseX, _icurrMouseY);
         }
         private void txt0SearchID_TextChanged(object sender, EventArgs e)
@@ -659,7 +660,7 @@ namespace FrmPIE
 
         private void t1AboutAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "0PackingInformationEntry.pptx";           
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "0PackingInformationEntry.pptx";
             cf.OpenFolderAndSelectFile(pathname);
         }
 
