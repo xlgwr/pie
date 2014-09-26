@@ -63,6 +63,7 @@ namespace FrmPIE
         public int _intTo = 0;
 
         public string _strSaveLabelFile = "";
+        public string _strDownLoadExcel = "";
         public frmIDR(LogonDomain logonDomain, PIE.Model.sys_user sys_user_model)
         {
             _logonDomain = logonDomain;
@@ -655,6 +656,12 @@ namespace FrmPIE
         private void btn24PIReports_Click(object sender, EventArgs e)
         {
             c22MenuStripPiSystem.Show(btn24PIReports, _icurrMouseX, _icurrMouseY);
+        }
+
+        private void t1AboutAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "0PackingInformationEntry.pptx";           
+            cf.OpenFolderAndSelectFile(pathname);
         }
 
 

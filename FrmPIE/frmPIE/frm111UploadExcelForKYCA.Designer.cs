@@ -1,6 +1,6 @@
 ﻿namespace FrmPIE.frmPIE
 {
-    partial class frmUploadExcel
+    partial class frm111UploadExcelForKYCA
     {
         /// <summary>
         /// Required designer variable.
@@ -31,8 +31,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUploadExcel));
-            this.groupBox0frmUploadExcel = new System.Windows.Forms.GroupBox();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm111UploadExcelForKYCA));
+            this.groupBox0frmUploadExcelForKYCA = new System.Windows.Forms.GroupBox();
             this.groupBox2mstrUploadExcel = new System.Windows.Forms.GroupBox();
             this.txt5batch_cre_dateUploadExcel = new System.Windows.Forms.TextBox();
             this.txt4batch_dec01UploadExcel = new System.Windows.Forms.TextBox();
@@ -45,7 +48,11 @@
             this.txt1batch_idUploadExcel = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3detUploadExcel = new System.Windows.Forms.GroupBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1SuccessUpLoad = new System.Windows.Forms.TabPage();
             this.data1GV1ePackingDet1UploadExcel = new System.Windows.Forms.DataGridView();
+            this.tabPage2ErrorItems = new System.Windows.Forms.TabPage();
+            this.data2GV2ePackingDet1UploadExcelError = new System.Windows.Forms.DataGridView();
             this.btn2TempleFileUploadExcel = new System.Windows.Forms.Button();
             this.lbl1UploadExcelThreadMsg = new System.Windows.Forms.Label();
             this.groupBox1browseUploadExcel = new System.Windows.Forms.GroupBox();
@@ -53,29 +60,33 @@
             this.txt0ExcelFileUploadExcel = new System.Windows.Forms.TextBox();
             this.btn3QuickUploadExcel = new System.Windows.Forms.Button();
             this.btnCmdUpdUploadExcel = new System.Windows.Forms.Button();
-            this.groupBox0frmUploadExcel.SuspendLayout();
+            this.groupBox0frmUploadExcelForKYCA.SuspendLayout();
             this.groupBox2mstrUploadExcel.SuspendLayout();
             this.groupBox3detUploadExcel.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1SuccessUpLoad.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingDet1UploadExcel)).BeginInit();
+            this.tabPage2ErrorItems.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.data2GV2ePackingDet1UploadExcelError)).BeginInit();
             this.groupBox1browseUploadExcel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox0frmUploadExcel
+            // groupBox0frmUploadExcelForKYCA
             // 
-            this.groupBox0frmUploadExcel.Controls.Add(this.groupBox2mstrUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.groupBox3detUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.btn2TempleFileUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.lbl1UploadExcelThreadMsg);
-            this.groupBox0frmUploadExcel.Controls.Add(this.groupBox1browseUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.btn3QuickUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.btnCmdUpdUploadExcel);
-            this.groupBox0frmUploadExcel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox0frmUploadExcel.Location = new System.Drawing.Point(0, 0);
-            this.groupBox0frmUploadExcel.Name = "groupBox0frmUploadExcel";
-            this.groupBox0frmUploadExcel.Size = new System.Drawing.Size(683, 472);
-            this.groupBox0frmUploadExcel.TabIndex = 0;
-            this.groupBox0frmUploadExcel.TabStop = false;
-            this.groupBox0frmUploadExcel.Resize += new System.EventHandler(this.groupBox1frmUpload_Resize);
+            this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.groupBox2mstrUploadExcel);
+            this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.groupBox3detUploadExcel);
+            this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.btn2TempleFileUploadExcel);
+            this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.lbl1UploadExcelThreadMsg);
+            this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.groupBox1browseUploadExcel);
+            this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.btn3QuickUploadExcel);
+            this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.btnCmdUpdUploadExcel);
+            this.groupBox0frmUploadExcelForKYCA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox0frmUploadExcelForKYCA.Location = new System.Drawing.Point(0, 0);
+            this.groupBox0frmUploadExcelForKYCA.Name = "groupBox0frmUploadExcelForKYCA";
+            this.groupBox0frmUploadExcelForKYCA.Size = new System.Drawing.Size(683, 472);
+            this.groupBox0frmUploadExcelForKYCA.TabIndex = 0;
+            this.groupBox0frmUploadExcelForKYCA.TabStop = false;
+            this.groupBox0frmUploadExcelForKYCA.Resize += new System.EventHandler(this.groupBox1frmUpload_Resize);
             // 
             // groupBox2mstrUploadExcel
             // 
@@ -179,13 +190,35 @@
             // 
             // groupBox3detUploadExcel
             // 
-            this.groupBox3detUploadExcel.Controls.Add(this.data1GV1ePackingDet1UploadExcel);
+            this.groupBox3detUploadExcel.Controls.Add(this.tabControl1);
             this.groupBox3detUploadExcel.Location = new System.Drawing.Point(7, 229);
             this.groupBox3detUploadExcel.Name = "groupBox3detUploadExcel";
             this.groupBox3detUploadExcel.Size = new System.Drawing.Size(668, 231);
             this.groupBox3detUploadExcel.TabIndex = 15;
             this.groupBox3detUploadExcel.TabStop = false;
             this.groupBox3detUploadExcel.Text = "Batch ePacking Det";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1SuccessUpLoad);
+            this.tabControl1.Controls.Add(this.tabPage2ErrorItems);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(3, 17);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(662, 211);
+            this.tabControl1.TabIndex = 17;
+            // 
+            // tabPage1SuccessUpLoad
+            // 
+            this.tabPage1SuccessUpLoad.Controls.Add(this.data1GV1ePackingDet1UploadExcel);
+            this.tabPage1SuccessUpLoad.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1SuccessUpLoad.Name = "tabPage1SuccessUpLoad";
+            this.tabPage1SuccessUpLoad.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1SuccessUpLoad.Size = new System.Drawing.Size(654, 185);
+            this.tabPage1SuccessUpLoad.TabIndex = 0;
+            this.tabPage1SuccessUpLoad.Text = "Success UpLoad";
+            this.tabPage1SuccessUpLoad.UseVisualStyleBackColor = true;
             // 
             // data1GV1ePackingDet1UploadExcel
             // 
@@ -207,7 +240,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.data1GV1ePackingDet1UploadExcel.DefaultCellStyle = dataGridViewCellStyle2;
             this.data1GV1ePackingDet1UploadExcel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.data1GV1ePackingDet1UploadExcel.Location = new System.Drawing.Point(3, 17);
+            this.data1GV1ePackingDet1UploadExcel.Location = new System.Drawing.Point(3, 3);
             this.data1GV1ePackingDet1UploadExcel.MultiSelect = false;
             this.data1GV1ePackingDet1UploadExcel.Name = "data1GV1ePackingDet1UploadExcel";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -219,15 +252,63 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data1GV1ePackingDet1UploadExcel.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.data1GV1ePackingDet1UploadExcel.RowTemplate.Height = 23;
-            this.data1GV1ePackingDet1UploadExcel.Size = new System.Drawing.Size(662, 211);
+            this.data1GV1ePackingDet1UploadExcel.Size = new System.Drawing.Size(648, 179);
             this.data1GV1ePackingDet1UploadExcel.TabIndex = 16;
+            // 
+            // tabPage2ErrorItems
+            // 
+            this.tabPage2ErrorItems.Controls.Add(this.data2GV2ePackingDet1UploadExcelError);
+            this.tabPage2ErrorItems.ForeColor = System.Drawing.Color.Red;
+            this.tabPage2ErrorItems.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2ErrorItems.Name = "tabPage2ErrorItems";
+            this.tabPage2ErrorItems.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2ErrorItems.Size = new System.Drawing.Size(654, 185);
+            this.tabPage2ErrorItems.TabIndex = 1;
+            this.tabPage2ErrorItems.Text = "Error Items";
+            this.tabPage2ErrorItems.UseVisualStyleBackColor = true;
+            // 
+            // data2GV2ePackingDet1UploadExcelError
+            // 
+            this.data2GV2ePackingDet1UploadExcelError.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data2GV2ePackingDet1UploadExcelError.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.data2GV2ePackingDet1UploadExcelError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data2GV2ePackingDet1UploadExcelError.DefaultCellStyle = dataGridViewCellStyle5;
+            this.data2GV2ePackingDet1UploadExcelError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.data2GV2ePackingDet1UploadExcelError.Location = new System.Drawing.Point(3, 3);
+            this.data2GV2ePackingDet1UploadExcelError.Name = "data2GV2ePackingDet1UploadExcelError";
+            this.data2GV2ePackingDet1UploadExcelError.ReadOnly = true;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data2GV2ePackingDet1UploadExcelError.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.data2GV2ePackingDet1UploadExcelError.RowTemplate.Height = 23;
+            this.data2GV2ePackingDet1UploadExcelError.Size = new System.Drawing.Size(648, 179);
+            this.data2GV2ePackingDet1UploadExcelError.TabIndex = 17;
             // 
             // btn2TempleFileUploadExcel
             // 
             this.btn2TempleFileUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2TempleFileUploadExcel.Location = new System.Drawing.Point(15, 90);
             this.btn2TempleFileUploadExcel.Name = "btn2TempleFileUploadExcel";
-            this.btn2TempleFileUploadExcel.Size = new System.Drawing.Size(108, 36);
+            this.btn2TempleFileUploadExcel.Size = new System.Drawing.Size(127, 36);
             this.btn2TempleFileUploadExcel.TabIndex = 7;
             this.btn2TempleFileUploadExcel.Text = "&Template File";
             this.btn2TempleFileUploadExcel.UseVisualStyleBackColor = true;
@@ -251,7 +332,7 @@
             this.groupBox1browseUploadExcel.Size = new System.Drawing.Size(668, 70);
             this.groupBox1browseUploadExcel.TabIndex = 13;
             this.groupBox1browseUploadExcel.TabStop = false;
-            this.groupBox1browseUploadExcel.Text = "选择上传的Excel文件";
+            this.groupBox1browseUploadExcel.Text = "选择上传的Excel文件(For KYCA)";
             // 
             // btnSelectfileUploadExcel
             // 
@@ -275,11 +356,11 @@
             // btn3QuickUploadExcel
             // 
             this.btn3QuickUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn3QuickUploadExcel.Location = new System.Drawing.Point(248, 90);
+            this.btn3QuickUploadExcel.Location = new System.Drawing.Point(238, 90);
             this.btn3QuickUploadExcel.Name = "btn3QuickUploadExcel";
-            this.btn3QuickUploadExcel.Size = new System.Drawing.Size(114, 36);
+            this.btn3QuickUploadExcel.Size = new System.Drawing.Size(188, 36);
             this.btn3QuickUploadExcel.TabIndex = 12;
-            this.btn3QuickUploadExcel.Text = "&Quick Upload";
+            this.btn3QuickUploadExcel.Text = "&Quick Upload(For KYCA)";
             this.btn3QuickUploadExcel.UseVisualStyleBackColor = true;
             this.btn3QuickUploadExcel.Click += new System.EventHandler(this.btn3QuickUploadExcel_Click);
             // 
@@ -295,25 +376,29 @@
             this.btnCmdUpdUploadExcel.Visible = false;
             this.btnCmdUpdUploadExcel.Click += new System.EventHandler(this.btnCmdUpdUploadExcel_Click);
             // 
-            // frmUploadExcel
+            // frm111UploadExcelForKYCA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(683, 472);
-            this.Controls.Add(this.groupBox0frmUploadExcel);
+            this.Controls.Add(this.groupBox0frmUploadExcelForKYCA);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmUploadExcel";
+            this.Name = "frm111UploadExcelForKYCA";
             this.Text = "e-Packing Upload";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUploadExcel_FormClosing);
             this.Load += new System.EventHandler(this.frmUpload_Load);
-            this.groupBox0frmUploadExcel.ResumeLayout(false);
-            this.groupBox0frmUploadExcel.PerformLayout();
+            this.groupBox0frmUploadExcelForKYCA.ResumeLayout(false);
+            this.groupBox0frmUploadExcelForKYCA.PerformLayout();
             this.groupBox2mstrUploadExcel.ResumeLayout(false);
             this.groupBox2mstrUploadExcel.PerformLayout();
             this.groupBox3detUploadExcel.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1SuccessUpLoad.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingDet1UploadExcel)).EndInit();
+            this.tabPage2ErrorItems.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.data2GV2ePackingDet1UploadExcelError)).EndInit();
             this.groupBox1browseUploadExcel.ResumeLayout(false);
             this.groupBox1browseUploadExcel.PerformLayout();
             this.ResumeLayout(false);
@@ -325,7 +410,7 @@
         private System.Windows.Forms.GroupBox groupBox1browseUploadExcel;
         private System.Windows.Forms.Button btnSelectfileUploadExcel;
         private System.Windows.Forms.Button btnCmdUpdUploadExcel;
-        protected internal System.Windows.Forms.GroupBox groupBox0frmUploadExcel;
+        protected internal System.Windows.Forms.GroupBox groupBox0frmUploadExcelForKYCA;
         private System.Windows.Forms.Label lbl1UploadExcelThreadMsg;
         private System.Windows.Forms.Button btn2TempleFileUploadExcel;
         protected internal System.Windows.Forms.TextBox txt0ExcelFileUploadExcel;
@@ -343,6 +428,10 @@
         private System.Windows.Forms.GroupBox groupBox3detUploadExcel;
         protected internal System.Windows.Forms.DataGridView data1GV1ePackingDet1UploadExcel;
         private System.Windows.Forms.Button btn3QuickUploadExcel;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1SuccessUpLoad;
+        private System.Windows.Forms.TabPage tabPage2ErrorItems;
+        protected internal System.Windows.Forms.DataGridView data2GV2ePackingDet1UploadExcelError;
 
     }
 }
