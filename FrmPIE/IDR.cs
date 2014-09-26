@@ -63,6 +63,7 @@ namespace FrmPIE
         public int _intTo = 0;
 
         public string _strSaveLabelFile = "";
+        public string _strDownLoadExcel = "";
         public frmIDR(LogonDomain logonDomain, PIE.Model.sys_user sys_user_model)
         {
             _logonDomain = logonDomain;
