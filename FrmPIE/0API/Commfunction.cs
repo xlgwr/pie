@@ -21,6 +21,7 @@ using Microsoft.Reporting.WinForms;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using frmPI;
 
 namespace FrmPIE._0API
 {
@@ -1348,7 +1349,7 @@ namespace FrmPIE._0API
 
         }
 
-        public void UploadtoERP(frmPIE.frm412UploadToERP frm4uploadToERP)
+        public void UploadtoERP(frm412UploadToERP frm4uploadToERP)
         {
             try
             {
@@ -1528,7 +1529,7 @@ namespace FrmPIE._0API
             string messageBox = "";
             string messageBoxError = "";
 
-            frmPIE.frm513PrintCartonLabel frm513PCL = (frmPIE.frm513PrintCartonLabel)_cartonfromto._objclass;
+            frm513PrintCartonLabel frm513PCL = (frm513PrintCartonLabel)_cartonfromto._objclass;
             decimal wec_ctn_Fr = _cartonfromto._wec_ctn_Fr;
             decimal wec_ctn_To = _cartonfromto._wec_ctn_To;
             string print_Type = _cartonfromto._print_Type;
@@ -1879,7 +1880,7 @@ namespace FrmPIE._0API
         /// set dgv,dgv1,ex,ey;
         /// </summary>
         /// <param name="dwo">dgv,dgv1,ex,ey</param>
-        public void selectCellMethod(DoWrokObject dwo, string strPIID, bool mainDataGV, frmPI.frmPI1ScanDataInquire frmpi1)
+        public void selectCellMethod(DoWrokObject dwo, string strPIID, bool mainDataGV, frmPI1ScanDataInquire frmpi1)
         {
 
 
@@ -2171,6 +2172,21 @@ namespace FrmPIE._0API
                 allfileNamepath = System.IO.Path.Combine(pathname, filename);
             }
             OpenFolderAndSelectFile(allfileNamepath);
+        }
+        public void EnquireByPart(DataGridView dgv, string cellsHeader, string strcontains)
+        {
+            if (dgv.Rows.Count > 0)
+            {
+                for (int i = 0; i < dgv.Rows.Count - 1; i++)
+                {
+                    if (dgv.Rows[i].Cells[cellsHeader].Value.ToString().ToLower().Contains(strcontains.ToLower()))
+                    {
+                        dgv.Rows[i].Cells[cellsHeader].Selected = true;
+                        break;
+                    }
+                    dgv.ClearSelection();
+                }
+            }
         }
         /////////////////////////////////////
         //start place

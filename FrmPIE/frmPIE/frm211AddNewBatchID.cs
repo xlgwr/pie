@@ -13,7 +13,7 @@ using PIE.DBUtility;
 using System.Data.SqlClient;
 using PIE.Common;
 
-namespace FrmPIE.frmPIE
+namespace FrmPIE
 {
     public partial class frm211AddNewBatchID : Form
     {

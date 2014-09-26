@@ -11,8 +11,7 @@ using System.Windows.Forms;
 
 using models = PIE.Model;
 
-using FrmPIE.frmPIE;
-using FrmPIE.frmPI;
+using FrmPIE;
 
 //xls
 using System.IO;
@@ -20,6 +19,7 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 //xlsx
 using NPOI.XSSF.UserModel;
+using frmPI;
 
 namespace FrmPIE
 {

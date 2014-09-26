@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrmPIE.frmPI
+namespace frmPI
 {
     public partial class frmCoMaint : Form
     {

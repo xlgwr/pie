@@ -11,11 +11,13 @@ using PIE.DBUtility;
 using System.Data.SqlClient;
 using System.Threading;
 
-namespace FrmPIE.frmPIE
+namespace FrmPIE
 {
 
     public partial class frm412UploadToERP : Form
     {
+        frmEnterTxt _frmET;
+
         frmIDR _idr_show;
         Commfunction cf;
         DataSet reobjdet;
@@ -32,6 +34,9 @@ namespace FrmPIE.frmPIE
             _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
             data1GVUploadToERP.CellClick += data1GVUploadToERP_CellClick;
             data1GVUploadToERP.RowEnter += data1GVUploadToERP_RowEnter;
+
+            data1GVUploadToERP.ContextMenuStrip = ctmenu0EnquireByPart;
+            ctmenu0EnquireByPart.Click += enquireByPartToolStripMenuItem_Click;
         }
 
         void data1GVUploadToERP_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -203,6 +208,24 @@ namespace FrmPIE.frmPIE
         {
 
             _idr_show.AcceptButton = btn1UploadToERP;
+        }
+        private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmET = new frmEnterTxt(_idr_show, this);
+            _frmET.button1.Click += enquireByPart;
+            _frmET.lblTitle.Text = "Part#:";
+            _frmET.Text = "Enquire by Part:";
+            _frmET.ShowDialog();
+        }
+
+        void enquireByPart(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                return;
+            }
+            cf.EnquireByPart(data1GVUploadToERP, "plr_partno", _frmET.textBox1.Text.Trim());
         }
     }
 }

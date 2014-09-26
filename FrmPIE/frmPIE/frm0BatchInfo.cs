@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace FrmPIE.frmPIE
+namespace FrmPIE
 {
     public partial class frm0BatchInfo : Form
     {
+        frmEnterTxt _frmET;
         frmIDR _idr_show;
         Commfunction cf;
 
@@ -142,6 +143,24 @@ namespace FrmPIE.frmPIE
         private void groupBox0BatchInfo0_Resize(object sender, EventArgs e)
         {
             initWidth();
+        }
+        private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmET = new frmEnterTxt(_idr_show,this);
+            _frmET.button1.Click += enquireByPart;
+            _frmET.lblTitle.Text = "Part#:";
+            _frmET.Text = "Enquire by Part:";
+            _frmET.ShowDialog();
+        }
+
+        void enquireByPart(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                return;
+            }
+            cf.EnquireByPart(data1GV1ePackingDet1_BatchInfo, "plr_partno", _frmET.textBox1.Text.Trim());
         }
 
 
