@@ -24,7 +24,7 @@ using NPOI.XSSF.UserModel;
 
 namespace FrmPIE.frmPIE
 {
-    public partial class frmUploadExcel : Form
+    public partial class frm111UploadExcelForKYCA : Form
     {
         frmIDR _idr_show;
         Commfunction cf;
@@ -33,13 +33,14 @@ namespace FrmPIE.frmPIE
         ISheet sheet;
         IRow row;
         string _strext;
+        System.Data.DataTable _dterr;
 
         bool _hasrun = false;
         string _strBatchID = "";
         DateTime oldtime;
 
         PIE.Model.plr_batch_mstr _plr_batch_mstr_model = new PIE.Model.plr_batch_mstr();
-        public frmUploadExcel(frmIDR idr)
+        public frm111UploadExcelForKYCA(frmIDR idr)
         {
             InitializeComponent();
 
@@ -76,9 +77,14 @@ namespace FrmPIE.frmPIE
             strsql = new StringBuilder();
             strsql.Append("select ");
             strsql.Append(" Batch_ID,LineID,plr_status, ");
-            strsql.Append(" packingListID,InvoiceID,plr_pallet_no,CartonType, ");
-            strsql.Append(" CartonID,plr_po,plr_co,plr_partno,plr_date_code, ");
-            strsql.Append(" plr_vend_mfgr,Plr_vm_partno,plr_carton_qty,plr_qty, ");
+            strsql.Append(" packingListID,InvoiceID, ");
+
+            strsql.Append(" Plr_vm_partno,plr_co,CartonID,plr_pallet_no, ");
+            strsql.Append(" plr_partno,plr_qty,plr_vend_mfgr,plr_po, ");
+
+            strsql.Append(" plr_carton_qty, ");
+            strsql.Append(" CartonType,plr_date_code, ");
+
             strsql.Append(" plr_doc_type,plr_rcp_date,plr_deli_date,plr_cre_date,plr_update_date,plr_user_ip ");
             strsql.Append(" from plr_mstr ");
             strsql.Append(" where ");
@@ -94,6 +100,17 @@ namespace FrmPIE.frmPIE
                 data1GV1ePackingDet1UploadExcel.DataSource = data0set_npoi.Tables[0].DefaultView;
                 data1GV1ePackingDet1UploadExcel.Refresh();
 
+                _dterr = new System.Data.DataTable();
+                _dterr.Columns.Add("rowsNum", typeof(int));
+                _dterr.Columns.Add("plr_partno");
+                _dterr.Columns.Add("plr_qty", typeof(decimal));
+                _dterr.Columns.Add("errorMsg");
+                data2GV2ePackingDet1UploadExcelError.DataSource = _dterr.DefaultView;
+                data2GV2ePackingDet1UploadExcelError.Refresh();
+                data2GV2ePackingDet1UploadExcelError.Columns["rowsNum"].HeaderText = "At Excel Rows Num";
+                data2GV2ePackingDet1UploadExcelError.Columns["plr_partno"].HeaderText = "Part";
+                data2GV2ePackingDet1UploadExcelError.Columns["plr_qty"].HeaderText = "Total/Qty";
+                data2GV2ePackingDet1UploadExcelError.Columns["errorMsg"].HeaderText = "Error Message";
                 data0set_npoi.AcceptChanges();
 
                 cf.initHeaderTextPlrMstr2ExcelUpload(data1GV1ePackingDet1UploadExcel);
@@ -131,10 +148,10 @@ namespace FrmPIE.frmPIE
         }
         private void initwidthUploadExcel()
         {
-            groupBox2mstrUploadExcel.Width = groupBox0frmUploadExcel.Width - groupBox2mstrUploadExcel.Left - 5;
+            groupBox2mstrUploadExcel.Width = groupBox0frmUploadExcelForKYCA.Width - groupBox2mstrUploadExcel.Left - 5;
             groupBox3detUploadExcel.Width = groupBox2mstrUploadExcel.Width;
 
-            groupBox3detUploadExcel.Height = groupBox0frmUploadExcel.Height - groupBox3detUploadExcel.Top - 10;
+            groupBox3detUploadExcel.Height = groupBox0frmUploadExcelForKYCA.Height - groupBox3detUploadExcel.Top - 10;
 
         }
         private void btnSelectfileUploadExcel_Click(object sender, EventArgs e)
@@ -644,7 +661,7 @@ namespace FrmPIE.frmPIE
 
         private void btn2TempleFile_Click(object sender, EventArgs e)
         {
-            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0temple\temples.xls";
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0temple\templesforKYCA.xls";
             Program.OpenFolderAndSelectFile(pathname);
         }
         void Init0ializeWorkbook(object path)
@@ -695,6 +712,14 @@ namespace FrmPIE.frmPIE
             }
             data1GV1ePackingDet1UploadExcel.Refresh();
 
+            if (_dterr.Rows.Count > 0)
+            {
+                data2GV2ePackingDet1UploadExcelError.DataSource = _dterr.DefaultView;
+                data2GV2ePackingDet1UploadExcelError.Refresh();
+                tabControl1.SelectedIndex = 1;
+            }
+
+
             var currtime = DateTime.Now - oldtime;
             string difftime = "\tUse Time: " + currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
             cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, strmsg + difftime, true, true);
@@ -719,6 +744,7 @@ namespace FrmPIE.frmPIE
             //{
             //    dt.Columns.Add(Convert.ToChar(((int)'A') + j).ToString());
             //}
+            int addrowscount = 0;
             int rowscount = 0;
             int rowserrscount = 0;
             int rowscountsum = sheet.LastRowNum;
@@ -726,13 +752,15 @@ namespace FrmPIE.frmPIE
             string strerrnullrows = "At ";
 
             var servedate = DbHelperSQL.getServerGetDate();
-            
+
 
             while (rows.MoveNext())
             {
-                if (rowscount == 0)
+
+                if (addrowscount == 0)
                 {
                     command.UpdateCommand = cmdb.GetUpdateCommand();
+                    addrowscount = 1;
                     rowscount = 1;
                     continue;
                 }
@@ -753,24 +781,28 @@ namespace FrmPIE.frmPIE
 
                 _idr_show.status15toolLabelstrResult.Text = "Load Rows at:" + rowscount;
 
-                for (int i = 0; i < 13; i++)
+
+                for (int i = 0; i < 8; i++)
                 {
                     dr[0] = _strBatchID;
-                    dr[1] = rowscount;
+                    dr[1] = addrowscount;
                     dr["plr_status"] = "No";
-                    dr["plr_doc_type"] = "e-Packing";
+
+                    dr["plr_doc_type"] = "e-Packing-kyca";
                     dr["plr_rcp_date"] = servedate;
                     dr["plr_deli_date"] = servedate;
                     dr["plr_cre_date"] = servedate; // DateTime.FromOADate(double型)    如果excel为日期时
                     dr["plr_update_date"] = servedate;
                     dr["plr_user_ip"] = _idr_show._custip;
 
+                    dr["plr_carton_qty"] = 1;
+                    dr["CartonType"] = 1;
 
                     ICell cell = row.GetCell(i);
 
                     if (cell == null || string.IsNullOrEmpty(cell.ToString()))
                     {
-                        if (rowserrscount == 0)
+                        if (rowscount == 0)
                         {
 
                             strerrnullrows += rowscount.ToString();
@@ -781,6 +813,7 @@ namespace FrmPIE.frmPIE
 
                         }
                         rowserrscount++;
+                        rowscount++;
                         nextrow = false;
                         break;
                         //dr[i] = null;
@@ -791,12 +824,12 @@ namespace FrmPIE.frmPIE
                         if (i > 10)
                         {
 
-                            dr[i + 3] = cell.NumericCellValue;
+                            dr[i + 4] = cell.NumericCellValue;
                         }
                         else
                         {
 
-                            dr[i + 3] = cell.ToString().Trim();
+                            dr[i + 4] = cell.ToString().Trim();
                         }
 
                     }
@@ -806,18 +839,139 @@ namespace FrmPIE.frmPIE
                 if (nextrow)
                 {
 
-                    rowscount++;
-                    dt.Rows.Add(dr);
+                    ICell cell5 = row.GetCell(5);
+                    //qty
+                    ICell cell6 = row.GetCell(6);
+
+                    ICell cell9 = row.GetCell(9);
+                    ICell cell11 = row.GetCell(11);
+                    ICell cell13 = row.GetCell(13);
+                    ICell cell15 = row.GetCell(15);
+
+                    //po
+                    ICell cell8 = row.GetCell(8);
+                    ICell cell10 = row.GetCell(10);
+                    ICell cell12 = row.GetCell(12);
+                    ICell cell14 = row.GetCell(14);
+
+                    double intcell6 = cell6.NumericCellValue;
+
+                    double intcell9 = (cell9 == null || string.IsNullOrEmpty(cell9.ToString())) ? 0 : cell9.NumericCellValue;
+                    double intcell11 = (cell11 == null || string.IsNullOrEmpty(cell11.ToString())) ? 0 : cell11.NumericCellValue;
+                    double intcell13 = (cell13 == null || string.IsNullOrEmpty(cell13.ToString())) ? 0 : cell13.NumericCellValue;
+                    double intcell15 = (cell15 == null || string.IsNullOrEmpty(cell15.ToString())) ? 0 : cell15.NumericCellValue;
+
+                    if (intcell6 != (intcell9 + intcell11 + intcell13))
+                    {
+                        strerrnullrows += ",QtyError:" + rowscount.ToString();
+
+                        DataRow drerr = _dterr.NewRow();
+                        drerr[0] = rowscount;
+                        drerr[1] = cell5.ToString();
+                        drerr[2] = intcell6;
+
+                        string strmsgint = "";
+                        if (intcell9 != 0)
+                        {
+                            strmsgint = "TTL/Qty: " + intcell6.ToString() + " no Equal(<>) " + " PO:" + cell8 + ",Qty:" + intcell9.ToString();
+                        }
+                        if (intcell11 != 0)
+                        {
+                            strmsgint += " +" + " PO:" + cell10 + ",Qty:" + intcell11.ToString();
+                        }
+                        if (intcell13 != 0)
+                        {
+                            strmsgint += " +" + " PO:" + cell12 + ",Qty:" + intcell13.ToString();
+                        }
+                        if (intcell15 != 0)
+                        {
+                            strmsgint += " +" + " PO:" + cell14 + ",Qty:" + intcell15.ToString();
+                        }
+                        drerr[3] = strmsgint;
+                        _dterr.Rows.Add(drerr);
+                        rowserrscount++;
+                        rowscount++;
+                        continue;
+                    }
+                    else
+                    {
+                        if (intcell9 > 0)
+                        {
+
+                            dr[12] = cell8.ToString().Trim();
+                            dr[10] = intcell9;
+
+                            dt.Rows.Add(dr);
+                            addrowscount++;
+                        }
+                        if (intcell11 > 0)
+                        {
+                            //po
+
+                            DataRow drnew = dt.NewRow();
+                            for (int i = 0; i < dr.ItemArray.Length; i++)
+                            {
+                                drnew[i] = dr[i];
+                            }
+                            drnew[12] = cell10.ToString().Trim();
+                            //qty
+                            drnew[10] = intcell11;
+                            drnew[1] = addrowscount;
+
+
+                            dt.Rows.Add(drnew);
+
+                            addrowscount++;
+                        }
+                        if (intcell13 > 0)
+                        {
+                            //po
+
+                            DataRow drnew = dt.NewRow();
+                            for (int i = 0; i < dr.ItemArray.Length; i++)
+                            {
+                                drnew[i] = dr[i];
+                            }
+
+                            drnew[12] = cell12.ToString().Trim();
+                            //qty
+                            drnew[10] = intcell13;
+                            drnew[1] = addrowscount;
+
+                            dt.Rows.Add(drnew);
+                            addrowscount++;
+                        }
+                        if (intcell15 > 0)
+                        {
+                            //po
+
+                            DataRow drnew = dt.NewRow();
+                            for (int i = 0; i < dr.ItemArray.Length; i++)
+                            {
+                                drnew[i] = dr[i];
+                            }
+
+                            drnew[12] = cell14.ToString().Trim();
+                            //qty
+                            drnew[10] = intcell15;
+                            drnew[1] = addrowscount;
+
+                            dt.Rows.Add(drnew);
+                            addrowscount++;
+                        }
+                        rowscount++;
+                    }
                 }
             }
-            _plr_batch_mstr_model.batch_dec01 = (rowscount - 1);
+            _plr_batch_mstr_model.batch_dec01 = (addrowscount - 1);
             var updatebathccount = new PIE.BLL.plr_batch_mstr().Update(_plr_batch_mstr_model);
             if (updatebathccount)
             {
                 _idr_show._plr_batch_mstr_model = _plr_batch_mstr_model;
                 initDatasetToTxt(_idr_show._plr_batch_mstr_model, true);
             }
-            return "Notice: Total: " + rowscountsum + " ,Update " + (rowscount - 1) + " Rows Success, Error: has " + rowserrscount + " Rows has null cell (" + strerrnullrows + ").";
+
+            return "Notice: Total Rows: " + rowscountsum + ",Total PO: " + (addrowscount - 1 + rowserrscount) + " ,Update " + (addrowscount - 1) + " items Success, Error: has " + rowserrscount + " Rows has Error (" + strerrnullrows + ").";
 
             //data0set_npoi.Tables.Add(dt);
         }

@@ -94,6 +94,7 @@
             this.chk0UploadToERP.TabIndex = 2;
             this.chk0UploadToERP.Text = "Upload All";
             this.chk0UploadToERP.UseVisualStyleBackColor = true;
+            this.chk0UploadToERP.Visible = false;
             this.chk0UploadToERP.CheckedChanged += new System.EventHandler(this.chk0UploadToERP_CheckedChanged);
             // 
             // txt0BatchIDUploadToERP

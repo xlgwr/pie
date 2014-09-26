@@ -135,6 +135,7 @@
     <Compile Include="Plr_mstr.cs" />
     <Compile Include="Plr_mstr_log.cs" />
     <Compile Include="Plr_mstr_tran.cs" />
+    <Compile Include="ticketingPTMR.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -27,7 +27,7 @@ namespace FrmPIE.frmPI
         DataSet cods;
 
         string _strWecCtnSn = "";
-        public bool _coisnull = false;
+        public  bool _coisnull = false;
         public string _strconext = "";
         public string _plr_wec_ctn = "";
 
@@ -327,7 +327,7 @@ namespace FrmPIE.frmPI
                         var existBatchidLine = true;
                         while (existBatchidLine)
                         {
-                            existBatchidLine = new PI.DAL.pi_det().Exists(_pi_det_model.PI_ID, _pi_det_model.pi_LineID);
+                            existBatchidLine = new PI.DAL.pi_det_ext().Exists(_pi_det_model.PI_ID, _pi_det_model.pi_LineID);
                             if (existBatchidLine)
                             {
                                 ShowMsg("系统中已存在PIID：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "，将修改LineID+1.", "Notice");
@@ -338,12 +338,23 @@ namespace FrmPIE.frmPI
 
 
                         }
-                        if (string.IsNullOrEmpty(tran.plr_co))
+                        if (string.IsNullOrWhiteSpace(tran.plr_co))
                         {
                             _coisnull = true;
                             _strconext = "";
                             _plr_mstr_tran_co_list.Add(tran);
                             _pi_det_model_co_list.Add(_pi_det_model);
+                        }
+                        else
+                        {
+                            PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", tran.plr_co,true);
+                            if (existco == null)
+                            {
+                                _coisnull = true;
+                                _strconext = "";
+                                _plr_mstr_tran_co_list.Add(tran);
+                                _pi_det_model_co_list.Add(_pi_det_model);
+                            }
                         }
                         result_pi_det = new PI.DAL.pi_det().Add(_pi_det_model);
                         if (result_pi_det)
@@ -385,7 +396,7 @@ namespace FrmPIE.frmPI
 
                     //initModelForTextBox(pi_det_new);
                     _addNextNewFalg = true;
-                    ShowMsg("新增相同的PI ID,\t上次新增的为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "\nScanSN:" + _pi_det_model.pi_wec_ctn + ",Pallet#:" + _pi_det_model.pi_deci1.ToString("000"), "Notice");
+                    ShowMsg("新增相同的PI ID,\t上次新增的为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString()+"\nScanSN:"+_pi_det_model.pi_wec_ctn+",Pallet#:"+_pi_det_model.pi_deci1.ToString("000"), "Notice");
 
                     lbl3COScanWECCtnLable.Text = "";
 
@@ -440,7 +451,7 @@ namespace FrmPIE.frmPI
             }
             if (txt2SanWecCtnLable.Text.Length >= 12)
             {
-                var exist = new PIE.DAL.plr_mstr_tran().Exists(txt2SanWecCtnLable.Text);
+                var exist = new PIE.DAL.plr_mstr_tran_ext().Exists(txt2SanWecCtnLable.Text);
                 if (!exist)
                 {
                     ShowMsg(txt2SanWecCtnLable.Text + "(len:" + txt2SanWecCtnLable.Text.Length + ") Wec Ctn Lable ID（len must be 12) is not exist.", "Error");
@@ -473,6 +484,7 @@ namespace FrmPIE.frmPI
                             if (string.IsNullOrEmpty(cmb3CO_ScanWECCtnLable.Text))
                             {
                                 ShowMsg(txt2SanWecCtnLable.Text + " has no CO.", "Error");
+                                //_coisnull = true;
                                 //cmb3CO_ScanWECCtnLable.Focus();
                                 //return false;
                             }
@@ -490,6 +502,7 @@ namespace FrmPIE.frmPI
                                 {
                                     ShowMsg(cmb3CO_ScanWECCtnLable.Text + " has no Desc.", "Error: ");
                                     strco = "";
+                                    //_coisnull = true;
                                     //cmb3CO_ScanWECCtnLable.Focus();
                                     //return false;
                                 }
@@ -523,6 +536,7 @@ namespace FrmPIE.frmPI
                                     ShowMsg(cmb3CO_ScanWECCtnLable.Text + " has no Desc.", "Error: ");
                                     cmb3CO_ScanWECCtnLable.Text = "";
                                     strco = "";
+                                    //_coisnull = true;
                                     //cmb3CO_ScanWECCtnLable.Focus();
                                     // return false;
                                 }
@@ -613,11 +627,11 @@ namespace FrmPIE.frmPI
                         //initModelForTextBox(pi_det_new);
 
                         _addNextNewFalg = true;
-                        var pre_pi_det = new PI.DAL.pi_det().GetModel(pi_det_new.PI_ID, (_nextlineid - 1));
+                        var pre_pi_det = new PI.DAL.pi_det_ext().GetModel(pi_det_new.PI_ID, (_nextlineid - 1));
                         string premsg = "继续新增相同的PI ID";
-                        if (pre_pi_det != null)
+                        if (pre_pi_det!=null)
                         {
-                            premsg += ",继续新增相同的PI ID,\t上次新增的为：" + pre_pi_det.PI_ID + ",LineID:" + pre_pi_det.pi_LineID + "\nScanSN:" + pre_pi_det.pi_wec_ctn + ",Pallet#:" + pre_pi_det.pi_deci1.ToString("000");
+                          premsg += ",继续新增相同的PI ID,\t上次新增的为：" + pre_pi_det.PI_ID + ",LineID:" + pre_pi_det.pi_LineID + "\nScanSN:" + pre_pi_det.pi_wec_ctn + ",Pallet#:" + pre_pi_det.pi_deci1.ToString("000") ;
 
                         }
                         else
@@ -789,7 +803,7 @@ namespace FrmPIE.frmPI
             {
                 if (!string.IsNullOrEmpty(_pi_mstr_model.PI_ID))
                 {
-                    List<PI.Model.pi_det> pi_det_list = new PI.BLL.pi_det().GetModelList("PI_ID='" + _pi_mstr_model.PI_ID + "'", true);
+                    List<PI.Model.pi_det> pi_det_list = new PI.BLL.pi_det_ext().GetModelList("PI_ID='" + _pi_mstr_model.PI_ID + "'", true);
                     PI.Model.pisr_grr pisr_grr_model = new PI.Model.pisr_grr();
 
 
@@ -797,7 +811,7 @@ namespace FrmPIE.frmPI
                     {
                         for (int i = 0; i < pi_det_list.Count; i++)
                         {
-                            PIE.Model.plr_mstr_tran plr_mstr_tran_model = new PIE.DAL.plr_mstr_tran().GetModel(pi_det_list[i].pi_wec_ctn);
+                            PIE.Model.plr_mstr_tran plr_mstr_tran_model = new PIE.DAL.plr_mstr_tran_ext().GetModel(pi_det_list[i].pi_wec_ctn);
                             if (plr_mstr_tran_model != null)
                             {
 
@@ -980,7 +994,7 @@ namespace FrmPIE.frmPI
                 return;
 
             }
-            var maxpallernum = new PI.DAL.pi_det().GetMaxId(txt1PIID_ScanWECCtnLable.Text).ToString("000");
+            var maxpallernum = new PI.DAL.pi_det_ext().GetMaxId(txt1PIID_ScanWECCtnLable.Text).ToString("000");
             if (!cmb4Pallet_PIScan.Items.Contains(maxpallernum))
             {
 
@@ -1017,7 +1031,7 @@ namespace FrmPIE.frmPI
                 txtPalletNW.Text = "";
                 return;
             }
-            var existpidet = new PI.DAL.pi_det().GetModel(txt1PIID_ScanWECCtnLable.Text, Convert.ToInt32(cmb4Pallet_PIScan.SelectedItem), true);
+            var existpidet = new PI.DAL.pi_det_ext().GetModel(txt1PIID_ScanWECCtnLable.Text, Convert.ToInt32(cmb4Pallet_PIScan.SelectedItem), true);
             if (existpidet != null)
             {
                 txtPalletNW.Text = existpidet.pi_pallet_no;

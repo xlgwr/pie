@@ -60,6 +60,7 @@
             this.btn1PackingListMaintain1 = new System.Windows.Forms.Button();
             this.cMenuStrip1PacklingListMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolcMenu11UploadEPackingListExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolcMenu10UploadEPackingListExcelForKYCA = new System.Windows.Forms.ToolStripMenuItem();
             this.toolcMenu12AddOneByOneBatchID = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -99,9 +100,9 @@
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.openDownLoadExcelFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -124,6 +125,7 @@
             this.cMenuStrip21ScanCartronLabel.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
             this.c22MenuStripPiSystem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -168,8 +170,9 @@
             // t1AboutAToolStripMenuItem
             // 
             this.t1AboutAToolStripMenuItem.Name = "t1AboutAToolStripMenuItem";
-            this.t1AboutAToolStripMenuItem.Size = new System.Drawing.Size(71, 21);
-            this.t1AboutAToolStripMenuItem.Text = "About(&A)";
+            this.t1AboutAToolStripMenuItem.Size = new System.Drawing.Size(64, 21);
+            this.t1AboutAToolStripMenuItem.Text = "Help(&H)";
+            this.t1AboutAToolStripMenuItem.Click += new System.EventHandler(this.t1AboutAToolStripMenuItem_Click);
             // 
             // cmb1SearchType
             // 
@@ -222,8 +225,7 @@
             this.status125toolBtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.status125toolBtnClear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearNoticeMsgToolStripMenuItem,
-            this.openPrintFileToolStripMenuItem,
-            this.openDownLoadExcelFileToolStripMenuItem});
+            this.openPrintFileToolStripMenuItem});
             this.status125toolBtnClear.Image = ((System.Drawing.Image)(resources.GetObject("status125toolBtnClear.Image")));
             this.status125toolBtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.status125toolBtnClear.Name = "status125toolBtnClear";
@@ -233,14 +235,14 @@
             // clearNoticeMsgToolStripMenuItem
             // 
             this.clearNoticeMsgToolStripMenuItem.Name = "clearNoticeMsgToolStripMenuItem";
-            this.clearNoticeMsgToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.clearNoticeMsgToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.clearNoticeMsgToolStripMenuItem.Text = "&ClearNoticeMessage";
             this.clearNoticeMsgToolStripMenuItem.Click += new System.EventHandler(this.clearNoticeMsgToolStripMenuItem_Click);
             // 
             // openPrintFileToolStripMenuItem
             // 
             this.openPrintFileToolStripMenuItem.Name = "openPrintFileToolStripMenuItem";
-            this.openPrintFileToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.openPrintFileToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.openPrintFileToolStripMenuItem.Text = "&Open Print File";
             this.openPrintFileToolStripMenuItem.Click += new System.EventHandler(this.openPrintFileToolStripMenuItem_Click);
             // 
@@ -342,6 +344,7 @@
             this.linkLabel9.TabStop = true;
             this.linkLabel9.Text = "HOME";
             this.linkLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkLabel9.Click += new System.EventHandler(this.btn1Home1_Click);
             // 
             // statusStrip2
             // 
@@ -442,28 +445,38 @@
             // 
             this.cMenuStrip1PacklingListMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolcMenu11UploadEPackingListExcel,
+            this.toolcMenu10UploadEPackingListExcelForKYCA,
             this.toolcMenu12AddOneByOneBatchID});
             this.cMenuStrip1PacklingListMain.Name = "cMenuPacklingListMain1";
-            this.cMenuStrip1PacklingListMain.Size = new System.Drawing.Size(240, 48);
+            this.cMenuStrip1PacklingListMain.Size = new System.Drawing.Size(298, 70);
             // 
             // toolcMenu11UploadEPackingListExcel
             // 
             this.toolcMenu11UploadEPackingListExcel.Image = global::FrmPIE.Properties.Resources.up;
             this.toolcMenu11UploadEPackingListExcel.Name = "toolcMenu11UploadEPackingListExcel";
-            this.toolcMenu11UploadEPackingListExcel.Size = new System.Drawing.Size(239, 22);
+            this.toolcMenu11UploadEPackingListExcel.Size = new System.Drawing.Size(297, 22);
             this.toolcMenu11UploadEPackingListExcel.Text = "&Upload EPacking List (Excel)";
             this.toolcMenu11UploadEPackingListExcel.Click += new System.EventHandler(this.toolcMenu11UploadEPackingListExcel_Click);
+            // 
+            // toolcMenu10UploadEPackingListExcelForKYCA
+            // 
+            this.toolcMenu10UploadEPackingListExcelForKYCA.Image = global::FrmPIE.Properties.Resources._23;
+            this.toolcMenu10UploadEPackingListExcelForKYCA.Name = "toolcMenu10UploadEPackingListExcelForKYCA";
+            this.toolcMenu10UploadEPackingListExcelForKYCA.Size = new System.Drawing.Size(297, 22);
+            this.toolcMenu10UploadEPackingListExcelForKYCA.Text = "&Upload EPacking List (Excel For KYCA)";
+            this.toolcMenu10UploadEPackingListExcelForKYCA.Click += new System.EventHandler(this.toolcMenu10UploadEPackingListExcelForKYCA_Click);
             // 
             // toolcMenu12AddOneByOneBatchID
             // 
             this.toolcMenu12AddOneByOneBatchID.Image = global::FrmPIE.Properties.Resources.add;
             this.toolcMenu12AddOneByOneBatchID.Name = "toolcMenu12AddOneByOneBatchID";
-            this.toolcMenu12AddOneByOneBatchID.Size = new System.Drawing.Size(239, 22);
+            this.toolcMenu12AddOneByOneBatchID.Size = new System.Drawing.Size(297, 22);
             this.toolcMenu12AddOneByOneBatchID.Text = "&Add New(Edit BatchID)";
             this.toolcMenu12AddOneByOneBatchID.Click += new System.EventHandler(this.toolcMenu12AddOneByOneBatchID_Click);
             // 
             // linkLabel1
             // 
+            this.linkLabel1.ContextMenuStrip = this.cMenuStrip1PacklingListMain;
             this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.linkLabel1.Location = new System.Drawing.Point(3, 88);
             this.linkLabel1.Name = "linkLabel1";
@@ -517,6 +530,7 @@
             // 
             // linkLabel2
             // 
+            this.linkLabel2.ContextMenuStrip = this.cMenuStrip2CartonIDMain;
             this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.linkLabel2.Location = new System.Drawing.Point(3, 88);
             this.linkLabel2.Name = "linkLabel2";
@@ -569,6 +583,7 @@
             // 
             // linkLabel3
             // 
+            this.linkLabel3.ContextMenuStrip = this.cMenuStrip3PrintCartonLabel;
             this.linkLabel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.linkLabel3.Location = new System.Drawing.Point(3, 88);
             this.linkLabel3.Name = "linkLabel3";
@@ -665,6 +680,7 @@
             // 
             // linkLabel4
             // 
+            this.linkLabel4.ContextMenuStrip = this.cMenuStrip21ScanCartronLabel;
             this.linkLabel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.linkLabel4.Location = new System.Drawing.Point(3, 88);
             this.linkLabel4.Name = "linkLabel4";
@@ -717,6 +733,7 @@
             // 
             // linkLabel8
             // 
+            this.linkLabel8.ContextMenuStrip = this.c22MenuStripPiSystem;
             this.linkLabel8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.linkLabel8.Location = new System.Drawing.Point(3, 88);
             this.linkLabel8.Name = "linkLabel8";
@@ -866,13 +883,6 @@
             this.c11MenuStripVoid.Name = "cMenuStrip1ScanCartronLabel";
             this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 26);
             // 
-            // openDownLoadExcelFileToolStripMenuItem
-            // 
-            this.openDownLoadExcelFileToolStripMenuItem.Name = "openDownLoadExcelFileToolStripMenuItem";
-            this.openDownLoadExcelFileToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.openDownLoadExcelFileToolStripMenuItem.Text = "Open DownLoad &Excel file";
-            this.openDownLoadExcelFileToolStripMenuItem.Click += new System.EventHandler(this.openDownLoadExcelFileToolStripMenuItem_Click);
-            // 
             // frmIDR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -897,6 +907,7 @@
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel9.ResumeLayout(false);
@@ -922,6 +933,7 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ctmenusClose.ResumeLayout(false);
             this.c11MenuStripVoid.ResumeLayout(false);
@@ -1001,7 +1013,7 @@
         private System.Windows.Forms.LinkLabel linkLabel8;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem t1AboutAToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openDownLoadExcelFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolcMenu10UploadEPackingListExcelForKYCA;
 
 
 

@@ -69,7 +69,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.txt16RemarkAddNewBatchID = new System.Windows.Forms.TextBox();
             this.lbl_CartonGen = new System.Windows.Forms.Label();
-            this.txt13plr_suppliers_id = new System.Windows.Forms.TextBox();
+            this.txt13plr_suppliers_id_co = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txt12CartonprifixAddNewBatchID = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -457,7 +457,7 @@
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.txt16RemarkAddNewBatchID);
             this.groupBox1.Controls.Add(this.lbl_CartonGen);
-            this.groupBox1.Controls.Add(this.txt13plr_suppliers_id);
+            this.groupBox1.Controls.Add(this.txt13plr_suppliers_id_co);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.txt12CartonprifixAddNewBatchID);
             this.groupBox1.Controls.Add(this.label17);
@@ -552,26 +552,21 @@
             this.lbl_CartonGen.Text = "G";
             this.lbl_CartonGen.Visible = false;
             // 
-            // txt13plr_suppliers_id
+            // txt13plr_suppliers_id_co
             // 
-            this.txt13plr_suppliers_id.Enabled = false;
-            this.txt13plr_suppliers_id.Location = new System.Drawing.Point(399, 201);
-            this.txt13plr_suppliers_id.Name = "txt13plr_suppliers_id";
-            this.txt13plr_suppliers_id.Size = new System.Drawing.Size(152, 21);
-            this.txt13plr_suppliers_id.TabIndex = 61;
-            this.txt13plr_suppliers_id.Text = "not";
-            this.txt13plr_suppliers_id.Visible = false;
+            this.txt13plr_suppliers_id_co.Location = new System.Drawing.Point(399, 201);
+            this.txt13plr_suppliers_id_co.Name = "txt13plr_suppliers_id_co";
+            this.txt13plr_suppliers_id_co.Size = new System.Drawing.Size(152, 21);
+            this.txt13plr_suppliers_id_co.TabIndex = 61;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Enabled = false;
-            this.label14.Location = new System.Drawing.Point(312, 204);
+            this.label14.Location = new System.Drawing.Point(366, 204);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(83, 12);
+            this.label14.Size = new System.Drawing.Size(23, 12);
             this.label14.TabIndex = 83;
-            this.label14.Text = "Suppliers_id:";
-            this.label14.Visible = false;
+            this.label14.Text = "CO:";
             // 
             // txt12CartonprifixAddNewBatchID
             // 
@@ -845,7 +840,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txt16RemarkAddNewBatchID;
-        private System.Windows.Forms.TextBox txt13plr_suppliers_id;
+        private System.Windows.Forms.TextBox txt13plr_suppliers_id_co;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txt12CartonprifixAddNewBatchID;
         private System.Windows.Forms.Label label17;

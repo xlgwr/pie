@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FrmPIE</RootNamespace>
     <AssemblyName>IDR System</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -54,7 +54,7 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>irobot256.ico</ApplicationIcon>
+    <ApplicationIcon>t %2825%29.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="COM.Excel, Version=1.1.1606.17082, Culture=neutral">
@@ -67,27 +67,48 @@
       <HintPath>..\Lib\Excel.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\Lib\Npoi\dotnet2\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\trunk\Lib\reportviewer\2010\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\trunk\Lib\reportviewer\2010\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\Lib\Npoi\dotnet2\NPOI.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>..\Lib\Npoi\dotnet2\NPOI.OOXML.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\Lib\Npoi\dotnet2\NPOI.OpenXml4Net.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\Lib\Npoi\dotnet2\NPOI.OpenXmlFormats.dll</HintPath>
+      <HintPath>..\..\..\trunk\Lib\Npoi\dotnet4\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services">
       <Private>True</Private>
     </Reference>
@@ -102,6 +123,12 @@
     </Compile>
     <Compile Include="frmPIE\frm0BatchInfo.Designer.cs">
       <DependentUpon>frm0BatchInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPIE\frm111UploadExcelForKYCA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPIE\frm111UploadExcelForKYCA.Designer.cs">
+      <DependentUpon>frm111UploadExcelForKYCA.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPIE\frm111UploadExcel.cs">
       <SubType>Form</SubType>
@@ -202,6 +229,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reports\DataSet\PIReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PIReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Web References\WebReference100\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -214,6 +246,9 @@
     </Compile>
     <EmbeddedResource Include="frmPIE\frm0BatchInfo.resx">
       <DependentUpon>frm0BatchInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPIE\frm111UploadExcelForKYCA.resx">
+      <DependentUpon>frm111UploadExcelForKYCA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPIE\frm111UploadExcel.resx">
       <DependentUpon>frm111UploadExcel.cs</DependentUpon>
@@ -273,11 +308,19 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="0PackingInformationEntry.pptx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="0temple\templesforKYCA.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="reports\frmPI\rpt_piReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="0temple\temples.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="app.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
@@ -289,6 +332,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="reports\DataSet\PIReport.xsc">
+      <DependentUpon>PIReport.xsd</DependentUpon>
+    </None>
+    <None Include="reports\DataSet\PIReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PIReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="reports\DataSet\PIReport.xss">
+      <DependentUpon>PIReport.xsd</DependentUpon>
+    </None>
     <None Include="Web References\WebReference100\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -344,8 +398,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web References\WebReference100\Service.disco" />
+    <Content Include="t %2825%29.ico" />
     <None Include="Web References\WebReference208\UserLoginCheck.disco" />
+    <None Include="Web References\WebReference100\Service.disco" />
     <None Include="0DownLoadExcel\text.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -391,9 +446,9 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="reports\DataSet\" />
-    <Folder Include="reports\frmPI\" />
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
