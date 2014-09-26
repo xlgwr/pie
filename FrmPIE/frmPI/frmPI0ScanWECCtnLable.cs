@@ -13,8 +13,9 @@ using PIE.DBUtility;
 using System.Data.SqlClient;
 using PIE.Common;
 using System.Threading;
+using FrmPIE;
 
-namespace FrmPIE.frmPI
+namespace frmPI
 {
     public partial class frmPI0ScanWECCtnLable : Form
     {
@@ -795,7 +796,7 @@ namespace FrmPIE.frmPI
             cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh....", false, true);
             ShowMsg(" Refresh ......", "Notice");
             DataSet ds;
-            WebReference100.Service server100 = new WebReference100.Service();
+            FrmPIE.WebReference100.Service server100 = new FrmPIE.WebReference100.Service();
             server100.Timeout = 9000000;
             string existrir = "";
             string existrirsuccess = "";

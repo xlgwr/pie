@@ -118,6 +118,12 @@
   <ItemGroup>
     <Compile Include="0API\CartonFromTo.cs" />
     <Compile Include="0API\DoWrokObject.cs" />
+    <Compile Include="0temple\frmEnterTxt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="0temple\frmEnterTxt.Designer.cs">
+      <DependentUpon>frmEnterTxt.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPIE\frm0BatchInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +250,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="0temple\frmEnterTxt.resx">
+      <DependentUpon>frmEnterTxt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPIE\frm0BatchInfo.resx">
       <DependentUpon>frm0BatchInfo.cs</DependentUpon>
     </EmbeddedResource>

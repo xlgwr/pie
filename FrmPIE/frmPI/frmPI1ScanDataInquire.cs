@@ -8,8 +8,9 @@ using System.Threading;
 using System.Windows.Forms;
 
 using FrmPIE._0API;
+using FrmPIE;
 
-namespace FrmPIE.frmPI
+namespace frmPI
 {
     public partial class frmPI1ScanDataInquire : Form
     {

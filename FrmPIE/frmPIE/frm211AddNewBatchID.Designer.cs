@@ -1,4 +1,4 @@
-﻿namespace FrmPIE.frmPIE
+﻿namespace FrmPIE
 {
     partial class frm211AddNewBatchID
     {

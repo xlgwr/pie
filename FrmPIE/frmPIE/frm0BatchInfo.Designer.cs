@@ -1,4 +1,4 @@
-﻿namespace FrmPIE.frmPIE
+﻿namespace FrmPIE
 {
     partial class frm0BatchInfo
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -50,12 +51,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gb2det_BatchInfo = new System.Windows.Forms.GroupBox();
             this.data1GV1ePackingDet1_BatchInfo = new System.Windows.Forms.DataGridView();
+            this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox0BatchInfo0.SuspendLayout();
             this.gb3CartonNo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2CartonNO)).BeginInit();
             this.gb1mstr_BatchInfo.SuspendLayout();
             this.gb2det_BatchInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingDet1_BatchInfo)).BeginInit();
+            this.ctmenu0EnquireByPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox0BatchInfo0
@@ -237,6 +241,7 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data1GV1ePackingDet1_BatchInfo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.data1GV1ePackingDet1_BatchInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.data1GV1ePackingDet1_BatchInfo.ContextMenuStrip = this.ctmenu0EnquireByPart;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -261,6 +266,20 @@
             this.data1GV1ePackingDet1_BatchInfo.Size = new System.Drawing.Size(708, 214);
             this.data1GV1ePackingDet1_BatchInfo.TabIndex = 16;
             // 
+            // ctmenu0EnquireByPart
+            // 
+            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enquireByPartToolStripMenuItem});
+            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(166, 26);
+            // 
+            // enquireByPartToolStripMenuItem
+            // 
+            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            this.enquireByPartToolStripMenuItem.Click += new System.EventHandler(this.enquireByPartToolStripMenuItem_Click);
+            // 
             // frm0BatchInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -277,6 +296,7 @@
             this.gb1mstr_BatchInfo.PerformLayout();
             this.gb2det_BatchInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingDet1_BatchInfo)).EndInit();
+            this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -299,5 +319,7 @@
         protected internal System.Windows.Forms.DataGridView data1GV1ePackingDet1_BatchInfo;
         private System.Windows.Forms.GroupBox gb3CartonNo;
         protected internal System.Windows.Forms.DataGridView data2GV2CartonNO;
+        private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
+        private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
     }
 }

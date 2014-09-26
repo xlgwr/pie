@@ -21,6 +21,7 @@ using Microsoft.Reporting.WinForms;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using frmPI;
 
 namespace FrmPIE._0API
 {
@@ -43,6 +44,7 @@ namespace FrmPIE._0API
         public DataGridView _shareDgv;
         PIE.Model.plr_mstr _plr_mstr_model = new PIE.Model.plr_mstr();
         PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
+        public int intnext = 0;
         public Commfunction(frmIDR idr)
         {
             _idr_show = idr;
@@ -1348,7 +1350,7 @@ namespace FrmPIE._0API
 
         }
 
-        public void UploadtoERP(frmPIE.frm412UploadToERP frm4uploadToERP)
+        public void UploadtoERP(frm412UploadToERP frm4uploadToERP)
         {
             try
             {
@@ -1528,7 +1530,7 @@ namespace FrmPIE._0API
             string messageBox = "";
             string messageBoxError = "";
 
-            frmPIE.frm513PrintCartonLabel frm513PCL = (frmPIE.frm513PrintCartonLabel)_cartonfromto._objclass;
+            frm513PrintCartonLabel frm513PCL = (frm513PrintCartonLabel)_cartonfromto._objclass;
             decimal wec_ctn_Fr = _cartonfromto._wec_ctn_Fr;
             decimal wec_ctn_To = _cartonfromto._wec_ctn_To;
             string print_Type = _cartonfromto._print_Type;
@@ -1553,7 +1555,7 @@ namespace FrmPIE._0API
                 int listcount = plr_mstr_tran_list.Count;
                 if (listcount > 0)
                 {
-                   
+
 
                     if (print_Type.Equals("ZPL"))
                     {
@@ -1582,7 +1584,7 @@ namespace FrmPIE._0API
                         {
                             if (plr_mstr_tran_list[i].plr_status.Equals("Yes"))
                             {
-                                MessageBox.Show(strWhere + ",LineID:"+plr_mstr_tran_list[i].LineID+" is Void,Can't Print.");
+                                MessageBox.Show(strWhere + ",LineID:" + plr_mstr_tran_list[i].LineID + " is Void,Can't Print.");
                                 SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
                                 SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg, true, true);
                                 SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
@@ -1879,7 +1881,7 @@ namespace FrmPIE._0API
         /// set dgv,dgv1,ex,ey;
         /// </summary>
         /// <param name="dwo">dgv,dgv1,ex,ey</param>
-        public void selectCellMethod(DoWrokObject dwo, string strPIID, bool mainDataGV, frmPI.frmPI1ScanDataInquire frmpi1)
+        public void selectCellMethod(DoWrokObject dwo, string strPIID, bool mainDataGV, frmPI1ScanDataInquire frmpi1)
         {
 
 
@@ -2155,6 +2157,50 @@ namespace FrmPIE._0API
             }
 
 
+        }
+        public void initOpenFile(string file, string filename)
+        {
+            string allfileNamepath;
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + file;
+            if (string.IsNullOrEmpty(filename))
+            {
+
+                allfileNamepath = pathname;
+            }
+            else
+            {
+
+                allfileNamepath = System.IO.Path.Combine(pathname, filename);
+            }
+            OpenFolderAndSelectFile(allfileNamepath);
+        }
+        public void EnquireByPart(DataGridView dgv, string cellsHeader, string strcontains)
+        {
+
+            int rowcount = dgv.Rows.Count;
+            if (rowcount > 0)
+            {
+                for (int i = intnext; i < rowcount - 1; i++)
+                {
+                    if (dgv.Rows[i].Cells[cellsHeader].Value.ToString().ToLower().Contains(strcontains.ToLower()))
+                    {
+
+                        dgv.Rows[i].Cells[cellsHeader].Selected = true;
+
+                        intnext = i + 1;
+                        if (intnext >= rowcount - 1)
+                        {
+                            intnext = 0;
+                        }
+                        break;
+                    }
+                    if (i >= rowcount - 2)
+                    {
+                        intnext = 0;
+                        dgv.ClearSelection();
+                    }
+                }
+            }
         }
         /////////////////////////////////////
         //start place

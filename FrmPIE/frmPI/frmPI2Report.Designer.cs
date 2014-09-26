@@ -1,4 +1,4 @@
-﻿namespace FrmPIE.frmPI
+﻿namespace FrmPIE
 {
     partial class frmPI2Report
     {

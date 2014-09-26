@@ -1,4 +1,4 @@
-﻿namespace FrmPIE.frmPIE
+﻿namespace FrmPIE
 {
     partial class frmUploadExcel
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -53,11 +54,14 @@
             this.txt0ExcelFileUploadExcel = new System.Windows.Forms.TextBox();
             this.btn3QuickUploadExcel = new System.Windows.Forms.Button();
             this.btnCmdUpdUploadExcel = new System.Windows.Forms.Button();
+            this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox0frmUploadExcel.SuspendLayout();
             this.groupBox2mstrUploadExcel.SuspendLayout();
             this.groupBox3detUploadExcel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingDet1UploadExcel)).BeginInit();
             this.groupBox1browseUploadExcel.SuspendLayout();
+            this.ctmenu0EnquireByPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox0frmUploadExcel
@@ -198,6 +202,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data1GV1ePackingDet1UploadExcel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.data1GV1ePackingDet1UploadExcel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.data1GV1ePackingDet1UploadExcel.ContextMenuStrip = this.ctmenu0EnquireByPart;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -295,6 +300,20 @@
             this.btnCmdUpdUploadExcel.Visible = false;
             this.btnCmdUpdUploadExcel.Click += new System.EventHandler(this.btnCmdUpdUploadExcel_Click);
             // 
+            // ctmenu0EnquireByPart
+            // 
+            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enquireByPartToolStripMenuItem});
+            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(166, 26);
+            // 
+            // enquireByPartToolStripMenuItem
+            // 
+            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            this.enquireByPartToolStripMenuItem.Click += new System.EventHandler(this.enquireByPartToolStripMenuItem_Click);
+            // 
             // frmUploadExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -316,6 +335,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingDet1UploadExcel)).EndInit();
             this.groupBox1browseUploadExcel.ResumeLayout(false);
             this.groupBox1browseUploadExcel.PerformLayout();
+            this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -343,6 +363,8 @@
         private System.Windows.Forms.GroupBox groupBox3detUploadExcel;
         protected internal System.Windows.Forms.DataGridView data1GV1ePackingDet1UploadExcel;
         private System.Windows.Forms.Button btn3QuickUploadExcel;
+        private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
+        private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
 
     }
 }

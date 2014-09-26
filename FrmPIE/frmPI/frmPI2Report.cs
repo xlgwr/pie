@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrmPIE.frmPI
+namespace FrmPIE
 {
     public partial class frmPI2Report : Form
     {

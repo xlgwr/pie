@@ -22,10 +22,12 @@ using NPOI.XSSF.UserModel;
 
 
 
-namespace FrmPIE.frmPIE
+namespace FrmPIE
 {
     public partial class frm111UploadExcelForKYCA : Form
     {
+        frmEnterTxt _frmET;
+
         frmIDR _idr_show;
         Commfunction cf;
         SqlConnection connection;
@@ -1041,6 +1043,45 @@ namespace FrmPIE.frmPIE
         {
             _idr_show.AcceptButton = btnCmdUpdUploadExcel;
         }
+
+        private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmET = new frmEnterTxt(_idr_show, this);
+            _frmET.button1.Click += enquireByPart;
+            _frmET.lblTitle.Text = "Part#:";
+            _frmET.Text = "Enquire by Part:";
+            _frmET.ShowDialog();
+        }
+
+        void enquireByPart(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                return;
+            }
+            cf.EnquireByPart(data1GV1ePackingDet1UploadExcel, "plr_partno", _frmET.textBox1.Text.Trim());
+        }
+        void enquireByPart1(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                return;
+            }
+            cf.EnquireByPart(data2GV2ePackingDet1UploadExcelError, "plr_partno", _frmET.textBox1.Text.Trim());
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            _frmET = new frmEnterTxt(_idr_show, this);
+            _frmET.button1.Click += enquireByPart1;
+            _frmET.lblTitle.Text = "Part#:";
+            _frmET.Text = "Enquire by Part:";
+            _frmET.ShowDialog();
+        }
+
+
 
     }
 }

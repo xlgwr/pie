@@ -42,6 +42,7 @@
             this.status125toolBtnClear = new System.Windows.Forms.ToolStripSplitButton();
             this.clearNoticeMsgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPrintFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openDownloadExcelFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.status13toolSStatusLblMsg = new System.Windows.Forms.ToolStripStatusLabel();
             this.status14toolLabelCellRowColXY = new System.Windows.Forms.ToolStripStatusLabel();
             this.status15toolLabelstrResult = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,39 +55,18 @@
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolSatusLableft1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabCtlRight1 = new System.Windows.Forms.TabControl();
-            this.tabPageHome1 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn1PackingListMaintain1 = new System.Windows.Forms.Button();
             this.cMenuStrip1PacklingListMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolcMenu11UploadEPackingListExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolcMenu10UploadEPackingListExcelForKYCA = new System.Windows.Forms.ToolStripMenuItem();
             this.toolcMenu12AddOneByOneBatchID = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn2GenCarton2 = new System.Windows.Forms.Button();
             this.cMenuStrip2CartonIDMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem22UploadCartonIDToERP = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn3PrintCartonLabel3 = new System.Windows.Forms.Button();
             this.cMenuStrip3PrintCartonLabel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem31btnPrintCartonLabel3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.lblSystemName = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn21ScanCartronLabel21 = new System.Windows.Forms.Button();
             this.cMenuStrip21ScanCartronLabel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tool1StripMenuItem21ScanCartronLabel = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn24PIReports = new System.Windows.Forms.Button();
             this.c22MenuStripPiSystem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkLabel8 = new System.Windows.Forms.LinkLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lbl0SearchError = new System.Windows.Forms.Label();
             this.btn0Find9 = new System.Windows.Forms.Button();
@@ -100,6 +80,27 @@
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabPageHome1 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn1PackingListMaintain1 = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn2GenCarton2 = new System.Windows.Forms.Button();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn3PrintCartonLabel3 = new System.Windows.Forms.Button();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.lblSystemName = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn21ScanCartronLabel21 = new System.Windows.Forms.Button();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+            this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn24PIReports = new System.Windows.Forms.Button();
+            this.linkLabel8 = new System.Windows.Forms.LinkLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -110,20 +111,10 @@
             this.flowLayoutPanel9.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.tabCtlRight1.SuspendLayout();
-            this.tabPageHome1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.cMenuStrip1PacklingListMain.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
             this.cMenuStrip2CartonIDMain.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
             this.cMenuStrip3PrintCartonLabel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.flowLayoutPanel4.SuspendLayout();
             this.cMenuStrip21ScanCartronLabel.SuspendLayout();
-            this.flowLayoutPanel8.SuspendLayout();
             this.c22MenuStripPiSystem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -131,6 +122,16 @@
             this.splitContainer1.SuspendLayout();
             this.ctmenusClose.SuspendLayout();
             this.c11MenuStripVoid.SuspendLayout();
+            this.tabPageHome1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -176,7 +177,7 @@
             // 
             // cmb1SearchType
             // 
-            this.cmb1SearchType.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb1SearchType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmb1SearchType.FormattingEnabled = true;
             this.cmb1SearchType.Items.AddRange(new object[] {
             "BatchID",
@@ -225,7 +226,8 @@
             this.status125toolBtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.status125toolBtnClear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearNoticeMsgToolStripMenuItem,
-            this.openPrintFileToolStripMenuItem});
+            this.openPrintFileToolStripMenuItem,
+            this.openDownloadExcelFileToolStripMenuItem});
             this.status125toolBtnClear.Image = ((System.Drawing.Image)(resources.GetObject("status125toolBtnClear.Image")));
             this.status125toolBtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.status125toolBtnClear.Name = "status125toolBtnClear";
@@ -235,16 +237,23 @@
             // clearNoticeMsgToolStripMenuItem
             // 
             this.clearNoticeMsgToolStripMenuItem.Name = "clearNoticeMsgToolStripMenuItem";
-            this.clearNoticeMsgToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.clearNoticeMsgToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.clearNoticeMsgToolStripMenuItem.Text = "&ClearNoticeMessage";
             this.clearNoticeMsgToolStripMenuItem.Click += new System.EventHandler(this.clearNoticeMsgToolStripMenuItem_Click);
             // 
             // openPrintFileToolStripMenuItem
             // 
             this.openPrintFileToolStripMenuItem.Name = "openPrintFileToolStripMenuItem";
-            this.openPrintFileToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.openPrintFileToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.openPrintFileToolStripMenuItem.Text = "&Open Print File";
             this.openPrintFileToolStripMenuItem.Click += new System.EventHandler(this.openPrintFileToolStripMenuItem_Click);
+            // 
+            // openDownloadExcelFileToolStripMenuItem
+            // 
+            this.openDownloadExcelFileToolStripMenuItem.Name = "openDownloadExcelFileToolStripMenuItem";
+            this.openDownloadExcelFileToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.openDownloadExcelFileToolStripMenuItem.Text = "Open &Download Excel File";
+            this.openDownloadExcelFileToolStripMenuItem.Click += new System.EventHandler(this.openDownLoadExcelFileToolStripMenuItem_Click);
             // 
             // status13toolSStatusLblMsg
             // 
@@ -264,7 +273,7 @@
             // 
             // txt0SearchID
             // 
-            this.txt0SearchID.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0SearchID.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txt0SearchID.Location = new System.Drawing.Point(282, 13);
             this.txt0SearchID.Name = "txt0SearchID";
             this.txt0SearchID.Size = new System.Drawing.Size(159, 26);
@@ -375,72 +384,6 @@
             this.tabCtlRight1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabCtlRight1_MouseMove);
             this.tabCtlRight1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tabCtlRight1_MouseUp);
             // 
-            // tabPageHome1
-            // 
-            this.tabPageHome1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPageHome1.Location = new System.Drawing.Point(4, 22);
-            this.tabPageHome1.Name = "tabPageHome1";
-            this.tabPageHome1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome1.Size = new System.Drawing.Size(624, 415);
-            this.tabPageHome1.TabIndex = 0;
-            this.tabPageHome1.Text = "Home";
-            this.tabPageHome1.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblSystemName, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox3, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel4, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel8, 2, 3);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(618, 409);
-            this.tableLayoutPanel1.TabIndex = 51;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.btn1PackingListMaintain1);
-            this.flowLayoutPanel1.Controls.Add(this.linkLabel1);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 68);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(148, 120);
-            this.flowLayoutPanel1.TabIndex = 2;
-            // 
-            // btn1PackingListMaintain1
-            // 
-            this.btn1PackingListMaintain1.BackgroundImage = global::FrmPIE.Properties.Resources.add_file;
-            this.btn1PackingListMaintain1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn1PackingListMaintain1.ContextMenuStrip = this.cMenuStrip1PacklingListMain;
-            this.btn1PackingListMaintain1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn1PackingListMaintain1.Location = new System.Drawing.Point(3, 3);
-            this.btn1PackingListMaintain1.Name = "btn1PackingListMaintain1";
-            this.btn1PackingListMaintain1.Size = new System.Drawing.Size(145, 82);
-            this.btn1PackingListMaintain1.TabIndex = 2;
-            this.btn1PackingListMaintain1.Text = "1";
-            this.btn1PackingListMaintain1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn1PackingListMaintain1.UseVisualStyleBackColor = true;
-            this.btn1PackingListMaintain1.Click += new System.EventHandler(this.btnPackingListMaintain1_Click);
-            // 
             // cMenuStrip1PacklingListMain
             // 
             this.cMenuStrip1PacklingListMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -474,44 +417,6 @@
             this.toolcMenu12AddOneByOneBatchID.Text = "&Add New(Edit BatchID)";
             this.toolcMenu12AddOneByOneBatchID.Click += new System.EventHandler(this.toolcMenu12AddOneByOneBatchID_Click);
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.ContextMenuStrip = this.cMenuStrip1PacklingListMain;
-            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel1.Location = new System.Drawing.Point(3, 88);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(145, 23);
-            this.linkLabel1.TabIndex = 4;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Packing List Maintain";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.btn2GenCarton2);
-            this.flowLayoutPanel2.Controls.Add(this.linkLabel2);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(212, 68);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(191, 120);
-            this.flowLayoutPanel2.TabIndex = 3;
-            // 
-            // btn2GenCarton2
-            // 
-            this.btn2GenCarton2.BackgroundImage = global::FrmPIE.Properties.Resources.packages;
-            this.btn2GenCarton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn2GenCarton2.ContextMenuStrip = this.cMenuStrip2CartonIDMain;
-            this.btn2GenCarton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn2GenCarton2.Location = new System.Drawing.Point(3, 3);
-            this.btn2GenCarton2.Name = "btn2GenCarton2";
-            this.btn2GenCarton2.Size = new System.Drawing.Size(176, 82);
-            this.btn2GenCarton2.TabIndex = 2;
-            this.btn2GenCarton2.Text = "2";
-            this.btn2GenCarton2.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn2GenCarton2.UseVisualStyleBackColor = true;
-            this.btn2GenCarton2.Click += new System.EventHandler(this.btnGenCarton2_Click);
-            // 
             // cMenuStrip2CartonIDMain
             // 
             this.cMenuStrip2CartonIDMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -528,44 +433,6 @@
             this.toolStripMenuItem22UploadCartonIDToERP.Text = "&Upload CartonID To ERP";
             this.toolStripMenuItem22UploadCartonIDToERP.Click += new System.EventHandler(this.toolStripMenuItem22UploadCartonIDToERP_Click);
             // 
-            // linkLabel2
-            // 
-            this.linkLabel2.ContextMenuStrip = this.cMenuStrip2CartonIDMain;
-            this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel2.Location = new System.Drawing.Point(3, 88);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(176, 23);
-            this.linkLabel2.TabIndex = 5;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "CartonID Maintain";
-            this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.btn3PrintCartonLabel3);
-            this.flowLayoutPanel3.Controls.Add(this.linkLabel3);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(464, 68);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(151, 120);
-            this.flowLayoutPanel3.TabIndex = 4;
-            // 
-            // btn3PrintCartonLabel3
-            // 
-            this.btn3PrintCartonLabel3.BackgroundImage = global::FrmPIE.Properties.Resources.bar1;
-            this.btn3PrintCartonLabel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn3PrintCartonLabel3.ContextMenuStrip = this.cMenuStrip3PrintCartonLabel;
-            this.btn3PrintCartonLabel3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn3PrintCartonLabel3.Location = new System.Drawing.Point(3, 3);
-            this.btn3PrintCartonLabel3.Name = "btn3PrintCartonLabel3";
-            this.btn3PrintCartonLabel3.Size = new System.Drawing.Size(148, 82);
-            this.btn3PrintCartonLabel3.TabIndex = 2;
-            this.btn3PrintCartonLabel3.Text = "3";
-            this.btn3PrintCartonLabel3.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn3PrintCartonLabel3.UseVisualStyleBackColor = true;
-            this.btn3PrintCartonLabel3.Click += new System.EventHandler(this.btnPrintCartonLabel3_Click);
-            // 
             // cMenuStrip3PrintCartonLabel
             // 
             this.cMenuStrip3PrintCartonLabel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -580,88 +447,6 @@
             this.toolStripMenuItem31btnPrintCartonLabel3.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem31btnPrintCartonLabel3.Text = "&Print Carton Label";
             this.toolStripMenuItem31btnPrintCartonLabel3.Click += new System.EventHandler(this.toolStripMenuItem31btnPrintCartonLabel3_Click);
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.ContextMenuStrip = this.cMenuStrip3PrintCartonLabel;
-            this.linkLabel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel3.Location = new System.Drawing.Point(3, 88);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(148, 23);
-            this.linkLabel3.TabIndex = 6;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "Print Carton Label";
-            this.linkLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSystemName
-            // 
-            this.lblSystemName.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.lblSystemName, 2);
-            this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSystemName.Font = new System.Drawing.Font("Microsoft YaHei", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblSystemName.Location = new System.Drawing.Point(212, 0);
-            this.lblSystemName.Name = "lblSystemName";
-            this.lblSystemName.Size = new System.Drawing.Size(246, 65);
-            this.lblSystemName.TabIndex = 10;
-            this.lblSystemName.Text = "IDR Solution";
-            this.lblSystemName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::FrmPIE.Properties.Resources._14;
-            this.pictureBox1.Location = new System.Drawing.Point(157, 68);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(49, 120);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Image = global::FrmPIE.Properties.Resources._14;
-            this.pictureBox2.Location = new System.Drawing.Point(409, 68);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(49, 120);
-            this.pictureBox2.TabIndex = 14;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Image = global::FrmPIE.Properties.Resources._14;
-            this.pictureBox3.Location = new System.Drawing.Point(157, 234);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(49, 120);
-            this.pictureBox3.TabIndex = 13;
-            this.pictureBox3.TabStop = false;
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.btn21ScanCartronLabel21);
-            this.flowLayoutPanel4.Controls.Add(this.linkLabel4);
-            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 234);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(148, 120);
-            this.flowLayoutPanel4.TabIndex = 5;
-            // 
-            // btn21ScanCartronLabel21
-            // 
-            this.btn21ScanCartronLabel21.BackgroundImage = global::FrmPIE.Properties.Resources.scanBar;
-            this.btn21ScanCartronLabel21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn21ScanCartronLabel21.ContextMenuStrip = this.cMenuStrip21ScanCartronLabel;
-            this.btn21ScanCartronLabel21.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn21ScanCartronLabel21.Location = new System.Drawing.Point(3, 3);
-            this.btn21ScanCartronLabel21.Name = "btn21ScanCartronLabel21";
-            this.btn21ScanCartronLabel21.Size = new System.Drawing.Size(145, 82);
-            this.btn21ScanCartronLabel21.TabIndex = 7;
-            this.btn21ScanCartronLabel21.Text = "1";
-            this.btn21ScanCartronLabel21.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn21ScanCartronLabel21.UseVisualStyleBackColor = true;
-            this.btn21ScanCartronLabel21.Click += new System.EventHandler(this.btn1ScanCartronLabel21_Click);
             // 
             // cMenuStrip21ScanCartronLabel
             // 
@@ -678,44 +463,6 @@
             this.tool1StripMenuItem21ScanCartronLabel.Text = "&Scan Ctn lable";
             this.tool1StripMenuItem21ScanCartronLabel.Click += new System.EventHandler(this.tool1StripMenuItem21ScanCartronLabel_Click);
             // 
-            // linkLabel4
-            // 
-            this.linkLabel4.ContextMenuStrip = this.cMenuStrip21ScanCartronLabel;
-            this.linkLabel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel4.Location = new System.Drawing.Point(3, 88);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(145, 23);
-            this.linkLabel4.TabIndex = 8;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "Scan Carton Label";
-            this.linkLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // flowLayoutPanel8
-            // 
-            this.flowLayoutPanel8.Controls.Add(this.btn24PIReports);
-            this.flowLayoutPanel8.Controls.Add(this.linkLabel8);
-            this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel8.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(212, 234);
-            this.flowLayoutPanel8.Name = "flowLayoutPanel8";
-            this.flowLayoutPanel8.Size = new System.Drawing.Size(191, 120);
-            this.flowLayoutPanel8.TabIndex = 9;
-            // 
-            // btn24PIReports
-            // 
-            this.btn24PIReports.BackgroundImage = global::FrmPIE.Properties.Resources.doc;
-            this.btn24PIReports.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn24PIReports.ContextMenuStrip = this.c22MenuStripPiSystem;
-            this.btn24PIReports.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn24PIReports.Location = new System.Drawing.Point(3, 3);
-            this.btn24PIReports.Name = "btn24PIReports";
-            this.btn24PIReports.Size = new System.Drawing.Size(176, 82);
-            this.btn24PIReports.TabIndex = 13;
-            this.btn24PIReports.Text = "2";
-            this.btn24PIReports.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn24PIReports.UseVisualStyleBackColor = true;
-            this.btn24PIReports.Click += new System.EventHandler(this.btn24PIReports_Click);
-            // 
             // c22MenuStripPiSystem
             // 
             this.c22MenuStripPiSystem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -730,18 +477,6 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(178, 22);
             this.toolStripMenuItem1.Text = "&Enquire Pi Report";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // linkLabel8
-            // 
-            this.linkLabel8.ContextMenuStrip = this.c22MenuStripPiSystem;
-            this.linkLabel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel8.Location = new System.Drawing.Point(3, 88);
-            this.linkLabel8.Name = "linkLabel8";
-            this.linkLabel8.Size = new System.Drawing.Size(176, 23);
-            this.linkLabel8.TabIndex = 14;
-            this.linkLabel8.TabStop = true;
-            this.linkLabel8.Text = "PI Reports";
-            this.linkLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // splitContainer1
             // 
@@ -883,6 +618,275 @@
             this.c11MenuStripVoid.Name = "cMenuStrip1ScanCartronLabel";
             this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 26);
             // 
+            // tabPageHome1
+            // 
+            this.tabPageHome1.Controls.Add(this.tableLayoutPanel1);
+            this.tabPageHome1.Location = new System.Drawing.Point(4, 22);
+            this.tabPageHome1.Name = "tabPageHome1";
+            this.tabPageHome1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageHome1.Size = new System.Drawing.Size(624, 415);
+            this.tabPageHome1.TabIndex = 0;
+            this.tabPageHome1.Text = "Home";
+            this.tabPageHome1.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblSystemName, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox3, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel4, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel8, 2, 3);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(618, 409);
+            this.tableLayoutPanel1.TabIndex = 52;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btn1PackingListMaintain1);
+            this.flowLayoutPanel1.Controls.Add(this.linkLabel1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 68);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(148, 120);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // btn1PackingListMaintain1
+            // 
+            this.btn1PackingListMaintain1.BackgroundImage = global::FrmPIE.Properties.Resources.add_file;
+            this.btn1PackingListMaintain1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn1PackingListMaintain1.ContextMenuStrip = this.cMenuStrip1PacklingListMain;
+            this.btn1PackingListMaintain1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn1PackingListMaintain1.Location = new System.Drawing.Point(3, 3);
+            this.btn1PackingListMaintain1.Name = "btn1PackingListMaintain1";
+            this.btn1PackingListMaintain1.Size = new System.Drawing.Size(145, 82);
+            this.btn1PackingListMaintain1.TabIndex = 2;
+            this.btn1PackingListMaintain1.Text = "1";
+            this.btn1PackingListMaintain1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn1PackingListMaintain1.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.ContextMenuStrip = this.cMenuStrip1PacklingListMain;
+            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.linkLabel1.Location = new System.Drawing.Point(3, 88);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(145, 23);
+            this.linkLabel1.TabIndex = 4;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Packing List Maintain";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.btn2GenCarton2);
+            this.flowLayoutPanel2.Controls.Add(this.linkLabel2);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(212, 68);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(191, 120);
+            this.flowLayoutPanel2.TabIndex = 3;
+            // 
+            // btn2GenCarton2
+            // 
+            this.btn2GenCarton2.BackgroundImage = global::FrmPIE.Properties.Resources.packages;
+            this.btn2GenCarton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn2GenCarton2.ContextMenuStrip = this.cMenuStrip2CartonIDMain;
+            this.btn2GenCarton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn2GenCarton2.Location = new System.Drawing.Point(3, 3);
+            this.btn2GenCarton2.Name = "btn2GenCarton2";
+            this.btn2GenCarton2.Size = new System.Drawing.Size(176, 82);
+            this.btn2GenCarton2.TabIndex = 2;
+            this.btn2GenCarton2.Text = "2";
+            this.btn2GenCarton2.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn2GenCarton2.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.ContextMenuStrip = this.cMenuStrip2CartonIDMain;
+            this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.linkLabel2.Location = new System.Drawing.Point(3, 88);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(176, 23);
+            this.linkLabel2.TabIndex = 5;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "CartonID Maintain";
+            this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.btn3PrintCartonLabel3);
+            this.flowLayoutPanel3.Controls.Add(this.linkLabel3);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(464, 68);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(151, 120);
+            this.flowLayoutPanel3.TabIndex = 4;
+            // 
+            // btn3PrintCartonLabel3
+            // 
+            this.btn3PrintCartonLabel3.BackgroundImage = global::FrmPIE.Properties.Resources.bar1;
+            this.btn3PrintCartonLabel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn3PrintCartonLabel3.ContextMenuStrip = this.cMenuStrip3PrintCartonLabel;
+            this.btn3PrintCartonLabel3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn3PrintCartonLabel3.Location = new System.Drawing.Point(3, 3);
+            this.btn3PrintCartonLabel3.Name = "btn3PrintCartonLabel3";
+            this.btn3PrintCartonLabel3.Size = new System.Drawing.Size(148, 82);
+            this.btn3PrintCartonLabel3.TabIndex = 2;
+            this.btn3PrintCartonLabel3.Text = "3";
+            this.btn3PrintCartonLabel3.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn3PrintCartonLabel3.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.ContextMenuStrip = this.cMenuStrip3PrintCartonLabel;
+            this.linkLabel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.linkLabel3.Location = new System.Drawing.Point(3, 88);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(148, 23);
+            this.linkLabel3.TabIndex = 6;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "Print Carton Label";
+            this.linkLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSystemName
+            // 
+            this.lblSystemName.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.lblSystemName, 2);
+            this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSystemName.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSystemName.Location = new System.Drawing.Point(212, 0);
+            this.lblSystemName.Name = "lblSystemName";
+            this.lblSystemName.Size = new System.Drawing.Size(246, 65);
+            this.lblSystemName.TabIndex = 10;
+            this.lblSystemName.Text = "IDR Solution";
+            this.lblSystemName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::FrmPIE.Properties.Resources._14;
+            this.pictureBox1.Location = new System.Drawing.Point(157, 68);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(49, 120);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox2.Image = global::FrmPIE.Properties.Resources._14;
+            this.pictureBox2.Location = new System.Drawing.Point(409, 68);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(49, 120);
+            this.pictureBox2.TabIndex = 14;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox3.Image = global::FrmPIE.Properties.Resources._14;
+            this.pictureBox3.Location = new System.Drawing.Point(157, 234);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(49, 120);
+            this.pictureBox3.TabIndex = 13;
+            this.pictureBox3.TabStop = false;
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.btn21ScanCartronLabel21);
+            this.flowLayoutPanel4.Controls.Add(this.linkLabel4);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 234);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(148, 120);
+            this.flowLayoutPanel4.TabIndex = 5;
+            // 
+            // btn21ScanCartronLabel21
+            // 
+            this.btn21ScanCartronLabel21.BackgroundImage = global::FrmPIE.Properties.Resources.scanBar;
+            this.btn21ScanCartronLabel21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn21ScanCartronLabel21.ContextMenuStrip = this.cMenuStrip21ScanCartronLabel;
+            this.btn21ScanCartronLabel21.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn21ScanCartronLabel21.Location = new System.Drawing.Point(3, 3);
+            this.btn21ScanCartronLabel21.Name = "btn21ScanCartronLabel21";
+            this.btn21ScanCartronLabel21.Size = new System.Drawing.Size(145, 82);
+            this.btn21ScanCartronLabel21.TabIndex = 7;
+            this.btn21ScanCartronLabel21.Text = "1";
+            this.btn21ScanCartronLabel21.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn21ScanCartronLabel21.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel4
+            // 
+            this.linkLabel4.ContextMenuStrip = this.cMenuStrip21ScanCartronLabel;
+            this.linkLabel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.linkLabel4.Location = new System.Drawing.Point(3, 88);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(145, 23);
+            this.linkLabel4.TabIndex = 8;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Text = "Scan Carton Label";
+            this.linkLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // flowLayoutPanel8
+            // 
+            this.flowLayoutPanel8.Controls.Add(this.btn24PIReports);
+            this.flowLayoutPanel8.Controls.Add(this.linkLabel8);
+            this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel8.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(212, 234);
+            this.flowLayoutPanel8.Name = "flowLayoutPanel8";
+            this.flowLayoutPanel8.Size = new System.Drawing.Size(191, 120);
+            this.flowLayoutPanel8.TabIndex = 9;
+            // 
+            // btn24PIReports
+            // 
+            this.btn24PIReports.BackgroundImage = global::FrmPIE.Properties.Resources.doc;
+            this.btn24PIReports.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn24PIReports.ContextMenuStrip = this.c22MenuStripPiSystem;
+            this.btn24PIReports.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn24PIReports.Location = new System.Drawing.Point(3, 3);
+            this.btn24PIReports.Name = "btn24PIReports";
+            this.btn24PIReports.Size = new System.Drawing.Size(176, 82);
+            this.btn24PIReports.TabIndex = 13;
+            this.btn24PIReports.Text = "2";
+            this.btn24PIReports.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn24PIReports.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel8
+            // 
+            this.linkLabel8.ContextMenuStrip = this.c22MenuStripPiSystem;
+            this.linkLabel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.linkLabel8.Location = new System.Drawing.Point(3, 88);
+            this.linkLabel8.Name = "linkLabel8";
+            this.linkLabel8.Size = new System.Drawing.Size(176, 23);
+            this.linkLabel8.TabIndex = 14;
+            this.linkLabel8.TabStop = true;
+            this.linkLabel8.Text = "PI Reports";
+            this.linkLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmIDR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -914,21 +918,10 @@
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
             this.tabCtlRight1.ResumeLayout(false);
-            this.tabPageHome1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.cMenuStrip1PacklingListMain.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
             this.cMenuStrip2CartonIDMain.ResumeLayout(false);
-            this.flowLayoutPanel3.ResumeLayout(false);
             this.cMenuStrip3PrintCartonLabel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.flowLayoutPanel4.ResumeLayout(false);
             this.cMenuStrip21ScanCartronLabel.ResumeLayout(false);
-            this.flowLayoutPanel8.ResumeLayout(false);
             this.c22MenuStripPiSystem.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -937,6 +930,17 @@
             this.splitContainer1.ResumeLayout(false);
             this.ctmenusClose.ResumeLayout(false);
             this.c11MenuStripVoid.ResumeLayout(false);
+            this.tabPageHome1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel8.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -963,34 +967,15 @@
         private System.Windows.Forms.ToolStripMenuItem closeAllButThisToolStripMenuItem3;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel toolSatusLableft1;
-        private System.Windows.Forms.TabPage tabPageHome1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btn1PackingListMaintain1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Button btn2GenCarton2;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.Button btn3PrintCartonLabel3;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.Label lblSystemName;
         private System.Windows.Forms.ContextMenuStrip cMenuStrip1PacklingListMain;
         private System.Windows.Forms.ToolStripMenuItem toolcMenu11UploadEPackingListExcel;
         private System.Windows.Forms.ToolStripMenuItem toolcMenu12AddOneByOneBatchID;
         private System.Windows.Forms.ContextMenuStrip cMenuStrip2CartonIDMain;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ContextMenuStrip cMenuStrip3PrintCartonLabel;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem31btnPrintCartonLabel3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem22UploadCartonIDToERP;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button btn21ScanCartronLabel21;
-        private System.Windows.Forms.LinkLabel linkLabel4;
         protected internal System.Windows.Forms.TabControl tabCtlRight1;
         private System.Windows.Forms.ContextMenuStrip cMenuStrip21ScanCartronLabel;
         private System.Windows.Forms.ToolStripMenuItem tool1StripMenuItem21ScanCartronLabel;
@@ -1009,11 +994,31 @@
         private System.Windows.Forms.ToolStripMenuItem openPrintFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tool110StripMenuItemVoid;
         protected internal System.Windows.Forms.ContextMenuStrip c11MenuStripVoid;
-        private System.Windows.Forms.Button btn24PIReports;
-        private System.Windows.Forms.LinkLabel linkLabel8;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem t1AboutAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolcMenu10UploadEPackingListExcelForKYCA;
+        private System.Windows.Forms.ToolStripMenuItem openDownloadExcelFileToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPageHome1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btn1PackingListMaintain1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Button btn2GenCarton2;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.Button btn3PrintCartonLabel3;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.Label lblSystemName;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.Button btn21ScanCartronLabel21;
+        private System.Windows.Forms.LinkLabel linkLabel4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
+        private System.Windows.Forms.Button btn24PIReports;
+        private System.Windows.Forms.LinkLabel linkLabel8;
 
 
 
