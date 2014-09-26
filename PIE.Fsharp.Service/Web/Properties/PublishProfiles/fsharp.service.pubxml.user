@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>G:\0work\publish\fsharp.wcf</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Contracts.dll">
+      <publishTime>09/24/2014 09:37:16</publishTime>
+    </File>
+    <File Include="bin/FSharp.Core.dll">
+      <publishTime>06/02/2014 20:17:24</publishTime>
+    </File>
+    <File Include="bin/Services.dll">
+      <publishTime>09/24/2014 09:36:43</publishTime>
+    </File>
+    <File Include="bin/System.ServiceModel.dll">
+      <publishTime>03/18/2010 19:31:26</publishTime>
+    </File>
+    <File Include="bin/System.ServiceModel.Web.dll">
+      <publishTime>03/18/2010 19:31:26</publishTime>
+    </File>
+    <File Include="bin/Web.dll">
+      <publishTime>09/24/2014 09:38:50</publishTime>
+    </File>
+    <File Include="Service1.svc">
+      <publishTime>09/24/2014 09:28:24</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/24/2014 09:37:27</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
