@@ -44,7 +44,7 @@ namespace FrmPIE._0API
         public DataGridView _shareDgv;
         PIE.Model.plr_mstr _plr_mstr_model = new PIE.Model.plr_mstr();
         PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
-        public List<int> intnext = new List<int>();
+        public int intnext = 0;
         public Commfunction(frmIDR idr)
         {
             _idr_show = idr;
@@ -2180,25 +2180,23 @@ namespace FrmPIE._0API
             int rowcount = dgv.Rows.Count;
             if (rowcount > 0)
             {
-                for (int i = 0; i < rowcount - 1; i++)
+                for (int i = intnext; i < rowcount - 1; i++)
                 {
                     if (dgv.Rows[i].Cells[cellsHeader].Value.ToString().ToLower().Contains(strcontains.ToLower()))
                     {
-                        if (intnext.Contains(i))
-                        {
-                            if (i >= 10 || i >= rowcount - 2)
-                            {
-                                intnext.Clear();
-                            }
-                            continue;
-                        }
-                        dgv.Rows[i].Cells[cellsHeader].Selected = true;
-                        intnext.Add(i);
 
+                        dgv.Rows[i].Cells[cellsHeader].Selected = true;
+
+                        intnext = i + 1;
+                        if (intnext >= rowcount - 1)
+                        {
+                            intnext = 0;
+                        }
                         break;
                     }
                     if (i >= rowcount - 2)
                     {
+                        intnext = 0;
                         dgv.ClearSelection();
                     }
                 }
