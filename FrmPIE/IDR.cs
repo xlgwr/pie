@@ -664,7 +664,10 @@ namespace FrmPIE
             cf.OpenFolderAndSelectFile(pathname);
         }
 
-
+        private void openDownLoadExcelFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cf.initOpenFile("0DownLoadExcel", _strDownLoadExcel);
+        }
 
 
     }

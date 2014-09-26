@@ -2156,6 +2156,22 @@ namespace FrmPIE._0API
 
 
         }
+        public void initOpenFile(string file, string filename)
+        {
+            string allfileNamepath;
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + file;
+            if (string.IsNullOrEmpty(filename))
+            {
+
+                allfileNamepath = pathname;
+            }
+            else
+            {
+
+                allfileNamepath = System.IO.Path.Combine(pathname, filename);
+            }
+            OpenFolderAndSelectFile(allfileNamepath);
+        }
         /////////////////////////////////////
         //start place
         /////////////////////////////////

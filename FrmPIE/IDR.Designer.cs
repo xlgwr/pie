@@ -100,6 +100,7 @@
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.openDownloadExcelFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -225,7 +226,8 @@
             this.status125toolBtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.status125toolBtnClear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearNoticeMsgToolStripMenuItem,
-            this.openPrintFileToolStripMenuItem});
+            this.openPrintFileToolStripMenuItem,
+            this.openDownloadExcelFileToolStripMenuItem});
             this.status125toolBtnClear.Image = ((System.Drawing.Image)(resources.GetObject("status125toolBtnClear.Image")));
             this.status125toolBtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.status125toolBtnClear.Name = "status125toolBtnClear";
@@ -883,6 +885,13 @@
             this.c11MenuStripVoid.Name = "cMenuStrip1ScanCartronLabel";
             this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 26);
             // 
+            // openDownloadExcelFileToolStripMenuItem
+            // 
+            this.openDownloadExcelFileToolStripMenuItem.Name = "openDownloadExcelFileToolStripMenuItem";
+            this.openDownloadExcelFileToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.openDownloadExcelFileToolStripMenuItem.Text = "Open &Download Excel File";
+            this.openDownloadExcelFileToolStripMenuItem.Click += new System.EventHandler(this.openDownLoadExcelFileToolStripMenuItem_Click);
+            // 
             // frmIDR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1014,6 +1023,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem t1AboutAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolcMenu10UploadEPackingListExcelForKYCA;
+        private System.Windows.Forms.ToolStripMenuItem openDownloadExcelFileToolStripMenuItem;
 
 
 
