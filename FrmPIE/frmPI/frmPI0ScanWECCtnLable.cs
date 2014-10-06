@@ -19,6 +19,8 @@ namespace frmPI
 {
     public partial class frmPI0ScanWECCtnLable : Form
     {
+
+        frmEnterTxt _frmET;
         frmIDR _idr_show;
         Commfunction cf;
 
@@ -797,7 +799,7 @@ namespace frmPI
             ShowMsg(" Refresh ......", "Notice");
             DataSet ds;
             FrmPIE.WebReference100.Service server100 = new FrmPIE.WebReference100.Service();
-            server100.Timeout = 9000000;
+            server100.Timeout = 90000;
             string existrir = "";
             string existrirsuccess = "";
             try
@@ -1068,6 +1070,83 @@ namespace frmPI
             {
                 btnAddPalletNW_Click(sender, e);
             }
+        }
+        
+
+        void enquireByPart(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                return;
+            }
+            var existprl_mstr_tran = new PIE.BLL.plr_batch_mstr().Exists(_frmET.textBox1.Text.Trim());
+
+            if (!existprl_mstr_tran)
+            {
+                lbl0msg.Text = _frmET.textBox1.Text + " is no exist.";
+                _frmET.textBox1.Focus();
+                return;
+            }
+            else
+            {
+                lbl0msg.Text = _frmET.textBox1.Text + " is add ok.";
+                
+            }
+            //cf.EnquireByPart(data1GV1ePackingDet1_BatchInfo, "plr_partno", _frmET.textBox1.Text.Trim());
+            _frmET.Close();
+        }
+        private void btn0AddFromePackingList0_Click(object sender, EventArgs e)
+        {
+            //btn0AddFromePackingList0.Enabled = false;
+
+            _frmET = new frmEnterTxt(_idr_show,this);
+            _frmET.button1.Click += enquireByPart;
+            _frmET.lblTitle.Text = "BatchID:";
+            _frmET.Text = "Add From ePacking List:";
+            _frmET.ShowDialog();
+
+            return;
+            #region add New PIID
+
+            int intOutAffected;
+            string strPIID = "";
+
+            PI.Model.pi_mstr pi_mstr_model = new PI.Model.pi_mstr();
+            SqlParameter[] parameters = {
+                                            new SqlParameter("@PIID",SqlDbType.NVarChar,11)
+                                        };
+            parameters[0].Direction = ParameterDirection.Output;
+
+            DbHelperSQL.RunProcedure("sp_GetPIID", parameters, out intOutAffected);
+            strPIID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
+            if (string.IsNullOrEmpty(strPIID))
+            {
+                ShowMsg("生成PIID,出错，无法新增。", "Error");
+                return;
+            }
+            pi_mstr_model.PI_ID = strPIID;
+            pi_mstr_model.LineID = 1;
+            pi_mstr_model.Plant = cmb1Plant_ScanWECCtnLable.Text.Trim();
+            pi_mstr_model.pi_type = cmb2Type_ScanWECCTN.Text.Trim();
+
+            pi_mstr_model.pi_cre_date = DbHelperSQL.getServerGetDate();
+            pi_mstr_model.pi_update_date = pi_mstr_model.pi_cre_date;
+            pi_mstr_model.pi_user_ip = _idr_show._custip;
+            pi_mstr_model.pi_status = "No";
+
+            pi_mstr_model.pi_remark = "from ePakcking list";
+
+            var result_plr_batch = new PI.DAL.pi_mstr().Add(pi_mstr_model);
+            if (!result_plr_batch)
+            {
+                ShowMsg("Add PI Mstr info fail", "Error");
+                return;
+            }
+            _pi_mstr_model = pi_mstr_model;
+            #endregion
+            btn0AddFromePackingList0.Enabled = true;
+
         }
 
 

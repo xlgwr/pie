@@ -167,5 +167,11 @@ namespace frmPI
         {
             _idr_show.AcceptButton = btn0_enquire_piReport;
         }
+
+        private void btn2UploadToHKPIDB_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

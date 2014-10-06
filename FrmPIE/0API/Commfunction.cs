@@ -1369,7 +1369,7 @@ namespace FrmPIE._0API
                 string strResult = "";
 
                 WebReference100.Service server100 = new WebReference100.Service();
-                server100.Timeout = 9000000;
+                server100.Timeout = 90000;
 
                 DataSet ds = null;
 
