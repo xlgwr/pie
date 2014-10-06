@@ -392,6 +392,7 @@ namespace FrmPIE
                     _icurrTabMouseUpIndex = i;
                     status13toolSStatusLblMsg.Text = i.ToString() + "," + tabCtlRight1.TabPages[i].Name;
                     status14toolLabelCellRowColXY.Text = "";
+                    status15toolLabelstrResult.Text = "";
                     break;
                 }
             }
