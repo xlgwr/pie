@@ -6,11 +6,11 @@ using PIE.DBUtility;//Please add references
 namespace PI.DAL
 {
     /// <summary>
-    /// 数据访问类:pi_det
+    /// 数据访问类:pi_mstr
     /// </summary>
-    public partial class pi_det
+    public partial class pi_mstr
     {
-        public pi_det()
+        public pi_mstr()
         { }
         #region  BasicMethod
 
@@ -19,84 +19,41 @@ namespace PI.DAL
         /// </summary>
         public int GetMaxId()
         {
-            return DbHelperSQL.GetMaxID("pi_LineID", "pi_det");
-        }
-        /// <summary>
-        /// 得到最大ID
-        /// </summary>
-        public int GetMaxId(string piid)
-        {
-            return DbHelperSQL.GetMaxID("pi_deci1", "PI_ID='"+piid+"'", "pi_det");
+            return DbHelperSQL.GetMaxID("LineID", "pi_mstr");
         }
 
         /// <summary>
         /// 是否存在该记录
         /// </summary>
-        public bool Exists(string PI_ID, int pi_LineID, string pi_wec_ctn)
+        public bool Exists(string PI_ID, int LineID)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) from pi_det");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_wec_ctn=@pi_wec_ctn ");
+            strSql.Append("select count(1) from pi_mstr");
+            strSql.Append(" where PI_ID=@PI_ID and LineID=@LineID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
-					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50)			};
+					new SqlParameter("@LineID", SqlDbType.Int,4)			};
             parameters[0].Value = PI_ID;
-            parameters[1].Value = pi_LineID;
-            parameters[2].Value = pi_wec_ctn;
+            parameters[1].Value = LineID;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
-        /// <summary>
-        /// 是否存在该记录
-        /// </summary>
-        public bool Exists( string pi_wec_ctn)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) from pi_det");
-            strSql.Append(" where pi_wec_ctn=@pi_wec_ctn ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50)			};
-            
-            parameters[0].Value = pi_wec_ctn;
 
-            return DbHelperSQL.Exists(strSql.ToString(), parameters);
-        }
-        /// <summary>
-        /// 是否存在该记录
-        /// </summary>
-        public bool Exists(string PI_ID, int pi_LineID)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) from pi_det");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID");
-            SqlParameter[] parameters = {
-					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_LineID", SqlDbType.Int,4)		};
-            parameters[0].Value = PI_ID;
-            parameters[1].Value = pi_LineID;
-
-            return DbHelperSQL.Exists(strSql.ToString(), parameters);
-        }
 
         /// <summary>
         /// 增加一条数据
         /// </summary>
-        public bool Add(PI.Model.pi_det model)
+        public bool Add(PI.Model.pi_mstr model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("insert into pi_det(");
-            strSql.Append("PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2)");
+            strSql.Append("insert into pi_mstr(");
+            strSql.Append("PI_ID,LineID,Plant,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2)");
             strSql.Append(" values (");
-            strSql.Append("@PI_ID,@pi_LineID,@pi_wec_ctn,@plr_LineID_tran,@pi_pallet_no,@CartonNo,@CartonID,@pi_type,@pi_status,@pi_status_msg,@pi_remark,@pi_cre_date,@pi_cre_userid,@pi_update_date,@pi_edituser_id,@pi_user_ip,@pi_void_status,@pi_chr01,@pi_chr02,@pi_deci1,@pi_deci2)");
+            strSql.Append("@PI_ID,@LineID,@Plant,@pi_type,@pi_status,@pi_status_msg,@pi_remark,@pi_cre_date,@pi_cre_userid,@pi_update_date,@pi_edituser_id,@pi_user_ip,@pi_void_status,@pi_chr01,@pi_chr02,@pi_deci1,@pi_deci2)");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
-					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
-					new SqlParameter("@plr_LineID_tran", SqlDbType.Int,4),
-					new SqlParameter("@pi_pallet_no", SqlDbType.NVarChar,10),
-					new SqlParameter("@CartonNo", SqlDbType.NVarChar,50),
-					new SqlParameter("@CartonID", SqlDbType.NVarChar,50),
+					new SqlParameter("@LineID", SqlDbType.Int,4),
+					new SqlParameter("@Plant", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_type", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_status_msg", SqlDbType.NVarChar,4000),
@@ -112,26 +69,22 @@ namespace PI.DAL
 					new SqlParameter("@pi_deci1", SqlDbType.Int,4),
 					new SqlParameter("@pi_deci2", SqlDbType.Decimal,9)};
             parameters[0].Value = model.PI_ID;
-            parameters[1].Value = model.pi_LineID;
-            parameters[2].Value = model.pi_wec_ctn;
-            parameters[3].Value = model.plr_LineID_tran;
-            parameters[4].Value = model.pi_pallet_no;
-            parameters[5].Value = model.CartonNo;
-            parameters[6].Value = model.CartonID;
-            parameters[7].Value = model.pi_type;
-            parameters[8].Value = model.pi_status;
-            parameters[9].Value = model.pi_status_msg;
-            parameters[10].Value = model.pi_remark;
-            parameters[11].Value = model.pi_cre_date;
-            parameters[12].Value = model.pi_cre_userid;
-            parameters[13].Value = model.pi_update_date;
-            parameters[14].Value = model.pi_edituser_id;
-            parameters[15].Value = model.pi_user_ip;
-            parameters[16].Value = model.pi_void_status;
-            parameters[17].Value = model.pi_chr01;
-            parameters[18].Value = model.pi_chr02;
-            parameters[19].Value = model.pi_deci1;
-            parameters[20].Value = model.pi_deci2;
+            parameters[1].Value = model.LineID;
+            parameters[2].Value = model.Plant;
+            parameters[3].Value = model.pi_type;
+            parameters[4].Value = model.pi_status;
+            parameters[5].Value = model.pi_status_msg;
+            parameters[6].Value = model.pi_remark;
+            parameters[7].Value = model.pi_cre_date;
+            parameters[8].Value = model.pi_cre_userid;
+            parameters[9].Value = model.pi_update_date;
+            parameters[10].Value = model.pi_edituser_id;
+            parameters[11].Value = model.pi_user_ip;
+            parameters[12].Value = model.pi_void_status;
+            parameters[13].Value = model.pi_chr01;
+            parameters[14].Value = model.pi_chr02;
+            parameters[15].Value = model.pi_deci1;
+            parameters[16].Value = model.pi_deci2;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -146,14 +99,11 @@ namespace PI.DAL
         /// <summary>
         /// 更新一条数据
         /// </summary>
-        public bool Update(PI.Model.pi_det model)
+        public bool Update(PI.Model.pi_mstr model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update pi_det set ");
-            strSql.Append("plr_LineID_tran=@plr_LineID_tran,");
-            strSql.Append("pi_pallet_no=@pi_pallet_no,");
-            strSql.Append("CartonNo=@CartonNo,");
-            strSql.Append("CartonID=@CartonID,");
+            strSql.Append("update pi_mstr set ");
+            strSql.Append("Plant=@Plant,");
             strSql.Append("pi_type=@pi_type,");
             strSql.Append("pi_status=@pi_status,");
             strSql.Append("pi_status_msg=@pi_status_msg,");
@@ -168,12 +118,9 @@ namespace PI.DAL
             strSql.Append("pi_chr02=@pi_chr02,");
             strSql.Append("pi_deci1=@pi_deci1,");
             strSql.Append("pi_deci2=@pi_deci2");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_wec_ctn=@pi_wec_ctn ");
+            strSql.Append(" where PI_ID=@PI_ID and LineID=@LineID ");
             SqlParameter[] parameters = {
-					new SqlParameter("@plr_LineID_tran", SqlDbType.Int,4),
-					new SqlParameter("@pi_pallet_no", SqlDbType.NVarChar,10),
-					new SqlParameter("@CartonNo", SqlDbType.NVarChar,50),
-					new SqlParameter("@CartonID", SqlDbType.NVarChar,50),
+					new SqlParameter("@Plant", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_type", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_status_msg", SqlDbType.NVarChar,4000),
@@ -189,29 +136,24 @@ namespace PI.DAL
 					new SqlParameter("@pi_deci1", SqlDbType.Int,4),
 					new SqlParameter("@pi_deci2", SqlDbType.Decimal,9),
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
-					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50)};
-            parameters[0].Value = model.plr_LineID_tran;
-            parameters[1].Value = model.pi_pallet_no;
-            parameters[2].Value = model.CartonNo;
-            parameters[3].Value = model.CartonID;
-            parameters[4].Value = model.pi_type;
-            parameters[5].Value = model.pi_status;
-            parameters[6].Value = model.pi_status_msg;
-            parameters[7].Value = model.pi_remark;
-            parameters[8].Value = model.pi_cre_date;
-            parameters[9].Value = model.pi_cre_userid;
-            parameters[10].Value = model.pi_update_date;
-            parameters[11].Value = model.pi_edituser_id;
-            parameters[12].Value = model.pi_user_ip;
-            parameters[13].Value = model.pi_void_status;
-            parameters[14].Value = model.pi_chr01;
-            parameters[15].Value = model.pi_chr02;
-            parameters[16].Value = model.pi_deci1;
-            parameters[17].Value = model.pi_deci2;
-            parameters[18].Value = model.PI_ID;
-            parameters[19].Value = model.pi_LineID;
-            parameters[20].Value = model.pi_wec_ctn;
+					new SqlParameter("@LineID", SqlDbType.Int,4)};
+            parameters[0].Value = model.Plant;
+            parameters[1].Value = model.pi_type;
+            parameters[2].Value = model.pi_status;
+            parameters[3].Value = model.pi_status_msg;
+            parameters[4].Value = model.pi_remark;
+            parameters[5].Value = model.pi_cre_date;
+            parameters[6].Value = model.pi_cre_userid;
+            parameters[7].Value = model.pi_update_date;
+            parameters[8].Value = model.pi_edituser_id;
+            parameters[9].Value = model.pi_user_ip;
+            parameters[10].Value = model.pi_void_status;
+            parameters[11].Value = model.pi_chr01;
+            parameters[12].Value = model.pi_chr02;
+            parameters[13].Value = model.pi_deci1;
+            parameters[14].Value = model.pi_deci2;
+            parameters[15].Value = model.PI_ID;
+            parameters[16].Value = model.LineID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -227,19 +169,17 @@ namespace PI.DAL
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public bool Delete(string PI_ID, int pi_LineID, string pi_wec_ctn)
+        public bool Delete(string PI_ID, int LineID)
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from pi_det ");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_wec_ctn=@pi_wec_ctn ");
+            strSql.Append("delete from pi_mstr ");
+            strSql.Append(" where PI_ID=@PI_ID and LineID=@LineID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
-					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50)			};
+					new SqlParameter("@LineID", SqlDbType.Int,4)			};
             parameters[0].Value = PI_ID;
-            parameters[1].Value = pi_LineID;
-            parameters[2].Value = pi_wec_ctn;
+            parameters[1].Value = LineID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -256,19 +196,19 @@ namespace PI.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public PI.Model.pi_det GetModel(string PI_ID, int pi_LineID)
+        public PI.Model.pi_mstr GetModel(string PI_ID, int LineID)
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 from pi_det ");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID ");
+            strSql.Append("select  top 1 PI_ID,LineID,Plant,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 from pi_mstr ");
+            strSql.Append(" where PI_ID=@PI_ID and LineID=@LineID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_LineID", SqlDbType.Int,4) 		};
+					new SqlParameter("@LineID", SqlDbType.Int,4)			};
             parameters[0].Value = PI_ID;
-            parameters[1].Value = pi_LineID; 
+            parameters[1].Value = LineID;
 
-            PI.Model.pi_det model = new PI.Model.pi_det();
+            PI.Model.pi_mstr model = new PI.Model.pi_mstr();
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -280,124 +220,26 @@ namespace PI.DAL
             }
         }
 
-        /// <summary>
-        /// 得到一个对象实体
-        /// </summary>
-        public PI.Model.pi_det GetModel(string PI_ID, string pi_wec_ctn, int plr_LineID_tran)
-        {
-
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 from pi_det ");
-            strSql.Append(" where PI_ID=@PI_ID and plr_LineID_tran=@plr_LineID_tran and pi_wec_ctn=@pi_wec_ctn ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
-					new SqlParameter("@plr_LineID_tran", SqlDbType.Int,4)			};
-            parameters[0].Value = PI_ID;
-            parameters[1].Value = pi_wec_ctn;
-            parameters[2].Value = plr_LineID_tran;
-
-            PI.Model.pi_det model = new PI.Model.pi_det();
-            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                return DataRowToModel(ds.Tables[0].Rows[0]);
-            }
-            else
-            {
-                return null;
-            }
-        }
-        /// <summary>
-        /// 得到一个对象实体
-        /// </summary>
-        public PI.Model.pi_det GetModel(string PI_ID, int pi_pallet_num,bool palletSN)
-        {
-
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 from pi_det ");
-            strSql.Append(" where PI_ID=@PI_ID and pi_deci1=@pi_pallet_num ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_pallet_num", SqlDbType.Int,4) 		};
-            parameters[0].Value = PI_ID;
-            parameters[1].Value = pi_pallet_num;
-
-            PI.Model.pi_det model = new PI.Model.pi_det();
-            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                return DataRowToModel(ds.Tables[0].Rows[0]);
-            }
-            else
-            {
-                return null;
-            }
-        }
-        /// <summary>
-        /// 得到一个对象实体
-        /// </summary>
-        public PI.Model.pi_det GetModel(string PI_ID, int pi_LineID, string pi_wec_ctn)
-        {
-
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 from pi_det ");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_wec_ctn=@pi_wec_ctn ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
-					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50)			};
-            parameters[0].Value = PI_ID;
-            parameters[1].Value = pi_LineID;
-            parameters[2].Value = pi_wec_ctn;
-
-            PI.Model.pi_det model = new PI.Model.pi_det();
-            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                return DataRowToModel(ds.Tables[0].Rows[0]);
-            }
-            else
-            {
-                return null;
-            }
-        }
 
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public PI.Model.pi_det DataRowToModel(DataRow row)
+        public PI.Model.pi_mstr DataRowToModel(DataRow row)
         {
-            PI.Model.pi_det model = new PI.Model.pi_det();
+            PI.Model.pi_mstr model = new PI.Model.pi_mstr();
             if (row != null)
             {
                 if (row["PI_ID"] != null)
                 {
                     model.PI_ID = row["PI_ID"].ToString();
                 }
-                if (row["pi_LineID"] != null && row["pi_LineID"].ToString() != "")
+                if (row["LineID"] != null && row["LineID"].ToString() != "")
                 {
-                    model.pi_LineID = int.Parse(row["pi_LineID"].ToString());
+                    model.LineID = int.Parse(row["LineID"].ToString());
                 }
-                if (row["pi_wec_ctn"] != null)
+                if (row["Plant"] != null)
                 {
-                    model.pi_wec_ctn = row["pi_wec_ctn"].ToString();
-                }
-                if (row["plr_LineID_tran"] != null && row["plr_LineID_tran"].ToString() != "")
-                {
-                    model.plr_LineID_tran = int.Parse(row["plr_LineID_tran"].ToString());
-                }
-                if (row["pi_pallet_no"] != null)
-                {
-                    model.pi_pallet_no = row["pi_pallet_no"].ToString();
-                }
-                if (row["CartonNo"] != null)
-                {
-                    model.CartonNo = row["CartonNo"].ToString();
-                }
-                if (row["CartonID"] != null)
-                {
-                    model.CartonID = row["CartonID"].ToString();
+                    model.Plant = row["Plant"].ToString();
                 }
                 if (row["pi_type"] != null)
                 {
@@ -460,42 +302,13 @@ namespace PI.DAL
         }
 
         /// <summary>
-        /// 得到一个对象实体
-        /// </summary>
-        public PI.Model.pi_det DataRowToModel(DataRow row,bool distinct)
-        {
-            PI.Model.pi_det model = new PI.Model.pi_det();
-            if (row != null)
-            {
-                if (row["pi_wec_ctn"] != null)
-                {
-                    model.pi_wec_ctn = row["pi_wec_ctn"].ToString();
-                }
-            }
-            return model;
-        }
-        /// <summary>
         /// 获得数据列表
         /// </summary>
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
-            strSql.Append(" FROM pi_det ");
-            if (strWhere.Trim() != "")
-            {
-                strSql.Append(" where " + strWhere);
-            }
-            return DbHelperSQL.Query(strSql.ToString());
-        }
-        /// <summary>
-        /// 获得数据列表
-        /// </summary>
-        public DataSet GetList(string strWhere,bool distinct)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select distinct pi_wec_ctn ");
-            strSql.Append(" FROM pi_det ");
+            strSql.Append("select PI_ID,LineID,Plant,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
+            strSql.Append(" FROM pi_mstr ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -514,8 +327,8 @@ namespace PI.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
-            strSql.Append(" FROM pi_det ");
+            strSql.Append(" PI_ID,LineID,Plant,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
+            strSql.Append(" FROM pi_mstr ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -530,7 +343,7 @@ namespace PI.DAL
         public int GetRecordCount(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) FROM pi_det ");
+            strSql.Append("select count(1) FROM pi_mstr ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -559,9 +372,9 @@ namespace PI.DAL
             }
             else
             {
-                strSql.Append("order by T.pi_wec_ctn desc");
+                strSql.Append("order by T.LineID desc");
             }
-            strSql.Append(")AS Row, T.*  from pi_det T ");
+            strSql.Append(")AS Row, T.*  from pi_mstr T ");
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
                 strSql.Append(" WHERE " + strWhere);
@@ -586,8 +399,8 @@ namespace PI.DAL
                     new SqlParameter("@OrderType", SqlDbType.Bit),
                     new SqlParameter("@strWhere", SqlDbType.VarChar,1000),
                     };
-            parameters[0].Value = "pi_det";
-            parameters[1].Value = "pi_wec_ctn";
+            parameters[0].Value = "pi_mstr";
+            parameters[1].Value = "LineID";
             parameters[2].Value = PageSize;
             parameters[3].Value = PageIndex;
             parameters[4].Value = 0;

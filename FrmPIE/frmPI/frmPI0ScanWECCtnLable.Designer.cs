@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1ScanWECCtnLable = new System.Windows.Forms.GroupBox();
+            this.btn0AddFromePackingList0 = new System.Windows.Forms.Button();
             this.btnAddPalletNW = new System.Windows.Forms.Button();
             this.btn1RefreshPI = new System.Windows.Forms.Button();
             this.group3BXdataGV1ScanList = new System.Windows.Forms.GroupBox();
@@ -62,7 +63,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmb3CO_ScanWECCtnLable = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btn0AddFromePackingList0 = new System.Windows.Forms.Button();
             this.groupBox1ScanWECCtnLable.SuspendLayout();
             this.group3BXdataGV1ScanList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GVSanWecCtnLable)).BeginInit();
@@ -85,6 +85,17 @@
             this.groupBox1ScanWECCtnLable.Size = new System.Drawing.Size(645, 473);
             this.groupBox1ScanWECCtnLable.TabIndex = 52;
             this.groupBox1ScanWECCtnLable.TabStop = false;
+            // 
+            // btn0AddFromePackingList0
+            // 
+            this.btn0AddFromePackingList0.ForeColor = System.Drawing.Color.Red;
+            this.btn0AddFromePackingList0.Location = new System.Drawing.Point(13, 231);
+            this.btn0AddFromePackingList0.Name = "btn0AddFromePackingList0";
+            this.btn0AddFromePackingList0.Size = new System.Drawing.Size(101, 33);
+            this.btn0AddFromePackingList0.TabIndex = 208;
+            this.btn0AddFromePackingList0.Text = "&Add From ePacking List";
+            this.btn0AddFromePackingList0.UseVisualStyleBackColor = true;
+            this.btn0AddFromePackingList0.Click += new System.EventHandler(this.btn0AddFromePackingList0_Click);
             // 
             // btnAddPalletNW
             // 
@@ -119,35 +130,35 @@
             // 
             // data1GVSanWecCtnLable
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GVSanWecCtnLable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GVSanWecCtnLable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.data1GVSanWecCtnLable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data1GVSanWecCtnLable.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data1GVSanWecCtnLable.DefaultCellStyle = dataGridViewCellStyle2;
             this.data1GVSanWecCtnLable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.data1GVSanWecCtnLable.Location = new System.Drawing.Point(3, 17);
             this.data1GVSanWecCtnLable.MultiSelect = false;
             this.data1GVSanWecCtnLable.Name = "data1GVSanWecCtnLable";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GVSanWecCtnLable.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GVSanWecCtnLable.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.data1GVSanWecCtnLable.RowTemplate.Height = 23;
             this.data1GVSanWecCtnLable.Size = new System.Drawing.Size(623, 162);
             this.data1GVSanWecCtnLable.TabIndex = 300;
@@ -439,16 +450,6 @@
             this.cmb3CO_ScanWECCtnLable.SelectedValueChanged += new System.EventHandler(this.cmb3CO_ScanWECCtnLable_SelectedValueChanged);
             this.cmb3CO_ScanWECCtnLable.TextChanged += new System.EventHandler(this.cmb3CO_ScanWECCtnLable_TextChanged);
             this.cmb3CO_ScanWECCtnLable.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmb3CO_ScanWECCtnLable_KeyUp);
-            // 
-            // btn0AddFromePackingList0
-            // 
-            this.btn0AddFromePackingList0.Location = new System.Drawing.Point(13, 231);
-            this.btn0AddFromePackingList0.Name = "btn0AddFromePackingList0";
-            this.btn0AddFromePackingList0.Size = new System.Drawing.Size(101, 33);
-            this.btn0AddFromePackingList0.TabIndex = 208;
-            this.btn0AddFromePackingList0.Text = "&Add From ePacking List";
-            this.btn0AddFromePackingList0.UseVisualStyleBackColor = true;
-            this.btn0AddFromePackingList0.Click += new System.EventHandler(this.btn0AddFromePackingList0_Click);
             // 
             // frmPI0ScanWECCtnLable
             // 

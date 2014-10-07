@@ -1285,7 +1285,36 @@ namespace FrmPIE._0API
                 tb.SelectionStart = tb.Text.Length;
             }
         }
+        /// <summary>
+        /// initWebServer 
+        /// </summary>
+        /// <param name="server100"></param>
+        /// <param name="inSystem">TESTOLDWEC</param>
+        /// <param name="intable">wsas018</param>
+        /// <param name="inwhere">R1406050002</param>
+        /// <returns></returns>
 
+        public DataSet initWebServer(string inSystem, string intable, string inwhere)
+        {
+            WebReference100.Service server100 = new WebReference100.Service();
+            server100.Timeout = 9000;
+
+            DataSet ds = null;
+            try
+            {
+
+                ds = server100.GetTable_n(inSystem, intable, inwhere);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+
+                return ds;
+                //MessageBox.Show(ex.Message);
+
+            }
+
+        }
         public bool initWebServer(string plr_po, WebReference100.Service server100, string intable, string strPO, out DataSet ds)
         {
             int returnValueNumber;

@@ -25,12 +25,14 @@ namespace frmPI
         Commfunction cf;
 
         bool _addNextNewFalg = false;
+        bool _validateBatchid = false;
         int _nextlineid = 1;
         string _strCO;
         DataSet cods;
+        DataSet webserviceDS;
 
         string _strWecCtnSn = "";
-        public  bool _coisnull = false;
+        public bool _coisnull = false;
         public string _strconext = "";
         public string _plr_wec_ctn = "";
 
@@ -350,7 +352,7 @@ namespace frmPI
                         }
                         else
                         {
-                            PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", tran.plr_co,true);
+                            PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", tran.plr_co, true);
                             if (existco == null)
                             {
                                 _coisnull = true;
@@ -399,7 +401,7 @@ namespace frmPI
 
                     //initModelForTextBox(pi_det_new);
                     _addNextNewFalg = true;
-                    ShowMsg("新增相同的PI ID,\t上次新增的为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString()+"\nScanSN:"+_pi_det_model.pi_wec_ctn+",Pallet#:"+_pi_det_model.pi_deci1.ToString("000"), "Notice");
+                    ShowMsg("新增相同的PI ID,\t上次新增的为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "\nScanSN:" + _pi_det_model.pi_wec_ctn + ",Pallet#:" + _pi_det_model.pi_deci1.ToString("000"), "Notice");
 
                     lbl3COScanWECCtnLable.Text = "";
 
@@ -632,9 +634,9 @@ namespace frmPI
                         _addNextNewFalg = true;
                         var pre_pi_det = new PI.DAL.pi_det_ext().GetModel(pi_det_new.PI_ID, (_nextlineid - 1));
                         string premsg = "继续新增相同的PI ID";
-                        if (pre_pi_det!=null)
+                        if (pre_pi_det != null)
                         {
-                          premsg += ",继续新增相同的PI ID,\t上次新增的为：" + pre_pi_det.PI_ID + ",LineID:" + pre_pi_det.pi_LineID + "\nScanSN:" + pre_pi_det.pi_wec_ctn + ",Pallet#:" + pre_pi_det.pi_deci1.ToString("000") ;
+                            premsg += ",继续新增相同的PI ID,\t上次新增的为：" + pre_pi_det.PI_ID + ",LineID:" + pre_pi_det.pi_LineID + "\nScanSN:" + pre_pi_det.pi_wec_ctn + ",Pallet#:" + pre_pi_det.pi_deci1.ToString("000");
 
                         }
                         else
@@ -1071,80 +1073,181 @@ namespace frmPI
                 btnAddPalletNW_Click(sender, e);
             }
         }
-        
+
 
         void enquireByPart(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(_frmET.textBox1.Text))
             {
                 _frmET.textBox1.Focus();
+                _validateBatchid = false;
                 return;
             }
-            var existprl_mstr_tran = new PIE.BLL.plr_batch_mstr().Exists(_frmET.textBox1.Text.Trim());
+            var existPIAdd = new PI.DAL.pi_mstr_ext().GetModel(_frmET.textBox1.Text.Trim());
 
-            if (!existprl_mstr_tran)
+            if (existPIAdd != null)
+            {
+                ShowMsg(_frmET.textBox1.Text + "already has been Add with PI ID: " + existPIAdd.PI_ID, "Notice");
+                _frmET.textBox1.Focus();
+                _validateBatchid = false;
+                return;
+            }
+            webserviceDS = cf.initWebServer("TESTOLDWEC", "wsas018", _frmET.textBox1.Text.Trim());
+
+            if (webserviceDS == null)
             {
                 lbl0msg.Text = _frmET.textBox1.Text + " is no exist.";
                 _frmET.textBox1.Focus();
+                _validateBatchid = false;
                 return;
             }
-            else
-            {
-                lbl0msg.Text = _frmET.textBox1.Text + " is add ok.";
-                
-            }
+            //else
+            //{
+            //    lbl0msg.Text = _frmET.textBox1.Text + " is add ok.";
+            //    // data1GVSanWecCtnLable.DataSource = webserviceDS.Tables[0].DefaultView;
+
+            //}
             //cf.EnquireByPart(data1GV1ePackingDet1_BatchInfo, "plr_partno", _frmET.textBox1.Text.Trim());
+            _validateBatchid = true;
             _frmET.Close();
         }
         private void btn0AddFromePackingList0_Click(object sender, EventArgs e)
         {
             //btn0AddFromePackingList0.Enabled = false;
 
-            _frmET = new frmEnterTxt(_idr_show,this);
+            _frmET = new frmEnterTxt(_idr_show, this);
             _frmET.button1.Click += enquireByPart;
             _frmET.lblTitle.Text = "BatchID:";
             _frmET.Text = "Add From ePacking List:";
             _frmET.ShowDialog();
+            if (!_validateBatchid)
+            {
+                return;
 
-            return;
-            #region add New PIID
+            }
+            if (webserviceDS != null)
+            {
+                #region add New PIID
 
-            int intOutAffected;
-            string strPIID = "";
+                int intOutAffected;
+                string strPIID = "";
 
-            PI.Model.pi_mstr pi_mstr_model = new PI.Model.pi_mstr();
-            SqlParameter[] parameters = {
+                PI.Model.pi_mstr pi_mstr_model = new PI.Model.pi_mstr();
+                SqlParameter[] parameters = {
                                             new SqlParameter("@PIID",SqlDbType.NVarChar,11)
                                         };
-            parameters[0].Direction = ParameterDirection.Output;
+                parameters[0].Direction = ParameterDirection.Output;
 
-            DbHelperSQL.RunProcedure("sp_GetPIID", parameters, out intOutAffected);
-            strPIID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
-            if (string.IsNullOrEmpty(strPIID))
-            {
-                ShowMsg("生成PIID,出错，无法新增。", "Error");
-                return;
+                DbHelperSQL.RunProcedure("sp_GetPIID", parameters, out intOutAffected);
+                strPIID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
+                if (string.IsNullOrEmpty(strPIID))
+                {
+                    ShowMsg("生成PIID,出错，无法新增。", "Error");
+                    return;
+                }
+                pi_mstr_model.PI_ID = strPIID;
+                pi_mstr_model.LineID = 1;
+                pi_mstr_model.Plant = cmb1Plant_ScanWECCtnLable.Text.Trim();
+                pi_mstr_model.pi_type = cmb2Type_ScanWECCTN.Text.Trim();
+
+                pi_mstr_model.pi_cre_date = DbHelperSQL.getServerGetDate();
+                pi_mstr_model.pi_update_date = pi_mstr_model.pi_cre_date;
+                pi_mstr_model.pi_user_ip = _idr_show._custip;
+                pi_mstr_model.pi_status = "No";
+
+                pi_mstr_model.pi_remark = "from ePakcking list";
+
+                pi_mstr_model.pi_chr01 = _frmET.textBox1.Text.Trim();
+
+                var result_plr_batch = new PI.DAL.pi_mstr().Add(pi_mstr_model);
+                if (!result_plr_batch)
+                {
+                    ShowMsg("Add PI Mstr info fail", "Error");
+                    return;
+                }
+                _pi_mstr_model = pi_mstr_model;
+                #endregion
+                for (int i = 0; i < webserviceDS.Tables[0].Rows.Count; i++)
+                {
+                    DataRow dr = webserviceDS.Tables[0].Rows[i];
+                    var pi_det_model_add = new PI.Model.pi_det();
+                    var pisr_grr_model_add = new PI.Model.pisr_grr();
+
+                    #region add pi_det_model_from_batchid
+
+                    pi_det_model_add.PI_ID = strPIID;
+                    pi_det_model_add.pi_LineID = i + 1;
+                    pi_det_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
+                    pi_det_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
+
+                    pi_det_model_add.pi_type = "N";
+                    pi_det_model_add.pi_deci1 = 0;
+                    pi_det_model_add.pi_pallet_no = "";
+
+                    pi_det_model_add.CartonNo = "0";
+                    pi_det_model_add.CartonID = "0";
+
+                    pi_det_model_add.pi_chr01 = "";
+
+
+                    pi_det_model_add.pi_chr02 = dr["wsas018_po_nbr"].ToString();
+
+                    pi_det_model_add.pi_remark = "Add From ePacking List:BatchID->" + dr["wsas018_batch"].ToString();
+
+                    pi_det_model_add.pi_cre_date = DbHelperSQL.getServerGetDate();
+                    pi_det_model_add.pi_user_ip = _idr_show._custip;
+                    pi_det_model_add.pi_status = "No";
+
+                    var result_pi_det_add = new PI.DAL.pi_det().Add(pi_det_model_add);
+                    #endregion
+                    #region add pisr_grr_model_add_fromBatchid
+                    pisr_grr_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
+                    pisr_grr_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
+
+
+                    pisr_grr_model_add.pisr_rir = dr["wsas018_rir"].ToString();
+                    pisr_grr_model_add.pisr_invoice = dr["wsas018_invoice"].ToString();
+
+                    pisr_grr_model_add.pisr_part = dr["wsas018_part"].ToString();
+                    pisr_grr_model_add.pisr_site = dr["wsas018_site"].ToString();
+                    pisr_grr_model_add.Pisr_receiver = dr["wsas018_receiver"].ToString();
+                    pisr_grr_model_add.pisr_po_nbr = dr["wsas018_po_nbr"].ToString();
+                    pisr_grr_model_add.pisr_qty = Convert.ToDecimal(dr["wsas018_qty"].ToString());
+                    pisr_grr_model_add.pisr_curr = dr["wsas018_curr"].ToString();
+                    pisr_grr_model_add.pisr_base_cost = Convert.ToDecimal(dr["wsas018_base_cost"].ToString());
+                    pisr_grr_model_add.pisr_us_cost = Convert.ToDecimal(dr["wsas018_us_cost"].ToString());
+                    pisr_grr_model_add.pisr_seq = dr["wsas018_seq"].ToString();
+                    pisr_grr_model_add.pisr_con_code = dr["wsas018_con_code"].ToString();
+                    pisr_grr_model_add.pisr_ch_desc = dr["wsas018_ch_desc"].ToString();
+                    pisr_grr_model_add.pisr_net_wt = Convert.ToDecimal(dr["wsas018_net_wt"].ToString());
+                    pisr_grr_model_add.pisr_rec_type = dr["wsas018_rec_type"].ToString();
+                    pisr_grr_model_add.pisr_abc = dr["wsas018_abc"].ToString();
+                    pisr_grr_model_add.pisr_code = dr["wsas018_code"].ToString();
+                    pisr_grr_model_add.pisr_lic_req = dr["wsas018_lic_req"].ToString();
+
+                    pisr_grr_model_add.pisr_sbu = dr["wsas018_sbu"].ToString();
+                    pisr_grr_model_add.pisr_vend = dr["wsas018_vend"].ToString();
+                    pisr_grr_model_add.pisr_mfgr_name = dr["wsas018_mfgr_name"].ToString();
+
+                    pisr_grr_model_add.pisr_dec01 = Convert.ToDecimal(dr["wsas018_k200_nw"].ToString()) / 1000;
+                    pisr_grr_model_add.pisr_dec02 = Convert.ToDecimal(dr["wsas018_nw"].ToString()) / 1000;
+
+                    pisr_grr_model_add.pi_cre_date = DateTime.Now;
+                    pisr_grr_model_add.pi_update_date = DateTime.Now;
+                    pisr_grr_model_add.pi_user_ip = _idr_show._custip;
+                    pisr_grr_model_add.pi_cre_userid = _idr_show._sys_user_model.user_name;
+
+                    var pisgrradd = new PI.BLL.pisr_grr().Add(pisr_grr_model_add);
+                    #endregion
+
+
+                }
+                ShowMsg("Add PI Mstr info Success", "Success");
             }
-            pi_mstr_model.PI_ID = strPIID;
-            pi_mstr_model.LineID = 1;
-            pi_mstr_model.Plant = cmb1Plant_ScanWECCtnLable.Text.Trim();
-            pi_mstr_model.pi_type = cmb2Type_ScanWECCTN.Text.Trim();
-
-            pi_mstr_model.pi_cre_date = DbHelperSQL.getServerGetDate();
-            pi_mstr_model.pi_update_date = pi_mstr_model.pi_cre_date;
-            pi_mstr_model.pi_user_ip = _idr_show._custip;
-            pi_mstr_model.pi_status = "No";
-
-            pi_mstr_model.pi_remark = "from ePakcking list";
-
-            var result_plr_batch = new PI.DAL.pi_mstr().Add(pi_mstr_model);
-            if (!result_plr_batch)
+            else
             {
-                ShowMsg("Add PI Mstr info fail", "Error");
-                return;
+                ShowMsg("Add PI Mstr info fail,ERP WebService return null", "Error");
             }
-            _pi_mstr_model = pi_mstr_model;
-            #endregion
             btn0AddFromePackingList0.Enabled = true;
 
         }
