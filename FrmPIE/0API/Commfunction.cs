@@ -17,6 +17,7 @@ using System.Drawing;
 using System.Text;
 using PIE.Common;
 using System.Threading;
+using System.Collections;
 
 namespace FrmPIE._0API
 {
@@ -2129,6 +2130,95 @@ namespace FrmPIE._0API
                         dgv.ClearSelection();
                     }
                 }
+            }
+        }
+        public Hashtable nameList0vpi_report_ds()
+        {
+            //生成列的中文对应表
+            Hashtable nameList = new Hashtable();
+            nameList.Add("PI_ID", "PI ID");
+            nameList.Add("pi_LineID", "Line");
+
+            nameList.Add("pi_wec_ctn", "Scan SN");
+
+            nameList.Add("plr_LineID_tran", "Scan Line");
+            nameList.Add("pi_pallet_no", "Pallet");
+            nameList.Add("CartonNo", "CartonNo");
+
+            nameList.Add("CartonID", "CartonID");
+
+            nameList.Add("pi_chr01", "CO");
+
+            nameList.Add("pisr_rir", "RIR #");
+            nameList.Add("pisr_invoice", "Invoice");
+            nameList.Add("pisr_part", "WEC-Part");
+            nameList.Add("Pisr_receiver", "Receiver");
+            nameList.Add("pisr_site", "MG");
+            nameList.Add("pisr_po_nbr", "PO-Number");
+            nameList.Add("pisr_curr", "Curr");
+            nameList.Add("pisr_cost", "U/P");
+            nameList.Add("pisr_base_cost", "U/P(Base)");
+            nameList.Add("pisr_us_cost", "U/P(USD)");
+            nameList.Add("pisr_seq", "Seq");
+
+            nameList.Add("pisr_con_code", "Custom Conn");
+
+            //nameList.Add("pisr_ch_desc","Description");
+            nameList.Add("pi_status", "Upload Status");
+
+            nameList.Add("sq_name", "Description");
+
+            nameList.Add("pisr_net_wt", "Net Weight");
+            nameList.Add("pisr_rec_type", "STS/IQC/SI");
+            nameList.Add("pisr_abc", "ABC");
+            nameList.Add("pisr_code", "商检");
+            //
+            nameList.Add("pisr_lic_req", "Lic. Req");
+
+            nameList.Add("pisr_sbu", "SBU");
+            nameList.Add("pisr_vend", "Vend");
+            nameList.Add("pisr_mfgr_name", "Mfgr Name");
+            nameList.Add("pisr_dec01", "k200 NW");
+            nameList.Add("pisr_dec02", "NW");
+            return nameList;
+        }
+        public void downLoadExcel(DataSet ds, Control ctMessage, Hashtable nameList, string filenamePrefix)
+        {
+            if (ds == null)
+            {
+                ctMessage.Text = "Error: no data.";
+            }
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ctMessage.Text = "notice: start download excel.";
+                string FilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+
+
+                //利用excel对象
+                DataToExcel dte = new DataToExcel();
+                string filename = "";
+                try
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        filename = dte.DataExcel(ds.Tables[0], "标题", FilePath, nameList, filenamePrefix);
+                    }
+                }
+                catch
+                {
+                    dte.KillExcelProcess();
+                }
+
+                if (filename != "")
+                {
+                    _idr_show._strDownLoadExcel = FilePath + @"\" + filename;
+                    ctMessage.Text = "Success: excel file is at " + _idr_show._strDownLoadExcel;
+                    OpenFolderAndSelectFile(_idr_show._strDownLoadExcel);
+                }
+            }
+            else
+            {
+                ctMessage.Text = "Error: has 0 count data.";
             }
         }
         /////////////////////////////////////

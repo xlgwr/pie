@@ -56,6 +56,8 @@
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2ErrorItems = new System.Windows.Forms.TabPage();
             this.data2GV2ePackingDet1UploadExcelError = new System.Windows.Forms.DataGridView();
+            this.ctmenu1EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btn2TempleFileUploadExcel = new System.Windows.Forms.Button();
             this.lbl1UploadExcelThreadMsg = new System.Windows.Forms.Label();
             this.groupBox1browseUploadExcel = new System.Windows.Forms.GroupBox();
@@ -63,8 +65,8 @@
             this.txt0ExcelFileUploadExcel = new System.Windows.Forms.TextBox();
             this.btn3QuickUploadExcel = new System.Windows.Forms.Button();
             this.btnCmdUpdUploadExcel = new System.Windows.Forms.Button();
-            this.ctmenu1EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad2ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox0frmUploadExcelForKYCA.SuspendLayout();
             this.groupBox2mstrUploadExcel.SuspendLayout();
             this.groupBox3detUploadExcel.SuspendLayout();
@@ -74,8 +76,8 @@
             this.ctmenu0EnquireByPart.SuspendLayout();
             this.tabPage2ErrorItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2ePackingDet1UploadExcelError)).BeginInit();
-            this.groupBox1browseUploadExcel.SuspendLayout();
             this.ctmenu1EnquireByPart.SuspendLayout();
+            this.groupBox1browseUploadExcel.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox0frmUploadExcelForKYCA
@@ -266,14 +268,15 @@
             // ctmenu0EnquireByPart
             // 
             this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enquireByPartToolStripMenuItem});
+            this.enquireByPartToolStripMenuItem,
+            this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(166, 26);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 70);
             // 
             // enquireByPartToolStripMenuItem
             // 
             this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
-            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
             this.enquireByPartToolStripMenuItem.Click += new System.EventHandler(this.enquireByPartToolStripMenuItem_Click);
             // 
@@ -325,6 +328,21 @@
             this.data2GV2ePackingDet1UploadExcelError.RowTemplate.Height = 23;
             this.data2GV2ePackingDet1UploadExcelError.Size = new System.Drawing.Size(648, 179);
             this.data2GV2ePackingDet1UploadExcelError.TabIndex = 17;
+            // 
+            // ctmenu1EnquireByPart
+            // 
+            this.ctmenu1EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.downLoad2ToExceltoolStripMenuItem2});
+            this.ctmenu1EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu1EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(190, 22);
+            this.toolStripMenuItem1.Text = "Enquire by &Part";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // btn2TempleFileUploadExcel
             // 
@@ -390,7 +408,7 @@
             // btnCmdUpdUploadExcel
             // 
             this.btnCmdUpdUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCmdUpdUploadExcel.Location = new System.Drawing.Point(455, 90);
+            this.btnCmdUpdUploadExcel.Location = new System.Drawing.Point(484, 90);
             this.btnCmdUpdUploadExcel.Name = "btnCmdUpdUploadExcel";
             this.btnCmdUpdUploadExcel.Size = new System.Drawing.Size(114, 36);
             this.btnCmdUpdUploadExcel.TabIndex = 12;
@@ -399,19 +417,19 @@
             this.btnCmdUpdUploadExcel.Visible = false;
             this.btnCmdUpdUploadExcel.Click += new System.EventHandler(this.btnCmdUpdUploadExcel_Click);
             // 
-            // ctmenu1EnquireByPart
+            // downLoad2ToExceltoolStripMenuItem2
             // 
-            this.ctmenu1EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.ctmenu1EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu1EnquireByPart.Size = new System.Drawing.Size(166, 48);
+            this.downLoad2ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
+            this.downLoad2ToExceltoolStripMenuItem2.Name = "downLoad2ToExceltoolStripMenuItem2";
+            this.downLoad2ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad2ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             // 
-            // toolStripMenuItem1
+            // downLoad1ToExceltoolStripMenuItem2
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(165, 22);
-            this.toolStripMenuItem1.Text = "Enquire by &Part";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
+            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
+            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             // 
             // frm111UploadExcelForKYCA
             // 
@@ -437,9 +455,9 @@
             this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.tabPage2ErrorItems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2ePackingDet1UploadExcelError)).EndInit();
+            this.ctmenu1EnquireByPart.ResumeLayout(false);
             this.groupBox1browseUploadExcel.ResumeLayout(false);
             this.groupBox1browseUploadExcel.PerformLayout();
-            this.ctmenu1EnquireByPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -475,6 +493,8 @@
         private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip ctmenu1EnquireByPart;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem downLoad2ToExceltoolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
 
     }
 }
