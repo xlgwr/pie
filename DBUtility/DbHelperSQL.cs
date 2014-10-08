@@ -71,7 +71,7 @@ namespace PIE.DBUtility
         }
         public static int GetMaxID(string FieldName, string strWhere, string TableName)
         {
-            string strsql = "select max(" + FieldName + ")+1 from " + TableName + " where " + strWhere;
+            string strsql = "select max(" + FieldName + ")+1 from " + TableName + " where " + strWhere + " order by " + FieldName;
             object obj = GetSingle(strsql);
             if (obj == null)
             {

@@ -753,6 +753,7 @@ namespace FrmPIE._0API
             CartonFromTo ctft = (CartonFromTo)ctftobj;
             var batchid = ctft._batchID;
             var lineid = ctft._lineID;
+            string strorderby = @" ORDER BY PI_ID,pi_LineID ";
             try
             {
                 string strwhere;
@@ -774,6 +775,7 @@ namespace FrmPIE._0API
 
                     strSql.Append(" where ");
                     strSql.Append(strwhere);
+                    strSql.Append(strorderby);
 
                     pi_det_ds = DbHelperSQL.Query(strSql.ToString());
 
@@ -804,7 +806,7 @@ namespace FrmPIE._0API
 
                     strSql.Append(" where ");
                     strSql.Append(strwhere);
-
+                    strSql.Append(strorderby);
 
                     pi_det_ds = DbHelperSQL.Query(strSql.ToString());
                     return pi_det_ds;
@@ -815,6 +817,7 @@ namespace FrmPIE._0API
                     strSql.Append("select ");
                     strSql.Append(" * ");
                     strSql.Append(" from vpi_detApisr_grr a ");
+                    strSql.Append(strorderby);
 
                     pi_det_ds = DbHelperSQL.Query(strSql.ToString());
                     return pi_det_ds;
@@ -1090,6 +1093,8 @@ namespace FrmPIE._0API
             dgv.Columns["pi_wec_ctn"].HeaderText = "Scan SN";
 
             dgv.Columns["pi_pallet_no"].HeaderText = "Pallet";
+            dgv.Columns["plr_LineID_tran"].HeaderText = "Scan Line";
+
             dgv.Columns["CartonNo"].HeaderText = "CartonNo";
 
             dgv.Columns["CartonID"].HeaderText = "CartonID";
@@ -1111,6 +1116,7 @@ namespace FrmPIE._0API
             dgv.Columns["pisr_con_code"].HeaderText = "Custom Conn";
 
             //dgv.Columns["pisr_ch_desc"].HeaderText = "Description";
+            dgv.Columns["pi_status"].HeaderText = "Upload Status";
             dgv.Columns["sq_name"].HeaderText = "Description";
 
             dgv.Columns["pisr_net_wt"].HeaderText = "Net Weight";

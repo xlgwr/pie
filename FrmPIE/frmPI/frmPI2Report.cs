@@ -30,7 +30,14 @@ namespace frmPI
             _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Layout;
             gb0PIReport.Resize += gb0PIReport_Resize;
 
+            data0GVPiReport.RowEnter += data0GVPiReport_RowEnter;
             initWidth();
+        }
+
+        void data0GVPiReport_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data0GVPiReport, 3, e.RowIndex, Color.LightGreen, "pi_pallet_no", "pi_status", "Yes", Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
         }
 
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
@@ -63,9 +70,10 @@ namespace frmPI
             }
             string strsql = @"select * from vpi_report where ";
             string strwhere = @"PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
-            vpi_report_ds = DbHelperSQL.Query(strsql + strwhere);
+            string strorderby = @" ORDER BY PI_ID, pi_pallet_no, pi_LineID ";
+            vpi_report_ds = DbHelperSQL.Query(strsql + strwhere + strorderby);
 
-            if (vpi_report_ds.Tables[0].Rows.Count<=0)
+            if (vpi_report_ds.Tables[0].Rows.Count <= 0)
             {
                 lblMsg.Text = txt0PINum_piReport.Text + " is not exist.";
                 txt0PINum_piReport.Focus();
@@ -99,6 +107,7 @@ namespace frmPI
 
                 nameList.Add("pi_wec_ctn", "Scan SN");
 
+                nameList.Add("plr_LineID_tran", "Scan Line");
                 nameList.Add("pi_pallet_no", "Pallet");
                 nameList.Add("CartonNo", "CartonNo");
 
@@ -121,6 +130,8 @@ namespace frmPI
                 nameList.Add("pisr_con_code", "Custom Conn");
 
                 //nameList.Add("pisr_ch_desc","Description");
+                nameList.Add("pi_status", "Upload Status");
+
                 nameList.Add("sq_name", "Description");
 
                 nameList.Add("pisr_net_wt", "Net Weight");

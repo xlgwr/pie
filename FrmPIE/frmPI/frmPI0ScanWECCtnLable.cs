@@ -605,7 +605,7 @@ namespace frmPI
                         cmb4Pallet_PIScan.Items.Clear();
                         cmb4Pallet_PIScan.Items.Add(" ");
 
-                        var ds = new PI.BLL.pi_det().GetList("PI_ID='" + txt1PIID_ScanWECCtnLable.Text.Trim() + "'");
+                        var ds = new PI.DAL.pi_det_ext().GetList("PI_ID='" + txt1PIID_ScanWECCtnLable.Text.Trim() + "'", "pi_deci1");
 
                         if (ds.Tables[0].Rows.Count > 0)
                         {
@@ -1088,15 +1088,24 @@ namespace frmPI
             if (existPIAdd != null)
             {
                 ShowMsg(_frmET.textBox1.Text + "already has been Add with PI ID: " + existPIAdd.PI_ID, "Notice");
+                txt1PIID_ScanWECCtnLable.Text = existPIAdd.PI_ID;
                 _frmET.textBox1.Focus();
                 _validateBatchid = false;
                 return;
             }
-            webserviceDS = cf.initWebServer("TESTOLDWEC", "wsas018", _frmET.textBox1.Text.Trim());
+            //TESTOLDWEC
+            webserviceDS = cf.initWebServer("P1", "wsas018", _frmET.textBox1.Text.Trim());
 
             if (webserviceDS == null)
             {
-                lbl0msg.Text = _frmET.textBox1.Text + " is no exist.";
+                lbl0msg.Text = _frmET.textBox1.Text + " (ERP) is no exist.";
+                _frmET.textBox1.Focus();
+                _validateBatchid = false;
+                return;
+            }
+            if (webserviceDS.Tables[0].Rows.Count <= 0)
+            {
+                lbl0msg.Text = _frmET.textBox1.Text + " (ERP) has no item.";
                 _frmET.textBox1.Focus();
                 _validateBatchid = false;
                 return;
@@ -1181,13 +1190,13 @@ namespace frmPI
                     pi_det_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
 
                     pi_det_model_add.pi_type = "N";
-                    pi_det_model_add.pi_deci1 = 0;
-                    pi_det_model_add.pi_pallet_no = "";
+                    pi_det_model_add.pi_deci1 = dr["wsas018_pallet"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_pallet"]);
+                    pi_det_model_add.pi_pallet_no = dr["wsas018_pallet"].ToString();
 
-                    pi_det_model_add.CartonNo = "0";
-                    pi_det_model_add.CartonID = "0";
+                    pi_det_model_add.CartonNo = dr["wsas018_ctn_no"].ToString();
+                    pi_det_model_add.CartonID = dr["wsas018_ctn_id"].ToString();
 
-                    pi_det_model_add.pi_chr01 = "";
+                    pi_det_model_add.pi_chr01 = dr["wsas018_co"].ToString();
 
 
                     pi_det_model_add.pi_chr02 = dr["wsas018_po_nbr"].ToString();
@@ -1242,6 +1251,9 @@ namespace frmPI
 
 
                 }
+                txt1PIID_ScanWECCtnLable.Text = strPIID;
+                txt1PIID_ScanWECCtnLable.Focus();
+
                 ShowMsg("Add PI Mstr info Success", "Success");
             }
             else

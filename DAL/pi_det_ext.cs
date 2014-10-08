@@ -14,6 +14,21 @@ namespace PI.DAL
         string _strAttr = @"PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 from pi_det";
         public pi_det_ext()
         { }
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public DataSet GetList(string strWhere, string strorderby)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_type,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
+            strSql.Append(" FROM pi_det ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            strSql.Append(" order by " + strorderby);
+            return DbHelperSQL.Query(strSql.ToString());
+        }
         #region  BasicMethod
         /// <summary>
         /// 得到最大ID piid add where 
