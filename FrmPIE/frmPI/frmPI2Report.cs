@@ -91,7 +91,7 @@ namespace frmPI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            cf.downLoadExcel(vpi_report_ds, lblMsg, cf.nameList0vpi_report_ds(), txt0PINum_piReport.Text.Trim());
+            cf.downLoadExcel(vpi_report_ds, lblMsg, cf.nameList0vpi_report_ds(), "2PIReoprt"+txt0PINum_piReport.Text.Trim());
         }
 
         private void txt0PINum_piReport_TextChanged(object sender, EventArgs e)

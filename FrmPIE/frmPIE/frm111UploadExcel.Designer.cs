@@ -56,6 +56,8 @@
             this.btnCmdUpdUploadExcel = new System.Windows.Forms.Button();
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn2GoUploadToERP = new System.Windows.Forms.Button();
             this.groupBox0frmUploadExcel.SuspendLayout();
             this.groupBox2mstrUploadExcel.SuspendLayout();
             this.groupBox3detUploadExcel.SuspendLayout();
@@ -66,6 +68,7 @@
             // 
             // groupBox0frmUploadExcel
             // 
+            this.groupBox0frmUploadExcel.Controls.Add(this.btn2GoUploadToERP);
             this.groupBox0frmUploadExcel.Controls.Add(this.groupBox2mstrUploadExcel);
             this.groupBox0frmUploadExcel.Controls.Add(this.groupBox3detUploadExcel);
             this.groupBox0frmUploadExcel.Controls.Add(this.btn2TempleFileUploadExcel);
@@ -202,7 +205,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data1GV1ePackingDet1UploadExcel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.data1GV1ePackingDet1UploadExcel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.data1GV1ePackingDet1UploadExcel.ContextMenuStrip = this.ctmenu0EnquireByPart;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -280,7 +282,7 @@
             // btn3QuickUploadExcel
             // 
             this.btn3QuickUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn3QuickUploadExcel.Location = new System.Drawing.Point(248, 90);
+            this.btn3QuickUploadExcel.Location = new System.Drawing.Point(238, 90);
             this.btn3QuickUploadExcel.Name = "btn3QuickUploadExcel";
             this.btn3QuickUploadExcel.Size = new System.Drawing.Size(114, 36);
             this.btn3QuickUploadExcel.TabIndex = 12;
@@ -291,7 +293,7 @@
             // btnCmdUpdUploadExcel
             // 
             this.btnCmdUpdUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCmdUpdUploadExcel.Location = new System.Drawing.Point(455, 90);
+            this.btnCmdUpdUploadExcel.Location = new System.Drawing.Point(547, 90);
             this.btnCmdUpdUploadExcel.Name = "btnCmdUpdUploadExcel";
             this.btnCmdUpdUploadExcel.Size = new System.Drawing.Size(114, 36);
             this.btnCmdUpdUploadExcel.TabIndex = 12;
@@ -303,16 +305,37 @@
             // ctmenu0EnquireByPart
             // 
             this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enquireByPartToolStripMenuItem});
+            this.enquireByPartToolStripMenuItem,
+            this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(166, 26);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
             // 
             // enquireByPartToolStripMenuItem
             // 
             this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
-            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
-            this.enquireByPartToolStripMenuItem.Click += new System.EventHandler(this.enquireByPartToolStripMenuItem_Click);
+            // 
+            // downLoad1ToExceltoolStripMenuItem2
+            // 
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
+            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
+            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
+            // 
+            // btn2GoUploadToERP
+            // 
+            this.btn2GoUploadToERP.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2GoUploadToERP.ForeColor = System.Drawing.Color.Red;
+            this.btn2GoUploadToERP.Location = new System.Drawing.Point(409, 90);
+            this.btn2GoUploadToERP.Name = "btn2GoUploadToERP";
+            this.btn2GoUploadToERP.Size = new System.Drawing.Size(114, 36);
+            this.btn2GoUploadToERP.TabIndex = 18;
+            this.btn2GoUploadToERP.Text = "&Upload To ERP";
+            this.btn2GoUploadToERP.UseVisualStyleBackColor = true;
+            this.btn2GoUploadToERP.Visible = false;
+            this.btn2GoUploadToERP.Click += new System.EventHandler(this.btn2GoUploadToERP_Click);
             // 
             // frmUploadExcel
             // 
@@ -365,6 +388,8 @@
         private System.Windows.Forms.Button btn3QuickUploadExcel;
         private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
         private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
+        private System.Windows.Forms.Button btn2GoUploadToERP;
 
     }
 }

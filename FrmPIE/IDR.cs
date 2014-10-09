@@ -604,7 +604,13 @@ namespace FrmPIE
             frm412UploadToERP ute = new frm412UploadToERP(this);
             addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
         }
-
+        public void goToUploadToERP(string batchid)
+        {
+            addNewTabPage("Upload WEC Carton ID To ERP");
+            frm412UploadToERP ute = new frm412UploadToERP(this);
+            ute.txt0BatchIDUploadToERP.Text = batchid;
+            addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
+        }
         private void toolStripMenuItem31btnPrintCartonLabel3_Click(object sender, EventArgs e)
         {
             addNewTabPage("Print Carton Label");

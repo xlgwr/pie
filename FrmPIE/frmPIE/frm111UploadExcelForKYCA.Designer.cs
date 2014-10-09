@@ -54,10 +54,12 @@
             this.data1GV1ePackingDet1UploadExcel = new System.Windows.Forms.DataGridView();
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2ErrorItems = new System.Windows.Forms.TabPage();
             this.data2GV2ePackingDet1UploadExcelError = new System.Windows.Forms.DataGridView();
             this.ctmenu1EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad2ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btn2TempleFileUploadExcel = new System.Windows.Forms.Button();
             this.lbl1UploadExcelThreadMsg = new System.Windows.Forms.Label();
             this.groupBox1browseUploadExcel = new System.Windows.Forms.GroupBox();
@@ -65,8 +67,7 @@
             this.txt0ExcelFileUploadExcel = new System.Windows.Forms.TextBox();
             this.btn3QuickUploadExcel = new System.Windows.Forms.Button();
             this.btnCmdUpdUploadExcel = new System.Windows.Forms.Button();
-            this.downLoad2ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn2GoUploadToERP = new System.Windows.Forms.Button();
             this.groupBox0frmUploadExcelForKYCA.SuspendLayout();
             this.groupBox2mstrUploadExcel.SuspendLayout();
             this.groupBox3detUploadExcel.SuspendLayout();
@@ -82,6 +83,7 @@
             // 
             // groupBox0frmUploadExcelForKYCA
             // 
+            this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.btn2GoUploadToERP);
             this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.groupBox2mstrUploadExcel);
             this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.groupBox3detUploadExcel);
             this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.btn2TempleFileUploadExcel);
@@ -271,7 +273,7 @@
             this.enquireByPartToolStripMenuItem,
             this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 70);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
             // 
             // enquireByPartToolStripMenuItem
             // 
@@ -279,6 +281,14 @@
             this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
             this.enquireByPartToolStripMenuItem.Click += new System.EventHandler(this.enquireByPartToolStripMenuItem_Click);
+            // 
+            // downLoad1ToExceltoolStripMenuItem2
+            // 
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
+            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
+            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
             // 
             // tabPage2ErrorItems
             // 
@@ -344,6 +354,14 @@
             this.toolStripMenuItem1.Text = "Enquire by &Part";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
+            // downLoad2ToExceltoolStripMenuItem2
+            // 
+            this.downLoad2ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
+            this.downLoad2ToExceltoolStripMenuItem2.Name = "downLoad2ToExceltoolStripMenuItem2";
+            this.downLoad2ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad2ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.downLoad2ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad2ToExceltoolStripMenuItem2_Click);
+            // 
             // btn2TempleFileUploadExcel
             // 
             this.btn2TempleFileUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -397,7 +415,7 @@
             // btn3QuickUploadExcel
             // 
             this.btn3QuickUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn3QuickUploadExcel.Location = new System.Drawing.Point(238, 90);
+            this.btn3QuickUploadExcel.Location = new System.Drawing.Point(211, 90);
             this.btn3QuickUploadExcel.Name = "btn3QuickUploadExcel";
             this.btn3QuickUploadExcel.Size = new System.Drawing.Size(188, 36);
             this.btn3QuickUploadExcel.TabIndex = 12;
@@ -408,7 +426,7 @@
             // btnCmdUpdUploadExcel
             // 
             this.btnCmdUpdUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCmdUpdUploadExcel.Location = new System.Drawing.Point(484, 90);
+            this.btnCmdUpdUploadExcel.Location = new System.Drawing.Point(551, 90);
             this.btnCmdUpdUploadExcel.Name = "btnCmdUpdUploadExcel";
             this.btnCmdUpdUploadExcel.Size = new System.Drawing.Size(114, 36);
             this.btnCmdUpdUploadExcel.TabIndex = 12;
@@ -417,19 +435,18 @@
             this.btnCmdUpdUploadExcel.Visible = false;
             this.btnCmdUpdUploadExcel.Click += new System.EventHandler(this.btnCmdUpdUploadExcel_Click);
             // 
-            // downLoad2ToExceltoolStripMenuItem2
+            // btn2GoUploadToERP
             // 
-            this.downLoad2ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
-            this.downLoad2ToExceltoolStripMenuItem2.Name = "downLoad2ToExceltoolStripMenuItem2";
-            this.downLoad2ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
-            this.downLoad2ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
-            // 
-            // downLoad1ToExceltoolStripMenuItem2
-            // 
-            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
-            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
-            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
-            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.btn2GoUploadToERP.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2GoUploadToERP.ForeColor = System.Drawing.Color.Red;
+            this.btn2GoUploadToERP.Location = new System.Drawing.Point(428, 90);
+            this.btn2GoUploadToERP.Name = "btn2GoUploadToERP";
+            this.btn2GoUploadToERP.Size = new System.Drawing.Size(114, 36);
+            this.btn2GoUploadToERP.TabIndex = 17;
+            this.btn2GoUploadToERP.Text = "&Upload To ERP";
+            this.btn2GoUploadToERP.UseVisualStyleBackColor = true;
+            this.btn2GoUploadToERP.Visible = false;
+            this.btn2GoUploadToERP.Click += new System.EventHandler(this.btn2GoUploadToERP_Click);
             // 
             // frm111UploadExcelForKYCA
             // 
@@ -495,6 +512,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem downLoad2ToExceltoolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
+        private System.Windows.Forms.Button btn2GoUploadToERP;
 
     }
 }

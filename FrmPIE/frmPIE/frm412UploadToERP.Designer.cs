@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.gb0UploadToERP.SuspendLayout();
             this.gb1UploadToERP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GVUploadToERP)).BeginInit();
@@ -131,15 +132,24 @@
             // ctmenu0EnquireByPart
             // 
             this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enquireByPartToolStripMenuItem});
+            this.enquireByPartToolStripMenuItem,
+            this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(166, 48);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
             // 
             // enquireByPartToolStripMenuItem
             // 
             this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
-            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            // 
+            // downLoad1ToExceltoolStripMenuItem2
+            // 
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
+            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
+            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
             // 
             // frm412UploadToERP
             // 
@@ -164,12 +174,13 @@
         private System.Windows.Forms.GroupBox gb1UploadToERP;
         private System.Windows.Forms.DataGridView data1GVUploadToERP;
         private System.Windows.Forms.CheckBox chk0UploadToERP;
-        private System.Windows.Forms.TextBox txt0BatchIDUploadToERP;
         protected internal System.Windows.Forms.GroupBox gb0UploadToERP;
         private System.Windows.Forms.Label label1;
         protected internal System.Windows.Forms.Label lbl0MsgUploadToERP;
         private System.Windows.Forms.Button btn1UploadToERP;
         private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
         private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
+        protected internal System.Windows.Forms.TextBox txt0BatchIDUploadToERP;
     }
 }

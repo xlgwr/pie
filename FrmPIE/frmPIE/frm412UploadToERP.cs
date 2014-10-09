@@ -20,7 +20,7 @@ namespace FrmPIE
 
         frmIDR _idr_show;
         Commfunction cf;
-        DataSet reobjdet;
+        DataSet _reobjdet;
         public string _strbatchid;
         public frm412UploadToERP(frmIDR idr)
         {
@@ -36,7 +36,7 @@ namespace FrmPIE
             data1GVUploadToERP.RowEnter += data1GVUploadToERP_RowEnter;
 
             data1GVUploadToERP.ContextMenuStrip = ctmenu0EnquireByPart;
-            ctmenu0EnquireByPart.Click += enquireByPartToolStripMenuItem_Click;
+            enquireByPartToolStripMenuItem.Click += enquireByPartToolStripMenuItem_Click;
         }
 
         void data1GVUploadToERP_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -101,11 +101,11 @@ namespace FrmPIE
             CartonFromTo ctftPlrMstr = new CartonFromTo(obj._dgv, txt0BatchIDUploadToERP.Text, 0, "upload", _idr_show._custip, _idr_show._custip);
             if (chk0UploadToERP.Checked)
             {
-                reobjdet = (DataSet)cf.initDataGVplr_mstr_tran(ctftPlrMstr, true, "all");
+                _reobjdet = (DataSet)cf.initDataGVplr_mstr_tran(ctftPlrMstr, true, "all");
             }
             else
             {
-                reobjdet = (DataSet)cf.initDataGVplr_mstr_tran(ctftPlrMstr, true, "ds");
+                _reobjdet = (DataSet)cf.initDataGVplr_mstr_tran(ctftPlrMstr, true, "ds");
             }
 
         }
@@ -226,6 +226,12 @@ namespace FrmPIE
                 return;
             }
             cf.EnquireByPart(data1GVUploadToERP, "plr_partno", _frmET.textBox1.Text.Trim());
+        }
+
+        private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            
+            cf.downLoadExcel(_reobjdet, lbl0MsgUploadToERP, cf.nameList12UploadToERP(), "12UploadToERP");
         }
     }
 }

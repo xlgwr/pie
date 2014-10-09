@@ -58,6 +58,9 @@ namespace FrmPIE
 
             data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
             data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
+
+            data1GV1ePackingDet1UploadExcel.ContextMenuStrip = ctmenu0EnquireByPart;
+            enquireByPartToolStripMenuItem.Click += enquireByPartToolStripMenuItem_Click;
         }
 
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
@@ -728,7 +731,7 @@ namespace FrmPIE
             string strerrnullrows = "At ";
 
             var servedate = DbHelperSQL.getServerGetDate();
-            
+
 
             while (rows.MoveNext())
             {
@@ -861,7 +864,7 @@ namespace FrmPIE
 
 
             txt0ExcelFileUploadExcel.Text = "";
-
+            btn2GoUploadToERP.Visible = true;
         }
 
         private void frmUploadExcel_FormClosing(object sender, FormClosingEventArgs e)
@@ -907,6 +910,17 @@ namespace FrmPIE
                 return;
             }
             cf.EnquireByPart(data1GV1ePackingDet1UploadExcel, "plr_partno", _frmET.textBox1.Text.Trim());
+        }
+
+        private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+            cf.downLoadExcel(data0set_npoi, lbl1UploadExcelThreadMsg, cf.nameListPlrMstr2ExcelUpload(), "11DownloadExcelFlag" + _strBatchID);
+        }
+
+        private void btn2GoUploadToERP_Click(object sender, EventArgs e)
+        {
+            _idr_show.goToUploadToERP(_strBatchID);
         }
 
 

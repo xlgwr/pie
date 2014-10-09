@@ -2182,11 +2182,89 @@ namespace FrmPIE._0API
             nameList.Add("pisr_dec02", "NW");
             return nameList;
         }
+
+        public Hashtable nameListPlrMstr2ExcelUpload()
+        {
+            //生成列的中文对应表
+            Hashtable nameList = new Hashtable();
+            nameList.Add("Batch_ID", "Batch ID");
+            nameList.Add("LineID", "LineID");
+            nameList.Add("plr_status", "Void");
+
+            //nameList.Add("plr_suppliers_id","Suppliers");
+
+            nameList.Add("InvoiceID", "Invoice ID");
+            nameList.Add("plr_po", "PO#");
+            nameList.Add("packingListID", "PackingListID");
+            nameList.Add("plr_partno", "Part");
+            nameList.Add("plr_qty", "Total/Qty");
+            nameList.Add("CartonType", "Number Carton");
+            nameList.Add("CartonID", "Carton ID");
+            nameList.Add("plr_carton_qty", "Qty/Carton");
+
+            nameList.Add("Plr_vm_partno", "MFGR-Part");
+
+            nameList.Add("plr_pallet_no", "Pallet No");
+            nameList.Add("plr_co", "CO");
+            nameList.Add("plr_date_code", "Date Code");
+
+
+            nameList.Add("plr_vend_mfgr", "MFGR");
+
+
+            nameList.Add("plr_doc_type", "Suppliers");
+            nameList.Add("plr_cre_date", "Create Date");
+            nameList.Add("plr_update_date", "Update Date");
+            //nameList.Add("plr_cre_userid","User Id");
+            nameList.Add("plr_user_ip", "Client IP");
+
+            nameList.Add("plr_rcp_date", "Rcp Date");
+            nameList.Add("plr_deli_date", "Deli Date");
+            return nameList;
+        }
+        public Hashtable nameList12UploadToERP()
+        {
+            //生成列的中文对应表
+            Hashtable nameList = new Hashtable();
+            nameList.Add("Batch_ID", "Batch ID");
+            nameList.Add("LineID", "Line");
+
+            nameList.Add("Wec_Ctn", "WEC Ctn ID");
+            nameList.Add("plr_status", "Status");
+            nameList.Add("plr_status_msg", "Msg");
+            nameList.Add("plr_wec_ctn", "WEC CTN");
+
+            nameList.Add("plr_pallet_no", "Pallet No");
+
+            //nameList.Add("plr_suppliers_id","Suppliers ID");
+            nameList.Add("InvoiceID", "Invoice ID");
+            nameList.Add("plr_po", "PO#");
+            nameList.Add("packingListID", "PackingListID");
+            nameList.Add("plr_partno", "Part");
+            nameList.Add("plr_qty", "Total/QTY");
+            nameList.Add("CartonType", "Number Carton");
+            nameList.Add("CartonID", "Carton ID");
+            nameList.Add("plr_carton_qty", "Qty/Carton");
+            nameList.Add("carton_id_prifix", "Carton Prefix");
+
+
+            nameList.Add("re_mark", "Remark");
+            nameList.Add("Plr_vm_partno", "MFGR-Part");
+            nameList.Add("plr_rcp_date", "Rcp Date");
+            nameList.Add("plr_deli_date", "Deli Date");
+
+            nameList.Add("plr_cre_date", "Create Date");
+            //nameList.Add("plr_update_date","Update Date");
+            //nameList.Add("plr_cre_userid","User Id");
+            //nameList.Add("plr_user_ip","Client IP");
+            return nameList;
+        }
         public void downLoadExcel(DataSet ds, Control ctMessage, Hashtable nameList, string filenamePrefix)
         {
             if (ds == null)
             {
                 ctMessage.Text = "Error: no data.";
+                return;
             }
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -2202,6 +2280,46 @@ namespace FrmPIE._0API
                     if (ds.Tables[0].Rows.Count > 0)
                     {
                         filename = dte.DataExcel(ds.Tables[0], "标题", FilePath, nameList, filenamePrefix);
+                    }
+                }
+                catch
+                {
+                    dte.KillExcelProcess();
+                }
+
+                if (filename != "")
+                {
+                    _idr_show._strDownLoadExcel = FilePath + @"\" + filename;
+                    ctMessage.Text = "Success: excel file is at " + _idr_show._strDownLoadExcel;
+                    OpenFolderAndSelectFile(_idr_show._strDownLoadExcel);
+                }
+            }
+            else
+            {
+                ctMessage.Text = "Error: has 0 count data.";
+            }
+        }
+        public void downLoadExcel(DataTable dt, Control ctMessage, Hashtable nameList, string filenamePrefix)
+        {
+            if (dt == null)
+            {
+                ctMessage.Text = "Error: no data.";
+                return;
+            }
+            if (dt.Rows.Count > 0)
+            {
+                ctMessage.Text = "notice: start download excel.";
+                string FilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+
+
+                //利用excel对象
+                DataToExcel dte = new DataToExcel();
+                string filename = "";
+                try
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        filename = dte.DataExcel(dt, "标题", FilePath, nameList, filenamePrefix);
                     }
                 }
                 catch
