@@ -2272,6 +2272,47 @@ namespace FrmPIE._0API
             //nameList.Add("plr_user_ip","Client IP");
             return nameList;
         }
+
+        public void downLoadExcel(DataSet ds, ToolStripItem ctMessage, Hashtable nameList, string filenamePrefix)
+        {
+            if (ds == null)
+            {
+                ctMessage.Text = "Error: no data.";
+                return;
+            }
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ctMessage.Text = "notice: start download excel.";
+                string FilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+
+
+                //利用excel对象
+                DataToExcel dte = new DataToExcel();
+                string filename = "";
+                try
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        filename = dte.DataExcel(ds.Tables[0], "标题", FilePath, nameList, filenamePrefix);
+                    }
+                }
+                catch
+                {
+                    dte.KillExcelProcess();
+                }
+
+                if (filename != "")
+                {
+                    _idr_show._strDownLoadExcel = FilePath + @"\" + filename;
+                    ctMessage.Text = "Success: excel file is at " + _idr_show._strDownLoadExcel;
+                    OpenFolderAndSelectFile(_idr_show._strDownLoadExcel);
+                }
+            }
+            else
+            {
+                ctMessage.Text = "Error: has 0 count data.";
+            }
+        }
         public void downLoadExcel(DataSet ds, Control ctMessage, Hashtable nameList, string filenamePrefix)
         {
             if (ds == null)

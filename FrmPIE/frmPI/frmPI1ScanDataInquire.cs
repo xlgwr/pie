@@ -16,6 +16,8 @@ namespace frmPI
     {
         frmIDR _idr_show;
         Commfunction cf;
+        frmEnterTxt _frmET;
+        DataSet _reobjdet;
 
         public frmPI1ScanDataInquire(frmIDR idr)
         {
@@ -54,6 +56,26 @@ namespace frmPI
             data1GV1_PIdet.CellClick += data1GV1ePackingDet1_BatchInfo_CellClick;
 
 
+            data1GV1_PIdet.ContextMenuStrip = ctmenu0EnquireByPart;
+            enquireByPartToolStripMenuItem.Click += enquireByPartToolStripMenuItem_Click;
+        }
+
+        private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmET = new frmEnterTxt(_idr_show, this);
+            _frmET.button1.Click += enquireByPart;
+            _frmET.lblTitle.Text = "Part#:";
+            _frmET.Text = "Enquire by Part:";
+            _frmET.ShowDialog();
+        }
+        void enquireByPart(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                return;
+            }
+            cf.EnquireByPart(data1GV1_PIdet, "pisr_part", _frmET.textBox1.Text.Trim());
         }
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
         {
@@ -100,7 +122,7 @@ namespace frmPI
             var reobjmstr = cf.initDataGVpi_mstr(ctftPlrMstr, false, "model");
 
             var reobjmstrDGVreflash = cf.initDataGVpi_mstr(ctftPlrMstrall, true, "all");
-            var reobjdet = cf.initDataGVpi_det_join_grr(ctftPlrMstrTran, true, "nothing");
+            _reobjdet = (DataSet)cf.initDataGVpi_det_join_grr(ctftPlrMstrTran, true, "ds");
 
             if (reobjmstr != null)
             {
@@ -130,6 +152,11 @@ namespace frmPI
         private void frmPI1ScanDataInquire_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            cf.downLoadExcel(_reobjdet, _idr_show.status15toolLabelstrResult, cf.nameList0vpi_report_ds(), "1PIScan" + _idr_show._pi_mstr_model.PI_ID);
         }
     }
 }

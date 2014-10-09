@@ -15,6 +15,7 @@ namespace FrmPIE
         frmEnterTxt _frmET;
         frmIDR _idr_show;
         Commfunction cf;
+        DataSet _reobjdet;
 
         //定义一个DateTimePicker控件
         private DateTimePicker dTimePicker = new DateTimePicker();
@@ -53,6 +54,9 @@ namespace FrmPIE
             data2GV2CartonNO.RowEnter += data2GV2CartonNO_RowEnter;
             data2GV2CartonNO.CellClick += data2GV2CartonNO_CellClick;
 
+
+            data2GV2CartonNO.ContextMenuStrip = ctmenu0EnquireByPart;
+            enquireByPartToolStripMenuItem.Click += enquireByPartToolStripMenuItem_Click;
         }
 
         void data2GV2CartonNO_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -107,13 +111,13 @@ namespace FrmPIE
             CartonFromTo ctftPlrMstrTran = new CartonFromTo(obj._dgv1, obj._strBatchId, 0, "upload", _idr_show._custip, _idr_show._custip);
 
             var reobjmstr = cf.initDataGVPlrBatchMstr(ctftPlrMstr, false, "model");
-            var reobjdet = cf.initDataGVplr_mstr(ctftPlrMstr, true, "nothing");
+            var reobjmstrDet = (DataSet)cf.initDataGVplr_mstr(ctftPlrMstr, true, "nothing");
 
             if (reobjmstr != null)
             {
                 _idr_show._plr_batch_mstr_model = (PIE.Model.plr_batch_mstr)reobjmstr;
                 initModelToTxtPlrBatchMast(_idr_show._plr_batch_mstr_model, true);
-                var reobjCarton = cf.initDataGVplr_mstr_tran(ctftPlrMstrTran, true, "nothing");
+                _reobjdet = (DataSet)cf.initDataGVplr_mstr_tran(ctftPlrMstrTran, true, "nothing");
             }
 
         }
@@ -160,7 +164,12 @@ namespace FrmPIE
                 _frmET.textBox1.Focus();
                 return;
             }
-            cf.EnquireByPart(data1GV1ePackingDet1_BatchInfo, "plr_partno", _frmET.textBox1.Text.Trim());
+            cf.EnquireByPart(data2GV2CartonNO, "plr_partno", _frmET.textBox1.Text.Trim());
+        }
+
+        private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            cf.downLoadExcel(_reobjdet, _idr_show.status15toolLabelstrResult, cf.nameList12UploadToERP(), "0BatchInfo" + _idr_show._plr_batch_mstr_model.batch_id);
         }
 
 

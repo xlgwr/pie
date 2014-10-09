@@ -404,7 +404,7 @@ namespace PIE.Common
         {
             COM.Excel.cExcelFile excel = new COM.Excel.cExcelFile();
             ClearFile(FilePath);
-            string filename = filenamePre + "Date" + DateTime.Now.ToString("yyyyMMddHHmmssff") + ".xls";
+            string filename = filenamePre + "D" + DateTime.Now.ToString("yyMMddHHms") + ".xls";//yyyyMMddHHmmssff
             excel.CreateFile(FilePath + @"\\" + filename);
             excel.PrintGridLines = false;
 

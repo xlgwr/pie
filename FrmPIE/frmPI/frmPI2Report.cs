@@ -37,11 +37,7 @@ namespace frmPI
             data0GVPiReport.ContextMenuStrip = ctmenu0EnquireByPart;
             enquireByPartToolStripMenuItem.Click += enquireByPartToolStripMenuItem_Click;
         }
-        void data0GVPiReport_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DoWrokObject dwo = new DoWrokObject(data0GVPiReport, e.RowIndex, e.ColumnIndex, "PI_ID");
-            cf.selectCellMethod(dwo);
-        }
+
         private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmET = new frmEnterTxt(_idr_show, this);
@@ -50,7 +46,6 @@ namespace frmPI
             _frmET.Text = "Enquire by Part:";
             _frmET.ShowDialog();
         }
-
         void enquireByPart(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(_frmET.textBox1.Text))
@@ -60,6 +55,12 @@ namespace frmPI
             }
             cf.EnquireByPart(data0GVPiReport, "pisr_part", _frmET.textBox1.Text.Trim());
         }
+        void data0GVPiReport_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data0GVPiReport, e.RowIndex, e.ColumnIndex, "PI_ID");
+            cf.selectCellMethod(dwo);
+        }
+
         void data0GVPiReport_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(data0GVPiReport, 3, e.RowIndex, Color.LightGreen, "pi_pallet_no", "pi_status", "Yes", Color.LightGray);
