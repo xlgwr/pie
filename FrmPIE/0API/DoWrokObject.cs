@@ -24,6 +24,8 @@ namespace FrmPIE._0API
         public string _sameColumnNameCountValut;
         public string _deffCellName;
         public string _deffCellValue;
+        public string _strCellColName = "Batch_ID";
+
         public Color _deffcolors;
 
         frmIDR _idr_show;
@@ -57,6 +59,23 @@ namespace FrmPIE._0API
             _deffCellName = deffCellName;
             _deffCellValue = deffCellValue;
             _deffcolors = Deffcolors;
+
+        }
+        public DoWrokObject(frmIDR idr_show, DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnNameCount, string sameColumnNameCountValut, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors, string compMaxMin)
+        {
+            _dgv = dgv;
+            _selectedindex = selectedindex;
+            _eX = eIndex;
+            _colors = colors;
+            _sameColumnName = sameColumnName;
+            _sameColumnNameCount = sameColumnNameCount;
+            _sameColumnNameCountHeaderText = dgv.Columns[sameColumnNameCount].HeaderText;
+            _sameColumnNameCountValut = sameColumnNameCountValut;
+            _deffCellName = deffCellName;
+            _deffCellValue = deffCellValue;
+            _deffcolors = Deffcolors;
+            _compMaxMin = compMaxMin;
+            _idr_show = idr_show;
 
         }
         public DoWrokObject(frmIDR idr_show, DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors, string compMaxMin)
@@ -93,6 +112,14 @@ namespace FrmPIE._0API
             _dgv = dgv;
             _eX = ex;
             _eY = ey;
+
+        }
+        public DoWrokObject(DataGridView dgv, int ex, int ey, string strCellColName)
+        {
+            _dgv = dgv;
+            _eX = ex;
+            _eY = ey;
+            _strCellColName = strCellColName;
 
         }
         public DoWrokObject(DataGridView dgv, int ex, int ey, bool haslineid, string voidColumn)

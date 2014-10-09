@@ -28,20 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gb0PIReport = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.data0GVPiReport = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn2UploadToHKPIDB = new System.Windows.Forms.Button();
-            this.btn1DownLoadToExcelPi = new System.Windows.Forms.Button();
             this.lblMsg = new System.Windows.Forms.Label();
             this.btn0_enquire_piReport = new System.Windows.Forms.Button();
             this.txt0PINum_piReport = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.gb0PIReport.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data0GVPiReport)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.ctmenu0EnquireByPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb0PIReport
@@ -78,7 +82,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btn2UploadToHKPIDB);
-            this.groupBox1.Controls.Add(this.btn1DownLoadToExcelPi);
             this.groupBox1.Controls.Add(this.lblMsg);
             this.groupBox1.Controls.Add(this.btn0_enquire_piReport);
             this.groupBox1.Controls.Add(this.txt0PINum_piReport);
@@ -92,23 +95,13 @@
             // 
             // btn2UploadToHKPIDB
             // 
-            this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(461, 20);
+            this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(403, 20);
             this.btn2UploadToHKPIDB.Name = "btn2UploadToHKPIDB";
             this.btn2UploadToHKPIDB.Size = new System.Drawing.Size(110, 34);
             this.btn2UploadToHKPIDB.TabIndex = 5;
             this.btn2UploadToHKPIDB.Text = "&UpLoad[HK,PI_DB]";
             this.btn2UploadToHKPIDB.UseVisualStyleBackColor = true;
             this.btn2UploadToHKPIDB.Click += new System.EventHandler(this.btn2UploadToHKPIDB_Click);
-            // 
-            // btn1DownLoadToExcelPi
-            // 
-            this.btn1DownLoadToExcelPi.Location = new System.Drawing.Point(332, 20);
-            this.btn1DownLoadToExcelPi.Name = "btn1DownLoadToExcelPi";
-            this.btn1DownLoadToExcelPi.Size = new System.Drawing.Size(110, 34);
-            this.btn1DownLoadToExcelPi.TabIndex = 5;
-            this.btn1DownLoadToExcelPi.Text = "&DownLoadToExcel";
-            this.btn1DownLoadToExcelPi.UseVisualStyleBackColor = true;
-            this.btn1DownLoadToExcelPi.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblMsg
             // 
@@ -148,6 +141,28 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Pi ID:";
             // 
+            // ctmenu0EnquireByPart
+            // 
+            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enquireByPartToolStripMenuItem,
+            this.downLoad1ToExceltoolStripMenuItem2});
+            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            // 
+            // enquireByPartToolStripMenuItem
+            // 
+            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            // 
+            // downLoad1ToExceltoolStripMenuItem2
+            // 
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources.down;
+            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
+            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
+            // 
             // frmPI2Report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -162,6 +177,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.data0GVPiReport)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -176,8 +192,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView data0GVPiReport;
-        private System.Windows.Forms.Button btn1DownLoadToExcelPi;
         private System.Windows.Forms.Button btn2UploadToHKPIDB;
+        private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
+        private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
 
     }
 }

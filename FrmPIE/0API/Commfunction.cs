@@ -132,6 +132,7 @@ namespace FrmPIE._0API
         public void cellSelectMethod(object dwko)
         {
             _idr_show._sameColumnCount = 0;
+            _idr_show.status16toolLabelstrSameColumnCount.Text = "";
             DoWrokObject dwo = (DoWrokObject)dwko;
             int mcount = 0;
             int minValue = 0;
@@ -1141,7 +1142,7 @@ namespace FrmPIE._0API
 
             dgv.Columns["pisr_sbu"].HeaderText = "SBU";
             dgv.Columns["pisr_vend"].HeaderText = "Vend";
-            dgv.Columns["pisr_mfgr_name"].HeaderText = "Mfgr Name";
+            dgv.Columns["pisr_mfgr_name"].HeaderText = "Vend Name";
             dgv.Columns["pisr_dec01"].HeaderText = "k200 NW";
             dgv.Columns["pisr_dec02"].HeaderText = "NW";
 
@@ -1947,7 +1948,7 @@ namespace FrmPIE._0API
             {
                 if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
                 {
-                    _plr_mstr_model.Batch_ID = dwo._dgv.Rows[dwo._eX].Cells["Batch_ID"].Value.ToString().Trim();
+                    _plr_mstr_model.Batch_ID = dwo._dgv.Rows[dwo._eX].Cells[dwo._strCellColName].Value.ToString().Trim();
                     return _plr_mstr_model.Batch_ID;
                 }
                 return "";
@@ -2189,7 +2190,7 @@ namespace FrmPIE._0API
 
             nameList.Add("pisr_sbu", "SBU");
             nameList.Add("pisr_vend", "Vend");
-            nameList.Add("pisr_mfgr_name", "Mfgr Name");
+            nameList.Add("pisr_mfgr_name", "Vend Name");
             nameList.Add("pisr_dec01", "k200 NW");
             nameList.Add("pisr_dec02", "NW");
             return nameList;
@@ -2350,6 +2351,44 @@ namespace FrmPIE._0API
             {
                 ctMessage.Text = "Error: has 0 count data.";
             }
+        }
+
+
+        /// <summary>  
+        /// 时间戳转为C#格式时间  
+        /// </summary>  
+        /// <param name="timeStamp">Unix时间戳格式</param>  
+        /// <returns>C#格式时间</returns>  
+        public DateTime GetTime(string timeStamp)
+        {
+            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            long lTime = long.Parse(timeStamp + "0000000");
+            TimeSpan toNow = new TimeSpan(lTime);
+            return dtStart.Add(toNow);
+        }
+
+
+        /// <summary>  
+        /// DateTime时间格式转换为Unix时间戳格式  
+        /// </summary>  
+        /// <param name="time"> DateTime时间格式</param>  
+        /// <returns>Unix时间戳格式</returns>  
+        public int ConvertDateTimeInt(System.DateTime time)
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+            return (int)(time - startTime).TotalSeconds;
+        }
+        public double ToTimestamp(DateTime value)
+        {
+            TimeSpan span = (value - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime());
+            return (double)span.TotalSeconds;
+        }
+
+        public DateTime ConvertTimestamp(double timestamp)
+        {
+            DateTime converted = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            DateTime newDateTime = converted.AddSeconds(timestamp);
+            return newDateTime.ToLocalTime();
         }
         /////////////////////////////////////
         //start place

@@ -121,6 +121,7 @@
     <Compile Include="PI_DET_Remote.cs" />
     <Compile Include="pkey_ctl.cs" />
     <Compile Include="pi_mstr.cs" />
+    <Compile Include="vpi_report.cs" />
     <Compile Include="sys_userInrole.cs" />
     <Compile Include="sys_user.cs" />
     <Compile Include="sys_role.cs" />

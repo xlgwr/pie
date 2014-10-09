@@ -63,7 +63,7 @@ namespace FrmPIE
 
         void data2GV2CartonNO_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data2GV2CartonNO, 3, e.RowIndex, Color.LightGreen, "CartonID", "plr_status", "Yes", Color.LightGray);
+            DoWrokObject dwo = new DoWrokObject(data2GV2CartonNO, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         

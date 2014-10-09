@@ -57,6 +57,7 @@ namespace frmPI
             _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Enter;
             _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
 
+            data1GVSanWecCtnLable.CellClick += data1GVSanWecCtnLable_CellClick;
             data1GVSanWecCtnLable.RowEnter += data1GVSanWecCtnLable_RowEnter;
 
             initWidth();
@@ -65,7 +66,11 @@ namespace frmPI
             cmb4Pallet_PIScan.Items.Add(" ");
 
         }
-
+        void data1GVSanWecCtnLable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data1GVSanWecCtnLable, e.RowIndex, e.ColumnIndex, "PI_ID");
+            cf.selectCellMethod(dwo);
+        }
         void data1GVSanWecCtnLable_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(data1GVSanWecCtnLable, 3, e.RowIndex, Color.LightGreen, "CartonID", "pi_status", "Yes", Color.LightGray);
