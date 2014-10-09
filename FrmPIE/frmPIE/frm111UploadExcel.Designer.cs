@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUploadExcel));
             this.groupBox0frmUploadExcel = new System.Windows.Forms.GroupBox();
+            this.btn2GoUploadToERP = new System.Windows.Forms.Button();
             this.groupBox2mstrUploadExcel = new System.Windows.Forms.GroupBox();
             this.txt5batch_cre_dateUploadExcel = new System.Windows.Forms.TextBox();
             this.txt4batch_dec01UploadExcel = new System.Windows.Forms.TextBox();
@@ -57,7 +58,6 @@
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn2GoUploadToERP = new System.Windows.Forms.Button();
             this.groupBox0frmUploadExcel.SuspendLayout();
             this.groupBox2mstrUploadExcel.SuspendLayout();
             this.groupBox3detUploadExcel.SuspendLayout();
@@ -83,6 +83,19 @@
             this.groupBox0frmUploadExcel.TabIndex = 0;
             this.groupBox0frmUploadExcel.TabStop = false;
             this.groupBox0frmUploadExcel.Resize += new System.EventHandler(this.groupBox1frmUpload_Resize);
+            // 
+            // btn2GoUploadToERP
+            // 
+            this.btn2GoUploadToERP.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2GoUploadToERP.ForeColor = System.Drawing.Color.Red;
+            this.btn2GoUploadToERP.Location = new System.Drawing.Point(409, 90);
+            this.btn2GoUploadToERP.Name = "btn2GoUploadToERP";
+            this.btn2GoUploadToERP.Size = new System.Drawing.Size(114, 36);
+            this.btn2GoUploadToERP.TabIndex = 18;
+            this.btn2GoUploadToERP.Text = "&Upload To ERP";
+            this.btn2GoUploadToERP.UseVisualStyleBackColor = true;
+            this.btn2GoUploadToERP.Visible = false;
+            this.btn2GoUploadToERP.Click += new System.EventHandler(this.btn2GoUploadToERP_Click);
             // 
             // groupBox2mstrUploadExcel
             // 
@@ -308,7 +321,7 @@
             this.enquireByPartToolStripMenuItem,
             this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 70);
             // 
             // enquireByPartToolStripMenuItem
             // 
@@ -318,24 +331,11 @@
             // 
             // downLoad1ToExceltoolStripMenuItem2
             // 
-            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources.down;
             this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
             this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
             this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
-            // 
-            // btn2GoUploadToERP
-            // 
-            this.btn2GoUploadToERP.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn2GoUploadToERP.ForeColor = System.Drawing.Color.Red;
-            this.btn2GoUploadToERP.Location = new System.Drawing.Point(409, 90);
-            this.btn2GoUploadToERP.Name = "btn2GoUploadToERP";
-            this.btn2GoUploadToERP.Size = new System.Drawing.Size(114, 36);
-            this.btn2GoUploadToERP.TabIndex = 18;
-            this.btn2GoUploadToERP.Text = "&Upload To ERP";
-            this.btn2GoUploadToERP.UseVisualStyleBackColor = true;
-            this.btn2GoUploadToERP.Visible = false;
-            this.btn2GoUploadToERP.Click += new System.EventHandler(this.btn2GoUploadToERP_Click);
             // 
             // frmUploadExcel
             // 

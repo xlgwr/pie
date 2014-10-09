@@ -131,7 +131,7 @@ namespace FrmPIE._0API
         }
         public void cellSelectMethod(object dwko)
         {
-
+            _idr_show._sameColumnCount = 0;
             DoWrokObject dwo = (DoWrokObject)dwko;
             int mcount = 0;
             int minValue = 0;
@@ -149,6 +149,14 @@ namespace FrmPIE._0API
                 //m
                 for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
                 {
+                    if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                    {
+                        if (dwo._dgv.Rows[i].Cells[dwo._sameColumnNameCount].Value.ToString().Equals(dwo._sameColumnNameCountValut))
+                        {
+                            _idr_show._sameColumnCount++;
+                        }
+                    }
+
                     if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
                     {
                         dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
@@ -198,6 +206,10 @@ namespace FrmPIE._0API
                 _idr_show._intFrom = minValue;
                 _idr_show._intTo = maxValue;
 
+                if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                {
+                    _idr_show.status16toolLabelstrSameColumnCount.Text = dwo._sameColumnNameCountHeaderText + " : " + dwo._sameColumnNameCountValut + " has " + _idr_show._sameColumnCount.ToString() + " items";
+                }
 
             }
 

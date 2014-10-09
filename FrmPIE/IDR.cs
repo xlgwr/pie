@@ -45,6 +45,7 @@ namespace FrmPIE
         public DataGridView _voidDGV;
         public int _voideX;
         public int _voideY;
+        public int _sameColumnCount;
         public Boolean _voidhasLineID;
         public Boolean _voidRefresh;
 

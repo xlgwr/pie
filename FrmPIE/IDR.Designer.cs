@@ -101,6 +101,7 @@
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.status16toolLabelstrSameColumnCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -193,7 +194,8 @@
             this.status125toolBtnClear,
             this.status13toolSStatusLblMsg,
             this.status14toolLabelCellRowColXY,
-            this.status15toolLabelstrResult});
+            this.status15toolLabelstrResult,
+            this.status16toolLabelstrSameColumnCount});
             this.statusStrip1.Location = new System.Drawing.Point(0, 441);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(632, 22);
@@ -847,7 +849,7 @@
             this.closeAllToolStripMenuItem2,
             this.closeAllButThisToolStripMenuItem3});
             this.ctmenusClose.Name = "contextMenuStrip1";
-            this.ctmenusClose.Size = new System.Drawing.Size(177, 92);
+            this.ctmenusClose.Size = new System.Drawing.Size(177, 70);
             // 
             // closeToolStripMenuItem1
             // 
@@ -886,6 +888,12 @@
             this.tool110StripMenuItemVoid});
             this.c11MenuStripVoid.Name = "cMenuStrip1ScanCartronLabel";
             this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 26);
+            // 
+            // status16toolLabelstrSameColumnCount
+            // 
+            this.status16toolLabelstrSameColumnCount.ForeColor = System.Drawing.Color.Red;
+            this.status16toolLabelstrSameColumnCount.Name = "status16toolLabelstrSameColumnCount";
+            this.status16toolLabelstrSameColumnCount.Size = new System.Drawing.Size(0, 17);
             // 
             // frmIDR
             // 
@@ -1017,6 +1025,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
         private System.Windows.Forms.Button btn24PIReports;
         private System.Windows.Forms.LinkLabel linkLabel8;
+        protected internal System.Windows.Forms.ToolStripStatusLabel status16toolLabelstrSameColumnCount;
 
 
 

@@ -47,7 +47,7 @@ namespace FrmPIE
 
         void data1GVUploadToERP_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GVUploadToERP, 3, e.RowIndex, Color.LightGreen, "CartonID", "plr_status", "Yes", Color.LightGray);
+            DoWrokObject dwo = new DoWrokObject(data1GVUploadToERP, 3, e.RowIndex, Color.LightGreen, "plr_status","U", "CartonID", "plr_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         void SelectedTab_Resize(object sender, EventArgs e)

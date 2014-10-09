@@ -135,7 +135,7 @@
             this.enquireByPartToolStripMenuItem,
             this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 70);
             // 
             // enquireByPartToolStripMenuItem
             // 
@@ -145,7 +145,7 @@
             // 
             // downLoad1ToExceltoolStripMenuItem2
             // 
-            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources._18;
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources.down;
             this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
             this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
             this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
