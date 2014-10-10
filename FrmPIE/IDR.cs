@@ -65,7 +65,9 @@ namespace FrmPIE
 
         public string _strSaveLabelFile = "";
         public string _strDownLoadExcel = "";
+
         public string _selectColumnNameValue;
+
         public string _strCellColName;
         public string _sameColumnName;
         public string _deffCellName;
@@ -111,7 +113,7 @@ namespace FrmPIE
             _FrmForRefe.data0GVForReference.RowEnter += data0GVForReference_RowEnter;
             _FrmForRefe.data0GVForReference.CellClick += data0GVForReference_Click;
             //
-            _FrmForRefe.button1.Click += enquireByPart;
+            _FrmForRefe.button1.Click += enquireByForReferenct;
             _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
             //
             _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
@@ -139,7 +141,7 @@ namespace FrmPIE
             }
             else
             {
-                enquireByPart(sender, e);
+                enquireByForReferenct(sender, e);
             }
         }
 
@@ -185,7 +187,7 @@ namespace FrmPIE
             cf.initThreadDowrokColor(dwo);
 
         }
-        void enquireByPart(object sender, EventArgs e)
+        void enquireByForReferenct(object sender, EventArgs e)
         {
             _FrmForRefe.chkTop50.Checked = false;
             if (string.IsNullOrEmpty(_FrmForRefe.textBox1.Text))

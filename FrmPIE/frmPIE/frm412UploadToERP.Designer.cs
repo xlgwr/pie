@@ -40,6 +40,7 @@
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn00More = new System.Windows.Forms.Button();
             this.gb0UploadToERP.SuspendLayout();
             this.gb1UploadToERP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GVUploadToERP)).BeginInit();
@@ -48,6 +49,7 @@
             // 
             // gb0UploadToERP
             // 
+            this.gb0UploadToERP.Controls.Add(this.btn00More);
             this.gb0UploadToERP.Controls.Add(this.gb1UploadToERP);
             this.gb0UploadToERP.Controls.Add(this.lbl0MsgUploadToERP);
             this.gb0UploadToERP.Controls.Add(this.chk0UploadToERP);
@@ -93,7 +95,7 @@
             // chk0UploadToERP
             // 
             this.chk0UploadToERP.AutoSize = true;
-            this.chk0UploadToERP.Location = new System.Drawing.Point(225, 48);
+            this.chk0UploadToERP.Location = new System.Drawing.Point(441, 49);
             this.chk0UploadToERP.Name = "chk0UploadToERP";
             this.chk0UploadToERP.Size = new System.Drawing.Size(84, 16);
             this.chk0UploadToERP.TabIndex = 2;
@@ -104,7 +106,7 @@
             // 
             // txt0BatchIDUploadToERP
             // 
-            this.txt0BatchIDUploadToERP.Location = new System.Drawing.Point(86, 46);
+            this.txt0BatchIDUploadToERP.Location = new System.Drawing.Point(86, 47);
             this.txt0BatchIDUploadToERP.Name = "txt0BatchIDUploadToERP";
             this.txt0BatchIDUploadToERP.Size = new System.Drawing.Size(124, 21);
             this.txt0BatchIDUploadToERP.TabIndex = 1;
@@ -112,7 +114,7 @@
             // 
             // btn1UploadToERP
             // 
-            this.btn1UploadToERP.Location = new System.Drawing.Point(315, 28);
+            this.btn1UploadToERP.Location = new System.Drawing.Point(315, 30);
             this.btn1UploadToERP.Name = "btn1UploadToERP";
             this.btn1UploadToERP.Size = new System.Drawing.Size(107, 54);
             this.btn1UploadToERP.TabIndex = 0;
@@ -123,7 +125,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 49);
+            this.label1.Location = new System.Drawing.Point(32, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 3;
@@ -135,7 +137,7 @@
             this.enquireByPartToolStripMenuItem,
             this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 70);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
             // 
             // enquireByPartToolStripMenuItem
             // 
@@ -150,6 +152,20 @@
             this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
             this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
+            // 
+            // btn00More
+            // 
+            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
+            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn00More.FlatAppearance.BorderSize = 0;
+            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
+            this.btn00More.Location = new System.Drawing.Point(211, 46);
+            this.btn00More.Name = "btn00More";
+            this.btn00More.Size = new System.Drawing.Size(23, 23);
+            this.btn00More.TabIndex = 7;
+            this.btn00More.UseVisualStyleBackColor = true;
             // 
             // frm412UploadToERP
             // 
@@ -182,5 +198,6 @@
         private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
         protected internal System.Windows.Forms.TextBox txt0BatchIDUploadToERP;
+        private System.Windows.Forms.Button btn00More;
     }
 }

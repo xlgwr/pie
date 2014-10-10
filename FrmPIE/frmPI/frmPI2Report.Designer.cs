@@ -41,6 +41,7 @@
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn00More = new System.Windows.Forms.Button();
             this.gb0PIReport.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data0GVPiReport)).BeginInit();
@@ -81,6 +82,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn00More);
             this.groupBox1.Controls.Add(this.btn2UploadToHKPIDB);
             this.groupBox1.Controls.Add(this.lblMsg);
             this.groupBox1.Controls.Add(this.btn0_enquire_piReport);
@@ -115,7 +117,7 @@
             // 
             // btn0_enquire_piReport
             // 
-            this.btn0_enquire_piReport.Location = new System.Drawing.Point(251, 20);
+            this.btn0_enquire_piReport.Location = new System.Drawing.Point(276, 20);
             this.btn0_enquire_piReport.Name = "btn0_enquire_piReport";
             this.btn0_enquire_piReport.Size = new System.Drawing.Size(75, 34);
             this.btn0_enquire_piReport.TabIndex = 2;
@@ -126,7 +128,7 @@
             // txt0PINum_piReport
             // 
             this.txt0PINum_piReport.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt0PINum_piReport.Location = new System.Drawing.Point(66, 23);
+            this.txt0PINum_piReport.Location = new System.Drawing.Point(58, 23);
             this.txt0PINum_piReport.Name = "txt0PINum_piReport";
             this.txt0PINum_piReport.Size = new System.Drawing.Size(179, 29);
             this.txt0PINum_piReport.TabIndex = 1;
@@ -163,6 +165,20 @@
             this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
             // 
+            // btn00More
+            // 
+            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
+            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn00More.FlatAppearance.BorderSize = 0;
+            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
+            this.btn00More.Location = new System.Drawing.Point(237, 26);
+            this.btn00More.Name = "btn00More";
+            this.btn00More.Size = new System.Drawing.Size(23, 23);
+            this.btn00More.TabIndex = 8;
+            this.btn00More.UseVisualStyleBackColor = true;
+            // 
             // frmPI2Report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -196,6 +212,7 @@
         private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
         private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
+        private System.Windows.Forms.Button btn00More;
 
     }
 }

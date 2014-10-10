@@ -17,11 +17,19 @@ namespace FrmPIE
     public partial class frm412UploadToERP : Form
     {
         frmEnterTxt _frmET;
+        frmEnterForReference _FrmForRefe;
 
         frmIDR _idr_show;
         Commfunction cf;
         DataSet _reobjdet;
         public string _strbatchid;
+
+
+        public string _strCellColName;
+        public string _sameColumnName;
+        public string _deffCellName;
+        public string _deffCellValue;
+
         public frm412UploadToERP(frmIDR idr)
         {
             InitializeComponent();
@@ -37,6 +45,111 @@ namespace FrmPIE
 
             data1GVUploadToERP.ContextMenuStrip = ctmenu0EnquireByPart;
             enquireByPartToolStripMenuItem.Click += enquireByPartToolStripMenuItem_Click;
+            btn00More.Click += btn00More0_Click;
+        }
+
+        void btn00More0_Click(object sender, EventArgs e)
+        {
+            _FrmForRefe = new frmEnterForReference(_idr_show, this);
+
+            _FrmForRefe.textBox1.Text = txt0BatchIDUploadToERP.Text;
+            _FrmForRefe.textBox1.Focus();
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            //
+            _FrmForRefe.data0GVForReference.RowEnter += data0GVForReference_RowEnter;
+            _FrmForRefe.data0GVForReference.CellClick += data0GVForReference_Click;
+            //
+            _FrmForRefe.button1.Click += enquireByForReferenct;
+            _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
+            //
+            _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
+            //
+            _FrmForRefe.gb0ForReference.Text = "Enquire Result";
+            //
+            initSelectCondition();
+            //
+            init_FrmForRefeDGV("");
+
+            _FrmForRefe.ShowDialog();
+        }
+
+        void chkTop50_CheckedChanged(object sender, EventArgs e)
+        {
+
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            if (_FrmForRefe.chkTop50.Checked)
+            {
+                //
+                initSelectCondition();
+                //
+                init_FrmForRefeDGV("");
+            }
+            else
+            {
+                enquireByForReferenct(sender, e);
+            }
+        }
+
+        private void initSelectCondition()
+        {
+            _FrmForRefe.lblTitle.Text = "BatchID# OR IP:";
+            _FrmForRefe.Text = "Enquire by BatchID";
+            //
+            _strCellColName = "batch_id";
+            _sameColumnName = "batch_user_ip";
+            _deffCellName = "batch_status";
+            _deffCellValue = "Yes";
+
+        }
+
+        void button1_DoubleClick(object sender, EventArgs e)
+        {
+            _FrmForRefe.Close();
+        }
+
+        void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
+            string strBatchID = cf.selectCellMethod(dwo);
+            txt0BatchIDUploadToERP.Text = strBatchID;
+        }
+
+        void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
+
+        }
+        void enquireByForReferenct(object sender, EventArgs e)
+        {
+            _FrmForRefe.chkTop50.Checked = false;
+            if (string.IsNullOrEmpty(_FrmForRefe.textBox1.Text))
+            {
+                _FrmForRefe.textBox1.Focus();
+                return;
+            }
+            init_FrmForRefeDGV(_FrmForRefe.textBox1.Text.Trim());
+            //txt0SearchID.Text = _FrmForRefe.textBox1.Text.Trim();
+            //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
+        }
+
+        private void init_FrmForRefeDGV(string strwhere)
+        {
+            strwhere = _strCellColName + @" like '%" + strwhere + @"%' or " + _sameColumnName + @" like '%" + strwhere + @"%'";
+            if (_strCellColName.Equals("batch_id"))
+            {
+                var batch_ds = new PIE.DAL.plr_batch_mstr_ext().GetList(50, strwhere, "batch_id desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPlrBatchMstr1(_FrmForRefe.data0GVForReference);
+            }
+            else
+            {
+                _FrmForRefe.data0GVForReference.DataSource = null;
+            }
+            _FrmForRefe.data0GVForReference.Refresh();
+
         }
 
         void data1GVUploadToERP_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -47,7 +160,7 @@ namespace FrmPIE
 
         void data1GVUploadToERP_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GVUploadToERP, 3, e.RowIndex, Color.LightGreen, "plr_status","U", "CartonID", "plr_status", "Yes", Color.LightGray);
+            DoWrokObject dwo = new DoWrokObject(data1GVUploadToERP, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         void SelectedTab_Resize(object sender, EventArgs e)
@@ -230,7 +343,7 @@ namespace FrmPIE
 
         private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            
+
             cf.downLoadExcel(_reobjdet, lbl0MsgUploadToERP, cf.nameList12UploadToERP(), "12UploadToERP");
         }
     }
