@@ -595,8 +595,15 @@ namespace FrmPIE
         private void btn1Home1_Click(object sender, EventArgs e)
         {
             tabCtlRight1.SelectedIndex = 0;
+            clearnotice();
         }
-
+        void clearnotice()
+        {
+            //status13toolSStatusLblMsg.Text = "";
+            status14toolLabelCellRowColXY.Text = "";
+            status15toolLabelstrResult.Text = "";
+            status16toolLabelstrSameColumnCount.Text = "";
+        }
         private void btn0Add_Click(object sender, EventArgs e)
         {
             //addNewTabPage("Add New", true);
@@ -680,14 +687,17 @@ namespace FrmPIE
         public void addGBToTC(TabControl tc, GroupBox gb)
         {
             tc.SelectedTab.Controls.Add(gb);
+            clearnotice();
         }
         public void addGBToTC(TabControl tc, Control cl)
         {
             tc.SelectedTab.Controls.Add(cl);
+            clearnotice();
         }
         public void addGBToTC(TabPage tp, GroupBox gb)
         {
             tp.Controls.Add(gb);
+            clearnotice();
         }
         private void toolcMenu11UploadEPackingListExcel_Click(object sender, EventArgs e)
         {
@@ -774,6 +784,7 @@ namespace FrmPIE
         {
             //status13toolSStatusLblMsg.Text = "";
             status15toolLabelstrResult.Text = "";
+            
             //status14toolLabelCellRowColXY.Text = "";
         }
 

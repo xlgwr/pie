@@ -104,9 +104,34 @@ namespace FrmPIE
 
         }
 
+
+        private void init_FrmForRefeDGV(string strwhere)
+        {
+            strwhere = _strCellColName + @" like '%" + strwhere + @"%' or " + _sameColumnName + @" like '%" + strwhere + @"%'";
+            if (_strCellColName.Equals("batch_id"))
+            {
+                var batch_ds = new PIE.DAL.plr_batch_mstr_ext().GetList(50, strwhere, "batch_id desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPlrBatchMstr1(_FrmForRefe.data0GVForReference);
+            }
+            else if (_strCellColName.Equals("PI_ID"))
+            {
+                var batch_ds = new PI.DAL.pi_mstr_ext().GetList(50, strwhere, "PI_ID desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPIMstrForEquire(_FrmForRefe.data0GVForReference);
+            }
+            else
+            {
+                _FrmForRefe.data0GVForReference.DataSource = null;
+            }
+            _FrmForRefe.data0GVForReference.Refresh();
+
+        }
+
         void button1_DoubleClick(object sender, EventArgs e)
         {
             _FrmForRefe.Close();
+            btn0UploadToERP_Click(sender, e);
         }
 
         void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
@@ -133,23 +158,6 @@ namespace FrmPIE
             init_FrmForRefeDGV(_FrmForRefe.textBox1.Text.Trim());
             //txt0SearchID.Text = _FrmForRefe.textBox1.Text.Trim();
             //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
-        }
-
-        private void init_FrmForRefeDGV(string strwhere)
-        {
-            strwhere = _strCellColName + @" like '%" + strwhere + @"%' or " + _sameColumnName + @" like '%" + strwhere + @"%'";
-            if (_strCellColName.Equals("batch_id"))
-            {
-                var batch_ds = new PIE.DAL.plr_batch_mstr_ext().GetList(50, strwhere, "batch_id desc", true);
-                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
-                cf.initHeaderTextPlrBatchMstr1(_FrmForRefe.data0GVForReference);
-            }
-            else
-            {
-                _FrmForRefe.data0GVForReference.DataSource = null;
-            }
-            _FrmForRefe.data0GVForReference.Refresh();
-
         }
 
         void data1GVUploadToERP_CellClick(object sender, DataGridViewCellEventArgs e)

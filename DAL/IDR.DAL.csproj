@@ -150,6 +150,7 @@
     <Compile Include="Plr_mstr_ext.cs" />
     <Compile Include="Plr_mstr_tran_ext.cs" />
     <Compile Include="sys_role.cs" />
+    <Compile Include="vpi_report_ext.cs" />
     <Compile Include="vpi_report.cs" />
     <Compile Include="sys_user.cs" />
     <Compile Include="sys_userInrole.cs" />

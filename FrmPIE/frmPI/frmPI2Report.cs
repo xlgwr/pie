@@ -100,10 +100,32 @@ namespace frmPI
             _deffCellValue = "Yes";
 
         }
+        private void init_FrmForRefeDGV(string strwhere)
+        {
+            strwhere = _strCellColName + @" like '%" + strwhere + @"%' or " + _sameColumnName + @" like '%" + strwhere + @"%'";
+            if (_strCellColName.Equals("batch_id"))
+            {
+                var batch_ds = new PIE.DAL.plr_batch_mstr_ext().GetList(50, strwhere, "batch_id desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPlrBatchMstr1(_FrmForRefe.data0GVForReference);
+            }
+            else if (_strCellColName.Equals("PI_ID"))
+            {
+                var batch_ds = new PI.DAL.pi_mstr_ext().GetList(50, strwhere, "PI_ID desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPIMstrForEquire(_FrmForRefe.data0GVForReference);
+            }
+            else
+            {
+                _FrmForRefe.data0GVForReference.DataSource = null;
+            }
+            _FrmForRefe.data0GVForReference.Refresh();
 
+        }
         void button1_DoubleClick(object sender, EventArgs e)
         {
             _FrmForRefe.Close();
+            btn_enquire_piReport_Click(sender, e);
         }
 
         void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
@@ -132,28 +154,7 @@ namespace frmPI
             //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
         }
 
-        private void init_FrmForRefeDGV(string strwhere)
-        {
-            strwhere = _strCellColName + @" like '%" + strwhere + @"%' or " + _sameColumnName + @" like '%" + strwhere + @"%'";
-            if (_strCellColName.Equals("batch_id"))
-            {
-                var batch_ds = new PIE.DAL.plr_batch_mstr_ext().GetList(50, strwhere, "batch_id desc", true);
-                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
-                cf.initHeaderTextPlrBatchMstr1(_FrmForRefe.data0GVForReference);
-            }
-            else if (_strCellColName.Equals("PI_ID"))
-            {
-                var batch_ds = new PI.DAL.pi_mstr_ext().GetList(50, strwhere, "PI_ID desc", true);
-                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
-                cf.initHeaderTextPIMstrForEquire(_FrmForRefe.data0GVForReference);
-            }
-            else
-            {
-                _FrmForRefe.data0GVForReference.DataSource = null;
-            }
-            _FrmForRefe.data0GVForReference.Refresh();
-
-        }
+       
 
         private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -206,6 +207,7 @@ namespace frmPI
 
         private void btn_enquire_piReport_Click(object sender, EventArgs e)
         {
+            lblMsg.Text = "";
             if (string.IsNullOrEmpty(txt0PINum_piReport.Text.Trim()) || txt0PINum_piReport.Text.Length > 12)
             {
                 txt0PINum_piReport.Focus();
@@ -221,6 +223,7 @@ namespace frmPI
             {
                 lblMsg.Text = txt0PINum_piReport.Text + " is not exist.";
                 txt0PINum_piReport.Focus();
+                data0GVPiReport.DataSource = null;
                 return;
             }
             data0GVPiReport.DataSource = vpi_report_ds.Tables[0].DefaultView;
@@ -245,16 +248,27 @@ namespace frmPI
 
         private void btn2UploadToHKPIDB_Click(object sender, EventArgs e)
         {
+
             lblMsg.Text = "";
             DateTime dt = DbHelperSQL.getServerGetDate();
             int addRemoteD = 0;
-            string strwhere = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No'";
-            List<PIE.Model.vpi_report> vpi_report_list = new PIE.BLL.vpi_report().GetModelList(strwhere);
-            int listcount = vpi_report_list.Count;
 
-            if (listcount <= 0)
+            string strwhereYes = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='Yes'";
+            string strwhereNo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No'";
+            List<PIE.Model.vpi_report> vpi_report_list_no = new PIE.BLL.vpi_report().GetModelList(strwhereNo);
+
+
+            int listcountno = vpi_report_list_no.Count;
+            int listcountYes = new PIE.DAL.vpi_report_ext().getCount(strwhereYes);
+
+            if (listcountno <= 0 && listcountYes > 0)
             {
-                lblMsg.Text = "Notice: " + strwhere + " has no Data.";
+                lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has being Update Over.";
+                return;
+            }
+            if (listcountno <= 0)
+            {
+                lblMsg.Text = "Notice: " + strwhereNo + " has no Data.";
                 return;
             }
             PI.Model.PI_MSTR_Remote pI_MSTR_Remote_model = new PI.Model.PI_MSTR_Remote();
@@ -263,11 +277,11 @@ namespace frmPI
             var addRemoteMstr = new PI.DAL.PI_MSTR_Remote_ext().Add(pI_MSTR_Remote_model, true);
             if (!addRemoteMstr)
             {
-                lblMsg.Text = "Error: Upload to PI DataBase(HK) fails.";
+                lblMsg.Text = "Error: Upload PI:" + txt0PINum_piReport.Text + " to DataBase(HK) fails.";
                 return;
             }
 
-            foreach (PIE.Model.vpi_report item in vpi_report_list)
+            foreach (PIE.Model.vpi_report item in vpi_report_list_no)
             {
                 PI.Model.PI_DET_Remote pI_DET_Remote_model = new PI.Model.PI_DET_Remote();
 
@@ -318,23 +332,26 @@ namespace frmPI
                 var intresutl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model);
                 if (intresutl > 0)
                 {
-                    string strupdatesql = "update dbo.pi_det set pi_status='Yes' where PI_ID='" + item.PI_ID + "' and pi_LineID='" + item.pi_LineID + "' and pi_wec_ctn='" + item.pi_wec_ctn + "'";
+                    string strupdatesqldet = "update dbo.pi_det set pi_status='Yes' where PI_ID='" + item.PI_ID + "' and pi_LineID='" + item.pi_LineID + "' and pi_wec_ctn='" + item.pi_wec_ctn + "'";
+                    string strupdatesqlMstr = "update dbo.pi_mstr set pi_status='Yes' where PI_ID='" + item.PI_ID + "'";
 
-                    var changeStatus = DbHelperSQL.ExecuteSql(strupdatesql);
+                    var changeStatus = DbHelperSQL.ExecuteSql(strupdatesqldet);
+                    var changeStatusMstr = DbHelperSQL.ExecuteSql(strupdatesqlMstr);
                     addRemoteD++;
                 }
 
             }
             if (addRemoteD > 0)
             {
-                if (addRemoteD >= listcount)
+                if (addRemoteD >= listcountno)
                 {
-                    lblMsg.Text = "Success: Upload to PI DataBase(HK)";
+                    lblMsg.Text = "Success: Upload PI:" + txt0PINum_piReport.Text + " to DataBase(HK)";
                 }
                 else
                 {
-                    lblMsg.Text = "Notice: Upload to PI DataBase(HK) OK, but some is not";
+                    lblMsg.Text = "Notice: Upload PI:" + txt0PINum_piReport.Text + " to  DataBase(HK) OK, but some is not";
                 }
+                btn_enquire_piReport_Click(sender, e);
             }
         }
 

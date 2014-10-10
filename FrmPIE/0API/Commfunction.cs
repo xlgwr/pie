@@ -277,12 +277,12 @@ namespace FrmPIE._0API
                     if (reurntype.Equals("all"))
                     {
                         strwhere = "select top 100 batch_id,batch_doc,batch_status,batch_cre_date," +
-                            "batch_dec01,batch_user_ip FROM plr_batch_mstr";
+                            "batch_dec01,batch_chr01,batch_user_ip FROM plr_batch_mstr";
                     }
                     else
                     {
                         strwhere = "select top 1 batch_id,batch_doc,batch_status,batch_cre_date," +
-                                        "batch_dec01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
+                                        "batch_dec01,batch_chr01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
                     }
 
                     plr_batch_mstr_ds1 = DbHelperSQL.Query(strwhere);
@@ -303,14 +303,14 @@ namespace FrmPIE._0API
                 if (reurntype.Equals("ds"))
                 {
                     strwhere = "select top 1 batch_id,batch_doc,batch_status,batch_cre_date," +
-                "batch_dec01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
+                "batch_dec01,batch_chr01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
                     plr_batch_mstr_ds1 = DbHelperSQL.Query(strwhere);
 
                     return plr_batch_mstr_ds1;
                 }
                 if (reurntype.Equals("all"))
                 {
-                    strwhere = "select batch_id,batch_doc,batch_status,batch_cre_date,batch_dec01,batch_user_ip FROM plr_batch_mstr";
+                    strwhere = "select batch_id,batch_doc,batch_status,batch_cre_date,batch_dec01,batch_chr01,batch_user_ip FROM plr_batch_mstr";
                     plr_batch_mstr_ds1 = DbHelperSQL.Query(strwhere);
                     return plr_batch_mstr_ds1;
                 }
@@ -876,6 +876,7 @@ namespace FrmPIE._0API
             //dgv.Columns["batch_user_ip"].HeaderText = "Client IP";
             //dgv.Columns["batch_chr01"].HeaderText = "other";
             dgv.Columns["batch_dec01"].HeaderText = "Items Count";
+            dgv.Columns["batch_chr01"].HeaderText = "PI Status";
             dgv.Columns["batch_user_ip"].HeaderText = "Create IP";
 
         }
@@ -1091,7 +1092,7 @@ namespace FrmPIE._0API
             dgv.Columns[1].Frozen = true;
 
             dgv.Columns["PI_ID"].HeaderText = "PI ID";
-            dgv.Columns["pi_status"].HeaderText = "Status";
+            dgv.Columns["pi_status"].HeaderText = "Upload Status";
 
             dgv.Columns["Plant"].HeaderText = "Plant";
 
@@ -1976,6 +1977,7 @@ namespace FrmPIE._0API
         }
         public string selectCellMethod(DoWrokObject dwo)
         {
+
             _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
             //_idr_show.status13toolSStatusLblMsg.Text = "";
             _idr_show.status15toolLabelstrResult.Text = "";
@@ -1983,8 +1985,18 @@ namespace FrmPIE._0API
             {
                 if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
                 {
-                    _plr_mstr_model.Batch_ID = dwo._dgv.Rows[dwo._eX].Cells[dwo._strCellColName].Value.ToString().Trim();
-                    return _plr_mstr_model.Batch_ID;
+                    string str_ID = dwo._dgv.Rows[dwo._eX].Cells[dwo._strCellColName].Value.ToString().Trim();
+                    _idr_show.status14toolLabelCellRowColXY.Text += "," + str_ID;
+                    if (dwo._strCellColName.Equals("Batch_ID"))
+                    {
+                        _plr_mstr_model.Batch_ID = str_ID;
+                    }
+                    else if (dwo._strCellColName.Equals("PI_ID"))
+                    {
+                        _pi_mstr_model.PI_ID = str_ID;
+                    }
+
+                    return str_ID;
                 }
                 return "";
             }
