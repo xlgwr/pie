@@ -46,6 +46,7 @@
             this.status13toolSStatusLblMsg = new System.Windows.Forms.ToolStripStatusLabel();
             this.status14toolLabelCellRowColXY = new System.Windows.Forms.ToolStripStatusLabel();
             this.status15toolLabelstrResult = new System.Windows.Forms.ToolStripStatusLabel();
+            this.status16toolLabelstrSameColumnCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.txt0SearchID = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -89,6 +90,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel8 = new System.Windows.Forms.LinkLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btn00More = new System.Windows.Forms.Button();
             this.lbl0SearchError = new System.Windows.Forms.Label();
             this.btn0Find9 = new System.Windows.Forms.Button();
             this.btn0Print6 = new System.Windows.Forms.Button();
@@ -101,7 +103,6 @@
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.status16toolLabelstrSameColumnCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -184,7 +185,7 @@
             this.cmb1SearchType.Location = new System.Drawing.Point(182, 14);
             this.cmb1SearchType.Name = "cmb1SearchType";
             this.cmb1SearchType.Size = new System.Drawing.Size(96, 24);
-            this.cmb1SearchType.TabIndex = 9;
+            this.cmb1SearchType.TabIndex = 4;
             this.cmb1SearchType.Text = "BatchID";
             // 
             // statusStrip1
@@ -271,13 +272,19 @@
             this.status15toolLabelstrResult.Name = "status15toolLabelstrResult";
             this.status15toolLabelstrResult.Size = new System.Drawing.Size(0, 17);
             // 
+            // status16toolLabelstrSameColumnCount
+            // 
+            this.status16toolLabelstrSameColumnCount.ForeColor = System.Drawing.Color.Red;
+            this.status16toolLabelstrSameColumnCount.Name = "status16toolLabelstrSameColumnCount";
+            this.status16toolLabelstrSameColumnCount.Size = new System.Drawing.Size(0, 17);
+            // 
             // txt0SearchID
             // 
             this.txt0SearchID.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt0SearchID.Location = new System.Drawing.Point(282, 13);
+            this.txt0SearchID.Location = new System.Drawing.Point(282, 14);
             this.txt0SearchID.Name = "txt0SearchID";
-            this.txt0SearchID.Size = new System.Drawing.Size(159, 26);
-            this.txt0SearchID.TabIndex = 8;
+            this.txt0SearchID.Size = new System.Drawing.Size(144, 26);
+            this.txt0SearchID.TabIndex = 5;
             this.toolTip1.SetToolTip(this.txt0SearchID, "    PI ID: PYYMMDD0000 (P1409090001)\r\nBatchID: RYYMMDD0000 (R1409090001)\r\n");
             this.txt0SearchID.TextChanged += new System.EventHandler(this.txt0SearchID_TextChanged);
             this.txt0SearchID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt0SearchID_KeyUp);
@@ -758,6 +765,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btn00More);
             this.splitContainer1.Panel1.Controls.Add(this.lbl0SearchError);
             this.splitContainer1.Panel1.Controls.Add(this.btn0Find9);
             this.splitContainer1.Panel1.Controls.Add(this.cmb1SearchType);
@@ -771,6 +779,21 @@
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(764, 517);
             this.splitContainer1.TabIndex = 1;
+            // 
+            // btn00More
+            // 
+            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
+            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn00More.FlatAppearance.BorderSize = 0;
+            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
+            this.btn00More.Location = new System.Drawing.Point(423, 15);
+            this.btn00More.Name = "btn00More";
+            this.btn00More.Size = new System.Drawing.Size(23, 23);
+            this.btn00More.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.btn00More, "For Reference");
+            this.btn00More.UseVisualStyleBackColor = true;
             // 
             // lbl0SearchError
             // 
@@ -789,11 +812,12 @@
             this.btn0Find9.FlatAppearance.BorderSize = 0;
             this.btn0Find9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn0Find9.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn0Find9.Location = new System.Drawing.Point(447, 3);
+            this.btn0Find9.Location = new System.Drawing.Point(455, 4);
             this.btn0Find9.Name = "btn0Find9";
             this.btn0Find9.Size = new System.Drawing.Size(43, 44);
-            this.btn0Find9.TabIndex = 10;
+            this.btn0Find9.TabIndex = 7;
             this.btn0Find9.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.toolTip1.SetToolTip(this.btn0Find9, "Find Result");
             this.btn0Find9.UseVisualStyleBackColor = false;
             this.btn0Find9.Click += new System.EventHandler(this.btn0Find9_Click);
             // 
@@ -807,7 +831,7 @@
             this.btn0Print6.Location = new System.Drawing.Point(89, 4);
             this.btn0Print6.Name = "btn0Print6";
             this.btn0Print6.Size = new System.Drawing.Size(43, 44);
-            this.btn0Print6.TabIndex = 6;
+            this.btn0Print6.TabIndex = 3;
             this.toolTip1.SetToolTip(this.btn0Print6, "Print Carton Lable");
             this.btn0Print6.UseVisualStyleBackColor = false;
             this.btn0Print6.Click += new System.EventHandler(this.btn0Print6_Click);
@@ -889,12 +913,6 @@
             this.c11MenuStripVoid.Name = "cMenuStrip1ScanCartronLabel";
             this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 26);
             // 
-            // status16toolLabelstrSameColumnCount
-            // 
-            this.status16toolLabelstrSameColumnCount.ForeColor = System.Drawing.Color.Red;
-            this.status16toolLabelstrSameColumnCount.Name = "status16toolLabelstrSameColumnCount";
-            this.status16toolLabelstrSameColumnCount.Size = new System.Drawing.Size(0, 17);
-            // 
             // frmIDR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -956,9 +974,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem t0WindowsWToolStripMenuItem;
-        private System.Windows.Forms.ComboBox cmb1SearchType;
         private System.Windows.Forms.ToolStripMenuItem hideLeftToolStripMenuItem3;
-        private System.Windows.Forms.TextBox txt0SearchID;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button btn0Edit2;
         private System.Windows.Forms.Button btn0Print6;
@@ -1026,6 +1042,9 @@
         private System.Windows.Forms.Button btn24PIReports;
         private System.Windows.Forms.LinkLabel linkLabel8;
         protected internal System.Windows.Forms.ToolStripStatusLabel status16toolLabelstrSameColumnCount;
+        private System.Windows.Forms.Button btn00More;
+        protected internal System.Windows.Forms.ComboBox cmb1SearchType;
+        protected internal System.Windows.Forms.TextBox txt0SearchID;
 
 
 

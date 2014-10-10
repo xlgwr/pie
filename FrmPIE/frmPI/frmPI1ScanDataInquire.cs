@@ -85,7 +85,7 @@ namespace frmPI
         {
             gb2det_PIdet.Width = gb00PIScanPIDataitemInquire.Width - gb2det_PIdet.Left;
             gb1mstr_PIMstr.Width = gb2det_PIdet.Width;
-            groupBox1PIMstr.Width = gb2det_PIdet.Width;
+            //groupBox1PIMstr.Width = gb2det_PIdet.Width;
 
             gb2det_PIdet.Height = gb00PIScanPIDataitemInquire.Height - gb2det_PIdet.Top;
         }

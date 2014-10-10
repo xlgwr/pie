@@ -144,7 +144,15 @@ namespace FrmPIE._0API
             {
                 var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
 
-
+                if (!string.IsNullOrEmpty(dwo._selectColumnNameValue))
+                {
+                    _idr_show._selectColumnNameValue = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                    if (dwo._FrmForRefeHas)
+                    {
+                        dwo._FrmForRefe.lbl2SelectValue.Text = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                        dwo._FrmForRefe.lbl1SelectNotice.Text = dwo._FrmForRefeLblMsg + dwo._FrmForRefe.lbl2SelectValue.Text;
+                    }
+                }
                 //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
 
                 //m
@@ -157,6 +165,7 @@ namespace FrmPIE._0API
                             _idr_show._sameColumnCount++;
                         }
                     }
+
 
                     if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
                     {
@@ -846,7 +855,7 @@ namespace FrmPIE._0API
             }
 
         }
-        private void initHeaderTextPlrBatchMstr1(DataGridView dgv)
+        public void initHeaderTextPlrBatchMstr1(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
             {
@@ -1069,6 +1078,32 @@ namespace FrmPIE._0API
             dgv.Columns["pi_update_date"].HeaderText = "Update Date";
             //dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
             //dgv.Columns["pi_user_ip"].HeaderText = "Client IP";
+        }
+        public void initHeaderTextPIMstrForEquire(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            //PI_ID,pi_status,Plant,pi_type,pi_user_ip,pi_remark,pi_cre_date,pi_chr01
+            dgv.ReadOnly = true;
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+
+            dgv.Columns["PI_ID"].HeaderText = "PI ID";
+            dgv.Columns["pi_status"].HeaderText = "Status";
+
+            dgv.Columns["Plant"].HeaderText = "Plant";
+
+            dgv.Columns["pi_type"].HeaderText = "Type";
+            dgv.Columns["pi_user_ip"].HeaderText = "Client IP";
+
+            dgv.Columns["pi_remark"].HeaderText = "Remark";
+
+            dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
+            //dgv.Columns["pi_update_date"].HeaderText = "Update Date";
+            //dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
+            dgv.Columns["pi_chr01"].HeaderText = "from BatchID";
         }
         public void initHeaderTextPIDet(DataGridView dgv)
         {

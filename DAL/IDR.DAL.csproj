@@ -146,6 +146,7 @@
     <Compile Include="pi_mstr.cs" />
     <Compile Include="pkey_ctl.cs" />
     <Compile Include="pi_det.cs" />
+    <Compile Include="plr_batch_mstr_ext.cs" />
     <Compile Include="Plr_mstr_ext.cs" />
     <Compile Include="Plr_mstr_tran_ext.cs" />
     <Compile Include="sys_role.cs" />

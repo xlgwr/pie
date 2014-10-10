@@ -97,6 +97,12 @@
   <ItemGroup>
     <Compile Include="0API\CartonFromTo.cs" />
     <Compile Include="0API\DoWrokObject.cs" />
+    <Compile Include="0temple\frmEnterForReference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="0temple\frmEnterForReference.Designer.cs">
+      <DependentUpon>frmEnterForReference.cs</DependentUpon>
+    </Compile>
     <Compile Include="0temple\frmEnterTxt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +231,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="0temple\frmEnterForReference.resx">
+      <DependentUpon>frmEnterForReference.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="0temple\frmEnterTxt.resx">
       <DependentUpon>frmEnterTxt.cs</DependentUpon>
     </EmbeddedResource>
