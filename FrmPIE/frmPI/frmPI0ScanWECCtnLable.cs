@@ -1238,7 +1238,7 @@ namespace frmPI
 
             if (webserviceDS == null)
             {
-                lbl0msg.Text = _frmET.textBox1.Text + " (ERP) is no exist. Please Upload ERP than Check(ok BookIn[OCR])";
+                lbl0msg.Text = _frmET.textBox1.Text + "  (ERP) has no item. if not Upload ERP Please Upload ,than in ERP to Check(ok BookIn[OCR]) it";
                 _frmET.textBox1.Focus();
                 txt1PIID_ScanWECCtnLable.Text = "";
                 data1GVSanWecCtnLable.DataSource = null;
@@ -1247,7 +1247,7 @@ namespace frmPI
             }
             if (webserviceDS.Tables[0].Rows.Count <= 0)
             {
-                lbl0msg.Text = _frmET.textBox1.Text + " (ERP) has no item. Please Check(ok BookIn[OCR])";
+                lbl0msg.Text = _frmET.textBox1.Text + " (ERP) has no item. if not Upload ERP Please Upload ,than in ERP to Check(ok BookIn[OCR]) it";
                 _frmET.textBox1.Focus();
                 txt1PIID_ScanWECCtnLable.Text = "";
                 data1GVSanWecCtnLable.DataSource = null;
