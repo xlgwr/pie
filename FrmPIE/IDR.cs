@@ -172,6 +172,7 @@ namespace FrmPIE
         void button1_DoubleClick(object sender, EventArgs e)
         {
             _FrmForRefe.Close();
+            btn0Find9_Click(sender, e);
         }
 
         void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
