@@ -32,6 +32,9 @@
 /Model/obj/*
 /Model/bin/*
 
+/IDR.TicketingProcessTimeMeasurement/obj/*
+/IDR.TicketingProcessTimeMeasurement/bin/*
+
 
 /Print/ClassLibrary1/obj/*
 /Print/ClassLibrary1/bin/*
