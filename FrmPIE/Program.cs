@@ -555,7 +555,7 @@ namespace FrmPIE
             Match m = RegPrefix.Match(strCtnId);
             if (m.Success)
             {
-                carprefix = m.Value;
+                carprefix = m.Value.Trim();
 
             }
             else

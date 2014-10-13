@@ -870,6 +870,8 @@ namespace FrmPIE
                         {
                             _strprefix = "";
                             _cartonid = Program.initCartonFromTo(cell.StringCellValue, "", out _strprefix);
+                            _cartonid[0] = _cartonid[0].Trim();
+                            _cartonid[1] = _cartonid[1].Trim();
                         }
                         else if (i > 10)
                         {
