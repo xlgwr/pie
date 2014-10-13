@@ -42,6 +42,10 @@ namespace FrmPIE
         string _strBatchID = "";
         DateTime oldtime;
 
+        string _strprefix = "";
+        string[] _cartonid;
+        int _numCell = 0;
+        bool _numCellVal = false;
 
         System.Data.DataTable _dt_downToExela = new System.Data.DataTable();
 
@@ -862,8 +866,12 @@ namespace FrmPIE
                     }
                     else
                     {
-
-                        if (i > 10)
+                        if (i == 3)
+                        {
+                            _strprefix = "";
+                            _cartonid = Program.initCartonFromTo(cell.StringCellValue, "", out _strprefix);
+                        }
+                        else if (i > 10)
                         {
 
                             dr[i + 4] = cell.NumericCellValue;
@@ -901,12 +909,40 @@ namespace FrmPIE
                     ICell cell18 = row.GetCell(18);
 
                     double intcell6 = getICellToDouble(cell6);
-                    double intcell9 = getICellToDouble(cell9);
-                    double intcell11 = getICellToDouble(cell11);
-                    double intcell13 = getICellToDouble(cell13);
-                    double intcell15 = getICellToDouble(cell15);
-                    double intcell17 = getICellToDouble(cell17);
-                    double intcell19 = getICellToDouble(cell19);
+                    _numCellVal = false;
+                    _numCell = 0;
+                    double intcell9 = getICellToDouble(cell9, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell11 = getICellToDouble(cell11, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell13 = getICellToDouble(cell13, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell15 = getICellToDouble(cell15, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell17 = getICellToDouble(cell17, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell19 = getICellToDouble(cell19, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+
+
 
                     if (intcell6 != (intcell9 + intcell11 + intcell13 + intcell15 + intcell17 + intcell19))
                     {
@@ -955,28 +991,57 @@ namespace FrmPIE
                     {
                         addRowsToDownExcel(_dt_downToExela, dr_downexcel, "Upload Success", row);
 
+
                         if (intcell9 > 0)
                         {
 
+                            dr[7] = _strprefix + _cartonid[0];
+
                             dr[12] = cell8.ToString().Trim();
                             dr[10] = intcell9;
-
+                            if (_numCell == 1)
+                            {
+                                int intfrom = Convert.ToInt32(_cartonid[0]);
+                                int into = Convert.ToInt32(_cartonid[1]);
+                                dr[7] = _strprefix + (intfrom + 1).ToString() + "-" + _cartonid[1];
+                            }
                             dt.Rows.Add(dr);
                             addrowscount++;
                         }
                         if (intcell11 > 0)
                         {
-                            //po
 
+                            //po
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
                             {
                                 drnew[i] = dr[i];
                             }
-                            drnew[12] = cell10.ToString().Trim();
+
+                            drnew[1] = addrowscount;
+                            if (_cartonid[0].Equals(_cartonid[1]))
+                            {
+                                drnew[7] = _strprefix + _cartonid[0];
+                            }
+                            else
+                            {
+                                if (_numCell == 2)
+                                {
+                                    int intfrom = Convert.ToInt32(_cartonid[0]);
+                                    int into = Convert.ToInt32(_cartonid[1]);
+                                    drnew[7] = _strprefix + (intfrom + 1).ToString() + "-" + _cartonid[1];
+                                }
+                                else
+                                {
+                                    int intfrom = Convert.ToInt32(_cartonid[0]);
+                                    int into = Convert.ToInt32(_cartonid[1]);
+                                    drnew[7] = _strprefix + (intfrom + 1).ToString();
+                                }
+                            }
                             //qty
                             drnew[10] = intcell11;
-                            drnew[1] = addrowscount;
+
+                            drnew[12] = cell10.ToString().Trim();
 
 
                             dt.Rows.Add(drnew);
@@ -987,22 +1052,45 @@ namespace FrmPIE
                         {
                             //po
 
+
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
                             {
                                 drnew[i] = dr[i];
                             }
 
-                            drnew[12] = cell12.ToString().Trim();
                             //qty
-                            drnew[10] = intcell13;
                             drnew[1] = addrowscount;
+                            if (_cartonid[0].Equals(_cartonid[1]))
+                            {
+                                drnew[7] = _strprefix + _cartonid[0];
+                            }
+                            else
+                            {
+                                int intfrom = Convert.ToInt32(_cartonid[0]);
+                                int into = Convert.ToInt32(_cartonid[1]);
+                                if (intfrom - into >= 2)
+                                {
+                                    drnew[7] = _strprefix + (intfrom + 2).ToString();
+                                }
+                                else
+                                {
+                                    drnew[7] = _strprefix + _cartonid[1];
+                                }
+                                if (_numCell == 3)
+                                {
+                                    drnew[7] = _strprefix + (intfrom + 2).ToString() + "-" + _cartonid[1];
+                                }
+                            }
+                            drnew[10] = intcell13;
+                            drnew[12] = cell12.ToString().Trim();
 
                             dt.Rows.Add(drnew);
                             addrowscount++;
                         }
                         if (intcell15 > 0)
                         {
+
                             //po
 
                             DataRow drnew = dt.NewRow();
@@ -1010,17 +1098,33 @@ namespace FrmPIE
                             {
                                 drnew[i] = dr[i];
                             }
+                            drnew[1] = addrowscount;
+                            int intfrom = Convert.ToInt32(_cartonid[0]);
+                            int into = Convert.ToInt32(_cartonid[1]);
+                            if (intfrom - into >= 3)
+                            {
 
-                            drnew[12] = cell14.ToString().Trim();
+                                drnew[7] = _strprefix + (intfrom + 3).ToString();
+                            }
+                            else
+                            {
+                                drnew[7] = _strprefix + _cartonid[1];
+                            }
+                            if (_numCell == 4)
+                            {
+                                drnew[7] = _strprefix + (intfrom + 3).ToString() + "-" + _cartonid[1];
+                            }
                             //qty
                             drnew[10] = intcell15;
-                            drnew[1] = addrowscount;
+
+                            drnew[12] = cell14.ToString().Trim();
 
                             dt.Rows.Add(drnew);
                             addrowscount++;
                         }
                         if (intcell17 > 0)
                         {
+
                             //po
 
                             DataRow drnew = dt.NewRow();
@@ -1028,11 +1132,26 @@ namespace FrmPIE
                             {
                                 drnew[i] = dr[i];
                             }
+                            drnew[1] = addrowscount;
+                            int intfrom = Convert.ToInt32(_cartonid[0]);
+                            int into = Convert.ToInt32(_cartonid[1]);
+                            if (intfrom - into >= 4)
+                            {
 
-                            drnew[12] = cell16.ToString().Trim();
+                                drnew[7] = _strprefix + (intfrom + 4).ToString();
+                            }
+                            else
+                            {
+                                drnew[7] = _strprefix + _cartonid[1];
+                            }
+                            if (_numCell == 5)
+                            {
+                                drnew[7] = _strprefix + (intfrom + 4).ToString() + "-" + _cartonid[1];
+                            }
                             //qty
                             drnew[10] = intcell17;
-                            drnew[1] = addrowscount;
+
+                            drnew[12] = cell16.ToString().Trim();
 
                             dt.Rows.Add(drnew);
                             addrowscount++;
@@ -1046,11 +1165,31 @@ namespace FrmPIE
                             {
                                 drnew[i] = dr[i];
                             }
+                            drnew[1] = addrowscount;
+                            int intfrom = Convert.ToInt32(_cartonid[0]);
+                            int into = Convert.ToInt32(_cartonid[1]);
+                            if (intfrom - into > 5)
+                            {
 
-                            drnew[12] = cell14.ToString().Trim();
+                                drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
+                            }
+                            else
+                            {
+                                drnew[7] = _strprefix + _cartonid[1];
+                            }
+                            if (_numCell == 6)
+                            {
+                                drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
+
+                            }
+                            if (intfrom - into <= 5)
+                            {
+                                drnew[7] = _strprefix + _cartonid[1];
+                            }
                             //qty
                             drnew[10] = intcell19;
-                            drnew[1] = addrowscount;
+
+                            drnew[12] = cell14.ToString().Trim();
 
                             dt.Rows.Add(drnew);
                             addrowscount++;
@@ -1071,6 +1210,7 @@ namespace FrmPIE
             //data0set_npoi.Tables.Add(dt);
         }
 
+
         public double getICellToDouble(ICell cell)
         {
             double tintcell6;
@@ -1090,6 +1230,40 @@ namespace FrmPIE
             else
             {
                 return 0;
+            }
+            return tintcell6;
+        }
+
+
+        public double getICellToDouble(ICell cell, out bool num)
+        {
+            double tintcell6;
+            if (cell == null)
+            {
+                num = false;
+                return 0;
+            }
+            if (cell.CellType == CellType.String)
+            {
+                tintcell6 = (string.IsNullOrEmpty(cell.ToString())) ? 0 : Convert.ToDouble(cell.StringCellValue);
+            }
+            else if (cell.CellType == CellType.Numeric)
+            {
+
+                tintcell6 = cell.NumericCellValue;
+            }
+            else
+            {
+                num = false;
+                return 0;
+            }
+            if (tintcell6 > 0.0)
+            {
+                num = true;
+            }
+            else
+            {
+                num = false;
             }
             return tintcell6;
         }
