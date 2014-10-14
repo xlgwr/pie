@@ -73,6 +73,8 @@ namespace FrmPIE
         public string _deffCellName;
         public string _deffCellValue;
 
+        public static string _strUpdateURL;
+
         public frmIDR(LogonDomain logonDomain, PIE.Model.sys_user sys_user_model)
         {
             _logonDomain = logonDomain;
@@ -86,6 +88,13 @@ namespace FrmPIE
             }
             cf = new Commfunction(this);
             btn00More.Click += btn00More0_Click;
+
+            if (Program.frm7VersionUpdateFlag)
+            {
+                link0NewVersion.Visible = true;
+                _strUpdateURL = Program.frm9VersionURL;
+                link0NewVersion.Text = "Click to " + Program.frm8VersionMsg + Program.frm1VersionLast;
+            }
         }
         public frmIDR()
         {
@@ -99,6 +108,13 @@ namespace FrmPIE
             cf = new Commfunction(this);
 
             btn00More.Click += btn00More0_Click;
+
+            if (Program.frm7VersionUpdateFlag)
+            {
+                link0NewVersion.Visible = true;
+                _strUpdateURL = Program.frm9VersionURL;
+                link0NewVersion.Text = "Click to " + Program.frm8VersionMsg + Program.frm1VersionLast;
+            }
         }
 
         void btn00More0_Click(object sender, EventArgs e)
@@ -212,7 +228,7 @@ namespace FrmPIE
             }
             else if (_strCellColName.Equals("PI_ID"))
             {
-                var batch_ds = new PI.DAL.pi_mstr_ext().GetList(50, strwhere, "PI_ID desc",true);
+                var batch_ds = new PI.DAL.pi_mstr_ext().GetList(50, strwhere, "PI_ID desc", true);
                 _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
                 cf.initHeaderTextPIMstrForEquire(_FrmForRefe.data0GVForReference);
             }
@@ -784,7 +800,7 @@ namespace FrmPIE
         {
             //status13toolSStatusLblMsg.Text = "";
             status15toolLabelstrResult.Text = "";
-            
+
             //status14toolLabelCellRowColXY.Text = "";
         }
 
@@ -819,6 +835,19 @@ namespace FrmPIE
         private void openDownLoadExcelFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             cf.initOpenFile("0DownLoadExcel", _strDownLoadExcel);
+        }
+
+        private void link0NewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                this.link0NewVersion.Links[0].LinkData = _strUpdateURL;
+                System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 

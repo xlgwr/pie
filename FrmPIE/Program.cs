@@ -44,7 +44,7 @@ namespace FrmPIE
         {
             //frmVersion = "@2V20141010H10-dev";
             frm3VersionDotNet = 2;
-            frm4VersionMain = 20141010;
+            frm4VersionMain = 20141014;
 
             frm5VersionSecond = 10;
             frm6Versionprefix = "dev";
@@ -105,7 +105,7 @@ namespace FrmPIE
                         {
                             frm1VersionLast = lastversion_model.t_desc;
                             frm7VersionUpdateFlag = true;
-                            frm8VersionMsg = " down new Version ";
+                            frm8VersionMsg = "down new Version ";
                             frm9VersionURL = lastversion_model.t_yyww;
                         }
 
@@ -114,7 +114,7 @@ namespace FrmPIE
                     {
                         frm1VersionLast = lastversion_model.t_desc;
                         frm7VersionUpdateFlag = true;
-                        frm8VersionMsg = " down new Version ";
+                        frm8VersionMsg = "down new Version ";
                         frm9VersionURL = lastversion_model.t_yyww;
                     }
 

@@ -1006,6 +1006,7 @@ namespace FrmPIE
                                 int intfrom = Convert.ToInt32(_cartonid[0]);
                                 int into = Convert.ToInt32(_cartonid[1]);
                                 dr[7] = _strprefix + (intfrom + 1).ToString() + "-" + _cartonid[1];
+
                             }
                             dt.Rows.Add(dr);
                             addrowscount++;
@@ -1031,7 +1032,14 @@ namespace FrmPIE
                                 {
                                     int intfrom = Convert.ToInt32(_cartonid[0]);
                                     int into = Convert.ToInt32(_cartonid[1]);
-                                    drnew[7] = _strprefix + (intfrom + 1).ToString() + "-" + _cartonid[1];
+                                    if (_numCell >= (into - intfrom + 1))
+                                    {
+                                        drnew[7] = _strprefix + _cartonid[1];
+                                    }
+                                    else
+                                    {
+                                        drnew[7] = _strprefix + (intfrom + 1).ToString() + "-" + _cartonid[1];
+                                    }
                                 }
                                 else
                                 {
@@ -1081,7 +1089,14 @@ namespace FrmPIE
                                 }
                                 if (_numCell == 3)
                                 {
-                                    drnew[7] = _strprefix + (intfrom + 2).ToString() + "-" + _cartonid[1];
+                                    if (_numCell >= (into - intfrom + 1))
+                                    {
+                                        drnew[7] = _strprefix + _cartonid[1];
+                                    }
+                                    else
+                                    {
+                                        drnew[7] = _strprefix + (intfrom + 2).ToString() + "-" + _cartonid[1];
+                                    }
                                 }
                             }
                             drnew[10] = intcell13;
@@ -1114,7 +1129,14 @@ namespace FrmPIE
                             }
                             if (_numCell == 4)
                             {
-                                drnew[7] = _strprefix + (intfrom + 3).ToString() + "-" + _cartonid[1];
+                                if (_numCell >= (into - intfrom + 1))
+                                {
+                                    drnew[7] = _strprefix + _cartonid[1];
+                                }
+                                else
+                                {
+                                    drnew[7] = _strprefix + (intfrom + 3).ToString() + "-" + _cartonid[1];
+                                }
                             }
                             //qty
                             drnew[10] = intcell15;
@@ -1148,7 +1170,14 @@ namespace FrmPIE
                             }
                             if (_numCell == 5)
                             {
-                                drnew[7] = _strprefix + (intfrom + 4).ToString() + "-" + _cartonid[1];
+                                if (_numCell >= (into - intfrom + 1))
+                                {
+                                    drnew[7] = _strprefix + _cartonid[1];
+                                }
+                                else
+                                {
+                                    drnew[7] = _strprefix + (intfrom + 4).ToString() + "-" + _cartonid[1];
+                                }
                             }
                             //qty
                             drnew[10] = intcell17;
@@ -1181,7 +1210,14 @@ namespace FrmPIE
                             }
                             if (_numCell == 6)
                             {
-                                drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
+                                if (_numCell >= (into - intfrom + 1))
+                                {
+                                    drnew[7] = _strprefix + _cartonid[1];
+                                }
+                                else
+                                {
+                                    drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
+                                }
 
                             }
                             if (intfrom - into <= 5)

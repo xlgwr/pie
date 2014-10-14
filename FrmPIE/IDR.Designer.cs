@@ -103,6 +103,7 @@
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.link0NewVersion = new System.Windows.Forms.LinkLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -913,11 +914,26 @@
             this.c11MenuStripVoid.Name = "cMenuStrip1ScanCartronLabel";
             this.c11MenuStripVoid.Size = new System.Drawing.Size(153, 26);
             // 
+            // link0NewVersion
+            // 
+            this.link0NewVersion.AutoSize = true;
+            this.link0NewVersion.LinkColor = System.Drawing.Color.Red;
+            this.link0NewVersion.Location = new System.Drawing.Point(167, 6);
+            this.link0NewVersion.Name = "link0NewVersion";
+            this.link0NewVersion.Size = new System.Drawing.Size(65, 12);
+            this.link0NewVersion.TabIndex = 12;
+            this.link0NewVersion.TabStop = true;
+            this.link0NewVersion.Text = "NewVersion";
+            this.link0NewVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.link0NewVersion.Visible = false;
+            this.link0NewVersion.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link0NewVersion_LinkClicked);
+            // 
             // frmIDR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 542);
+            this.Controls.Add(this.link0NewVersion);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
@@ -1045,6 +1061,7 @@
         private System.Windows.Forms.Button btn00More;
         protected internal System.Windows.Forms.ComboBox cmb1SearchType;
         protected internal System.Windows.Forms.TextBox txt0SearchID;
+        private System.Windows.Forms.LinkLabel link0NewVersion;
 
 
 
