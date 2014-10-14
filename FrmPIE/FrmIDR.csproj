@@ -304,7 +304,9 @@
     <None Include="0PackingInformationEntry.pptx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="0temple\templesforKYCA.xlsx" />
+    <None Include="0temple\templesforKYCA.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="reports\frmPI\rpt_piReport.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
