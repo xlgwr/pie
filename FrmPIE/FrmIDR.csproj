@@ -388,6 +388,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\updatepackage.png" />
     <Content Include="t %2825%29.ico" />
     <None Include="Web References\WebReference208\UserLoginCheck.disco" />
     <None Include="Web References\WebReference100\Service.disco" />

@@ -515,7 +515,7 @@
             // 
             // btn2GenCarton2
             // 
-            this.btn2GenCarton2.BackgroundImage = global::FrmPIE.Properties.Resources.packages;
+            this.btn2GenCarton2.BackgroundImage = global::FrmPIE.Properties.Resources.updatepackage;
             this.btn2GenCarton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn2GenCarton2.ContextMenuStrip = this.cMenuStrip2CartonIDMain;
             this.btn2GenCarton2.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -926,7 +926,6 @@
             this.link0NewVersion.Text = "NewVersion";
             this.link0NewVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.link0NewVersion.Visible = false;
-           
             // 
             // frmIDR
             // 

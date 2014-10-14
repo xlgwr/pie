@@ -26,6 +26,7 @@ namespace FrmPIE._0API
         frmIDR _idr_show;
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
+        public static bool _updateflag = false;
 
         public delegate void dvoidMethod();
         public delegate void dinitDataGVSource(object obj);
@@ -1504,6 +1505,7 @@ namespace FrmPIE._0API
                         var returnWeb = initWebServer(item.plr_po, server100, "wsas013", strPO, out ds);
                         if (returnWeb)
                         {
+                            _updateflag = false;
                             if (ds != null && ds.Tables[0].Rows.Count > 0)
                             {
                                 string strResultWebser = ds.Tables[0].Rows[0][4].ToString();
@@ -1554,10 +1556,12 @@ namespace FrmPIE._0API
                                     strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + strErrMessage + "\n";
                                     intUploadErrCount++;
                                 }
+                                _updateflag = true;
 
                             }
                             else
                             {
+                                _updateflag = false;
 
                                 item.plr_status = "N";
                                 item.plr_status_msg = "WebServer Error 没有返回值";
@@ -1584,7 +1588,14 @@ namespace FrmPIE._0API
                 }
                 else
                 {
-                    strResult = "$UploadToERP: Error: 系统数据库中没有可上传的（C状态）记录。";
+                    strResult = "$UploadToERP-->Error: \n\t系统数据库中\n没有可上传的（C状态）记录(" + frm4uploadToERP._strbatchid + ")。";
+                }
+                if (_updateflag)
+                {
+                    var plr_batch_mstr = new PIE.BLL.plr_batch_mstr().GetModel(frm4uploadToERP._strbatchid);
+                    plr_batch_mstr.batch_chr01 = "Upload ERP Over";
+                    var updatebatchmstr = new PIE.BLL.plr_batch_mstr().Update(plr_batch_mstr);
+
                 }
                 SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, strResult, true, true);
                 SetToolTextdelegate(_idr_show.status15toolLabelstrResult, strResult, true, true);

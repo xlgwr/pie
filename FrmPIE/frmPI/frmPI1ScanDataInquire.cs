@@ -107,7 +107,7 @@ namespace frmPI
 
         void data1GV1ePackingDet1_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1_PIdet, 3, e.RowIndex, Color.LightGreen, "pi_wec_ctn", "pi_status", "Yes", Color.LightGray);
+            DoWrokObject dwo = new DoWrokObject(data1GV1_PIdet, 3, e.RowIndex, Color.LightGreen, "CartonID", "pi_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         private void initDGV(object doWorkobj)
