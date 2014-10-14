@@ -37,6 +37,7 @@ namespace frmPI
         string _strCO;
         DataSet cods;
         DataSet webserviceDS;
+        DataSet _reobjdet;
 
         string _strWecCtnSn = "";
         public bool _coisnull = false;
@@ -74,6 +75,27 @@ namespace frmPI
 
 
             btn00More.Click += btn00More0_Click;
+
+
+            data1GVSanWecCtnLable.ContextMenuStrip = ctmenu0EnquireByPart;
+            enquireByPartToolStripMenuItem.Click += enquireByPartToolStripMenuItem_Click;
+        }
+        private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmET = new frmEnterTxt(_idr_show, this);
+            _frmET.button1.Click += enquireByPartAA;
+            _frmET.lblTitle.Text = "Part#:";
+            _frmET.Text = "Enquire by Part:";
+            _frmET.ShowDialog();
+        }
+        void enquireByPartAA(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                return;
+            }
+            cf.EnquireByPart(data1GVSanWecCtnLable, "pisr_part", _frmET.textBox1.Text.Trim());
         }
         #region enquire by PI
 
@@ -304,7 +326,7 @@ namespace frmPI
             CartonFromTo ctftdet = new CartonFromTo(data1GVSanWecCtnLable, (string)strBatchID, 0, "add", _idr_show._custip, _idr_show._custip);
 
             var reobjmstr = cf.initDataGVpi_mstr(ctftmstr, false, "model");
-            var reobjdet = cf.initDataGVpi_det_join_grr(ctftdet, true, "nothing");
+            _reobjdet = (DataSet)cf.initDataGVpi_det_join_grr(ctftdet, true, "ds");
             if (reobjmstr != null)
             {
                 initDatasetToTxt((PI.Model.pi_mstr)reobjmstr);
@@ -1027,6 +1049,10 @@ namespace frmPI
                                                 pisr_grr_model.pisr_vend = ds.Tables[0].Rows[y]["wsas017_vend"].ToString();
                                                 pisr_grr_model.pisr_mfgr_name = ds.Tables[0].Rows[y]["wsas017_mfgr_name"].ToString();
 
+
+                                                pisr_grr_model.pisr_char01 = ds.Tables[0].Rows[y]["wsas017_mfgr"].ToString();
+                                                pisr_grr_model.pisr_char02 = ds.Tables[0].Rows[y]["wsas017_vend_name"].ToString();
+
                                                 pisr_grr_model.pisr_dec01 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_k200_nw"].ToString()) / 1000;
                                                 pisr_grr_model.pisr_dec02 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_nw"].ToString()) / 1000;
 
@@ -1383,6 +1409,9 @@ namespace frmPI
                     pisr_grr_model_add.pisr_vend = dr["wsas018_vend"].ToString();
                     pisr_grr_model_add.pisr_mfgr_name = dr["wsas018_mfgr_name"].ToString();
 
+                    pisr_grr_model_add.pisr_char01 = dr["wsas018_mfgr"].ToString();
+                    pisr_grr_model_add.pisr_char02 = dr["wsas018_vend_name"].ToString();
+
                     pisr_grr_model_add.pisr_dec01 = Convert.ToDecimal(dr["wsas018_k200_nw"].ToString()) / 1000;
                     pisr_grr_model_add.pisr_dec02 = Convert.ToDecimal(dr["wsas018_nw"].ToString()) / 1000;
 
@@ -1411,6 +1440,11 @@ namespace frmPI
             }
             btn0AddFromePackingList0.Enabled = true;
 
+        }
+
+        private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            cf.downLoadExcel(_reobjdet, lbl0msg, cf.nameList0vpi_report_ds(), "20PI0Scan" + txt1PIID_ScanWECCtnLable.Text.Trim());
         }
 
 

@@ -169,7 +169,7 @@ namespace FrmPIE
 
         private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            cf.downLoadExcel(_reobjdet, _idr_show.status15toolLabelstrResult, cf.nameList12UploadToERP(), "0BatchInfo" + _idr_show._plr_batch_mstr_model.batch_id);
+            cf.downLoadExcel(_reobjdet, _idr_show.status15toolLabelstrResult, cf.nameList12UploadToERP(), "10BatchInfo" + _idr_show._plr_batch_mstr_model.batch_id);
         }
 
 

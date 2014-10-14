@@ -156,7 +156,7 @@ namespace frmPI
 
         private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            cf.downLoadExcel(_reobjdet, _idr_show.status15toolLabelstrResult, cf.nameList0vpi_report_ds(), "1PIScan" + _idr_show._pi_mstr_model.PI_ID);
+            cf.downLoadExcel(_reobjdet, _idr_show.status15toolLabelstrResult, cf.nameList0vpi_report_ds(), "21PIScan" + _idr_show._pi_mstr_model.PI_ID);
         }
     }
 }

@@ -41,6 +41,7 @@
             this.btn0Scan = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAddPalletNum = new System.Windows.Forms.Button();
+            this.btn00More = new System.Windows.Forms.Button();
             this.lbl0msg = new System.Windows.Forms.Label();
             this.lbl2TypeScanWECCtnLable = new System.Windows.Forms.Label();
             this.lbl0noticePiId = new System.Windows.Forms.Label();
@@ -63,12 +64,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmb3CO_ScanWECCtnLable = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btn00More = new System.Windows.Forms.Button();
+            this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1ScanWECCtnLable.SuspendLayout();
             this.group3BXdataGV1ScanList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GVSanWecCtnLable)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.ctmenu0EnquireByPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1ScanWECCtnLable
@@ -113,9 +117,9 @@
             this.btn1RefreshPI.ForeColor = System.Drawing.Color.Red;
             this.btn1RefreshPI.Location = new System.Drawing.Point(431, 231);
             this.btn1RefreshPI.Name = "btn1RefreshPI";
-            this.btn1RefreshPI.Size = new System.Drawing.Size(75, 33);
+            this.btn1RefreshPI.Size = new System.Drawing.Size(121, 33);
             this.btn1RefreshPI.TabIndex = 209;
-            this.btn1RefreshPI.Text = "&Refresh";
+            this.btn1RefreshPI.Text = "&Get RIR# (ERP)";
             this.btn1RefreshPI.UseVisualStyleBackColor = true;
             this.btn1RefreshPI.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -213,6 +217,20 @@
             this.btnAddPalletNum.TabIndex = 203;
             this.btnAddPalletNum.UseVisualStyleBackColor = false;
             this.btnAddPalletNum.Click += new System.EventHandler(this.btnAddPalletNum_Click);
+            // 
+            // btn00More
+            // 
+            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
+            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn00More.FlatAppearance.BorderSize = 0;
+            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
+            this.btn00More.Location = new System.Drawing.Point(257, 16);
+            this.btn00More.Name = "btn00More";
+            this.btn00More.Size = new System.Drawing.Size(23, 23);
+            this.btn00More.TabIndex = 206;
+            this.btn00More.UseVisualStyleBackColor = true;
             // 
             // lbl0msg
             // 
@@ -453,19 +471,27 @@
             this.cmb3CO_ScanWECCtnLable.TextChanged += new System.EventHandler(this.cmb3CO_ScanWECCtnLable_TextChanged);
             this.cmb3CO_ScanWECCtnLable.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmb3CO_ScanWECCtnLable_KeyUp);
             // 
-            // btn00More
+            // ctmenu0EnquireByPart
             // 
-            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
-            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn00More.FlatAppearance.BorderSize = 0;
-            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
-            this.btn00More.Location = new System.Drawing.Point(257, 16);
-            this.btn00More.Name = "btn00More";
-            this.btn00More.Size = new System.Drawing.Size(23, 23);
-            this.btn00More.TabIndex = 206;
-            this.btn00More.UseVisualStyleBackColor = true;
+            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enquireByPartToolStripMenuItem,
+            this.downLoad1ToExceltoolStripMenuItem2});
+            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            // 
+            // enquireByPartToolStripMenuItem
+            // 
+            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            // 
+            // downLoad1ToExceltoolStripMenuItem2
+            // 
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources.down;
+            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
+            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
             // 
             // frmPI0ScanWECCtnLable
             // 
@@ -483,6 +509,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -522,5 +549,8 @@
         private System.Windows.Forms.Button btnAddPalletNW;
         private System.Windows.Forms.Button btn0AddFromePackingList0;
         protected internal System.Windows.Forms.Button btn00More;
+        private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
+        private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
     }
 }

@@ -19,12 +19,15 @@ namespace frmPI
         Commfunction cf;
         DataSet vpi_report_ds;
         frmEnterTxt _frmET;
+
         frmEnterForReference _FrmForRefe;
 
         public string _strCellColName;
         public string _sameColumnName;
         public string _deffCellName;
         public string _deffCellValue;
+
+        public string _clickCellname = "pi_pallet_no";
 
         public frmPI2Report(frmIDR idr)
         {
@@ -96,6 +99,7 @@ namespace frmPI
             //
             _strCellColName = "PI_ID";
             _sameColumnName = "pi_user_ip";
+            _clickCellname = "CartonID";
             _deffCellName = "pi_status";
             _deffCellValue = "Yes";
 
@@ -137,7 +141,7 @@ namespace frmPI
 
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _strCellColName, _deffCellName, _deffCellValue, Color.LightGray);
             cf.initThreadDowrokColor(dwo);
 
         }
@@ -154,7 +158,7 @@ namespace frmPI
             //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
         }
 
-       
+
 
         private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -181,7 +185,7 @@ namespace frmPI
 
         void data0GVPiReport_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data0GVPiReport, 3, e.RowIndex, Color.LightGreen, "pi_pallet_no", "pi_status", "Yes", Color.LightGray);
+            DoWrokObject dwo = new DoWrokObject(data0GVPiReport, 3, e.RowIndex, Color.LightGreen, _clickCellname, "pi_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
 
@@ -357,7 +361,7 @@ namespace frmPI
 
         private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            cf.downLoadExcel(vpi_report_ds, lblMsg, cf.nameList0vpi_report_ds(), "2PIReoprt" + txt0PINum_piReport.Text.Trim());
+            cf.downLoadExcel(vpi_report_ds, lblMsg, cf.nameList0vpi_report_ds(), "22PIReoprt" + txt0PINum_piReport.Text.Trim());
         }
 
     }

@@ -1174,7 +1174,7 @@ namespace FrmPIE._0API
             dgv.Columns["pisr_us_cost"].HeaderText = "U/P(USD)";
             dgv.Columns["pisr_seq"].HeaderText = "Seq";
 
-            dgv.Columns["pisr_con_code"].HeaderText = "Custom Conn";
+            //dgv.Columns["pisr_con_code"].HeaderText = "Custom Conn";
 
             //dgv.Columns["pisr_ch_desc"].HeaderText = "Description";
             dgv.Columns["pi_status"].HeaderText = "Upload Status";
@@ -1189,7 +1189,11 @@ namespace FrmPIE._0API
 
             dgv.Columns["pisr_sbu"].HeaderText = "SBU";
             dgv.Columns["pisr_vend"].HeaderText = "Vend";
-            dgv.Columns["pisr_mfgr_name"].HeaderText = "Vend Name";
+            //dgv.Columns["mfgr_name"].HeaderText = "MFGR Name";
+
+            //dgv.Columns["pisr_char01"].HeaderText = "MFGR";
+            //dgv.Columns["pisr_char02"].HeaderText = "Vend Name";
+
             dgv.Columns["pisr_dec01"].HeaderText = "k200 NW";
             dgv.Columns["pisr_dec02"].HeaderText = "NW";
 

@@ -920,7 +920,14 @@ namespace FrmPIE
 
         private void btn2GoUploadToERP_Click(object sender, EventArgs e)
         {
-            _idr_show.goToUploadToERP(_strBatchID);
+            if (string.IsNullOrEmpty(txt1batch_idUploadExcel.Text))
+            {
+                btn3QuickUploadExcel_Click(sender, e);
+            }
+            else
+            {
+                _idr_show.goToUploadToERP(txt1batch_idUploadExcel.Text.Trim());
+            }
         }
 
 
