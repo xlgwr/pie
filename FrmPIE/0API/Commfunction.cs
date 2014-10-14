@@ -1169,6 +1169,7 @@ namespace FrmPIE._0API
             dgv.Columns["Pisr_receiver"].HeaderText = "Receiver";
             dgv.Columns["pisr_site"].HeaderText = "MG";
             dgv.Columns["pisr_po_nbr"].HeaderText = "PO-Number";
+            dgv.Columns["pisr_qty"].HeaderText = "Qty";
             dgv.Columns["pisr_curr"].HeaderText = "Curr";
             dgv.Columns["pisr_cost"].HeaderText = "U/P";
             dgv.Columns["pisr_base_cost"].HeaderText = "U/P(Base)";
@@ -1195,6 +1196,7 @@ namespace FrmPIE._0API
             //dgv.Columns["pisr_char01"].HeaderText = "MFGR";
             //dgv.Columns["pisr_char02"].HeaderText = "Vend Name";
 
+            dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
             dgv.Columns["pisr_dec01"].HeaderText = "k200 NW";
             dgv.Columns["pisr_dec02"].HeaderText = "NW";
 
@@ -2241,6 +2243,7 @@ namespace FrmPIE._0API
             nameList.Add("Pisr_receiver", "Receiver");
             nameList.Add("pisr_site", "MG");
             nameList.Add("pisr_po_nbr", "PO-Number");
+            nameList.Add("pisr_qty", "Qty");
             nameList.Add("pisr_curr", "Curr");
             nameList.Add("pisr_cost", "U/P");
             nameList.Add("pisr_base_cost", "U/P(Base)");
@@ -2266,6 +2269,7 @@ namespace FrmPIE._0API
             nameList.Add("pisr_mfgr_name", "Vend Name");
             nameList.Add("pisr_dec01", "k200 NW");
             nameList.Add("pisr_dec02", "NW");
+            nameList.Add("pi_cre_date", "Create Date");
             return nameList;
         }
 

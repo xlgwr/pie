@@ -955,8 +955,8 @@ namespace frmPI
 
         private void pirefresh()
         {
-            cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh....", false, true);
-            ShowMsg(" Refresh ......", "Notice");
+            cf.SetCtlTextdelegate(btn1RefreshPI, "Get....", false, true);
+            ShowMsg(" Get RIR# (ERP) ......", "Notice");
             DataSet ds;
             FrmPIE.WebReference100.Service server100 = new FrmPIE.WebReference100.Service();
             server100.Timeout = 90000;
@@ -1124,14 +1124,14 @@ namespace frmPI
                     ShowMsg("Ctn SN is null.", "Error");
                 }
 
-                cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh", true, true);
+                cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# (ERP)", true, true);
                 //////////////************************
                 threadinitDVdelegate();
             }
             catch (Exception ex)
             {
 
-                cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh", true, true);
+                cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# (ERP)", true, true);
                 MessageBox.Show(ex.Message);
             }
         }
