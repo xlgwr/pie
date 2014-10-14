@@ -46,7 +46,7 @@ namespace FrmPIE
             frm3VersionDotNet = 2;
             frm4VersionMain = 20141014;
 
-            frm5VersionSecond = 10;
+            frm5VersionSecond = 11;
             frm6Versionprefix = "dev";
             //dev  main
             frm0Version = "@" + frm3VersionDotNet + "V" + frm4VersionMain + "H" + frm5VersionSecond + "-" + frm6Versionprefix;
@@ -654,6 +654,29 @@ namespace FrmPIE
             psi.Arguments = "/e,/select," + fileFullName;
             System.Diagnostics.Process.Start(psi);
         }
+        public static void showNewVersion(LinkLabel lk)
+        {
+            if (Program.frm7VersionUpdateFlag)
+            {
+                lk.Visible = true;
+                lk.Text = "Click to " + Program.frm8VersionMsg + Program.frm1VersionLast;
+                lk.LinkClicked += link0NewVersion_LinkClicked;
+            }
+        }
+        static void link0NewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                LinkLabel lk = (LinkLabel)sender;
+                lk.Links[0].LinkData = Program.frm9VersionURL;
+                System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        ///////////////////////////////////new
 
     }
 

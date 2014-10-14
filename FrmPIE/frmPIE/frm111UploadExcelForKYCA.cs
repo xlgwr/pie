@@ -1005,7 +1005,7 @@ namespace FrmPIE
                             {
                                 int intfrom = Convert.ToInt32(_cartonid[0]);
                                 int into = Convert.ToInt32(_cartonid[1]);
-                                dr[7] = _strprefix + (intfrom + 1).ToString() + "-" + _cartonid[1];
+                                dr[7] = _strprefix + _cartonid[0] + "-" + _cartonid[1];
 
                             }
                             dt.Rows.Add(dr);

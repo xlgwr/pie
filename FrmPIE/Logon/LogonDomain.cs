@@ -18,12 +18,7 @@ namespace FrmPIE
         public LogonDomain()
         {
             InitializeComponent();
-            if (Program.frm7VersionUpdateFlag)
-            {
-                linkLabel1.Visible = true;
-                _strUpdateURL = Program.frm9VersionURL;
-                linkLabel1.Text = "Click to " + Program.frm8VersionMsg + Program.frm1VersionLast;
-            }
+            Program.showNewVersion(linkLabel1);
         }
 
         private void initfrmShow()

@@ -926,7 +926,7 @@
             this.link0NewVersion.Text = "NewVersion";
             this.link0NewVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.link0NewVersion.Visible = false;
-            this.link0NewVersion.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link0NewVersion_LinkClicked);
+           
             // 
             // frmIDR
             // 

@@ -89,13 +89,10 @@ namespace FrmPIE
             cf = new Commfunction(this);
             btn00More.Click += btn00More0_Click;
 
-            if (Program.frm7VersionUpdateFlag)
-            {
-                link0NewVersion.Visible = true;
-                _strUpdateURL = Program.frm9VersionURL;
-                link0NewVersion.Text = "Click to " + Program.frm8VersionMsg + Program.frm1VersionLast;
-            }
+            Program.showNewVersion(link0NewVersion);
         }
+
+       
         public frmIDR()
         {
 
@@ -109,12 +106,7 @@ namespace FrmPIE
 
             btn00More.Click += btn00More0_Click;
 
-            if (Program.frm7VersionUpdateFlag)
-            {
-                link0NewVersion.Visible = true;
-                _strUpdateURL = Program.frm9VersionURL;
-                link0NewVersion.Text = "Click to " + Program.frm8VersionMsg + Program.frm1VersionLast;
-            }
+            Program.showNewVersion(link0NewVersion);
         }
 
         void btn00More0_Click(object sender, EventArgs e)
@@ -837,18 +829,7 @@ namespace FrmPIE
             cf.initOpenFile("0DownLoadExcel", _strDownLoadExcel);
         }
 
-        private void link0NewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-                this.link0NewVersion.Links[0].LinkData = _strUpdateURL;
-                System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        
 
 
 
