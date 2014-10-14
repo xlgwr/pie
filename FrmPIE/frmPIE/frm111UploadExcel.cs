@@ -812,6 +812,7 @@ namespace FrmPIE
                 {
 
                     rowscount++;
+                    dr["CartonType"]=0;
                     dt.Rows.Add(dr);
                 }
             }
