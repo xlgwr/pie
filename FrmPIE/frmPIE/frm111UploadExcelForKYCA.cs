@@ -841,8 +841,8 @@ namespace FrmPIE
                     dr["plr_update_date"] = servedate;
                     dr["plr_user_ip"] = _idr_show._custip;
 
-                    dr["plr_carton_qty"] = 1;
-                    dr["CartonType"] = 1;
+                    dr["plr_carton_qty"] = 0;
+                    dr["CartonType"] = 0;
 
                     ICell cell = row.GetCell(i);
 
@@ -996,6 +996,7 @@ namespace FrmPIE
 
                         if (intcell9 > 0)
                         {
+                            dr["CartonType"] = 0;
 
                             dr[7] = _strprefix + _cartonid[0];
 
@@ -1005,7 +1006,17 @@ namespace FrmPIE
                             {
                                 int intfrom = Convert.ToInt32(_cartonid[0]);
                                 int into = Convert.ToInt32(_cartonid[1]);
-                                dr[7] = _strprefix + _cartonid[0] + "-" + _cartonid[1];
+                                if (_cartonid[0].Equals(_cartonid[1]))
+                                {
+                                    dr[7] = _strprefix + _cartonid[0];
+                                }
+                                else
+                                {
+                                    dr[7] = _strprefix + _cartonid[0] + "-" + _cartonid[1];
+
+                                    getAvgCarton(intcell9, dr, intfrom, into);
+                                }
+
 
                             }
                             dt.Rows.Add(dr);
@@ -1013,7 +1024,7 @@ namespace FrmPIE
                         }
                         if (intcell11 > 0)
                         {
-
+                            dr["CartonType"] = 0;
                             //po
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
@@ -1039,6 +1050,7 @@ namespace FrmPIE
                                     else
                                     {
                                         drnew[7] = _strprefix + (intfrom + 1).ToString() + "-" + _cartonid[1];
+                                        getAvgCarton(intcell11, drnew, intfrom, into);
                                     }
                                 }
                                 else
@@ -1061,7 +1073,7 @@ namespace FrmPIE
                         if (intcell13 > 0)
                         {
                             //po
-
+                            dr["CartonType"] = 0;
 
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
@@ -1096,6 +1108,7 @@ namespace FrmPIE
                                     else
                                     {
                                         drnew[7] = _strprefix + (intfrom + 2).ToString() + "-" + _cartonid[1];
+                                        getAvgCarton(intcell13, drnew, intfrom, into);
                                     }
                                 }
                             }
@@ -1109,6 +1122,7 @@ namespace FrmPIE
                         {
 
                             //po
+                            dr["CartonType"] = 0;
 
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
@@ -1136,6 +1150,7 @@ namespace FrmPIE
                                 else
                                 {
                                     drnew[7] = _strprefix + (intfrom + 3).ToString() + "-" + _cartonid[1];
+                                    getAvgCarton(intcell15, drnew, intfrom, into);
                                 }
                             }
                             //qty
@@ -1150,6 +1165,7 @@ namespace FrmPIE
                         {
 
                             //po
+                            dr["CartonType"] = 0;
 
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
@@ -1177,6 +1193,7 @@ namespace FrmPIE
                                 else
                                 {
                                     drnew[7] = _strprefix + (intfrom + 4).ToString() + "-" + _cartonid[1];
+                                    getAvgCarton(intcell17, drnew, intfrom, into);
                                 }
                             }
                             //qty
@@ -1190,6 +1207,7 @@ namespace FrmPIE
                         if (intcell19 > 0)
                         {
                             //po
+                            dr["CartonType"] = 0;
 
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
@@ -1203,6 +1221,7 @@ namespace FrmPIE
                             {
 
                                 drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
+                                getAvgCarton(intcell19, drnew, intfrom, into);
                             }
                             else
                             {
@@ -1217,6 +1236,7 @@ namespace FrmPIE
                                 else
                                 {
                                     drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
+                                    getAvgCarton(intcell19, drnew, intfrom, into);
                                 }
 
                             }
@@ -1246,6 +1266,13 @@ namespace FrmPIE
             return "Notice: Total Rows: " + rowscountsum + ",Total PO: " + (addrowscount - 1 + rowserrscount) + " ,Update " + (addrowscount - 1) + " items Success, Error: has " + rowserrscount + " Rows has Error (" + strerrnullrows + ").";
 
             //data0set_npoi.Tables.Add(dt);
+        }
+
+        private void getAvgCarton(double intcellValue, DataRow drnew, int intfrom, int into)
+        {
+            double modevalue = intcellValue % (into - intfrom - _numCell + 2);
+            drnew[13] = (intcellValue - modevalue) / (into - intfrom - _numCell + 2);
+            drnew[14] = modevalue;
         }
 
 

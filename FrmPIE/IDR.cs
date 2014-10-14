@@ -47,6 +47,7 @@ namespace FrmPIE
         public int _voideX;
         public int _voideY;
         public int _sameColumnCount;
+        public int _sameColumnNameCount;
         public Boolean _voidhasLineID;
         public Boolean _voidRefresh;
 
