@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1ScanWECCtnLable = new System.Windows.Forms.GroupBox();
+            this.btn0AddFromePackingList0 = new System.Windows.Forms.Button();
             this.btnAddPalletNW = new System.Windows.Forms.Button();
             this.btn1RefreshPI = new System.Windows.Forms.Button();
             this.group3BXdataGV1ScanList = new System.Windows.Forms.GroupBox();
@@ -40,6 +41,7 @@
             this.btn0Scan = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAddPalletNum = new System.Windows.Forms.Button();
+            this.btn00More = new System.Windows.Forms.Button();
             this.lbl0msg = new System.Windows.Forms.Label();
             this.lbl2TypeScanWECCtnLable = new System.Windows.Forms.Label();
             this.lbl0noticePiId = new System.Windows.Forms.Label();
@@ -62,15 +64,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmb3CO_ScanWECCtnLable = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1ScanWECCtnLable.SuspendLayout();
             this.group3BXdataGV1ScanList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GVSanWecCtnLable)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.ctmenu0EnquireByPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1ScanWECCtnLable
             // 
+            this.groupBox1ScanWECCtnLable.Controls.Add(this.btn0AddFromePackingList0);
             this.groupBox1ScanWECCtnLable.Controls.Add(this.btnAddPalletNW);
             this.groupBox1ScanWECCtnLable.Controls.Add(this.btn1RefreshPI);
             this.groupBox1ScanWECCtnLable.Controls.Add(this.group3BXdataGV1ScanList);
@@ -84,9 +91,20 @@
             this.groupBox1ScanWECCtnLable.TabIndex = 52;
             this.groupBox1ScanWECCtnLable.TabStop = false;
             // 
+            // btn0AddFromePackingList0
+            // 
+            this.btn0AddFromePackingList0.ForeColor = System.Drawing.Color.Red;
+            this.btn0AddFromePackingList0.Location = new System.Drawing.Point(13, 231);
+            this.btn0AddFromePackingList0.Name = "btn0AddFromePackingList0";
+            this.btn0AddFromePackingList0.Size = new System.Drawing.Size(101, 33);
+            this.btn0AddFromePackingList0.TabIndex = 208;
+            this.btn0AddFromePackingList0.Text = "&Add From ePacking List";
+            this.btn0AddFromePackingList0.UseVisualStyleBackColor = true;
+            this.btn0AddFromePackingList0.Click += new System.EventHandler(this.btn0AddFromePackingList0_Click);
+            // 
             // btnAddPalletNW
             // 
-            this.btnAddPalletNW.Location = new System.Drawing.Point(159, 234);
+            this.btnAddPalletNW.Location = new System.Drawing.Point(159, 231);
             this.btnAddPalletNW.Name = "btnAddPalletNW";
             this.btnAddPalletNW.Size = new System.Drawing.Size(75, 33);
             this.btnAddPalletNW.TabIndex = 208;
@@ -97,11 +115,11 @@
             // btn1RefreshPI
             // 
             this.btn1RefreshPI.ForeColor = System.Drawing.Color.Red;
-            this.btn1RefreshPI.Location = new System.Drawing.Point(431, 234);
+            this.btn1RefreshPI.Location = new System.Drawing.Point(431, 231);
             this.btn1RefreshPI.Name = "btn1RefreshPI";
-            this.btn1RefreshPI.Size = new System.Drawing.Size(75, 33);
+            this.btn1RefreshPI.Size = new System.Drawing.Size(121, 33);
             this.btn1RefreshPI.TabIndex = 209;
-            this.btn1RefreshPI.Text = "&Refresh";
+            this.btn1RefreshPI.Text = "&Get RIR# (ERP)";
             this.btn1RefreshPI.UseVisualStyleBackColor = true;
             this.btn1RefreshPI.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -117,35 +135,35 @@
             // 
             // data1GVSanWecCtnLable
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GVSanWecCtnLable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GVSanWecCtnLable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.data1GVSanWecCtnLable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data1GVSanWecCtnLable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data1GVSanWecCtnLable.DefaultCellStyle = dataGridViewCellStyle8;
             this.data1GVSanWecCtnLable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.data1GVSanWecCtnLable.Location = new System.Drawing.Point(3, 17);
             this.data1GVSanWecCtnLable.MultiSelect = false;
             this.data1GVSanWecCtnLable.Name = "data1GVSanWecCtnLable";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GVSanWecCtnLable.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GVSanWecCtnLable.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.data1GVSanWecCtnLable.RowTemplate.Height = 23;
             this.data1GVSanWecCtnLable.Size = new System.Drawing.Size(623, 162);
             this.data1GVSanWecCtnLable.TabIndex = 300;
@@ -153,7 +171,7 @@
             // btn0Scan
             // 
             this.btn0Scan.Font = new System.Drawing.Font("Microsoft YaHei", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn0Scan.Location = new System.Drawing.Point(250, 233);
+            this.btn0Scan.Location = new System.Drawing.Point(250, 231);
             this.btn0Scan.Name = "btn0Scan";
             this.btn0Scan.Size = new System.Drawing.Size(145, 34);
             this.btn0Scan.TabIndex = 208;
@@ -164,6 +182,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnAddPalletNum);
+            this.groupBox1.Controls.Add(this.btn00More);
             this.groupBox1.Controls.Add(this.lbl0msg);
             this.groupBox1.Controls.Add(this.lbl2TypeScanWECCtnLable);
             this.groupBox1.Controls.Add(this.lbl0noticePiId);
@@ -192,12 +211,26 @@
             this.btnAddPalletNum.FlatAppearance.BorderSize = 0;
             this.btnAddPalletNum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPalletNum.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAddPalletNum.Location = new System.Drawing.Point(259, 46);
+            this.btnAddPalletNum.Location = new System.Drawing.Point(254, 46);
             this.btnAddPalletNum.Name = "btnAddPalletNum";
-            this.btnAddPalletNum.Size = new System.Drawing.Size(32, 23);
+            this.btnAddPalletNum.Size = new System.Drawing.Size(25, 25);
             this.btnAddPalletNum.TabIndex = 203;
             this.btnAddPalletNum.UseVisualStyleBackColor = false;
             this.btnAddPalletNum.Click += new System.EventHandler(this.btnAddPalletNum_Click);
+            // 
+            // btn00More
+            // 
+            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
+            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn00More.FlatAppearance.BorderSize = 0;
+            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
+            this.btn00More.Location = new System.Drawing.Point(257, 16);
+            this.btn00More.Name = "btn00More";
+            this.btn00More.Size = new System.Drawing.Size(23, 23);
+            this.btn00More.TabIndex = 206;
+            this.btn00More.UseVisualStyleBackColor = true;
             // 
             // lbl0msg
             // 
@@ -298,7 +331,7 @@
             this.txt1PIID_ScanWECCtnLable.Font = new System.Drawing.Font("SimSun", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txt1PIID_ScanWECCtnLable.Location = new System.Drawing.Point(142, 13);
             this.txt1PIID_ScanWECCtnLable.Name = "txt1PIID_ScanWECCtnLable";
-            this.txt1PIID_ScanWECCtnLable.Size = new System.Drawing.Size(144, 27);
+            this.txt1PIID_ScanWECCtnLable.Size = new System.Drawing.Size(115, 27);
             this.txt1PIID_ScanWECCtnLable.TabIndex = 205;
             this.toolTip1.SetToolTip(this.txt1PIID_ScanWECCtnLable, "PI ID if is Null,System Will be Generate new one");
             this.txt1PIID_ScanWECCtnLable.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt1PIID_ScanWECCtnLable_KeyUp);
@@ -438,6 +471,28 @@
             this.cmb3CO_ScanWECCtnLable.TextChanged += new System.EventHandler(this.cmb3CO_ScanWECCtnLable_TextChanged);
             this.cmb3CO_ScanWECCtnLable.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmb3CO_ScanWECCtnLable_KeyUp);
             // 
+            // ctmenu0EnquireByPart
+            // 
+            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enquireByPartToolStripMenuItem,
+            this.downLoad1ToExceltoolStripMenuItem2});
+            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            // 
+            // enquireByPartToolStripMenuItem
+            // 
+            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            // 
+            // downLoad1ToExceltoolStripMenuItem2
+            // 
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources.down;
+            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
+            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
+            // 
             // frmPI0ScanWECCtnLable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -454,6 +509,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -491,5 +547,10 @@
         private System.Windows.Forms.TextBox txtPalletNW;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnAddPalletNW;
+        private System.Windows.Forms.Button btn0AddFromePackingList0;
+        protected internal System.Windows.Forms.Button btn00More;
+        private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
+        private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
     }
 }

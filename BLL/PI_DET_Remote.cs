@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-
+using System.Collections.Generic;
+using PIE.Common;
+using PI.Model;
 namespace PI.BLL
 {
     /// <summary>
@@ -10,12 +11,9 @@ namespace PI.BLL
     public partial class PI_MSTR_Remote
     {
         private readonly PI.DAL.PI_MSTR_Remote dal = new PI.DAL.PI_MSTR_Remote();
-
         public PI_MSTR_Remote()
         { }
-
-        #region BasicMethod
-
+        #region  BasicMethod
         /// <summary>
         /// 是否存在该记录
         /// </summary>
@@ -45,9 +43,9 @@ namespace PI.BLL
         /// </summary>
         public bool Delete(string PI_NO)
         {
+
             return dal.Delete(PI_NO);
         }
-
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -61,6 +59,7 @@ namespace PI.BLL
         /// </summary>
         public PI.Model.PI_MSTR_Remote GetModel(string PI_NO)
         {
+
             return dal.GetModel(PI_NO);
         }
 
@@ -69,6 +68,7 @@ namespace PI.BLL
         /// </summary>
         public PI.Model.PI_MSTR_Remote GetModelByCache(string PI_NO)
         {
+
             string CacheKey = "PI_MSTR_RemoteModel-" + PI_NO;
             object objModel = PIE.Common.DataCache.GetCache(CacheKey);
             if (objModel == null)
@@ -94,7 +94,6 @@ namespace PI.BLL
         {
             return dal.GetList(strWhere);
         }
-
         /// <summary>
         /// 获得前几行数据
         /// </summary>
@@ -102,7 +101,6 @@ namespace PI.BLL
         {
             return dal.GetList(Top, strWhere, filedOrder);
         }
-
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -111,7 +109,6 @@ namespace PI.BLL
             DataSet ds = dal.GetList(strWhere);
             return DataTableToList(ds.Tables[0]);
         }
-
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -149,7 +146,6 @@ namespace PI.BLL
         {
             return dal.GetRecordCount(strWhere);
         }
-
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
@@ -157,7 +153,6 @@ namespace PI.BLL
         {
             return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
         }
-
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
@@ -166,6 +161,10 @@ namespace PI.BLL
         //return dal.GetList(PageSize,PageIndex,strWhere);
         //}
 
-        #endregion BasicMethod
+        #endregion  BasicMethod
+        #region  ExtensionMethod
+
+        #endregion  ExtensionMethod
     }
 }
+

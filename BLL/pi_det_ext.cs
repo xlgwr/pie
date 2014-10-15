@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using PIE.DBUtility;
+using System.Collections.Generic;
 using System.Data;
+using System.Text;
 
 namespace PI.BLL
 {
@@ -12,7 +14,7 @@ namespace PI.BLL
 
         public pi_det_ext()
         { }
-
+        
         /// <summary>
         /// 获得数据列表
         /// </summary>

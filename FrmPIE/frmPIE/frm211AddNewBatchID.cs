@@ -23,6 +23,7 @@ namespace FrmPIE
         PIE.Model.plr_mstr _plr_mstr_model = new PIE.Model.plr_mstr();
         string _strbatch = "";
         string _lineid = "";
+        List<int> _lift;
         bool _addNewFalg = false;
         bool _updateflag = false;
         int _nextlineid;
@@ -178,15 +179,15 @@ namespace FrmPIE
             {
                 return false;
             }
-            if (isnullempty(txt11CartonTypeAddNewBatchID, "Number of Carton must be has.", "Error"))
-            {
-                return false;
-            }
-            //number
-            if (isNumber(txt11CartonTypeAddNewBatchID))
-            {
-                return false;
-            }
+            //if (isnullempty(txt11CartonTypeAddNewBatchID, "Number of Carton must be has.", "Error"))
+            //{
+            //    return false;
+            //}
+            ////number
+            //if (isNumber(txt11CartonTypeAddNewBatchID))
+            //{
+            //    return false;
+            //}
 
 
             if (!PageValidate.IsNumber(txt14CartonIDFromAddNewBatchID.Text) || !PageValidate.IsNumber(txt15CartonIDToAddNewBatchID.Text))
@@ -212,11 +213,11 @@ namespace FrmPIE
         private void initCartonFromTo()
         {
             string strprefix;
-            var strCtnIdArr = CartonFromTo.initCartonFromTo(txt10CartonIDAddNewBatchID.Text, txt11CartonTypeAddNewBatchID.Text, out strprefix);
-
+            //var strCtnIdArr = CartonFromTo.initCartonFromTo(txt10CartonIDAddNewBatchID.Text, txt11CartonTypeAddNewBatchID.Text, out strprefix);
+            _lift = CartonFromTo.initCartonFromTo(txt10CartonIDAddNewBatchID.Text, out strprefix);
             txt12CartonprifixAddNewBatchID.Text = strprefix;
-            txt14CartonIDFromAddNewBatchID.Text = strCtnIdArr[0].ToString().Trim();
-            txt15CartonIDToAddNewBatchID.Text = strCtnIdArr[1].ToString().Trim();
+            txt14CartonIDFromAddNewBatchID.Text = _lift[0].ToString();
+            txt15CartonIDToAddNewBatchID.Text = _lift[1].ToString();
         }
         private void initTxtToModel(PIE.Model.plr_mstr plr_mstr_model)
         {
@@ -238,8 +239,12 @@ namespace FrmPIE
             plr_mstr_model.plr_carton_qty = Convert.ToDecimal(txt8CartonQtyAddNewBatchID.Text.Trim());
             plr_mstr_model.plr_qty = Convert.ToDecimal(txt9QTYAddNewBatchID.Text.Trim());
             plr_mstr_model.CartonID = txt10CartonIDAddNewBatchID.Text.Trim();
-            plr_mstr_model.CartonType = txt11CartonTypeAddNewBatchID.Text.Trim();
 
+            decimal? mod = plr_mstr_model.plr_qty % plr_mstr_model.plr_carton_qty;
+
+            plr_mstr_model.CartonType = mod.ToString();
+
+            //plr_mstr_model.CartonType = "0";
             plr_mstr_model.plr_rcp_date = Convert.ToDateTime(dateTime1RecDateAddNewBatchID.Text);
 
             plr_mstr_model.plr_deli_date = Convert.ToDateTime(dateTime2DeliDateAddNewBatchID.Text);
@@ -266,7 +271,7 @@ namespace FrmPIE
             txt8CartonQtyAddNewBatchID.Text = plr_mstr_model.plr_carton_qty.ToString();
             txt9QTYAddNewBatchID.Text = plr_mstr_model.plr_qty.ToString();
             txt10CartonIDAddNewBatchID.Text = plr_mstr_model.CartonID;
-            txt11CartonTypeAddNewBatchID.Text = plr_mstr_model.CartonType;
+            //txt11CartonTypeAddNewBatchID.Text = plr_mstr_model.CartonType;
 
             dateTime1RecDateAddNewBatchID.Text = plr_mstr_model.plr_rcp_date.ToString();
 
@@ -517,6 +522,8 @@ namespace FrmPIE
 
         private void btn3NewAddNewBatchID_Click(object sender, EventArgs e)
         {
+            _idr_show.AcceptButton = btn1UpadeAddAddNewBatchID;
+
             ShowMsg("新增新的BatchID,LineID 从1开始计算.", "Notice");
             btn1UpadeAddAddNewBatchID.Text = "&Add";
             _addNewFalg = false;
@@ -634,6 +641,7 @@ namespace FrmPIE
         }
         private void btn2AddContinue_Click(object sender, EventArgs e)
         {
+            _idr_show.AcceptButton = btn1UpadeAddAddNewBatchID;
             if (txtb3batch_statu_AddNewBatchID.Text.Equals("Yes"))
             {
 

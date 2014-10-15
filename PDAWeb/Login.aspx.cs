@@ -71,7 +71,7 @@ public partial class Login : System.Web.UI.Page
             txtUserName.Focus();
             return;
         }
-        if (_sys_user_model.user_password.Equals(PIE.DBUtility.DESEncrypt.Encrypt(pwd + pwd2)))
+        if (_sys_user_model.user_password.Equals(PIE.DBUtility.DESEncrypt.Encrypt(pwd + "," + pwd2)))
         {
 
             Session["user_id"] = username;

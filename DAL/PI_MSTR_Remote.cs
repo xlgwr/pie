@@ -11,7 +11,7 @@ namespace PI.DAL
     public partial class PI_MSTR_Remote
     {
 
-        DbHelperSQLP DbHelperSQLP = new DbHelperSQLP("ConnectionStringRemote");
+        public DbHelperSQLP DbHelperSQLP = new DbHelperSQLP(PubConstant.ConnectionStringRemote);
         public PI_MSTR_Remote()
         { }
         #region  BasicMethod
@@ -22,7 +22,7 @@ namespace PI.DAL
         public bool Exists(string PI_NO)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) from PI_MSTR_Remote");
+            strSql.Append("select count(1) from PI_MSTR");
             strSql.Append(" where PI_NO=@PI_NO ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,12)			};
@@ -38,19 +38,17 @@ namespace PI.DAL
         public bool Add(PI.Model.PI_MSTR_Remote model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("insert into PI_MSTR_Remote(");
-            strSql.Append("PI_NO,PI_Date,PI_Page,msrepl_synctran_ts)");
+            strSql.Append("insert into PI_MSTR(");
+            strSql.Append("PI_NO,PI_Date,PI_Page)");
             strSql.Append(" values (");
-            strSql.Append("@PI_NO,@PI_Date,@PI_Page,@msrepl_synctran_ts)");
+            strSql.Append("@PI_NO,@PI_Date,@PI_Page)");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,12),
 					new SqlParameter("@PI_Date", SqlDbType.SmallDateTime),
-					new SqlParameter("@PI_Page", SqlDbType.NVarChar,2),
-					new SqlParameter("@msrepl_synctran_ts", SqlDbType.Timestamp,8)};
+					new SqlParameter("@PI_Page", SqlDbType.NVarChar,2)};
             parameters[0].Value = model.PI_NO;
             parameters[1].Value = model.PI_Date;
             parameters[2].Value = model.PI_Page;
-            parameters[3].Value = model.msrepl_synctran_ts;
 
             int rows = DbHelperSQLP.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -68,7 +66,7 @@ namespace PI.DAL
         public bool Update(PI.Model.PI_MSTR_Remote model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update PI_MSTR_Remote set ");
+            strSql.Append("update PI_MSTR set ");
             strSql.Append("PI_Date=@PI_Date,");
             strSql.Append("PI_Page=@PI_Page");
             strSql.Append(" where PI_NO=@PI_NO ");
@@ -98,7 +96,7 @@ namespace PI.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from PI_MSTR_Remote ");
+            strSql.Append("delete from PI_MSTR ");
             strSql.Append(" where PI_NO=@PI_NO ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,12)			};
@@ -120,7 +118,7 @@ namespace PI.DAL
         public bool DeleteList(string PI_NOlist)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from PI_MSTR_Remote ");
+            strSql.Append("delete from PI_MSTR ");
             strSql.Append(" where PI_NO in (" + PI_NOlist + ")  ");
             int rows = DbHelperSQLP.ExecuteSql(strSql.ToString());
             if (rows > 0)
@@ -141,7 +139,7 @@ namespace PI.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 PI_NO,PI_Date,PI_Page,msrepl_synctran_ts from PI_MSTR_Remote ");
+            strSql.Append("select  top 1 PI_NO,PI_Date,PI_Page,msrepl_synctran_ts from PI_MSTR ");
             strSql.Append(" where PI_NO=@PI_NO ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,12)			};
@@ -195,7 +193,7 @@ namespace PI.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select PI_NO,PI_Date,PI_Page,msrepl_synctran_ts ");
-            strSql.Append(" FROM PI_MSTR_Remote ");
+            strSql.Append(" from PI_MSTR ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -215,7 +213,7 @@ namespace PI.DAL
                 strSql.Append(" top " + Top.ToString());
             }
             strSql.Append(" PI_NO,PI_Date,PI_Page,msrepl_synctran_ts ");
-            strSql.Append(" FROM PI_MSTR_Remote ");
+            strSql.Append(" from PI_MSTR ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -230,7 +228,7 @@ namespace PI.DAL
         public int GetRecordCount(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) FROM PI_MSTR_Remote ");
+            strSql.Append("select count(1) from PI_MSTR ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -261,7 +259,7 @@ namespace PI.DAL
             {
                 strSql.Append("order by T.PI_NO desc");
             }
-            strSql.Append(")AS Row, T.*  from PI_MSTR_Remote T ");
+            strSql.Append(")AS Row, T.*  from PI_MSTR T ");
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
                 strSql.Append(" WHERE " + strWhere);

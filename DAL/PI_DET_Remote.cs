@@ -10,7 +10,7 @@ namespace PI.DAL
     /// </summary>
     public partial class PI_DET_Remote
     {
-        DbHelperSQLP DbHelperSQLP = new DbHelperSQLP("ConnectionStringRemote");
+        public DbHelperSQLP DbHelperSQLP = new DbHelperSQLP(PubConstant.ConnectionStringRemote);
         public PI_DET_Remote()
         { }
         #region  BasicMethod
@@ -20,7 +20,7 @@ namespace PI.DAL
         public bool Exists(string PI_NO, int PI_LINE)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) from PI_DET_Remote");
+            strSql.Append("select count(1) from PI_DET");
             strSql.Append(" where PI_NO=@PI_NO and PI_LINE=@PI_LINE ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,12),
@@ -38,7 +38,7 @@ namespace PI.DAL
         public int Add(PI.Model.PI_DET_Remote model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("insert into PI_DET_Remote(");
+            strSql.Append("insert into PI_DET(");
             strSql.Append("PI_NO,PI_CARTON_NO,PI_SITE,PI_PART,PI_CO,PI_DESC,PI_QTY,PI_LOT,PI_NW,PI_K200_NW,PI_GW,PI_SBU,PI_REC_NO,PI_PRICE,PI_PALLET,PI_PO_price,PI_CONTRACT,PI_SEQ,PI_SEQ_CL,PI_IQC,PI_PO,PI_Taxcode,PI_ConnCode,pi_user,pi_cre_time,pi_ver,pi_mfgr,pi_mfgr_part,pi_mfgr_name,pi_Lic_req,pi_ori_PO_price,pi_PO_curr,pi_curr_rate,pi_us_rate,pi_vend)");
             strSql.Append(" values (");
             strSql.Append("@PI_NO,@PI_CARTON_NO,@PI_SITE,@PI_PART,@PI_CO,@PI_DESC,@PI_QTY,@PI_LOT,@PI_NW,@PI_K200_NW,@PI_GW,@PI_SBU,@PI_REC_NO,@PI_PRICE,@PI_PALLET,@PI_PO_price,@PI_CONTRACT,@PI_SEQ,@PI_SEQ_CL,@PI_IQC,@PI_PO,@PI_Taxcode,@PI_ConnCode,@pi_user,@pi_cre_time,@pi_ver,@pi_mfgr,@pi_mfgr_part,@pi_mfgr_name,@pi_Lic_req,@pi_ori_PO_price,@pi_PO_curr,@pi_curr_rate,@pi_us_rate,@pi_vend)");
@@ -131,7 +131,7 @@ namespace PI.DAL
         public bool Update(PI.Model.PI_DET_Remote model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update PI_DET_Remote set ");
+            strSql.Append("update PI_DET set ");
             strSql.Append("PI_CARTON_NO=@PI_CARTON_NO,");
             strSql.Append("PI_SITE=@PI_SITE,");
             strSql.Append("PI_PART=@PI_PART,");
@@ -259,7 +259,7 @@ namespace PI.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from PI_DET_Remote ");
+            strSql.Append("delete from PI_DET ");
             strSql.Append(" where PI_LINE=@PI_LINE");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_LINE", SqlDbType.Int,4)
@@ -283,7 +283,7 @@ namespace PI.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from PI_DET_Remote ");
+            strSql.Append("delete from PI_DET ");
             strSql.Append(" where PI_NO=@PI_NO and PI_LINE=@PI_LINE ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,12),
@@ -307,7 +307,7 @@ namespace PI.DAL
         public bool DeleteList(string PI_LINElist)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from PI_DET_Remote ");
+            strSql.Append("delete from PI_DET ");
             strSql.Append(" where PI_LINE in (" + PI_LINElist + ")  ");
             int rows = DbHelperSQLP.ExecuteSql(strSql.ToString());
             if (rows > 0)
@@ -328,7 +328,7 @@ namespace PI.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 PI_NO,PI_LINE,PI_CARTON_NO,PI_SITE,PI_PART,PI_CO,PI_DESC,PI_QTY,PI_LOT,PI_NW,PI_K200_NW,PI_GW,PI_SBU,PI_REC_NO,PI_PRICE,PI_PALLET,PI_PO_price,PI_CONTRACT,PI_SEQ,PI_SEQ_CL,PI_IQC,PI_PO,PI_Taxcode,PI_ConnCode,pi_user,pi_cre_time,pi_ver,pi_mfgr,pi_mfgr_part,pi_mfgr_name,pi_Lic_req,pi_ori_PO_price,pi_PO_curr,pi_curr_rate,pi_us_rate,pi_vend from PI_DET_Remote ");
+            strSql.Append("select  top 1 PI_NO,PI_LINE,PI_CARTON_NO,PI_SITE,PI_PART,PI_CO,PI_DESC,PI_QTY,PI_LOT,PI_NW,PI_K200_NW,PI_GW,PI_SBU,PI_REC_NO,PI_PRICE,PI_PALLET,PI_PO_price,PI_CONTRACT,PI_SEQ,PI_SEQ_CL,PI_IQC,PI_PO,PI_Taxcode,PI_ConnCode,pi_user,pi_cre_time,pi_ver,pi_mfgr,pi_mfgr_part,pi_mfgr_name,pi_Lic_req,pi_ori_PO_price,pi_PO_curr,pi_curr_rate,pi_us_rate,pi_vend from PI_DET ");
             strSql.Append(" where PI_LINE=@PI_LINE");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_LINE", SqlDbType.Int,4)
@@ -511,7 +511,7 @@ namespace PI.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select PI_NO,PI_LINE,PI_CARTON_NO,PI_SITE,PI_PART,PI_CO,PI_DESC,PI_QTY,PI_LOT,PI_NW,PI_K200_NW,PI_GW,PI_SBU,PI_REC_NO,PI_PRICE,PI_PALLET,PI_PO_price,PI_CONTRACT,PI_SEQ,PI_SEQ_CL,PI_IQC,PI_PO,PI_Taxcode,PI_ConnCode,pi_user,pi_cre_time,pi_ver,pi_mfgr,pi_mfgr_part,pi_mfgr_name,pi_Lic_req,pi_ori_PO_price,pi_PO_curr,pi_curr_rate,pi_us_rate,pi_vend ");
-            strSql.Append(" FROM PI_DET_Remote ");
+            strSql.Append(" from PI_DET ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -531,7 +531,7 @@ namespace PI.DAL
                 strSql.Append(" top " + Top.ToString());
             }
             strSql.Append(" PI_NO,PI_LINE,PI_CARTON_NO,PI_SITE,PI_PART,PI_CO,PI_DESC,PI_QTY,PI_LOT,PI_NW,PI_K200_NW,PI_GW,PI_SBU,PI_REC_NO,PI_PRICE,PI_PALLET,PI_PO_price,PI_CONTRACT,PI_SEQ,PI_SEQ_CL,PI_IQC,PI_PO,PI_Taxcode,PI_ConnCode,pi_user,pi_cre_time,pi_ver,pi_mfgr,pi_mfgr_part,pi_mfgr_name,pi_Lic_req,pi_ori_PO_price,pi_PO_curr,pi_curr_rate,pi_us_rate,pi_vend ");
-            strSql.Append(" FROM PI_DET_Remote ");
+            strSql.Append(" from PI_DET ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -546,7 +546,7 @@ namespace PI.DAL
         public int GetRecordCount(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) FROM PI_DET_Remote ");
+            strSql.Append("select count(1) from PI_DET ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -577,7 +577,7 @@ namespace PI.DAL
             {
                 strSql.Append("order by T.PI_LINE desc");
             }
-            strSql.Append(")AS Row, T.*  from PI_DET_Remote T ");
+            strSql.Append(")AS Row, T.*  from PI_DET T ");
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
                 strSql.Append(" WHERE " + strWhere);

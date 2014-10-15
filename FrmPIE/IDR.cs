@@ -27,6 +27,7 @@ namespace FrmPIE
     public partial class frmIDR : Form
     {
         LogonDomain _logonDomain = new LogonDomain();
+        frmEnterForReference _FrmForRefe;
         public PIE.Model.sys_user _sys_user_model = new PIE.Model.sys_user();
 
         public Thread _tuploadExcel;
@@ -45,6 +46,8 @@ namespace FrmPIE
         public DataGridView _voidDGV;
         public int _voideX;
         public int _voideY;
+        public int _sameColumnCount;
+        public int _sameColumnNameCount;
         public Boolean _voidhasLineID;
         public Boolean _voidRefresh;
 
@@ -63,6 +66,16 @@ namespace FrmPIE
 
         public string _strSaveLabelFile = "";
         public string _strDownLoadExcel = "";
+
+        public string _selectColumnNameValue;
+
+        public string _strCellColName;
+        public string _sameColumnName;
+        public string _deffCellName;
+        public string _deffCellValue;
+
+        public static string _strUpdateURL;
+
         public frmIDR(LogonDomain logonDomain, PIE.Model.sys_user sys_user_model)
         {
             _logonDomain = logonDomain;
@@ -75,8 +88,12 @@ namespace FrmPIE
                 tp.MouseDown += tp_MouseDown;
             }
             cf = new Commfunction(this);
+            btn00More.Click += btn00More0_Click;
 
+            Program.showNewVersion(link0NewVersion);
         }
+
+       
         public frmIDR()
         {
 
@@ -87,6 +104,132 @@ namespace FrmPIE
                 tp.MouseDown += tp_MouseDown;
             }
             cf = new Commfunction(this);
+
+            btn00More.Click += btn00More0_Click;
+
+            Program.showNewVersion(link0NewVersion);
+        }
+
+        void btn00More0_Click(object sender, EventArgs e)
+        {
+            _FrmForRefe = new frmEnterForReference(this);
+
+            _FrmForRefe.textBox1.Text = txt0SearchID.Text;
+            _FrmForRefe.textBox1.Focus();
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            //
+            _FrmForRefe.data0GVForReference.RowEnter += data0GVForReference_RowEnter;
+            _FrmForRefe.data0GVForReference.CellClick += data0GVForReference_Click;
+            //
+            _FrmForRefe.button1.Click += enquireByForReferenct;
+            _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
+            //
+            _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
+            //
+            _FrmForRefe.gb0ForReference.Text = "Enquire Result";
+            //
+            initSelectCondition();
+            //
+            init_FrmForRefeDGV("");
+
+            _FrmForRefe.ShowDialog();
+        }
+
+        void chkTop50_CheckedChanged(object sender, EventArgs e)
+        {
+
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            if (_FrmForRefe.chkTop50.Checked)
+            {
+                //
+                initSelectCondition();
+                //
+                init_FrmForRefeDGV("");
+            }
+            else
+            {
+                enquireByForReferenct(sender, e);
+            }
+        }
+
+        private void initSelectCondition()
+        {
+            if (cmb1SearchType.Text.Equals("BatchID"))
+            {
+                _FrmForRefe.lblTitle.Text = "BatchID# OR IP:";
+                _FrmForRefe.Text = "Enquire by BatchID";
+                //
+                _strCellColName = "batch_id";
+                _sameColumnName = "batch_user_ip";
+                _deffCellName = "batch_status";
+                _deffCellValue = "Yes";
+            }
+            else if (cmb1SearchType.Text.Equals("PI ID"))
+            {
+                _FrmForRefe.lblTitle.Text = "PI ID# OR IP:";
+                _FrmForRefe.Text = "Enquire by PI ID";
+                //
+                _strCellColName = "PI_ID";
+                _sameColumnName = "pi_user_ip";
+                _deffCellName = "pi_status";
+                _deffCellValue = "Yes";
+            }
+        }
+
+        void button1_DoubleClick(object sender, EventArgs e)
+        {
+            _FrmForRefe.Close();
+            btn0Find9_Click(sender, e);
+        }
+
+        void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
+            string strBatchID = cf.selectCellMethod(dwo);
+            txt0SearchID.Text = strBatchID;
+        }
+
+        void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
+
+        }
+        void enquireByForReferenct(object sender, EventArgs e)
+        {
+            _FrmForRefe.chkTop50.Checked = false;
+            if (string.IsNullOrEmpty(_FrmForRefe.textBox1.Text))
+            {
+                _FrmForRefe.textBox1.Focus();
+                return;
+            }
+            init_FrmForRefeDGV(_FrmForRefe.textBox1.Text.Trim());
+            //txt0SearchID.Text = _FrmForRefe.textBox1.Text.Trim();
+            //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
+        }
+
+        private void init_FrmForRefeDGV(string strwhere)
+        {
+            strwhere = _strCellColName + @" like '%" + strwhere + @"%' or " + _sameColumnName + @" like '%" + strwhere + @"%'";
+            if (_strCellColName.Equals("batch_id"))
+            {
+                var batch_ds = new PIE.DAL.plr_batch_mstr_ext().GetList(50, strwhere, "batch_id desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPlrBatchMstr1(_FrmForRefe.data0GVForReference);
+            }
+            else if (_strCellColName.Equals("PI_ID"))
+            {
+                var batch_ds = new PI.DAL.pi_mstr_ext().GetList(50, strwhere, "PI_ID desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPIMstrForEquire(_FrmForRefe.data0GVForReference);
+            }
+            else
+            {
+                _FrmForRefe.data0GVForReference.DataSource = null;
+            }
+            _FrmForRefe.data0GVForReference.Refresh();
 
         }
         private void frmIDR_Load(object sender, EventArgs e)
@@ -461,8 +604,15 @@ namespace FrmPIE
         private void btn1Home1_Click(object sender, EventArgs e)
         {
             tabCtlRight1.SelectedIndex = 0;
+            clearnotice();
         }
-
+        void clearnotice()
+        {
+            //status13toolSStatusLblMsg.Text = "";
+            status14toolLabelCellRowColXY.Text = "";
+            status15toolLabelstrResult.Text = "";
+            status16toolLabelstrSameColumnCount.Text = "";
+        }
         private void btn0Add_Click(object sender, EventArgs e)
         {
             //addNewTabPage("Add New", true);
@@ -546,14 +696,17 @@ namespace FrmPIE
         public void addGBToTC(TabControl tc, GroupBox gb)
         {
             tc.SelectedTab.Controls.Add(gb);
+            clearnotice();
         }
         public void addGBToTC(TabControl tc, Control cl)
         {
             tc.SelectedTab.Controls.Add(cl);
+            clearnotice();
         }
         public void addGBToTC(TabPage tp, GroupBox gb)
         {
             tp.Controls.Add(gb);
+            clearnotice();
         }
         private void toolcMenu11UploadEPackingListExcel_Click(object sender, EventArgs e)
         {
@@ -604,7 +757,13 @@ namespace FrmPIE
             frm412UploadToERP ute = new frm412UploadToERP(this);
             addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
         }
-
+        public void goToUploadToERP(string batchid)
+        {
+            addNewTabPage("Upload WEC Carton ID To ERP");
+            frm412UploadToERP ute = new frm412UploadToERP(this);
+            ute.txt0BatchIDUploadToERP.Text = batchid;
+            addGBToTC(tabCtlRight1, ute.gb0UploadToERP);
+        }
         private void toolStripMenuItem31btnPrintCartonLabel3_Click(object sender, EventArgs e)
         {
             addNewTabPage("Print Carton Label");
@@ -634,6 +793,7 @@ namespace FrmPIE
         {
             //status13toolSStatusLblMsg.Text = "";
             status15toolLabelstrResult.Text = "";
+
             //status14toolLabelCellRowColXY.Text = "";
         }
 
@@ -669,6 +829,9 @@ namespace FrmPIE
         {
             cf.initOpenFile("0DownLoadExcel", _strDownLoadExcel);
         }
+
+        
+
 
 
     }

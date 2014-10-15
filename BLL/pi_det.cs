@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-
+using System.Collections.Generic;
+using PIE.Common;
+using PI.Model;
 namespace PI.BLL
 {
     /// <summary>
@@ -10,11 +11,9 @@ namespace PI.BLL
     public partial class pi_det
     {
         private readonly PI.DAL.pi_det dal = new PI.DAL.pi_det();
-
         public pi_det()
         { }
-
-        #region BasicMethod
+        #region  BasicMethod
 
         /// <summary>
         /// 得到最大ID
@@ -53,6 +52,7 @@ namespace PI.BLL
         /// </summary>
         public bool Delete(string PI_ID, int pi_LineID, string pi_wec_ctn)
         {
+
             return dal.Delete(PI_ID, pi_LineID, pi_wec_ctn);
         }
 
@@ -61,6 +61,7 @@ namespace PI.BLL
         /// </summary>
         public PI.Model.pi_det GetModel(string PI_ID, int pi_LineID, string pi_wec_ctn)
         {
+
             return dal.GetModel(PI_ID, pi_LineID, pi_wec_ctn);
         }
 
@@ -69,6 +70,7 @@ namespace PI.BLL
         /// </summary>
         public PI.Model.pi_det GetModelByCache(string PI_ID, int pi_LineID, string pi_wec_ctn)
         {
+
             string CacheKey = "pi_detModel-" + PI_ID + pi_LineID + pi_wec_ctn;
             object objModel = PIE.Common.DataCache.GetCache(CacheKey);
             if (objModel == null)
@@ -94,7 +96,6 @@ namespace PI.BLL
         {
             return dal.GetList(strWhere);
         }
-
         /// <summary>
         /// 获得前几行数据
         /// </summary>
@@ -102,7 +103,6 @@ namespace PI.BLL
         {
             return dal.GetList(Top, strWhere, filedOrder);
         }
-
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -112,6 +112,35 @@ namespace PI.BLL
             return DataTableToList(ds.Tables[0]);
         }
 
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<PI.Model.pi_det> GetModelList(string strWhere, bool distinct)
+        {
+            DataSet ds = dal.GetList(strWhere, distinct);
+            return DataTableToList(ds.Tables[0],distinct);
+        }
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<PI.Model.pi_det> DataTableToList(DataTable dt,bool distinct)
+        {
+            List<PI.Model.pi_det> modelList = new List<PI.Model.pi_det>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                PI.Model.pi_det model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = dal.DataRowToModel(dt.Rows[n],distinct);
+                    if (model != null)
+                    {
+                        modelList.Add(model);
+                    }
+                }
+            }
+            return modelList;
+        }
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -133,7 +162,6 @@ namespace PI.BLL
             }
             return modelList;
         }
-
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -149,7 +177,6 @@ namespace PI.BLL
         {
             return dal.GetRecordCount(strWhere);
         }
-
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
@@ -157,7 +184,6 @@ namespace PI.BLL
         {
             return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
         }
-
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
@@ -166,6 +192,10 @@ namespace PI.BLL
         //return dal.GetList(PageSize,PageIndex,strWhere);
         //}
 
-        #endregion BasicMethod
+        #endregion  BasicMethod
+        #region  ExtensionMethod
+
+        #endregion  ExtensionMethod
     }
 }
+
