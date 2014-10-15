@@ -55,6 +55,14 @@ FROM      vpi_report</CommandText>
               <Mapping SourceColumn="pi_status" DataSetColumn="pi_status" />
               <Mapping SourceColumn="Pallet_TTL_NW" DataSetColumn="Pallet_TTL_NW" />
               <Mapping SourceColumn="pi_cre_date" DataSetColumn="pi_cre_date" />
+              <Mapping SourceColumn="CoDesc" DataSetColumn="CoDesc" />
+              <Mapping SourceColumn="Vend_name" DataSetColumn="Vend_name" />
+              <Mapping SourceColumn="MFGR" DataSetColumn="MFGR" />
+              <Mapping SourceColumn="MFGR_Name" DataSetColumn="MFGR_Name" />
+              <Mapping SourceColumn="MFGR_Part" DataSetColumn="MFGR_Part" />
+              <Mapping SourceColumn="GW" DataSetColumn="GW" />
+              <Mapping SourceColumn="REC_NO" DataSetColumn="REC_NO" />
+              <Mapping SourceColumn="Contract" DataSetColumn="Contract" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -66,7 +74,7 @@ FROM      vpi_report</CommandText>
   <xs:element name="PIReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PIReport" msprop:Generator_UserDSName="PIReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="vpi_report" msprop:Generator_TableClassName="vpi_reportDataTable" msprop:Generator_TableVarName="tablevpi_report" msprop:Generator_TablePropName="vpi_report" msprop:Generator_RowDeletingName="vpi_reportRowDeleting" msprop:Generator_RowChangingName="vpi_reportRowChanging" msprop:Generator_RowEvHandlerName="vpi_reportRowChangeEventHandler" msprop:Generator_RowDeletedName="vpi_reportRowDeleted" msprop:Generator_UserTableName="vpi_report" msprop:Generator_RowChangedName="vpi_reportRowChanged" msprop:Generator_RowEvArgName="vpi_reportRowChangeEvent" msprop:Generator_RowClassName="vpi_reportRow">
+        <xs:element name="vpi_report" msprop:Generator_TableClassName="vpi_reportDataTable" msprop:Generator_TableVarName="tablevpi_report" msprop:Generator_RowChangedName="vpi_reportRowChanged" msprop:Generator_TablePropName="vpi_report" msprop:Generator_RowDeletingName="vpi_reportRowDeleting" msprop:Generator_RowChangingName="vpi_reportRowChanging" msprop:Generator_RowEvHandlerName="vpi_reportRowChangeEventHandler" msprop:Generator_RowDeletedName="vpi_reportRowDeleted" msprop:Generator_RowClassName="vpi_reportRow" msprop:Generator_UserTableName="vpi_report" msprop:Generator_RowEvArgName="vpi_reportRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PI_ID" msprop:Generator_ColumnVarNameInTable="columnPI_ID" msprop:Generator_ColumnPropNameInRow="PI_ID" msprop:Generator_ColumnPropNameInTable="PI_IDColumn" msprop:Generator_UserColumnName="PI_ID">
@@ -248,6 +256,56 @@ FROM      vpi_report</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="pi_cre_date" msprop:Generator_ColumnVarNameInTable="columnpi_cre_date" msprop:Generator_ColumnPropNameInRow="pi_cre_date" msprop:Generator_ColumnPropNameInTable="pi_cre_dateColumn" msprop:Generator_UserColumnName="pi_cre_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CoDesc" msprop:Generator_ColumnVarNameInTable="columnCoDesc" msprop:Generator_ColumnPropNameInRow="CoDesc" msprop:Generator_ColumnPropNameInTable="CoDescColumn" msprop:Generator_UserColumnName="CoDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Vend_name" msprop:Generator_ColumnVarNameInTable="columnVend_name" msprop:Generator_ColumnPropNameInRow="Vend_name" msprop:Generator_ColumnPropNameInTable="Vend_nameColumn" msprop:Generator_UserColumnName="Vend_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MFGR" msprop:Generator_ColumnVarNameInTable="columnMFGR" msprop:Generator_ColumnPropNameInRow="MFGR" msprop:Generator_ColumnPropNameInTable="MFGRColumn" msprop:Generator_UserColumnName="MFGR" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MFGR_Name" msprop:Generator_ColumnVarNameInTable="columnMFGR_Name" msprop:Generator_ColumnPropNameInRow="MFGR_Name" msprop:Generator_ColumnPropNameInTable="MFGR_NameColumn" msprop:Generator_UserColumnName="MFGR_Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MFGR_Part" msprop:Generator_ColumnVarNameInTable="columnMFGR_Part" msprop:Generator_ColumnPropNameInRow="MFGR_Part" msprop:Generator_ColumnPropNameInTable="MFGR_PartColumn" msprop:Generator_UserColumnName="MFGR_Part" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GW" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnGW" msprop:Generator_ColumnPropNameInRow="GW" msprop:Generator_ColumnPropNameInTable="GWColumn" msprop:Generator_UserColumnName="GW" type="xs:int" minOccurs="0" />
+              <xs:element name="REC_NO" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnREC_NO" msprop:Generator_ColumnPropNameInRow="REC_NO" msprop:Generator_ColumnPropNameInTable="REC_NOColumn" msprop:Generator_UserColumnName="REC_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Contract" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnContract" msprop:Generator_ColumnPropNameInRow="Contract" msprop:Generator_ColumnPropNameInTable="ContractColumn" msprop:Generator_UserColumnName="Contract" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
