@@ -9,11 +9,9 @@
 
 namespace PIE.EF.Model.Dal
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-
-    [JsonObject(IsReference = true)]
+    
     public partial class plr_mstr_tran
     {
         public string Batch_ID { get; set; }
@@ -52,7 +50,7 @@ namespace PIE.EF.Model.Dal
         public string plr_chr02 { get; set; }
         public Nullable<int> plr_deci1 { get; set; }
         public Nullable<decimal> plr_deci2 { get; set; }
-
+    
         public virtual plr_mstr plr_mstr { get; set; }
     }
 }

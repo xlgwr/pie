@@ -6,35 +6,27 @@
 
 # Ignore bundler config.
 /.bundle
-/packages/*
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /eshell/*
 
-/FrmPIE/obj/*
-/FrmPIE/bin/*
+# Ingore bin obj app.config
 
-/FrmPIE/app.config
+*/app.config
 
-/BLL/obj/*
-/BLL/bin/*
+/*/app.config
 
-/Common/obj/*
-/Common/bin/*
+/packages/*
 
-/DAL/obj/*
-/DAL/bin/*
+*/bin/*
+*/obj/*
 
-/DBUtility/obj/*
-/DBUtility/bin/*
+/*/bin/*
+/*/obj/*
 
-/Model/obj/*
-/Model/bin/*
-
-
-/Print/ClassLibrary1/obj/*
-/Print/ClassLibrary1/bin/*
+/*/*/bin/*
+/*/*/obj/*
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
