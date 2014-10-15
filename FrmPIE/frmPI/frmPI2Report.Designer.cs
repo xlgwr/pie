@@ -32,6 +32,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn00More = new System.Windows.Forms.Button();
+            this.btn2UploadToHKPIDB = new System.Windows.Forms.Button();
             this.lblMsg = new System.Windows.Forms.Label();
             this.btn_enquire_piReport = new System.Windows.Forms.Button();
             this.txt0PINum_piReport = new System.Windows.Forms.TextBox();
@@ -73,6 +75,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn00More);
+            this.groupBox1.Controls.Add(this.btn2UploadToHKPIDB);
             this.groupBox1.Controls.Add(this.lblMsg);
             this.groupBox1.Controls.Add(this.btn_enquire_piReport);
             this.groupBox1.Controls.Add(this.txt0PINum_piReport);
@@ -83,6 +87,30 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enquire ";
+            // 
+            // btn00More
+            // 
+            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
+            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn00More.FlatAppearance.BorderSize = 0;
+            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
+            this.btn00More.Location = new System.Drawing.Point(294, 32);
+            this.btn00More.Name = "btn00More";
+            this.btn00More.Size = new System.Drawing.Size(23, 23);
+            this.btn00More.TabIndex = 9;
+            this.btn00More.UseVisualStyleBackColor = true;
+            // 
+            // btn2UploadToHKPIDB
+            // 
+            this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(449, 26);
+            this.btn2UploadToHKPIDB.Name = "btn2UploadToHKPIDB";
+            this.btn2UploadToHKPIDB.Size = new System.Drawing.Size(110, 34);
+            this.btn2UploadToHKPIDB.TabIndex = 6;
+            this.btn2UploadToHKPIDB.Text = "&UpLoad[HK,PI_DB]";
+            this.btn2UploadToHKPIDB.UseVisualStyleBackColor = true;
+            this.btn2UploadToHKPIDB.Click += new System.EventHandler(this.btn2UploadToHKPIDB_Click);
             // 
             // lblMsg
             // 
@@ -96,7 +124,7 @@
             // 
             // btn_enquire_piReport
             // 
-            this.btn_enquire_piReport.Location = new System.Drawing.Point(330, 20);
+            this.btn_enquire_piReport.Location = new System.Drawing.Point(335, 26);
             this.btn_enquire_piReport.Name = "btn_enquire_piReport";
             this.btn_enquire_piReport.Size = new System.Drawing.Size(85, 34);
             this.btn_enquire_piReport.TabIndex = 2;
@@ -107,7 +135,7 @@
             // txt0PINum_piReport
             // 
             this.txt0PINum_piReport.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt0PINum_piReport.Location = new System.Drawing.Point(145, 22);
+            this.txt0PINum_piReport.Location = new System.Drawing.Point(115, 29);
             this.txt0PINum_piReport.Name = "txt0PINum_piReport";
             this.txt0PINum_piReport.Size = new System.Drawing.Size(179, 29);
             this.txt0PINum_piReport.TabIndex = 1;
@@ -116,7 +144,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(98, 32);
+            this.label1.Location = new System.Drawing.Point(74, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 0;
@@ -149,6 +177,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblMsg;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.Button btn00More;
+        private System.Windows.Forms.Button btn2UploadToHKPIDB;
 
     }
 }

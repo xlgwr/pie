@@ -19,16 +19,28 @@ namespace frmPI
 {
     public partial class frmPI0ScanWECCtnLable : Form
     {
+
+        frmEnterTxt _frmET;
+
+        frmEnterForReference _FrmForRefe;
+        public string _strCellColName;
+        public string _sameColumnName;
+        public string _deffCellName;
+        public string _deffCellValue;
+
         frmIDR _idr_show;
         Commfunction cf;
 
         bool _addNextNewFalg = false;
+        bool _validateBatchid = false;
         int _nextlineid = 1;
         string _strCO;
         DataSet cods;
+        DataSet webserviceDS;
+        DataSet _reobjdet;
 
         string _strWecCtnSn = "";
-        public  bool _coisnull = false;
+        public bool _coisnull = false;
         public string _strconext = "";
         public string _plr_wec_ctn = "";
 
@@ -53,6 +65,7 @@ namespace frmPI
             _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Enter;
             _idr_show.tabCtlRight1.SelectedTab.Resize += SelectedTab_Resize;
 
+            data1GVSanWecCtnLable.CellClick += data1GVSanWecCtnLable_CellClick;
             data1GVSanWecCtnLable.RowEnter += data1GVSanWecCtnLable_RowEnter;
 
             initWidth();
@@ -60,8 +73,152 @@ namespace frmPI
 
             cmb4Pallet_PIScan.Items.Add(" ");
 
+
+            btn00More.Click += btn00More0_Click;
+
+
+            data1GVSanWecCtnLable.ContextMenuStrip = ctmenu0EnquireByPart;
+            enquireByPartToolStripMenuItem.Click += enquireByPartToolStripMenuItem_Click;
+        }
+        private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmET = new frmEnterTxt(_idr_show, this);
+            _frmET.button1.Click += enquireByPartAA;
+            _frmET.lblTitle.Text = "Part#:";
+            _frmET.Text = "Enquire by Part:";
+            _frmET.ShowDialog();
+        }
+        void enquireByPartAA(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                return;
+            }
+            cf.EnquireByPart(data1GVSanWecCtnLable, "pisr_part", _frmET.textBox1.Text.Trim());
+        }
+        #region enquire by PI
+
+        void button1_DoubleClick(object sender, EventArgs e)
+        {
+            _FrmForRefe.Close();
+
+            txt1PIID_ScanWECCtnLable.Focus();
+            KeyEventArgs eenter = new KeyEventArgs(Keys.Enter);
+            piidenter(sender, eenter);
+        }
+        void btn00More0_Click(object sender, EventArgs e)
+        {
+            lbl0msg.Text = "";
+            _FrmForRefe = new frmEnterForReference(_idr_show, this);
+
+            _FrmForRefe.textBox1.Text = txt1PIID_ScanWECCtnLable.Text;
+            _FrmForRefe.textBox1.Focus();
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            //
+            _FrmForRefe.data0GVForReference.RowEnter += data0GVForReference_RowEnter;
+            _FrmForRefe.data0GVForReference.CellClick += data0GVForReference_Click;
+            //
+            _FrmForRefe.button1.Click += enquireByForReferenct;
+            _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
+            //
+            _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
+            //
+            _FrmForRefe.gb0ForReference.Text = "Enquire Result";
+            //
+            initSelectCondition();
+            //
+            init_FrmForRefeDGV("");
+
+            _FrmForRefe.ShowDialog();
         }
 
+        void chkTop50_CheckedChanged(object sender, EventArgs e)
+        {
+
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            if (_FrmForRefe.chkTop50.Checked)
+            {
+                //
+                initSelectCondition();
+                //
+                init_FrmForRefeDGV("");
+            }
+            else
+            {
+                enquireByForReferenct(sender, e);
+            }
+        }
+
+        private void initSelectCondition()
+        {
+            _FrmForRefe.lblTitle.Text = "PI ID# OR IP:";
+            _FrmForRefe.Text = "Enquire by PI ID";
+            //
+            _strCellColName = "PI_ID";
+            _sameColumnName = "pi_user_ip";
+            _deffCellName = "pi_status";
+            _deffCellValue = "Yes";
+
+        }
+
+
+        void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
+            string strBatchID = cf.selectCellMethod(dwo);
+            txt1PIID_ScanWECCtnLable.Text = strBatchID;
+        }
+
+        void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
+
+        }
+        void enquireByForReferenct(object sender, EventArgs e)
+        {
+            _FrmForRefe.chkTop50.Checked = false;
+            if (string.IsNullOrEmpty(_FrmForRefe.textBox1.Text))
+            {
+                _FrmForRefe.textBox1.Focus();
+                return;
+            }
+            init_FrmForRefeDGV(_FrmForRefe.textBox1.Text.Trim());
+            //txt0SearchID.Text = _FrmForRefe.textBox1.Text.Trim();
+            //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
+        }
+        private void init_FrmForRefeDGV(string strwhere)
+        {
+            strwhere = _strCellColName + @" like '%" + strwhere + @"%' or " + _sameColumnName + @" like '%" + strwhere + @"%'";
+            if (_strCellColName.Equals("batch_id"))
+            {
+                var batch_ds = new PIE.DAL.plr_batch_mstr_ext().GetList(50, strwhere, "batch_id desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPlrBatchMstr1(_FrmForRefe.data0GVForReference);
+            }
+            else if (_strCellColName.Equals("PI_ID"))
+            {
+                var batch_ds = new PI.DAL.pi_mstr_ext().GetList(50, strwhere, "PI_ID desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPIMstrForEquire(_FrmForRefe.data0GVForReference);
+            }
+            else
+            {
+                _FrmForRefe.data0GVForReference.DataSource = null;
+            }
+            _FrmForRefe.data0GVForReference.Refresh();
+
+        }
+        /********************************************************************/
+        #endregion
+        void data1GVSanWecCtnLable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(data1GVSanWecCtnLable, e.RowIndex, e.ColumnIndex, "PI_ID");
+            cf.selectCellMethod(dwo);
+        }
         void data1GVSanWecCtnLable_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(data1GVSanWecCtnLable, 3, e.RowIndex, Color.LightGreen, "CartonID", "pi_status", "Yes", Color.LightGray);
@@ -169,7 +326,7 @@ namespace frmPI
             CartonFromTo ctftdet = new CartonFromTo(data1GVSanWecCtnLable, (string)strBatchID, 0, "add", _idr_show._custip, _idr_show._custip);
 
             var reobjmstr = cf.initDataGVpi_mstr(ctftmstr, false, "model");
-            var reobjdet = cf.initDataGVpi_det_join_grr(ctftdet, true, "nothing");
+            _reobjdet = (DataSet)cf.initDataGVpi_det_join_grr(ctftdet, true, "ds");
             if (reobjmstr != null)
             {
                 initDatasetToTxt((PI.Model.pi_mstr)reobjmstr);
@@ -339,7 +496,7 @@ namespace frmPI
 
 
                         }
-                        if (string.IsNullOrWhiteSpace(tran.plr_co))
+                        if (string.IsNullOrEmpty(tran.plr_co))
                         {
                             _coisnull = true;
                             _strconext = "";
@@ -348,7 +505,7 @@ namespace frmPI
                         }
                         else
                         {
-                            PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", tran.plr_co,true);
+                            PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", tran.plr_co, true);
                             if (existco == null)
                             {
                                 _coisnull = true;
@@ -397,7 +554,7 @@ namespace frmPI
 
                     //initModelForTextBox(pi_det_new);
                     _addNextNewFalg = true;
-                    ShowMsg("新增相同的PI ID,\t上次新增的为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString()+"\nScanSN:"+_pi_det_model.pi_wec_ctn+",Pallet#:"+_pi_det_model.pi_deci1.ToString("000"), "Notice");
+                    ShowMsg("新增相同的PI ID,\t上次新增的为：" + _pi_det_model.PI_ID + ",LineID:" + _pi_det_model.pi_LineID.ToString() + "\nScanSN:" + _pi_det_model.pi_wec_ctn + ",Pallet#:" + _pi_det_model.pi_deci1.ToString("000"), "Notice");
 
                     lbl3COScanWECCtnLable.Text = "";
 
@@ -580,104 +737,109 @@ namespace frmPI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (txt1PIID_ScanWECCtnLable.Text.Length > 0)
+                piidenter(sender, e);
+            }
+        }
+        void piidenter(object sender, KeyEventArgs e)
+        {
+            if (txt1PIID_ScanWECCtnLable.Text.Length > 0)
+            {
+                lbl0noticePiId.Text = "";
+
+                var strexist = new PI.BLL.pi_mstr().Exists(txt1PIID_ScanWECCtnLable.Text.Trim(), 1);
+                if (strexist)
                 {
-                    lbl0noticePiId.Text = "";
+                    _pi_mstr_model = new PI.BLL.pi_mstr().GetModel(txt1PIID_ScanWECCtnLable.Text.Trim(), 1);
+                    var detds = new PI.BLL.pi_det().GetList("PI_ID='" + txt1PIID_ScanWECCtnLable.Text.Trim() + "'");
 
-                    var strexist = new PI.BLL.pi_mstr().Exists(txt1PIID_ScanWECCtnLable.Text.Trim(), 1);
-                    if (strexist)
+                    PI.Model.pi_det pi_det_new = new PI.Model.pi_det();
+
+                    pi_det_new.PI_ID = _pi_mstr_model.PI_ID;
+
+                    _nextlineid = cf.getMaxOrMinColumnFromDataTable(detds.Tables[0], "pi_LineID", true, false) + 1;
+
+                    pi_det_new.pi_LineID = _nextlineid;
+
+                    cmb4Pallet_PIScan.Items.Clear();
+                    cmb4Pallet_PIScan.Items.Add(" ");
+
+                    var ds = new PI.DAL.pi_det_ext().GetList("PI_ID='" + txt1PIID_ScanWECCtnLable.Text.Trim() + "'", "pi_deci1");
+
+                    if (ds.Tables[0].Rows.Count > 0)
                     {
-                        _pi_mstr_model = new PI.BLL.pi_mstr().GetModel(txt1PIID_ScanWECCtnLable.Text.Trim(), 1);
-                        var detds = new PI.BLL.pi_det().GetList("PI_ID='" + txt1PIID_ScanWECCtnLable.Text.Trim() + "'");
-
-                        PI.Model.pi_det pi_det_new = new PI.Model.pi_det();
-
-                        pi_det_new.PI_ID = _pi_mstr_model.PI_ID;
-
-                        _nextlineid = cf.getMaxOrMinColumnFromDataTable(detds.Tables[0], "pi_LineID", true, false) + 1;
-
-                        pi_det_new.pi_LineID = _nextlineid;
-
-                        cmb4Pallet_PIScan.Items.Clear();
-                        cmb4Pallet_PIScan.Items.Add(" ");
-
-                        var ds = new PI.BLL.pi_det().GetList("PI_ID='" + txt1PIID_ScanWECCtnLable.Text.Trim() + "'");
-
-                        if (ds.Tables[0].Rows.Count > 0)
+                        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                         {
-                            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                            if (ds.Tables[0].Rows[i]["pi_deci1"] == DBNull.Value)
                             {
-                                if (ds.Tables[0].Rows[i]["pi_deci1"] == DBNull.Value)
-                                {
-                                    continue;
-                                }
-                                var pallet = Convert.ToInt32(ds.Tables[0].Rows[i]["pi_deci1"]).ToString("000");
-                                var strnw = ds.Tables[0].Rows[i]["pi_pallet_no"].ToString();
+                                continue;
+                            }
+                            var pallet = Convert.ToInt32(ds.Tables[0].Rows[i]["pi_deci1"]).ToString("000");
+                            var strnw = ds.Tables[0].Rows[i]["pi_pallet_no"].ToString();
 
-                                if (!cmb4Pallet_PIScan.Items.Contains(pallet))
-                                {
-                                    cmb4Pallet_PIScan.Items.Add(pallet);
-                                    //var index = txtPalletNum.Items.IndexOf(li);
-                                    //txtPalletNum.SelectedIndex = index;
-                                }
+                            if (!cmb4Pallet_PIScan.Items.Contains(pallet))
+                            {
+                                cmb4Pallet_PIScan.Items.Add(pallet);
+                                //var index = txtPalletNum.Items.IndexOf(li);
+                                //txtPalletNum.SelectedIndex = index;
                             }
                         }
-                        cmb4Pallet_PIScan.SelectedIndex = -1;
-                        cmb4Pallet_PIScan.Text = "";
-                        //txt1PIID_ScanWECCtnLable.Text = _pi_mstr_model.PI_ID;
-                        //initModelForTextBox(pi_det_new);
+                    }
+                    cmb4Pallet_PIScan.SelectedIndex = -1;
+                    cmb4Pallet_PIScan.Text = "";
+                    //txt1PIID_ScanWECCtnLable.Text = _pi_mstr_model.PI_ID;
+                    //initModelForTextBox(pi_det_new);
 
-                        _addNextNewFalg = true;
-                        var pre_pi_det = new PI.DAL.pi_det_ext().GetModel(pi_det_new.PI_ID, (_nextlineid - 1));
-                        string premsg = "继续新增相同的PI ID";
-                        if (pre_pi_det!=null)
-                        {
-                          premsg += ",继续新增相同的PI ID,\t上次新增的为：" + pre_pi_det.PI_ID + ",LineID:" + pre_pi_det.pi_LineID + "\nScanSN:" + pre_pi_det.pi_wec_ctn + ",Pallet#:" + pre_pi_det.pi_deci1.ToString("000") ;
-
-                        }
-                        else
-                        {
-                            premsg += "，无上次扫描记录。";
-                        }
-                        ShowMsg(premsg, "Notice");
-                        lbl0noticePiId.Text = premsg;
-                        lbl3COScanWECCtnLable.Text = "";
-                        //lbl0noticePiId.Text = "changed";
-                        //////////////************************
-                        threadinitDVdelegate();
-
+                    _addNextNewFalg = true;
+                    var pre_pi_det = new PI.DAL.pi_det_ext().GetModel(pi_det_new.PI_ID, (_nextlineid - 1));
+                    string premsg = "继续新增相同的PI ID";
+                    if (pre_pi_det != null)
+                    {
+                        premsg += ",继续新增相同的PI ID,\t上次新增的为：" + pre_pi_det.PI_ID + ",LineID:" + pre_pi_det.pi_LineID + "\nScanSN:" + pre_pi_det.pi_wec_ctn + ",Pallet#:" + pre_pi_det.pi_deci1.ToString("000");
 
                     }
                     else
                     {
-                        ShowMsg(txt1PIID_ScanWECCtnLable.Text + " is not exist.", "Notice");
-                        lbl0noticePiId.Text = txt1PIID_ScanWECCtnLable.Text + " is not exist.";
-                        if (!string.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text.Trim()))
-                        {  //!string.IsNullOrEmpty(cmb4Pallet_PIScan.Text.Trim()) && 
-                            txt1PIID_ScanWECCtnLable.Focus();
-                            txt1PIID_ScanWECCtnLable.SelectionStart = txt1PIID_ScanWECCtnLable.Text.Length;
-                        }
-                        else
-                        {
-                            cmb4Pallet_PIScan.Focus();
-                        }
-
-                        return;
+                        premsg += "，无上次扫描记录。";
                     }
-                }
-                if (!string.IsNullOrEmpty(cmb4Pallet_PIScan.Text.Trim()))
-                {
-                    txt1PIID_ScanWECCtnLable.Focus();
-                    txt1PIID_ScanWECCtnLable.SelectionStart = txt1PIID_ScanWECCtnLable.Text.Length;
+                    ShowMsg(premsg, "Notice");
+                    lbl0noticePiId.Text = premsg;
+                    lbl3COScanWECCtnLable.Text = "";
+                    //lbl0noticePiId.Text = "changed";
+                    //////////////************************
+                    threadinitDVdelegate();
+
+
                 }
                 else
                 {
-                    cmb4Pallet_PIScan.Focus();
+                    ShowMsg(txt1PIID_ScanWECCtnLable.Text + " is not exist.", "Notice");
+                    lbl0noticePiId.Text = txt1PIID_ScanWECCtnLable.Text + " is not exist.";
+                    if (!string.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text.Trim()))
+                    {  //!string.IsNullOrEmpty(cmb4Pallet_PIScan.Text.Trim()) && 
+                        txt1PIID_ScanWECCtnLable.Focus();
+                        txt1PIID_ScanWECCtnLable.SelectionStart = txt1PIID_ScanWECCtnLable.Text.Length;
+                    }
+                    else
+                    {
+                        cmb4Pallet_PIScan.Focus();
+                    }
+
+                    return;
                 }
-                txt2SanWecCtnLable.Text = "";
-                cmb3CO_ScanWECCtnLable.SelectedIndex = -1;
-                //txt2SanWecCtnLable.SelectAll();
             }
+            if (!string.IsNullOrEmpty(cmb4Pallet_PIScan.Text.Trim()))
+            {
+                txt1PIID_ScanWECCtnLable.Focus();
+                txt1PIID_ScanWECCtnLable.SelectionStart = txt1PIID_ScanWECCtnLable.Text.Length;
+            }
+            else
+            {
+                cmb4Pallet_PIScan.Focus();
+            }
+            txt2SanWecCtnLable.Text = "";
+            cmb3CO_ScanWECCtnLable.SelectedIndex = -1;
+            //txt2SanWecCtnLable.SelectAll();
+
         }
         private void cmb3CO_ScanWECCtnLable_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -793,11 +955,11 @@ namespace frmPI
 
         private void pirefresh()
         {
-            cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh....", false, true);
-            ShowMsg(" Refresh ......", "Notice");
+            cf.SetCtlTextdelegate(btn1RefreshPI, "Get....", false, true);
+            ShowMsg(" Get RIR# (ERP) ......", "Notice");
             DataSet ds;
             FrmPIE.WebReference100.Service server100 = new FrmPIE.WebReference100.Service();
-            server100.Timeout = 9000000;
+            server100.Timeout = 90000;
             string existrir = "";
             string existrirsuccess = "";
             try
@@ -887,6 +1049,10 @@ namespace frmPI
                                                 pisr_grr_model.pisr_vend = ds.Tables[0].Rows[y]["wsas017_vend"].ToString();
                                                 pisr_grr_model.pisr_mfgr_name = ds.Tables[0].Rows[y]["wsas017_mfgr_name"].ToString();
 
+
+                                                pisr_grr_model.pisr_char01 = ds.Tables[0].Rows[y]["wsas017_mfgr"].ToString();
+                                                pisr_grr_model.pisr_char02 = ds.Tables[0].Rows[y]["wsas017_vend_name"].ToString();
+
                                                 pisr_grr_model.pisr_dec01 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_k200_nw"].ToString()) / 1000;
                                                 pisr_grr_model.pisr_dec02 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_nw"].ToString()) / 1000;
 
@@ -958,14 +1124,14 @@ namespace frmPI
                     ShowMsg("Ctn SN is null.", "Error");
                 }
 
-                cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh", true, true);
+                cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# (ERP)", true, true);
                 //////////////************************
                 threadinitDVdelegate();
             }
             catch (Exception ex)
             {
 
-                cf.SetCtlTextdelegate(btn1RefreshPI, "Refresh", true, true);
+                cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# (ERP)", true, true);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -1068,6 +1234,217 @@ namespace frmPI
             {
                 btnAddPalletNW_Click(sender, e);
             }
+        }
+
+
+        void enquireByPart(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                _validateBatchid = false;
+                return;
+            }
+            var existPIAdd = new PI.DAL.pi_mstr_ext().GetModel(_frmET.textBox1.Text.Trim());
+
+            if (existPIAdd != null)
+            {
+                ShowMsg(_frmET.textBox1.Text + " already has been Add with PI ID: " + existPIAdd.PI_ID, " Notice ");
+                txt1PIID_ScanWECCtnLable.Text = existPIAdd.PI_ID;
+                _frmET.textBox1.Focus();
+                txt1PIID_ScanWECCtnLable.Focus();
+                KeyEventArgs eenter = new KeyEventArgs(Keys.Enter);
+                piidenter(sender, eenter);
+
+                _validateBatchid = false;
+                return;
+            }
+            //TESTOLDWEC
+            webserviceDS = cf.initWebServer("P1", "wsas018", _frmET.textBox1.Text.Trim());
+
+            if (webserviceDS == null)
+            {
+                lbl0msg.Text = _frmET.textBox1.Text + "  (ERP) has no item. if not Upload ERP Please Upload ,than in ERP to Check(ok BookIn[OCR]) it";
+                _frmET.textBox1.Focus();
+                txt1PIID_ScanWECCtnLable.Text = "";
+                data1GVSanWecCtnLable.DataSource = null;
+                _validateBatchid = false;
+                return;
+            }
+            if (webserviceDS.Tables[0].Rows.Count <= 0)
+            {
+                lbl0msg.Text = _frmET.textBox1.Text + " (ERP) has no item. if not Upload ERP Please Upload ,than in ERP to Check(ok BookIn[OCR]) it";
+                _frmET.textBox1.Focus();
+                txt1PIID_ScanWECCtnLable.Text = "";
+                data1GVSanWecCtnLable.DataSource = null;
+                _validateBatchid = false;
+                return;
+            }
+            //else
+            //{
+            //    lbl0msg.Text = _frmET.textBox1.Text + " is add ok.";
+            //    // data1GVSanWecCtnLable.DataSource = webserviceDS.Tables[0].DefaultView;
+
+            //}
+            //cf.EnquireByPart(data1GV1ePackingDet1_BatchInfo, "plr_partno", _frmET.textBox1.Text.Trim());
+            _validateBatchid = true;
+            _frmET.Close();
+        }
+        private void btn0AddFromePackingList0_Click(object sender, EventArgs e)
+        {
+            //btn0AddFromePackingList0.Enabled = false;
+
+            _frmET = new frmEnterTxt(_idr_show, this);
+            _frmET.button1.Click += enquireByPart;
+            _frmET.btn00More.Visible = true;
+            _frmET.lblTitle.Text = "BatchID:";
+            _frmET.Text = "Add From ePacking List:";
+            _frmET.ShowDialog();
+            if (!_validateBatchid)
+            {
+                return;
+
+            }
+            if (webserviceDS != null)
+            {
+                #region add New PIID
+
+                int intOutAffected;
+                string strPIID = "";
+
+                PI.Model.pi_mstr pi_mstr_model = new PI.Model.pi_mstr();
+                SqlParameter[] parameters = {
+                                            new SqlParameter("@PIID",SqlDbType.NVarChar,11)
+                                        };
+                parameters[0].Direction = ParameterDirection.Output;
+
+                DbHelperSQL.RunProcedure("sp_GetPIID", parameters, out intOutAffected);
+                strPIID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
+                if (string.IsNullOrEmpty(strPIID))
+                {
+                    ShowMsg("生成PIID,出错，无法新增。", "Error");
+                    return;
+                }
+                pi_mstr_model.PI_ID = strPIID;
+                pi_mstr_model.LineID = 1;
+                pi_mstr_model.Plant = cmb1Plant_ScanWECCtnLable.Text.Trim();
+                pi_mstr_model.pi_type = cmb2Type_ScanWECCTN.Text.Trim();
+
+                pi_mstr_model.pi_cre_date = DbHelperSQL.getServerGetDate();
+                pi_mstr_model.pi_update_date = pi_mstr_model.pi_cre_date;
+                pi_mstr_model.pi_user_ip = _idr_show._custip;
+                pi_mstr_model.pi_status = "No";
+
+                pi_mstr_model.pi_remark = "from ePakcking list";
+
+                pi_mstr_model.pi_chr01 = _frmET.textBox1.Text.Trim();
+
+                var result_plr_batch = new PI.DAL.pi_mstr().Add(pi_mstr_model);
+                if (!result_plr_batch)
+                {
+                    ShowMsg("Add PI Mstr info fail", "Error");
+                    return;
+                }
+                _pi_mstr_model = pi_mstr_model;
+                #endregion
+                for (int i = 0; i < webserviceDS.Tables[0].Rows.Count; i++)
+                {
+                    DataRow dr = webserviceDS.Tables[0].Rows[i];
+                    var pi_det_model_add = new PI.Model.pi_det();
+                    var pisr_grr_model_add = new PI.Model.pisr_grr();
+
+                    #region add pi_det_model_from_batchid
+
+                    pi_det_model_add.PI_ID = strPIID;
+                    pi_det_model_add.pi_LineID = i + 1;
+                    pi_det_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
+                    pi_det_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
+
+                    pi_det_model_add.pi_type = "N";
+                    pi_det_model_add.pi_deci1 = dr["wsas018_pallet"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_pallet"]);
+                    pi_det_model_add.pi_pallet_no = dr["wsas018_pallet"].ToString();
+
+                    pi_det_model_add.CartonNo = dr["wsas018_ctn_no"].ToString();
+                    pi_det_model_add.CartonID = dr["wsas018_ctn_id"].ToString();
+
+                    pi_det_model_add.pi_chr01 = dr["wsas018_co"].ToString();
+
+
+                    pi_det_model_add.pi_chr02 = dr["wsas018_po_nbr"].ToString();
+
+                    pi_det_model_add.pi_remark = "Add From ePacking List:BatchID->" + dr["wsas018_batch"].ToString();
+
+                    pi_det_model_add.pi_cre_date = DbHelperSQL.getServerGetDate();
+                    pi_det_model_add.pi_user_ip = _idr_show._custip;
+                    pi_det_model_add.pi_status = "No";
+
+                    var result_pi_det_add = new PI.DAL.pi_det().Add(pi_det_model_add);
+                    #endregion
+                    #region add pisr_grr_model_add_fromBatchid
+                    pisr_grr_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
+                    pisr_grr_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
+
+
+                    pisr_grr_model_add.pisr_rir = dr["wsas018_rir"].ToString();
+                    pisr_grr_model_add.pisr_invoice = dr["wsas018_invoice"].ToString();
+
+                    pisr_grr_model_add.pisr_part = dr["wsas018_part"].ToString();
+                    pisr_grr_model_add.pisr_site = dr["wsas018_site"].ToString();
+                    pisr_grr_model_add.Pisr_receiver = dr["wsas018_receiver"].ToString();
+                    pisr_grr_model_add.pisr_po_nbr = dr["wsas018_po_nbr"].ToString();
+                    pisr_grr_model_add.pisr_qty = Convert.ToDecimal(dr["wsas018_qty"].ToString());
+                    pisr_grr_model_add.pisr_curr = dr["wsas018_curr"].ToString();
+                    pisr_grr_model_add.pisr_base_cost = Convert.ToDecimal(dr["wsas018_base_cost"].ToString());
+                    pisr_grr_model_add.pisr_us_cost = Convert.ToDecimal(dr["wsas018_us_cost"].ToString());
+                    pisr_grr_model_add.pisr_seq = dr["wsas018_seq"].ToString();
+                    pisr_grr_model_add.pisr_con_code = dr["wsas018_con_code"].ToString();
+                    pisr_grr_model_add.pisr_ch_desc = dr["wsas018_ch_desc"].ToString();
+                    pisr_grr_model_add.pisr_net_wt = Convert.ToDecimal(dr["wsas018_net_wt"].ToString());
+                    pisr_grr_model_add.pisr_rec_type = dr["wsas018_rec_type"].ToString();
+                    pisr_grr_model_add.pisr_abc = dr["wsas018_abc"].ToString();
+                    pisr_grr_model_add.pisr_code = dr["wsas018_code"].ToString();
+                    pisr_grr_model_add.pisr_lic_req = dr["wsas018_lic_req"].ToString();
+
+                    pisr_grr_model_add.pisr_sbu = dr["wsas018_sbu"].ToString();
+                    pisr_grr_model_add.pisr_vend = dr["wsas018_vend"].ToString();
+                    pisr_grr_model_add.pisr_mfgr_name = dr["wsas018_mfgr_name"].ToString();
+
+                    pisr_grr_model_add.pisr_char01 = dr["wsas018_mfgr"].ToString();
+                    pisr_grr_model_add.pisr_char02 = dr["wsas018_vend_name"].ToString();
+
+                    pisr_grr_model_add.pisr_dec01 = Convert.ToDecimal(dr["wsas018_k200_nw"].ToString()) / 1000;
+                    pisr_grr_model_add.pisr_dec02 = Convert.ToDecimal(dr["wsas018_nw"].ToString()) / 1000;
+
+                    pisr_grr_model_add.pi_cre_date = DateTime.Now;
+                    pisr_grr_model_add.pi_update_date = DateTime.Now;
+                    pisr_grr_model_add.pi_user_ip = _idr_show._custip;
+                    pisr_grr_model_add.pi_cre_userid = _idr_show._sys_user_model.user_name;
+
+                    var pisgrradd = new PI.BLL.pisr_grr().Add(pisr_grr_model_add);
+                    #endregion
+
+
+                }
+                txt1PIID_ScanWECCtnLable.Text = strPIID;
+                txt1PIID_ScanWECCtnLable.Focus();
+
+                string strupdatesqlMstr = "update dbo.plr_batch_mstr set batch_chr01='Gen PI:" + strPIID + "' where batch_id='" + _frmET.textBox1.Text.Trim() + "'";
+                var changeStatusMstr = DbHelperSQL.ExecuteSql(strupdatesqlMstr);
+
+                ShowMsg("Add PI Mstr info Success", "Success");
+                _validateBatchid = false;
+            }
+            else
+            {
+                ShowMsg("Add PI Mstr info fail,ERP WebService return null", "Error");
+            }
+            btn0AddFromePackingList0.Enabled = true;
+
+        }
+
+        private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            cf.downLoadExcel(_reobjdet, lbl0msg, cf.nameList0vpi_report_ds(), "20PI0Scan" + txt1PIID_ScanWECCtnLable.Text.Trim());
         }
 
 

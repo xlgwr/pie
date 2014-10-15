@@ -45,7 +45,7 @@ namespace PIE.DAL
             SqlParameter[] parameters = {
 					new SqlParameter("@user_name", SqlDbType.NVarChar,50),
 					new SqlParameter("@user_comp", SqlDbType.NVarChar,50),
-					new SqlParameter("@user_password", SqlDbType.NVarChar,50),
+					new SqlParameter("@user_password", SqlDbType.NVarChar,250),
 					new SqlParameter("@user_email", SqlDbType.NVarChar,150),
 					new SqlParameter("@user_desc", SqlDbType.NVarChar,100),
 					new SqlParameter("@update_time", SqlDbType.DateTime),
@@ -88,8 +88,8 @@ namespace PIE.DAL
             strSql.Append("user_password=@user_password,");
             strSql.Append("user_email=@user_email,");
             strSql.Append("user_desc=@user_desc,");
-            strSql.Append("create_time=@create_time,");
             strSql.Append("update_time=@update_time,");
+            strSql.Append("create_time=@create_time,");
             strSql.Append("create_user_id=@create_user_id,");
             strSql.Append("update_user_id=@update_user_id,");
             strSql.Append("client_ip=@client_ip,");
@@ -97,9 +97,10 @@ namespace PIE.DAL
             strSql.Append("flag_status=@flag_status");
             strSql.Append(" where user_name=@user_name and user_comp=@user_comp ");
             SqlParameter[] parameters = {
-					new SqlParameter("@user_password", SqlDbType.NVarChar,50),
+					new SqlParameter("@user_password", SqlDbType.NVarChar,250),
 					new SqlParameter("@user_email", SqlDbType.NVarChar,150),
 					new SqlParameter("@user_desc", SqlDbType.NVarChar,100),
+					new SqlParameter("@update_time", SqlDbType.DateTime),
 					new SqlParameter("@create_time", SqlDbType.DateTime),
 					new SqlParameter("@create_user_id", SqlDbType.NVarChar,50),
 					new SqlParameter("@update_user_id", SqlDbType.NVarChar,50),
@@ -107,20 +108,19 @@ namespace PIE.DAL
 					new SqlParameter("@re_mark", SqlDbType.Text),
 					new SqlParameter("@flag_status", SqlDbType.NVarChar,10),
 					new SqlParameter("@user_name", SqlDbType.NVarChar,50),
-					new SqlParameter("@user_comp", SqlDbType.NVarChar,50),
-					new SqlParameter("@update_time", SqlDbType.DateTime)};
+					new SqlParameter("@user_comp", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.user_password;
             parameters[1].Value = model.user_email;
             parameters[2].Value = model.user_desc;
-            parameters[3].Value = model.create_time;
-            parameters[4].Value = model.create_user_id;
-            parameters[5].Value = model.update_user_id;
-            parameters[6].Value = model.client_ip;
-            parameters[7].Value = model.re_mark;
-            parameters[8].Value = model.flag_status;
-            parameters[9].Value = model.user_name;
-            parameters[10].Value = model.user_comp;
-            parameters[11].Value = model.update_time;
+            parameters[3].Value = model.update_time;
+            parameters[4].Value = model.create_time;
+            parameters[5].Value = model.create_user_id;
+            parameters[6].Value = model.update_user_id;
+            parameters[7].Value = model.client_ip;
+            parameters[8].Value = model.re_mark;
+            parameters[9].Value = model.flag_status;
+            parameters[10].Value = model.user_name;
+            parameters[11].Value = model.user_comp;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)

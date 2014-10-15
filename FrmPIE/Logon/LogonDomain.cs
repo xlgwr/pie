@@ -13,9 +13,12 @@ namespace FrmPIE
     public partial class LogonDomain : Form
     {
         PIE.Model.sys_user system_user_model = new PIE.Model.sys_user();
+        public static string _strUpdateURL;
+
         public LogonDomain()
         {
             InitializeComponent();
+            Program.showNewVersion(linkLabel1);
         }
 
         private void initfrmShow()
@@ -27,7 +30,7 @@ namespace FrmPIE
             //FrmPIE.Show();
 
             var frmIDR = new frmIDR(this, system_user_model);
-            frmIDR.Text += Program.frmVersion + "    Welcome : " + txtUserName.Text;
+            frmIDR.Text += Program.frm0Version + "    Welcome : " + txtUserName.Text;
             frmIDR.Show();
         }
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -68,6 +71,8 @@ namespace FrmPIE
                     {
                         systemuserexists.update_time = DateTime.Now;
                         systemuserexists.re_mark = Program.getClientIP();
+                        systemuserexists.update_user_id = Program.frm0Version;
+
                         var updateuser = new PIE.BLL.sys_user().Update(systemuserexists);
                         if (!getrole())
                         {
@@ -149,6 +154,8 @@ namespace FrmPIE
                         systemuserexists.update_time = DbHelperSQL.getServerGetDate();
                         systemuserexists.user_password = system_user_model.user_password;
                         systemuserexists.re_mark = Program.getClientIP();
+                        systemuserexists.update_user_id = Program.frm0Version;
+
                         var sysuserUpdate = new PIE.BLL.sys_user().Update(systemuserexists);
 
                         if (systemuserexists.flag_status == "F")
@@ -291,5 +298,12 @@ namespace FrmPIE
 
 
         public System.Threading.ThreadExceptionEventHandler Application_ThreadException { get; set; }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel1.Links[0].LinkData = _strUpdateURL;
+            System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+        }
+
     }
 }

@@ -18,9 +18,23 @@ namespace FrmPIE
 {
     static class Program
     {
-        public static string frmVersion;
+        #region def paraider
+
+        public static string frm0Version;
+        public static string frm1VersionLast;
+        public static string frm6Versionprefix;
+
+        public static int frm3VersionDotNet;
+        public static int frm4VersionMain;
+        public static int frm5VersionSecond;
+
+        public static bool frm7VersionUpdateFlag = false;
+        public static string frm8VersionMsg;
+        public static string frm9VersionURL;
+
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
+        #endregion
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -28,11 +42,89 @@ namespace FrmPIE
         [STAThread]
         static void Main()
         {
-            frmVersion = "@4V2014-10-06-08-dev";
+            //frmVersion = "@4V20141010H10-dev";
+            frm3VersionDotNet = 4;
+            frm4VersionMain = 20141015;
+
+            frm5VersionSecond = 09;
+            frm6Versionprefix = "dev";
+            //dev  main
+            frm0Version = "@" + frm3VersionDotNet + "V" + frm4VersionMain + "H" + frm5VersionSecond + "-" + frm6Versionprefix;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            //
+            string t_name_m = "version";
+            string t_value_m = "last" + frm3VersionDotNet;
+            PIE.Model.pkey_ctl lastversion_model = new PIE.DAL.pkey_ctl().GetModel(t_name_m, t_value_m);
+            if (lastversion_model == null)
+            {
+                PIE.Model.pkey_ctl pkey_ctl_mode = new PIE.Model.pkey_ctl();
+                pkey_ctl_mode.t_name = t_name_m;
+                pkey_ctl_mode.t_value = t_value_m;
+                pkey_ctl_mode.t_desc = frm0Version;
+                pkey_ctl_mode.t_yyww = "http://142.2.47.149/pisoft/";
+                pkey_ctl_mode.prefix = frm6Versionprefix;
+                pkey_ctl_mode.ctl_fro = frm4VersionMain;
+                pkey_ctl_mode.ctl_to = frm5VersionSecond;
+                pkey_ctl_mode.ctl_curr = frm3VersionDotNet;
+                var addresultflg = new PIE.BLL.pkey_ctl().Add(pkey_ctl_mode);
+            }
+            else
+            {
+                if (!lastversion_model.t_desc.Equals(frm0Version))
+                {
+                    if (frm4VersionMain > lastversion_model.ctl_fro)
+                    {
+                        frm7VersionUpdateFlag = false;
 
+                        lastversion_model.t_desc = frm0Version;
+                        lastversion_model.ctl_fro = frm4VersionMain;
+                        lastversion_model.ctl_to = frm5VersionSecond;
+                        lastversion_model.prefix = frm6Versionprefix;
+
+                        var updateLast = new PIE.BLL.pkey_ctl().Update(lastversion_model);
+
+
+                    }
+                    else if (frm4VersionMain == lastversion_model.ctl_fro)
+                    {
+                        if (frm5VersionSecond > lastversion_model.ctl_to)
+                        {
+                            frm7VersionUpdateFlag = false;
+
+                            lastversion_model.t_desc = frm0Version;
+                            lastversion_model.ctl_fro = frm4VersionMain;
+                            lastversion_model.ctl_to = frm5VersionSecond;
+                            lastversion_model.prefix = frm6Versionprefix;
+
+                            var updateLast = new PIE.BLL.pkey_ctl().Update(lastversion_model);
+                        }
+                        else
+                        {
+                            frm1VersionLast = lastversion_model.t_desc;
+                            frm7VersionUpdateFlag = true;
+                            frm8VersionMsg = "down new Version ";
+                            frm9VersionURL = lastversion_model.t_yyww;
+                        }
+
+                    }
+                    else
+                    {
+                        frm1VersionLast = lastversion_model.t_desc;
+                        frm7VersionUpdateFlag = true;
+                        frm8VersionMsg = "down new Version ";
+                        frm9VersionURL = lastversion_model.t_yyww;
+                    }
+
+                }
+                else
+                {
+                    frm7VersionUpdateFlag = false;
+                }
+
+            }
             // Application.Run(new frmplMain());
 
             //var FrmPIE = new FrmPIE();
@@ -42,7 +134,7 @@ namespace FrmPIE
             //logon on
 
             var LogonOn = new LogonDomain();
-            LogonOn.Text += frmVersion;
+            LogonOn.Text += frm0Version;
             Application.Run(LogonOn);
 
             //var index = new IndexTemple();
@@ -463,7 +555,7 @@ namespace FrmPIE
             Match m = RegPrefix.Match(strCtnId);
             if (m.Success)
             {
-                carprefix = m.Value;
+                carprefix = m.Value.Trim();
 
             }
             else
@@ -562,6 +654,29 @@ namespace FrmPIE
             psi.Arguments = "/e,/select," + fileFullName;
             System.Diagnostics.Process.Start(psi);
         }
+        public static void showNewVersion(LinkLabel lk)
+        {
+            if (Program.frm7VersionUpdateFlag)
+            {
+                lk.Visible = true;
+                lk.Text = "Click to " + Program.frm8VersionMsg + Program.frm1VersionLast;
+                lk.LinkClicked += link0NewVersion_LinkClicked;
+            }
+        }
+        static void link0NewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                LinkLabel lk = (LinkLabel)sender;
+                lk.Links[0].LinkData = Program.frm9VersionURL;
+                System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        ///////////////////////////////////new
 
     }
 

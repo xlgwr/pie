@@ -17,11 +17,11 @@ using System.Drawing;
 using System.Text;
 using PIE.Common;
 using System.Threading;
+using System.Collections;
+using System.Xml.Serialization;
 using Microsoft.Reporting.WinForms;
 using System.Xml;
-using System.Xml.Serialization;
 using System.IO;
-using frmPI;
 
 namespace FrmPIE._0API
 {
@@ -30,6 +30,7 @@ namespace FrmPIE._0API
         frmIDR _idr_show;
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
+        public static bool _updateflag = false;
 
         public delegate void dvoidMethod();
         public delegate void dinitDataGVSource(object obj);
@@ -135,7 +136,10 @@ namespace FrmPIE._0API
         }
         public void cellSelectMethod(object dwko)
         {
+            _idr_show._sameColumnCount = 0;
+            _idr_show._sameColumnNameCount = 0;
 
+            _idr_show.status16toolLabelstrSameColumnCount.Text = "";
             DoWrokObject dwo = (DoWrokObject)dwko;
             int mcount = 0;
             int minValue = 0;
@@ -147,12 +151,29 @@ namespace FrmPIE._0API
             {
                 var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
 
-
+                if (!string.IsNullOrEmpty(dwo._selectColumnNameValue))
+                {
+                    _idr_show._selectColumnNameValue = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                    if (dwo._FrmForRefeHas)
+                    {
+                        dwo._FrmForRefe.lbl2SelectValue.Text = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                        dwo._FrmForRefe.lbl1SelectNotice.Text = dwo._FrmForRefeLblMsg + dwo._FrmForRefe.lbl2SelectValue.Text;
+                    }
+                }
                 //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
 
                 //m
                 for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
                 {
+                    if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                    {
+                        if (dwo._dgv.Rows[i].Cells[dwo._sameColumnNameCount].Value.ToString().Equals(dwo._sameColumnNameCountValut))
+                        {
+                            _idr_show._sameColumnCount++;
+                        }
+                    }
+
+
                     if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
                     {
                         dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
@@ -167,6 +188,7 @@ namespace FrmPIE._0API
                     {
                         if (cartonid.ToString() == cartonidenter.ToString())
                         {
+                            _idr_show._sameColumnNameCount++;
                             mcount++;
                             dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
 
@@ -202,6 +224,18 @@ namespace FrmPIE._0API
                 _idr_show._intFrom = minValue;
                 _idr_show._intTo = maxValue;
 
+                if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                {
+                    _idr_show.status16toolLabelstrSameColumnCount.Text = dwo._sameColumnNameCountHeaderText + " : " + dwo._sameColumnNameCountValut + " has " + _idr_show._sameColumnCount.ToString() + " items";
+                }
+                if (string.IsNullOrEmpty(_idr_show.status16toolLabelstrSameColumnCount.Text))
+                {
+                    _idr_show.status16toolLabelstrSameColumnCount.Text = " Same Rows:" + _idr_show._sameColumnNameCount;
+                }
+                else
+                {
+                    _idr_show.status16toolLabelstrSameColumnCount.Text += ", Same Rows:" + _idr_show._sameColumnNameCount;
+                }
 
             }
 
@@ -259,12 +293,12 @@ namespace FrmPIE._0API
                     if (reurntype.Equals("all"))
                     {
                         strwhere = "select top 100 batch_id,batch_doc,batch_status,batch_cre_date," +
-                            "batch_dec01,batch_user_ip FROM plr_batch_mstr";
+                            "batch_dec01,batch_chr01,batch_user_ip FROM plr_batch_mstr";
                     }
                     else
                     {
                         strwhere = "select top 1 batch_id,batch_doc,batch_status,batch_cre_date," +
-                                        "batch_dec01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
+                                        "batch_dec01,batch_chr01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
                     }
 
                     plr_batch_mstr_ds1 = DbHelperSQL.Query(strwhere);
@@ -285,14 +319,14 @@ namespace FrmPIE._0API
                 if (reurntype.Equals("ds"))
                 {
                     strwhere = "select top 1 batch_id,batch_doc,batch_status,batch_cre_date," +
-                "batch_dec01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
+                "batch_dec01,batch_chr01,batch_user_ip FROM plr_batch_mstr where Batch_ID='" + batchid + "'";
                     plr_batch_mstr_ds1 = DbHelperSQL.Query(strwhere);
 
                     return plr_batch_mstr_ds1;
                 }
                 if (reurntype.Equals("all"))
                 {
-                    strwhere = "select batch_id,batch_doc,batch_status,batch_cre_date,batch_dec01,batch_user_ip FROM plr_batch_mstr";
+                    strwhere = "select batch_id,batch_doc,batch_status,batch_cre_date,batch_dec01,batch_chr01,batch_user_ip FROM plr_batch_mstr";
                     plr_batch_mstr_ds1 = DbHelperSQL.Query(strwhere);
                     return plr_batch_mstr_ds1;
                 }
@@ -482,7 +516,7 @@ namespace FrmPIE._0API
                 }
                 if (reurntype.Equals("model"))
                 {
-                    plr_mstr_tran = new PIE.DAL.plr_mstr_tran_ext().GetModel(batchid, lineid);
+                    plr_mstr_tran = new PIE.DAL.plr_mstr_tran().GetModel(batchid, lineid);
                     return plr_mstr_tran;
                 }
                 if (reurntype.Equals("ds"))
@@ -702,7 +736,7 @@ namespace FrmPIE._0API
                 }
                 if (reurntype.Equals("model"))
                 {
-                    pi_det = new PI.DAL.pi_det_ext().GetModel(batchid, lineid);
+                    pi_det = new PI.DAL.pi_det().GetModel(batchid, lineid);
                     return pi_det;
                 }
                 if (reurntype.Equals("ds"))
@@ -758,6 +792,7 @@ namespace FrmPIE._0API
             CartonFromTo ctft = (CartonFromTo)ctftobj;
             var batchid = ctft._batchID;
             var lineid = ctft._lineID;
+            string strorderby = @" ORDER BY PI_ID,pi_LineID ";
             try
             {
                 string strwhere;
@@ -779,6 +814,7 @@ namespace FrmPIE._0API
 
                     strSql.Append(" where ");
                     strSql.Append(strwhere);
+                    strSql.Append(strorderby);
 
                     pi_det_ds = DbHelperSQL.Query(strSql.ToString());
 
@@ -809,7 +845,7 @@ namespace FrmPIE._0API
 
                     strSql.Append(" where ");
                     strSql.Append(strwhere);
-
+                    strSql.Append(strorderby);
 
                     pi_det_ds = DbHelperSQL.Query(strSql.ToString());
                     return pi_det_ds;
@@ -820,6 +856,7 @@ namespace FrmPIE._0API
                     strSql.Append("select ");
                     strSql.Append(" * ");
                     strSql.Append(" from vpi_detApisr_grr a ");
+                    strSql.Append(strorderby);
 
                     pi_det_ds = DbHelperSQL.Query(strSql.ToString());
                     return pi_det_ds;
@@ -834,7 +871,7 @@ namespace FrmPIE._0API
             }
 
         }
-        private void initHeaderTextPlrBatchMstr1(DataGridView dgv)
+        public void initHeaderTextPlrBatchMstr1(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
             {
@@ -855,6 +892,7 @@ namespace FrmPIE._0API
             //dgv.Columns["batch_user_ip"].HeaderText = "Client IP";
             //dgv.Columns["batch_chr01"].HeaderText = "other";
             dgv.Columns["batch_dec01"].HeaderText = "Items Count";
+            dgv.Columns["batch_chr01"].HeaderText = "PI Status";
             dgv.Columns["batch_user_ip"].HeaderText = "Create IP";
 
         }
@@ -1058,6 +1096,32 @@ namespace FrmPIE._0API
             //dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
             //dgv.Columns["pi_user_ip"].HeaderText = "Client IP";
         }
+        public void initHeaderTextPIMstrForEquire(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            //PI_ID,pi_status,Plant,pi_type,pi_user_ip,pi_remark,pi_cre_date,pi_chr01
+            dgv.ReadOnly = true;
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+
+            dgv.Columns["PI_ID"].HeaderText = "PI ID";
+            dgv.Columns["pi_status"].HeaderText = "Upload Status";
+
+            dgv.Columns["Plant"].HeaderText = "Plant";
+
+            dgv.Columns["pi_type"].HeaderText = "Type";
+            dgv.Columns["pi_user_ip"].HeaderText = "Client IP";
+
+            dgv.Columns["pi_remark"].HeaderText = "Remark";
+
+            dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
+            //dgv.Columns["pi_update_date"].HeaderText = "Update Date";
+            //dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
+            dgv.Columns["pi_chr01"].HeaderText = "from BatchID";
+        }
         public void initHeaderTextPIDet(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
@@ -1095,6 +1159,8 @@ namespace FrmPIE._0API
             dgv.Columns["pi_wec_ctn"].HeaderText = "Scan SN";
 
             dgv.Columns["pi_pallet_no"].HeaderText = "Pallet";
+            dgv.Columns["plr_LineID_tran"].HeaderText = "Scan Line";
+
             dgv.Columns["CartonNo"].HeaderText = "CartonNo";
 
             dgv.Columns["CartonID"].HeaderText = "CartonID";
@@ -1107,6 +1173,7 @@ namespace FrmPIE._0API
             dgv.Columns["Pisr_receiver"].HeaderText = "Receiver";
             dgv.Columns["pisr_site"].HeaderText = "MG";
             dgv.Columns["pisr_po_nbr"].HeaderText = "PO-Number";
+            dgv.Columns["pisr_qty"].HeaderText = "Qty";
             dgv.Columns["pisr_curr"].HeaderText = "Curr";
             dgv.Columns["pisr_cost"].HeaderText = "U/P";
             dgv.Columns["pisr_base_cost"].HeaderText = "U/P(Base)";
@@ -1116,6 +1183,7 @@ namespace FrmPIE._0API
             dgv.Columns["pisr_con_code"].HeaderText = "Custom Conn";
 
             //dgv.Columns["pisr_ch_desc"].HeaderText = "Description";
+            dgv.Columns["pi_status"].HeaderText = "Upload Status";
             dgv.Columns["sq_name"].HeaderText = "Description";
 
             dgv.Columns["pisr_net_wt"].HeaderText = "Net Weight";
@@ -1127,7 +1195,12 @@ namespace FrmPIE._0API
 
             dgv.Columns["pisr_sbu"].HeaderText = "SBU";
             dgv.Columns["pisr_vend"].HeaderText = "Vend";
-            dgv.Columns["pisr_mfgr_name"].HeaderText = "Mfgr Name";
+            //dgv.Columns["mfgr_name"].HeaderText = "MFGR Name";
+
+            //dgv.Columns["pisr_char01"].HeaderText = "MFGR";
+            //dgv.Columns["pisr_char02"].HeaderText = "Vend Name";
+
+            dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
             dgv.Columns["pisr_dec01"].HeaderText = "k200 NW";
             dgv.Columns["pisr_dec02"].HeaderText = "NW";
 
@@ -1290,7 +1363,36 @@ namespace FrmPIE._0API
                 tb.SelectionStart = tb.Text.Length;
             }
         }
+        /// <summary>
+        /// initWebServer 
+        /// </summary>
+        /// <param name="server100"></param>
+        /// <param name="inSystem">TESTOLDWEC</param>
+        /// <param name="intable">wsas018</param>
+        /// <param name="inwhere">R1406050002</param>
+        /// <returns></returns>
 
+        public DataSet initWebServer(string inSystem, string intable, string inwhere)
+        {
+            WebReference100.Service server100 = new WebReference100.Service();
+            server100.Timeout = 9000;
+
+            DataSet ds = null;
+            try
+            {
+
+                ds = server100.GetTable_n(inSystem, intable, inwhere);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+
+                return ds;
+                //MessageBox.Show(ex.Message);
+
+            }
+
+        }
         public bool initWebServer(string plr_po, WebReference100.Service server100, string intable, string strPO, out DataSet ds)
         {
             int returnValueNumber;
@@ -1374,7 +1476,7 @@ namespace FrmPIE._0API
                 string strResult = "";
 
                 WebReference100.Service server100 = new WebReference100.Service();
-                server100.Timeout = 9000000;
+                server100.Timeout = 90000;
 
                 DataSet ds = null;
 
@@ -1409,6 +1511,7 @@ namespace FrmPIE._0API
                         var returnWeb = initWebServer(item.plr_po, server100, "wsas013", strPO, out ds);
                         if (returnWeb)
                         {
+                            _updateflag = false;
                             if (ds != null && ds.Tables[0].Rows.Count > 0)
                             {
                                 string strResultWebser = ds.Tables[0].Rows[0][4].ToString();
@@ -1459,10 +1562,12 @@ namespace FrmPIE._0API
                                     strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + strErrMessage + "\n";
                                     intUploadErrCount++;
                                 }
+                                _updateflag = true;
 
                             }
                             else
                             {
+                                _updateflag = false;
 
                                 item.plr_status = "N";
                                 item.plr_status_msg = "WebServer Error 没有返回值";
@@ -1489,7 +1594,14 @@ namespace FrmPIE._0API
                 }
                 else
                 {
-                    strResult = "$UploadToERP: Error: 系统数据库中没有可上传的（C状态）记录。";
+                    strResult = "$UploadToERP-->Error: \n\t系统数据库中\n没有可上传的（C状态）记录(" + frm4uploadToERP._strbatchid + ")。";
+                }
+                if (_updateflag)
+                {
+                    var plr_batch_mstr = new PIE.BLL.plr_batch_mstr().GetModel(frm4uploadToERP._strbatchid);
+                    plr_batch_mstr.batch_chr01 = "Upload ERP Over";
+                    var updatebatchmstr = new PIE.BLL.plr_batch_mstr().Update(plr_batch_mstr);
+
                 }
                 SetCtlTextdelegate(frm4uploadToERP.lbl0MsgUploadToERP, strResult, true, true);
                 SetToolTextdelegate(_idr_show.status15toolLabelstrResult, strResult, true, true);
@@ -1551,11 +1663,9 @@ namespace FrmPIE._0API
                 strWhere = "Wec_Ctn='" + wec_ctn_Fr + "'";
 
                 List<PIE.Model.plr_mstr_tran> plr_mstr_tran_list = new PIE.BLL.plr_mstr_tran().GetModelList(strWhere);
-
                 int listcount = plr_mstr_tran_list.Count;
                 if (listcount > 0)
                 {
-
 
                     if (print_Type.Equals("ZPL"))
                     {
@@ -1582,18 +1692,11 @@ namespace FrmPIE._0API
 
                         for (int i = 0; i < listcount; i++)
                         {
-                            if (plr_mstr_tran_list[i].plr_status.Equals("Yes"))
-                            {
-                                MessageBox.Show(strWhere + ",LineID:" + plr_mstr_tran_list[i].LineID + " is Void,Can't Print.");
-                                SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
-                                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg, true, true);
-                                SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
-                                return;
-                            }
                             plr_mstr_tran_list[i].plr_deci1 = 1;
                             var printflag = new PIE.BLL.plr_mstr_tran().Update(plr_mstr_tran_list[i]);
 
                             totoal = totoal + Convert.ToInt32(plr_mstr_tran_list[i].plr_qty);
+
                             if (plr_mstr_tran_list[i].plr_chr02.ToString().ToLower().Equals("yes"))
                             {
                                 strSJ = plr_mstr_tran_list[i].plr_chr02.ToString();
@@ -1663,15 +1766,6 @@ namespace FrmPIE._0API
                         string strSJ = "";
                         for (int i = 0; i < listcount; i++)
                         {
-                            if (plr_mstr_tran_list[i].plr_status.Equals("Yes"))
-                            {
-                                MessageBox.Show(strWhere + " is Void,Can't Print.");
-                                SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
-                                SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, resultmsg, true, true);
-                                SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
-                                return;
-                            }
-
                             plr_mstr_tran_list[i].plr_deci1 = 1;
                             var printflag = new PIE.BLL.plr_mstr_tran().Update(plr_mstr_tran_list[i]);
 
@@ -1758,7 +1852,6 @@ namespace FrmPIE._0API
                 SetCtlTextdelegate(frm513PCL.btn0Print_PrintCartonLabel, "&Print", true, true);
                 SetCtlTextdelegate(frm513PCL.lbl0PrintMsg, "$Print: Printing End", true, true);
                 return;
-
             }
             else if (intPrintErrorCount > 0)
             {
@@ -1881,7 +1974,7 @@ namespace FrmPIE._0API
         /// set dgv,dgv1,ex,ey;
         /// </summary>
         /// <param name="dwo">dgv,dgv1,ex,ey</param>
-        public void selectCellMethod(DoWrokObject dwo, string strPIID, bool mainDataGV, frmPI1ScanDataInquire frmpi1)
+        public void selectCellMethod(DoWrokObject dwo, string strPIID, bool mainDataGV, frmPI.frmPI1ScanDataInquire frmpi1)
         {
 
 
@@ -1916,6 +2009,7 @@ namespace FrmPIE._0API
         }
         public string selectCellMethod(DoWrokObject dwo)
         {
+
             _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
             //_idr_show.status13toolSStatusLblMsg.Text = "";
             _idr_show.status15toolLabelstrResult.Text = "";
@@ -1923,8 +2017,18 @@ namespace FrmPIE._0API
             {
                 if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
                 {
-                    _plr_mstr_model.Batch_ID = dwo._dgv.Rows[dwo._eX].Cells["Batch_ID"].Value.ToString().Trim();
-                    return _plr_mstr_model.Batch_ID;
+                    string str_ID = dwo._dgv.Rows[dwo._eX].Cells[dwo._strCellColName].Value.ToString().Trim();
+                    _idr_show.status14toolLabelCellRowColXY.Text += "," + str_ID;
+                    if (dwo._strCellColName.Equals("Batch_ID"))
+                    {
+                        _plr_mstr_model.Batch_ID = str_ID;
+                    }
+                    else if (dwo._strCellColName.Equals("PI_ID"))
+                    {
+                        _pi_mstr_model.PI_ID = str_ID;
+                    }
+
+                    return str_ID;
                 }
                 return "";
             }
@@ -2076,88 +2180,6 @@ namespace FrmPIE._0API
                 }
             }
         }
-        public void initReportViewer(ReportViewer rv)
-        {
-            rv.Reset();
-            rv.LocalReport.DataSources.Clear();
-        }
-        public void ShowReportViewer(ReportViewer rv, string rvname)
-        {
-            rv.LocalReport.DisplayName = rvname;
-            rv.LocalReport.Refresh();
-            rv.Visible = true;
-        }
-        public void ShowReportViewer(ReportViewer rv, string rvname, bool addprefxi)
-        {
-            string piefix = "Date" + DateTime.Today.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Today.Day.ToString() + "H" + DateTime.Now.Hour + "M" + DateTime.Now.Minute;
-            rv.LocalReport.DisplayName = rvname + piefix;
-
-            rv.RefreshReport();
-            rv.Visible = true;
-        }
-        public void initReportViewerLoadXMLfromString(ReportViewer rv, string tempxmlstring)
-        {
-            //string tempxml = mydssqltemplate.Tables[0].Rows[0]["tempxml"].ToString();
-            XmlDocument sourceDoc = new XmlDocument();
-
-            sourceDoc.LoadXml(tempxmlstring);
-            XmlSerializer serializer = new XmlSerializer(typeof(XmlDocument));
-
-            var m_rdl = new MemoryStream();
-
-            serializer.Serialize(m_rdl, sourceDoc);
-
-            if (m_rdl == null)
-            {
-                return;
-            }
-            rv.Reset();
-            m_rdl.Position = 0;
-            rv.LocalReport.DataSources.Clear();
-            rv.LocalReport.LoadReportDefinition(m_rdl);
-        }
-
-        public void initReportViewerLoadXMLfromPath(ReportViewer rv, string path)
-        {
-            //string tempxml = mydssqltemplate.Tables[0].Rows[0]["tempxml"].ToString();
-            XmlDocument sourceDoc = new XmlDocument();
-
-            //@"Reports\SO\siv_mstr_p.rdlc"
-
-            path = AppDomain.CurrentDomain.BaseDirectory + path;
-            sourceDoc.Load(path);
-
-            XmlSerializer serializer = new XmlSerializer(typeof(XmlDocument));
-
-            var m_rdl = new MemoryStream();
-            serializer.Serialize(m_rdl, sourceDoc);
-
-            if (m_rdl == null)
-            {
-                return;
-            }
-            rv.Reset();
-            m_rdl.Position = 0;
-            rv.LocalReport.DataSources.Clear();
-            rv.LocalReport.LoadReportDefinition(m_rdl);
-        }
-        public void addDataSourceToReportViewer(ReportViewer rv, string reportDataSourceName, DataSet ds)
-        {
-            ReportDataSource rd = new ReportDataSource(reportDataSourceName, ds.Tables[0]);
-            rv.LocalReport.DataSources.Add(rd);
-        }
-        public void addReportParameterToReportViewer(ReportViewer rv, ReportParameter rp, string rpname, string rpvalue)
-        {
-            rp = new ReportParameter(rpname, rpvalue);
-
-
-            if (!string.IsNullOrWhiteSpace(rpvalue))
-            {
-                rv.LocalReport.SetParameters(new ReportParameter[] { rp });
-            }
-
-
-        }
         public void initOpenFile(string file, string filename)
         {
             string allfileNamepath;
@@ -2176,8 +2198,8 @@ namespace FrmPIE._0API
         }
         public void EnquireByPart(DataGridView dgv, string cellsHeader, string strcontains)
         {
-
             int rowcount = dgv.Rows.Count;
+
             if (rowcount > 0)
             {
                 for (int i = intnext; i < rowcount - 1; i++)
@@ -2202,6 +2224,361 @@ namespace FrmPIE._0API
                 }
             }
         }
+        public Hashtable nameList0vpi_report_ds()
+        {
+            //生成列的中文对应表
+            Hashtable nameList = new Hashtable();
+            nameList.Add("PI_ID", "PI ID");
+            nameList.Add("pi_LineID", "Line");
+
+            nameList.Add("pi_wec_ctn", "Scan SN");
+
+            nameList.Add("plr_LineID_tran", "Scan Line");
+            nameList.Add("pi_pallet_no", "Pallet");
+            nameList.Add("CartonNo", "CartonNo");
+
+            nameList.Add("CartonID", "CartonID");
+
+            nameList.Add("pi_chr01", "CO");
+
+            nameList.Add("pisr_rir", "RIR #");
+            nameList.Add("pisr_invoice", "Invoice");
+            nameList.Add("pisr_part", "WEC-Part");
+            nameList.Add("Pisr_receiver", "Receiver");
+            nameList.Add("pisr_site", "MG");
+            nameList.Add("pisr_po_nbr", "PO-Number");
+            nameList.Add("pisr_qty", "Qty");
+            nameList.Add("pisr_curr", "Curr");
+            nameList.Add("pisr_cost", "U/P");
+            nameList.Add("pisr_base_cost", "U/P(Base)");
+            nameList.Add("pisr_us_cost", "U/P(USD)");
+            nameList.Add("pisr_seq", "Seq");
+
+            nameList.Add("pisr_con_code", "Custom Conn");
+
+            //nameList.Add("pisr_ch_desc","Description");
+            nameList.Add("pi_status", "Upload Status");
+
+            nameList.Add("sq_name", "Description");
+
+            nameList.Add("pisr_net_wt", "Net Weight");
+            nameList.Add("pisr_rec_type", "STS/IQC/SI");
+            nameList.Add("pisr_abc", "ABC");
+            nameList.Add("pisr_code", "商检");
+            //
+            nameList.Add("pisr_lic_req", "Lic. Req");
+
+            nameList.Add("pisr_sbu", "SBU");
+            nameList.Add("pisr_vend", "Vend");
+            nameList.Add("pisr_mfgr_name", "Vend Name");
+            nameList.Add("pisr_dec01", "k200 NW");
+            nameList.Add("pisr_dec02", "NW");
+            nameList.Add("pi_cre_date", "Create Date");
+            return nameList;
+        }
+
+        public Hashtable nameListPlrMstr2ExcelUpload()
+        {
+            //生成列的中文对应表
+            Hashtable nameList = new Hashtable();
+            nameList.Add("Batch_ID", "Batch ID");
+            nameList.Add("LineID", "LineID");
+            nameList.Add("plr_status", "Void");
+
+            //nameList.Add("plr_suppliers_id","Suppliers");
+
+            nameList.Add("InvoiceID", "Invoice ID");
+            nameList.Add("plr_po", "PO#");
+            nameList.Add("packingListID", "PackingListID");
+            nameList.Add("plr_partno", "Part");
+            nameList.Add("plr_qty", "Total/Qty");
+            nameList.Add("CartonType", "Number Carton");
+            nameList.Add("CartonID", "Carton ID");
+            nameList.Add("plr_carton_qty", "Qty/Carton");
+
+            nameList.Add("Plr_vm_partno", "MFGR-Part");
+
+            nameList.Add("plr_pallet_no", "Pallet No");
+            nameList.Add("plr_co", "CO");
+            nameList.Add("plr_date_code", "Date Code");
+
+
+            nameList.Add("plr_vend_mfgr", "MFGR");
+
+
+            nameList.Add("plr_doc_type", "Suppliers");
+            nameList.Add("plr_cre_date", "Create Date");
+            nameList.Add("plr_update_date", "Update Date");
+            //nameList.Add("plr_cre_userid","User Id");
+            nameList.Add("plr_user_ip", "Client IP");
+
+            nameList.Add("plr_rcp_date", "Rcp Date");
+            nameList.Add("plr_deli_date", "Deli Date");
+            return nameList;
+        }
+        public Hashtable nameList12UploadToERP()
+        {
+            //生成列的中文对应表
+            Hashtable nameList = new Hashtable();
+            nameList.Add("Batch_ID", "Batch ID");
+            nameList.Add("LineID", "Line");
+
+            nameList.Add("Wec_Ctn", "WEC Ctn ID");
+            nameList.Add("plr_status", "Status");
+            nameList.Add("plr_status_msg", "Msg");
+            nameList.Add("plr_wec_ctn", "WEC CTN");
+
+            nameList.Add("plr_pallet_no", "Pallet No");
+
+            //nameList.Add("plr_suppliers_id","Suppliers ID");
+            nameList.Add("InvoiceID", "Invoice ID");
+            nameList.Add("plr_po", "PO#");
+            nameList.Add("packingListID", "PackingListID");
+            nameList.Add("plr_partno", "Part");
+            nameList.Add("plr_qty", "Total/QTY");
+            nameList.Add("CartonType", "Number Carton");
+            nameList.Add("CartonID", "Carton ID");
+            nameList.Add("plr_carton_qty", "Qty/Carton");
+            nameList.Add("carton_id_prifix", "Carton Prefix");
+
+
+            nameList.Add("re_mark", "Remark");
+            nameList.Add("Plr_vm_partno", "MFGR-Part");
+            nameList.Add("plr_rcp_date", "Rcp Date");
+            nameList.Add("plr_deli_date", "Deli Date");
+
+            nameList.Add("plr_cre_date", "Create Date");
+            //nameList.Add("plr_update_date","Update Date");
+            //nameList.Add("plr_cre_userid","User Id");
+            //nameList.Add("plr_user_ip","Client IP");
+            return nameList;
+        }
+
+        public void downLoadExcel(DataSet ds, ToolStripItem ctMessage, Hashtable nameList, string filenamePrefix)
+        {
+            if (ds == null)
+            {
+                ctMessage.Text = "Error: no data.";
+                return;
+            }
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ctMessage.Text = "notice: start download excel.";
+                string FilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+
+
+                //利用excel对象
+                DataToExcel dte = new DataToExcel();
+                string filename = "";
+                try
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        filename = dte.DataExcel(ds.Tables[0], "标题", FilePath, nameList, filenamePrefix);
+                    }
+                }
+                catch
+                {
+                    dte.KillExcelProcess();
+                }
+
+                if (filename != "")
+                {
+                    _idr_show._strDownLoadExcel = FilePath + @"\" + filename;
+                    ctMessage.Text = "Success: excel file is at " + _idr_show._strDownLoadExcel;
+                    OpenFolderAndSelectFile(_idr_show._strDownLoadExcel);
+                }
+            }
+            else
+            {
+                ctMessage.Text = "Error: has 0 count data.";
+            }
+        }
+        public void downLoadExcel(DataSet ds, Control ctMessage, Hashtable nameList, string filenamePrefix)
+        {
+            if (ds == null)
+            {
+                ctMessage.Text = "Error: no data.";
+                return;
+            }
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ctMessage.Text = "notice: start download excel.";
+                string FilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+
+
+                //利用excel对象
+                DataToExcel dte = new DataToExcel();
+                string filename = "";
+                try
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        filename = dte.DataExcel(ds.Tables[0], "标题", FilePath, nameList, filenamePrefix);
+                    }
+                }
+                catch
+                {
+                    dte.KillExcelProcess();
+                }
+
+                if (filename != "")
+                {
+                    _idr_show._strDownLoadExcel = FilePath + @"\" + filename;
+                    ctMessage.Text = "Success: excel file is at " + _idr_show._strDownLoadExcel;
+                    OpenFolderAndSelectFile(_idr_show._strDownLoadExcel);
+                }
+            }
+            else
+            {
+                ctMessage.Text = "Error: has 0 count data.";
+            }
+        }
+        public void downLoadExcel(DataTable dt, Control ctMessage, Hashtable nameList, string filenamePrefix)
+        {
+            if (dt == null)
+            {
+                ctMessage.Text = "Error: no data.";
+                return;
+            }
+            if (dt.Rows.Count > 0)
+            {
+                ctMessage.Text = "notice: start download excel.";
+                string FilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+
+
+                //利用excel对象
+                DataToExcel dte = new DataToExcel();
+                string filename = "";
+                try
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        filename = dte.DataExcel(dt, "标题", FilePath, nameList, filenamePrefix);
+                    }
+                }
+                catch
+                {
+                    dte.KillExcelProcess();
+                }
+
+                if (filename != "")
+                {
+                    _idr_show._strDownLoadExcel = FilePath + @"\" + filename;
+                    ctMessage.Text = "Success: excel file is at " + _idr_show._strDownLoadExcel;
+                    OpenFolderAndSelectFile(_idr_show._strDownLoadExcel);
+                }
+            }
+            else
+            {
+                ctMessage.Text = "Error: has 0 count data.";
+            }
+        }
+
+
+        /// <summary>  
+        /// 时间戳转为C#格式时间  
+        /// </summary>  
+        /// <param name="timeStamp">Unix时间戳格式</param>  
+        /// <returns>C#格式时间</returns>  
+        public DateTime GetTime(string timeStamp)
+        {
+            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            long lTime = long.Parse(timeStamp + "0000000");
+            TimeSpan toNow = new TimeSpan(lTime);
+            return dtStart.Add(toNow);
+        }
+
+
+        /// <summary>  
+        /// DateTime时间格式转换为Unix时间戳格式  
+        /// </summary>  
+        /// <param name="time"> DateTime时间格式</param>  
+        /// <returns>Unix时间戳格式</returns>  
+        public int ConvertDateTimeInt(System.DateTime time)
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+            return (int)(time - startTime).TotalSeconds;
+        }
+        public double ToTimestamp(DateTime value)
+        {
+            TimeSpan span = (value - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime());
+            return (double)span.TotalSeconds;
+        }
+
+        public DateTime ConvertTimestamp(double timestamp)
+        {
+            DateTime converted = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            DateTime newDateTime = converted.AddSeconds(timestamp);
+            return newDateTime.ToLocalTime();
+        }
+        public void initReportViewer(ReportViewer rv)
+        {
+            rv.Reset();
+            rv.LocalReport.DataSources.Clear();
+        }
+        public void ShowReportViewer(ReportViewer rv, string rvname)
+        {
+            rv.LocalReport.DisplayName = rvname;
+            rv.LocalReport.Refresh();
+            rv.Visible = true;
+        }
+        public void ShowReportViewer(ReportViewer rv, string rvname, bool addprefxi)
+        {
+            string piefix = "Date" + DateTime.Today.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Today.Day.ToString() + "H" + DateTime.Now.Hour + "M" + DateTime.Now.Minute;
+            rv.LocalReport.DisplayName = rvname + piefix;
+            rv.RefreshReport();
+            rv.Visible = true;
+        }
+        public void initReportViewerLoadXMLfromString(ReportViewer rv, string tempxmlstring)
+        {
+            //string tempxml = mydssqltemplate.Tables[0].Rows[0]["tempxml"].ToString();
+            XmlDocument sourceDoc = new XmlDocument();
+            sourceDoc.LoadXml(tempxmlstring);
+            XmlSerializer serializer = new XmlSerializer(typeof(XmlDocument));
+            var m_rdl = new MemoryStream();
+            serializer.Serialize(m_rdl, sourceDoc);
+            if (m_rdl == null)
+            {
+                return;
+            }
+            rv.Reset();
+            m_rdl.Position = 0;
+            rv.LocalReport.DataSources.Clear();
+            rv.LocalReport.LoadReportDefinition(m_rdl);
+        }
+        public void initReportViewerLoadXMLfromPath(ReportViewer rv, string path)
+        {
+            //string tempxml = mydssqltemplate.Tables[0].Rows[0]["tempxml"].ToString();
+            XmlDocument sourceDoc = new XmlDocument();
+            //@"Reports\SO\siv_mstr_p.rdlc"
+            path = AppDomain.CurrentDomain.BaseDirectory + path;
+            sourceDoc.Load(path);
+            XmlSerializer serializer = new XmlSerializer(typeof(XmlDocument));
+            var m_rdl = new MemoryStream();
+            serializer.Serialize(m_rdl, sourceDoc);
+            if (m_rdl == null)
+            {
+                return;
+            }
+            rv.Reset();
+            m_rdl.Position = 0;
+            rv.LocalReport.DataSources.Clear();
+            rv.LocalReport.LoadReportDefinition(m_rdl);
+        }
+        public void addDataSourceToReportViewer(ReportViewer rv, string reportDataSourceName, DataSet ds)
+        {
+            ReportDataSource rd = new ReportDataSource(reportDataSourceName, ds.Tables[0]);
+            rv.LocalReport.DataSources.Add(rd);
+        }
+        public void addReportParameterToReportViewer(ReportViewer rv, ReportParameter rp, string rpname, string rpvalue)
+        {
+            rp = new ReportParameter(rpname, rpvalue);
+            if (!string.IsNullOrEmpty(rpvalue))
+            {
+                rv.LocalReport.SetParameters(new ReportParameter[] { rp });
+            }
+        }
         /////////////////////////////////////
         //start place
         /////////////////////////////////
@@ -2223,5 +2600,4 @@ namespace FrmPIE._0API
 
         }
     }
-
 }

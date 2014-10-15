@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -80,7 +80,7 @@ namespace frmPI
             {
                 _pi_det_model_co = new PI.DAL.pi_det_ext().GetModel(_frmPI0ScanWECCtnLable._pi_det_model.PI_ID, _frmPI0ScanWECCtnLable._pi_det_model.pi_wec_ctn, _intPlrLine);
                 _pi_det_model_co.pi_chr01 = cmb3CO_Maint.Text;
-                if (string.IsNullOrWhiteSpace(_pi_det_model_co.pi_chr01))
+                if (string.IsNullOrEmpty(_pi_det_model_co.pi_chr01))
                 {
                     lbl0msg.Text = "Please select the right CO.";
                     cmb3CO_Maint.Focus();

@@ -38,8 +38,16 @@ namespace FrmPIE
         System.Data.DataTable _dterr;
 
         bool _hasrun = false;
+        bool _addHeadForDownExcel = false;
         string _strBatchID = "";
         DateTime oldtime;
+
+        string _strprefix = "";
+        string[] _cartonid;
+        int _numCell = 0;
+        bool _numCellVal = false;
+
+        System.Data.DataTable _dt_downToExela = new System.Data.DataTable();
 
         PIE.Model.plr_batch_mstr _plr_batch_mstr_model = new PIE.Model.plr_batch_mstr();
         public frm111UploadExcelForKYCA(frmIDR idr)
@@ -59,8 +67,21 @@ namespace FrmPIE
 
             data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
             data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
-        }
 
+        }
+        void tableColumnsAdd(System.Data.DataTable dt, string strcolnumname)
+        {
+            dt.Columns.Add(strcolnumname);
+        }
+        public void addRowsToDownExcel(System.Data.DataTable dt, DataRow dr, string strflag, IRow row)
+        {
+            dr[0] = strflag;
+            for (int i = 0; i < row.LastCellNum; i++)
+            {
+                dr[i + 1] = row.GetCell(i);
+            }
+            dt.Rows.Add(dr);
+        }
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
         {
             //txt0ExcelFileUploadExcel.Focus();
@@ -758,14 +779,6 @@ namespace FrmPIE
 
             while (rows.MoveNext())
             {
-
-                if (addrowscount == 0)
-                {
-                    command.UpdateCommand = cmdb.GetUpdateCommand();
-                    addrowscount = 1;
-                    rowscount = 1;
-                    continue;
-                }
                 if (_strext.Equals(".xls"))
                 {
                     row = (HSSFRow)rows.Current;
@@ -778,8 +791,39 @@ namespace FrmPIE
                 {
                     throw new Exception("Error1: this file is not the xls or xlsx file .");
                 }
+                if (addrowscount == 0)
+                {
+                    command.UpdateCommand = cmdb.GetUpdateCommand();
+                    addrowscount = 1;
+                    rowscount = 1;
+
+                    //errorDataTable
+                    _dterr.Clear();
+                    _dterr.AcceptChanges();
+
+                    //Excel
+                    _dt_downToExela.Clear();
+                    _dt_downToExela.AcceptChanges();
+
+                    if (!_addHeadForDownExcel)
+                    {
+                        tableColumnsAdd(_dt_downToExela, "flag");
+                        for (int i = 0; i < row.LastCellNum; i++)
+                        {
+                            tableColumnsAdd(_dt_downToExela, row.GetCell(i).ToString());
+                        }
+                        _addHeadForDownExcel = true;
+                    }
+
+                    //data2GV2ePackingDet1UploadExcelError.DataSource = _dt_downToExela.DefaultView;
+                    //data2GV2ePackingDet1UploadExcelError.Refresh();
+                    //cf.downLoadExcel(_dt_downToExela, lbl1UploadExcelThreadMsg, cf.nameList0vpi_report_ds(), "dd");
+                    //break;
+                    continue;
+                }
 
                 DataRow dr = dt.NewRow();
+                DataRow dr_downexcel = _dt_downToExela.NewRow();
 
                 _idr_show.status15toolLabelstrResult.Text = "Load Rows at:" + rowscount;
 
@@ -797,8 +841,8 @@ namespace FrmPIE
                     dr["plr_update_date"] = servedate;
                     dr["plr_user_ip"] = _idr_show._custip;
 
-                    dr["plr_carton_qty"] = 1;
-                    dr["CartonType"] = 1;
+                    dr["plr_carton_qty"] = 0;
+                    dr["CartonType"] = 0;
 
                     ICell cell = row.GetCell(i);
 
@@ -822,8 +866,14 @@ namespace FrmPIE
                     }
                     else
                     {
-
-                        if (i > 10)
+                        if (i == 3)
+                        {
+                            _strprefix = "";
+                            _cartonid = Program.initCartonFromTo(cell.StringCellValue, "", out _strprefix);
+                            _cartonid[0] = _cartonid[0].Trim();
+                            _cartonid[1] = _cartonid[1].Trim();
+                        }
+                        else if (i > 10)
                         {
 
                             dr[i + 4] = cell.NumericCellValue;
@@ -849,21 +899,54 @@ namespace FrmPIE
                     ICell cell11 = row.GetCell(11);
                     ICell cell13 = row.GetCell(13);
                     ICell cell15 = row.GetCell(15);
+                    ICell cell17 = row.GetCell(17);
+                    ICell cell19 = row.GetCell(19);
 
                     //po
                     ICell cell8 = row.GetCell(8);
                     ICell cell10 = row.GetCell(10);
                     ICell cell12 = row.GetCell(12);
                     ICell cell14 = row.GetCell(14);
+                    ICell cell16 = row.GetCell(16);
+                    ICell cell18 = row.GetCell(18);
 
-                    double intcell6 = cell6.NumericCellValue;
+                    double intcell6 = getICellToDouble(cell6);
+                    _numCellVal = false;
+                    _numCell = 0;
+                    double intcell9 = getICellToDouble(cell9, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell11 = getICellToDouble(cell11, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell13 = getICellToDouble(cell13, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell15 = getICellToDouble(cell15, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell17 = getICellToDouble(cell17, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell19 = getICellToDouble(cell19, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
 
-                    double intcell9 = (cell9 == null || string.IsNullOrEmpty(cell9.ToString())) ? 0 : cell9.NumericCellValue;
-                    double intcell11 = (cell11 == null || string.IsNullOrEmpty(cell11.ToString())) ? 0 : cell11.NumericCellValue;
-                    double intcell13 = (cell13 == null || string.IsNullOrEmpty(cell13.ToString())) ? 0 : cell13.NumericCellValue;
-                    double intcell15 = (cell15 == null || string.IsNullOrEmpty(cell15.ToString())) ? 0 : cell15.NumericCellValue;
 
-                    if (intcell6 != (intcell9 + intcell11 + intcell13))
+
+                    if (intcell6 != (intcell9 + intcell11 + intcell13 + intcell15 + intcell17 + intcell19))
                     {
                         strerrnullrows += ",QtyError:" + rowscount.ToString();
 
@@ -889,36 +972,98 @@ namespace FrmPIE
                         {
                             strmsgint += " +" + " PO:" + cell14 + ",Qty:" + intcell15.ToString();
                         }
+                        if (intcell17 != 0)
+                        {
+                            strmsgint += " +" + " PO:" + cell16 + ",Qty:" + intcell17.ToString();
+                        }
+                        if (intcell19 != 0)
+                        {
+                            strmsgint += " +" + " PO:" + cell18 + ",Qty:" + intcell19.ToString();
+                        }
                         drerr[3] = strmsgint;
                         _dterr.Rows.Add(drerr);
+
+                        addRowsToDownExcel(_dt_downToExela, dr_downexcel, strmsgint, row);
+
                         rowserrscount++;
                         rowscount++;
                         continue;
                     }
                     else
                     {
+                        addRowsToDownExcel(_dt_downToExela, dr_downexcel, "Upload Success", row);
+
+
                         if (intcell9 > 0)
                         {
+                            dr["CartonType"] = 0;
+
+                            dr[7] = _strprefix + _cartonid[0];
 
                             dr[12] = cell8.ToString().Trim();
                             dr[10] = intcell9;
+                            if (_numCell == 1)
+                            {
+                                int intfrom = Convert.ToInt32(_cartonid[0]);
+                                int into = Convert.ToInt32(_cartonid[1]);
+                                if (_cartonid[0].Equals(_cartonid[1]))
+                                {
+                                    dr[7] = _strprefix + _cartonid[0];
+                                }
+                                else
+                                {
+                                    dr[7] = _strprefix + _cartonid[0] + "-" + _cartonid[1];
 
+                                    getAvgCarton(intcell9, dr, intfrom, into);
+                                }
+
+
+                            }
                             dt.Rows.Add(dr);
                             addrowscount++;
                         }
                         if (intcell11 > 0)
                         {
+                            dr["CartonType"] = 0;
                             //po
-
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
                             {
                                 drnew[i] = dr[i];
                             }
-                            drnew[12] = cell10.ToString().Trim();
+
+                            drnew[1] = addrowscount;
+                            if (_cartonid[0].Equals(_cartonid[1]))
+                            {
+                                drnew[7] = _strprefix + _cartonid[0];
+                            }
+                            else
+                            {
+                                if (_numCell == 2)
+                                {
+                                    int intfrom = Convert.ToInt32(_cartonid[0]);
+                                    int into = Convert.ToInt32(_cartonid[1]);
+                                    if (_numCell >= (into - intfrom + 1))
+                                    {
+                                        drnew[7] = _strprefix + _cartonid[1];
+                                    }
+                                    else
+                                    {
+                                        drnew[7] = _strprefix + (intfrom + 1).ToString() + "-" + _cartonid[1];
+                                        getAvgCarton(intcell11, drnew, intfrom, into);
+                                    }
+                                }
+                                else
+                                {
+                                    int intfrom = Convert.ToInt32(_cartonid[0]);
+                                    int into = Convert.ToInt32(_cartonid[1]);
+                                    drnew[7] = _strprefix + (intfrom + 1).ToString();
+                                }
+                            }
                             //qty
                             drnew[10] = intcell11;
-                            drnew[1] = addrowscount;
+
+                            drnew[12] = cell10.ToString().Trim();
 
 
                             dt.Rows.Add(drnew);
@@ -928,6 +1073,7 @@ namespace FrmPIE
                         if (intcell13 > 0)
                         {
                             //po
+                            dr["CartonType"] = 0;
 
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
@@ -935,28 +1081,173 @@ namespace FrmPIE
                                 drnew[i] = dr[i];
                             }
 
-                            drnew[12] = cell12.ToString().Trim();
                             //qty
-                            drnew[10] = intcell13;
                             drnew[1] = addrowscount;
+                            if (_cartonid[0].Equals(_cartonid[1]))
+                            {
+                                drnew[7] = _strprefix + _cartonid[0];
+                            }
+                            else
+                            {
+                                int intfrom = Convert.ToInt32(_cartonid[0]);
+                                int into = Convert.ToInt32(_cartonid[1]);
+                                if (intfrom - into >= 2)
+                                {
+                                    drnew[7] = _strprefix + (intfrom + 2).ToString();
+                                }
+                                else
+                                {
+                                    drnew[7] = _strprefix + _cartonid[1];
+                                }
+                                if (_numCell == 3)
+                                {
+                                    if (_numCell >= (into - intfrom + 1))
+                                    {
+                                        drnew[7] = _strprefix + _cartonid[1];
+                                    }
+                                    else
+                                    {
+                                        drnew[7] = _strprefix + (intfrom + 2).ToString() + "-" + _cartonid[1];
+                                        getAvgCarton(intcell13, drnew, intfrom, into);
+                                    }
+                                }
+                            }
+                            drnew[10] = intcell13;
+                            drnew[12] = cell12.ToString().Trim();
 
                             dt.Rows.Add(drnew);
                             addrowscount++;
                         }
                         if (intcell15 > 0)
                         {
+
                             //po
+                            dr["CartonType"] = 0;
 
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
                             {
                                 drnew[i] = dr[i];
                             }
+                            drnew[1] = addrowscount;
+                            int intfrom = Convert.ToInt32(_cartonid[0]);
+                            int into = Convert.ToInt32(_cartonid[1]);
+                            if (intfrom - into >= 3)
+                            {
 
-                            drnew[12] = cell14.ToString().Trim();
+                                drnew[7] = _strprefix + (intfrom + 3).ToString();
+                            }
+                            else
+                            {
+                                drnew[7] = _strprefix + _cartonid[1];
+                            }
+                            if (_numCell == 4)
+                            {
+                                if (_numCell >= (into - intfrom + 1))
+                                {
+                                    drnew[7] = _strprefix + _cartonid[1];
+                                }
+                                else
+                                {
+                                    drnew[7] = _strprefix + (intfrom + 3).ToString() + "-" + _cartonid[1];
+                                    getAvgCarton(intcell15, drnew, intfrom, into);
+                                }
+                            }
                             //qty
                             drnew[10] = intcell15;
+
+                            drnew[12] = cell14.ToString().Trim();
+
+                            dt.Rows.Add(drnew);
+                            addrowscount++;
+                        }
+                        if (intcell17 > 0)
+                        {
+
+                            //po
+                            dr["CartonType"] = 0;
+
+                            DataRow drnew = dt.NewRow();
+                            for (int i = 0; i < dr.ItemArray.Length; i++)
+                            {
+                                drnew[i] = dr[i];
+                            }
                             drnew[1] = addrowscount;
+                            int intfrom = Convert.ToInt32(_cartonid[0]);
+                            int into = Convert.ToInt32(_cartonid[1]);
+                            if (intfrom - into >= 4)
+                            {
+
+                                drnew[7] = _strprefix + (intfrom + 4).ToString();
+                            }
+                            else
+                            {
+                                drnew[7] = _strprefix + _cartonid[1];
+                            }
+                            if (_numCell == 5)
+                            {
+                                if (_numCell >= (into - intfrom + 1))
+                                {
+                                    drnew[7] = _strprefix + _cartonid[1];
+                                }
+                                else
+                                {
+                                    drnew[7] = _strprefix + (intfrom + 4).ToString() + "-" + _cartonid[1];
+                                    getAvgCarton(intcell17, drnew, intfrom, into);
+                                }
+                            }
+                            //qty
+                            drnew[10] = intcell17;
+
+                            drnew[12] = cell16.ToString().Trim();
+
+                            dt.Rows.Add(drnew);
+                            addrowscount++;
+                        }
+                        if (intcell19 > 0)
+                        {
+                            //po
+                            dr["CartonType"] = 0;
+
+                            DataRow drnew = dt.NewRow();
+                            for (int i = 0; i < dr.ItemArray.Length; i++)
+                            {
+                                drnew[i] = dr[i];
+                            }
+                            drnew[1] = addrowscount;
+                            int intfrom = Convert.ToInt32(_cartonid[0]);
+                            int into = Convert.ToInt32(_cartonid[1]);
+                            if (intfrom - into > 5)
+                            {
+
+                                drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
+                                getAvgCarton(intcell19, drnew, intfrom, into);
+                            }
+                            else
+                            {
+                                drnew[7] = _strprefix + _cartonid[1];
+                            }
+                            if (_numCell == 6)
+                            {
+                                if (_numCell >= (into - intfrom + 1))
+                                {
+                                    drnew[7] = _strprefix + _cartonid[1];
+                                }
+                                else
+                                {
+                                    drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
+                                    getAvgCarton(intcell19, drnew, intfrom, into);
+                                }
+
+                            }
+                            if (intfrom - into <= 5)
+                            {
+                                drnew[7] = _strprefix + _cartonid[1];
+                            }
+                            //qty
+                            drnew[10] = intcell19;
+
+                            drnew[12] = cell14.ToString().Trim();
 
                             dt.Rows.Add(drnew);
                             addrowscount++;
@@ -972,11 +1263,77 @@ namespace FrmPIE
                 _idr_show._plr_batch_mstr_model = _plr_batch_mstr_model;
                 initDatasetToTxt(_idr_show._plr_batch_mstr_model, true);
             }
-
             return "Notice: Total Rows: " + rowscountsum + ",Total PO: " + (addrowscount - 1 + rowserrscount) + " ,Update " + (addrowscount - 1) + " items Success, Error: has " + rowserrscount + " Rows has Error (" + strerrnullrows + ").";
 
             //data0set_npoi.Tables.Add(dt);
         }
+
+        private void getAvgCarton(double intcellValue, DataRow drnew, int intfrom, int into)
+        {
+            double modevalue = intcellValue % (into - intfrom - _numCell + 2);
+            drnew[13] = (intcellValue - modevalue) / (into - intfrom - _numCell + 2);
+            drnew[14] = modevalue;
+        }
+
+
+        public double getICellToDouble(ICell cell)
+        {
+            double tintcell6;
+            if (cell == null)
+            {
+                return 0;
+            }
+            if (cell.CellType == CellType.String)
+            {
+                tintcell6 = (string.IsNullOrEmpty(cell.ToString())) ? 0 : Convert.ToDouble(cell.StringCellValue);
+            }
+            else if (cell.CellType == CellType.Numeric)
+            {
+
+                tintcell6 = cell.NumericCellValue;
+            }
+            else
+            {
+                return 0;
+            }
+            return tintcell6;
+        }
+
+
+        public double getICellToDouble(ICell cell, out bool num)
+        {
+            double tintcell6;
+            if (cell == null)
+            {
+                num = false;
+                return 0;
+            }
+            if (cell.CellType == CellType.String)
+            {
+                tintcell6 = (string.IsNullOrEmpty(cell.ToString())) ? 0 : Convert.ToDouble(cell.StringCellValue);
+            }
+            else if (cell.CellType == CellType.Numeric)
+            {
+
+                tintcell6 = cell.NumericCellValue;
+            }
+            else
+            {
+                num = false;
+                return 0;
+            }
+            if (tintcell6 > 0.0)
+            {
+                num = true;
+            }
+            else
+            {
+                num = false;
+            }
+            return tintcell6;
+        }
+
+
         void Init0ializeWorkbookdelegate(object objpath)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(Init0ializeWorkbook);
@@ -1015,7 +1372,7 @@ namespace FrmPIE
 
 
             txt0ExcelFileUploadExcel.Text = "";
-
+            btn2GoUploadToERP.Visible = true;
         }
 
         private void frmUploadExcel_FormClosing(object sender, FormClosingEventArgs e)
@@ -1079,6 +1436,28 @@ namespace FrmPIE
             _frmET.lblTitle.Text = "Part#:";
             _frmET.Text = "Enquire by Part:";
             _frmET.ShowDialog();
+        }
+
+        private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            cf.downLoadExcel(_dt_downToExela, lbl1UploadExcelThreadMsg, cf.nameList0vpi_report_ds(), "11DownloadExcelFlagKYCA" + _strBatchID);
+        }
+
+        private void downLoad2ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            cf.downLoadExcel(_dt_downToExela, lbl1UploadExcelThreadMsg, cf.nameList0vpi_report_ds(), "11DownloadExcelFlagKYCA" + _strBatchID);
+        }
+
+        private void btn2GoUploadToERP_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt1batch_idUploadExcel.Text))
+            {
+                btn3QuickUploadExcel_Click(sender, e);
+            }
+            else
+            {
+                _idr_show.goToUploadToERP(txt1batch_idUploadExcel.Text.Trim());
+            }
         }
 
 

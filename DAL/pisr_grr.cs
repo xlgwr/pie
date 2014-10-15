@@ -559,7 +559,7 @@ namespace PI.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_mfgr_name,pisr_char01,pisr_char02,pisr_char03,pisr_dec01,pisr_dec02,pisr_int01,pisr_int02,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
+            strSql.Append("select pi_wec_ctn,plr_LineID_tran,Plant,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,pisr_ch_desc,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_char02,pisr_char01,pisr_mfgr_name,pisr_char03,pisr_dec01,pisr_dec02,pisr_int01,pisr_int02,pi_status,pi_status_msg,pi_remark,pi_cre_date,pi_cre_userid,pi_update_date,pi_edituser_id,pi_user_ip,pi_void_status,pi_chr01,pi_chr02,pi_deci1,pi_deci2 ");
             strSql.Append(" FROM pisr_grr ");
             if (strWhere.Trim() != "")
             {

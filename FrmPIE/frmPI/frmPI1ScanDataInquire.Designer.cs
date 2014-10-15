@@ -28,15 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb00PIScanPIDataitemInquire = new System.Windows.Forms.GroupBox();
-            this.groupBox1PIMstr = new System.Windows.Forms.GroupBox();
-            this.data0GVPIMstr = new System.Windows.Forms.DataGridView();
             this.gb1mstr_PIMstr = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txt5_cre_date_PIMstr = new System.Windows.Forms.TextBox();
@@ -48,12 +47,18 @@
             this.txt1PI_id_PIMstr = new System.Windows.Forms.TextBox();
             this.gb2det_PIdet = new System.Windows.Forms.GroupBox();
             this.data1GV1_PIdet = new System.Windows.Forms.DataGridView();
+            this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.data0GVPIMstr = new System.Windows.Forms.DataGridView();
+            this.groupBox1PIMstr = new System.Windows.Forms.GroupBox();
             this.gb00PIScanPIDataitemInquire.SuspendLayout();
-            this.groupBox1PIMstr.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.data0GVPIMstr)).BeginInit();
             this.gb1mstr_PIMstr.SuspendLayout();
             this.gb2det_PIdet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1_PIdet)).BeginInit();
+            this.ctmenu0EnquireByPart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.data0GVPIMstr)).BeginInit();
+            this.groupBox1PIMstr.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb00PIScanPIDataitemInquire
@@ -64,54 +69,9 @@
             this.gb00PIScanPIDataitemInquire.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb00PIScanPIDataitemInquire.Location = new System.Drawing.Point(0, 0);
             this.gb00PIScanPIDataitemInquire.Name = "gb00PIScanPIDataitemInquire";
-            this.gb00PIScanPIDataitemInquire.Size = new System.Drawing.Size(724, 455);
+            this.gb00PIScanPIDataitemInquire.Size = new System.Drawing.Size(727, 455);
             this.gb00PIScanPIDataitemInquire.TabIndex = 0;
             this.gb00PIScanPIDataitemInquire.TabStop = false;
-            // 
-            // groupBox1PIMstr
-            // 
-            this.groupBox1PIMstr.Controls.Add(this.data0GVPIMstr);
-            this.groupBox1PIMstr.Location = new System.Drawing.Point(6, 62);
-            this.groupBox1PIMstr.Name = "groupBox1PIMstr";
-            this.groupBox1PIMstr.Size = new System.Drawing.Size(714, 198);
-            this.groupBox1PIMstr.TabIndex = 21;
-            this.groupBox1PIMstr.TabStop = false;
-            this.groupBox1PIMstr.Text = "PI Scan Mstr Top 100";
-            // 
-            // data0GVPIMstr
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data0GVPIMstr.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.data0GVPIMstr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data0GVPIMstr.DefaultCellStyle = dataGridViewCellStyle2;
-            this.data0GVPIMstr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.data0GVPIMstr.Location = new System.Drawing.Point(3, 17);
-            this.data0GVPIMstr.MultiSelect = false;
-            this.data0GVPIMstr.Name = "data0GVPIMstr";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data0GVPIMstr.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.data0GVPIMstr.RowTemplate.Height = 23;
-            this.data0GVPIMstr.Size = new System.Drawing.Size(708, 178);
-            this.data0GVPIMstr.TabIndex = 16;
             // 
             // gb1mstr_PIMstr
             // 
@@ -200,7 +160,7 @@
             // gb2det_PIdet
             // 
             this.gb2det_PIdet.Controls.Add(this.data1GV1_PIdet);
-            this.gb2det_PIdet.Location = new System.Drawing.Point(6, 260);
+            this.gb2det_PIdet.Location = new System.Drawing.Point(6, 68);
             this.gb2det_PIdet.Name = "gb2det_PIdet";
             this.gb2det_PIdet.Size = new System.Drawing.Size(714, 185);
             this.gb2det_PIdet.TabIndex = 19;
@@ -242,22 +202,91 @@
             this.data1GV1_PIdet.Size = new System.Drawing.Size(708, 165);
             this.data1GV1_PIdet.TabIndex = 16;
             // 
+            // ctmenu0EnquireByPart
+            // 
+            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enquireByPartToolStripMenuItem,
+            this.downLoad1ToExceltoolStripMenuItem2});
+            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            // 
+            // enquireByPartToolStripMenuItem
+            // 
+            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            // 
+            // downLoad1ToExceltoolStripMenuItem2
+            // 
+            this.downLoad1ToExceltoolStripMenuItem2.Image = global::FrmPIE.Properties.Resources.down;
+            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
+            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
+            // 
+            // data0GVPIMstr
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data0GVPIMstr.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.data0GVPIMstr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data0GVPIMstr.DefaultCellStyle = dataGridViewCellStyle2;
+            this.data0GVPIMstr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.data0GVPIMstr.Location = new System.Drawing.Point(3, 17);
+            this.data0GVPIMstr.MultiSelect = false;
+            this.data0GVPIMstr.Name = "data0GVPIMstr";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data0GVPIMstr.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.data0GVPIMstr.RowTemplate.Height = 23;
+            this.data0GVPIMstr.Size = new System.Drawing.Size(708, 178);
+            this.data0GVPIMstr.TabIndex = 16;
+            // 
+            // groupBox1PIMstr
+            // 
+            this.groupBox1PIMstr.Controls.Add(this.data0GVPIMstr);
+            this.groupBox1PIMstr.Location = new System.Drawing.Point(9, 256);
+            this.groupBox1PIMstr.Name = "groupBox1PIMstr";
+            this.groupBox1PIMstr.Size = new System.Drawing.Size(714, 198);
+            this.groupBox1PIMstr.TabIndex = 21;
+            this.groupBox1PIMstr.TabStop = false;
+            this.groupBox1PIMstr.Text = "PI Scan Mstr Top 100";
+            this.groupBox1PIMstr.Visible = false;
+            // 
             // frmPI1ScanDataInquire
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(724, 455);
+            this.ClientSize = new System.Drawing.Size(727, 455);
             this.Controls.Add(this.gb00PIScanPIDataitemInquire);
             this.Name = "frmPI1ScanDataInquire";
             this.Text = "frmPI1ScanDataInquire";
             this.Load += new System.EventHandler(this.frmPI1ScanDataInquire_Load);
             this.gb00PIScanPIDataitemInquire.ResumeLayout(false);
-            this.groupBox1PIMstr.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.data0GVPIMstr)).EndInit();
             this.gb1mstr_PIMstr.ResumeLayout(false);
             this.gb1mstr_PIMstr.PerformLayout();
             this.gb2det_PIdet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1_PIdet)).EndInit();
+            this.ctmenu0EnquireByPart.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.data0GVPIMstr)).EndInit();
+            this.groupBox1PIMstr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -276,6 +305,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         protected internal System.Windows.Forms.GroupBox gb00PIScanPIDataitemInquire;
+        private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
+        private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
         private System.Windows.Forms.GroupBox groupBox1PIMstr;
         protected internal System.Windows.Forms.DataGridView data0GVPIMstr;
     }
