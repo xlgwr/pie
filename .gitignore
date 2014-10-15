@@ -15,6 +15,10 @@
 
 */app.config
 
+*.bak
+
+/*/*.bak
+
 /*/app.config
 
 /packages/*
