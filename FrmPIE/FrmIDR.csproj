@@ -68,6 +68,12 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\Lib\Npoi\dotnet2\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="NPOI">
       <HintPath>..\Lib\Npoi\dotnet2\NPOI.dll</HintPath>
     </Reference>
@@ -225,7 +231,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PIReport.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Web References\WebReference100\Reference.cs" />
+    <Compile Include="Web References\WebReference100\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\WebReference208\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -338,6 +348,7 @@
     </None>
     <None Include="Web References\WebReference100\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\WebReference100\Service.wsdl" />
     <None Include="Web References\WebReference208\Reference.map">
