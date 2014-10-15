@@ -17,14 +17,15 @@ namespace PIE.DAL
         /// <summary>
         /// 是否存在该记录
         /// </summary>
-        public bool Exists(string PI_ID, int pi_LineID, string pi_wec_ctn, int plr_LineID_tran, int pi_pallet_no, string CartonNo, string CartonID, string pi_chr01, string CoDesc, string pisr_rir, string pisr_invoice, string pisr_part, string Pisr_receiver, string pisr_site, string pisr_po_nbr, decimal pisr_qty, string pisr_curr, decimal pisr_cost, decimal pisr_base_cost, decimal pisr_us_cost, string pisr_seq, string pisr_con_code, string sq_name, decimal pisr_net_wt, string pisr_rec_type, string pisr_abc, string pisr_code, string pisr_lic_req, string pisr_sbu, string pisr_vend, string pisr_mfgr_name, string MFGR, string MFGR_Name, string MFGR_Part, decimal pisr_dec01, decimal pisr_dec02, string pi_status, string Pallet_TTL_NW, DateTime pi_cre_date, int GW, string REC_NO, string Contract)
+        public bool Exists(string PI_ID, int pi_LineID, string pi_status, string pi_wec_ctn, int plr_LineID_tran, int pi_pallet_no, string CartonNo, string CartonID, string pi_chr01, string CoDesc, string pisr_rir, string pisr_invoice, string pisr_part, string Pisr_receiver, string pisr_site, string pisr_po_nbr, decimal pisr_qty, string pisr_curr, decimal pisr_cost, decimal pisr_base_cost, decimal pisr_us_cost, string pisr_seq, string sq_name, decimal pisr_net_wt, string pisr_rec_type, string pisr_abc, string pisr_code, string pisr_lic_req, string pisr_sbu, string pisr_vend, string Vend_name, string MFGR, string MFGR_Name, string MFGR_Part, decimal pisr_dec01, decimal pisr_dec02, string Pallet_TTL_NW, DateTime pi_cre_date, int GW, string REC_NO, string Contract, string pisr_con_code)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from vpi_report");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_wec_ctn=@pi_wec_ctn and plr_LineID_tran=@plr_LineID_tran and pi_pallet_no=@pi_pallet_no and CartonNo=@CartonNo and CartonID=@CartonID and pi_chr01=@pi_chr01 and CoDesc=@CoDesc and pisr_rir=@pisr_rir and pisr_invoice=@pisr_invoice and pisr_part=@pisr_part and Pisr_receiver=@Pisr_receiver and pisr_site=@pisr_site and pisr_po_nbr=@pisr_po_nbr and pisr_qty=@pisr_qty and pisr_curr=@pisr_curr and pisr_cost=@pisr_cost and pisr_base_cost=@pisr_base_cost and pisr_us_cost=@pisr_us_cost and pisr_seq=@pisr_seq and pisr_con_code=@pisr_con_code and sq_name=@sq_name and pisr_net_wt=@pisr_net_wt and pisr_rec_type=@pisr_rec_type and pisr_abc=@pisr_abc and pisr_code=@pisr_code and pisr_lic_req=@pisr_lic_req and pisr_sbu=@pisr_sbu and pisr_vend=@pisr_vend and pisr_mfgr_name=@pisr_mfgr_name and MFGR=@MFGR and MFGR_Name=@MFGR_Name and MFGR_Part=@MFGR_Part and pisr_dec01=@pisr_dec01 and pisr_dec02=@pisr_dec02 and pi_status=@pi_status and Pallet_TTL_NW=@Pallet_TTL_NW and pi_cre_date=@pi_cre_date and GW=@GW and REC_NO=@REC_NO and Contract=@Contract ");
+            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_status=@pi_status and pi_wec_ctn=@pi_wec_ctn and plr_LineID_tran=@plr_LineID_tran and pi_pallet_no=@pi_pallet_no and CartonNo=@CartonNo and CartonID=@CartonID and pi_chr01=@pi_chr01 and CoDesc=@CoDesc and pisr_rir=@pisr_rir and pisr_invoice=@pisr_invoice and pisr_part=@pisr_part and Pisr_receiver=@Pisr_receiver and pisr_site=@pisr_site and pisr_po_nbr=@pisr_po_nbr and pisr_qty=@pisr_qty and pisr_curr=@pisr_curr and pisr_cost=@pisr_cost and pisr_base_cost=@pisr_base_cost and pisr_us_cost=@pisr_us_cost and pisr_seq=@pisr_seq and sq_name=@sq_name and pisr_net_wt=@pisr_net_wt and pisr_rec_type=@pisr_rec_type and pisr_abc=@pisr_abc and pisr_code=@pisr_code and pisr_lic_req=@pisr_lic_req and pisr_sbu=@pisr_sbu and pisr_vend=@pisr_vend and Vend_name=@Vend_name and MFGR=@MFGR and MFGR_Name=@MFGR_Name and MFGR_Part=@MFGR_Part and pisr_dec01=@pisr_dec01 and pisr_dec02=@pisr_dec02 and Pallet_TTL_NW=@Pallet_TTL_NW and pi_cre_date=@pi_cre_date and GW=@GW and REC_NO=@REC_NO and Contract=@Contract and pisr_con_code=@pisr_con_code ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
+					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
 					new SqlParameter("@plr_LineID_tran", SqlDbType.Int,4),
 					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
@@ -44,7 +45,6 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_base_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_us_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_seq", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50),
 					new SqlParameter("@sq_name", SqlDbType.NVarChar,100),
 					new SqlParameter("@pisr_net_wt", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_rec_type", SqlDbType.NVarChar,50),
@@ -53,40 +53,40 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_lic_req", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_sbu", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_vend", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_mfgr_name", SqlDbType.NVarChar,50),
-					new SqlParameter("@MFGR", SqlDbType.VarChar,30),
-					new SqlParameter("@MFGR_Name", SqlDbType.VarChar,1),
+					new SqlParameter("@Vend_name", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR_Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@MFGR_Part", SqlDbType.VarChar,30),
 					new SqlParameter("@pisr_dec01", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_dec02", SqlDbType.Decimal,9),
-					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@Pallet_TTL_NW", SqlDbType.NVarChar,10),
 					new SqlParameter("@pi_cre_date", SqlDbType.DateTime),
 					new SqlParameter("@GW", SqlDbType.Int,4),
 					new SqlParameter("@REC_NO", SqlDbType.VarChar,1),
-					new SqlParameter("@Contract", SqlDbType.VarChar,1)			};
+					new SqlParameter("@Contract", SqlDbType.VarChar,1),
+					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50)			};
             parameters[0].Value = PI_ID;
             parameters[1].Value = pi_LineID;
-            parameters[2].Value = pi_wec_ctn;
-            parameters[3].Value = plr_LineID_tran;
-            parameters[4].Value = pi_pallet_no;
-            parameters[5].Value = CartonNo;
-            parameters[6].Value = CartonID;
-            parameters[7].Value = pi_chr01;
-            parameters[8].Value = CoDesc;
-            parameters[9].Value = pisr_rir;
-            parameters[10].Value = pisr_invoice;
-            parameters[11].Value = pisr_part;
-            parameters[12].Value = Pisr_receiver;
-            parameters[13].Value = pisr_site;
-            parameters[14].Value = pisr_po_nbr;
-            parameters[15].Value = pisr_qty;
-            parameters[16].Value = pisr_curr;
-            parameters[17].Value = pisr_cost;
-            parameters[18].Value = pisr_base_cost;
-            parameters[19].Value = pisr_us_cost;
-            parameters[20].Value = pisr_seq;
-            parameters[21].Value = pisr_con_code;
+            parameters[2].Value = pi_status;
+            parameters[3].Value = pi_wec_ctn;
+            parameters[4].Value = plr_LineID_tran;
+            parameters[5].Value = pi_pallet_no;
+            parameters[6].Value = CartonNo;
+            parameters[7].Value = CartonID;
+            parameters[8].Value = pi_chr01;
+            parameters[9].Value = CoDesc;
+            parameters[10].Value = pisr_rir;
+            parameters[11].Value = pisr_invoice;
+            parameters[12].Value = pisr_part;
+            parameters[13].Value = Pisr_receiver;
+            parameters[14].Value = pisr_site;
+            parameters[15].Value = pisr_po_nbr;
+            parameters[16].Value = pisr_qty;
+            parameters[17].Value = pisr_curr;
+            parameters[18].Value = pisr_cost;
+            parameters[19].Value = pisr_base_cost;
+            parameters[20].Value = pisr_us_cost;
+            parameters[21].Value = pisr_seq;
             parameters[22].Value = sq_name;
             parameters[23].Value = pisr_net_wt;
             parameters[24].Value = pisr_rec_type;
@@ -95,18 +95,18 @@ namespace PIE.DAL
             parameters[27].Value = pisr_lic_req;
             parameters[28].Value = pisr_sbu;
             parameters[29].Value = pisr_vend;
-            parameters[30].Value = pisr_mfgr_name;
+            parameters[30].Value = Vend_name;
             parameters[31].Value = MFGR;
             parameters[32].Value = MFGR_Name;
             parameters[33].Value = MFGR_Part;
             parameters[34].Value = pisr_dec01;
             parameters[35].Value = pisr_dec02;
-            parameters[36].Value = pi_status;
-            parameters[37].Value = Pallet_TTL_NW;
-            parameters[38].Value = pi_cre_date;
-            parameters[39].Value = GW;
-            parameters[40].Value = REC_NO;
-            parameters[41].Value = Contract;
+            parameters[36].Value = Pallet_TTL_NW;
+            parameters[37].Value = pi_cre_date;
+            parameters[38].Value = GW;
+            parameters[39].Value = REC_NO;
+            parameters[40].Value = Contract;
+            parameters[41].Value = pisr_con_code;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
@@ -119,12 +119,13 @@ namespace PIE.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into vpi_report(");
-            strSql.Append("PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_chr01,CoDesc,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,sq_name,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_mfgr_name,MFGR,MFGR_Name,MFGR_Part,pisr_dec01,pisr_dec02,pi_status,Pallet_TTL_NW,pi_cre_date,GW,REC_NO,Contract)");
+            strSql.Append("PI_ID,pi_LineID,pi_status,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_chr01,CoDesc,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,sq_name,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,Vend_name,MFGR,MFGR_Name,MFGR_Part,pisr_dec01,pisr_dec02,Pallet_TTL_NW,pi_cre_date,GW,REC_NO,Contract,pisr_con_code)");
             strSql.Append(" values (");
-            strSql.Append("@PI_ID,@pi_LineID,@pi_wec_ctn,@plr_LineID_tran,@pi_pallet_no,@CartonNo,@CartonID,@pi_chr01,@CoDesc,@pisr_rir,@pisr_invoice,@pisr_part,@Pisr_receiver,@pisr_site,@pisr_po_nbr,@pisr_qty,@pisr_curr,@pisr_cost,@pisr_base_cost,@pisr_us_cost,@pisr_seq,@pisr_con_code,@sq_name,@pisr_net_wt,@pisr_rec_type,@pisr_abc,@pisr_code,@pisr_lic_req,@pisr_sbu,@pisr_vend,@pisr_mfgr_name,@MFGR,@MFGR_Name,@MFGR_Part,@pisr_dec01,@pisr_dec02,@pi_status,@Pallet_TTL_NW,@pi_cre_date,@GW,@REC_NO,@Contract)");
+            strSql.Append("@PI_ID,@pi_LineID,@pi_status,@pi_wec_ctn,@plr_LineID_tran,@pi_pallet_no,@CartonNo,@CartonID,@pi_chr01,@CoDesc,@pisr_rir,@pisr_invoice,@pisr_part,@Pisr_receiver,@pisr_site,@pisr_po_nbr,@pisr_qty,@pisr_curr,@pisr_cost,@pisr_base_cost,@pisr_us_cost,@pisr_seq,@sq_name,@pisr_net_wt,@pisr_rec_type,@pisr_abc,@pisr_code,@pisr_lic_req,@pisr_sbu,@pisr_vend,@Vend_name,@MFGR,@MFGR_Name,@MFGR_Part,@pisr_dec01,@pisr_dec02,@Pallet_TTL_NW,@pi_cre_date,@GW,@REC_NO,@Contract,@pisr_con_code)");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
+					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
 					new SqlParameter("@plr_LineID_tran", SqlDbType.Int,4),
 					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
@@ -144,7 +145,6 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_base_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_us_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_seq", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50),
 					new SqlParameter("@sq_name", SqlDbType.NVarChar,100),
 					new SqlParameter("@pisr_net_wt", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_rec_type", SqlDbType.NVarChar,50),
@@ -153,40 +153,40 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_lic_req", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_sbu", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_vend", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_mfgr_name", SqlDbType.NVarChar,50),
-					new SqlParameter("@MFGR", SqlDbType.VarChar,30),
-					new SqlParameter("@MFGR_Name", SqlDbType.VarChar,1),
+					new SqlParameter("@Vend_name", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR_Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@MFGR_Part", SqlDbType.VarChar,30),
 					new SqlParameter("@pisr_dec01", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_dec02", SqlDbType.Decimal,9),
-					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@Pallet_TTL_NW", SqlDbType.NVarChar,10),
 					new SqlParameter("@pi_cre_date", SqlDbType.DateTime),
 					new SqlParameter("@GW", SqlDbType.Int,4),
 					new SqlParameter("@REC_NO", SqlDbType.VarChar,1),
-					new SqlParameter("@Contract", SqlDbType.VarChar,1)};
+					new SqlParameter("@Contract", SqlDbType.VarChar,1),
+					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.PI_ID;
             parameters[1].Value = model.pi_LineID;
-            parameters[2].Value = model.pi_wec_ctn;
-            parameters[3].Value = model.plr_LineID_tran;
-            parameters[4].Value = model.pi_pallet_no;
-            parameters[5].Value = model.CartonNo;
-            parameters[6].Value = model.CartonID;
-            parameters[7].Value = model.pi_chr01;
-            parameters[8].Value = model.CoDesc;
-            parameters[9].Value = model.pisr_rir;
-            parameters[10].Value = model.pisr_invoice;
-            parameters[11].Value = model.pisr_part;
-            parameters[12].Value = model.Pisr_receiver;
-            parameters[13].Value = model.pisr_site;
-            parameters[14].Value = model.pisr_po_nbr;
-            parameters[15].Value = model.pisr_qty;
-            parameters[16].Value = model.pisr_curr;
-            parameters[17].Value = model.pisr_cost;
-            parameters[18].Value = model.pisr_base_cost;
-            parameters[19].Value = model.pisr_us_cost;
-            parameters[20].Value = model.pisr_seq;
-            parameters[21].Value = model.pisr_con_code;
+            parameters[2].Value = model.pi_status;
+            parameters[3].Value = model.pi_wec_ctn;
+            parameters[4].Value = model.plr_LineID_tran;
+            parameters[5].Value = model.pi_pallet_no;
+            parameters[6].Value = model.CartonNo;
+            parameters[7].Value = model.CartonID;
+            parameters[8].Value = model.pi_chr01;
+            parameters[9].Value = model.CoDesc;
+            parameters[10].Value = model.pisr_rir;
+            parameters[11].Value = model.pisr_invoice;
+            parameters[12].Value = model.pisr_part;
+            parameters[13].Value = model.Pisr_receiver;
+            parameters[14].Value = model.pisr_site;
+            parameters[15].Value = model.pisr_po_nbr;
+            parameters[16].Value = model.pisr_qty;
+            parameters[17].Value = model.pisr_curr;
+            parameters[18].Value = model.pisr_cost;
+            parameters[19].Value = model.pisr_base_cost;
+            parameters[20].Value = model.pisr_us_cost;
+            parameters[21].Value = model.pisr_seq;
             parameters[22].Value = model.sq_name;
             parameters[23].Value = model.pisr_net_wt;
             parameters[24].Value = model.pisr_rec_type;
@@ -195,18 +195,18 @@ namespace PIE.DAL
             parameters[27].Value = model.pisr_lic_req;
             parameters[28].Value = model.pisr_sbu;
             parameters[29].Value = model.pisr_vend;
-            parameters[30].Value = model.pisr_mfgr_name;
+            parameters[30].Value = model.Vend_name;
             parameters[31].Value = model.MFGR;
             parameters[32].Value = model.MFGR_Name;
             parameters[33].Value = model.MFGR_Part;
             parameters[34].Value = model.pisr_dec01;
             parameters[35].Value = model.pisr_dec02;
-            parameters[36].Value = model.pi_status;
-            parameters[37].Value = model.Pallet_TTL_NW;
-            parameters[38].Value = model.pi_cre_date;
-            parameters[39].Value = model.GW;
-            parameters[40].Value = model.REC_NO;
-            parameters[41].Value = model.Contract;
+            parameters[36].Value = model.Pallet_TTL_NW;
+            parameters[37].Value = model.pi_cre_date;
+            parameters[38].Value = model.GW;
+            parameters[39].Value = model.REC_NO;
+            parameters[40].Value = model.Contract;
+            parameters[41].Value = model.pisr_con_code;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -227,6 +227,7 @@ namespace PIE.DAL
             strSql.Append("update vpi_report set ");
             strSql.Append("PI_ID=@PI_ID,");
             strSql.Append("pi_LineID=@pi_LineID,");
+            strSql.Append("pi_status=@pi_status,");
             strSql.Append("pi_wec_ctn=@pi_wec_ctn,");
             strSql.Append("plr_LineID_tran=@plr_LineID_tran,");
             strSql.Append("pi_pallet_no=@pi_pallet_no,");
@@ -246,7 +247,6 @@ namespace PIE.DAL
             strSql.Append("pisr_base_cost=@pisr_base_cost,");
             strSql.Append("pisr_us_cost=@pisr_us_cost,");
             strSql.Append("pisr_seq=@pisr_seq,");
-            strSql.Append("pisr_con_code=@pisr_con_code,");
             strSql.Append("sq_name=@sq_name,");
             strSql.Append("pisr_net_wt=@pisr_net_wt,");
             strSql.Append("pisr_rec_type=@pisr_rec_type,");
@@ -255,22 +255,23 @@ namespace PIE.DAL
             strSql.Append("pisr_lic_req=@pisr_lic_req,");
             strSql.Append("pisr_sbu=@pisr_sbu,");
             strSql.Append("pisr_vend=@pisr_vend,");
-            strSql.Append("pisr_mfgr_name=@pisr_mfgr_name,");
+            strSql.Append("Vend_name=@Vend_name,");
             strSql.Append("MFGR=@MFGR,");
             strSql.Append("MFGR_Name=@MFGR_Name,");
             strSql.Append("MFGR_Part=@MFGR_Part,");
             strSql.Append("pisr_dec01=@pisr_dec01,");
             strSql.Append("pisr_dec02=@pisr_dec02,");
-            strSql.Append("pi_status=@pi_status,");
             strSql.Append("Pallet_TTL_NW=@Pallet_TTL_NW,");
             strSql.Append("pi_cre_date=@pi_cre_date,");
             strSql.Append("GW=@GW,");
             strSql.Append("REC_NO=@REC_NO,");
-            strSql.Append("Contract=@Contract");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_wec_ctn=@pi_wec_ctn and plr_LineID_tran=@plr_LineID_tran and pi_pallet_no=@pi_pallet_no and CartonNo=@CartonNo and CartonID=@CartonID and pi_chr01=@pi_chr01 and CoDesc=@CoDesc and pisr_rir=@pisr_rir and pisr_invoice=@pisr_invoice and pisr_part=@pisr_part and Pisr_receiver=@Pisr_receiver and pisr_site=@pisr_site and pisr_po_nbr=@pisr_po_nbr and pisr_qty=@pisr_qty and pisr_curr=@pisr_curr and pisr_cost=@pisr_cost and pisr_base_cost=@pisr_base_cost and pisr_us_cost=@pisr_us_cost and pisr_seq=@pisr_seq and pisr_con_code=@pisr_con_code and sq_name=@sq_name and pisr_net_wt=@pisr_net_wt and pisr_rec_type=@pisr_rec_type and pisr_abc=@pisr_abc and pisr_code=@pisr_code and pisr_lic_req=@pisr_lic_req and pisr_sbu=@pisr_sbu and pisr_vend=@pisr_vend and pisr_mfgr_name=@pisr_mfgr_name and MFGR=@MFGR and MFGR_Name=@MFGR_Name and MFGR_Part=@MFGR_Part and pisr_dec01=@pisr_dec01 and pisr_dec02=@pisr_dec02 and pi_status=@pi_status and Pallet_TTL_NW=@Pallet_TTL_NW and pi_cre_date=@pi_cre_date and GW=@GW and REC_NO=@REC_NO and Contract=@Contract ");
+            strSql.Append("Contract=@Contract,");
+            strSql.Append("pisr_con_code=@pisr_con_code");
+            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_status=@pi_status and pi_wec_ctn=@pi_wec_ctn and plr_LineID_tran=@plr_LineID_tran and pi_pallet_no=@pi_pallet_no and CartonNo=@CartonNo and CartonID=@CartonID and pi_chr01=@pi_chr01 and CoDesc=@CoDesc and pisr_rir=@pisr_rir and pisr_invoice=@pisr_invoice and pisr_part=@pisr_part and Pisr_receiver=@Pisr_receiver and pisr_site=@pisr_site and pisr_po_nbr=@pisr_po_nbr and pisr_qty=@pisr_qty and pisr_curr=@pisr_curr and pisr_cost=@pisr_cost and pisr_base_cost=@pisr_base_cost and pisr_us_cost=@pisr_us_cost and pisr_seq=@pisr_seq and sq_name=@sq_name and pisr_net_wt=@pisr_net_wt and pisr_rec_type=@pisr_rec_type and pisr_abc=@pisr_abc and pisr_code=@pisr_code and pisr_lic_req=@pisr_lic_req and pisr_sbu=@pisr_sbu and pisr_vend=@pisr_vend and Vend_name=@Vend_name and MFGR=@MFGR and MFGR_Name=@MFGR_Name and MFGR_Part=@MFGR_Part and pisr_dec01=@pisr_dec01 and pisr_dec02=@pisr_dec02 and Pallet_TTL_NW=@Pallet_TTL_NW and pi_cre_date=@pi_cre_date and GW=@GW and REC_NO=@REC_NO and Contract=@Contract and pisr_con_code=@pisr_con_code ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
+					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
 					new SqlParameter("@plr_LineID_tran", SqlDbType.Int,4),
 					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
@@ -290,7 +291,6 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_base_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_us_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_seq", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50),
 					new SqlParameter("@sq_name", SqlDbType.NVarChar,100),
 					new SqlParameter("@pisr_net_wt", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_rec_type", SqlDbType.NVarChar,50),
@@ -299,40 +299,40 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_lic_req", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_sbu", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_vend", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_mfgr_name", SqlDbType.NVarChar,50),
-					new SqlParameter("@MFGR", SqlDbType.VarChar,30),
-					new SqlParameter("@MFGR_Name", SqlDbType.VarChar,1),
+					new SqlParameter("@Vend_name", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR_Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@MFGR_Part", SqlDbType.VarChar,30),
 					new SqlParameter("@pisr_dec01", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_dec02", SqlDbType.Decimal,9),
-					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@Pallet_TTL_NW", SqlDbType.NVarChar,10),
 					new SqlParameter("@pi_cre_date", SqlDbType.DateTime),
 					new SqlParameter("@GW", SqlDbType.Int,4),
 					new SqlParameter("@REC_NO", SqlDbType.VarChar,1),
-					new SqlParameter("@Contract", SqlDbType.VarChar,1)};
+					new SqlParameter("@Contract", SqlDbType.VarChar,1),
+					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.PI_ID;
             parameters[1].Value = model.pi_LineID;
-            parameters[2].Value = model.pi_wec_ctn;
-            parameters[3].Value = model.plr_LineID_tran;
-            parameters[4].Value = model.pi_pallet_no;
-            parameters[5].Value = model.CartonNo;
-            parameters[6].Value = model.CartonID;
-            parameters[7].Value = model.pi_chr01;
-            parameters[8].Value = model.CoDesc;
-            parameters[9].Value = model.pisr_rir;
-            parameters[10].Value = model.pisr_invoice;
-            parameters[11].Value = model.pisr_part;
-            parameters[12].Value = model.Pisr_receiver;
-            parameters[13].Value = model.pisr_site;
-            parameters[14].Value = model.pisr_po_nbr;
-            parameters[15].Value = model.pisr_qty;
-            parameters[16].Value = model.pisr_curr;
-            parameters[17].Value = model.pisr_cost;
-            parameters[18].Value = model.pisr_base_cost;
-            parameters[19].Value = model.pisr_us_cost;
-            parameters[20].Value = model.pisr_seq;
-            parameters[21].Value = model.pisr_con_code;
+            parameters[2].Value = model.pi_status;
+            parameters[3].Value = model.pi_wec_ctn;
+            parameters[4].Value = model.plr_LineID_tran;
+            parameters[5].Value = model.pi_pallet_no;
+            parameters[6].Value = model.CartonNo;
+            parameters[7].Value = model.CartonID;
+            parameters[8].Value = model.pi_chr01;
+            parameters[9].Value = model.CoDesc;
+            parameters[10].Value = model.pisr_rir;
+            parameters[11].Value = model.pisr_invoice;
+            parameters[12].Value = model.pisr_part;
+            parameters[13].Value = model.Pisr_receiver;
+            parameters[14].Value = model.pisr_site;
+            parameters[15].Value = model.pisr_po_nbr;
+            parameters[16].Value = model.pisr_qty;
+            parameters[17].Value = model.pisr_curr;
+            parameters[18].Value = model.pisr_cost;
+            parameters[19].Value = model.pisr_base_cost;
+            parameters[20].Value = model.pisr_us_cost;
+            parameters[21].Value = model.pisr_seq;
             parameters[22].Value = model.sq_name;
             parameters[23].Value = model.pisr_net_wt;
             parameters[24].Value = model.pisr_rec_type;
@@ -341,18 +341,18 @@ namespace PIE.DAL
             parameters[27].Value = model.pisr_lic_req;
             parameters[28].Value = model.pisr_sbu;
             parameters[29].Value = model.pisr_vend;
-            parameters[30].Value = model.pisr_mfgr_name;
+            parameters[30].Value = model.Vend_name;
             parameters[31].Value = model.MFGR;
             parameters[32].Value = model.MFGR_Name;
             parameters[33].Value = model.MFGR_Part;
             parameters[34].Value = model.pisr_dec01;
             parameters[35].Value = model.pisr_dec02;
-            parameters[36].Value = model.pi_status;
-            parameters[37].Value = model.Pallet_TTL_NW;
-            parameters[38].Value = model.pi_cre_date;
-            parameters[39].Value = model.GW;
-            parameters[40].Value = model.REC_NO;
-            parameters[41].Value = model.Contract;
+            parameters[36].Value = model.Pallet_TTL_NW;
+            parameters[37].Value = model.pi_cre_date;
+            parameters[38].Value = model.GW;
+            parameters[39].Value = model.REC_NO;
+            parameters[40].Value = model.Contract;
+            parameters[41].Value = model.pisr_con_code;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -368,15 +368,16 @@ namespace PIE.DAL
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public bool Delete(string PI_ID, int pi_LineID, string pi_wec_ctn, int plr_LineID_tran, int pi_pallet_no, string CartonNo, string CartonID, string pi_chr01, string CoDesc, string pisr_rir, string pisr_invoice, string pisr_part, string Pisr_receiver, string pisr_site, string pisr_po_nbr, decimal pisr_qty, string pisr_curr, decimal pisr_cost, decimal pisr_base_cost, decimal pisr_us_cost, string pisr_seq, string pisr_con_code, string sq_name, decimal pisr_net_wt, string pisr_rec_type, string pisr_abc, string pisr_code, string pisr_lic_req, string pisr_sbu, string pisr_vend, string pisr_mfgr_name, string MFGR, string MFGR_Name, string MFGR_Part, decimal pisr_dec01, decimal pisr_dec02, string pi_status, string Pallet_TTL_NW, DateTime pi_cre_date, int GW, string REC_NO, string Contract)
+        public bool Delete(string PI_ID, int pi_LineID, string pi_status, string pi_wec_ctn, int plr_LineID_tran, int pi_pallet_no, string CartonNo, string CartonID, string pi_chr01, string CoDesc, string pisr_rir, string pisr_invoice, string pisr_part, string Pisr_receiver, string pisr_site, string pisr_po_nbr, decimal pisr_qty, string pisr_curr, decimal pisr_cost, decimal pisr_base_cost, decimal pisr_us_cost, string pisr_seq, string sq_name, decimal pisr_net_wt, string pisr_rec_type, string pisr_abc, string pisr_code, string pisr_lic_req, string pisr_sbu, string pisr_vend, string Vend_name, string MFGR, string MFGR_Name, string MFGR_Part, decimal pisr_dec01, decimal pisr_dec02, string Pallet_TTL_NW, DateTime pi_cre_date, int GW, string REC_NO, string Contract, string pisr_con_code)
         {
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from vpi_report ");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_wec_ctn=@pi_wec_ctn and plr_LineID_tran=@plr_LineID_tran and pi_pallet_no=@pi_pallet_no and CartonNo=@CartonNo and CartonID=@CartonID and pi_chr01=@pi_chr01 and CoDesc=@CoDesc and pisr_rir=@pisr_rir and pisr_invoice=@pisr_invoice and pisr_part=@pisr_part and Pisr_receiver=@Pisr_receiver and pisr_site=@pisr_site and pisr_po_nbr=@pisr_po_nbr and pisr_qty=@pisr_qty and pisr_curr=@pisr_curr and pisr_cost=@pisr_cost and pisr_base_cost=@pisr_base_cost and pisr_us_cost=@pisr_us_cost and pisr_seq=@pisr_seq and pisr_con_code=@pisr_con_code and sq_name=@sq_name and pisr_net_wt=@pisr_net_wt and pisr_rec_type=@pisr_rec_type and pisr_abc=@pisr_abc and pisr_code=@pisr_code and pisr_lic_req=@pisr_lic_req and pisr_sbu=@pisr_sbu and pisr_vend=@pisr_vend and pisr_mfgr_name=@pisr_mfgr_name and MFGR=@MFGR and MFGR_Name=@MFGR_Name and MFGR_Part=@MFGR_Part and pisr_dec01=@pisr_dec01 and pisr_dec02=@pisr_dec02 and pi_status=@pi_status and Pallet_TTL_NW=@Pallet_TTL_NW and pi_cre_date=@pi_cre_date and GW=@GW and REC_NO=@REC_NO and Contract=@Contract ");
+            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_status=@pi_status and pi_wec_ctn=@pi_wec_ctn and plr_LineID_tran=@plr_LineID_tran and pi_pallet_no=@pi_pallet_no and CartonNo=@CartonNo and CartonID=@CartonID and pi_chr01=@pi_chr01 and CoDesc=@CoDesc and pisr_rir=@pisr_rir and pisr_invoice=@pisr_invoice and pisr_part=@pisr_part and Pisr_receiver=@Pisr_receiver and pisr_site=@pisr_site and pisr_po_nbr=@pisr_po_nbr and pisr_qty=@pisr_qty and pisr_curr=@pisr_curr and pisr_cost=@pisr_cost and pisr_base_cost=@pisr_base_cost and pisr_us_cost=@pisr_us_cost and pisr_seq=@pisr_seq and sq_name=@sq_name and pisr_net_wt=@pisr_net_wt and pisr_rec_type=@pisr_rec_type and pisr_abc=@pisr_abc and pisr_code=@pisr_code and pisr_lic_req=@pisr_lic_req and pisr_sbu=@pisr_sbu and pisr_vend=@pisr_vend and Vend_name=@Vend_name and MFGR=@MFGR and MFGR_Name=@MFGR_Name and MFGR_Part=@MFGR_Part and pisr_dec01=@pisr_dec01 and pisr_dec02=@pisr_dec02 and Pallet_TTL_NW=@Pallet_TTL_NW and pi_cre_date=@pi_cre_date and GW=@GW and REC_NO=@REC_NO and Contract=@Contract and pisr_con_code=@pisr_con_code ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
+					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
 					new SqlParameter("@plr_LineID_tran", SqlDbType.Int,4),
 					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
@@ -396,7 +397,6 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_base_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_us_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_seq", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50),
 					new SqlParameter("@sq_name", SqlDbType.NVarChar,100),
 					new SqlParameter("@pisr_net_wt", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_rec_type", SqlDbType.NVarChar,50),
@@ -405,40 +405,40 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_lic_req", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_sbu", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_vend", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_mfgr_name", SqlDbType.NVarChar,50),
-					new SqlParameter("@MFGR", SqlDbType.VarChar,30),
-					new SqlParameter("@MFGR_Name", SqlDbType.VarChar,1),
+					new SqlParameter("@Vend_name", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR_Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@MFGR_Part", SqlDbType.VarChar,30),
 					new SqlParameter("@pisr_dec01", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_dec02", SqlDbType.Decimal,9),
-					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@Pallet_TTL_NW", SqlDbType.NVarChar,10),
 					new SqlParameter("@pi_cre_date", SqlDbType.DateTime),
 					new SqlParameter("@GW", SqlDbType.Int,4),
 					new SqlParameter("@REC_NO", SqlDbType.VarChar,1),
-					new SqlParameter("@Contract", SqlDbType.VarChar,1)			};
+					new SqlParameter("@Contract", SqlDbType.VarChar,1),
+					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50)			};
             parameters[0].Value = PI_ID;
             parameters[1].Value = pi_LineID;
-            parameters[2].Value = pi_wec_ctn;
-            parameters[3].Value = plr_LineID_tran;
-            parameters[4].Value = pi_pallet_no;
-            parameters[5].Value = CartonNo;
-            parameters[6].Value = CartonID;
-            parameters[7].Value = pi_chr01;
-            parameters[8].Value = CoDesc;
-            parameters[9].Value = pisr_rir;
-            parameters[10].Value = pisr_invoice;
-            parameters[11].Value = pisr_part;
-            parameters[12].Value = Pisr_receiver;
-            parameters[13].Value = pisr_site;
-            parameters[14].Value = pisr_po_nbr;
-            parameters[15].Value = pisr_qty;
-            parameters[16].Value = pisr_curr;
-            parameters[17].Value = pisr_cost;
-            parameters[18].Value = pisr_base_cost;
-            parameters[19].Value = pisr_us_cost;
-            parameters[20].Value = pisr_seq;
-            parameters[21].Value = pisr_con_code;
+            parameters[2].Value = pi_status;
+            parameters[3].Value = pi_wec_ctn;
+            parameters[4].Value = plr_LineID_tran;
+            parameters[5].Value = pi_pallet_no;
+            parameters[6].Value = CartonNo;
+            parameters[7].Value = CartonID;
+            parameters[8].Value = pi_chr01;
+            parameters[9].Value = CoDesc;
+            parameters[10].Value = pisr_rir;
+            parameters[11].Value = pisr_invoice;
+            parameters[12].Value = pisr_part;
+            parameters[13].Value = Pisr_receiver;
+            parameters[14].Value = pisr_site;
+            parameters[15].Value = pisr_po_nbr;
+            parameters[16].Value = pisr_qty;
+            parameters[17].Value = pisr_curr;
+            parameters[18].Value = pisr_cost;
+            parameters[19].Value = pisr_base_cost;
+            parameters[20].Value = pisr_us_cost;
+            parameters[21].Value = pisr_seq;
             parameters[22].Value = sq_name;
             parameters[23].Value = pisr_net_wt;
             parameters[24].Value = pisr_rec_type;
@@ -447,18 +447,18 @@ namespace PIE.DAL
             parameters[27].Value = pisr_lic_req;
             parameters[28].Value = pisr_sbu;
             parameters[29].Value = pisr_vend;
-            parameters[30].Value = pisr_mfgr_name;
+            parameters[30].Value = Vend_name;
             parameters[31].Value = MFGR;
             parameters[32].Value = MFGR_Name;
             parameters[33].Value = MFGR_Part;
             parameters[34].Value = pisr_dec01;
             parameters[35].Value = pisr_dec02;
-            parameters[36].Value = pi_status;
-            parameters[37].Value = Pallet_TTL_NW;
-            parameters[38].Value = pi_cre_date;
-            parameters[39].Value = GW;
-            parameters[40].Value = REC_NO;
-            parameters[41].Value = Contract;
+            parameters[36].Value = Pallet_TTL_NW;
+            parameters[37].Value = pi_cre_date;
+            parameters[38].Value = GW;
+            parameters[39].Value = REC_NO;
+            parameters[40].Value = Contract;
+            parameters[41].Value = pisr_con_code;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -475,15 +475,16 @@ namespace PIE.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public PIE.Model.vpi_report GetModel(string PI_ID, int pi_LineID, string pi_wec_ctn, int plr_LineID_tran, int pi_pallet_no, string CartonNo, string CartonID, string pi_chr01, string CoDesc, string pisr_rir, string pisr_invoice, string pisr_part, string Pisr_receiver, string pisr_site, string pisr_po_nbr, decimal pisr_qty, string pisr_curr, decimal pisr_cost, decimal pisr_base_cost, decimal pisr_us_cost, string pisr_seq, string pisr_con_code, string sq_name, decimal pisr_net_wt, string pisr_rec_type, string pisr_abc, string pisr_code, string pisr_lic_req, string pisr_sbu, string pisr_vend, string pisr_mfgr_name, string MFGR, string MFGR_Name, string MFGR_Part, decimal pisr_dec01, decimal pisr_dec02, string pi_status, string Pallet_TTL_NW, DateTime pi_cre_date, int GW, string REC_NO, string Contract)
+        public PIE.Model.vpi_report GetModel(string PI_ID, int pi_LineID, string pi_status, string pi_wec_ctn, int plr_LineID_tran, int pi_pallet_no, string CartonNo, string CartonID, string pi_chr01, string CoDesc, string pisr_rir, string pisr_invoice, string pisr_part, string Pisr_receiver, string pisr_site, string pisr_po_nbr, decimal pisr_qty, string pisr_curr, decimal pisr_cost, decimal pisr_base_cost, decimal pisr_us_cost, string pisr_seq, string sq_name, decimal pisr_net_wt, string pisr_rec_type, string pisr_abc, string pisr_code, string pisr_lic_req, string pisr_sbu, string pisr_vend, string Vend_name, string MFGR, string MFGR_Name, string MFGR_Part, decimal pisr_dec01, decimal pisr_dec02, string Pallet_TTL_NW, DateTime pi_cre_date, int GW, string REC_NO, string Contract, string pisr_con_code)
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_chr01,CoDesc,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,sq_name,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_mfgr_name,MFGR,MFGR_Name,MFGR_Part,pisr_dec01,pisr_dec02,pi_status,Pallet_TTL_NW,pi_cre_date,GW,REC_NO,Contract from vpi_report ");
-            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_wec_ctn=@pi_wec_ctn and plr_LineID_tran=@plr_LineID_tran and pi_pallet_no=@pi_pallet_no and CartonNo=@CartonNo and CartonID=@CartonID and pi_chr01=@pi_chr01 and CoDesc=@CoDesc and pisr_rir=@pisr_rir and pisr_invoice=@pisr_invoice and pisr_part=@pisr_part and Pisr_receiver=@Pisr_receiver and pisr_site=@pisr_site and pisr_po_nbr=@pisr_po_nbr and pisr_qty=@pisr_qty and pisr_curr=@pisr_curr and pisr_cost=@pisr_cost and pisr_base_cost=@pisr_base_cost and pisr_us_cost=@pisr_us_cost and pisr_seq=@pisr_seq and pisr_con_code=@pisr_con_code and sq_name=@sq_name and pisr_net_wt=@pisr_net_wt and pisr_rec_type=@pisr_rec_type and pisr_abc=@pisr_abc and pisr_code=@pisr_code and pisr_lic_req=@pisr_lic_req and pisr_sbu=@pisr_sbu and pisr_vend=@pisr_vend and pisr_mfgr_name=@pisr_mfgr_name and MFGR=@MFGR and MFGR_Name=@MFGR_Name and MFGR_Part=@MFGR_Part and pisr_dec01=@pisr_dec01 and pisr_dec02=@pisr_dec02 and pi_status=@pi_status and Pallet_TTL_NW=@Pallet_TTL_NW and pi_cre_date=@pi_cre_date and GW=@GW and REC_NO=@REC_NO and Contract=@Contract ");
+            strSql.Append("select  top 1 PI_ID,pi_LineID,pi_status,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_chr01,CoDesc,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,sq_name,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,Vend_name,MFGR,MFGR_Name,MFGR_Part,pisr_dec01,pisr_dec02,Pallet_TTL_NW,pi_cre_date,GW,REC_NO,Contract,pisr_con_code from vpi_report ");
+            strSql.Append(" where PI_ID=@PI_ID and pi_LineID=@pi_LineID and pi_status=@pi_status and pi_wec_ctn=@pi_wec_ctn and plr_LineID_tran=@plr_LineID_tran and pi_pallet_no=@pi_pallet_no and CartonNo=@CartonNo and CartonID=@CartonID and pi_chr01=@pi_chr01 and CoDesc=@CoDesc and pisr_rir=@pisr_rir and pisr_invoice=@pisr_invoice and pisr_part=@pisr_part and Pisr_receiver=@Pisr_receiver and pisr_site=@pisr_site and pisr_po_nbr=@pisr_po_nbr and pisr_qty=@pisr_qty and pisr_curr=@pisr_curr and pisr_cost=@pisr_cost and pisr_base_cost=@pisr_base_cost and pisr_us_cost=@pisr_us_cost and pisr_seq=@pisr_seq and sq_name=@sq_name and pisr_net_wt=@pisr_net_wt and pisr_rec_type=@pisr_rec_type and pisr_abc=@pisr_abc and pisr_code=@pisr_code and pisr_lic_req=@pisr_lic_req and pisr_sbu=@pisr_sbu and pisr_vend=@pisr_vend and Vend_name=@Vend_name and MFGR=@MFGR and MFGR_Name=@MFGR_Name and MFGR_Part=@MFGR_Part and pisr_dec01=@pisr_dec01 and pisr_dec02=@pisr_dec02 and Pallet_TTL_NW=@Pallet_TTL_NW and pi_cre_date=@pi_cre_date and GW=@GW and REC_NO=@REC_NO and Contract=@Contract and pisr_con_code=@pisr_con_code ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_LineID", SqlDbType.Int,4),
+					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
 					new SqlParameter("@plr_LineID_tran", SqlDbType.Int,4),
 					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
@@ -503,7 +504,6 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_base_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_us_cost", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_seq", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50),
 					new SqlParameter("@sq_name", SqlDbType.NVarChar,100),
 					new SqlParameter("@pisr_net_wt", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_rec_type", SqlDbType.NVarChar,50),
@@ -512,40 +512,40 @@ namespace PIE.DAL
 					new SqlParameter("@pisr_lic_req", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_sbu", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_vend", SqlDbType.NVarChar,50),
-					new SqlParameter("@pisr_mfgr_name", SqlDbType.NVarChar,50),
-					new SqlParameter("@MFGR", SqlDbType.VarChar,30),
-					new SqlParameter("@MFGR_Name", SqlDbType.VarChar,1),
+					new SqlParameter("@Vend_name", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR", SqlDbType.NVarChar,50),
+					new SqlParameter("@MFGR_Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@MFGR_Part", SqlDbType.VarChar,30),
 					new SqlParameter("@pisr_dec01", SqlDbType.Decimal,9),
 					new SqlParameter("@pisr_dec02", SqlDbType.Decimal,9),
-					new SqlParameter("@pi_status", SqlDbType.NVarChar,50),
 					new SqlParameter("@Pallet_TTL_NW", SqlDbType.NVarChar,10),
 					new SqlParameter("@pi_cre_date", SqlDbType.DateTime),
 					new SqlParameter("@GW", SqlDbType.Int,4),
 					new SqlParameter("@REC_NO", SqlDbType.VarChar,1),
-					new SqlParameter("@Contract", SqlDbType.VarChar,1)			};
+					new SqlParameter("@Contract", SqlDbType.VarChar,1),
+					new SqlParameter("@pisr_con_code", SqlDbType.NVarChar,50)			};
             parameters[0].Value = PI_ID;
             parameters[1].Value = pi_LineID;
-            parameters[2].Value = pi_wec_ctn;
-            parameters[3].Value = plr_LineID_tran;
-            parameters[4].Value = pi_pallet_no;
-            parameters[5].Value = CartonNo;
-            parameters[6].Value = CartonID;
-            parameters[7].Value = pi_chr01;
-            parameters[8].Value = CoDesc;
-            parameters[9].Value = pisr_rir;
-            parameters[10].Value = pisr_invoice;
-            parameters[11].Value = pisr_part;
-            parameters[12].Value = Pisr_receiver;
-            parameters[13].Value = pisr_site;
-            parameters[14].Value = pisr_po_nbr;
-            parameters[15].Value = pisr_qty;
-            parameters[16].Value = pisr_curr;
-            parameters[17].Value = pisr_cost;
-            parameters[18].Value = pisr_base_cost;
-            parameters[19].Value = pisr_us_cost;
-            parameters[20].Value = pisr_seq;
-            parameters[21].Value = pisr_con_code;
+            parameters[2].Value = pi_status;
+            parameters[3].Value = pi_wec_ctn;
+            parameters[4].Value = plr_LineID_tran;
+            parameters[5].Value = pi_pallet_no;
+            parameters[6].Value = CartonNo;
+            parameters[7].Value = CartonID;
+            parameters[8].Value = pi_chr01;
+            parameters[9].Value = CoDesc;
+            parameters[10].Value = pisr_rir;
+            parameters[11].Value = pisr_invoice;
+            parameters[12].Value = pisr_part;
+            parameters[13].Value = Pisr_receiver;
+            parameters[14].Value = pisr_site;
+            parameters[15].Value = pisr_po_nbr;
+            parameters[16].Value = pisr_qty;
+            parameters[17].Value = pisr_curr;
+            parameters[18].Value = pisr_cost;
+            parameters[19].Value = pisr_base_cost;
+            parameters[20].Value = pisr_us_cost;
+            parameters[21].Value = pisr_seq;
             parameters[22].Value = sq_name;
             parameters[23].Value = pisr_net_wt;
             parameters[24].Value = pisr_rec_type;
@@ -554,18 +554,18 @@ namespace PIE.DAL
             parameters[27].Value = pisr_lic_req;
             parameters[28].Value = pisr_sbu;
             parameters[29].Value = pisr_vend;
-            parameters[30].Value = pisr_mfgr_name;
+            parameters[30].Value = Vend_name;
             parameters[31].Value = MFGR;
             parameters[32].Value = MFGR_Name;
             parameters[33].Value = MFGR_Part;
             parameters[34].Value = pisr_dec01;
             parameters[35].Value = pisr_dec02;
-            parameters[36].Value = pi_status;
-            parameters[37].Value = Pallet_TTL_NW;
-            parameters[38].Value = pi_cre_date;
-            parameters[39].Value = GW;
-            parameters[40].Value = REC_NO;
-            parameters[41].Value = Contract;
+            parameters[36].Value = Pallet_TTL_NW;
+            parameters[37].Value = pi_cre_date;
+            parameters[38].Value = GW;
+            parameters[39].Value = REC_NO;
+            parameters[40].Value = Contract;
+            parameters[41].Value = pisr_con_code;
 
             PIE.Model.vpi_report model = new PIE.Model.vpi_report();
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
@@ -595,6 +595,10 @@ namespace PIE.DAL
                 if (row["pi_LineID"] != null && row["pi_LineID"].ToString() != "")
                 {
                     model.pi_LineID = int.Parse(row["pi_LineID"].ToString());
+                }
+                if (row["pi_status"] != null)
+                {
+                    model.pi_status = row["pi_status"].ToString();
                 }
                 if (row["pi_wec_ctn"] != null)
                 {
@@ -672,10 +676,6 @@ namespace PIE.DAL
                 {
                     model.pisr_seq = row["pisr_seq"].ToString();
                 }
-                if (row["pisr_con_code"] != null)
-                {
-                    model.pisr_con_code = row["pisr_con_code"].ToString();
-                }
                 if (row["sq_name"] != null)
                 {
                     model.sq_name = row["sq_name"].ToString();
@@ -708,9 +708,9 @@ namespace PIE.DAL
                 {
                     model.pisr_vend = row["pisr_vend"].ToString();
                 }
-                if (row["pisr_mfgr_name"] != null)
+                if (row["Vend_name"] != null)
                 {
-                    model.pisr_mfgr_name = row["pisr_mfgr_name"].ToString();
+                    model.Vend_name = row["Vend_name"].ToString();
                 }
                 if (row["MFGR"] != null)
                 {
@@ -732,10 +732,6 @@ namespace PIE.DAL
                 {
                     model.pisr_dec02 = decimal.Parse(row["pisr_dec02"].ToString());
                 }
-                if (row["pi_status"] != null)
-                {
-                    model.pi_status = row["pi_status"].ToString();
-                }
                 if (row["Pallet_TTL_NW"] != null)
                 {
                     model.Pallet_TTL_NW = row["Pallet_TTL_NW"].ToString();
@@ -756,6 +752,10 @@ namespace PIE.DAL
                 {
                     model.Contract = row["Contract"].ToString();
                 }
+                if (row["pisr_con_code"] != null)
+                {
+                    model.pisr_con_code = row["pisr_con_code"].ToString();
+                }
             }
             return model;
         }
@@ -766,7 +766,7 @@ namespace PIE.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_chr01,CoDesc,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,sq_name,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_mfgr_name,MFGR,MFGR_Name,MFGR_Part,pisr_dec01,pisr_dec02,pi_status,Pallet_TTL_NW,pi_cre_date,GW,REC_NO,Contract ");
+            strSql.Append("select PI_ID,pi_LineID,pi_status,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_chr01,CoDesc,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,sq_name,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,Vend_name,MFGR,MFGR_Name,MFGR_Part,pisr_dec01,pisr_dec02,Pallet_TTL_NW,pi_cre_date,GW,REC_NO,Contract,pisr_con_code ");
             strSql.Append(" FROM vpi_report ");
             if (strWhere.Trim() != "")
             {
@@ -786,7 +786,7 @@ namespace PIE.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" PI_ID,pi_LineID,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_chr01,CoDesc,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,pisr_con_code,sq_name,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,pisr_mfgr_name,MFGR,MFGR_Name,MFGR_Part,pisr_dec01,pisr_dec02,pi_status,Pallet_TTL_NW,pi_cre_date,GW,REC_NO,Contract ");
+            strSql.Append(" PI_ID,pi_LineID,pi_status,pi_wec_ctn,plr_LineID_tran,pi_pallet_no,CartonNo,CartonID,pi_chr01,CoDesc,pisr_rir,pisr_invoice,pisr_part,Pisr_receiver,pisr_site,pisr_po_nbr,pisr_qty,pisr_curr,pisr_cost,pisr_base_cost,pisr_us_cost,pisr_seq,sq_name,pisr_net_wt,pisr_rec_type,pisr_abc,pisr_code,pisr_lic_req,pisr_sbu,pisr_vend,Vend_name,MFGR,MFGR_Name,MFGR_Part,pisr_dec01,pisr_dec02,Pallet_TTL_NW,pi_cre_date,GW,REC_NO,Contract,pisr_con_code ");
             strSql.Append(" FROM vpi_report ");
             if (strWhere.Trim() != "")
             {
@@ -831,7 +831,7 @@ namespace PIE.DAL
             }
             else
             {
-                strSql.Append("order by T.Contract desc");
+                strSql.Append("order by T.pisr_con_code desc");
             }
             strSql.Append(")AS Row, T.*  from vpi_report T ");
             if (!string.IsNullOrEmpty(strWhere.Trim()))
@@ -859,7 +859,7 @@ namespace PIE.DAL
                     new SqlParameter("@strWhere", SqlDbType.VarChar,1000),
                     };
             parameters[0].Value = "vpi_report";
-            parameters[1].Value = "Contract";
+            parameters[1].Value = "pisr_con_code";
             parameters[2].Value = PageSize;
             parameters[3].Value = PageIndex;
             parameters[4].Value = 0;

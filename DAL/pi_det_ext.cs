@@ -35,7 +35,7 @@ namespace PI.DAL
         /// </summary>
         public int GetMaxId(string piid)
         {
-            return DbHelperSQL.GetMaxID("pi_deci1", "PI_ID='" + piid + "'", "pi_det");
+            return DbHelperSQL.GetMaxID("pi_deci1", "PI_ID='" + piid + "'", "pi_det",false);
         }
         /// <summary>
         /// 是否存在该记录

@@ -623,6 +623,7 @@
             this.label12.Size = new System.Drawing.Size(89, 12);
             this.label12.TabIndex = 75;
             this.label12.Text = "Number Carton:";
+            this.label12.Visible = false;
             // 
             // txt14CartonIDFromAddNewBatchID
             // 
@@ -648,6 +649,7 @@
             this.txt11CartonTypeAddNewBatchID.Name = "txt11CartonTypeAddNewBatchID";
             this.txt11CartonTypeAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt11CartonTypeAddNewBatchID.TabIndex = 41;
+            this.txt11CartonTypeAddNewBatchID.Visible = false;
             // 
             // txt9QTYAddNewBatchID
             // 

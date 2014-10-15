@@ -44,9 +44,9 @@ namespace FrmPIE
         {
             //frmVersion = "@2V20141010H10-dev";
             frm3VersionDotNet = 2;
-            frm4VersionMain = 20141014;
+            frm4VersionMain = 20141015;
 
-            frm5VersionSecond = 14;
+            frm5VersionSecond = 09;
             frm6Versionprefix = "dev";
             //dev  main
             frm0Version = "@" + frm3VersionDotNet + "V" + frm4VersionMain + "H" + frm5VersionSecond + "-" + frm6Versionprefix;

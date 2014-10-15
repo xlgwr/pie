@@ -143,5 +143,69 @@ namespace FrmPIE._0API
 
             return strCtnIdArr;
         }
+
+
+        public static List<int> initCartonFromTo(string CartonId, out string carprefix)
+        {
+            Regex RegPrefix = new Regex(@"[a-zA-Z\.,@?^=%&amp;:/~\+#]+");
+            List<int> lift = new List<int>();
+            int intfrom;
+            int into;
+            var iPos = CartonId.IndexOf('-');
+            var strCtnId = CartonId;
+
+            string[] strCtnIdArr = new string[2];
+
+            Match m = RegPrefix.Match(strCtnId);
+            if (m.Success)
+            {
+                carprefix = m.Value;
+
+            }
+            else
+            {
+                carprefix = "";
+            }
+            if (!string.IsNullOrEmpty(carprefix))
+            {
+
+                strCtnId = strCtnId.Replace(carprefix, " ");
+            }
+            if (iPos > 0)
+            {
+                strCtnIdArr = strCtnId.Split('-');
+                if (string.IsNullOrEmpty(strCtnIdArr[0]))
+                {
+                    strCtnIdArr[0] = "0";
+                }
+                if (string.IsNullOrEmpty(strCtnIdArr[1]))
+                {
+                    strCtnIdArr[0] = "0";
+                }
+            }
+            else
+            {
+
+
+                strCtnIdArr[0] = strCtnId;
+                strCtnIdArr[1] = strCtnId;
+            }
+            if (!(string.IsNullOrEmpty(strCtnIdArr[0]) || string.IsNullOrEmpty(strCtnIdArr[1])))
+            {
+                intfrom = Convert.ToInt32(strCtnIdArr[0]);
+                into = Convert.ToInt32(strCtnIdArr[1]);
+
+            }
+            else
+            {
+                intfrom = 1;
+                into = 1;
+            }
+
+            lift.Add(intfrom);
+            lift.Add(into);
+            lift.Add((into - intfrom + 1));
+            return lift;
+        }
     }
 }

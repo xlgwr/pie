@@ -141,7 +141,7 @@ namespace frmPI
 
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _strCellColName, _deffCellName, _deffCellValue, Color.LightGray);
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
             cf.initThreadDowrokColor(dwo);
 
         }
@@ -303,8 +303,10 @@ namespace frmPI
                 pI_DET_Remote_model.pi_Lic_req = item.pisr_lic_req;
                 pI_DET_Remote_model.PI_LINE = item.pi_LineID;
                 pI_DET_Remote_model.PI_LOT = item.pisr_rir;
+
                 pI_DET_Remote_model.pi_mfgr = item.MFGR;
                 pI_DET_Remote_model.pi_mfgr_name = item.MFGR_Name;
+
                 pI_DET_Remote_model.pi_mfgr_part = item.MFGR_Part;
                 pI_DET_Remote_model.PI_NO = item.PI_ID;
                 pI_DET_Remote_model.PI_NW = item.pisr_dec02;
@@ -331,6 +333,8 @@ namespace frmPI
                 pI_DET_Remote_model.pi_us_rate = null;
                 pI_DET_Remote_model.pi_user = _idr_show._sys_user_model.user_name;
                 pI_DET_Remote_model.pi_vend = item.pisr_vend;
+                
+
                 pI_DET_Remote_model.pi_ver = 1;
 
                 var intresutl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model);

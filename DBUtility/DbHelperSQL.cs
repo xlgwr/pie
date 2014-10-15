@@ -82,6 +82,19 @@ namespace PIE.DBUtility
                 return int.Parse(obj.ToString());
             }
         }
+        public static int GetMaxID(string FieldName, string strWhere, string TableName,bool boOrderby)
+        {
+            string strsql = "select max(" + FieldName + ")+1 from " + TableName + " where " + strWhere;
+            object obj = GetSingle(strsql);
+            if (obj == null)
+            {
+                return 1;
+            }
+            else
+            {
+                return int.Parse(obj.ToString());
+            }
+        }
         public static bool Exists(string strSql)
         {
             object obj = GetSingle(strSql);

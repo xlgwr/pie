@@ -1176,7 +1176,7 @@ namespace FrmPIE._0API
             dgv.Columns["pisr_us_cost"].HeaderText = "U/P(USD)";
             dgv.Columns["pisr_seq"].HeaderText = "Seq";
 
-            //dgv.Columns["pisr_con_code"].HeaderText = "Custom Conn";
+            dgv.Columns["pisr_con_code"].HeaderText = "Custom Conn";
 
             //dgv.Columns["pisr_ch_desc"].HeaderText = "Description";
             dgv.Columns["pi_status"].HeaderText = "Upload Status";
