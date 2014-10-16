@@ -150,6 +150,7 @@
     <Compile Include="Plr_mstr_ext.cs" />
     <Compile Include="Plr_mstr_tran_ext.cs" />
     <Compile Include="sys_role.cs" />
+    <Compile Include="vpi_report_palletCount.cs" />
     <Compile Include="vpi_report_ext.cs" />
     <Compile Include="vpi_report.cs" />
     <Compile Include="sys_user.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Plr_mstr_tran.cs" />
     <Compile Include="ticketingPTMR.cs" />
     <Compile Include="ticketingPTMR_ext.cs" />
+    <Compile Include="vpi_report_palletCount_ext.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

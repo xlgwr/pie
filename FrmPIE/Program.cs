@@ -20,17 +20,18 @@ namespace FrmPIE
     {
         #region def paraider
 
-        public static string frm0Version;
-        public static string frm1VersionLast;
-        public static string frm6Versionprefix;
+        public static string _frm0Version;
+        public static string _frm1VersionLast;
+        public static string _frm6Versionprefix;
 
-        public static int frm3VersionDotNet;
-        public static int frm4VersionMain;
-        public static int frm5VersionSecond;
+        public static int _frm3VersionDotNet;
+        public static int _frm4VersionMain;
+        public static int _frm5VersionSecond;
 
-        public static bool frm7VersionUpdateFlag = false;
-        public static string frm8VersionMsg;
-        public static string frm9VersionURL;
+        public static bool _frm7VersionUpdateFlag = false;
+        public static string _frm8VersionMsg;
+        public static string _frm9VersionURL;
+        public static string _frm10VersionFixMsg;
 
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
@@ -42,88 +43,105 @@ namespace FrmPIE
         [STAThread]
         static void Main()
         {
-            //frmVersion = "@2V20141010H10-dev";
-            frm3VersionDotNet = 2;
-            frm4VersionMain = 20141015;
 
-            frm5VersionSecond = 09;
-            frm6Versionprefix = "dev";
+            //frmVersion = "@2V20141010H10-dev";
+            _frm3VersionDotNet = 2;
+            _frm4VersionMain = 20141016;
+
+            _frm5VersionSecond = 11;
+            _frm6Versionprefix = "dev";
             //dev  main
-            frm0Version = "@" + frm3VersionDotNet + "V" + frm4VersionMain + "H" + frm5VersionSecond + "-" + frm6Versionprefix;
+            _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
             //
             string t_name_m = "version";
-            string t_value_m = "last" + frm3VersionDotNet;
-            PIE.Model.pkey_ctl lastversion_model = new PIE.DAL.pkey_ctl().GetModel(t_name_m, t_value_m);
-            if (lastversion_model == null)
+            string t_value_m = "last" + _frm3VersionDotNet;
+
+            PIE.Model.pkey_ctl _lastversion_model;
+            PIE.Model.pkey_ctl _lastversion_model_fixmsg;
+            try
             {
-                PIE.Model.pkey_ctl pkey_ctl_mode = new PIE.Model.pkey_ctl();
-                pkey_ctl_mode.t_name = t_name_m;
-                pkey_ctl_mode.t_value = t_value_m;
-                pkey_ctl_mode.t_desc = frm0Version;
-                pkey_ctl_mode.t_yyww = "http://142.2.47.149/pisoft/";
-                pkey_ctl_mode.prefix = frm6Versionprefix;
-                pkey_ctl_mode.ctl_fro = frm4VersionMain;
-                pkey_ctl_mode.ctl_to = frm5VersionSecond;
-                pkey_ctl_mode.ctl_curr = frm3VersionDotNet;
-                var addresultflg = new PIE.BLL.pkey_ctl().Add(pkey_ctl_mode);
-            }
-            else
-            {
-                if (!lastversion_model.t_desc.Equals(frm0Version))
+                _lastversion_model = new PIE.DAL.pkey_ctl().GetModel(t_name_m, t_value_m);
+
+                if (_lastversion_model == null)
                 {
-                    if (frm4VersionMain > lastversion_model.ctl_fro)
+                    PIE.Model.pkey_ctl pkey_ctl_mode = new PIE.Model.pkey_ctl();
+                    pkey_ctl_mode.t_name = t_name_m;
+                    pkey_ctl_mode.t_value = t_value_m;
+                    pkey_ctl_mode.t_desc = _frm0Version;
+                    pkey_ctl_mode.t_yyww = "http://142.2.47.149/pisoft/";
+                    pkey_ctl_mode.prefix = _frm6Versionprefix;
+                    pkey_ctl_mode.ctl_fro = _frm4VersionMain;
+                    pkey_ctl_mode.ctl_to = _frm5VersionSecond;
+                    pkey_ctl_mode.ctl_curr = _frm3VersionDotNet;
+                    var addresultflg = new PIE.BLL.pkey_ctl().Add(pkey_ctl_mode);
+                }
+                else
+                {
+                    if (!_lastversion_model.t_desc.Equals(_frm0Version))
                     {
-                        frm7VersionUpdateFlag = false;
-
-                        lastversion_model.t_desc = frm0Version;
-                        lastversion_model.ctl_fro = frm4VersionMain;
-                        lastversion_model.ctl_to = frm5VersionSecond;
-                        lastversion_model.prefix = frm6Versionprefix;
-
-                        var updateLast = new PIE.BLL.pkey_ctl().Update(lastversion_model);
-
-
-                    }
-                    else if (frm4VersionMain == lastversion_model.ctl_fro)
-                    {
-                        if (frm5VersionSecond > lastversion_model.ctl_to)
+                        if (_frm4VersionMain > _lastversion_model.ctl_fro)
                         {
-                            frm7VersionUpdateFlag = false;
+                            _frm7VersionUpdateFlag = false;
 
-                            lastversion_model.t_desc = frm0Version;
-                            lastversion_model.ctl_fro = frm4VersionMain;
-                            lastversion_model.ctl_to = frm5VersionSecond;
-                            lastversion_model.prefix = frm6Versionprefix;
+                            _lastversion_model.t_desc = _frm0Version;
+                            _lastversion_model.ctl_fro = _frm4VersionMain;
+                            _lastversion_model.ctl_to = _frm5VersionSecond;
+                            _lastversion_model.prefix = _frm6Versionprefix;
 
-                            var updateLast = new PIE.BLL.pkey_ctl().Update(lastversion_model);
+                            var updateLast = new PIE.BLL.pkey_ctl().Update(_lastversion_model);
+
+
+                        }
+                        else if (_frm4VersionMain == _lastversion_model.ctl_fro)
+                        {
+                            if (_frm5VersionSecond > _lastversion_model.ctl_to)
+                            {
+                                _frm7VersionUpdateFlag = false;
+
+                                _lastversion_model.t_desc = _frm0Version;
+                                _lastversion_model.ctl_fro = _frm4VersionMain;
+                                _lastversion_model.ctl_to = _frm5VersionSecond;
+                                _lastversion_model.prefix = _frm6Versionprefix;
+
+                                var updateLast = new PIE.BLL.pkey_ctl().Update(_lastversion_model);
+                            }
+                            else
+                            {
+                                _frm1VersionLast = _lastversion_model.t_desc;
+                                _frm7VersionUpdateFlag = true;
+                                _frm8VersionMsg = "down new Version ";
+                                _frm9VersionURL = _lastversion_model.t_yyww;
+                                _lastversion_model_fixmsg = new PIE.BLL.pkey_ctl().GetModel(t_name_m, _frm1VersionLast);
+                                _frm10VersionFixMsg = _lastversion_model_fixmsg.t_desc;
+                            }
+
                         }
                         else
                         {
-                            frm1VersionLast = lastversion_model.t_desc;
-                            frm7VersionUpdateFlag = true;
-                            frm8VersionMsg = "down new Version ";
-                            frm9VersionURL = lastversion_model.t_yyww;
+                            _frm1VersionLast = _lastversion_model.t_desc;
+                            _frm7VersionUpdateFlag = true;
+                            _frm8VersionMsg = "down new Version ";
+                            _frm9VersionURL = _lastversion_model.t_yyww;
+                            _lastversion_model_fixmsg = new PIE.BLL.pkey_ctl().GetModel(t_name_m, _frm1VersionLast);
+                            _frm10VersionFixMsg = _lastversion_model_fixmsg.t_desc;
                         }
 
                     }
                     else
                     {
-                        frm1VersionLast = lastversion_model.t_desc;
-                        frm7VersionUpdateFlag = true;
-                        frm8VersionMsg = "down new Version ";
-                        frm9VersionURL = lastversion_model.t_yyww;
+                        _frm7VersionUpdateFlag = false;
                     }
 
                 }
-                else
-                {
-                    frm7VersionUpdateFlag = false;
-                }
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show(ex.Message);
             }
             // Application.Run(new frmplMain());
 
@@ -132,9 +150,8 @@ namespace FrmPIE
             //Application.Run(FrmPIE);
 
             //logon on
-
             var LogonOn = new LogonDomain();
-            LogonOn.Text += frm0Version;
+            LogonOn.Text += _frm0Version;
             Application.Run(LogonOn);
 
             //var index = new IndexTemple();
@@ -656,10 +673,10 @@ namespace FrmPIE
         }
         public static void showNewVersion(LinkLabel lk)
         {
-            if (Program.frm7VersionUpdateFlag)
+            if (Program._frm7VersionUpdateFlag)
             {
                 lk.Visible = true;
-                lk.Text = "Click to " + Program.frm8VersionMsg + Program.frm1VersionLast;
+                lk.Text = "Click to " + Program._frm8VersionMsg + Program._frm1VersionLast;
                 lk.LinkClicked += link0NewVersion_LinkClicked;
             }
         }
@@ -667,8 +684,12 @@ namespace FrmPIE
         {
             try
             {
+                if (!string.IsNullOrEmpty(_frm10VersionFixMsg))
+                {
+                    MessageBox.Show("New Version: \n" + _frm1VersionLast + "\n\n" + _frm10VersionFixMsg, "Update Notice");
+                }
                 LinkLabel lk = (LinkLabel)sender;
-                lk.Links[0].LinkData = Program.frm9VersionURL;
+                lk.Links[0].LinkData = Program._frm9VersionURL;
                 System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
             }
             catch (Exception ex)
@@ -677,7 +698,6 @@ namespace FrmPIE
             }
         }
         ///////////////////////////////////new
-
     }
 
 }
