@@ -18,10 +18,10 @@ using System.Text;
 using PIE.Common;
 using System.Threading;
 using System.Collections;
-using System.Xml.Serialization;
-using Microsoft.Reporting.WinForms;
 using System.Xml;
+using System.Xml.Serialization;
 using System.IO;
+using Microsoft.Reporting.WinForms;
 
 namespace FrmPIE._0API
 {
@@ -877,6 +877,7 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.BorderStyle = BorderStyle.None;
             dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
@@ -914,6 +915,7 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.BorderStyle = BorderStyle.None;
             dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
@@ -970,6 +972,7 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.BorderStyle = BorderStyle.None;
             dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
@@ -1035,6 +1038,7 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.BorderStyle = BorderStyle.None;
             dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
@@ -1080,6 +1084,7 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.BorderStyle = BorderStyle.None;
             dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
@@ -1102,6 +1107,8 @@ namespace FrmPIE._0API
             {
                 return;
             }
+
+            dgv.BorderStyle = BorderStyle.None;
             //PI_ID,pi_status,Plant,pi_type,pi_user_ip,pi_remark,pi_cre_date,pi_chr01
             dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
@@ -1129,6 +1136,7 @@ namespace FrmPIE._0API
                 return;
             }
             dgv.ReadOnly = true;
+            dgv.BorderStyle = BorderStyle.None;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
             dgv.Columns["PI_ID"].HeaderText = "PI ID";
@@ -1149,6 +1157,7 @@ namespace FrmPIE._0API
             {
                 return;
             }
+            dgv.BorderStyle = BorderStyle.None;
             dgv.ReadOnly = true;
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
@@ -2512,7 +2521,7 @@ namespace FrmPIE._0API
             DateTime newDateTime = converted.AddSeconds(timestamp);
             return newDateTime.ToLocalTime();
         }
-        public void initReportViewer(ReportViewer rv)
+		public void initReportViewer(ReportViewer rv)
         {
             rv.Reset();
             rv.LocalReport.DataSources.Clear();

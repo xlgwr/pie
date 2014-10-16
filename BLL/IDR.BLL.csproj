@@ -135,6 +135,7 @@
     <Compile Include="Plr_mstr_log.cs" />
     <Compile Include="Plr_mstr_tran.cs" />
     <Compile Include="ticketingPTMR.cs" />
+    <Compile Include="vpi_report_palletCount.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\IDR.Common.csproj">
