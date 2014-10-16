@@ -583,6 +583,7 @@ namespace frmPI
             {
                 ShowMsg("Scan Add fail", "Error");
             }
+            btn1RefreshPI.Visible = true;
 
         }
 
@@ -1292,6 +1293,7 @@ namespace frmPI
         }
         private void btn0AddFromePackingList0_Click(object sender, EventArgs e)
         {
+            btn1RefreshPI.Visible = false;
             //btn0AddFromePackingList0.Enabled = false;
 
             _frmET = new frmEnterTxt(_idr_show, this);

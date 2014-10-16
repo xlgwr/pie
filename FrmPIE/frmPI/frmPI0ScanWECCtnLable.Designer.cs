@@ -121,6 +121,7 @@
             this.btn1RefreshPI.TabIndex = 209;
             this.btn1RefreshPI.Text = "&Get RIR# (ERP)";
             this.btn1RefreshPI.UseVisualStyleBackColor = true;
+            this.btn1RefreshPI.Visible = false;
             this.btn1RefreshPI.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // group3BXdataGV1ScanList
