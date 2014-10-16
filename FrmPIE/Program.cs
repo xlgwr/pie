@@ -48,8 +48,10 @@ namespace FrmPIE
             _frm3VersionDotNet = 2;
             _frm4VersionMain = 20141016;
 
-            _frm5VersionSecond = 11;
+            _frm5VersionSecond = 13;
             _frm6Versionprefix = "dev";
+            //fix msg
+            _frm10VersionFixMsg = "1.fix Upload to PI data(HK).";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 
@@ -61,7 +63,7 @@ namespace FrmPIE
             string t_value_m = "last" + _frm3VersionDotNet;
 
             PIE.Model.pkey_ctl _lastversion_model;
-            PIE.Model.pkey_ctl _lastversion_model_fixmsg;
+            PIE.Model.pkey_ctl _lastversion_model_fixmsg = new PIE.Model.pkey_ctl();
             try
             {
                 _lastversion_model = new PIE.DAL.pkey_ctl().GetModel(t_name_m, t_value_m);
@@ -86,13 +88,18 @@ namespace FrmPIE
                         if (_frm4VersionMain > _lastversion_model.ctl_fro)
                         {
                             _frm7VersionUpdateFlag = false;
-
+                            //version
                             _lastversion_model.t_desc = _frm0Version;
                             _lastversion_model.ctl_fro = _frm4VersionMain;
                             _lastversion_model.ctl_to = _frm5VersionSecond;
                             _lastversion_model.prefix = _frm6Versionprefix;
 
                             var updateLast = new PIE.BLL.pkey_ctl().Update(_lastversion_model);
+                            //version msg
+                            _lastversion_model_fixmsg.t_name = t_name_m;
+                            _lastversion_model_fixmsg.t_value = _frm0Version;
+                            _lastversion_model_fixmsg.t_desc = _frm10VersionFixMsg;
+                            var updatelastMsg = new PIE.BLL.pkey_ctl().Add(_lastversion_model_fixmsg);
 
 
                         }
@@ -108,6 +115,13 @@ namespace FrmPIE
                                 _lastversion_model.prefix = _frm6Versionprefix;
 
                                 var updateLast = new PIE.BLL.pkey_ctl().Update(_lastversion_model);
+
+                                //version msg
+                                _lastversion_model_fixmsg.t_name = t_name_m;
+                                _lastversion_model_fixmsg.t_value = _frm0Version;
+                                _lastversion_model_fixmsg.t_desc = _frm10VersionFixMsg;
+                                var updatelastMsg = new PIE.BLL.pkey_ctl().Add(_lastversion_model_fixmsg);
+
                             }
                             else
                             {
@@ -116,7 +130,11 @@ namespace FrmPIE
                                 _frm8VersionMsg = "down new Version ";
                                 _frm9VersionURL = _lastversion_model.t_yyww;
                                 _lastversion_model_fixmsg = new PIE.BLL.pkey_ctl().GetModel(t_name_m, _frm1VersionLast);
-                                _frm10VersionFixMsg = _lastversion_model_fixmsg.t_desc;
+                                if (_lastversion_model_fixmsg != null)
+                                {
+                                    _frm10VersionFixMsg = _lastversion_model_fixmsg.t_desc;
+
+                                }
                             }
 
                         }
@@ -127,7 +145,11 @@ namespace FrmPIE
                             _frm8VersionMsg = "down new Version ";
                             _frm9VersionURL = _lastversion_model.t_yyww;
                             _lastversion_model_fixmsg = new PIE.BLL.pkey_ctl().GetModel(t_name_m, _frm1VersionLast);
-                            _frm10VersionFixMsg = _lastversion_model_fixmsg.t_desc;
+                            if (_lastversion_model_fixmsg != null)
+                            {
+                                _frm10VersionFixMsg = _lastversion_model_fixmsg.t_desc;
+
+                            }
                         }
 
                     }
