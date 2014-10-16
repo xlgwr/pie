@@ -931,7 +931,7 @@ namespace FrmPIE._0API
             dgv.Columns["packingListID"].HeaderText = "PackingListID";
             dgv.Columns["plr_partno"].HeaderText = "Part";
             dgv.Columns["plr_qty"].HeaderText = "Total/Qty";
-            dgv.Columns["CartonType"].HeaderText = "Number Carton";
+            dgv.Columns["CartonType"].HeaderText = "Remainder";
             dgv.Columns["CartonID"].HeaderText = "Carton ID";
             dgv.Columns["plr_carton_qty"].HeaderText = "Qty/Carton";
 
@@ -987,7 +987,7 @@ namespace FrmPIE._0API
             dgv.Columns["packingListID"].HeaderText = "PackingListID";
             dgv.Columns["plr_partno"].HeaderText = "Part";
             dgv.Columns["plr_qty"].HeaderText = "Total/Qty";
-            dgv.Columns["CartonType"].HeaderText = "Number Carton";
+            dgv.Columns["CartonType"].HeaderText = "Remainder";
             dgv.Columns["CartonID"].HeaderText = "Carton ID";
             dgv.Columns["plr_carton_qty"].HeaderText = "Qty/Carton";
             dgv.Columns["carton_id_prifix"].HeaderText = "Carton Prefix";
@@ -1058,7 +1058,7 @@ namespace FrmPIE._0API
             dgv.Columns["packingListID"].HeaderText = "PackingListID";
             dgv.Columns["plr_partno"].HeaderText = "Part";
             dgv.Columns["plr_qty"].HeaderText = "Total/QTY";
-            dgv.Columns["CartonType"].HeaderText = "Number Carton";
+            dgv.Columns["CartonType"].HeaderText = "Remainder";
             dgv.Columns["CartonID"].HeaderText = "Carton ID";
             dgv.Columns["plr_carton_qty"].HeaderText = "Qty/Carton";
             dgv.Columns["carton_id_prifix"].HeaderText = "Carton Prefix";
@@ -2301,7 +2301,7 @@ namespace FrmPIE._0API
             nameList.Add("packingListID", "PackingListID");
             nameList.Add("plr_partno", "Part");
             nameList.Add("plr_qty", "Total/Qty");
-            nameList.Add("CartonType", "Number Carton");
+            nameList.Add("CartonType", "Remainder");
             nameList.Add("CartonID", "Carton ID");
             nameList.Add("plr_carton_qty", "Qty/Carton");
 
@@ -2345,7 +2345,7 @@ namespace FrmPIE._0API
             nameList.Add("packingListID", "PackingListID");
             nameList.Add("plr_partno", "Part");
             nameList.Add("plr_qty", "Total/QTY");
-            nameList.Add("CartonType", "Number Carton");
+            nameList.Add("CartonType", "Remainder");
             nameList.Add("CartonID", "Carton ID");
             nameList.Add("plr_carton_qty", "Qty/Carton");
             nameList.Add("carton_id_prifix", "Carton Prefix");

@@ -684,7 +684,7 @@ namespace FrmPIE
 
         private void btn2TempleFile_Click(object sender, EventArgs e)
         {
-            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0temple\templesforKYCA.xls";
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0temple\templesforKYCA.xlsx";
             Program.OpenFolderAndSelectFile(pathname);
         }
         void Init0ializeWorkbook(object path)
