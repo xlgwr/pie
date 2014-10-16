@@ -18,6 +18,10 @@ using System.Text;
 using PIE.Common;
 using System.Threading;
 using System.Collections;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using Microsoft.Reporting.WinForms;
 
 namespace FrmPIE._0API
 {
@@ -2516,6 +2520,73 @@ namespace FrmPIE._0API
             DateTime converted = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             DateTime newDateTime = converted.AddSeconds(timestamp);
             return newDateTime.ToLocalTime();
+        }
+		public void initReportViewer(ReportViewer rv)
+        {
+            rv.Reset();
+            rv.LocalReport.DataSources.Clear();
+        }
+        public void ShowReportViewer(ReportViewer rv, string rvname)
+        {
+            rv.LocalReport.DisplayName = rvname;
+            rv.LocalReport.Refresh();
+            rv.Visible = true;
+        }
+        public void ShowReportViewer(ReportViewer rv, string rvname, bool addprefxi)
+        {
+            string piefix = "Date" + DateTime.Today.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Today.Day.ToString() + "H" + DateTime.Now.Hour + "M" + DateTime.Now.Minute;
+            rv.LocalReport.DisplayName = rvname + piefix;
+            rv.RefreshReport();
+            rv.Visible = true;
+        }
+        public void initReportViewerLoadXMLfromString(ReportViewer rv, string tempxmlstring)
+        {
+            //string tempxml = mydssqltemplate.Tables[0].Rows[0]["tempxml"].ToString();
+            XmlDocument sourceDoc = new XmlDocument();
+            sourceDoc.LoadXml(tempxmlstring);
+            XmlSerializer serializer = new XmlSerializer(typeof(XmlDocument));
+            var m_rdl = new MemoryStream();
+            serializer.Serialize(m_rdl, sourceDoc);
+            if (m_rdl == null)
+            {
+                return;
+            }
+            rv.Reset();
+            m_rdl.Position = 0;
+            rv.LocalReport.DataSources.Clear();
+            rv.LocalReport.LoadReportDefinition(m_rdl);
+        }
+        public void initReportViewerLoadXMLfromPath(ReportViewer rv, string path)
+        {
+            //string tempxml = mydssqltemplate.Tables[0].Rows[0]["tempxml"].ToString();
+            XmlDocument sourceDoc = new XmlDocument();
+            //@"Reports\SO\siv_mstr_p.rdlc"
+            path = AppDomain.CurrentDomain.BaseDirectory + path;
+            sourceDoc.Load(path);
+            XmlSerializer serializer = new XmlSerializer(typeof(XmlDocument));
+            var m_rdl = new MemoryStream();
+            serializer.Serialize(m_rdl, sourceDoc);
+            if (m_rdl == null)
+            {
+                return;
+            }
+            rv.Reset();
+            m_rdl.Position = 0;
+            rv.LocalReport.DataSources.Clear();
+            rv.LocalReport.LoadReportDefinition(m_rdl);
+        }
+        public void addDataSourceToReportViewer(ReportViewer rv, string reportDataSourceName, DataSet ds)
+        {
+            ReportDataSource rd = new ReportDataSource(reportDataSourceName, ds.Tables[0]);
+            rv.LocalReport.DataSources.Add(rd);
+        }
+        public void addReportParameterToReportViewer(ReportViewer rv, ReportParameter rp, string rpname, string rpvalue)
+        {
+            rp = new ReportParameter(rpname, rpvalue);
+            if (!string.IsNullOrEmpty(rpvalue))
+            {
+                rv.LocalReport.SetParameters(new ReportParameter[] { rp });
+            }
         }
         /////////////////////////////////////
         //start place
