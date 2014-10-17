@@ -625,7 +625,7 @@ namespace FrmPIE
 
             _plr_batch_mstr_model.batch_id = _strBatchID;
             //_plr_batch_mstr_model.plr_suppliers_id = "";
-            _plr_batch_mstr_model.batch_doc = "e-Packing";
+            _plr_batch_mstr_model.batch_doc = "e-Packing-kyca";
             //plr_batch_mstr_model.batch_dec01 = row - 1;
             //_plr_batch_mstr_model.batch_void = 0;
             _plr_batch_mstr_model.batch_status = "No";
