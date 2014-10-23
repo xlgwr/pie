@@ -46,9 +46,9 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141016;
+            _frm4VersionMain = 20141023;
 
-            _frm5VersionSecond = 13;
+            _frm5VersionSecond = 10;
             _frm6Versionprefix = "dev";
             //fix msg
             _frm10VersionFixMsg = "1.fix Upload to PI data(HK).";
