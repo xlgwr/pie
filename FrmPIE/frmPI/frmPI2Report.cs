@@ -209,7 +209,7 @@ namespace frmPI
             groupBox2.Height = gb0PIReport.Height - groupBox2.Top;
         }
 
-        private void btn_enquire_piReport_Click(object sender, EventArgs e)
+        public void btn_enquire_piReport_Click(object sender, EventArgs e)
         {
             lblMsg.Text = "";
             if (string.IsNullOrEmpty(txt0PINum_piReport.Text.Trim()) || txt0PINum_piReport.Text.Length > 12)

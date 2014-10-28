@@ -46,12 +46,12 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141023;
+            _frm4VersionMain = 20141028;
 
-            _frm5VersionSecond = 10;
+            _frm5VersionSecond = 11;
             _frm6Versionprefix = "dev";
             //fix msg
-            _frm10VersionFixMsg = "1.fix Upload to PI data(HK).";
+            _frm10VersionFixMsg = "1.fix [Add From ePacking List] to PI data(HK).";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 

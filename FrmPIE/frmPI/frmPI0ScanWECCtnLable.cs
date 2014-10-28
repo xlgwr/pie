@@ -1302,6 +1302,7 @@ namespace frmPI
             _frmET.lblTitle.Text = "BatchID:";
             _frmET.Text = "Add From ePacking List:";
             _frmET.ShowDialog();
+            btn2UploadToHKPIDB.Visible = true;
             if (!_validateBatchid)
             {
                 return;
@@ -1447,6 +1448,23 @@ namespace frmPI
         private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
         {
             cf.downLoadExcel(_reobjdet, lbl0msg, cf.nameList0vpi_report_ds(), "20PI0Scan" + txt1PIID_ScanWECCtnLable.Text.Trim());
+        }
+
+        private void btn2UploadToHKPIDB_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text))
+            {
+                _idr_show.addNewTabPage("Enquire Pi Report");
+                frmPI2Report swcl = new frmPI2Report(_idr_show);
+                swcl.txt0PINum_piReport.Text = txt1PIID_ScanWECCtnLable.Text;
+                swcl.btn_enquire_piReport_Click(sender, e);
+                _idr_show.addGBToTC(_idr_show.tabCtlRight1, swcl.gb0PIReport);
+
+            }
+            else
+            {
+                lbl0msg.Text = "PI ID is null";
+            }
         }
 
 

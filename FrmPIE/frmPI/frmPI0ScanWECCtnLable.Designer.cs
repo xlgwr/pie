@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1ScanWECCtnLable = new System.Windows.Forms.GroupBox();
             this.btn0AddFromePackingList0 = new System.Windows.Forms.Button();
             this.btnAddPalletNW = new System.Windows.Forms.Button();
@@ -67,6 +67,7 @@
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn2UploadToHKPIDB = new System.Windows.Forms.Button();
             this.groupBox1ScanWECCtnLable.SuspendLayout();
             this.group3BXdataGV1ScanList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GVSanWecCtnLable)).BeginInit();
@@ -77,6 +78,7 @@
             // 
             // groupBox1ScanWECCtnLable
             // 
+            this.groupBox1ScanWECCtnLable.Controls.Add(this.btn2UploadToHKPIDB);
             this.groupBox1ScanWECCtnLable.Controls.Add(this.btn0AddFromePackingList0);
             this.groupBox1ScanWECCtnLable.Controls.Add(this.btnAddPalletNW);
             this.groupBox1ScanWECCtnLable.Controls.Add(this.btn1RefreshPI);
@@ -93,10 +95,11 @@
             // 
             // btn0AddFromePackingList0
             // 
+            this.btn0AddFromePackingList0.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn0AddFromePackingList0.ForeColor = System.Drawing.Color.Red;
-            this.btn0AddFromePackingList0.Location = new System.Drawing.Point(13, 231);
+            this.btn0AddFromePackingList0.Location = new System.Drawing.Point(6, 231);
             this.btn0AddFromePackingList0.Name = "btn0AddFromePackingList0";
-            this.btn0AddFromePackingList0.Size = new System.Drawing.Size(101, 33);
+            this.btn0AddFromePackingList0.Size = new System.Drawing.Size(130, 33);
             this.btn0AddFromePackingList0.TabIndex = 208;
             this.btn0AddFromePackingList0.Text = "&Add From ePacking List";
             this.btn0AddFromePackingList0.UseVisualStyleBackColor = true;
@@ -104,9 +107,9 @@
             // 
             // btnAddPalletNW
             // 
-            this.btnAddPalletNW.Location = new System.Drawing.Point(159, 231);
+            this.btnAddPalletNW.Location = new System.Drawing.Point(172, 231);
             this.btnAddPalletNW.Name = "btnAddPalletNW";
-            this.btnAddPalletNW.Size = new System.Drawing.Size(75, 33);
+            this.btnAddPalletNW.Size = new System.Drawing.Size(60, 33);
             this.btnAddPalletNW.TabIndex = 208;
             this.btnAddPalletNW.Text = "&Add NW";
             this.btnAddPalletNW.UseVisualStyleBackColor = true;
@@ -115,7 +118,7 @@
             // btn1RefreshPI
             // 
             this.btn1RefreshPI.ForeColor = System.Drawing.Color.Red;
-            this.btn1RefreshPI.Location = new System.Drawing.Point(431, 231);
+            this.btn1RefreshPI.Location = new System.Drawing.Point(359, 231);
             this.btn1RefreshPI.Name = "btn1RefreshPI";
             this.btn1RefreshPI.Size = new System.Drawing.Size(121, 33);
             this.btn1RefreshPI.TabIndex = 209;
@@ -137,35 +140,35 @@
             // data1GVSanWecCtnLable
             // 
             this.data1GVSanWecCtnLable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GVSanWecCtnLable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GVSanWecCtnLable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.data1GVSanWecCtnLable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data1GVSanWecCtnLable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data1GVSanWecCtnLable.DefaultCellStyle = dataGridViewCellStyle17;
             this.data1GVSanWecCtnLable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.data1GVSanWecCtnLable.Location = new System.Drawing.Point(3, 17);
             this.data1GVSanWecCtnLable.MultiSelect = false;
             this.data1GVSanWecCtnLable.Name = "data1GVSanWecCtnLable";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GVSanWecCtnLable.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GVSanWecCtnLable.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.data1GVSanWecCtnLable.RowTemplate.Height = 23;
             this.data1GVSanWecCtnLable.Size = new System.Drawing.Size(623, 162);
             this.data1GVSanWecCtnLable.TabIndex = 300;
@@ -173,11 +176,11 @@
             // btn0Scan
             // 
             this.btn0Scan.Font = new System.Drawing.Font("Microsoft YaHei", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn0Scan.Location = new System.Drawing.Point(250, 231);
+            this.btn0Scan.Location = new System.Drawing.Point(251, 230);
             this.btn0Scan.Name = "btn0Scan";
-            this.btn0Scan.Size = new System.Drawing.Size(145, 34);
+            this.btn0Scan.Size = new System.Drawing.Size(91, 34);
             this.btn0Scan.TabIndex = 208;
-            this.btn0Scan.Text = "&OK";
+            this.btn0Scan.Text = "&Scan";
             this.btn0Scan.UseVisualStyleBackColor = true;
             this.btn0Scan.Click += new System.EventHandler(this.btn0Scan_Click);
             // 
@@ -495,6 +498,19 @@
             this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
             // 
+            // btn2UploadToHKPIDB
+            // 
+            this.btn2UploadToHKPIDB.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2UploadToHKPIDB.ForeColor = System.Drawing.Color.Red;
+            this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(496, 230);
+            this.btn2UploadToHKPIDB.Name = "btn2UploadToHKPIDB";
+            this.btn2UploadToHKPIDB.Size = new System.Drawing.Size(133, 34);
+            this.btn2UploadToHKPIDB.TabIndex = 300;
+            this.btn2UploadToHKPIDB.Text = "&UpLoad[HK,PI_DB]";
+            this.btn2UploadToHKPIDB.UseVisualStyleBackColor = true;
+            this.btn2UploadToHKPIDB.Visible = false;
+            this.btn2UploadToHKPIDB.Click += new System.EventHandler(this.btn2UploadToHKPIDB_Click);
+            // 
             // frmPI0ScanWECCtnLable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -554,5 +570,6 @@
         private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
         private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
+        private System.Windows.Forms.Button btn2UploadToHKPIDB;
     }
 }

@@ -681,14 +681,14 @@
             this.cMenuStrip21ScanCartronLabel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tool1StripMenuItem21ScanCartronLabel});
             this.cMenuStrip21ScanCartronLabel.Name = "cMenuStrip1ScanCartronLabel";
-            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(159, 26);
+            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(159, 48);
             // 
             // tool1StripMenuItem21ScanCartronLabel
             // 
             this.tool1StripMenuItem21ScanCartronLabel.Image = global::FrmPIE.Properties.Resources.bar1;
             this.tool1StripMenuItem21ScanCartronLabel.Name = "tool1StripMenuItem21ScanCartronLabel";
             this.tool1StripMenuItem21ScanCartronLabel.Size = new System.Drawing.Size(158, 22);
-            this.tool1StripMenuItem21ScanCartronLabel.Text = "&Scan Ctn lable";
+            this.tool1StripMenuItem21ScanCartronLabel.Text = "&Scan Ctn label";
             this.tool1StripMenuItem21ScanCartronLabel.Click += new System.EventHandler(this.tool1StripMenuItem21ScanCartronLabel_Click);
             // 
             // linkLabel4

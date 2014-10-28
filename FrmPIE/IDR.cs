@@ -455,7 +455,7 @@ namespace FrmPIE
         }
 
 
-        private TabPage addNewTabPage(string pagename)
+        public TabPage addNewTabPage(string pagename)
         {
             tabCtlRight1.TabPages.Add(tabCtlRight1.TabCount + ":" + pagename, tabCtlRight1.TabCount + ":" + pagename);
 
@@ -467,7 +467,7 @@ namespace FrmPIE
             return tabCtlRight1.SelectedTab;
 
         }
-        private TabPage addNewTabPage(string pagename, bool develop)
+        public TabPage addNewTabPage(string pagename, bool develop)
         {
             tabCtlRight1.TabPages.Add(tabCtlRight1.TabCount + pagename, tabCtlRight1.TabCount + pagename);
 

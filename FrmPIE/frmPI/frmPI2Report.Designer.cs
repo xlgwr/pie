@@ -33,6 +33,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.data0GVPiReport = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn00More = new System.Windows.Forms.Button();
             this.btn2UploadToHKPIDB = new System.Windows.Forms.Button();
             this.lblMsg = new System.Windows.Forms.Label();
             this.btn0_enquire_piReport = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn00More = new System.Windows.Forms.Button();
             this.gb0PIReport.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data0GVPiReport)).BeginInit();
@@ -95,11 +95,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enquire ";
             // 
+            // btn00More
+            // 
+            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
+            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn00More.FlatAppearance.BorderSize = 0;
+            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
+            this.btn00More.Location = new System.Drawing.Point(237, 26);
+            this.btn00More.Name = "btn00More";
+            this.btn00More.Size = new System.Drawing.Size(23, 23);
+            this.btn00More.TabIndex = 8;
+            this.btn00More.UseVisualStyleBackColor = true;
+            // 
             // btn2UploadToHKPIDB
             // 
+            this.btn2UploadToHKPIDB.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2UploadToHKPIDB.ForeColor = System.Drawing.Color.Red;
             this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(403, 20);
             this.btn2UploadToHKPIDB.Name = "btn2UploadToHKPIDB";
-            this.btn2UploadToHKPIDB.Size = new System.Drawing.Size(110, 34);
+            this.btn2UploadToHKPIDB.Size = new System.Drawing.Size(138, 34);
             this.btn2UploadToHKPIDB.TabIndex = 5;
             this.btn2UploadToHKPIDB.Text = "&UpLoad[HK,PI_DB]";
             this.btn2UploadToHKPIDB.UseVisualStyleBackColor = true;
@@ -165,20 +181,6 @@
             this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
             // 
-            // btn00More
-            // 
-            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
-            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn00More.FlatAppearance.BorderSize = 0;
-            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
-            this.btn00More.Location = new System.Drawing.Point(237, 26);
-            this.btn00More.Name = "btn00More";
-            this.btn00More.Size = new System.Drawing.Size(23, 23);
-            this.btn00More.TabIndex = 8;
-            this.btn00More.UseVisualStyleBackColor = true;
-            // 
             // frmPI2Report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -203,8 +205,6 @@
         protected internal System.Windows.Forms.GroupBox gb0PIReport;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblMsg;
-        private System.Windows.Forms.Button btn0_enquire_piReport;
-        private System.Windows.Forms.TextBox txt0PINum_piReport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView data0GVPiReport;
@@ -213,6 +213,8 @@
         private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
         private System.Windows.Forms.Button btn00More;
+        protected internal System.Windows.Forms.TextBox txt0PINum_piReport;
+        protected internal System.Windows.Forms.Button btn0_enquire_piReport;
 
     }
 }
