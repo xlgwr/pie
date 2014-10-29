@@ -243,6 +243,7 @@
     </Compile>
     <EmbeddedResource Include="0temple\frmEnterForReference.resx">
       <DependentUpon>frmEnterForReference.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="0temple\frmEnterTxt.resx">
       <DependentUpon>frmEnterTxt.cs</DependentUpon>
@@ -426,10 +427,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://142.2.70.100/mfgpgm/Service.asmx">
+    <WebReferenceUrl Include="http://142.2.70.99/mfgpgm/Service.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WebReference100\</RelPath>
-      <UpdateFromURL>http://142.2.70.100/mfgpgm/Service.asmx</UpdateFromURL>
+      <UpdateFromURL>http://142.2.70.99/mfgpgm/Service.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

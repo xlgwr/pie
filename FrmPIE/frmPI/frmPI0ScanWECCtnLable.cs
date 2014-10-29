@@ -1261,7 +1261,7 @@ namespace frmPI
                 return;
             }
             //TESTOLDWEC
-            webserviceDS = cf.initWebServer("P1", "wsas018", _frmET.textBox1.Text.Trim());
+            webserviceDS = cf.initWebServer("OLDWEC", "wsas018", _frmET.textBox1.Text.Trim());
 
             if (webserviceDS == null)
             {

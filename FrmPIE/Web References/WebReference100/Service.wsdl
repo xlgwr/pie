@@ -36,11 +36,7 @@
         </s:complexType>
       </s:element>
       <s:element name="GetSetTableResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetSetTableResult" />
-          </s:sequence>
-        </s:complexType>
+        <s:complexType />
       </s:element>
       <s:element name="GetTable">
         <s:complexType>
@@ -207,10 +203,10 @@
   </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
-      <soap:address location="http://142.2.70.100/mfgpgm/Service.asmx" />
+      <soap:address location="http://142.2.70.99/mfgpgm/Service.asmx" />
     </wsdl:port>
     <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
-      <soap12:address location="http://142.2.70.100/mfgpgm/Service.asmx" />
+      <soap12:address location="http://142.2.70.99/mfgpgm/Service.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -1426,23 +1426,23 @@ namespace FrmPIE._0API
 
             if (wec_ctn_pre == "WWTS")
             {
-                strServer = "P1";
+                strServer = "OLDWEC";
             }
             else if (wec_ctn_pre == "WEC")
             {
-                strServer = "P1";
+                strServer = "OLDWEC";
             }
             else if (wec_ctn_pre == "WTSZ")
             {
-                strServer = "P1";
+                strServer = "OLDWEC";
             }
             else if (wec_ctn_pre == "Wellop")
             {
-                strServer = "P1";
+                strServer = "OLDWEC";
             }
             else
             {
-                strServer = "P1";
+                strServer = "OLDWEC";//P1
             }
             try
             {

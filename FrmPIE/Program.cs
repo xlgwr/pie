@@ -46,12 +46,12 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141028;
+            _frm4VersionMain = 20141029;
 
-            _frm5VersionSecond = 15;
-            _frm6Versionprefix = "dev";
+            _frm5VersionSecond = 14;
+            _frm6Versionprefix = "RTM";
             //fix msg
-            _frm10VersionFixMsg = "1.Upload User's Manual[Packing Information Entry].";
+            _frm10VersionFixMsg = "1.update version to RTM. change database to official";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 
@@ -260,23 +260,23 @@ namespace FrmPIE
 
                 if (wec_ctn_pre == "WWTS")
                 {
-                    strServer = "TESTOLDWEC";
+                    strServer = "OLDWEC";
                 }
                 else if (wec_ctn_pre == "WEC")
                 {
-                    strServer = "P1";
+                    strServer = "OLDWEC";//P1
                 }
                 else if (wec_ctn_pre == "WTSZ")
                 {
-                    strServer = "TESTOLDWEC";
+                    strServer = "OLDWEC";//TESTOLDWEC
                 }
                 else if (wec_ctn_pre == "Wellop")
                 {
-                    strServer = "TESTOLDWEC";
+                    strServer = "OLDWEC";
                 }
                 else
                 {
-                    strServer = "other";
+                    strServer = "OLDWEC";
                 }
 
                 ds = server100.GetTable_n(strServer, "wsas014", strPO);
@@ -403,23 +403,23 @@ namespace FrmPIE
 
             if (wec_ctn_pre == "WWTS")
             {
-                strServer = "TESTOLDWEC";
+                strServer = "OLDWEC";
             }
             else if (wec_ctn_pre == "WEC")
             {
-                strServer = "P1";
+                strServer = "OLDWEC";
             }
             else if (wec_ctn_pre == "WTSZ")
             {
-                strServer = "TESTOLDWEC";
+                strServer = "OLDWEC";
             }
             else if (wec_ctn_pre == "Wellop")
             {
-                strServer = "TESTOLDWEC";
+                strServer = "OLDWEC";
             }
             else
             {
-                strServer = "P1";
+                strServer = "OLDWEC";
             }
             try
             {
