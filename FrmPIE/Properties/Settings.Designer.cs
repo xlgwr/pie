@@ -26,10 +26,10 @@ namespace FrmPIE.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.100/mfgpgm/Service.asmx")]
-        public string FrmPIE_WebReference100_Service {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.99/mfgpgm/Service.asmx")]
+        public string IDR_System_WebReferenceRTM99_Service {
             get {
-                return ((string)(this["FrmPIE_WebReference100_Service"]));
+                return ((string)(this["IDR_System_WebReferenceRTM99_Service"]));
             }
         }
         
@@ -40,25 +40,6 @@ namespace FrmPIE.Properties {
         public string IDR_System_WebReference208_UserLoginCheck {
             get {
                 return ((string)(this["IDR_System_WebReference208_UserLoginCheck"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx")]
-        public string _0PackingInformationEnfry_WebReference_UserLoginCheck {
-            get {
-                return ((string)(this["_0PackingInformationEnfry_WebReference_UserLoginCheck"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.99/mfgpgm/Service.asmx")]
-        public string IDR_System_WebReference100_Service {
-            get {
-                return ((string)(this["IDR_System_WebReference100_Service"]));
             }
         }
     }

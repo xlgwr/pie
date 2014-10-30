@@ -231,12 +231,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PIReport.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Web References\WebReference100\Reference.cs">
+    <Compile Include="Web References\WebReference208\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\WebReference208\Reference.cs">
+    <Compile Include="Web References\WebReferenceRTM99\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -347,16 +347,16 @@
     <None Include="reports\DataSet\PIReport.xss">
       <DependentUpon>PIReport.xsd</DependentUpon>
     </None>
-    <None Include="Web References\WebReference100\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\WebReference100\Service.wsdl" />
     <None Include="Web References\WebReference208\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\WebReference208\UserLoginCheck.wsdl" />
+    <None Include="Web References\WebReferenceRTM99\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebReferenceRTM99\Service.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\IDR.BLL.csproj">
@@ -402,10 +402,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Web References\WebReference208\UserLoginCheck.disco" />
+    <None Include="Web References\WebReferenceRTM99\Service.disco" />
     <None Include="Resources\updatepackage.png" />
     <Content Include="t %2825%29.ico" />
-    <None Include="Web References\WebReference208\UserLoginCheck.disco" />
-    <None Include="Web References\WebReference100\Service.disco" />
     <None Include="0DownLoadExcel\text.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -427,17 +427,6 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://142.2.70.99/mfgpgm/Service.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\WebReference100\</RelPath>
-      <UpdateFromURL>http://142.2.70.99/mfgpgm/Service.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>IDR_System_WebReference100_Service</CachedSettingsPropName>
-    </WebReferenceUrl>
     <WebReferenceUrl Include="http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WebReference208\</RelPath>
@@ -448,6 +437,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>IDR_System_WebReference208_UserLoginCheck</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://142.2.70.99/mfgpgm/Service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebReferenceRTM99\</RelPath>
+      <UpdateFromURL>http://142.2.70.99/mfgpgm/Service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>IDR_System_WebReferenceRTM99_Service</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>

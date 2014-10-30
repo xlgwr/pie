@@ -240,7 +240,7 @@ namespace FrmPIE
                 string strServer;
                 DataSet ds;
 
-                WebReference100.Service server100 = new WebReference100.Service();
+                WebReferenceRTM99.Service server100 = new WebReferenceRTM99.Service();
                 server100.Timeout = 9000000;
 
                 var strPO = POnbr + " @ " + Partno + " @ " + Qty;
@@ -314,7 +314,7 @@ namespace FrmPIE
 
                 PIE.Model.plr_mstr_err plr_mstr_err_model = new PIE.Model.plr_mstr_err();
 
-                WebReference100.Service server100 = new WebReference100.Service();
+                WebReferenceRTM99.Service server100 = new WebReferenceRTM99.Service();
                 server100.Timeout = 9000000;
 
                 var strPO = plr_mstr_model.plr_po + " @ " + plr_mstr_model.plr_partno + " @ " + plr_mstr_model.plr_qty.ToString();
@@ -379,7 +379,7 @@ namespace FrmPIE
 
 
         }
-        private static bool initWebServer(string plr_po, WebReference100.Service server100, string intable, string strPO, out DataSet ds)
+        private static bool initWebServer(string plr_po, WebReferenceRTM99.Service server100, string intable, string strPO, out DataSet ds)
         {
             int returnValueNumber;
             string wec_ctn_pre;
@@ -455,7 +455,7 @@ namespace FrmPIE
 
                 string strResult = "";
 
-                WebReference100.Service server100 = new WebReference100.Service();
+                WebReferenceRTM99.Service server100 = new WebReferenceRTM99.Service();
                 server100.Timeout = 9000000;
 
                 DataSet ds = null;

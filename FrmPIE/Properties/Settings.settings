@@ -2,17 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FrmPIE.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="FrmPIE_WebReference100_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://142.2.70.100/mfgpgm/Service.asmx</Value>
+    <Setting Name="IDR_System_WebReferenceRTM99_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://142.2.70.99/mfgpgm/Service.asmx</Value>
     </Setting>
     <Setting Name="IDR_System_WebReference208_UserLoginCheck" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx</Value>
-    </Setting>
-    <Setting Name="_0PackingInformationEnfry_WebReference_UserLoginCheck" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx</Value>
-    </Setting>
-    <Setting Name="IDR_System_WebReference100_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://142.2.70.99/mfgpgm/Service.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

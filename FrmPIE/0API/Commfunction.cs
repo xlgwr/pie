@@ -1383,7 +1383,7 @@ namespace FrmPIE._0API
 
         public DataSet initWebServer(string inSystem, string intable, string inwhere)
         {
-            WebReference100.Service server100 = new WebReference100.Service();
+            WebReferenceRTM99.Service server100 = new WebReferenceRTM99.Service();
             server100.Timeout = 9000;
 
             DataSet ds = null;
@@ -1402,7 +1402,7 @@ namespace FrmPIE._0API
             }
 
         }
-        public bool initWebServer(string plr_po, WebReference100.Service server100, string intable, string strPO, out DataSet ds)
+        public bool initWebServer(string plr_po, WebReferenceRTM99.Service server100, string intable, string strPO, out DataSet ds)
         {
             int returnValueNumber;
             string wec_ctn_pre;
@@ -1484,7 +1484,7 @@ namespace FrmPIE._0API
 
                 string strResult = "";
 
-                WebReference100.Service server100 = new WebReference100.Service();
+                WebReferenceRTM99.Service server100 = new WebReferenceRTM99.Service();
                 server100.Timeout = 90000;
 
                 DataSet ds = null;
@@ -1679,15 +1679,15 @@ namespace FrmPIE._0API
                     if (print_Type.Equals("ZPL"))
                     {
                         int x = 9;
-                        int y = 204;
+                        int y = 196;
                         int xoff = 0;
-                        int yoff = 25;
+                        int yoff = 27;
 
                         #region zpl 2824
                         strtxt.AppendLine(@"^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2~SD15^JUS^LRN^CI0^XZ");
                         strtxt.AppendLine(@"~DG000.GRF,00512,008,");
 
-                        strtxt.AppendLine(@",::::::::::::::K02C0,J01550,J02BA8,J05105,J0C08280,I010101,I02008080,J0H104,J0208C,J0H104,J02188,J0H104,I06EJE0,I0K540,J0H2H8,J01544,J02CAC,J0I14,I0H2188,I01010140,I02808280,I014105,J0A8AA,J01554,K0HE0,,:::::::::::::::::::::::^XA");
+                        strtxt.AppendLine(@",:::::::::::::::::::::::::K0160,K0IA,J015D5,J0288280,J0604140,J08080A0,I01004050,K0H82,J01042,K0H82,J010C0,K0H82,I037J70,I02AJA8,J0H150,K0IA,J01656,K0H8A,I0H10C010,J0808020,I01404060,J0A08080,J05445,K0IA,K0H74,,::::::::::::^XA");
 
                         strtxt.AppendLine("^MMT");
                         strtxt.AppendLine("^LL0320");
@@ -1696,9 +1696,11 @@ namespace FrmPIE._0API
 
                         strtxt.AppendLine("^FT384,320^XG000.GRF,1,1^FS");
 
+                        //start 
                         int totoal = 0;
                         string strSJ = "";
 
+                        // item list center
                         for (int i = 0; i < listcount; i++)
                         {
                             plr_mstr_tran_list[i].plr_deci1 = 1;
@@ -1718,38 +1720,60 @@ namespace FrmPIE._0API
                             if (plr_mstr_tran_list[i].plr_chr01.Equals("A"))
                             {
                                 //partno
-                                strtxt.AppendLine(@"^FT9," + (y + (i * yoff)).ToString() + @"^A0N,23,24^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "  " + plr_mstr_tran_list[i].plr_carton_qty.ToString() + "  A^FS");
+                                strtxt.AppendLine(@"^FT23," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_partno +"^FS");
+                                //qty
+                                strtxt.AppendLine(@"^FT251," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_qty + "^FS");
+                                //A
+                                strtxt.AppendLine(@"^FT347," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FDA^FS");
+                                //CO
+                                strtxt.AppendLine(@"^FT388," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_co + "^FS");
+                            
                             }
                             else
                             {
-                                strtxt.AppendLine(@"^FT9," + (y + (i * yoff)).ToString() + @"^A0N,23,24^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "  " + plr_mstr_tran_list[i].plr_carton_qty.ToString() + " ^FS");
-
+                                //partno
+                                strtxt.AppendLine(@"^FT23," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "^FS");
+                                //qty
+                                strtxt.AppendLine(@"^FT251," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_qty + "^FS");
+                                //A
+                                //strtxt.AppendLine(@"^FT347," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FDA^FS");
+                                //CO
+                                strtxt.AppendLine(@"^FT388," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_co + "^FS");
                             }
 
 
                         }
+
+                        //cartonID top
+                        strtxt.AppendLine(@"^FT25,58^A0N,51,45^FH\^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
+                        strtxt.AppendLine(@"^FT290,33^A0N,25,24^FH\^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
+                        strtxt.AppendLine(@"^FT352,66^A0N,26,28^FH\^FD" + plr_mstr_tran_list[0].plr_pallet_no + "^FS");
+                        
+                        // Barcode
+
+                        strtxt.AppendLine(@"^BY4,3,57^FT21,133^BCN,,Y,N");
+                        strtxt.AppendLine(@"^FD>;" + plr_mstr_tran_list[0].plr_wec_ctn + "^FS");
+
+                        //Total bottom
+                        strtxt.AppendLine(@"^FT23,301^A0N,26,24^FH\^FD"+plr_mstr_tran_list[0].re_mark+"^FS");
+
                         if (listcount > limitCount)
                         {
-                            strtxt.AppendLine(@"^FT9,305^A0N,23,24^FH\^FD.........^FS");
+                            strtxt.AppendLine(@"^FT77,302^A0N,23,33^FH\^FD........^FS");
                         }
-                        strtxt.AppendLine(@"^FT180,305^A0N,23,24^FH\^FD" + listcount.ToString() + " / " + totoal.ToString() + "^FS");
 
+                        strtxt.AppendLine(@"^FT163,302^A0N,23,24^FH\^FD" + listcount.ToString() + " / " + totoal.ToString() + "^FS");
 
-                        strtxt.AppendLine(@"^FT9,61^A0N,51,50^FH\^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
-                        strtxt.AppendLine(@"^FT379,33^A0N,28,26^FH\^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
-                        strtxt.AppendLine(@"^FT354,68^A0N,28,28^FH\^FD" + plr_mstr_tran_list[0].plr_pallet_no + "^FS");
-
+                        //bottom right
                         if (!string.IsNullOrEmpty(strSJ))
                         {
-                            strtxt.AppendLine(@"^FT383,250^A0N,23,24^FH\^FD * " + plr_mstr_tran_list[0].plr_co + "^FS");
+                            strtxt.AppendLine(@"^FT378,302^A0N,22,31^FH\^FD*^FS");
                         }
                         else
                         {
-                            strtxt.AppendLine(@"^FT383,250^A0N,23,24^FH\^FD" + plr_mstr_tran_list[0].plr_co + "^FS");
+                            //strtxt.AppendLine(@"^FT383,250^A0N,23,24^FH\^FD" + plr_mstr_tran_list[0].plr_co + "^FS");
 
                         }
-                        strtxt.AppendLine(@"^BY4,3,63^FT9,142^BCN,,Y,N");
-                        strtxt.AppendLine(@"^FD>;" + plr_mstr_tran_list[0].plr_wec_ctn + "^FS");
 
                         strtxt.AppendLine("^PQ1,0,1,Y^XZ");
 

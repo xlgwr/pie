@@ -959,7 +959,7 @@ namespace frmPI
             cf.SetCtlTextdelegate(btn1RefreshPI, "Get....", false, true);
             ShowMsg(" Get RIR# (ERP) ......", "Notice");
             DataSet ds;
-            FrmPIE.WebReference100.Service server100 = new FrmPIE.WebReference100.Service();
+            FrmPIE.WebReferenceRTM99.Service server100 = new FrmPIE.WebReferenceRTM99.Service();
             server100.Timeout = 90000;
             string existrir = "";
             string existrirsuccess = "";
