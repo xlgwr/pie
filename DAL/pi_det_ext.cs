@@ -35,7 +35,7 @@ namespace PI.DAL
         /// </summary>
         public int GetMaxId(string piid)
         {
-            return DbHelperSQL.GetMaxID("pi_deci1", "PI_ID='" + piid + "'", "pi_det",false);
+            return DbHelperSQL.GetMaxID("pi_deci1", "PI_ID='" + piid + "'", "pi_det", false);
         }
         /// <summary>
         /// 是否存在该记录
@@ -97,6 +97,30 @@ namespace PI.DAL
         }
 
 
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public PI.Model.pi_det GetModel(string PI_ID)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 " + _strAttr);
+            strSql.Append(" where PI_ID=@PI_ID  ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50)	};
+            parameters[0].Value = PI_ID;
+
+            PI.Model.pi_det model = new PI.Model.pi_det();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// 得到一个对象实体
         /// </summary>

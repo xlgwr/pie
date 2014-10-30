@@ -1406,48 +1406,13 @@ namespace FrmPIE._0API
         {
             int returnValueNumber;
             string wec_ctn_pre;
-            string strServer;
 
+            Program.getInitServer(plr_po, out returnValueNumber, out wec_ctn_pre);
 
-            SqlParameter[] parameters ={
-                new SqlParameter("@po_nbr",SqlDbType.VarChar,30),
-                new SqlParameter("@wec_ctn_pre",SqlDbType.VarChar,30)
-                };
-
-            parameters[0].Value = plr_po;
-
-            parameters[1].Direction = ParameterDirection.Output;
-
-            DbHelperSQL.RunProcedure("sp_Get_WecCtnPre", parameters, out returnValueNumber);
-
-            wec_ctn_pre = parameters[1].Value.ToString().Trim();
-
-
-
-            if (wec_ctn_pre == "WWTS")
-            {
-                strServer = "OLDWEC";
-            }
-            else if (wec_ctn_pre == "WEC")
-            {
-                strServer = "OLDWEC";
-            }
-            else if (wec_ctn_pre == "WTSZ")
-            {
-                strServer = "OLDWEC";
-            }
-            else if (wec_ctn_pre == "Wellop")
-            {
-                strServer = "OLDWEC";
-            }
-            else
-            {
-                strServer = "OLDWEC";//P1
-            }
             try
             {
 
-                ds = server100.GetTable_n(strServer, intable, strPO);
+                ds = server100.GetTable_n(wec_ctn_pre, intable, strPO);
                 return true;
             }
             catch (Exception ex)

@@ -68,7 +68,7 @@ namespace FrmPIE
                 PIE.Model.sys_user sys_user_model = new PIE.Model.sys_user();
                 sys_user_model.user_name = txtUserName.Text;
                 sys_user_model.user_comp = cmbcomp0.Text;
-                sys_user_model.user_password = PIE.DBUtility.DESEncrypt.Encrypt(txtUserName.Text + "," + txtpwd.Text);
+                sys_user_model.user_password = PIE.DBUtility.DESEncrypt.Encrypt(txtpwd.Text + "," + txtpwd.Text);
                 sys_user_model.create_time = DateTime.Now;
                 sys_user_model.update_time = DateTime.Now;
                 sys_user_model.client_ip = Program.getClientIP();
@@ -92,7 +92,7 @@ namespace FrmPIE
         {
             addOrRemoveRole("add");
         }
-        
+
         private void addOrRemoveRole(string editp)
         {
             var username = cmbUsers.Text;
@@ -190,7 +190,7 @@ namespace FrmPIE
                 return;
             }
             var roleid = cmbRoles.SelectedValue;
-
+            txtUserName.Text = username;
             string strWhere = "user_name='" + username + "'";
             var getrolelist = new PIE.BLL.sys_userInrole().GetList(strWhere);
 
@@ -251,6 +251,45 @@ namespace FrmPIE
 
                     }
                 }
+            }
+        }
+
+        private void btn3ChangePassWD_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUserName.Text))
+            {
+                txtUserName.Focus();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtpwd.Text))
+            {
+                txtpwd.Focus();
+                return;
+            }
+            var exist = new PIE.BLL.sys_user().Exists(txtUserName.Text, cmbcomp0.Text);
+            if (exist)
+            {
+                PIE.Model.sys_user sys_user_model = new PIE.BLL.sys_user().GetModel(txtUserName.Text, cmbcomp0.Text);
+                sys_user_model.user_password = PIE.DBUtility.DESEncrypt.Encrypt(txtpwd.Text + "," + txtpwd.Text);
+                
+                sys_user_model.update_time = DateTime.Now;
+                sys_user_model.client_ip = Program.getClientIP();
+
+                var adduser = new PIE.BLL.sys_user().Update(sys_user_model);
+                if (adduser)
+                {
+                    initcmbUser();
+                    lblRoleMsg.Text = "change User:" + txtUserName.Text + "," + cmbcomp0.Text + " Password Success.";
+                }
+                else
+                {
+                    lblRoleMsg.Text = "change User:" + txtUserName.Text + "," + cmbcomp0.Text + " Password Fail.";
+                }
+
+            }
+            else
+            {
+                lblRoleMsg.Text = "Fail: " + txtUserName.Text + " is not exist";
             }
         }
     }

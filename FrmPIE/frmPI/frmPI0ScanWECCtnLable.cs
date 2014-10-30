@@ -1260,8 +1260,16 @@ namespace frmPI
                 _validateBatchid = false;
                 return;
             }
+            PI.Model.pi_det pi_det = new PI.DAL.pi_det_ext().GetModel(_frmET.textBox1.Text.Trim());
+            PIE.Model.plr_mstr_tran plr_mstr_tran_mode = new PIE.DAL.plr_mstr_tran_ext().GetModel(pi_det.pi_wec_ctn);
+
             //TESTOLDWEC
-            webserviceDS = cf.initWebServer("OLDWEC", "wsas018", _frmET.textBox1.Text.Trim());
+            int returnValueNumber;
+            string wec_ctn_pre;
+           
+            Program.getInitServer(plr_mstr_tran_mode.plr_po, out returnValueNumber, out wec_ctn_pre);
+
+            webserviceDS = cf.initWebServer(wec_ctn_pre, "wsas018", _frmET.textBox1.Text.Trim());
 
             if (webserviceDS == null)
             {

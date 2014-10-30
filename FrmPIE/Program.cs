@@ -35,6 +35,7 @@ namespace FrmPIE
 
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
+        public static string _strURL = "";
         #endregion
 
         /// <summary>
@@ -46,14 +47,16 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141029;
+            _frm4VersionMain = 20141030;
 
             _frm5VersionSecond = 14;
-            _frm6Versionprefix = "RTM";
+            _frm6Versionprefix = "RTM";//RTM
             //fix msg
             _frm10VersionFixMsg = "1.update version to RTM. change database to official";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
+
+            _strURL = "http://142.2.47.149/pisoft/net" + _frm3VersionDotNet + ".0/0" + _frm6Versionprefix;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -74,7 +77,7 @@ namespace FrmPIE
                     pkey_ctl_mode.t_name = t_name_m;
                     pkey_ctl_mode.t_value = t_value_m;
                     pkey_ctl_mode.t_desc = _frm0Version;
-                    pkey_ctl_mode.t_yyww = "http://142.2.47.149/pisoft/";
+                    pkey_ctl_mode.t_yyww = _strURL;
                     pkey_ctl_mode.prefix = _frm6Versionprefix;
                     pkey_ctl_mode.ctl_fro = _frm4VersionMain;
                     pkey_ctl_mode.ctl_to = _frm5VersionSecond;
@@ -235,9 +238,6 @@ namespace FrmPIE
         {
             try
             {
-                int returnValueNumber;
-                string wec_ctn_pre;
-                string strServer;
                 DataSet ds;
 
                 WebReferenceRTM99.Service server100 = new WebReferenceRTM99.Service();
@@ -245,41 +245,11 @@ namespace FrmPIE
 
                 var strPO = POnbr + " @ " + Partno + " @ " + Qty;
 
-                SqlParameter[] parameters ={
-                new SqlParameter("@po_nbr",SqlDbType.VarChar,30),
-                new SqlParameter("@wec_ctn_pre",SqlDbType.VarChar,30)
-                };
-                parameters[0].Value = POnbr;
+                int returnValueNumber;
+                string wec_ctn_pre;
+                getInitServer(POnbr, out returnValueNumber, out wec_ctn_pre);
 
-                parameters[1].Direction = ParameterDirection.Output;
-
-                DbHelperSQL.RunProcedure("sp_Get_WecCtnPre", parameters, out returnValueNumber);
-
-                wec_ctn_pre = parameters[1].Value.ToString().Trim();
-
-
-                if (wec_ctn_pre == "WWTS")
-                {
-                    strServer = "OLDWEC";
-                }
-                else if (wec_ctn_pre == "WEC")
-                {
-                    strServer = "OLDWEC";//P1
-                }
-                else if (wec_ctn_pre == "WTSZ")
-                {
-                    strServer = "OLDWEC";//TESTOLDWEC
-                }
-                else if (wec_ctn_pre == "Wellop")
-                {
-                    strServer = "OLDWEC";
-                }
-                else
-                {
-                    strServer = "OLDWEC";
-                }
-
-                ds = server100.GetTable_n(strServer, "wsas014", strPO);
+                ds = server100.GetTable_n(wec_ctn_pre, "wsas014", strPO);
 
                 if (ds.Tables[0].Rows.Count > 0)
                 {
@@ -299,6 +269,21 @@ namespace FrmPIE
 
 
 
+        }
+
+        public static void getInitServer(string POnbr, out int returnValueNumber, out string wec_ctn_pre)
+        {
+            SqlParameter[] parameters ={
+                new SqlParameter("@po_nbr",SqlDbType.VarChar,30),
+                new SqlParameter("@wec_ctn_pre",SqlDbType.VarChar,30)
+                };
+            parameters[0].Value = POnbr;
+
+            parameters[1].Direction = ParameterDirection.Output;
+
+            DbHelperSQL.RunProcedure("sp_Get_WecCtnPre", parameters, out returnValueNumber);
+
+            wec_ctn_pre = parameters[1].Value.ToString().Trim();
         }
 
         public static string POchecking(PIE.Model.plr_mstr plr_mstr_model)
@@ -383,48 +368,13 @@ namespace FrmPIE
         {
             int returnValueNumber;
             string wec_ctn_pre;
-            string strServer;
 
+            getInitServer(plr_po, out returnValueNumber, out wec_ctn_pre);
 
-            SqlParameter[] parameters ={
-                new SqlParameter("@po_nbr",SqlDbType.VarChar,30),
-                new SqlParameter("@wec_ctn_pre",SqlDbType.VarChar,30)
-                };
-
-            parameters[0].Value = plr_po;
-
-            parameters[1].Direction = ParameterDirection.Output;
-
-            DbHelperSQL.RunProcedure("sp_Get_WecCtnPre", parameters, out returnValueNumber);
-
-            wec_ctn_pre = parameters[1].Value.ToString().Trim();
-
-
-
-            if (wec_ctn_pre == "WWTS")
-            {
-                strServer = "OLDWEC";
-            }
-            else if (wec_ctn_pre == "WEC")
-            {
-                strServer = "OLDWEC";
-            }
-            else if (wec_ctn_pre == "WTSZ")
-            {
-                strServer = "OLDWEC";
-            }
-            else if (wec_ctn_pre == "Wellop")
-            {
-                strServer = "OLDWEC";
-            }
-            else
-            {
-                strServer = "OLDWEC";
-            }
             try
             {
 
-                ds = server100.GetTable_n(strServer, intable, strPO);
+                ds = server100.GetTable_n(wec_ctn_pre, intable, strPO);
                 return true;
             }
             catch (Exception ex)

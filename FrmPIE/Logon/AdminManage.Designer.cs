@@ -44,6 +44,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtpwd = new System.Windows.Forms.TextBox();
+            this.btn3ChangePassWD = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -82,7 +83,7 @@
             // 
             // btnAddUser
             // 
-            this.btnAddUser.Location = new System.Drawing.Point(440, 56);
+            this.btnAddUser.Location = new System.Drawing.Point(419, 56);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(75, 23);
             this.btnAddUser.TabIndex = 3;
@@ -101,7 +102,7 @@
             // 
             // btnAddRole
             // 
-            this.btnAddRole.Location = new System.Drawing.Point(440, 91);
+            this.btnAddRole.Location = new System.Drawing.Point(419, 91);
             this.btnAddRole.Name = "btnAddRole";
             this.btnAddRole.Size = new System.Drawing.Size(75, 23);
             this.btnAddRole.TabIndex = 8;
@@ -138,7 +139,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(440, 119);
+            this.btnRemove.Location = new System.Drawing.Point(419, 119);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 11;
@@ -184,12 +185,23 @@
             this.txtpwd.Size = new System.Drawing.Size(121, 21);
             this.txtpwd.TabIndex = 1;
             // 
+            // btn3ChangePassWD
+            // 
+            this.btn3ChangePassWD.Location = new System.Drawing.Point(292, 24);
+            this.btn3ChangePassWD.Name = "btn3ChangePassWD";
+            this.btn3ChangePassWD.Size = new System.Drawing.Size(106, 23);
+            this.btn3ChangePassWD.TabIndex = 14;
+            this.btn3ChangePassWD.Text = "&ChangePassword";
+            this.btn3ChangePassWD.UseVisualStyleBackColor = true;
+            this.btn3ChangePassWD.Click += new System.EventHandler(this.btn3ChangePassWD_Click);
+            // 
             // AdminManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(579, 294);
+            this.ClientSize = new System.Drawing.Size(595, 294);
+            this.Controls.Add(this.btn3ChangePassWD);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbcomp0);
             this.Controls.Add(this.btnRemove);
@@ -234,5 +246,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtpwd;
+        private System.Windows.Forms.Button btn3ChangePassWD;
     }
 }
