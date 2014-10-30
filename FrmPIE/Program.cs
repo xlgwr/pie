@@ -49,7 +49,7 @@ namespace FrmPIE
             _frm3VersionDotNet = 2;
             _frm4VersionMain = 20141030;
 
-            _frm5VersionSecond = 14;
+            _frm5VersionSecond = 16;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
             _frm10VersionFixMsg = "1.update version to RTM. change database to official";

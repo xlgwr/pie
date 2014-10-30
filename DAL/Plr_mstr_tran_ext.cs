@@ -106,6 +106,31 @@ namespace PIE.DAL
                 return null;
             }
         }
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public PIE.Model.plr_mstr_tran GetModel(string Batch_ID, bool bi)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 " + _strAtt);
+            strSql.Append(" where Batch_ID=@Batch_ID ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Batch_ID", SqlDbType.NVarChar,50)	};
+            parameters[0].Value = Batch_ID;
+
+            PIE.Model.plr_mstr_tran model = new PIE.Model.plr_mstr_tran();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
         #region  ExtensionMethod
 
         #endregion  ExtensionMethod

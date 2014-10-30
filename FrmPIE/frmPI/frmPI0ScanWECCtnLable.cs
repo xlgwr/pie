@@ -1260,8 +1260,7 @@ namespace frmPI
                 _validateBatchid = false;
                 return;
             }
-            PI.Model.pi_det pi_det = new PI.DAL.pi_det_ext().GetModel(_frmET.textBox1.Text.Trim());
-            PIE.Model.plr_mstr_tran plr_mstr_tran_mode = new PIE.DAL.plr_mstr_tran_ext().GetModel(pi_det.pi_wec_ctn);
+            PIE.Model.plr_mstr_tran plr_mstr_tran_mode = new PIE.DAL.plr_mstr_tran_ext().GetModel(_frmET.textBox1.Text.Trim(),true);
 
             //TESTOLDWEC
             int returnValueNumber;
