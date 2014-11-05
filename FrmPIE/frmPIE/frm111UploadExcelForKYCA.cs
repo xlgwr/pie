@@ -78,7 +78,14 @@ namespace FrmPIE
             dr[0] = strflag;
             for (int i = 0; i < row.LastCellNum; i++)
             {
-                dr[i + 1] = row.GetCell(i);
+                try
+                {
+                    dr[i + 1] = row.GetCell(i);
+                }
+                catch (Exception ex)
+                {
+                    continue;
+                }
             }
             dt.Rows.Add(dr);
         }
@@ -810,6 +817,10 @@ namespace FrmPIE
                         tableColumnsAdd(_dt_downToExela, "flag");
                         for (int i = 0; i < row.LastCellNum; i++)
                         {
+                            if (row == null)
+                            {
+                                continue;
+                            }
                             tableColumnsAdd(_dt_downToExela, row.GetCell(i).ToString());
                         }
                         _addHeadForDownExcel = true;
@@ -952,8 +963,8 @@ namespace FrmPIE
                     }
 
 
-
-                    if (intcell6 != (intcell9 + intcell11 + intcell13 + intcell15 + intcell17 + intcell19))
+                    var ttl = intcell9 + intcell11 + intcell13 + intcell15 + intcell17 + intcell19;
+                    if (intcell6 != ttl)
                     {
                         strerrnullrows += ",QtyError:" + rowscount.ToString();
 
@@ -965,7 +976,7 @@ namespace FrmPIE
                         string strmsgint = "";
                         if (intcell9 != 0)
                         {
-                            strmsgint = "TTL/Qty: " + intcell6.ToString() + " no Equal(<>) " + " PO:" + cell8 + ",Qty:" + intcell9.ToString();
+                            strmsgint = "TTL/Qty: [" + intcell6.ToString() + "] no Equal(<>) [" + ttl + "] PO:" + cell8 + ",Qty:" + intcell9.ToString();
                         }
                         if (intcell11 != 0)
                         {
@@ -1309,35 +1320,45 @@ namespace FrmPIE
 
         public double getICellToDouble(ICell cell, out bool num)
         {
-            double tintcell6;
-            if (cell == null)
-            {
-                num = false;
-                return 0;
-            }
-            if (cell.CellType == CellType.String)
-            {
-                tintcell6 = (string.IsNullOrEmpty(cell.ToString())) ? 0 : Convert.ToDouble(cell.StringCellValue);
-            }
-            else if (cell.CellType == CellType.Numeric)
+            try
             {
 
-                tintcell6 = cell.NumericCellValue;
+
+                double tintcell6;
+                if (cell == null)
+                {
+                    num = false;
+                    return 0;
+                }
+                if (cell.CellType == CellType.String)
+                {
+                    tintcell6 = (string.IsNullOrEmpty(cell.ToString())) ? 0 : Convert.ToDouble(cell.StringCellValue);
+                }
+                else if (cell.CellType == CellType.Numeric)
+                {
+
+                    tintcell6 = cell.NumericCellValue;
+                }
+                else
+                {
+                    num = false;
+                    return 0;
+                }
+                if (tintcell6 > 0.0)
+                {
+                    num = true;
+                }
+                else
+                {
+                    num = false;
+                }
+                return tintcell6;
             }
-            else
+            catch (Exception ex)
             {
                 num = false;
-                return 0;
+                return 0.0;
             }
-            if (tintcell6 > 0.0)
-            {
-                num = true;
-            }
-            else
-            {
-                num = false;
-            }
-            return tintcell6;
         }
 
 

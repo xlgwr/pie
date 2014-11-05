@@ -47,12 +47,12 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141030;
+            _frm4VersionMain = 20141105;
 
             _frm5VersionSecond = 16;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
-            _frm10VersionFixMsg = "1.update version to RTM. change database to official";
+            _frm10VersionFixMsg = "1.fix  Upload Excel For KYCA.";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 
