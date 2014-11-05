@@ -792,17 +792,30 @@ namespace FrmPIE
                     }
                     else
                     {
-
-                        if (i > 10)
+                        if (cell.CellType == CellType.Numeric)
                         {
-
                             dr[i + 3] = cell.NumericCellValue;
                         }
-                        else
+                        else if (cell.CellType == CellType.String)
                         {
 
                             dr[i + 3] = cell.ToString().Trim();
                         }
+                        else
+                        {
+                            dr[i + 3] = cell.ToString();
+                        }
+
+                        //if (i > 10)
+                        //{
+
+                        //    dr[i + 3] = cell.NumericCellValue;
+                        //}
+                        //else
+                        //{
+
+                        //    dr[i + 3] = cell.ToString().Trim();
+                        //}
 
                     }
                     nextrow = true;

@@ -866,23 +866,30 @@ namespace FrmPIE
                     }
                     else
                     {
-                        if (i == 3)
-                        {
-                            _strprefix = "";
-                            _cartonid = Program.initCartonFromTo(cell.StringCellValue, "", out _strprefix);
-                            _cartonid[0] = _cartonid[0].Trim();
-                            _cartonid[1] = _cartonid[1].Trim();
-                        }
-                        else if (i > 10)
-                        {
 
+                        if (cell.CellType == CellType.Numeric)
+                        {
                             dr[i + 4] = cell.NumericCellValue;
                         }
-                        else
+                        else if (cell.CellType == CellType.String)
                         {
 
                             dr[i + 4] = cell.ToString().Trim();
                         }
+                        else
+                        {
+                            dr[i + 4] = cell.ToString();
+                        }
+
+                        if (i == 3)
+                        {
+                            _strprefix = "";
+                            _cartonid = Program.initCartonFromTo(dr[i + 4].ToString(), "", out _strprefix);
+                            _cartonid[0] = _cartonid[0].Trim();
+                            _cartonid[1] = _cartonid[1].Trim();
+                        }
+
+
 
                     }
                     nextrow = true;
