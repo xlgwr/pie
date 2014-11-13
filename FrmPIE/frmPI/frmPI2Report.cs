@@ -310,7 +310,7 @@ namespace frmPI
                 {
                     PI.Model.PI_DET_Remote pI_DET_Remote_model = new PI.Model.PI_DET_Remote();
 
-                    pI_DET_Remote_model.PI_CARTON_NO = item.CartonNo;
+                    pI_DET_Remote_model.PI_CARTON_NO = item.CartonID;
                     pI_DET_Remote_model.PI_CO = item.CoDesc;
                     pI_DET_Remote_model.PI_ConnCode = item.pisr_con_code;
                     pI_DET_Remote_model.PI_CONTRACT = item.Contract;
@@ -339,7 +339,7 @@ namespace frmPI
                     pI_DET_Remote_model.pi_PO_curr = item.pisr_curr;
                     //
                     pI_DET_Remote_model.PI_PO_price = 0;
-                    pI_DET_Remote_model.PI_PRICE = 0;
+                    pI_DET_Remote_model.PI_PRICE = item.pisr_cost;
                     pI_DET_Remote_model.PI_QTY = item.pisr_qty;
                     //
                     pI_DET_Remote_model.PI_REC_NO = item.REC_NO;

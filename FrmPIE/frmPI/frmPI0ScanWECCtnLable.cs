@@ -1404,6 +1404,7 @@ namespace frmPI
                     pisr_grr_model_add.pisr_po_nbr = dr["wsas018_po_nbr"].ToString();
                     pisr_grr_model_add.pisr_qty = Convert.ToDecimal(dr["wsas018_qty"].ToString());
                     pisr_grr_model_add.pisr_curr = dr["wsas018_curr"].ToString();
+                    pisr_grr_model_add.pisr_cost = Convert.ToDecimal(dr["wsas018_cost"].ToString());
                     pisr_grr_model_add.pisr_base_cost = Convert.ToDecimal(dr["wsas018_base_cost"].ToString());
                     pisr_grr_model_add.pisr_us_cost = Convert.ToDecimal(dr["wsas018_us_cost"].ToString());
                     pisr_grr_model_add.pisr_seq = dr["wsas018_seq"].ToString();
