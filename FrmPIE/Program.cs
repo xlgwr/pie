@@ -36,6 +36,8 @@ namespace FrmPIE
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
         public static string _strURL = "";
+
+        static LogonDomain LogonOn = null;
         #endregion
 
         /// <summary>
@@ -49,7 +51,7 @@ namespace FrmPIE
             _frm3VersionDotNet = 2;
             _frm4VersionMain = 20141114;
 
-            _frm5VersionSecond = 13;
+            _frm5VersionSecond = 14;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
             _frm10VersionFixMsg = "1.fix pi Report.";
@@ -175,7 +177,7 @@ namespace FrmPIE
             //Application.Run(FrmPIE);
 
             //logon on
-            var LogonOn = new LogonDomain();
+            LogonOn = new LogonDomain();
             LogonOn.Text += _frm0Version;
             Application.Run(LogonOn);
 
@@ -676,7 +678,7 @@ namespace FrmPIE
             if (Program._frm7VersionUpdateFlag)
             {
                 lk.Visible = true;
-                lk.Text = "New Version! Click to " + Program._frm8VersionMsg + Program._frm1VersionLast;
+                lk.Text = "New Version!" + Program._frm1VersionLast + ", Click to DownLoad.";
                 lk.LinkClicked += link0NewVersion_LinkClicked;
                 return true;
             }
@@ -693,7 +695,12 @@ namespace FrmPIE
                 }
                 LinkLabel lk = (LinkLabel)sender;
                 lk.Links[0].LinkData = Program._frm9VersionURL;
-                System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+                if (lk.Visible == true)
+                {
+                    System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+                    lk.Visible = false;
+                }
+
 
             }
             catch (Exception ex)
@@ -702,9 +709,15 @@ namespace FrmPIE
             }
             finally
             {
+                if (LogonOn != null)
+                {
 
-                Application.Exit();
-                Application.ExitThread();
+                    LogonOn.Close();
+                }
+                else
+                {
+                    Application.Exit();
+                }
                 GC.Collect();
             }
         }

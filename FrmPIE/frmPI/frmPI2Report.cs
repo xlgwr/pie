@@ -36,6 +36,8 @@ namespace frmPI
 
             InitializeComponent();
 
+            data0GVPiReport.MultiSelect = false;
+
             _idr_show.tabCtlRight1.SelectedTab.Layout += SelectedTab_Layout;
             gb0PIReport.Resize += gb0PIReport_Resize;
 
@@ -372,7 +374,7 @@ namespace frmPI
                     var intresutl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model);
                     if (intresutl > 0)
                     {
-                        string strupdatesqldet = "update dbo.pi_det set pi_status='Yes' where PI_ID='" + item.PI_ID + "' and pi_LineID='" + item.pi_LineID + "' and pi_wec_ctn='" + item.pi_wec_ctn + "'";
+                        string strupdatesqldet = "update dbo.pi_det set pi_status='Yes' where PI_ID='" + item.PI_ID + "' and plr_LineID_tran='" + item.plr_LineID_tran + "'";
                         string strupdatesqlMstr = "update dbo.pi_mstr set pi_status='Yes' where PI_ID='" + item.PI_ID + "'";
 
                         var changeStatus = DbHelperSQL.ExecuteSql(strupdatesqldet);
