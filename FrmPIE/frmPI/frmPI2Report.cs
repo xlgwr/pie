@@ -293,13 +293,18 @@ namespace frmPI
                 //add TTL for pallet
                 PI.Model.PI_DET_Remote pI_DET_Remote_model_ttl = new PI.Model.PI_DET_Remote();
 
+                if ((decimal)itemPall.pi_pallet_no == itemPall.PI_GW)
+                {
+                    lblMsg.Text = "Error: Please Add PI:" + txt0PINum_piReport.Text + " GW for Pallet " + itemPall.pi_pallet_no.ToString();
+                    return;
+                }
                 pI_DET_Remote_model_ttl.PI_NO = itemPall.PI_NO;
                 pI_DET_Remote_model_ttl.PI_CARTON_NO = itemPall.PI_CARTON_NO;
                 pI_DET_Remote_model_ttl.PI_DESC = itemPall.PI_DESC;
                 pI_DET_Remote_model_ttl.PI_GW = itemPall.PI_GW;
 
                 var addflagttl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model_ttl);
-                if (addflagttl<=0)
+                if (addflagttl <= 0)
                 {
                     return;
                 }
@@ -356,7 +361,7 @@ namespace frmPI
                     pI_DET_Remote_model.pi_vend = item.pisr_vend;
 
                     //GW
-                    pI_DET_Remote_model.PI_GW = (item.Pallet_TTL_NW.Equals(DBNull.Value) || string.IsNullOrEmpty(item.Pallet_TTL_NW)) ? 0 : Convert.ToDecimal(item.Pallet_TTL_NW);
+                    pI_DET_Remote_model.PI_GW = 0;//(item.Pallet_TTL_NW.Equals(DBNull.Value) || string.IsNullOrEmpty(item.Pallet_TTL_NW)) ? 0 : Convert.ToDecimal(item.Pallet_TTL_NW);
 
                     pI_DET_Remote_model.pi_ver = 1;
 
