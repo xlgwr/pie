@@ -104,6 +104,8 @@
             this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.link0NewVersion = new System.Windows.Forms.LinkLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerColor = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -681,7 +683,7 @@
             this.cMenuStrip21ScanCartronLabel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tool1StripMenuItem21ScanCartronLabel});
             this.cMenuStrip21ScanCartronLabel.Name = "cMenuStrip1ScanCartronLabel";
-            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(159, 48);
+            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(159, 26);
             // 
             // tool1StripMenuItem21ScanCartronLabel
             // 
@@ -927,6 +929,16 @@
             this.link0NewVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.link0NewVersion.Visible = false;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timerColor
+            // 
+            this.timerColor.Tick += new System.EventHandler(this.timerColor_Tick);
+            // 
             // frmIDR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1061,6 +1073,8 @@
         protected internal System.Windows.Forms.ComboBox cmb1SearchType;
         protected internal System.Windows.Forms.TextBox txt0SearchID;
         private System.Windows.Forms.LinkLabel link0NewVersion;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerColor;
 
 
 

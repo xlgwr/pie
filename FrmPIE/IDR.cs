@@ -93,7 +93,7 @@ namespace FrmPIE
             Program.showNewVersion(link0NewVersion);
         }
 
-       
+
         public frmIDR()
         {
 
@@ -830,7 +830,28 @@ namespace FrmPIE
             cf.initOpenFile("0DownLoadExcel", _strDownLoadExcel);
         }
 
-        
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            timerColor.Enabled = Program.showNewVersion(link0NewVersion);
+        }
+
+        private void timerColor_Tick(object sender, EventArgs e)
+        {
+
+            if (link0NewVersion.ForeColor == Color.Red)
+            {
+                link0NewVersion.LinkColor = Color.Green;
+                link0NewVersion.ForeColor = Color.Green;
+            }
+            else
+            {
+                link0NewVersion.LinkColor = Color.Red;
+                link0NewVersion.ForeColor = Color.Red;
+            }
+        }
+
+
 
 
 

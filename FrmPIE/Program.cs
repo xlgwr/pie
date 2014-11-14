@@ -47,12 +47,12 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141113;
+            _frm4VersionMain = 20141114;
 
-            _frm5VersionSecond = 17;
+            _frm5VersionSecond = 13;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
-            _frm10VersionFixMsg = "1.fix UpLoad[HK,PI_DB] and add cost.";
+            _frm10VersionFixMsg = "1.fix pi Report.";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 
@@ -188,6 +188,33 @@ namespace FrmPIE
 
         }
 
+        public static void checkNewVersion()
+        {
+            string t_name_m = "version";
+            string t_value_m = "last" + _frm3VersionDotNet;
+
+            PIE.Model.pkey_ctl _lastversion_model;
+            PIE.Model.pkey_ctl _lastversion_model_fixmsg;
+            try
+            {
+                _lastversion_model = new PIE.DAL.pkey_ctl().GetModel(t_name_m, t_value_m);
+                if (!_frm0Version.Equals(_lastversion_model.t_desc))
+                {
+                    _frm1VersionLast = _lastversion_model.t_desc;
+                    _lastversion_model_fixmsg = new PIE.DAL.pkey_ctl().GetModel(t_name_m, _frm1VersionLast);
+                    _frm8VersionMsg = _lastversion_model_fixmsg.t_desc;
+                    _frm7VersionUpdateFlag = true;
+                }
+                else
+                {
+                    _frm7VersionUpdateFlag = false;
+                }
+            }
+            catch
+            {
+                _frm7VersionUpdateFlag = false;
+            }
+        }
         private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
             //throw new NotImplementedException("error thread:"+e.Exception.Message);
@@ -643,14 +670,18 @@ namespace FrmPIE
             psi.Arguments = "/e,/select," + fileFullName;
             System.Diagnostics.Process.Start(psi);
         }
-        public static void showNewVersion(LinkLabel lk)
+        public static bool showNewVersion(LinkLabel lk)
         {
+            checkNewVersion();
             if (Program._frm7VersionUpdateFlag)
             {
                 lk.Visible = true;
-                lk.Text = "Click to " + Program._frm8VersionMsg + Program._frm1VersionLast;
+                lk.Text = "New Version! Click to " + Program._frm8VersionMsg + Program._frm1VersionLast;
                 lk.LinkClicked += link0NewVersion_LinkClicked;
+                return true;
             }
+            lk.Visible = false;
+            return false;
         }
         static void link0NewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -663,10 +694,18 @@ namespace FrmPIE
                 LinkLabel lk = (LinkLabel)sender;
                 lk.Links[0].LinkData = Program._frm9VersionURL;
                 System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+
+                Application.Exit();
+                Application.ExitThread();
+                GC.Collect();
             }
         }
         ///////////////////////////////////new

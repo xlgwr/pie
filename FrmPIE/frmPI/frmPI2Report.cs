@@ -220,7 +220,7 @@ namespace frmPI
             }
             string strsql = @"select * from vpi_report where ";
             string strwhere = @"PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
-            string strorderby = @" ORDER BY PI_ID, pi_pallet_no, pi_LineID ";
+            string strorderby = @" ORDER BY plr_LineID_tran ";
             vpi_report_ds = DbHelperSQL.Query(strsql + strwhere + strorderby);
 
             if (vpi_report_ds.Tables[0].Rows.Count <= 0)
@@ -233,6 +233,7 @@ namespace frmPI
             data0GVPiReport.DataSource = vpi_report_ds.Tables[0].DefaultView;
             cf.initHeaderTextPIDetGrr(data0GVPiReport);
             data0GVPiReport.Refresh();
+            btn2UploadToHKPIDB.Enabled = true;
         }
 
         private void frmPI2Report_Load(object sender, EventArgs e)
@@ -252,7 +253,7 @@ namespace frmPI
 
         private void btn2UploadToHKPIDB_Click(object sender, EventArgs e)
         {
-
+            btn2UploadToHKPIDB.Enabled = false;
             lblMsg.Text = "";
             DateTime dt = DbHelperSQL.getServerGetDate();
             int addRemoteD = 0;
@@ -308,7 +309,7 @@ namespace frmPI
                 {
                     return;
                 }
-                string strwherePalletNo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No' and pi_pallet_no='" + itemPall.pi_pallet_no + "'";
+                string strwherePalletNo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No' and pi_pallet_no='" + itemPall.pi_pallet_no + "' order by plr_LineID_tran";
                 List<PIE.Model.vpi_report> vpi_report_list_no = new PIE.BLL.vpi_report().GetModelList(strwherePalletNo);
                 #region upload to Remote HK(PI)
                 foreach (PIE.Model.vpi_report item in vpi_report_list_no)
@@ -326,7 +327,7 @@ namespace frmPI
                     //pI_DET_Remote_model.PI_GW = item.GW;
                     pI_DET_Remote_model.PI_IQC = item.pisr_rec_type;
                     pI_DET_Remote_model.PI_K200_NW = item.pisr_dec01;
-                    pI_DET_Remote_model.pi_Lic_req = item.pisr_lic_req;
+                    pI_DET_Remote_model.pi_Lic_req = string.IsNullOrEmpty(item.pisr_lic_req) ? " - " : item.pisr_lic_req;
                     pI_DET_Remote_model.PI_LINE = item.pi_LineID;
                     pI_DET_Remote_model.PI_LOT = item.pisr_rir;
 
@@ -344,10 +345,10 @@ namespace frmPI
                     pI_DET_Remote_model.pi_PO_curr = item.pisr_curr;
                     //
                     pI_DET_Remote_model.PI_PO_price = 0;
-                    pI_DET_Remote_model.PI_PRICE = item.pisr_cost;
+                    pI_DET_Remote_model.PI_REC_NO = item.pisr_cost.ToString();
                     pI_DET_Remote_model.PI_QTY = item.pisr_qty;
                     //
-                    pI_DET_Remote_model.PI_REC_NO = item.REC_NO;
+                    //pI_DET_Remote_model.PI_REC_NO = item.REC_NO;
                     pI_DET_Remote_model.PI_SBU = item.pisr_sbu;
                     pI_DET_Remote_model.PI_SEQ = (item.pisr_seq.Equals(DBNull.Value) || string.IsNullOrEmpty(item.pisr_seq)) ? 0 : Convert.ToInt32(item.pisr_seq);
 
@@ -361,9 +362,12 @@ namespace frmPI
                     pI_DET_Remote_model.pi_vend = item.pisr_vend;
 
                     //GW
-                    pI_DET_Remote_model.PI_GW = 0;//(item.Pallet_TTL_NW.Equals(DBNull.Value) || string.IsNullOrEmpty(item.Pallet_TTL_NW)) ? 0 : Convert.ToDecimal(item.Pallet_TTL_NW);
+                    pI_DET_Remote_model.PI_GW = null;//(item.Pallet_TTL_NW.Equals(DBNull.Value) || string.IsNullOrEmpty(item.Pallet_TTL_NW)) ? 0 : Convert.ToDecimal(item.Pallet_TTL_NW);
 
                     pI_DET_Remote_model.pi_ver = 1;
+
+                    //add
+                    //pI_DET_Remote_model.pi_Lic_req = " - ";
 
                     var intresutl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model);
                     if (intresutl > 0)
@@ -392,6 +396,7 @@ namespace frmPI
 
                 #endregion
             }
+            btn2UploadToHKPIDB.Enabled = true;
 
         }
 
