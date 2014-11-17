@@ -291,6 +291,7 @@
             // 
             // enquireByPartToolStripMenuItem
             // 
+            this.enquireByPartToolStripMenuItem.Image = global::FrmPIE.Properties.Resources.find;
             this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
             this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
@@ -359,10 +360,11 @@
             this.toolStripMenuItem1,
             this.downLoad2ToExceltoolStripMenuItem2});
             this.ctmenu1EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu1EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            this.ctmenu1EnquireByPart.Size = new System.Drawing.Size(191, 70);
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.Image = global::FrmPIE.Properties.Resources.find;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(190, 22);
             this.toolStripMenuItem1.Text = "Enquire by &Part";

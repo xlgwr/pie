@@ -652,8 +652,8 @@ namespace frmPI
                                 PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", cmb3CO_ScanWECCtnLable.Text, true);
                                 if (existco != null)
                                 {
-                                    cmb3CO_ScanWECCtnLable.Text = existco.t_value + ":" + existco.t_desc;
-                                    strco = existco.t_value + ":" + existco.t_desc;
+                                    cmb3CO_ScanWECCtnLable.Text = existco.t_value;// +":" + existco.t_desc;
+                                    strco = existco.t_value;// +":" + existco.t_desc;
                                     _strCO = strco;
                                     //return false;
                                 }
@@ -686,8 +686,8 @@ namespace frmPI
                                 PIE.Model.pkey_ctl existco = new PIE.DAL.pkey_ctl().GetModel("co", cmb3CO_ScanWECCtnLable.Text, true);
                                 if (existco != null)
                                 {
-                                    lbl3COScanWECCtnLable.Text = existco.t_value + ":" + existco.t_desc;
-                                    strco = existco.t_value + ":" + existco.t_desc;
+                                    lbl3COScanWECCtnLable.Text = existco.t_value;// +":" + existco.t_desc;
+                                    strco = existco.t_value;// +":" + existco.t_desc;
                                     _strCO = strco;
                                 }
                                 else
@@ -1260,12 +1260,12 @@ namespace frmPI
                 _validateBatchid = false;
                 return;
             }
-            PIE.Model.plr_mstr_tran plr_mstr_tran_mode = new PIE.DAL.plr_mstr_tran_ext().GetModel(_frmET.textBox1.Text.Trim(),true);
+            PIE.Model.plr_mstr_tran plr_mstr_tran_mode = new PIE.DAL.plr_mstr_tran_ext().GetModel(_frmET.textBox1.Text.Trim(), true);
 
             //TESTOLDWEC
             int returnValueNumber;
             string wec_ctn_pre;
-           
+
             Program.getInitServer(plr_mstr_tran_mode.plr_po, out returnValueNumber, out wec_ctn_pre);
 
             webserviceDS = cf.initWebServer(wec_ctn_pre, "wsas018", _frmET.textBox1.Text.Trim());

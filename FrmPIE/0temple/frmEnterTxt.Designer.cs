@@ -91,7 +91,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmEnterTxt";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmEnterTxt_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

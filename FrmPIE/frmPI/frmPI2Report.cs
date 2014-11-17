@@ -260,11 +260,19 @@ namespace frmPI
             DateTime dt = DbHelperSQL.getServerGetDate();
             int addRemoteD = 0;
 
+            string strwhereRiR = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and (pisr_rir='' or pisr_rir is null) ";
             string strwhereYes = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='Yes'";
             string strwhereNo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No'";
 
+            int listcountRir = new PIE.DAL.vpi_report_ext().getCount(strwhereRiR);
             int listcountno = new PIE.DAL.vpi_report_ext().getCount(strwhereNo);
             int listcountYes = new PIE.DAL.vpi_report_ext().getCount(strwhereYes);
+
+            if (listcountRir > 0)
+            {
+                lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has some not RiR#.";
+                return;
+            }
 
             if (listcountno <= 0 && listcountYes > 0)
             {

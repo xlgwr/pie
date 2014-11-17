@@ -165,10 +165,11 @@
             this.enquireByPartToolStripMenuItem,
             this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 70);
             // 
             // enquireByPartToolStripMenuItem
             // 
+            this.enquireByPartToolStripMenuItem.Image = global::FrmPIE.Properties.Resources.find;
             this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
             this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";

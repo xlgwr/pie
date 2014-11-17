@@ -32,6 +32,7 @@ namespace FrmPIE._0API
         public static string _uploaderrows = "";
         public static bool _updateflag = false;
 
+        public delegate void Action();
         public delegate void dvoidMethod();
         public delegate void dinitDataGVSource(object obj);
         public delegate void dDoWorkCellSelectColor(object dwko);

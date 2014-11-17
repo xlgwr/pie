@@ -241,6 +241,7 @@ namespace FrmPIE
         }
         private void frmEnterTxt_Load(object sender, EventArgs e)
         {
+            this.Location = new Point { X = Control.MousePosition.X - this.Width / 2, Y = Control.MousePosition.Y - this.Height };
 
         }
 

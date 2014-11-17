@@ -56,18 +56,18 @@
             this.chkTop100 = new System.Windows.Forms.CheckBox();
             this.gb3CartonNo_PrintCartonLabel = new System.Windows.Forms.GroupBox();
             this.data2GV2CartonNO_PrintCtnLbl = new System.Windows.Forms.DataGridView();
-            this.gb2det_PrintCartonLabel = new System.Windows.Forms.GroupBox();
-            this.data1GV1ePackingMstr_PrintCtnLbl = new System.Windows.Forms.DataGridView();
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gb2det_PrintCartonLabel = new System.Windows.Forms.GroupBox();
+            this.data1GV1ePackingMstr_PrintCtnLbl = new System.Windows.Forms.DataGridView();
             this.gb0PrintCartonLabel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gb3CartonNo_PrintCartonLabel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2CartonNO_PrintCtnLbl)).BeginInit();
+            this.ctmenu0EnquireByPart.SuspendLayout();
             this.gb2det_PrintCartonLabel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingMstr_PrintCtnLbl)).BeginInit();
-            this.ctmenu0EnquireByPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb0PrintCartonLabel
@@ -325,6 +325,21 @@
             this.data2GV2CartonNO_PrintCtnLbl.Size = new System.Drawing.Size(708, 245);
             this.data2GV2CartonNO_PrintCtnLbl.TabIndex = 16;
             // 
+            // ctmenu0EnquireByPart
+            // 
+            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enquireByPartToolStripMenuItem});
+            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(166, 48);
+            // 
+            // enquireByPartToolStripMenuItem
+            // 
+            this.enquireByPartToolStripMenuItem.Image = global::FrmPIE.Properties.Resources.find;
+            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
+            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            this.enquireByPartToolStripMenuItem.Click += new System.EventHandler(this.enquireByPartToolStripMenuItem_Click);
+            // 
             // gb2det_PrintCartonLabel
             // 
             this.gb2det_PrintCartonLabel.Controls.Add(this.data1GV1ePackingMstr_PrintCtnLbl);
@@ -370,20 +385,6 @@
             this.data1GV1ePackingMstr_PrintCtnLbl.Size = new System.Drawing.Size(708, 113);
             this.data1GV1ePackingMstr_PrintCtnLbl.TabIndex = 16;
             // 
-            // ctmenu0EnquireByPart
-            // 
-            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enquireByPartToolStripMenuItem});
-            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(166, 48);
-            // 
-            // enquireByPartToolStripMenuItem
-            // 
-            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
-            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
-            this.enquireByPartToolStripMenuItem.Click += new System.EventHandler(this.enquireByPartToolStripMenuItem_Click);
-            // 
             // frm513PrintCartonLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -400,9 +401,9 @@
             this.groupBox2.PerformLayout();
             this.gb3CartonNo_PrintCartonLabel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2CartonNO_PrintCtnLbl)).EndInit();
+            this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.gb2det_PrintCartonLabel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingMstr_PrintCtnLbl)).EndInit();
-            this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
