@@ -236,6 +236,10 @@ namespace frmPI
             cf.initHeaderTextPIDetGrr(data0GVPiReport);
             data0GVPiReport.Refresh();
             btn2UploadToHKPIDB.Enabled = true;
+
+            lblpino.Visible = true;
+            txt1Change.Visible = true;
+            btn3Change.Visible = true;
         }
 
         private void frmPI2Report_Load(object sender, EventArgs e)
@@ -268,13 +272,7 @@ namespace frmPI
             int listcountno = new PIE.DAL.vpi_report_ext().getCount(strwhereNo);
             int listcountYes = new PIE.DAL.vpi_report_ext().getCount(strwhereYes);
 
-            if (listcountRir > 0)
-            {
-                lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has some not RiR#.";
-                return;
-            }
-
-            if (listcountno <= 0 && listcountYes > 0)
+            if (listcountYes > 0)
             {
                 lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has being Update Over.";
                 return;
@@ -284,6 +282,20 @@ namespace frmPI
                 lblMsg.Text = "Notice: " + strwhereNo + " has no Data.";
                 return;
             }
+            if (listcountRir > 0)
+            {
+                lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has some not RiR#.";
+                return;
+            }
+
+            var pi_mstr_remote_exit = new PI.BLL.PI_MSTR_Remote().Exists(txt0PINum_piReport.Text.Trim());
+
+            if (pi_mstr_remote_exit)
+            {
+                lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " was exist in Remote HK Database(PI pi_mstr)";
+                return;
+            }
+
             PI.Model.PI_MSTR_Remote pI_MSTR_Remote_model = new PI.Model.PI_MSTR_Remote();
 
             pI_MSTR_Remote_model.PI_NO = txt0PINum_piReport.Text.Trim();
@@ -413,6 +425,87 @@ namespace frmPI
         private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
         {
             cf.downLoadExcel(vpi_report_ds, lblMsg, cf.nameList0vpi_report_ds(), "22PIReoprt" + txt0PINum_piReport.Text.Trim());
+        }
+
+        private void btn3Change_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt0PINum_piReport.Text.Trim()))
+            {
+                txt0PINum_piReport.Focus();
+                return;
+            }
+            if (string.IsNullOrEmpty(txt1Change.Text.Trim()))
+            {
+                txt1Change.Focus();
+                return;
+            }
+            string mbox="Are you sure Change "+txt0PINum_piReport.Text+" to "+txt1Change.Text;
+            if (System.Windows.Forms.MessageBox.Show(mbox,"Notice",MessageBoxButtons.YesNo)==DialogResult.No)
+            {
+                lblMsg.Text = "";     
+                return;
+            }
+            string strwhereYes = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='Yes'";
+
+            int listcountYes = new PIE.DAL.vpi_report_ext().getCount(strwhereYes);
+
+            if (listcountYes < 0)
+            {
+                lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has not update to HK PI Database.";
+                return;
+            }
+          
+            var pi_mstr_remote_exit = new PI.BLL.PI_MSTR_Remote().Exists(txt1Change.Text.Trim());
+
+            var pi_det_remote_exit = new PI.DAL.PI_DET_Remote_ext().Exists(txt1Change.Text.Trim());
+
+
+            if (!pi_mstr_remote_exit)
+            {
+                lblMsg.Text = "Notice: " + txt1Change.Text.Trim() + " not exist in Remote HK Database(PI pi_mstr)";
+                return;
+            }
+
+            if (!pi_det_remote_exit)
+            {
+                lblMsg.Text = "Notice: " + txt1Change.Text.Trim() + " not exist in Remote HK Database(PI pi_det)";
+                return;
+            }
+            var pi_det_update_flag = new PI.DAL.PI_DET_Remote_ext().Update(txt0PINum_piReport.Text.Trim(), txt1Change.Text.Trim());
+            if (pi_det_update_flag)
+            {
+                string flagms = "Success:  Change "+txt0PINum_piReport.Text+" to "+txt1Change.Text+" OK in Remote HK Database(PI pi_det)";
+                lblMsg.Text = flagms;
+                var exitpi_mstr = new PI.BLL.pi_mstr().Exists(txt1Change.Text, 1);
+                var change_pi_mstr_flag = true;
+                if (!exitpi_mstr)
+                {
+                    change_pi_mstr_flag = new PI.DAL.pi_mstr_ext().Update(txt0PINum_piReport.Text.Trim(), txt1Change.Text.Trim());
+                }
+                else
+                {
+                    var exitchange = new PI.BLL.pi_mstr().GetModel(txt0PINum_piReport.Text.Trim(), 1);
+                    exitchange.pi_status_msg += "Change to " + txt1Change.Text;
+                    exitchange.pi_remark += "Change to " + txt1Change.Text;
+                    var updatNettoChange = new PI.BLL.pi_mstr().Update(exitchange);
+
+                }
+                if (change_pi_mstr_flag)
+                {
+                    var chage_pi_det_flag = new PI.DAL.pi_det_ext().Update(txt0PINum_piReport.Text.Trim(), txt1Change.Text.Trim());
+                    if (chage_pi_det_flag)
+                    {
+                        txt0PINum_piReport.Text = txt1Change.Text;
+                        btn_enquire_piReport_Click(sender, e);
+                        lblMsg.Text = flagms + ",本地更新OK";
+                    }
+                }
+            }
+            else
+            {
+                lblMsg.Text = "Fail: " + txt1Change.Text.Trim() + " Change Fail in Remote HK Database(PI pi_det)";
+            }
+
         }
 
     }

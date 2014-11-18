@@ -121,6 +121,7 @@ namespace FrmPIE
             //
             _FrmForRefe.data0GVForReference.RowEnter += data0GVForReference_RowEnter;
             _FrmForRefe.data0GVForReference.CellClick += data0GVForReference_Click;
+            _FrmForRefe.data0GVForReference.KeyDown += data0GVForReference_KeyDown;
             //
             _FrmForRefe.button1.Click += enquireByForReferenct;
             _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
@@ -135,6 +136,21 @@ namespace FrmPIE
 
             _FrmForRefe.ShowDialog();
         }
+
+        void data0GVForReference_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData==Keys.Enter)
+            {
+                if (!string.IsNullOrEmpty(_FrmForRefe.lbl2SelectValue.Text))
+                {
+                    txt0SearchID.Text = _FrmForRefe.lbl2SelectValue.Text;
+                    button1_DoubleClick(sender, e);
+                    _FrmForRefe.Hide();
+                }
+            }
+        }
+
+      
 
         void chkTop50_CheckedChanged(object sender, EventArgs e)
         {
@@ -184,7 +200,7 @@ namespace FrmPIE
             btn0Find9_Click(sender, e);
         }
 
-        void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
+        public void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
             string strBatchID = cf.selectCellMethod(dwo);
@@ -195,7 +211,6 @@ namespace FrmPIE
         {
             DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
             cf.initThreadDowrokColor(dwo);
-
         }
         void enquireByForReferenct(object sender, EventArgs e)
         {
@@ -206,6 +221,7 @@ namespace FrmPIE
                 return;
             }
             init_FrmForRefeDGV(_FrmForRefe.textBox1.Text.Trim());
+            _FrmForRefe.data0GVForReference.Focus();
             //txt0SearchID.Text = _FrmForRefe.textBox1.Text.Trim();
             //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
         }

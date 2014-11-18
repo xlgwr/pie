@@ -89,7 +89,7 @@
             this.groupBox1ScanWECCtnLable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1ScanWECCtnLable.Location = new System.Drawing.Point(0, 0);
             this.groupBox1ScanWECCtnLable.Name = "groupBox1ScanWECCtnLable";
-            this.groupBox1ScanWECCtnLable.Size = new System.Drawing.Size(645, 473);
+            this.groupBox1ScanWECCtnLable.Size = new System.Drawing.Size(645, 445);
             this.groupBox1ScanWECCtnLable.TabIndex = 52;
             this.groupBox1ScanWECCtnLable.TabStop = false;
             // 
@@ -97,7 +97,7 @@
             // 
             this.btn2UploadToHKPIDB.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2UploadToHKPIDB.ForeColor = System.Drawing.Color.Red;
-            this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(496, 230);
+            this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(496, 212);
             this.btn2UploadToHKPIDB.Name = "btn2UploadToHKPIDB";
             this.btn2UploadToHKPIDB.Size = new System.Drawing.Size(133, 34);
             this.btn2UploadToHKPIDB.TabIndex = 300;
@@ -110,7 +110,7 @@
             // 
             this.btn0AddFromePackingList0.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn0AddFromePackingList0.ForeColor = System.Drawing.Color.Red;
-            this.btn0AddFromePackingList0.Location = new System.Drawing.Point(6, 231);
+            this.btn0AddFromePackingList0.Location = new System.Drawing.Point(6, 213);
             this.btn0AddFromePackingList0.Name = "btn0AddFromePackingList0";
             this.btn0AddFromePackingList0.Size = new System.Drawing.Size(130, 33);
             this.btn0AddFromePackingList0.TabIndex = 208;
@@ -120,7 +120,7 @@
             // 
             // btnAddPalletNW
             // 
-            this.btnAddPalletNW.Location = new System.Drawing.Point(172, 231);
+            this.btnAddPalletNW.Location = new System.Drawing.Point(172, 213);
             this.btnAddPalletNW.Name = "btnAddPalletNW";
             this.btnAddPalletNW.Size = new System.Drawing.Size(60, 33);
             this.btnAddPalletNW.TabIndex = 208;
@@ -131,7 +131,7 @@
             // btn1RefreshPI
             // 
             this.btn1RefreshPI.ForeColor = System.Drawing.Color.Red;
-            this.btn1RefreshPI.Location = new System.Drawing.Point(359, 231);
+            this.btn1RefreshPI.Location = new System.Drawing.Point(359, 213);
             this.btn1RefreshPI.Name = "btn1RefreshPI";
             this.btn1RefreshPI.Size = new System.Drawing.Size(121, 33);
             this.btn1RefreshPI.TabIndex = 209;
@@ -143,7 +143,7 @@
             // group3BXdataGV1ScanList
             // 
             this.group3BXdataGV1ScanList.Controls.Add(this.data1GVSanWecCtnLable);
-            this.group3BXdataGV1ScanList.Location = new System.Drawing.Point(7, 270);
+            this.group3BXdataGV1ScanList.Location = new System.Drawing.Point(7, 252);
             this.group3BXdataGV1ScanList.Name = "group3BXdataGV1ScanList";
             this.group3BXdataGV1ScanList.Size = new System.Drawing.Size(629, 182);
             this.group3BXdataGV1ScanList.TabIndex = 299;
@@ -189,7 +189,7 @@
             // btn0Scan
             // 
             this.btn0Scan.Font = new System.Drawing.Font("Microsoft YaHei", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn0Scan.Location = new System.Drawing.Point(251, 230);
+            this.btn0Scan.Location = new System.Drawing.Point(251, 212);
             this.btn0Scan.Name = "btn0Scan";
             this.btn0Scan.Size = new System.Drawing.Size(91, 34);
             this.btn0Scan.TabIndex = 208;
@@ -215,7 +215,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(7, 9);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(629, 125);
+            this.groupBox1.Size = new System.Drawing.Size(629, 103);
             this.groupBox1.TabIndex = 199;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pi Mstr Info";
@@ -255,9 +255,9 @@
             this.lbl0msg.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lbl0msg.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl0msg.ForeColor = System.Drawing.Color.Red;
-            this.lbl0msg.Location = new System.Drawing.Point(3, 73);
+            this.lbl0msg.Location = new System.Drawing.Point(3, 71);
             this.lbl0msg.Name = "lbl0msg";
-            this.lbl0msg.Size = new System.Drawing.Size(623, 49);
+            this.lbl0msg.Size = new System.Drawing.Size(623, 29);
             this.lbl0msg.TabIndex = 5;
             this.lbl0msg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -394,7 +394,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.cmb3CO_ScanWECCtnLable);
-            this.groupBox2.Location = new System.Drawing.Point(7, 134);
+            this.groupBox2.Location = new System.Drawing.Point(7, 116);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(629, 91);
             this.groupBox2.TabIndex = 0;
@@ -495,7 +495,7 @@
             this.enquireByPartToolStripMenuItem,
             this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 70);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
             // 
             // enquireByPartToolStripMenuItem
             // 
@@ -516,7 +516,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 473);
+            this.ClientSize = new System.Drawing.Size(645, 445);
             this.Controls.Add(this.groupBox1ScanWECCtnLable);
             this.Name = "frmPI0ScanWECCtnLable";
             this.Text = "frmPI0ScanWECCtnLable";

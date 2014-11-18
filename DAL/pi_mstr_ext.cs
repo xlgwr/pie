@@ -12,6 +12,34 @@ namespace PI.DAL
     {
         public pi_mstr_ext()
         { }
+
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(string PI_ID,string change_pi_id)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update pi_mstr set ");
+            strSql.Append("PI_ID=@change_pi_id ");
+            strSql.Append(" where PI_ID=@PI_ID ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@PI_ID", SqlDbType.NVarChar,50),
+					new SqlParameter("@change_pi_id", SqlDbType.NVarChar,50)
+                                        };
+            parameters[0].Value = PI_ID;
+            parameters[1].Value = change_pi_id;
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// 得到一个对象实体pi_chr01>PI add from epacking batchid
         /// </summary>
