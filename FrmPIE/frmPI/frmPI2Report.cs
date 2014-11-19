@@ -292,21 +292,31 @@ namespace frmPI
 
             if (pi_mstr_remote_exit)
             {
-                lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " was exist in Remote HK Database(PI pi_mstr)";
-                return;
+                string msg = "Notice: " + txt0PINum_piReport.Text.Trim() + " was exist in Remote HK Database(PI pi_mstr)";
+
+                if (System.Windows.Forms.MessageBox.Show(msg + "\n Are you sure Continue to Upload " + txt0PINum_piReport.Text.Trim(), "Notice", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    lblMsg.Text = msg;
+                    return;
+                }
             }
-
-            PI.Model.PI_MSTR_Remote pI_MSTR_Remote_model = new PI.Model.PI_MSTR_Remote();
-
-            pI_MSTR_Remote_model.PI_NO = txt0PINum_piReport.Text.Trim();
-            pI_MSTR_Remote_model.PI_Date = dt;
-
-            var addRemoteMstr = new PI.DAL.PI_MSTR_Remote_ext().Add(pI_MSTR_Remote_model, true);
-            if (!addRemoteMstr)
+            else
             {
-                lblMsg.Text = "Error: Upload PI:" + txt0PINum_piReport.Text + " to DataBase(HK) fails.";
-                return;
+                PI.Model.PI_MSTR_Remote pI_MSTR_Remote_model = new PI.Model.PI_MSTR_Remote();
+
+                pI_MSTR_Remote_model.PI_NO = txt0PINum_piReport.Text.Trim();
+                pI_MSTR_Remote_model.PI_Date = dt;
+
+
+                var addRemoteMstr = new PI.DAL.PI_MSTR_Remote_ext().Add(pI_MSTR_Remote_model, true);
+                if (!addRemoteMstr)
+                {
+                    lblMsg.Text = "Error: Upload PI:" + txt0PINum_piReport.Text + " to DataBase(HK) fails.";
+                    return;
+                }
             }
+
+
 
             string strwherePalletCount = "PI_NO='" + txt0PINum_piReport.Text.Trim() + "'";
             List<PIE.Model.vpi_report_palletCount> vpi_report_palletCount_mode_list = new PIE.BLL.vpi_report_palletCount().GetModelList(strwherePalletCount);
@@ -439,10 +449,10 @@ namespace frmPI
                 txt1Change.Focus();
                 return;
             }
-            string mbox="Are you sure Change "+txt0PINum_piReport.Text+" to "+txt1Change.Text;
-            if (System.Windows.Forms.MessageBox.Show(mbox,"Notice",MessageBoxButtons.YesNo)==DialogResult.No)
+            string mbox = "Are you sure Change " + txt0PINum_piReport.Text + " to " + txt1Change.Text;
+            if (System.Windows.Forms.MessageBox.Show(mbox, "Notice", MessageBoxButtons.YesNo) == DialogResult.No)
             {
-                lblMsg.Text = "";     
+                lblMsg.Text = "";
                 return;
             }
             string strwhereYes = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='Yes'";
@@ -454,7 +464,7 @@ namespace frmPI
                 lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has not update to HK PI Database.";
                 return;
             }
-          
+
             var pi_mstr_remote_exit = new PI.BLL.PI_MSTR_Remote().Exists(txt1Change.Text.Trim());
 
             var pi_det_remote_exit = new PI.DAL.PI_DET_Remote_ext().Exists(txt1Change.Text.Trim());
@@ -474,7 +484,7 @@ namespace frmPI
             var pi_det_update_flag = new PI.DAL.PI_DET_Remote_ext().Update(txt0PINum_piReport.Text.Trim(), txt1Change.Text.Trim());
             if (pi_det_update_flag)
             {
-                string flagms = "Success:  Change "+txt0PINum_piReport.Text+" to "+txt1Change.Text+" OK in Remote HK Database(PI pi_det)";
+                string flagms = "Success:  Change " + txt0PINum_piReport.Text + " to " + txt1Change.Text + " OK in Remote HK Database(PI pi_det)";
                 lblMsg.Text = flagms;
                 var exitpi_mstr = new PI.BLL.pi_mstr().Exists(txt1Change.Text, 1);
                 var change_pi_mstr_flag = true;

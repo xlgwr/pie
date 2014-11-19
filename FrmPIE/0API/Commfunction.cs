@@ -1544,13 +1544,13 @@ namespace FrmPIE._0API
                             {
                                 _updateflag = false;
 
-                                item.plr_status = "N";
+                                //item.plr_status = "C";
                                 item.plr_status_msg = "WebServer Error 没有返回值";
 
-                                item.plr_update_date = DateTime.Now;
-                                item.plr_user_ip = getClientIP();
+                                //item.plr_update_date = DateTime.Now;
+                               // item.plr_user_ip = getClientIP();
 
-                                var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+                               // var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
                                 strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + "WebServer 没有返回值" + "\n";
                                 intUploadErrCount++;
                             }
