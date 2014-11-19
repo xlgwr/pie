@@ -229,7 +229,7 @@
             this.btnAddPalletNum.FlatAppearance.BorderSize = 0;
             this.btnAddPalletNum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPalletNum.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAddPalletNum.Location = new System.Drawing.Point(254, 46);
+            this.btnAddPalletNum.Location = new System.Drawing.Point(257, 46);
             this.btnAddPalletNum.Name = "btnAddPalletNum";
             this.btnAddPalletNum.Size = new System.Drawing.Size(25, 25);
             this.btnAddPalletNum.TabIndex = 203;
@@ -244,7 +244,7 @@
             this.btn00More.FlatAppearance.BorderSize = 0;
             this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
-            this.btn00More.Location = new System.Drawing.Point(257, 16);
+            this.btn00More.Location = new System.Drawing.Point(259, 16);
             this.btn00More.Name = "btn00More";
             this.btn00More.Size = new System.Drawing.Size(23, 23);
             this.btn00More.TabIndex = 206;

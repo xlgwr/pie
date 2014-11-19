@@ -354,7 +354,7 @@ namespace frmPI
                     pI_DET_Remote_model.PI_CONTRACT = item.Contract;
                     pI_DET_Remote_model.pi_cre_time = dt;
                     //
-                    pI_DET_Remote_model.pi_curr_rate = 0;
+                    pI_DET_Remote_model.pi_curr_rate = null; //0;
                     pI_DET_Remote_model.PI_DESC = item.sq_name;
                     //pI_DET_Remote_model.PI_GW = item.GW;
                     pI_DET_Remote_model.PI_IQC = item.pisr_rec_type;
@@ -370,14 +370,14 @@ namespace frmPI
                     pI_DET_Remote_model.PI_NO = item.PI_ID;
                     pI_DET_Remote_model.PI_NW = item.pisr_dec02;
                     //
-                    pI_DET_Remote_model.pi_ori_PO_price = 0;
+                    pI_DET_Remote_model.pi_ori_PO_price = null;// 0;
                     pI_DET_Remote_model.PI_PALLET = item.pi_pallet_no.ToString();
                     pI_DET_Remote_model.PI_PART = item.pisr_part;
                     pI_DET_Remote_model.PI_PO = item.pisr_po_nbr;
-                    pI_DET_Remote_model.pi_PO_curr = item.pisr_curr;
+                    pI_DET_Remote_model.pi_PO_curr = null;// item.pisr_curr;
                     //
                     pI_DET_Remote_model.PI_PO_price = 0;
-                    pI_DET_Remote_model.PI_REC_NO = item.pisr_cost.ToString();
+                    pI_DET_Remote_model.PI_REC_NO = item.pisr_us_cost.ToString();//item.pisr_cost.ToString();
                     pI_DET_Remote_model.PI_QTY = item.pisr_qty;
                     //
                     //pI_DET_Remote_model.PI_REC_NO = item.REC_NO;

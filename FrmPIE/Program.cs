@@ -51,7 +51,7 @@ namespace FrmPIE
             _frm3VersionDotNet = 2;
             _frm4VersionMain = 20141119;
 
-            _frm5VersionSecond = 09;
+            _frm5VersionSecond = 14;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
             _frm10VersionFixMsg = "1.fix pi Report,Change pi_no to other PI_no.";
