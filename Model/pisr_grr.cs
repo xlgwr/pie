@@ -38,8 +38,8 @@ namespace PI.Model
         private string _pisr_char01;
         private string _pisr_char02;
         private string _pisr_char03;
-        private decimal? _pisr_dec01;
-        private decimal? _pisr_dec02;
+        private decimal _pisr_dec01;
+        private decimal _pisr_dec02;
         private int? _pisr_int01;
         private int? _pisr_int02;
         private string _pi_status;
@@ -282,7 +282,7 @@ namespace PI.Model
         /// <summary>
         /// 
         /// </summary>
-        public decimal? pisr_dec01
+        public decimal pisr_dec01
         {
             set { _pisr_dec01 = value; }
             get { return _pisr_dec01; }
@@ -290,7 +290,7 @@ namespace PI.Model
         /// <summary>
         /// 
         /// </summary>
-        public decimal? pisr_dec02
+        public decimal pisr_dec02
         {
             set { _pisr_dec02 = value; }
             get { return _pisr_dec02; }

@@ -136,6 +136,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pisr_grr_ext.cs" />
     <Compile Include="pisr_grr.cs" />
     <Compile Include="pi_det_ext.cs" />
     <Compile Include="PI_DET_Remote_ext.cs" />

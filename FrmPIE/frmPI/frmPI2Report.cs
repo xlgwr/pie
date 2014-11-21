@@ -287,7 +287,10 @@ namespace frmPI
                 lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has some not RiR#.";
                 return;
             }
-
+            if (GetPriceOfUSD(txt0PINum_piReport.Text.Trim(), lblMsg).Equals("Error"))
+            {
+                return;
+            };
             var pi_mstr_remote_exit = new PI.BLL.PI_MSTR_Remote().Exists(txt0PINum_piReport.Text.Trim());
 
             if (pi_mstr_remote_exit)
@@ -358,7 +361,6 @@ namespace frmPI
                     pI_DET_Remote_model.PI_DESC = item.sq_name;
                     //pI_DET_Remote_model.PI_GW = item.GW;
                     pI_DET_Remote_model.PI_IQC = item.pisr_rec_type;
-                    pI_DET_Remote_model.PI_K200_NW = item.pisr_dec01;
                     pI_DET_Remote_model.pi_Lic_req = string.IsNullOrEmpty(item.pisr_lic_req) ? " - " : item.pisr_lic_req;
                     pI_DET_Remote_model.PI_LINE = item.pi_LineID;
                     pI_DET_Remote_model.PI_LOT = item.pisr_rir;
@@ -369,6 +371,7 @@ namespace frmPI
                     pI_DET_Remote_model.pi_mfgr_part = item.MFGR_Part;
                     pI_DET_Remote_model.PI_NO = item.PI_ID;
                     pI_DET_Remote_model.PI_NW = item.pisr_dec02;
+                    pI_DET_Remote_model.PI_K200_NW = item.pisr_dec01;
                     //
                     pI_DET_Remote_model.pi_ori_PO_price = null;// 0;
                     pI_DET_Remote_model.PI_PALLET = item.pi_pallet_no.ToString();
@@ -518,5 +521,87 @@ namespace frmPI
 
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (GetPriceOfUSD(txt0PINum_piReport.Text.Trim(), lblMsg).Equals("Error"))
+            {
+                return;
+            };
+        }
+        public string GetPriceOfUSD(string piid, Control clmsg)
+        {
+            PI.Model.pi_mstr pi_mstr_model = new PI.BLL.pi_mstr().GetModel(piid, 1);
+            string errormsg = "";
+
+            if (pi_mstr_model == null)
+            {
+                clmsg.Text = "Error1: get price fail.";
+                return "Error";
+            }
+            if (string.IsNullOrEmpty(pi_mstr_model.pi_chr01))
+            {
+                clmsg.Text = "Error2: get price fail.";
+                return "Error";
+            }
+
+            try
+            {
+                FrmPIE.WebReferenceRTM99.Service server100 = new FrmPIE.WebReferenceRTM99.Service();
+                server100.Timeout = 90000;
+
+                var ds = server100.GetTable_n("WEC", "wsas019", pi_mstr_model.pi_chr01);
+                if (ds != null)
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        int dscount = ds.Tables[0].Rows.Count;
+                        for (int y = 0; y < ds.Tables[0].Rows.Count; y++)
+                        {
+                            string wsas019_wec_id = ds.Tables[0].Rows[y]["wsas019_wec_id"].ToString();
+                            string wsas019_rir = ds.Tables[0].Rows[y]["wsas019_rir"].ToString();
+                            string wsas019_us_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas019_us_cost"]).ToString("#,#.0000");
+
+                            if (string.IsNullOrEmpty(wsas019_wec_id) || string.IsNullOrEmpty(wsas019_rir) || string.IsNullOrEmpty(wsas019_us_cost))
+                            {
+                                clmsg.Text = "Error3: get price fail. wec_id or rir# or us_cost is null ";
+                                continue;
+                            }
+                            else
+                            {
+                                var updatePriceflag = new PI.DAL.pisr_grr_ext().Update(wsas019_wec_id, wsas019_rir, wsas019_us_cost,piid);
+                                if (!updatePriceflag)
+                                {
+                                    if (string.IsNullOrEmpty(errormsg))
+                                    {
+                                        errormsg = "Error5: update fail list: Wec_id:" + wsas019_wec_id + ",RiR#: " + wsas019_rir;
+                                    }
+                                    else
+                                    {
+                                        errormsg += "\t Wec_id:" + wsas019_wec_id + ",RiR#: " + wsas019_rir;
+                                    }
+                                }
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(errormsg))
+                        {
+                            System.Windows.Forms.MessageBox.Show(errormsg);
+                            return "Error";
+                        }
+                        return "OK";
+                    }
+                }
+
+                clmsg.Text = "Error6: get price fail. ";
+                return "Error";
+
+            }
+            catch (Exception ex)
+            {
+
+                clmsg.Text = "Error7: get price fail. " + ex.Message;
+                return "Error";
+            }
+
+        }
     }
 }

@@ -45,6 +45,7 @@
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.gb0PIReport.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data0GVPiReport)).BeginInit();
@@ -85,6 +86,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.lblpino);
             this.groupBox1.Controls.Add(this.btn3Change);
             this.groupBox1.Controls.Add(this.btn2UploadToHKPIDB);
@@ -126,7 +128,7 @@
             // 
             this.btn2UploadToHKPIDB.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2UploadToHKPIDB.ForeColor = System.Drawing.Color.Red;
-            this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(321, 20);
+            this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(310, 18);
             this.btn2UploadToHKPIDB.Name = "btn2UploadToHKPIDB";
             this.btn2UploadToHKPIDB.Size = new System.Drawing.Size(127, 34);
             this.btn2UploadToHKPIDB.TabIndex = 5;
@@ -169,7 +171,7 @@
             // 
             // btn0_enquire_piReport
             // 
-            this.btn0_enquire_piReport.Location = new System.Drawing.Point(227, 20);
+            this.btn0_enquire_piReport.Location = new System.Drawing.Point(217, 20);
             this.btn0_enquire_piReport.Name = "btn0_enquire_piReport";
             this.btn0_enquire_piReport.Size = new System.Drawing.Size(75, 34);
             this.btn0_enquire_piReport.TabIndex = 2;
@@ -218,6 +220,17 @@
             this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(310, 55);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // frmPI2Report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -255,6 +268,7 @@
         protected internal System.Windows.Forms.Button btn3Change;
         protected internal System.Windows.Forms.TextBox txt1Change;
         private System.Windows.Forms.Label lblpino;
+        private System.Windows.Forms.Button button1;
 
     }
 }

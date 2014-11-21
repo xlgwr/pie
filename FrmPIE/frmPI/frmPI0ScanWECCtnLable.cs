@@ -895,6 +895,7 @@ namespace frmPI
 
         private void txt2SanWecCtnLable_Enter(object sender, EventArgs e)
         {
+            _idr_show.AcceptButton = btn0Scan;
             lbl0msg.Text = "";
             lbl0noticePiId.Text = "";
             if (txt2SanWecCtnLable.Text.Length >= 12)
@@ -1193,6 +1194,7 @@ namespace frmPI
 
         private void cmb4Pallet_PIScan_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txtPalletNW.Focus();
             if (string.IsNullOrEmpty(cmb4Pallet_PIScan.Text.Trim()))
             {
 
@@ -1423,8 +1425,8 @@ namespace frmPI
                     pisr_grr_model_add.pisr_char01 = dr["wsas018_mfgr"].ToString();
                     pisr_grr_model_add.pisr_char02 = dr["wsas018_vend_name"].ToString();
 
-                    pisr_grr_model_add.pisr_dec01 = Convert.ToDecimal(dr["wsas018_k200_nw"].ToString()) / 1000;
-                    pisr_grr_model_add.pisr_dec02 = Convert.ToDecimal(dr["wsas018_nw"].ToString()) / 1000;
+                    pisr_grr_model_add.pisr_dec01 = Convert.ToDecimal(dr["wsas018_k200_nw"]);
+                    pisr_grr_model_add.pisr_dec02 = Convert.ToDecimal(dr["wsas018_nw"]);
 
                     pisr_grr_model_add.pi_cre_date = DateTime.Now;
                     pisr_grr_model_add.pi_update_date = DateTime.Now;
@@ -1473,6 +1475,11 @@ namespace frmPI
             {
                 lbl0msg.Text = "PI ID is null";
             }
+        }
+
+        private void txtPalletNW_Enter(object sender, EventArgs e)
+        {
+            _idr_show.AcceptButton = btnAddPalletNW;
         }
 
 
