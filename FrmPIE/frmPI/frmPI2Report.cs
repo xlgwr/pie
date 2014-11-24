@@ -329,7 +329,7 @@ namespace frmPI
                 //add TTL for pallet
                 PI.Model.PI_DET_Remote pI_DET_Remote_model_ttl = new PI.Model.PI_DET_Remote();
 
-                if ((decimal)itemPall.pi_pallet_no == itemPall.PI_GW)
+                if (((decimal)itemPall.pi_pallet_no == itemPall.PI_GW) || itemPall.PI_GW==0 )
                 {
                     lblMsg.Text = "Error: Please Add PI:" + txt0PINum_piReport.Text + " GW for Pallet " + itemPall.pi_pallet_no.ToString();
                     return;

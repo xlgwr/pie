@@ -1389,6 +1389,7 @@ namespace FrmPIE
         }
         private void btn3QuickUploadExcel_Click(object sender, EventArgs e)
         {
+            btn3QuickUploadExcel.Enabled = false;
             if (!_hasrun)
             {
                 getDataGV();
@@ -1401,6 +1402,7 @@ namespace FrmPIE
 
             txt0ExcelFileUploadExcel.Text = "";
             btn2GoUploadToERP.Visible = true;
+            btn3QuickUploadExcel.Enabled = true;
         }
 
         private void frmUploadExcel_FormClosing(object sender, FormClosingEventArgs e)

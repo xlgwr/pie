@@ -33,6 +33,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btn00More = new System.Windows.Forms.Button();
+            this.lblMsg = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox1
@@ -75,6 +76,16 @@
             this.btn00More.UseVisualStyleBackColor = true;
             this.btn00More.Visible = false;
             // 
+            // lblMsg
+            // 
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblMsg.Location = new System.Drawing.Point(27, 42);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(0, 14);
+            this.lblMsg.TabIndex = 9;
+            // 
             // frmEnterTxt
             // 
             this.AcceptButton = this.button1;
@@ -82,7 +93,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(380, 52);
+            this.ClientSize = new System.Drawing.Size(380, 57);
+            this.Controls.Add(this.lblMsg);
             this.Controls.Add(this.btn00More);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.button1);
@@ -103,5 +115,6 @@
         protected internal System.Windows.Forms.Label lblTitle;
         protected internal System.Windows.Forms.Button button1;
         protected internal System.Windows.Forms.Button btn00More;
+        protected internal System.Windows.Forms.Label lblMsg;
     }
 }

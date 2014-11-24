@@ -1686,14 +1686,14 @@ namespace FrmPIE._0API
                             if (plr_mstr_tran_list[i].plr_chr01.Equals("A"))
                             {
                                 //partno
-                                strtxt.AppendLine(@"^FT23," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_partno +"^FS");
+                                strtxt.AppendLine(@"^FT23," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_partno + "^FS");
                                 //qty
                                 strtxt.AppendLine(@"^FT251," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_qty + "^FS");
                                 //A
                                 strtxt.AppendLine(@"^FT347," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FDA^FS");
                                 //CO
                                 strtxt.AppendLine(@"^FT388," + (y + (i * yoff)).ToString() + @"^A0N,23,19^FH\^FD" + plr_mstr_tran_list[i].plr_co + "^FS");
-                            
+
                             }
                             else
                             {
@@ -1714,14 +1714,14 @@ namespace FrmPIE._0API
                         strtxt.AppendLine(@"^FT25,58^A0N,51,45^FH\^FD" + plr_mstr_tran_list[0].CartonID + "^FS");
                         strtxt.AppendLine(@"^FT290,33^A0N,25,24^FH\^FD" + plr_mstr_tran_list[0].plr_vend_mfgr + "^FS");
                         strtxt.AppendLine(@"^FT352,66^A0N,26,28^FH\^FD" + plr_mstr_tran_list[0].plr_pallet_no + "^FS");
-                        
+
                         // Barcode
 
                         strtxt.AppendLine(@"^BY4,3,57^FT21,133^BCN,,Y,N");
                         strtxt.AppendLine(@"^FD>;" + plr_mstr_tran_list[0].plr_wec_ctn + "^FS");
 
                         //Total bottom
-                        strtxt.AppendLine(@"^FT23,301^A0N,26,24^FH\^FD"+plr_mstr_tran_list[0].re_mark+"^FS");
+                        strtxt.AppendLine(@"^FT23,301^A0N,26,24^FH\^FD" + plr_mstr_tran_list[0].re_mark + "^FS");
 
                         if (listcount > limitCount)
                         {
@@ -2511,7 +2511,7 @@ namespace FrmPIE._0API
             DateTime newDateTime = converted.AddSeconds(timestamp);
             return newDateTime.ToLocalTime();
         }
-		public void initReportViewer(ReportViewer rv)
+        public void initReportViewer(ReportViewer rv)
         {
             rv.Reset();
             rv.LocalReport.DataSources.Clear();

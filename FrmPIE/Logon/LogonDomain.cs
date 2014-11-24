@@ -12,6 +12,7 @@ namespace FrmPIE
 {
     public partial class LogonDomain : Form
     {
+        frmNotice _frmNotice;
         PIE.Model.sys_user system_user_model = new PIE.Model.sys_user();
         public static string _strUpdateURL;
 
@@ -35,6 +36,7 @@ namespace FrmPIE
         }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+
             string strdomain = combDomain.Text;
 
             if (string.IsNullOrEmpty(combDomain.Text))
@@ -309,6 +311,12 @@ namespace FrmPIE
         {
             this.linkLabel1.Links[0].LinkData = _strUpdateURL;
             System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+
         }
 
     }

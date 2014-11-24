@@ -20,7 +20,7 @@ namespace PI.DAL
             strSql.Append("update pisr_grr set ");
             strSql.Append("pi_chr01=@pi_chr01,");
             strSql.Append("pi_chr02=@pi_chr02 ");
-            strSql.Append(" where pi_wec_ctn=@pi_wec_ctn and pisr_rir=@pisr_rir ");
+            strSql.Append(" where pisr_rir=@pisr_rir ");//pi_wec_ctn=@pi_wec_ctn and 
             SqlParameter[] parameters = {
 					new SqlParameter("@pi_wec_ctn", SqlDbType.NVarChar,50),
 					new SqlParameter("@pisr_rir", SqlDbType.NVarChar,50),

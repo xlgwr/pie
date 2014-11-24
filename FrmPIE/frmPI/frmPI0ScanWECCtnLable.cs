@@ -27,6 +27,7 @@ namespace frmPI
         public string _sameColumnName;
         public string _deffCellName;
         public string _deffCellValue;
+        public string _strbatchid;
 
         frmIDR _idr_show;
         Commfunction cf;
@@ -35,6 +36,7 @@ namespace frmPI
         bool _validateBatchid = false;
         int _nextlineid = 1;
         string _strCO;
+
         DataSet cods;
         DataSet webserviceDS;
         DataSet _reobjdet;
@@ -740,6 +742,7 @@ namespace frmPI
             {
                 piidenter(sender, e);
             }
+            this.AcceptButton = btn0Scan;
         }
         void piidenter(object sender, KeyEventArgs e)
         {
@@ -969,7 +972,7 @@ namespace frmPI
                 if (!string.IsNullOrEmpty(_pi_mstr_model.PI_ID))
                 {
                     List<PI.Model.pi_det> pi_det_list = new PI.BLL.pi_det_ext().GetModelList("PI_ID='" + _pi_mstr_model.PI_ID + "'", true);
-                    PI.Model.pisr_grr pisr_grr_model = new PI.Model.pisr_grr();
+                    PI.Model.pisr_grr pisr_grr_model;
 
 
                     if (pi_det_list.Count > 0)
@@ -980,9 +983,11 @@ namespace frmPI
                             if (plr_mstr_tran_model != null)
                             {
 
-                                var existinit = cf.initWebServer(plr_mstr_tran_model.plr_po, server100, "wsas017", pi_det_list[i].pi_wec_ctn, out ds);
+                                var existinit = cf.initWebServer(plr_mstr_tran_model.plr_po, server100, "wsas017x", pi_det_list[i].pi_wec_ctn, out ds);
+
                                 if (existinit)
                                 {
+                                    pisr_grr_model = new PI.Model.pisr_grr();
                                     if (ds != null)
                                     {
                                         if (ds.Tables[0].Rows.Count > 0)
@@ -995,6 +1000,7 @@ namespace frmPI
                                                 pisr_grr_model.pi_wec_ctn = ds.Tables[0].Rows[y]["wsas017_wec_id"].ToString();
                                                 pisr_grr_model.plr_LineID_tran = Convert.ToInt32(ds.Tables[0].Rows[y]["wsas017_line"]);
 
+                                                cf.SetCtlTextdelegate(lbl0msg, "current: WEC ID:"+pisr_grr_model.pi_wec_ctn+",LineID:"+pisr_grr_model.plr_LineID_tran, true, true);
                                                 var existgrr = new PI.BLL.pisr_grr().Exists(pisr_grr_model.pi_wec_ctn, pisr_grr_model.plr_LineID_tran);
                                                 pisr_grr_model.Plant = "0";
 
@@ -1027,6 +1033,11 @@ namespace frmPI
                                                     }
                                                     continue;
                                                 }
+                                                #region add pisr_grr_model_fromBatchid
+                                                pisr_grr_model.pi_wec_ctn = ds.Tables[0].Rows[y]["wsas017_wec_id"].ToString();
+                                                pisr_grr_model.plr_LineID_tran = ds.Tables[0].Rows[y]["wsas017_line"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[y]["wsas017_line"]);
+
+
                                                 pisr_grr_model.pisr_rir = ds.Tables[0].Rows[y]["wsas017_rir"].ToString();
                                                 pisr_grr_model.pisr_invoice = ds.Tables[0].Rows[y]["wsas017_invoice"].ToString();
 
@@ -1036,6 +1047,7 @@ namespace frmPI
                                                 pisr_grr_model.pisr_po_nbr = ds.Tables[0].Rows[y]["wsas017_po_nbr"].ToString();
                                                 pisr_grr_model.pisr_qty = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_qty"].ToString());
                                                 pisr_grr_model.pisr_curr = ds.Tables[0].Rows[y]["wsas017_curr"].ToString();
+                                                pisr_grr_model.pisr_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_cost"].ToString());
                                                 pisr_grr_model.pisr_base_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_base_cost"].ToString());
                                                 pisr_grr_model.pisr_us_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_us_cost"].ToString());
                                                 pisr_grr_model.pisr_seq = ds.Tables[0].Rows[y]["wsas017_seq"].ToString();
@@ -1051,19 +1063,57 @@ namespace frmPI
                                                 pisr_grr_model.pisr_vend = ds.Tables[0].Rows[y]["wsas017_vend"].ToString();
                                                 pisr_grr_model.pisr_mfgr_name = ds.Tables[0].Rows[y]["wsas017_mfgr_name"].ToString();
 
-
                                                 pisr_grr_model.pisr_char01 = ds.Tables[0].Rows[y]["wsas017_mfgr"].ToString();
                                                 pisr_grr_model.pisr_char02 = ds.Tables[0].Rows[y]["wsas017_vend_name"].ToString();
 
-                                                pisr_grr_model.pisr_dec01 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_k200_nw"].ToString()) / 1000;
-                                                pisr_grr_model.pisr_dec02 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_nw"].ToString()) / 1000;
+                                                pisr_grr_model.pisr_dec01 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_k200_nw"]);
+                                                pisr_grr_model.pisr_dec02 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_nw"]);
 
                                                 pisr_grr_model.pi_cre_date = DateTime.Now;
                                                 pisr_grr_model.pi_update_date = DateTime.Now;
                                                 pisr_grr_model.pi_user_ip = _idr_show._custip;
                                                 pisr_grr_model.pi_cre_userid = _idr_show._sys_user_model.user_name;
 
-                                                addPisgrr = new PI.BLL.pisr_grr().Add(pisr_grr_model);
+                                                var pisgrradd = new PI.BLL.pisr_grr().Add(pisr_grr_model);
+                                                #endregion
+                                                #region old
+                                                //pisr_grr_model.pisr_rir = ds.Tables[0].Rows[y]["wsas017_rir"].ToString();
+                                                //pisr_grr_model.pisr_invoice = ds.Tables[0].Rows[y]["wsas017_invoice"].ToString();
+
+                                                //pisr_grr_model.pisr_part = ds.Tables[0].Rows[y]["wsas017_part"].ToString();
+                                                //pisr_grr_model.pisr_site = ds.Tables[0].Rows[y]["wsas017_site"].ToString();
+                                                //pisr_grr_model.Pisr_receiver = ds.Tables[0].Rows[y]["wsas017_receiver"].ToString();
+                                                //pisr_grr_model.pisr_po_nbr = ds.Tables[0].Rows[y]["wsas017_po_nbr"].ToString();
+                                                //pisr_grr_model.pisr_qty = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_qty"].ToString());
+                                                //pisr_grr_model.pisr_curr = ds.Tables[0].Rows[y]["wsas017_curr"].ToString();
+                                                //pisr_grr_model.pisr_base_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_base_cost"].ToString());
+                                                //pisr_grr_model.pisr_us_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_us_cost"].ToString());
+                                                //pisr_grr_model.pisr_seq = ds.Tables[0].Rows[y]["wsas017_seq"].ToString();
+                                                //pisr_grr_model.pisr_con_code = ds.Tables[0].Rows[y]["wsas017_con_code"].ToString();
+                                                //pisr_grr_model.pisr_ch_desc = ds.Tables[0].Rows[y]["wsas017_ch_desc"].ToString();
+                                                //pisr_grr_model.pisr_net_wt = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_net_wt"].ToString());
+                                                //pisr_grr_model.pisr_rec_type = ds.Tables[0].Rows[y]["wsas017_rec_type"].ToString();
+                                                //pisr_grr_model.pisr_abc = ds.Tables[0].Rows[y]["wsas017_abc"].ToString();
+                                                //pisr_grr_model.pisr_code = ds.Tables[0].Rows[y]["wsas017_code"].ToString();
+                                                //pisr_grr_model.pisr_lic_req = ds.Tables[0].Rows[y]["wsas017_lic_req"].ToString();
+
+                                                //pisr_grr_model.pisr_sbu = ds.Tables[0].Rows[y]["wsas017_sbu"].ToString();
+                                                //pisr_grr_model.pisr_vend = ds.Tables[0].Rows[y]["wsas017_vend"].ToString();
+                                                //pisr_grr_model.pisr_mfgr_name = ds.Tables[0].Rows[y]["wsas017_mfgr_name"].ToString();
+
+
+                                                //pisr_grr_model.pisr_char01 = ds.Tables[0].Rows[y]["wsas017_mfgr"].ToString();
+                                                //pisr_grr_model.pisr_char02 = ds.Tables[0].Rows[y]["wsas017_vend_name"].ToString();
+
+                                                //pisr_grr_model.pisr_dec01 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_k200_nw"].ToString()) / 1000;
+                                                //pisr_grr_model.pisr_dec02 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_nw"].ToString()) / 1000;
+
+                                                //pisr_grr_model.pi_cre_date = DateTime.Now;
+                                                //pisr_grr_model.pi_update_date = DateTime.Now;
+                                                //pisr_grr_model.pi_user_ip = _idr_show._custip;
+                                                //pisr_grr_model.pi_cre_userid = _idr_show._sys_user_model.user_name;
+                                                //addPisgrr = new PI.BLL.pisr_grr().Add(pisr_grr_model);
+                                                #endregion
 
                                             }
                                             if (addPisgrr)
@@ -1139,6 +1189,13 @@ namespace frmPI
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
+            //btn1RefreshPI.Enabled = false;
+            if (string.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text))
+            {
+                lbl0msg.Text = "PIID is null.";
+                return;
+            }
+            lbl0msg.Text = "Start Update RiR#, Please wait.";
             threadPiRefreshdeleget();
         }
 
@@ -1242,10 +1299,17 @@ namespace frmPI
 
         void enquireByPart(object sender, EventArgs e)
         {
+
+            _frmET.button1.Text = "生成中";
+            _frmET.button1.Enabled = false;
+            _frmET.lblMsg.Text = "正在生成中，请不要关闭软件，谢谢。";
             if (string.IsNullOrEmpty(_frmET.textBox1.Text))
             {
                 _frmET.textBox1.Focus();
                 _validateBatchid = false;
+                _frmET.lblMsg.Text = "";
+
+                _frmET.button1.Enabled = true;
                 return;
             }
             var existPIAdd = new PI.DAL.pi_mstr_ext().GetModel(_frmET.textBox1.Text.Trim());
@@ -1260,6 +1324,9 @@ namespace frmPI
                 piidenter(sender, eenter);
 
                 _validateBatchid = false;
+                _frmET.lblMsg.Text = "";
+
+                _frmET.button1.Enabled = true;
                 return;
             }
             PIE.Model.plr_mstr_tran plr_mstr_tran_mode = new PIE.DAL.plr_mstr_tran_ext().GetModel(_frmET.textBox1.Text.Trim(), true);
@@ -1274,11 +1341,14 @@ namespace frmPI
 
             if (webserviceDS == null)
             {
-                lbl0msg.Text = _frmET.textBox1.Text + "  (ERP) has no item. if not Upload ERP Please Upload ,than in ERP to Check(ok BookIn[OCR]) it";
+                lbl0msg.Text = _frmET.textBox1.Text + " (error), please check WebService.";
                 _frmET.textBox1.Focus();
                 txt1PIID_ScanWECCtnLable.Text = "";
                 data1GVSanWecCtnLable.DataSource = null;
                 _validateBatchid = false;
+                _frmET.lblMsg.Text = "";
+
+                _frmET.button1.Enabled = true;
                 return;
             }
             if (webserviceDS.Tables[0].Rows.Count <= 0)
@@ -1288,6 +1358,9 @@ namespace frmPI
                 txt1PIID_ScanWECCtnLable.Text = "";
                 data1GVSanWecCtnLable.DataSource = null;
                 _validateBatchid = false;
+                _frmET.lblMsg.Text = "";
+
+                _frmET.button1.Enabled = true;
                 return;
             }
             //else
@@ -1297,12 +1370,13 @@ namespace frmPI
 
             //}
             //cf.EnquireByPart(data1GV1ePackingDet1_BatchInfo, "plr_partno", _frmET.textBox1.Text.Trim());
+            _strbatchid = _frmET.textBox1.Text.Trim();
             _validateBatchid = true;
             _frmET.Close();
         }
         private void btn0AddFromePackingList0_Click(object sender, EventArgs e)
         {
-            btn1RefreshPI.Visible = false;
+            //btn1RefreshPI.Visible = false;
             //btn0AddFromePackingList0.Enabled = false;
 
             _frmET = new frmEnterTxt(_idr_show, this);
@@ -1317,6 +1391,7 @@ namespace frmPI
                 return;
 
             }
+            lbl0msg.Text = "Start Generate PI,please Wait. thank you!";
             if (webserviceDS != null)
             {
                 #region add New PIID
@@ -1358,40 +1433,70 @@ namespace frmPI
                     return;
                 }
                 _pi_mstr_model = pi_mstr_model;
+
+
                 #endregion
-                for (int i = 0; i < webserviceDS.Tables[0].Rows.Count; i++)
+                #region new gen pi_det
+                string outFlag;
+                SqlParameter[] sqlparameters = {
+                                                   new SqlParameter("@PI_ID",SqlDbType.NVarChar,50),
+                                                   new SqlParameter("@batch_id",SqlDbType.NVarChar,50),
+                                                   new SqlParameter("@pi_user_ip",SqlDbType.NVarChar,50),
+                                                   new SqlParameter("@flag",SqlDbType.NVarChar,50)
+                    
+                                               };
+
+                sqlparameters[0].Value = strPIID;
+                sqlparameters[1].Value = _strbatchid;
+                sqlparameters[2].Value = _idr_show._custip;
+                sqlparameters[3].Direction = ParameterDirection.Output;
+                DbHelperSQL.RunProcedure("sp_genPI_Det", sqlparameters, out intOutAffected);
+
+                outFlag = sqlparameters[3].Value != null ? sqlparameters[3].Value.ToString() : "";
+                if (string.IsNullOrEmpty(outFlag) || outFlag.Equals("1"))
                 {
+                    ShowMsg("生成PI Det,出错，无法新增。", "Error");
+                    return;
+                }
+
+                #endregion
+                int dscount = webserviceDS.Tables[0].Rows.Count;
+                for (int i = 0; i < dscount; i++)
+                {
+                    lbl0msg.Invoke(new FrmPIE._0API.Commfunction.Action(delegate() { lbl0msg.Text = "Current:" + i.ToString() + ",Total:" + dscount.ToString(); }));
                     DataRow dr = webserviceDS.Tables[0].Rows[i];
-                    var pi_det_model_add = new PI.Model.pi_det();
                     var pisr_grr_model_add = new PI.Model.pisr_grr();
 
                     #region add pi_det_model_from_batchid
 
-                    pi_det_model_add.PI_ID = strPIID;
-                    pi_det_model_add.pi_LineID = i + 1;
-                    pi_det_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
-                    pi_det_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
+                    // var pi_det_model_add = new PI.Model.pi_det();
+                    //pi_det_model_add.PI_ID = strPIID;
+                    //pi_det_model_add.pi_LineID = i + 1;
+                    //pi_det_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
+                    //pi_det_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
 
-                    pi_det_model_add.pi_type = "N";
-                    pi_det_model_add.pi_deci1 = dr["wsas018_pallet"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_pallet"]);
-                    pi_det_model_add.pi_pallet_no = dr["wsas018_pallet"].ToString();
+                    //pi_det_model_add.pi_type = "N";
+                    //pi_det_model_add.pi_deci1 = 0;//dr["wsas018_pallet"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_pallet"]);
+                    //pi_det_model_add.pi_pallet_no = dr["wsas018_pallet"].ToString();
 
-                    pi_det_model_add.CartonNo = dr["wsas018_ctn_no"].ToString();
-                    pi_det_model_add.CartonID = dr["wsas018_ctn_id"].ToString();
+                    //pi_det_model_add.CartonNo = dr["wsas018_ctn_no"].ToString();
+                    //pi_det_model_add.CartonID = dr["wsas018_ctn_id"].ToString();
 
-                    pi_det_model_add.pi_chr01 = dr["wsas018_co"].ToString();
+                    //pi_det_model_add.pi_chr01 = dr["wsas018_co"].ToString();
 
 
-                    pi_det_model_add.pi_chr02 = dr["wsas018_po_nbr"].ToString();
+                    //pi_det_model_add.pi_chr02 = dr["wsas018_po_nbr"].ToString();
 
-                    pi_det_model_add.pi_remark = "Add From ePacking List:BatchID->" + dr["wsas018_batch"].ToString();
+                    //pi_det_model_add.pi_remark = "Add From ePacking List:BatchID->" + dr["wsas018_batch"].ToString();
 
-                    pi_det_model_add.pi_cre_date = DbHelperSQL.getServerGetDate();
-                    pi_det_model_add.pi_user_ip = _idr_show._custip;
-                    pi_det_model_add.pi_status = "No";
+                    //pi_det_model_add.pi_cre_date = DbHelperSQL.getServerGetDate();
+                    //pi_det_model_add.pi_user_ip = _idr_show._custip;
+                    //pi_det_model_add.pi_status = "No";
 
-                    var result_pi_det_add = new PI.DAL.pi_det().Add(pi_det_model_add);
+                    //var result_pi_det_add = new PI.DAL.pi_det().Add(pi_det_model_add);
                     #endregion
+
+
                     #region add pisr_grr_model_add_fromBatchid
                     pisr_grr_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
                     pisr_grr_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
@@ -1445,12 +1550,14 @@ namespace frmPI
                 var changeStatusMstr = DbHelperSQL.ExecuteSql(strupdatesqlMstr);
 
                 ShowMsg("Add PI Mstr info Success", "Success");
+                _frmET.lblMsg.Text = "";
                 _validateBatchid = false;
             }
             else
             {
                 ShowMsg("Add PI Mstr info fail,ERP WebService return null", "Error");
             }
+            _frmET.lblMsg.Text = "";
             btn0AddFromePackingList0.Enabled = true;
 
         }
