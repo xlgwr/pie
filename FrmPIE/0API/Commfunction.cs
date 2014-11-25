@@ -22,8 +22,9 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using Microsoft.Reporting.WinForms;
+using FrmPIE;
 
-namespace FrmPIE._0API
+namespace FrmIDR._0API
 {
     class Commfunction
     {
@@ -1384,7 +1385,7 @@ namespace FrmPIE._0API
 
         public DataSet initWebServer(string inSystem, string intable, string inwhere)
         {
-            WebReferenceRTM99.Service server100 = new WebReferenceRTM99.Service();
+            FrmPIE.WebReferenceRTM99.Service server100 = new FrmPIE.WebReferenceRTM99.Service();
             server100.Timeout = 9000;
 
             DataSet ds = null;
@@ -1403,7 +1404,7 @@ namespace FrmPIE._0API
             }
 
         }
-        public bool initWebServer(string plr_po, WebReferenceRTM99.Service server100, string intable, string strPO, out DataSet ds)
+        public bool initWebServer(string plr_po, FrmPIE.WebReferenceRTM99.Service server100, string intable, string strPO, out DataSet ds)
         {
             int returnValueNumber;
             string wec_ctn_pre;
@@ -1450,7 +1451,7 @@ namespace FrmPIE._0API
 
                 string strResult = "";
 
-                WebReferenceRTM99.Service server100 = new WebReferenceRTM99.Service();
+                FrmPIE.WebReferenceRTM99.Service server100 = new FrmPIE.WebReferenceRTM99.Service();
                 server100.Timeout = 90000;
 
                 DataSet ds = null;

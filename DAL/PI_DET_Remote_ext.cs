@@ -10,6 +10,31 @@ namespace PI.DAL
     /// </summary>
     public partial class PI_DET_Remote_ext:PI_DET_Remote
     {
+
+
+        /// <summary>
+        /// 删除一条数据PI_NO
+        /// </summary>
+        public bool Delete(string PI_NO, bool delPi_no)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from PI_DET ");
+            strSql.Append(" where PI_NO=@PI_NO");
+            SqlParameter[] parameters = {
+					new SqlParameter("@PI_NO", SqlDbType.NVarChar,12)		};
+            parameters[0].Value = PI_NO;
+
+            int rows = DbHelperSQLP.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         /// <summary>
         /// 是否存在该记录
         /// </summary>

@@ -43,6 +43,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lblmsg = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -161,9 +162,9 @@
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSubmit.Location = new System.Drawing.Point(155, 244);
+            this.btnSubmit.Location = new System.Drawing.Point(143, 244);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(104, 37);
+            this.btnSubmit.Size = new System.Drawing.Size(110, 37);
             this.btnSubmit.TabIndex = 3;
             this.btnSubmit.Text = "&Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -205,6 +206,16 @@
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkLabel1.Visible = false;
             // 
+            // lblmsg
+            // 
+            this.lblmsg.AutoSize = true;
+            this.lblmsg.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblmsg.ForeColor = System.Drawing.Color.Red;
+            this.lblmsg.Location = new System.Drawing.Point(253, 258);
+            this.lblmsg.Name = "lblmsg";
+            this.lblmsg.Size = new System.Drawing.Size(0, 12);
+            this.lblmsg.TabIndex = 12;
+            // 
             // LogonDomain
             // 
             this.AcceptButton = this.btnSubmit;
@@ -212,6 +223,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(430, 307);
+            this.Controls.Add(this.lblmsg);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
@@ -251,5 +263,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label lblmsg;
     }
 }

@@ -1,4 +1,4 @@
-﻿using FrmPIE._0API;
+﻿using FrmIDR._0API;
 using FrmPIE.Properties;
 using System;
 using System.Collections.Generic;
@@ -139,7 +139,7 @@ namespace FrmPIE
 
         void data0GVForReference_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData==Keys.Enter)
+            if (e.KeyData == Keys.Enter)
             {
                 if (!string.IsNullOrEmpty(_FrmForRefe.lbl2SelectValue.Text))
                 {
@@ -150,7 +150,7 @@ namespace FrmPIE
             }
         }
 
-      
+
 
         void chkTop50_CheckedChanged(object sender, EventArgs e)
         {
@@ -754,11 +754,18 @@ namespace FrmPIE
 
         private void tool1StripMenuItem21ScanCartronLabel_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Scan Cartron Label");
-            frmPI0ScanWECCtnLable swcl = new frmPI0ScanWECCtnLable(this);
+            var rire = new KeyEventArgs(Keys.Enter);
+            tabScanCartonLabel("Scan Cartron Label", "", this, sender, rire);
+        }
+        public void tabScanCartonLabel(string headtext, string piid, frmIDR idr, object sender, KeyEventArgs e)
+        {
+            addNewTabPage(headtext);
+            frmPI0ScanWECCtnLable swcl = new frmPI0ScanWECCtnLable(idr);
+            idr.AcceptButton = swcl.btn1RefreshPI;
+            swcl.txt1PIID_ScanWECCtnLable.Text = piid;
+            swcl.piidenter(sender, e);
             addGBToTC(tabCtlRight1, swcl.groupBox1ScanWECCtnLable);
         }
-
         private void txt0SearchID_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

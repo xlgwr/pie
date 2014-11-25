@@ -1,5 +1,5 @@
 ﻿using FrmPIE;
-using FrmPIE._0API;
+using FrmIDR._0API;
 using PIE.Common;
 using PIE.DBUtility;
 using System;
@@ -237,9 +237,10 @@ namespace frmPI
             data0GVPiReport.Refresh();
             btn2UploadToHKPIDB.Enabled = true;
 
-            lblpino.Visible = true;
-            txt1Change.Visible = true;
-            btn3Change.Visible = true;
+            btn0RetryUpload.Enabled = true;
+            //lblpino.Visible = true;
+            //txt1Change.Visible = true;
+            //btn3Change.Visible = true;
         }
 
         private void frmPI2Report_Load(object sender, EventArgs e)
@@ -259,179 +260,215 @@ namespace frmPI
 
         private void btn2UploadToHKPIDB_Click(object sender, EventArgs e)
         {
-            btn2UploadToHKPIDB.Enabled = false;
-            lblMsg.Text = "";
-            DateTime dt = DbHelperSQL.getServerGetDate();
-            int addRemoteD = 0;
-
-            string strwhereRiR = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and (pisr_rir='' or pisr_rir is null) ";
-            string strwhereYes = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='Yes'";
-            string strwhereNo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No'";
-
-            int listcountRir = new PIE.DAL.vpi_report_ext().getCount(strwhereRiR);
-            int listcountno = new PIE.DAL.vpi_report_ext().getCount(strwhereNo);
-            int listcountYes = new PIE.DAL.vpi_report_ext().getCount(strwhereYes);
-
-            if (listcountYes > 0)
+            try
             {
-                lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has being Update Over.";
-                return;
-            }
-            if (listcountno <= 0)
-            {
-                lblMsg.Text = "Notice: " + strwhereNo + " has no Data.";
-                return;
-            }
-            if (listcountRir > 0)
-            {
-                lblMsg.Text = "Notice: " + txt0PINum_piReport.Text.Trim() + " has some not RiR#.";
-                return;
-            }
-            if (GetPriceOfUSD(txt0PINum_piReport.Text.Trim(), lblMsg).Equals("Error"))
-            {
-                return;
-            };
-            var pi_mstr_remote_exit = new PI.BLL.PI_MSTR_Remote().Exists(txt0PINum_piReport.Text.Trim());
+                btn2UploadToHKPIDB.Enabled = false;
+                lblMsg.Text = "";
+                DateTime dt = DbHelperSQL.getServerGetDate();
+                int addRemoteD = 0;
 
-            if (pi_mstr_remote_exit)
-            {
-                string msg = "Notice: " + txt0PINum_piReport.Text.Trim() + " was exist in Remote HK Database(PI pi_mstr)";
+                string strwhereAll = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
+                string strwhereRiR = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and (pisr_rir='' or pisr_rir is null) ";
+                string strwhereYes = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='Yes'";
+                string strwhereNo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No'";
 
-                if (System.Windows.Forms.MessageBox.Show(msg + "\n Are you sure Continue to Upload " + txt0PINum_piReport.Text.Trim(), "Notice", MessageBoxButtons.YesNo) == DialogResult.No)
+                int listcountAll = new PIE.DAL.vpi_report_ext().getCount(strwhereAll);
+                int listcountRir = new PIE.DAL.vpi_report_ext().getCount(strwhereRiR);
+                int listcountno = new PIE.DAL.vpi_report_ext().getCount(strwhereNo);
+                int listcountYes = new PIE.DAL.vpi_report_ext().getCount(strwhereYes);
+
+                if (listcountAll <= 0)
                 {
-                    lblMsg.Text = msg;
+                    lblMsg.Text = "Notice1: " + txt0PINum_piReport.Text.Trim() + " has not Data.";
                     return;
                 }
-            }
-            else
-            {
-                PI.Model.PI_MSTR_Remote pI_MSTR_Remote_model = new PI.Model.PI_MSTR_Remote();
-
-                pI_MSTR_Remote_model.PI_NO = txt0PINum_piReport.Text.Trim();
-                pI_MSTR_Remote_model.PI_Date = dt;
-
-
-                var addRemoteMstr = new PI.DAL.PI_MSTR_Remote_ext().Add(pI_MSTR_Remote_model, true);
-                if (!addRemoteMstr)
+                if (listcountno <= 0)
                 {
-                    lblMsg.Text = "Error: Upload PI:" + txt0PINum_piReport.Text + " to DataBase(HK) fails.";
+                    lblMsg.Text = "Notice2: " + strwhereNo + " has no Data to update.";
                     return;
                 }
-            }
-
-
-
-            string strwherePalletCount = "PI_NO='" + txt0PINum_piReport.Text.Trim() + "'";
-            List<PIE.Model.vpi_report_palletCount> vpi_report_palletCount_mode_list = new PIE.BLL.vpi_report_palletCount().GetModelList(strwherePalletCount);
-
-            foreach (var itemPall in vpi_report_palletCount_mode_list)
-            {
-                //add TTL for pallet
-                PI.Model.PI_DET_Remote pI_DET_Remote_model_ttl = new PI.Model.PI_DET_Remote();
-
-                if (((decimal)itemPall.pi_pallet_no == itemPall.PI_GW) || itemPall.PI_GW==0 )
+                if (listcountYes == listcountAll)
                 {
-                    lblMsg.Text = "Error: Please Add PI:" + txt0PINum_piReport.Text + " GW for Pallet " + itemPall.pi_pallet_no.ToString();
+                    lblMsg.Text = "Notice3: " + txt0PINum_piReport.Text.Trim() + " has being Update Over.";
                     return;
                 }
-                pI_DET_Remote_model_ttl.PI_NO = itemPall.PI_NO;
-                pI_DET_Remote_model_ttl.PI_CARTON_NO = itemPall.PI_CARTON_NO;
-                pI_DET_Remote_model_ttl.PI_DESC = itemPall.PI_DESC;
-                pI_DET_Remote_model_ttl.PI_GW = itemPall.PI_GW;
-
-                var addflagttl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model_ttl);
-                if (addflagttl <= 0)
+                if (listcountYes == listcountAll)
                 {
+                    lblMsg.Text = "Notice4: " + txt0PINum_piReport.Text.Trim() + " has being Update Over.";
                     return;
                 }
-                string strwherePalletNo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No' and pi_pallet_no='" + itemPall.pi_pallet_no + "' order by plr_LineID_tran";
-                List<PIE.Model.vpi_report> vpi_report_list_no = new PIE.BLL.vpi_report().GetModelList(strwherePalletNo);
-                #region upload to Remote HK(PI)
-                foreach (PIE.Model.vpi_report item in vpi_report_list_no)
+                if (listcountYes != listcountAll && listcountYes > 0)
                 {
-                    PI.Model.PI_DET_Remote pI_DET_Remote_model = new PI.Model.PI_DET_Remote();
+                    lblMsg.Text = "Notice5: " + txt0PINum_piReport.Text.Trim() + " has some not update OK,Please retry Upload to HK. thank you.";
+                    return;
+                }
+                if (listcountRir > 0)
+                {
+                    var msg = "Notice6: " + txt0PINum_piReport.Text.Trim() + " has some data are not RiR#. that will be open new tab to Refresh RiR#";
+                    System.Windows.Forms.MessageBox.Show(msg);
+                    var rire = new KeyEventArgs(Keys.Enter);
+                    _idr_show.tabScanCartonLabel("Refresh RiR NO", txt0PINum_piReport.Text.Trim(), _idr_show, sender, rire);
+                    return;
+                }
+                if (GetPriceOfUSD(txt0PINum_piReport.Text.Trim(), lblMsg).Equals("Error"))
+                {
+                    return;
+                };
+                var pi_mstr_remote_exit = new PI.BLL.PI_MSTR_Remote().Exists(txt0PINum_piReport.Text.Trim());
 
-                    pI_DET_Remote_model.PI_CARTON_NO = item.CartonID;
-                    pI_DET_Remote_model.PI_CO = item.CoDesc;
-                    pI_DET_Remote_model.PI_ConnCode = item.pisr_con_code;
-                    pI_DET_Remote_model.PI_CONTRACT = item.Contract;
-                    pI_DET_Remote_model.pi_cre_time = dt;
-                    //
-                    pI_DET_Remote_model.pi_curr_rate = null; //0;
-                    pI_DET_Remote_model.PI_DESC = item.sq_name;
-                    //pI_DET_Remote_model.PI_GW = item.GW;
-                    pI_DET_Remote_model.PI_IQC = item.pisr_rec_type;
-                    pI_DET_Remote_model.pi_Lic_req = string.IsNullOrEmpty(item.pisr_lic_req) ? " - " : item.pisr_lic_req;
-                    pI_DET_Remote_model.PI_LINE = item.pi_LineID;
-                    pI_DET_Remote_model.PI_LOT = item.pisr_rir;
+                if (pi_mstr_remote_exit)
+                {
+                    string msg = "Notice7: " + txt0PINum_piReport.Text.Trim() + " was exist in Remote HK Database(PI pi_mstr)";
 
-                    pI_DET_Remote_model.pi_mfgr = item.MFGR;
-                    pI_DET_Remote_model.pi_mfgr_name = item.MFGR_Name;
-
-                    pI_DET_Remote_model.pi_mfgr_part = item.MFGR_Part;
-                    pI_DET_Remote_model.PI_NO = item.PI_ID;
-                    pI_DET_Remote_model.PI_NW = item.pisr_dec02;
-                    pI_DET_Remote_model.PI_K200_NW = item.pisr_dec01;
-                    //
-                    pI_DET_Remote_model.pi_ori_PO_price = null;// 0;
-                    pI_DET_Remote_model.PI_PALLET = item.pi_pallet_no.ToString();
-                    pI_DET_Remote_model.PI_PART = item.pisr_part;
-                    pI_DET_Remote_model.PI_PO = item.pisr_po_nbr;
-                    pI_DET_Remote_model.pi_PO_curr = null;// item.pisr_curr;
-                    //
-                    pI_DET_Remote_model.PI_PO_price = 0;
-                    pI_DET_Remote_model.PI_REC_NO = item.pisr_us_cost.ToString();//item.pisr_cost.ToString();
-                    pI_DET_Remote_model.PI_QTY = item.pisr_qty;
-                    //
-                    //pI_DET_Remote_model.PI_REC_NO = item.REC_NO;
-                    pI_DET_Remote_model.PI_SBU = item.pisr_sbu;
-                    pI_DET_Remote_model.PI_SEQ = (item.pisr_seq.Equals(DBNull.Value) || string.IsNullOrEmpty(item.pisr_seq)) ? 0 : Convert.ToInt32(item.pisr_seq);
-
-                    pI_DET_Remote_model.PI_SEQ_CL = pI_DET_Remote_model.PI_SEQ;
-
-                    pI_DET_Remote_model.PI_SITE = item.pisr_site;
-                    //
-                    pI_DET_Remote_model.PI_Taxcode = null;
-                    pI_DET_Remote_model.pi_us_rate = null;
-                    pI_DET_Remote_model.pi_user = _idr_show._sys_user_model.user_name;
-                    pI_DET_Remote_model.pi_vend = item.pisr_vend;
-
-                    //GW
-                    pI_DET_Remote_model.PI_GW = null;//(item.Pallet_TTL_NW.Equals(DBNull.Value) || string.IsNullOrEmpty(item.Pallet_TTL_NW)) ? 0 : Convert.ToDecimal(item.Pallet_TTL_NW);
-
-                    pI_DET_Remote_model.pi_ver = 1;
-
-                    //add
-                    //pI_DET_Remote_model.pi_Lic_req = " - ";
-
-                    var intresutl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model);
-                    if (intresutl > 0)
+                    if (System.Windows.Forms.MessageBox.Show(msg + "\n Are you sure Continue to Upload " + txt0PINum_piReport.Text.Trim(), "Notice", MessageBoxButtons.YesNo) == DialogResult.No)
                     {
-                        string strupdatesqldet = "update dbo.pi_det set pi_status='Yes' where PI_ID='" + item.PI_ID + "' and plr_LineID_tran='" + item.plr_LineID_tran + "'";
-                        string strupdatesqlMstr = "update dbo.pi_mstr set pi_status='Yes' where PI_ID='" + item.PI_ID + "'";
+                        lblMsg.Text = msg;
+                        return;
+                    }
+                }
+                else
+                {
+                    PI.Model.PI_MSTR_Remote pI_MSTR_Remote_model = new PI.Model.PI_MSTR_Remote();
 
-                        var changeStatus = DbHelperSQL.ExecuteSql(strupdatesqldet);
-                        var changeStatusMstr = DbHelperSQL.ExecuteSql(strupdatesqlMstr);
-                        addRemoteD++;
+                    pI_MSTR_Remote_model.PI_NO = txt0PINum_piReport.Text.Trim();
+                    pI_MSTR_Remote_model.PI_Date = dt;
+
+
+                    var addRemoteMstr = new PI.DAL.PI_MSTR_Remote_ext().Add(pI_MSTR_Remote_model, true);
+                    if (!addRemoteMstr)
+                    {
+                        lblMsg.Text = "Error: Upload PI:" + txt0PINum_piReport.Text + " to DataBase(HK) fails.";
+                        return;
+                    }
+                }
+
+
+
+                string strwherePalletCount = "PI_NO='" + txt0PINum_piReport.Text.Trim() + "'";
+                List<PIE.Model.vpi_report_palletCount> vpi_report_palletCount_mode_list = new PIE.BLL.vpi_report_palletCount().GetModelList(strwherePalletCount);
+
+                foreach (var itemPall in vpi_report_palletCount_mode_list)
+                {
+                    //add TTL for pallet
+                    PI.Model.PI_DET_Remote pI_DET_Remote_model_ttl = new PI.Model.PI_DET_Remote();
+
+                    if (((decimal)itemPall.pi_pallet_no == itemPall.PI_GW) || itemPall.PI_GW == 0)
+                    {
+                        lblMsg.Text = "Error: Please Add PI:" + txt0PINum_piReport.Text + " GW for Pallet " + itemPall.pi_pallet_no.ToString();
+                        return;
+                    }
+                    pI_DET_Remote_model_ttl.PI_NO = itemPall.PI_NO;
+                    pI_DET_Remote_model_ttl.PI_CARTON_NO = itemPall.PI_CARTON_NO;
+                    pI_DET_Remote_model_ttl.PI_DESC = itemPall.PI_DESC;
+                    pI_DET_Remote_model_ttl.PI_GW = itemPall.PI_GW;
+
+                    var addflagttl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model_ttl);
+                    if (addflagttl <= 0)
+                    {
+                        return;
+                    }
+                    string strwherePalletNo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No' and pi_pallet_no='" + itemPall.pi_pallet_no + "' order by plr_LineID_tran";
+                    List<PIE.Model.vpi_report> vpi_report_list_no = new PIE.BLL.vpi_report().GetModelList(strwherePalletNo);
+                    #region upload to Remote HK(PI)
+                    foreach (PIE.Model.vpi_report item in vpi_report_list_no)
+                    {
+                        PI.Model.PI_DET_Remote pI_DET_Remote_model = new PI.Model.PI_DET_Remote();
+
+                        pI_DET_Remote_model.PI_CARTON_NO = item.CartonID;
+                        pI_DET_Remote_model.PI_CO = item.CoDesc;
+                        pI_DET_Remote_model.PI_ConnCode = item.pisr_con_code;
+                        pI_DET_Remote_model.PI_CONTRACT = item.Contract;
+                        pI_DET_Remote_model.pi_cre_time = dt;
+                        //
+                        pI_DET_Remote_model.pi_curr_rate = null; //0;
+                        pI_DET_Remote_model.PI_DESC = item.sq_name;
+                        //pI_DET_Remote_model.PI_GW = item.GW;
+                        pI_DET_Remote_model.PI_IQC = item.pisr_rec_type;
+                        pI_DET_Remote_model.pi_Lic_req = string.IsNullOrEmpty(item.pisr_lic_req) ? " - " : item.pisr_lic_req;
+                        pI_DET_Remote_model.PI_LINE = item.pi_LineID;
+                        pI_DET_Remote_model.PI_LOT = item.pisr_rir;
+
+                        pI_DET_Remote_model.pi_mfgr = item.MFGR;
+                        pI_DET_Remote_model.pi_mfgr_name = item.MFGR_Name;
+
+                        pI_DET_Remote_model.pi_mfgr_part = item.MFGR_Part;
+                        pI_DET_Remote_model.PI_NO = item.PI_ID;
+                        pI_DET_Remote_model.PI_NW = item.pisr_dec02;
+                        pI_DET_Remote_model.PI_K200_NW = item.pisr_dec01;
+                        //
+                        pI_DET_Remote_model.pi_ori_PO_price = null;// 0;
+                        pI_DET_Remote_model.PI_PALLET = item.pi_pallet_no.ToString();
+                        pI_DET_Remote_model.PI_PART = item.pisr_part;
+                        pI_DET_Remote_model.PI_PO = item.pisr_po_nbr;
+                        pI_DET_Remote_model.pi_PO_curr = null;// item.pisr_curr;
+                        //
+                        pI_DET_Remote_model.PI_PO_price = 0;
+                        pI_DET_Remote_model.PI_REC_NO = item.pisr_us_cost.ToString();//item.pisr_cost.ToString();
+                        pI_DET_Remote_model.PI_QTY = item.pisr_qty;
+                        //
+                        //pI_DET_Remote_model.PI_REC_NO = item.REC_NO;
+                        pI_DET_Remote_model.PI_SBU = item.pisr_sbu;
+                        pI_DET_Remote_model.PI_SEQ = (item.pisr_seq.Equals(DBNull.Value) || string.IsNullOrEmpty(item.pisr_seq)) ? 0 : Convert.ToInt32(item.pisr_seq);
+
+                        pI_DET_Remote_model.PI_SEQ_CL = pI_DET_Remote_model.PI_SEQ;
+
+                        pI_DET_Remote_model.PI_SITE = item.pisr_site;
+                        //
+                        pI_DET_Remote_model.PI_Taxcode = null;
+                        pI_DET_Remote_model.pi_us_rate = null;
+                        pI_DET_Remote_model.pi_user = _idr_show._sys_user_model.user_name;
+                        pI_DET_Remote_model.pi_vend = item.pisr_vend;
+
+                        //GW
+                        pI_DET_Remote_model.PI_GW = null;//(item.Pallet_TTL_NW.Equals(DBNull.Value) || string.IsNullOrEmpty(item.Pallet_TTL_NW)) ? 0 : Convert.ToDecimal(item.Pallet_TTL_NW);
+
+                        pI_DET_Remote_model.pi_ver = 1;
+
+                        //add
+                        //pI_DET_Remote_model.pi_Lic_req = " - ";
+
+                        var intresutl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model);
+                        if (intresutl > 0)
+                        {
+
+                            string strupdatesqldet = "update dbo.pi_det set pi_status='Yes' where PI_ID='" + txt0PINum_piReport.Text + "' and pi_LineID='" + item.pi_LineID + "'";
+                            string strupdatesqlMstr = "update dbo.pi_mstr set pi_status='Yes' where PI_ID='" + txt0PINum_piReport.Text + "'";
+                            var changeStatus = DbHelperSQL.ExecuteSql(strupdatesqldet);
+                            var changeStatusMstr = DbHelperSQL.ExecuteSql(strupdatesqlMstr);
+                            addRemoteD++;
+                        }
+
+                    }
+                    if (addRemoteD > 0)
+                    {
+                        if (addRemoteD >= listcountno)
+                        {
+                            
+                            lblMsg.Text = "Success: Upload PI:" + txt0PINum_piReport.Text + " to DataBase(HK)";
+                        }
+                        else
+                        {
+
+                            lblMsg.Text = "Error: Upload PI:" + txt0PINum_piReport.Text + " fail,Please Retry Upload again";
+                            btn2UploadToHKPIDB.Enabled = false;
+                            btn0RetryUpload.Enabled = true;
+                            btn0RetryUpload.Focus();
+                        }
+                        btn_enquire_piReport_Click(sender, e);
                     }
 
+                    #endregion
                 }
-                if (addRemoteD > 0)
-                {
-                    if (addRemoteD >= listcountno)
-                    {
-                        lblMsg.Text = "Success: Upload PI:" + txt0PINum_piReport.Text + " to DataBase(HK)";
-                    }
-                    else
-                    {
-                        lblMsg.Text = "Notice: Upload PI:" + txt0PINum_piReport.Text + " to  DataBase(HK) OK, but some is not";
-                    }
-                    btn_enquire_piReport_Click(sender, e);
-                }
-
-                #endregion
+                btn2UploadToHKPIDB.Enabled = true;
             }
-            btn2UploadToHKPIDB.Enabled = true;
+            catch (Exception ex)
+            {
+                lblMsg.Text = "Error: Upload PI:" + txt0PINum_piReport.Text + " fail,Please Retry Upload again";
+                btn2UploadToHKPIDB.Enabled = false;
+                btn0RetryUpload.Enabled = true;
+                btn0RetryUpload.Focus();
+            }
+
 
         }
 
@@ -568,17 +605,12 @@ namespace frmPI
                             }
                             else
                             {
-                                var updatePriceflag = new PI.DAL.pisr_grr_ext().Update(wsas019_wec_id, wsas019_rir, wsas019_us_cost,piid);
+                                var updatePriceflag = new PI.DAL.pisr_grr_ext().Update(wsas019_wec_id, wsas019_rir, wsas019_us_cost, piid);
                                 if (!updatePriceflag)
                                 {
-                                    if (string.IsNullOrEmpty(errormsg))
-                                    {
-                                        errormsg = "Error5: update fail list: Wec_id:" + wsas019_wec_id + ",RiR#: " + wsas019_rir;
-                                    }
-                                    else
-                                    {
-                                        errormsg += "\t Wec_id:" + wsas019_wec_id + ",RiR#: " + wsas019_rir;
-                                    }
+
+                                    errormsg = "Error5: update fail list: Wec_id:" + wsas019_wec_id + ",RiR#: " + wsas019_rir;
+
                                 }
                             }
                         }
@@ -591,7 +623,7 @@ namespace frmPI
                     }
                 }
 
-                clmsg.Text = "Error6: get price fail. ";
+                clmsg.Text = "Error6: get price fail. please check wec(wsas019) data is exists bathcid: " + pi_mstr_model.pi_chr01;
                 return "Error";
 
             }
@@ -600,6 +632,60 @@ namespace frmPI
 
                 clmsg.Text = "Error7: get price fail. " + ex.Message;
                 return "Error";
+            }
+
+        }
+
+        private void btn0RetryUpload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                btn0RetryUpload.Enabled = false;
+                if (!string.IsNullOrEmpty(txt0PINum_piReport.Text))
+                {
+                    var existpi = new PI.BLL.pi_mstr().Exists(txt0PINum_piReport.Text.Trim(), 1);
+                    if (existpi)
+                    {
+                        if (System.Windows.Forms.MessageBox.Show("Are you sure Retry UpLoad PIID:[" + txt0PINum_piReport.Text + "] to[HK,PI_DB]", "Notice", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                        {
+                            string strupdatesqldet = "update dbo.pi_det set pi_status='No' where PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
+                            string strupdatesqlMstr = "update dbo.pi_mstr set pi_status='No' where PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
+
+                            var changeStatus = DbHelperSQL.ExecuteSql(strupdatesqldet);
+                            var changeStatusMstr = DbHelperSQL.ExecuteSql(strupdatesqlMstr);
+
+                            if (changeStatus >= 0 && changeStatusMstr >= 0)
+                            {
+                                var delpimstremote = new PI.DAL.PI_MSTR_Remote().Delete(txt0PINum_piReport.Text.Trim());
+                                var delpidetremote = new PI.DAL.PI_DET_Remote_ext().Delete(txt0PINum_piReport.Text.Trim(), true);
+
+                                btn2UploadToHKPIDB.Enabled = true;
+                                btn2UploadToHKPIDB_Click(sender, e);
+                            }
+                            else
+                            {
+                                lblMsg.Text = "Please try again.";
+                                btn0RetryUpload.Enabled = true;
+                                return;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        lblMsg.Text = "PIID: " + txt0PINum_piReport.Text + " is not exists";
+                    }
+
+                }
+                else
+                {
+
+                    txt0PINum_piReport.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMsg.Text = "Error: Please try again. " + ex.Message;
+                btn0RetryUpload.Enabled = true;
             }
 
         }

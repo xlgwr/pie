@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace FrmPIE._0API
+namespace FrmIDR._0API
 {
     class CartonFromTo
     {

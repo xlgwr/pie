@@ -49,12 +49,12 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141124;
+            _frm4VersionMain = 20141125;
 
-            _frm5VersionSecond = 09;
+            _frm5VersionSecond = 15;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
-            _frm10VersionFixMsg = "1.fix gen pi from batchid.";
+            _frm10VersionFixMsg = "1.add a function for Upload to HK db(retry upload).";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 

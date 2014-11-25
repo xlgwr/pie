@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-using FrmPIE._0API;
+using FrmIDR._0API;
 using FrmPIE;
 
 namespace frmPI

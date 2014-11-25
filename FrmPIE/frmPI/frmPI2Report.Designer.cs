@@ -30,22 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gb0PIReport = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.data0GVPiReport = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblpino = new System.Windows.Forms.Label();
-            this.btn3Change = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn2UploadToHKPIDB = new System.Windows.Forms.Button();
-            this.txt1Change = new System.Windows.Forms.TextBox();
             this.btn00More = new System.Windows.Forms.Button();
             this.lblMsg = new System.Windows.Forms.Label();
             this.btn0_enquire_piReport = new System.Windows.Forms.Button();
             this.txt0PINum_piReport = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btn3Change = new System.Windows.Forms.Button();
+            this.txt1Change = new System.Windows.Forms.TextBox();
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn0RetryUpload = new System.Windows.Forms.Button();
             this.gb0PIReport.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data0GVPiReport)).BeginInit();
@@ -55,14 +56,29 @@
             // 
             // gb0PIReport
             // 
+            this.gb0PIReport.Controls.Add(this.button1);
             this.gb0PIReport.Controls.Add(this.groupBox2);
+            this.gb0PIReport.Controls.Add(this.lblpino);
             this.gb0PIReport.Controls.Add(this.groupBox1);
+            this.gb0PIReport.Controls.Add(this.btn3Change);
+            this.gb0PIReport.Controls.Add(this.txt1Change);
             this.gb0PIReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb0PIReport.Location = new System.Drawing.Point(0, 0);
             this.gb0PIReport.Name = "gb0PIReport";
-            this.gb0PIReport.Size = new System.Drawing.Size(703, 392);
+            this.gb0PIReport.Size = new System.Drawing.Size(926, 392);
             this.gb0PIReport.TabIndex = 0;
             this.gb0PIReport.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(709, 74);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // groupBox2
             // 
@@ -84,13 +100,20 @@
             this.data0GVPiReport.Size = new System.Drawing.Size(668, 250);
             this.data0GVPiReport.TabIndex = 0;
             // 
+            // lblpino
+            // 
+            this.lblpino.AutoSize = true;
+            this.lblpino.Location = new System.Drawing.Point(697, 47);
+            this.lblpino.Name = "lblpino";
+            this.lblpino.Size = new System.Drawing.Size(41, 12);
+            this.lblpino.TabIndex = 11;
+            this.lblpino.Text = "PI NO:";
+            this.lblpino.Visible = false;
+            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.lblpino);
-            this.groupBox1.Controls.Add(this.btn3Change);
+            this.groupBox1.Controls.Add(this.btn0RetryUpload);
             this.groupBox1.Controls.Add(this.btn2UploadToHKPIDB);
-            this.groupBox1.Controls.Add(this.txt1Change);
             this.groupBox1.Controls.Add(this.btn00More);
             this.groupBox1.Controls.Add(this.lblMsg);
             this.groupBox1.Controls.Add(this.btn0_enquire_piReport);
@@ -103,29 +126,9 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enquire ";
             // 
-            // lblpino
-            // 
-            this.lblpino.AutoSize = true;
-            this.lblpino.Location = new System.Drawing.Point(454, 31);
-            this.lblpino.Name = "lblpino";
-            this.lblpino.Size = new System.Drawing.Size(41, 12);
-            this.lblpino.TabIndex = 11;
-            this.lblpino.Text = "PI NO:";
-            this.lblpino.Visible = false;
-            // 
-            // btn3Change
-            // 
-            this.btn3Change.Location = new System.Drawing.Point(609, 22);
-            this.btn3Change.Name = "btn3Change";
-            this.btn3Change.Size = new System.Drawing.Size(75, 34);
-            this.btn3Change.TabIndex = 10;
-            this.btn3Change.Text = "&Change";
-            this.btn3Change.UseVisualStyleBackColor = true;
-            this.btn3Change.Visible = false;
-            this.btn3Change.Click += new System.EventHandler(this.btn3Change_Click);
-            // 
             // btn2UploadToHKPIDB
             // 
+            this.btn2UploadToHKPIDB.Enabled = false;
             this.btn2UploadToHKPIDB.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2UploadToHKPIDB.ForeColor = System.Drawing.Color.Red;
             this.btn2UploadToHKPIDB.Location = new System.Drawing.Point(310, 18);
@@ -135,15 +138,6 @@
             this.btn2UploadToHKPIDB.Text = "&UpLoad[HK,PI_DB]";
             this.btn2UploadToHKPIDB.UseVisualStyleBackColor = true;
             this.btn2UploadToHKPIDB.Click += new System.EventHandler(this.btn2UploadToHKPIDB_Click);
-            // 
-            // txt1Change
-            // 
-            this.txt1Change.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt1Change.Location = new System.Drawing.Point(499, 23);
-            this.txt1Change.Name = "txt1Change";
-            this.txt1Change.Size = new System.Drawing.Size(107, 29);
-            this.txt1Change.TabIndex = 9;
-            this.txt1Change.Visible = false;
             // 
             // btn00More
             // 
@@ -197,6 +191,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Pi ID:";
             // 
+            // btn3Change
+            // 
+            this.btn3Change.Location = new System.Drawing.Point(852, 38);
+            this.btn3Change.Name = "btn3Change";
+            this.btn3Change.Size = new System.Drawing.Size(75, 34);
+            this.btn3Change.TabIndex = 10;
+            this.btn3Change.Text = "&Change";
+            this.btn3Change.UseVisualStyleBackColor = true;
+            this.btn3Change.Visible = false;
+            this.btn3Change.Click += new System.EventHandler(this.btn3Change_Click);
+            // 
+            // txt1Change
+            // 
+            this.txt1Change.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt1Change.Location = new System.Drawing.Point(742, 39);
+            this.txt1Change.Name = "txt1Change";
+            this.txt1Change.Size = new System.Drawing.Size(107, 29);
+            this.txt1Change.TabIndex = 9;
+            this.txt1Change.Visible = false;
+            // 
             // ctmenu0EnquireByPart
             // 
             this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -220,27 +234,30 @@
             this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             this.downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.downLoad1ToExceltoolStripMenuItem2_Click);
             // 
-            // button1
+            // btn0RetryUpload
             // 
-            this.button1.Location = new System.Drawing.Point(310, 55);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btn0RetryUpload.Enabled = false;
+            this.btn0RetryUpload.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn0RetryUpload.ForeColor = System.Drawing.Color.Red;
+            this.btn0RetryUpload.Location = new System.Drawing.Point(443, 20);
+            this.btn0RetryUpload.Name = "btn0RetryUpload";
+            this.btn0RetryUpload.Size = new System.Drawing.Size(127, 34);
+            this.btn0RetryUpload.TabIndex = 9;
+            this.btn0RetryUpload.Text = "&Retry UpLoad[HK,PI_DB]";
+            this.btn0RetryUpload.UseVisualStyleBackColor = true;
+            this.btn0RetryUpload.Click += new System.EventHandler(this.btn0RetryUpload_Click);
             // 
             // frmPI2Report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 392);
+            this.ClientSize = new System.Drawing.Size(926, 392);
             this.Controls.Add(this.gb0PIReport);
             this.Name = "frmPI2Report";
             this.Text = "frmPI2Report";
             this.Load += new System.EventHandler(this.frmPI2Report_Load);
             this.gb0PIReport.ResumeLayout(false);
+            this.gb0PIReport.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data0GVPiReport)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -269,6 +286,7 @@
         protected internal System.Windows.Forms.TextBox txt1Change;
         private System.Windows.Forms.Label lblpino;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn0RetryUpload;
 
     }
 }

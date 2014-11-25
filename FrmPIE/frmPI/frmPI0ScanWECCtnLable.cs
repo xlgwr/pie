@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 using MessageBox = System.Windows.Forms.MessageBox;
 
-using FrmPIE._0API;
+using FrmIDR._0API;
 using PIE.DBUtility;
 using System.Data.SqlClient;
 using PIE.Common;
@@ -744,7 +744,7 @@ namespace frmPI
             }
             this.AcceptButton = btn0Scan;
         }
-        void piidenter(object sender, KeyEventArgs e)
+        public void piidenter(object sender, KeyEventArgs e)
         {
             if (txt1PIID_ScanWECCtnLable.Text.Length > 0)
             {
@@ -1000,7 +1000,7 @@ namespace frmPI
                                                 pisr_grr_model.pi_wec_ctn = ds.Tables[0].Rows[y]["wsas017_wec_id"].ToString();
                                                 pisr_grr_model.plr_LineID_tran = Convert.ToInt32(ds.Tables[0].Rows[y]["wsas017_line"]);
 
-                                                cf.SetCtlTextdelegate(lbl0msg, "current: WEC ID:"+pisr_grr_model.pi_wec_ctn+",LineID:"+pisr_grr_model.plr_LineID_tran, true, true);
+                                                //cf.SetCtlTextdelegate(lbl0msg, "current: WEC ID:"+pisr_grr_model.pi_wec_ctn+",LineID:"+pisr_grr_model.plr_LineID_tran, true, true);
                                                 var existgrr = new PI.BLL.pisr_grr().Exists(pisr_grr_model.pi_wec_ctn, pisr_grr_model.plr_LineID_tran);
                                                 pisr_grr_model.Plant = "0";
 
@@ -1074,7 +1074,10 @@ namespace frmPI
                                                 pisr_grr_model.pi_user_ip = _idr_show._custip;
                                                 pisr_grr_model.pi_cre_userid = _idr_show._sys_user_model.user_name;
 
-                                                var pisgrradd = new PI.BLL.pisr_grr().Add(pisr_grr_model);
+                                                //
+                                                pisr_grr_model.pi_chr02 = txt1PIID_ScanWECCtnLable.Text.Trim();
+
+                                                addPisgrr = new PI.BLL.pisr_grr().Add(pisr_grr_model);
                                                 #endregion
                                                 #region old
                                                 //pisr_grr_model.pisr_rir = ds.Tables[0].Rows[y]["wsas017_rir"].ToString();
@@ -1189,7 +1192,7 @@ namespace frmPI
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //btn1RefreshPI.Enabled = false;
+            btn1RefreshPI.Enabled = false;
             if (string.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text))
             {
                 lbl0msg.Text = "PIID is null.";
@@ -1309,6 +1312,7 @@ namespace frmPI
                 _validateBatchid = false;
                 _frmET.lblMsg.Text = "";
 
+                _frmET.button1.Text = "OK";
                 _frmET.button1.Enabled = true;
                 return;
             }
@@ -1325,7 +1329,7 @@ namespace frmPI
 
                 _validateBatchid = false;
                 _frmET.lblMsg.Text = "";
-
+                _frmET.button1.Text = "OK";
                 _frmET.button1.Enabled = true;
                 return;
             }
@@ -1348,6 +1352,7 @@ namespace frmPI
                 _validateBatchid = false;
                 _frmET.lblMsg.Text = "";
 
+                _frmET.button1.Text = "OK";
                 _frmET.button1.Enabled = true;
                 return;
             }
@@ -1360,6 +1365,7 @@ namespace frmPI
                 _validateBatchid = false;
                 _frmET.lblMsg.Text = "";
 
+                _frmET.button1.Text = "OK";
                 _frmET.button1.Enabled = true;
                 return;
             }
@@ -1463,7 +1469,7 @@ namespace frmPI
                 int dscount = webserviceDS.Tables[0].Rows.Count;
                 for (int i = 0; i < dscount; i++)
                 {
-                    lbl0msg.Invoke(new FrmPIE._0API.Commfunction.Action(delegate() { lbl0msg.Text = "Current:" + i.ToString() + ",Total:" + dscount.ToString(); }));
+                    lbl0msg.Invoke(new FrmIDR._0API.Commfunction.Action(delegate() { lbl0msg.Text = "Current:" + i.ToString() + ",Total:" + dscount.ToString(); }));
                     DataRow dr = webserviceDS.Tables[0].Rows[i];
                     var pisr_grr_model_add = new PI.Model.pisr_grr();
 
@@ -1501,7 +1507,11 @@ namespace frmPI
                     pisr_grr_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
                     pisr_grr_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
 
-
+                    var grrexistsflag = new PI.BLL.pisr_grr().Exists(pisr_grr_model_add.pi_wec_ctn, pisr_grr_model_add.plr_LineID_tran);
+                    if (grrexistsflag)
+                    {
+                        continue;
+                    }
                     pisr_grr_model_add.pisr_rir = dr["wsas018_rir"].ToString();
                     pisr_grr_model_add.pisr_invoice = dr["wsas018_invoice"].ToString();
 
@@ -1537,6 +1547,10 @@ namespace frmPI
                     pisr_grr_model_add.pi_update_date = DateTime.Now;
                     pisr_grr_model_add.pi_user_ip = _idr_show._custip;
                     pisr_grr_model_add.pi_cre_userid = _idr_show._sys_user_model.user_name;
+
+                    //add 
+                    pisr_grr_model_add.pisr_char03 = _strbatchid;
+                    pisr_grr_model_add.pi_chr02 = strPIID;
 
                     var pisgrradd = new PI.BLL.pisr_grr().Add(pisr_grr_model_add);
                     #endregion

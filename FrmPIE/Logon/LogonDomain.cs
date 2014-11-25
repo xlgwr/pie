@@ -8,11 +8,14 @@ using System.Windows.Forms;
 
 using PIE.DBUtility;
 
+using System.Threading;
+
 namespace FrmPIE
 {
     public partial class LogonDomain : Form
     {
         frmNotice _frmNotice;
+        Thread t;
         PIE.Model.sys_user system_user_model = new PIE.Model.sys_user();
         public static string _strUpdateURL;
 
@@ -20,8 +23,29 @@ namespace FrmPIE
         {
             InitializeComponent();
             Program.showNewVersion(linkLabel1);
+            t = new Thread(initShowing);
         }
+        public void initShowing()
+        {
+            this.BeginInvoke(new FrmIDR._0API.Commfunction.Action(delegate() { lblmsg.Visible = true; }));
+            //lblmsg.Text = "load..";
+            this.BeginInvoke(new FrmIDR._0API.Commfunction.Action(
+                delegate()
+                {
+                    if (lblmsg.ForeColor == Color.Red)
+                    {
+                        lblmsg.ForeColor = Color.Green;
+                        lblmsg.Text = "load..";
 
+                    }
+                    else
+                    {
+                        lblmsg.ForeColor = Color.Red;
+                        lblmsg.Text = "load....";
+                    }
+                }));
+
+        }
         private void initfrmShow()
         {
             this.Hide();
@@ -36,7 +60,7 @@ namespace FrmPIE
         }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-
+            //timer1.Enabled = true;
             string strdomain = combDomain.Text;
 
             if (string.IsNullOrEmpty(combDomain.Text))
@@ -315,8 +339,13 @@ namespace FrmPIE
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
 
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            initShowing();
         }
 
     }

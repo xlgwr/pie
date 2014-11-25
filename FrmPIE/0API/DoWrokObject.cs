@@ -1,10 +1,11 @@
-﻿using System;
+﻿using FrmPIE;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrmPIE._0API
+namespace FrmIDR._0API
 {
     class DoWrokObject
     {
