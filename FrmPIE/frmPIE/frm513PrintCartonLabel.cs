@@ -118,7 +118,7 @@ namespace FrmPIE
         private void initDGVDelegate(object doWorkobj)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initDGV);
-            _idr_show.BeginInvoke(me, doWorkobj);
+            _idr_show.Invoke(me, doWorkobj);
         }
         private void btn8Search_Click(object sender, EventArgs e)
         {

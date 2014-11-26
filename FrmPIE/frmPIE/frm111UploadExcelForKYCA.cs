@@ -266,7 +266,7 @@ namespace FrmPIE
         private void UploadExcelDelegate()
         {
             Commfunction.dvoidMethod me = new Commfunction.dvoidMethod(UploadExcel);
-            _idr_show.BeginInvoke(me);
+            _idr_show.Invoke(me);
         }
 
         private void initExcelDGV(object strBatchID)
@@ -284,7 +284,7 @@ namespace FrmPIE
         private void initExcelDGVDelegate(object strBatchID)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initExcelDGV);
-            _idr_show.BeginInvoke(me, strBatchID);
+            _idr_show.Invoke(me, strBatchID);
         }
         public void SetCtlTextdelegate(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
         {
@@ -720,26 +720,6 @@ namespace FrmPIE
             var strmsg = Convert0ToDataTable();
 
             data1GV1ePackingDet1UploadExcel.DataSource = data0set_npoi.Tables[0];
-            if (data0set_npoi.Tables[0].Rows.Count > 0)
-            {
-                // command.InsertCommand = cmdb.GetInsertCommand();
-                // command.DeleteCommand = cmdb.GetDeleteCommand();
-                // command.UpdateCommand = cmdb.GetUpdateCommand();
-                command.Update(data0set_npoi);
-                data0set_npoi.AcceptChanges();
-
-                foreach (DataRow dr in data0set_npoi.Tables[0].Rows)
-                {
-                    PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr_ext().DataRowToModel(dr, true);
-                    var intresutl = Program.GenCartonNo(plr_mstr_model);
-                }
-                //for (int i = 0; i < data0set_npoi.Tables[0].Rows.Count; i++)
-                //{
-                //    DataRow dr = data0set_npoi.Tables[0].Rows[i];
-                //    PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr().DataRowToModel(dr, true);
-                //    var intresutl = Program.GenCartonNo(plr_mstr_model);
-                //}
-            }
             data1GV1ePackingDet1UploadExcel.Refresh();
 
             if (_dterr.Rows.Count > 0)
@@ -748,11 +728,66 @@ namespace FrmPIE
                 data2GV2ePackingDet1UploadExcelError.Refresh();
                 tabControl1.SelectedIndex = 1;
             }
+            if (data0set_npoi.Tables[0].Rows.Count > 0)
+            {
+                // command.InsertCommand = cmdb.GetInsertCommand();
+                // command.DeleteCommand = cmdb.GetDeleteCommand();
+                // command.UpdateCommand = cmdb.GetUpdateCommand();
 
 
+                UpdateBatchToDB(strmsg);
+
+
+                //for (int i = 0; i < data0set_npoi.Tables[0].Rows.Count; i++)
+                //{
+                //    DataRow dr = data0set_npoi.Tables[0].Rows[i];
+                //    PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr().DataRowToModel(dr, true);
+                //    var intresutl = Program.GenCartonNo(plr_mstr_model);
+                //}
+            }
+
+
+
+
+        }
+        void UpdateBatchToDB(object o)
+        {
+
+            var currmsg = "Start Upload DB For BatchID......";
+            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, currmsg, true, true);
+            command.Update(data0set_npoi);
+            data0set_npoi.AcceptChanges();
+
+            //var intresutl = Program.GenCartonNo(data0set_npoi);
+
+            ThreadPool.QueueUserWorkItem(new WaitCallback(doGenCarton), o);
+        }
+        void doGenCarton(object o)
+        {
+            int countsuccess = 0;
+            int counterror = 0;
+            string batchid = "";
+            foreach (DataRow dr in data0set_npoi.Tables[0].Rows)
+            {
+                PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr_ext().DataRowToModel(dr, true);
+                var currmsg = "Start Generate Carton ID For BatchID: " + plr_mstr_model.Batch_ID + ",LineID:" + plr_mstr_model.LineID;
+                cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, currmsg, true, true);
+                int intresutl = Program.GenCartonNo(plr_mstr_model);
+                batchid = plr_mstr_model.Batch_ID;
+                ///0: success 1:error 3:has upload to erp;
+                if (intresutl == 1)
+                {
+                    counterror++;
+                }
+                else
+                {
+                    countsuccess++;
+                }
+            }
+            var msgCarton = "\nGenerate Carton ID For BatchID " + batchid + " Success.";
             var currtime = DateTime.Now - oldtime;
             string difftime = "\tUse Time: " + currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
-            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, strmsg + difftime, true, true);
+            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "\t" + o.ToString() + msgCarton + difftime, true, true);
         }
         string Convert0ToDataTable()
         {
@@ -1365,7 +1400,7 @@ namespace FrmPIE
         void Init0ializeWorkbookdelegate(object objpath)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(Init0ializeWorkbook);
-            _idr_show.BeginInvoke(me, objpath);
+            _idr_show.Invoke(me, objpath);
         }
         void initLoadExcelFile()
         {

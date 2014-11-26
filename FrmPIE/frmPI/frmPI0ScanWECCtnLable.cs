@@ -45,6 +45,7 @@ namespace frmPI
         public bool _coisnull = false;
         public string _strconext = "";
         public string _plr_wec_ctn = "";
+        public string currmsg = "";
 
         public List<PIE.Model.plr_mstr_tran> _plr_mstr_tran_co_list = new List<PIE.Model.plr_mstr_tran>();
         public List<PI.Model.pi_det> _pi_det_model_co_list = new List<PI.Model.pi_det>();
@@ -334,33 +335,10 @@ namespace frmPI
                 initDatasetToTxt((PI.Model.pi_mstr)reobjmstr);
             }
         }
-        private void pirefreshDelegate()
-        {
-            Commfunction.dvoidMethod me = new Commfunction.dvoidMethod(pirefresh);
-            _idr_show.BeginInvoke(me);
-        }
         private void initDGVDelegate(object strBatchID)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initDGV);
-            _idr_show.BeginInvoke(me, strBatchID);
-        }
-        private void threadPiRefreshdeleget()
-        {
-            _idr_show._tRefresh = new Thread(pirefreshDelegate);
-            if (_idr_show._tRefresh.ThreadState == ThreadState.Running)
-            {
-                _idr_show._tRefresh.Abort();
-            }
-
-            if (_idr_show._tRefresh.ThreadState == ThreadState.Unstarted)
-            {
-                _idr_show._tRefresh.Start();
-            }
-            if (_idr_show._tRefresh.ThreadState == ThreadState.Stopped)
-            {
-                _idr_show._tRefresh = new Thread(pirefreshDelegate);
-                _idr_show._tRefresh.Start();
-            }
+            _idr_show.Invoke(me, strBatchID);
         }
         private void threadinitDVdelegate()
         {
@@ -958,7 +936,7 @@ namespace frmPI
             lbl0msg.Text = strmsg;
         }
 
-        private void pirefresh()
+        private void pirefresh(object o)
         {
             cf.SetCtlTextdelegate(btn1RefreshPI, "Get....", false, true);
             ShowMsg(" Get RIR# (ERP) ......", "Notice");
@@ -979,6 +957,7 @@ namespace frmPI
                     {
                         for (int i = 0; i < pi_det_list.Count; i++)
                         {
+
                             PIE.Model.plr_mstr_tran plr_mstr_tran_model = new PIE.DAL.plr_mstr_tran_ext().GetModel(pi_det_list[i].pi_wec_ctn);
                             if (plr_mstr_tran_model != null)
                             {
@@ -1000,7 +979,7 @@ namespace frmPI
                                                 pisr_grr_model.pi_wec_ctn = ds.Tables[0].Rows[y]["wsas017_wec_id"].ToString();
                                                 pisr_grr_model.plr_LineID_tran = Convert.ToInt32(ds.Tables[0].Rows[y]["wsas017_line"]);
 
-                                                //cf.SetCtlTextdelegate(lbl0msg, "current: WEC ID:"+pisr_grr_model.pi_wec_ctn+",LineID:"+pisr_grr_model.plr_LineID_tran, true, true);
+                                                cf.SetCtlTextdelegate(lbl0msg, "Start Get RiR#, Current:" + i + ",WEC ID:" + pisr_grr_model.pi_wec_ctn + ",LineID:" + pisr_grr_model.plr_LineID_tran, true, true);
                                                 var existgrr = new PI.BLL.pisr_grr().Exists(pisr_grr_model.pi_wec_ctn, pisr_grr_model.plr_LineID_tran);
                                                 pisr_grr_model.Plant = "0";
 
@@ -1026,11 +1005,11 @@ namespace frmPI
                                                     //    ShowMsg(existrirsuccess + " RiR 已更新.\n\t" + existrir, "Notice0");
                                                     //}
                                                     dsexist++;
-                                                    if (dsexist >= dscount)
-                                                    {
+                                                    //if (dsexist >= dscount)
+                                                    //{
 
-                                                        ShowMsg(" All rows has alread Refresh RiR OK.", "Notice0");
-                                                    }
+                                                    //    ShowMsg(" All rows has alread Refresh RiR OK.", "Notice0");
+                                                    //}
                                                     continue;
                                                 }
                                                 #region add pisr_grr_model_fromBatchid
@@ -1119,10 +1098,7 @@ namespace frmPI
                                                 #endregion
 
                                             }
-                                            if (addPisgrr)
-                                            {
-                                                ShowMsg(" Refresh RiR OK.", "Notice1");
-                                            }
+                                            //ShowMsg(" Refresh RiR OK.", "Notice1");
                                         }
                                         else
                                         {
@@ -1150,7 +1126,7 @@ namespace frmPI
                                     }
                                     else
                                     {
-                                        ShowMsg(pi_det_list[i].pi_wec_ctn + " ERP 中 无 RiR 没有记录.", "Error1");
+                                        ShowMsg("WEC ID: " + pi_det_list[i].pi_wec_ctn + " 在 WebServer(ERP) 中未生成对应 RiR#。", "Error1");
                                     }
                                 }
                                 else
@@ -1164,7 +1140,7 @@ namespace frmPI
                                 ShowMsg("没有扫描记录.", "Error3");
                             }
                         }
-
+                        ShowMsg(" Refresh RiR OK.", "Notice1");
                     }
                     else
                     {
@@ -1179,7 +1155,7 @@ namespace frmPI
                     ShowMsg("Ctn SN is null.", "Error");
                 }
 
-                cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# (ERP)", true, true);
+                cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# OK", true, true);
                 //////////////************************
                 threadinitDVdelegate();
             }
@@ -1199,7 +1175,8 @@ namespace frmPI
                 return;
             }
             lbl0msg.Text = "Start Update RiR#, Please wait.";
-            threadPiRefreshdeleget();
+            //threadPiRefreshdeleget();
+            ThreadPool.QueueUserWorkItem(new WaitCallback(pirefresh), "dd");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1466,106 +1443,9 @@ namespace frmPI
                 }
 
                 #endregion
-                int dscount = webserviceDS.Tables[0].Rows.Count;
-                for (int i = 0; i < dscount; i++)
-                {
-                    lbl0msg.Invoke(new FrmIDR._0API.Commfunction.Action(delegate() { lbl0msg.Text = "Current:" + i.ToString() + ",Total:" + dscount.ToString(); }));
-                    DataRow dr = webserviceDS.Tables[0].Rows[i];
-                    var pisr_grr_model_add = new PI.Model.pisr_grr();
 
-                    #region add pi_det_model_from_batchid
-
-                    // var pi_det_model_add = new PI.Model.pi_det();
-                    //pi_det_model_add.PI_ID = strPIID;
-                    //pi_det_model_add.pi_LineID = i + 1;
-                    //pi_det_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
-                    //pi_det_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
-
-                    //pi_det_model_add.pi_type = "N";
-                    //pi_det_model_add.pi_deci1 = 0;//dr["wsas018_pallet"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_pallet"]);
-                    //pi_det_model_add.pi_pallet_no = dr["wsas018_pallet"].ToString();
-
-                    //pi_det_model_add.CartonNo = dr["wsas018_ctn_no"].ToString();
-                    //pi_det_model_add.CartonID = dr["wsas018_ctn_id"].ToString();
-
-                    //pi_det_model_add.pi_chr01 = dr["wsas018_co"].ToString();
-
-
-                    //pi_det_model_add.pi_chr02 = dr["wsas018_po_nbr"].ToString();
-
-                    //pi_det_model_add.pi_remark = "Add From ePacking List:BatchID->" + dr["wsas018_batch"].ToString();
-
-                    //pi_det_model_add.pi_cre_date = DbHelperSQL.getServerGetDate();
-                    //pi_det_model_add.pi_user_ip = _idr_show._custip;
-                    //pi_det_model_add.pi_status = "No";
-
-                    //var result_pi_det_add = new PI.DAL.pi_det().Add(pi_det_model_add);
-                    #endregion
-
-
-                    #region add pisr_grr_model_add_fromBatchid
-                    pisr_grr_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
-                    pisr_grr_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
-
-                    var grrexistsflag = new PI.BLL.pisr_grr().Exists(pisr_grr_model_add.pi_wec_ctn, pisr_grr_model_add.plr_LineID_tran);
-                    if (grrexistsflag)
-                    {
-                        continue;
-                    }
-                    pisr_grr_model_add.pisr_rir = dr["wsas018_rir"].ToString();
-                    pisr_grr_model_add.pisr_invoice = dr["wsas018_invoice"].ToString();
-
-                    pisr_grr_model_add.pisr_part = dr["wsas018_part"].ToString();
-                    pisr_grr_model_add.pisr_site = dr["wsas018_site"].ToString();
-                    pisr_grr_model_add.Pisr_receiver = dr["wsas018_receiver"].ToString();
-                    pisr_grr_model_add.pisr_po_nbr = dr["wsas018_po_nbr"].ToString();
-                    pisr_grr_model_add.pisr_qty = Convert.ToDecimal(dr["wsas018_qty"].ToString());
-                    pisr_grr_model_add.pisr_curr = dr["wsas018_curr"].ToString();
-                    pisr_grr_model_add.pisr_cost = Convert.ToDecimal(dr["wsas018_cost"].ToString());
-                    pisr_grr_model_add.pisr_base_cost = Convert.ToDecimal(dr["wsas018_base_cost"].ToString());
-                    pisr_grr_model_add.pisr_us_cost = Convert.ToDecimal(dr["wsas018_us_cost"].ToString());
-                    pisr_grr_model_add.pisr_seq = dr["wsas018_seq"].ToString();
-                    pisr_grr_model_add.pisr_con_code = dr["wsas018_con_code"].ToString();
-                    pisr_grr_model_add.pisr_ch_desc = dr["wsas018_ch_desc"].ToString();
-                    pisr_grr_model_add.pisr_net_wt = Convert.ToDecimal(dr["wsas018_net_wt"].ToString());
-                    pisr_grr_model_add.pisr_rec_type = dr["wsas018_rec_type"].ToString();
-                    pisr_grr_model_add.pisr_abc = dr["wsas018_abc"].ToString();
-                    pisr_grr_model_add.pisr_code = dr["wsas018_code"].ToString();
-                    pisr_grr_model_add.pisr_lic_req = dr["wsas018_lic_req"].ToString();
-
-                    pisr_grr_model_add.pisr_sbu = dr["wsas018_sbu"].ToString();
-                    pisr_grr_model_add.pisr_vend = dr["wsas018_vend"].ToString();
-                    pisr_grr_model_add.pisr_mfgr_name = dr["wsas018_mfgr_name"].ToString();
-
-                    pisr_grr_model_add.pisr_char01 = dr["wsas018_mfgr"].ToString();
-                    pisr_grr_model_add.pisr_char02 = dr["wsas018_vend_name"].ToString();
-
-                    pisr_grr_model_add.pisr_dec01 = Convert.ToDecimal(dr["wsas018_k200_nw"]);
-                    pisr_grr_model_add.pisr_dec02 = Convert.ToDecimal(dr["wsas018_nw"]);
-
-                    pisr_grr_model_add.pi_cre_date = DateTime.Now;
-                    pisr_grr_model_add.pi_update_date = DateTime.Now;
-                    pisr_grr_model_add.pi_user_ip = _idr_show._custip;
-                    pisr_grr_model_add.pi_cre_userid = _idr_show._sys_user_model.user_name;
-
-                    //add 
-                    pisr_grr_model_add.pisr_char03 = _strbatchid;
-                    pisr_grr_model_add.pi_chr02 = strPIID;
-
-                    var pisgrradd = new PI.BLL.pisr_grr().Add(pisr_grr_model_add);
-                    #endregion
-
-
-                }
-                txt1PIID_ScanWECCtnLable.Text = strPIID;
-                txt1PIID_ScanWECCtnLable.Focus();
-
-                string strupdatesqlMstr = "update dbo.plr_batch_mstr set batch_chr01='Gen PI:" + strPIID + "' where batch_id='" + _frmET.textBox1.Text.Trim() + "'";
-                var changeStatusMstr = DbHelperSQL.ExecuteSql(strupdatesqlMstr);
-
-                ShowMsg("Add PI Mstr info Success", "Success");
-                _frmET.lblMsg.Text = "";
-                _validateBatchid = false;
+                //addGrr(strPIID);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(addGrr), strPIID);
             }
             else
             {
@@ -1573,6 +1453,115 @@ namespace frmPI
             }
             _frmET.lblMsg.Text = "";
             btn0AddFromePackingList0.Enabled = true;
+
+        }
+        public void addGrr(object o)
+        {
+            var strPIID = o.ToString();
+
+            int dscount = webserviceDS.Tables[0].Rows.Count;
+            for (int i = 0; i < dscount; i++)
+            {
+
+                DataRow dr = webserviceDS.Tables[0].Rows[i];
+                var pisr_grr_model_add = new PI.Model.pisr_grr();
+
+                //old
+                #region add pi_det_model_from_batchid
+
+                // var pi_det_model_add = new PI.Model.pi_det();
+                //pi_det_model_add.PI_ID = strPIID;
+                //pi_det_model_add.pi_LineID = i + 1;
+                //pi_det_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
+                //pi_det_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
+
+                //pi_det_model_add.pi_type = "N";
+                //pi_det_model_add.pi_deci1 = 0;//dr["wsas018_pallet"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_pallet"]);
+                //pi_det_model_add.pi_pallet_no = dr["wsas018_pallet"].ToString();
+
+                //pi_det_model_add.CartonNo = dr["wsas018_ctn_no"].ToString();
+                //pi_det_model_add.CartonID = dr["wsas018_ctn_id"].ToString();
+
+                //pi_det_model_add.pi_chr01 = dr["wsas018_co"].ToString();
+
+
+                //pi_det_model_add.pi_chr02 = dr["wsas018_po_nbr"].ToString();
+
+                //pi_det_model_add.pi_remark = "Add From ePacking List:BatchID->" + dr["wsas018_batch"].ToString();
+
+                //pi_det_model_add.pi_cre_date = DbHelperSQL.getServerGetDate();
+                //pi_det_model_add.pi_user_ip = _idr_show._custip;
+                //pi_det_model_add.pi_status = "No";
+
+                //var result_pi_det_add = new PI.DAL.pi_det().Add(pi_det_model_add);
+                #endregion
+
+
+                #region add pisr_grr_model_add_fromBatchid
+                pisr_grr_model_add.pi_wec_ctn = dr["wsas018_wec_id"].ToString();
+                pisr_grr_model_add.plr_LineID_tran = dr["wsas018_line"] == DBNull.Value ? 0 : Convert.ToInt32(dr["wsas018_line"]);
+
+                currmsg = "Total:" + dscount.ToString() + ",Current:" + i.ToString() + ",WEC ID:" + pisr_grr_model_add.pi_wec_ctn + ",LinID:" + pisr_grr_model_add.plr_LineID_tran;
+                cf.SetCtlTextdelegate(lbl0msg, currmsg, true, true);
+
+                var grrexistsflag = new PI.BLL.pisr_grr().Exists(pisr_grr_model_add.pi_wec_ctn, pisr_grr_model_add.plr_LineID_tran);
+                if (grrexistsflag)
+                {
+                    continue;
+                }
+                pisr_grr_model_add.pisr_rir = dr["wsas018_rir"].ToString();
+                pisr_grr_model_add.pisr_invoice = dr["wsas018_invoice"].ToString();
+
+                pisr_grr_model_add.pisr_part = dr["wsas018_part"].ToString();
+                pisr_grr_model_add.pisr_site = dr["wsas018_site"].ToString();
+                pisr_grr_model_add.Pisr_receiver = dr["wsas018_receiver"].ToString();
+                pisr_grr_model_add.pisr_po_nbr = dr["wsas018_po_nbr"].ToString();
+                pisr_grr_model_add.pisr_qty = Convert.ToDecimal(dr["wsas018_qty"].ToString());
+                pisr_grr_model_add.pisr_curr = dr["wsas018_curr"].ToString();
+                pisr_grr_model_add.pisr_cost = Convert.ToDecimal(dr["wsas018_cost"].ToString());
+                pisr_grr_model_add.pisr_base_cost = Convert.ToDecimal(dr["wsas018_base_cost"].ToString());
+                pisr_grr_model_add.pisr_us_cost = Convert.ToDecimal(dr["wsas018_us_cost"].ToString());
+                pisr_grr_model_add.pisr_seq = dr["wsas018_seq"].ToString();
+                pisr_grr_model_add.pisr_con_code = dr["wsas018_con_code"].ToString();
+                pisr_grr_model_add.pisr_ch_desc = dr["wsas018_ch_desc"].ToString();
+                pisr_grr_model_add.pisr_net_wt = Convert.ToDecimal(dr["wsas018_net_wt"].ToString());
+                pisr_grr_model_add.pisr_rec_type = dr["wsas018_rec_type"].ToString();
+                pisr_grr_model_add.pisr_abc = dr["wsas018_abc"].ToString();
+                pisr_grr_model_add.pisr_code = dr["wsas018_code"].ToString();
+                pisr_grr_model_add.pisr_lic_req = dr["wsas018_lic_req"].ToString();
+
+                pisr_grr_model_add.pisr_sbu = dr["wsas018_sbu"].ToString();
+                pisr_grr_model_add.pisr_vend = dr["wsas018_vend"].ToString();
+                pisr_grr_model_add.pisr_mfgr_name = dr["wsas018_mfgr_name"].ToString();
+
+                pisr_grr_model_add.pisr_char01 = dr["wsas018_mfgr"].ToString();
+                pisr_grr_model_add.pisr_char02 = dr["wsas018_vend_name"].ToString();
+
+                pisr_grr_model_add.pisr_dec01 = Convert.ToDecimal(dr["wsas018_k200_nw"]);
+                pisr_grr_model_add.pisr_dec02 = Convert.ToDecimal(dr["wsas018_nw"]);
+
+                pisr_grr_model_add.pi_cre_date = DateTime.Now;
+                pisr_grr_model_add.pi_update_date = DateTime.Now;
+                pisr_grr_model_add.pi_user_ip = _idr_show._custip;
+                pisr_grr_model_add.pi_cre_userid = _idr_show._sys_user_model.user_name;
+
+                //add 
+                pisr_grr_model_add.pisr_char03 = _strbatchid;
+                pisr_grr_model_add.pi_chr02 = strPIID;
+
+                var pisgrradd = new PI.BLL.pisr_grr().Add(pisr_grr_model_add);
+                #endregion
+
+
+            }
+            txt1PIID_ScanWECCtnLable.Text = strPIID;
+            txt1PIID_ScanWECCtnLable.Focus();
+
+            string strupdatesqlMstr = "update dbo.plr_batch_mstr set batch_chr01='Gen PI:" + strPIID + "' where batch_id='" + _frmET.textBox1.Text.Trim() + "'";
+            var changeStatusMstr = DbHelperSQL.ExecuteSql(strupdatesqlMstr);
+
+            ShowMsg("Add PI Mstr info Success", "Success");
+            _validateBatchid = false;
 
         }
 

@@ -207,13 +207,13 @@ namespace FrmPIE
         {
             Commfunction.dSafeSetToolText objSet = new Commfunction.dSafeSetToolText(cf.setToolText);
 
-            _idr_show.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
+            _idr_show.Invoke(objSet, new object[] { ctl, strMsg, enable, visible });
         }
         public void SetCtlTextdelegate(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
         {
             Commfunction.dSafeSetCtlText objSet = new Commfunction.dSafeSetCtlText(cf.setControlText);
 
-            _idr_show.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
+            _idr_show.Invoke(objSet, new object[] { ctl, strMsg, enable, visible });
         }
         private void initDGV(object doWorkobj)
         {
@@ -234,7 +234,7 @@ namespace FrmPIE
         private void initDGVDelegate(object doWorkobj)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initDGV);
-            _idr_show.BeginInvoke(me, doWorkobj);
+            _idr_show.Invoke(me, doWorkobj);
         }
         private void UploadERP()
         {

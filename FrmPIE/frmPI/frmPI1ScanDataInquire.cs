@@ -147,7 +147,7 @@ namespace frmPI
         private void initDGVDelegate(object doWorkobj)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initDGV);
-            _idr_show.BeginInvoke(me, doWorkobj);
+            _idr_show.Invoke(me, doWorkobj);
         }
         private void frmPI1ScanDataInquire_Load(object sender, EventArgs e)
         {

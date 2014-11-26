@@ -317,7 +317,7 @@ namespace FrmPIE
         private void initDGVDelegate(object strBatchID)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initDGV);
-            _idr_show.BeginInvoke(me, strBatchID);
+            _idr_show.Invoke(me, strBatchID);
         }
         private void btn1UpadeAddAddNewBatchID_Click(object sender, EventArgs e)
         {

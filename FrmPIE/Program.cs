@@ -49,7 +49,7 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141125;
+            _frm4VersionMain = 20141126;
 
             _frm5VersionSecond = 15;
             _frm6Versionprefix = "RTM";//RTM
@@ -604,6 +604,7 @@ namespace FrmPIE
 
             return strCtnIdArr;
         }
+
         public static int GenCartonNo(PIE.Model.plr_mstr plr_mstr_model)
         {
             int result;
@@ -665,6 +666,16 @@ namespace FrmPIE
             DbHelperSQL.RunProcedure("sp_GenCtn_Tran", parameters, out intEffected);
             result = Convert.ToInt16(parameters[12].Value);
             return result;
+        }
+        public static int GenCartonNo(DataSet ds)
+        {
+            int intresutl = 1;
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                PIE.Model.plr_mstr plr_mstr_model = new PIE.DAL.plr_mstr_ext().DataRowToModel(dr, true);
+                intresutl = Program.GenCartonNo(plr_mstr_model);
+            }
+            return intresutl;
         }
         public static void OpenFolderAndSelectFile(String fileFullName)
         {

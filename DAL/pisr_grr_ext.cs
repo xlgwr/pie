@@ -12,6 +12,20 @@ namespace PI.DAL
     {
 
         /// <summary>
+        /// 是否存在该记录usd
+        /// </summary>
+        public bool Exists(string pi_id)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from pisr_grr");
+            strSql.Append(" where pi_chr02=@pi_chr02 and (pi_chr01 is null or pi_chr01='') ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@pi_chr02", SqlDbType.NVarChar,50)};
+            parameters[0].Value = pi_id;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+        /// <summary>
         /// 更新一条数据
         /// </summary>
         public bool Update(string pi_wec_ctn, string pisr_rir,string getPrice,string piid)

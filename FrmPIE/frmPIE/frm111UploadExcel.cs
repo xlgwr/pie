@@ -224,7 +224,7 @@ namespace FrmPIE
         private void UploadExcelDelegate()
         {
             Commfunction.dvoidMethod me = new Commfunction.dvoidMethod(UploadExcel);
-            _idr_show.BeginInvoke(me);
+            _idr_show.Invoke(me);
         }
 
         private void initExcelDGV(object strBatchID)
@@ -242,7 +242,7 @@ namespace FrmPIE
         private void initExcelDGVDelegate(object strBatchID)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initExcelDGV);
-            _idr_show.BeginInvoke(me, strBatchID);
+            _idr_show.Invoke(me, strBatchID);
         }
         public void SetCtlTextdelegate(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
         {
@@ -843,7 +843,7 @@ namespace FrmPIE
         void Init0ializeWorkbookdelegate(object objpath)
         {
             Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(Init0ializeWorkbook);
-            _idr_show.BeginInvoke(me, objpath);
+            _idr_show.Invoke(me, objpath);
         }
         void initLoadExcelFile()
         {

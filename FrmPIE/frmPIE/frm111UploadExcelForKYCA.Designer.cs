@@ -360,7 +360,7 @@
             this.toolStripMenuItem1,
             this.downLoad2ToExceltoolStripMenuItem2});
             this.ctmenu1EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu1EnquireByPart.Size = new System.Drawing.Size(191, 70);
+            this.ctmenu1EnquireByPart.Size = new System.Drawing.Size(191, 48);
             // 
             // toolStripMenuItem1
             // 
@@ -393,7 +393,7 @@
             // 
             this.lbl1UploadExcelThreadMsg.AutoSize = true;
             this.lbl1UploadExcelThreadMsg.ForeColor = System.Drawing.Color.Red;
-            this.lbl1UploadExcelThreadMsg.Location = new System.Drawing.Point(13, 142);
+            this.lbl1UploadExcelThreadMsg.Location = new System.Drawing.Point(13, 134);
             this.lbl1UploadExcelThreadMsg.Name = "lbl1UploadExcelThreadMsg";
             this.lbl1UploadExcelThreadMsg.Size = new System.Drawing.Size(0, 12);
             this.lbl1UploadExcelThreadMsg.TabIndex = 14;

@@ -57,31 +57,31 @@ namespace FrmIDR._0API
         {
             DoWrokObject dwo = (DoWrokObject)dwko;
             dDoWorkCellSelectColor mi = new dDoWorkCellSelectColor(cellSelectMethod);
-            _idr_show.BeginInvoke(mi, dwo);
+            _idr_show.Invoke(mi, dwo);
 
         }
         public void SetToolTextdelegate(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible)
         {
             dSafeSetToolText objSet = new dSafeSetToolText(setToolText);
 
-            _idr_show.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
+            _idr_show.Invoke(objSet, new object[] { ctl, strMsg, enable, visible });
         }
         public void SetCtlTextdelegate(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
         {
             dSafeSetCtlText objSet = new dSafeSetCtlText(setControlText);
 
-            _idr_show.BeginInvoke(objSet, new object[] { ctl, strMsg, enable, visible });
+            _idr_show.Invoke(objSet, new object[] { ctl, strMsg, enable, visible });
         }
         public void SetCtlTextdelegateObj(object obj)
         {
             dinitDataGVSource objSet = new dinitDataGVSource(setControlTextObj);
 
-            _idr_show.BeginInvoke(objSet, obj);
+            _idr_show.Invoke(objSet, obj);
         }
         public void initWECPrintFromToDeleteaget(CartonFromTo cft)
         {
             dinitDataGVSource me = new dinitDataGVSource(initWECPrintFromTo);
-            _idr_show.BeginInvoke(me, cft);
+            _idr_show.Invoke(me, cft);
         }
 
         public static string getClientIP()
