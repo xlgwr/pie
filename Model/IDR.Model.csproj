@@ -117,7 +117,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="codetable.cs" />
     <Compile Include="pisr_grr.cs" />
+    <Compile Include="pi_sq.cs" />
     <Compile Include="PI_MSTR_Remote.cs" />
     <Compile Include="PI_DET_Remote.cs" />
     <Compile Include="pi_det.cs" />
