@@ -721,6 +721,7 @@ namespace frmPI
                 piidenter(sender, e);
             }
             this.AcceptButton = btn0Scan;
+            btn1RefreshPI.Enabled = true;
         }
         public void piidenter(object sender, KeyEventArgs e)
         {
@@ -1114,30 +1115,31 @@ namespace frmPI
 
                                             if (string.IsNullOrEmpty(existrirsuccess))
                                             {
-                                                ShowMsg(existrir + " ERP 中 无 RiR 记录.", "Error0");
+                                                //ShowMsg(existrir + " ERP 中 无 RiR 记录.", "Error0");
+                                                ShowMsg(existrir + " ERP has no RiR# Data.", "Error0");
                                             }
                                             else
                                             {
 
-                                                ShowMsg(existrir + " ERP 中 无 RiR 记录.\n\t" + existrirsuccess + " RiR 已更新.", "Error0");
+                                                ShowMsg(existrir + " ERP has no RiR# Dat.\n\t" + existrirsuccess + " RiR has updated.", "Error0");
                                             }
                                         }
 
                                     }
                                     else
                                     {
-                                        ShowMsg("WEC ID: " + pi_det_list[i].pi_wec_ctn + " 在 WebServer(ERP) 中未生成对应 RiR#。", "Error1");
+                                        ShowMsg("WEC ID: " + pi_det_list[i].pi_wec_ctn + " at WebServer(ERP) has no RiR#。", "Error1");
                                     }
                                 }
                                 else
                                 {
-                                    ShowMsg("WebServer 连接错误.", "Error2");
+                                    ShowMsg("WebServer open fail.", "Error2");
                                     break;
                                 }
                             }
                             else
                             {
-                                ShowMsg("没有扫描记录.", "Error3");
+                                ShowMsg("has no Carton NO.", "Error3");
                             }
                         }
                         ShowMsg(" Refresh RiR OK.", "Notice1");
@@ -1156,6 +1158,8 @@ namespace frmPI
                 }
 
                 cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# OK", true, true);
+
+                cf.SetCtlTextdelegate(btn0AddFromePackingList0, "&Add From ePacking List", true, true);
                 //////////////************************
                 threadinitDVdelegate();
             }
@@ -1163,17 +1167,19 @@ namespace frmPI
             {
 
                 cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# (ERP)", true, true);
+                cf.SetCtlTextdelegate(btn0AddFromePackingList0, "&Add From ePacking List", true, true);
                 MessageBox.Show(ex.Message);
             }
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            btn1RefreshPI.Enabled = false;
             if (string.IsNullOrEmpty(txt1PIID_ScanWECCtnLable.Text))
             {
                 lbl0msg.Text = "PIID is null.";
                 return;
             }
+            btn1RefreshPI.Enabled = false;
+            btn0AddFromePackingList0.Enabled = false;
             lbl0msg.Text = "Start Update RiR#, Please wait.";
             //threadPiRefreshdeleget();
             ThreadPool.QueueUserWorkItem(new WaitCallback(pirefresh), "dd");
@@ -1457,8 +1463,9 @@ namespace frmPI
         }
         public void addGrr(object o)
         {
-            var strPIID = o.ToString();
-
+            var strPIID = o.ToString(); 
+            cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# (ERP)", false, true);
+            cf.SetCtlTextdelegate(btn0AddFromePackingList0, "&Add From ePacking List", false, true);
             int dscount = webserviceDS.Tables[0].Rows.Count;
             for (int i = 0; i < dscount; i++)
             {
@@ -1561,6 +1568,8 @@ namespace frmPI
             var changeStatusMstr = DbHelperSQL.ExecuteSql(strupdatesqlMstr);
 
             ShowMsg("Add PI Mstr info Success", "Success");
+            cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# (ERP)", true, true);
+            cf.SetCtlTextdelegate(btn0AddFromePackingList0, "&Add From ePacking List", true, true);
             _validateBatchid = false;
 
         }
