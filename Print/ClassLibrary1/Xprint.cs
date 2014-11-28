@@ -110,7 +110,7 @@ namespace Xprint
 
             }
             if (System.IO.File.Exists(logofile) && !System.IO.File.Exists(@"D:\logo.png"))
-            { 
+            {
                 System.IO.File.Copy(logofile, @"D:\logo.png", true);
             }
             FileStream filetxt = new FileStream(allfileNamepath, FileMode.OpenOrCreate);
@@ -139,5 +139,7 @@ namespace Xprint
         {
             return CloseHandle(iHandle);
         }
+
+       
     }
 }

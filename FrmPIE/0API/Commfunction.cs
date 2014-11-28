@@ -23,6 +23,7 @@ using System.Xml.Serialization;
 using System.IO;
 using Microsoft.Reporting.WinForms;
 using FrmPIE;
+using System.Drawing.Printing;
 
 namespace FrmIDR._0API
 {
@@ -32,6 +33,7 @@ namespace FrmIDR._0API
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
         public static bool _updateflag = false;
+        public string _strzpl = "";
 
         public delegate void Action();
         public delegate void dvoidMethod();
@@ -52,7 +54,20 @@ namespace FrmIDR._0API
         {
             _idr_show = idr;
         }
+        public void xprintdocument(string strzpl)
+        {
+            _strzpl = strzpl;
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+            printDocument.Print();
+        }
 
+        private void pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Font mainFont = new Font("Courier New", 8);
+            string strLine = String.Format("{0,0}", _strzpl);//Gb.printstr包含ZPL指令的全局变量
+            e.Graphics.DrawString(strLine, mainFont, Brushes.Black, PointF.Empty);
+        }
         public void DoWorkCellSelectColordelegate(object dwko)
         {
             DoWrokObject dwo = (DoWrokObject)dwko;
@@ -1549,9 +1564,9 @@ namespace FrmIDR._0API
                                 item.plr_status_msg = "WebServer Error 没有返回值";
 
                                 //item.plr_update_date = DateTime.Now;
-                               // item.plr_user_ip = getClientIP();
+                                // item.plr_user_ip = getClientIP();
 
-                               // var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
+                                // var intupdate = new PIE.BLL.plr_mstr_tran().Update(item);
                                 strResult = strResult + "未上传：" + item.Batch_ID + "," + item.LineID + ",Error:" + "WebServer 没有返回值" + "\n";
                                 intUploadErrCount++;
                             }
@@ -1875,14 +1890,23 @@ namespace FrmIDR._0API
                     var dialogbutton = MessageBox.Show(messageBox + " Success.\n\t是否打印些文件？", "Notice:Success", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                     if (dialogbutton == DialogResult.Yes)
                     {
-                        if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+                        if (print_port.Equals("USB"))
                         {
+                            xprintdocument(strtxt.ToString());  
                             resultmsg += " 成功。";
                         }
                         else
                         {
-                            resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
+                            if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+                            {
+                                resultmsg += " 成功。";
+                            }
+                            else
+                            {
+                                resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
+                            }
                         }
+
                     }
                     else
                     {

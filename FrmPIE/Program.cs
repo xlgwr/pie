@@ -49,12 +49,12 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141126;
+            _frm4VersionMain = 20141128;
 
-            _frm5VersionSecond = 15;
+            _frm5VersionSecond = 11;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
-            _frm10VersionFixMsg = "1.add a function for Upload to HK db(retry upload).";
+            _frm10VersionFixMsg = "1.add a new print for usb (zpl).";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 
