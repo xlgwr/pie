@@ -69,6 +69,7 @@ namespace frmPI
             //
             _FrmForRefe.button1.Click += enquireByForReferenct;
             _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
+            _FrmForRefe.FormClosing += _FrmForRefe_FormClosing;
             //
             _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
             //
@@ -79,6 +80,11 @@ namespace frmPI
             init_FrmForRefeDGV("");
 
             _FrmForRefe.ShowDialog();
+        }
+
+        void _FrmForRefe_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            btn_enquire_piReport_Click(sender, e);
         }
 
         void chkTop50_CheckedChanged(object sender, EventArgs e)

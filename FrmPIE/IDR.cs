@@ -126,6 +126,7 @@ namespace FrmPIE
             //
             _FrmForRefe.button1.Click += enquireByForReferenct;
             _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
+            _FrmForRefe.FormClosing += _FrmForRefe_FormClosing;
             //
             _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
             //
@@ -136,6 +137,12 @@ namespace FrmPIE
             init_FrmForRefeDGV("");
 
             _FrmForRefe.ShowDialog();
+        }
+
+        void _FrmForRefe_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //throw new NotImplementedException();
+            btn0Find9_Click(sender, e);
         }
 
         void data0GVForReference_KeyDown(object sender, KeyEventArgs e)
