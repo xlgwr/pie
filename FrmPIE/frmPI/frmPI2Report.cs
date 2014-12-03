@@ -384,7 +384,7 @@ namespace frmPI
             //satrt upload to HK db
             #region satrt upload to HK db
 
-            string strwherePalletCount = "PI_NO='" + txt0PINum_piReport.Text.Trim() + "'";
+            string strwherePalletCount = "PI_NO='" + txt0PINum_piReport.Text.Trim() + "' order by PI_NO,plr_LineID";
             List<PIE.Model.vpi_report_palletCount> vpi_report_palletCount_mode_list = new PIE.BLL.vpi_report_palletCount().GetModelList(strwherePalletCount);
             //add TTL for one row
             PI.Model.PI_DET_Remote pI_DET_Remote_model_one = new PI.Model.PI_DET_Remote();
@@ -653,7 +653,7 @@ namespace frmPI
             try
             {
                 FrmPIE.WebReferenceRTM99.Service server100 = new FrmPIE.WebReferenceRTM99.Service();
-                server100.Timeout = 90000;
+                server100.Timeout = 900000;
                 //pi_chr01 is barchid
                 var ds = server100.GetTable_n("WEC", "wsas019", pi_mstr_model.pi_chr01);
                 if (ds != null)

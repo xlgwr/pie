@@ -1300,7 +1300,7 @@ namespace FrmPIE
                             //qty
                             drnew[10] = intcell19;
 
-                            drnew[12] = cell14.ToString().Trim();
+                            drnew[12] = cell18.ToString().Trim();
 
                             dt.Rows.Add(drnew);
                             addrowscount++;

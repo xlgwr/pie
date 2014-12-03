@@ -1401,18 +1401,20 @@ namespace FrmIDR._0API
         public DataSet initWebServer(string inSystem, string intable, string inwhere)
         {
             FrmPIE.WebReferenceRTM99.Service server100 = new FrmPIE.WebReferenceRTM99.Service();
-            server100.Timeout = 9000;
+            server100.Timeout = 900000;
 
             DataSet ds = null;
             try
             {
 
                 ds = server100.GetTable_n(inSystem, intable, inwhere);
+                server100.Dispose();
                 return ds;
             }
             catch (Exception ex)
             {
 
+                server100.Dispose();
                 return ds;
                 //MessageBox.Show(ex.Message);
 
@@ -1467,7 +1469,7 @@ namespace FrmIDR._0API
                 string strResult = "";
 
                 FrmPIE.WebReferenceRTM99.Service server100 = new FrmPIE.WebReferenceRTM99.Service();
-                server100.Timeout = 90000;
+                server100.Timeout = 900000;
 
                 DataSet ds = null;
 
