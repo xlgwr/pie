@@ -17,9 +17,9 @@ namespace PIE.BLL
         /// <summary>
         /// 是否存在该记录
         /// </summary>
-        public bool Exists(string PI_NO, int pi_pallet_no, int TTL, string PI_CARTON_NO, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01)
+        public bool Exists(string PI_NO, int plr_LineID, string PI_CARTON_NO, int TTL, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01, string pi_pallet_no)
         {
-            return dal.Exists(PI_NO, pi_pallet_no, TTL, PI_CARTON_NO, PI_DESC, PI_GW, use_char01, use_char02, use_dec01);
+            return dal.Exists(PI_NO, plr_LineID, PI_CARTON_NO, TTL, PI_DESC, PI_GW, use_char01, use_char02, use_dec01, pi_pallet_no);
         }
 
         /// <summary>
@@ -41,34 +41,34 @@ namespace PIE.BLL
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public bool Delete(string PI_NO, int pi_pallet_no, int TTL, string PI_CARTON_NO, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01)
+        public bool Delete(string PI_NO, int plr_LineID, string PI_CARTON_NO, int TTL, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01, string pi_pallet_no)
         {
 
-            return dal.Delete(PI_NO, pi_pallet_no, TTL, PI_CARTON_NO, PI_DESC, PI_GW, use_char01, use_char02, use_dec01);
+            return dal.Delete(PI_NO, plr_LineID, PI_CARTON_NO, TTL, PI_DESC, PI_GW, use_char01, use_char02, use_dec01, pi_pallet_no);
         }
 
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public PIE.Model.vpi_report_palletCount GetModel(string PI_NO, int pi_pallet_no, int TTL, string PI_CARTON_NO, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01)
+        public PIE.Model.vpi_report_palletCount GetModel(string PI_NO, int plr_LineID, string PI_CARTON_NO, int TTL, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01, string pi_pallet_no)
         {
 
-            return dal.GetModel(PI_NO, pi_pallet_no, TTL, PI_CARTON_NO, PI_DESC, PI_GW, use_char01, use_char02, use_dec01);
+            return dal.GetModel(PI_NO, plr_LineID, PI_CARTON_NO, TTL, PI_DESC, PI_GW, use_char01, use_char02, use_dec01, pi_pallet_no);
         }
 
         /// <summary>
         /// 得到一个对象实体，从缓存中
         /// </summary>
-        public PIE.Model.vpi_report_palletCount GetModelByCache(string PI_NO, int pi_pallet_no, int TTL, string PI_CARTON_NO, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01)
+        public PIE.Model.vpi_report_palletCount GetModelByCache(string PI_NO, int plr_LineID, string PI_CARTON_NO, int TTL, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01, string pi_pallet_no)
         {
 
-            string CacheKey = "vpi_report_palletCountModel-" + PI_NO + pi_pallet_no + TTL + PI_CARTON_NO + PI_DESC + PI_GW + use_char01 + use_char02 + use_dec01;
+            string CacheKey = "vpi_report_palletCountModel-" + PI_NO + plr_LineID + PI_CARTON_NO + TTL + PI_DESC + PI_GW + use_char01 + use_char02 + use_dec01 + pi_pallet_no;
             object objModel = PIE.Common.DataCache.GetCache(CacheKey);
             if (objModel == null)
             {
                 try
                 {
-                    objModel = dal.GetModel(PI_NO, pi_pallet_no, TTL, PI_CARTON_NO, PI_DESC, PI_GW, use_char01, use_char02, use_dec01);
+                    objModel = dal.GetModel(PI_NO, plr_LineID, PI_CARTON_NO, TTL, PI_DESC, PI_GW, use_char01, use_char02, use_dec01, pi_pallet_no);
                     if (objModel != null)
                     {
                         int ModelCache = PIE.Common.ConfigHelper.GetConfigInt("ModelCache");

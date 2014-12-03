@@ -12,10 +12,10 @@ namespace PIE.Model
         #region Model
         private string _pi_id;
         private int _pi_lineid;
+        private decimal? _pisr_qty;
         private string _pi_status;
         private string _pi_wec_ctn;
         private int _plr_lineid_tran;
-        private int? _pi_pallet_no;
         private string _cartonno;
         private string _cartonid;
         private string _pi_chr01;
@@ -26,12 +26,12 @@ namespace PIE.Model
         private string _pisr_receiver;
         private string _pisr_site;
         private string _pisr_po_nbr;
-        private decimal? _pisr_qty;
         private string _pisr_curr;
         private decimal? _pisr_cost;
         private decimal? _pisr_base_cost;
-        private decimal? _pisr_us_cost;
+        private string _pisr_us_cost;
         private string _pisr_seq;
+        private string _pisr_con_code;
         private string _sq_name;
         private decimal? _pisr_net_wt;
         private string _pisr_rec_type;
@@ -51,7 +51,7 @@ namespace PIE.Model
         private int _gw;
         private string _rec_no;
         private string _contract;
-        private string _pisr_con_code;
+        private string _pi_pallet_no;
         /// <summary>
         /// 
         /// </summary>
@@ -67,6 +67,14 @@ namespace PIE.Model
         {
             set { _pi_lineid = value; }
             get { return _pi_lineid; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal? pisr_qty
+        {
+            set { _pisr_qty = value; }
+            get { return _pisr_qty; }
         }
         /// <summary>
         /// 
@@ -91,14 +99,6 @@ namespace PIE.Model
         {
             set { _plr_lineid_tran = value; }
             get { return _plr_lineid_tran; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int? pi_pallet_no
-        {
-            set { _pi_pallet_no = value; }
-            get { return _pi_pallet_no; }
         }
         /// <summary>
         /// 
@@ -183,14 +183,6 @@ namespace PIE.Model
         /// <summary>
         /// 
         /// </summary>
-        public decimal? pisr_qty
-        {
-            set { _pisr_qty = value; }
-            get { return _pisr_qty; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
         public string pisr_curr
         {
             set { _pisr_curr = value; }
@@ -215,7 +207,7 @@ namespace PIE.Model
         /// <summary>
         /// 
         /// </summary>
-        public decimal? pisr_us_cost
+        public string pisr_us_cost
         {
             set { _pisr_us_cost = value; }
             get { return _pisr_us_cost; }
@@ -227,6 +219,14 @@ namespace PIE.Model
         {
             set { _pisr_seq = value; }
             get { return _pisr_seq; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pisr_con_code
+        {
+            set { _pisr_con_code = value; }
+            get { return _pisr_con_code; }
         }
         /// <summary>
         /// 
@@ -383,10 +383,10 @@ namespace PIE.Model
         /// <summary>
         /// 
         /// </summary>
-        public string pisr_con_code
+        public string pi_pallet_no
         {
-            set { _pisr_con_code = value; }
-            get { return _pisr_con_code; }
+            set { _pi_pallet_no = value; }
+            get { return _pi_pallet_no; }
         }
         #endregion Model
 

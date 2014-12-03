@@ -113,7 +113,7 @@ namespace FrmPIE
             strsql.Append(" plr_partno,plr_qty,plr_vend_mfgr,plr_po, ");
 
             strsql.Append(" plr_carton_qty, ");
-            strsql.Append(" CartonType,plr_date_code, ");
+            strsql.Append(" CartonType,plr_date_code,carton_id_prifix, ");
 
             strsql.Append(" plr_doc_type,plr_rcp_date,plr_deli_date,plr_cre_date,plr_update_date,plr_user_ip ");
             strsql.Append(" from plr_mstr ");
@@ -1046,38 +1046,56 @@ namespace FrmPIE
                     {
                         addRowsToDownExcel(_dt_downToExela, dr_downexcel, "Upload Success", row);
 
+                        int intfrom = Convert.ToInt32(_cartonid[0]);
+                        int into = Convert.ToInt32(_cartonid[1]);
+                        int countCTN = into - intfrom + 1;
+                        string strCartonID;
+
+                        if (_cartonid[0].Equals(_cartonid[1]))
+                        {
+                            strCartonID = _strprefix + _cartonid[0];
+                        }
+                        else
+                        {
+                            strCartonID = _strprefix + _cartonid[0] + "-" + _cartonid[1];
+                        }
+
+                        //
+                        dr["CartonType"] = 0;
 
                         if (intcell9 > 0)
                         {
-                            dr["CartonType"] = 0;
-
-                            dr[7] = _strprefix + _cartonid[0];
-
-                            dr[12] = cell8.ToString().Trim();
-                            dr[10] = intcell9;
-                            if (_numCell == 1)
+                            if (_numCell == countCTN)
                             {
-                                int intfrom = Convert.ToInt32(_cartonid[0]);
-                                int into = Convert.ToInt32(_cartonid[1]);
                                 if (_cartonid[0].Equals(_cartonid[1]))
                                 {
-                                    dr[7] = _strprefix + _cartonid[0];
+                                    dr[7] = strCartonID;
                                 }
                                 else
                                 {
-                                    dr[7] = _strprefix + _cartonid[0] + "-" + _cartonid[1];
-
-                                    getAvgCarton(intcell9, dr, intfrom, into);
+                                    dr[7] = _strprefix + intfrom.ToString();
+                                    //getAvgCarton(intcell9, dr, intfrom, into);
                                 }
 
+                            }
+                            else
+                            {
+                                dr[7] = _strprefix + intfrom.ToString();
 
                             }
+                            //po-qty
+                            dr[10] = intcell9;
+                            //po
+                            dr[12] = cell8.ToString().Trim();
+
+                            //file cartonid
+                            dr[16] = strCartonID;
+
                             dt.Rows.Add(dr);
                             addrowscount++;
                         }
                         if (intcell11 > 0)
                         {
-                            dr["CartonType"] = 0;
                             //po
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
@@ -1086,48 +1104,22 @@ namespace FrmPIE
                             }
 
                             drnew[1] = addrowscount;
-                            if (_cartonid[0].Equals(_cartonid[1]))
-                            {
-                                drnew[7] = _strprefix + _cartonid[0];
-                            }
-                            else
-                            {
-                                if (_numCell == 2)
-                                {
-                                    int intfrom = Convert.ToInt32(_cartonid[0]);
-                                    int into = Convert.ToInt32(_cartonid[1]);
-                                    if (_numCell >= (into - intfrom + 1))
-                                    {
-                                        drnew[7] = _strprefix + _cartonid[1];
-                                    }
-                                    else
-                                    {
-                                        drnew[7] = _strprefix + (intfrom + 1).ToString() + "-" + _cartonid[1];
-                                        getAvgCarton(intcell11, drnew, intfrom, into);
-                                    }
-                                }
-                                else
-                                {
-                                    int intfrom = Convert.ToInt32(_cartonid[0]);
-                                    int into = Convert.ToInt32(_cartonid[1]);
-                                    drnew[7] = _strprefix + (intfrom + 1).ToString();
-                                }
-                            }
+
+                            //carton
+                            initCartonID(dr, intcell11, 2, intfrom, into, countCTN, drnew);
+
                             //qty
                             drnew[10] = intcell11;
 
                             drnew[12] = cell10.ToString().Trim();
 
-
+                            drnew[16] = strCartonID;
                             dt.Rows.Add(drnew);
 
                             addrowscount++;
                         }
                         if (intcell13 > 0)
                         {
-                            //po
-                            dr["CartonType"] = 0;
-
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
                             {
@@ -1136,172 +1128,73 @@ namespace FrmPIE
 
                             //qty
                             drnew[1] = addrowscount;
-                            if (_cartonid[0].Equals(_cartonid[1]))
-                            {
-                                drnew[7] = _strprefix + _cartonid[0];
-                            }
-                            else
-                            {
-                                int intfrom = Convert.ToInt32(_cartonid[0]);
-                                int into = Convert.ToInt32(_cartonid[1]);
-                                if (intfrom - into >= 2)
-                                {
-                                    drnew[7] = _strprefix + (intfrom + 2).ToString();
-                                }
-                                else
-                                {
-                                    drnew[7] = _strprefix + _cartonid[1];
-                                }
-                                if (_numCell == 3)
-                                {
-                                    if (_numCell >= (into - intfrom + 1))
-                                    {
-                                        drnew[7] = _strprefix + _cartonid[1];
-                                    }
-                                    else
-                                    {
-                                        drnew[7] = _strprefix + (intfrom + 2).ToString() + "-" + _cartonid[1];
-                                        getAvgCarton(intcell13, drnew, intfrom, into);
-                                    }
-                                }
-                            }
+
+                            //gen cartonid
+                            initCartonID(dr, intcell13, 3, intfrom, into, countCTN, drnew);
+
                             drnew[10] = intcell13;
                             drnew[12] = cell12.ToString().Trim();
 
+                            drnew[16] = strCartonID;
                             dt.Rows.Add(drnew);
                             addrowscount++;
                         }
                         if (intcell15 > 0)
                         {
-
-                            //po
-                            dr["CartonType"] = 0;
-
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
                             {
                                 drnew[i] = dr[i];
                             }
                             drnew[1] = addrowscount;
-                            int intfrom = Convert.ToInt32(_cartonid[0]);
-                            int into = Convert.ToInt32(_cartonid[1]);
-                            if (intfrom - into >= 3)
-                            {
-
-                                drnew[7] = _strprefix + (intfrom + 3).ToString();
-                            }
-                            else
-                            {
-                                drnew[7] = _strprefix + _cartonid[1];
-                            }
-                            if (_numCell == 4)
-                            {
-                                if (_numCell >= (into - intfrom + 1))
-                                {
-                                    drnew[7] = _strprefix + _cartonid[1];
-                                }
-                                else
-                                {
-                                    drnew[7] = _strprefix + (intfrom + 3).ToString() + "-" + _cartonid[1];
-                                    getAvgCarton(intcell15, drnew, intfrom, into);
-                                }
-                            }
+                            //carton id
+                            initCartonID(dr, intcell15, 4, intfrom, into, countCTN, drnew);
                             //qty
                             drnew[10] = intcell15;
 
                             drnew[12] = cell14.ToString().Trim();
 
+                            drnew[16] = strCartonID;
                             dt.Rows.Add(drnew);
                             addrowscount++;
                         }
                         if (intcell17 > 0)
                         {
 
-                            //po
-                            dr["CartonType"] = 0;
-
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
                             {
                                 drnew[i] = dr[i];
                             }
                             drnew[1] = addrowscount;
-                            int intfrom = Convert.ToInt32(_cartonid[0]);
-                            int into = Convert.ToInt32(_cartonid[1]);
-                            if (intfrom - into >= 4)
-                            {
-
-                                drnew[7] = _strprefix + (intfrom + 4).ToString();
-                            }
-                            else
-                            {
-                                drnew[7] = _strprefix + _cartonid[1];
-                            }
-                            if (_numCell == 5)
-                            {
-                                if (_numCell >= (into - intfrom + 1))
-                                {
-                                    drnew[7] = _strprefix + _cartonid[1];
-                                }
-                                else
-                                {
-                                    drnew[7] = _strprefix + (intfrom + 4).ToString() + "-" + _cartonid[1];
-                                    getAvgCarton(intcell17, drnew, intfrom, into);
-                                }
-                            }
+                            //carton id
+                            initCartonID(dr, intcell17, 5, intfrom, into, countCTN, drnew);
                             //qty
                             drnew[10] = intcell17;
 
                             drnew[12] = cell16.ToString().Trim();
 
+                            drnew[16] = strCartonID;
                             dt.Rows.Add(drnew);
                             addrowscount++;
                         }
                         if (intcell19 > 0)
                         {
-                            //po
-                            dr["CartonType"] = 0;
-
                             DataRow drnew = dt.NewRow();
                             for (int i = 0; i < dr.ItemArray.Length; i++)
                             {
                                 drnew[i] = dr[i];
                             }
                             drnew[1] = addrowscount;
-                            int intfrom = Convert.ToInt32(_cartonid[0]);
-                            int into = Convert.ToInt32(_cartonid[1]);
-                            if (intfrom - into > 5)
-                            {
+                            //carton id
+                            initCartonID(dr, intcell19, 6, intfrom, into, countCTN, drnew);
 
-                                drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
-                                getAvgCarton(intcell19, drnew, intfrom, into);
-                            }
-                            else
-                            {
-                                drnew[7] = _strprefix + _cartonid[1];
-                            }
-                            if (_numCell == 6)
-                            {
-                                if (_numCell >= (into - intfrom + 1))
-                                {
-                                    drnew[7] = _strprefix + _cartonid[1];
-                                }
-                                else
-                                {
-                                    drnew[7] = _strprefix + (intfrom + 5).ToString() + "-" + _cartonid[1];
-                                    getAvgCarton(intcell19, drnew, intfrom, into);
-                                }
-
-                            }
-                            if (intfrom - into <= 5)
-                            {
-                                drnew[7] = _strprefix + _cartonid[1];
-                            }
                             //qty
                             drnew[10] = intcell19;
 
                             drnew[12] = cell18.ToString().Trim();
 
+                            drnew[16] = strCartonID;
                             dt.Rows.Add(drnew);
                             addrowscount++;
                         }
@@ -1319,6 +1212,46 @@ namespace FrmPIE
             return "Notice: Total Rows: " + rowscountsum + ",Total PO: " + (addrowscount - 1 + rowserrscount) + " ,Update " + (addrowscount - 1) + " items Success, Error: has " + rowserrscount + " Rows has Error (" + strerrnullrows + ").";
 
             //data0set_npoi.Tables.Add(dt);
+        }
+
+        private void initCartonID(DataRow dr, double intcell11, int currentnumber, int intfrom, int into, int countCTN, DataRow drnew)
+        {
+            if (_cartonid[0].Equals(_cartonid[1]))
+            {
+                dr[7] = _strprefix + intfrom.ToString();
+            }
+            else if (_numCell == countCTN)
+            {
+
+                drnew[7] = _strprefix + (intfrom + currentnumber - 1).ToString();
+
+            }
+            else if (_numCell > countCTN)
+            {
+
+                if (countCTN > currentnumber)
+                {
+                    drnew[7] = _strprefix + (intfrom + currentnumber - 1).ToString();
+                }
+                else if (countCTN <= currentnumber)
+                {
+                    drnew[7] = _strprefix + (intfrom + countCTN - 1).ToString();
+                    //getAvgCarton(intcell11, drnew, intfrom, into);
+                }
+            }
+            else if (_numCell < countCTN)
+            {
+
+                if (_numCell > currentnumber)
+                {
+                    drnew[7] = _strprefix + (intfrom + currentnumber - 1).ToString();
+                }
+                else if (_numCell <= currentnumber)
+                {
+                    drnew[7] = _strprefix + (intfrom + _numCell - 1).ToString() + '-' + into.ToString();
+                    getAvgCarton(intcell11, drnew, intfrom, into);
+                }
+            }
         }
 
         private void getAvgCarton(double intcellValue, DataRow drnew, int intfrom, int into)

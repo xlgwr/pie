@@ -11,14 +11,15 @@ namespace PIE.Model
         { }
         #region Model
         private string _pi_no;
-        private int? _pi_pallet_no;
-        private int? _ttl;
+        private int? _plr_lineid;
         private string _pi_carton_no;
+        private int? _ttl;
         private string _pi_desc;
         private decimal? _pi_gw;
         private string _use_char01;
         private string _use_char02;
         private int _use_dec01;
+        private string _pi_pallet_no;
         /// <summary>
         /// 
         /// </summary>
@@ -30,18 +31,10 @@ namespace PIE.Model
         /// <summary>
         /// 
         /// </summary>
-        public int? pi_pallet_no
+        public int? plr_LineID
         {
-            set { _pi_pallet_no = value; }
-            get { return _pi_pallet_no; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int? TTL
-        {
-            set { _ttl = value; }
-            get { return _ttl; }
+            set { _plr_lineid = value; }
+            get { return _plr_lineid; }
         }
         /// <summary>
         /// 
@@ -50,6 +43,14 @@ namespace PIE.Model
         {
             set { _pi_carton_no = value; }
             get { return _pi_carton_no; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? TTL
+        {
+            set { _ttl = value; }
+            get { return _ttl; }
         }
         /// <summary>
         /// 
@@ -90,6 +91,14 @@ namespace PIE.Model
         {
             set { _use_dec01 = value; }
             get { return _use_dec01; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pi_pallet_no
+        {
+            set { _pi_pallet_no = value; }
+            get { return _pi_pallet_no; }
         }
         #endregion Model
 

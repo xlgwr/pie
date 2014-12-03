@@ -181,6 +181,12 @@
     <Compile Include="frmPI\frmPI2Report.Designer.cs">
       <DependentUpon>frmPI2Report.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPI\frmPI3AddNWForPallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPI\frmPI3AddNWForPallet.Designer.cs">
+      <DependentUpon>frmPI3AddNWForPallet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logon\AdminManage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPI\frmPI2Report.resx">
       <DependentUpon>frmPI2Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPI\frmPI3AddNWForPallet.resx">
+      <DependentUpon>frmPI3AddNWForPallet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logon\AdminManage.resx">
       <DependentUpon>AdminManage.cs</DependentUpon>

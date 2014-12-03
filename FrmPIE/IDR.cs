@@ -19,6 +19,7 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 //xlsx
 using NPOI.XSSF.UserModel;
+using FrmPIE.frmPI;
 
 namespace FrmPIE
 {
@@ -756,6 +757,27 @@ namespace FrmPIE
         {
             var rire = new KeyEventArgs(Keys.Enter);
             tabScanCartonLabel("Scan Cartron Label", "", this, sender, rire);
+        }
+
+        private void addNWForPalletToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var rire = new KeyEventArgs(Keys.Enter);
+            tabScanAddNwForPallet("Add NW for Pallet", "", this, sender, rire);
+        }
+        public void tabScanAddNwForPallet(string headtext, string piid, frmIDR idr, object sender, KeyEventArgs e)
+        {
+            var tabpagenew = addNewTabPage(headtext);
+            frmPI3AddNWForPallet fanb = new frmPI3AddNWForPallet(this);
+
+            fanb.txt4PIID_search.Text = piid;
+            fanb.txt4PIID_search.Focus();
+
+            this.AcceptButton = fanb.btn1Search;
+            if (!string.IsNullOrEmpty(piid))
+            {
+                fanb.btn1Search_Click(sender, e);  
+            }
+            addGBToTC(tabpagenew, fanb.gb0PIAddNWForPallet);
         }
         public void tabScanCartonLabel(string headtext, string piid, frmIDR idr, object sender, KeyEventArgs e)
         {

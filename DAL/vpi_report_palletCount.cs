@@ -17,30 +17,32 @@ namespace PIE.DAL
         /// <summary>
         /// 是否存在该记录
         /// </summary>
-        public bool Exists(string PI_NO, int pi_pallet_no, int TTL, string PI_CARTON_NO, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01)
+        public bool Exists(string PI_NO, int plr_LineID, string PI_CARTON_NO, int TTL, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01, string pi_pallet_no)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from vpi_report_palletCount");
-            strSql.Append(" where PI_NO=@PI_NO and pi_pallet_no=@pi_pallet_no and TTL=@TTL and PI_CARTON_NO=@PI_CARTON_NO and PI_DESC=@PI_DESC and PI_GW=@PI_GW and use_char01=@use_char01 and use_char02=@use_char02 and use_dec01=@use_dec01 ");
+            strSql.Append(" where PI_NO=@PI_NO and plr_LineID=@plr_LineID and PI_CARTON_NO=@PI_CARTON_NO and TTL=@TTL and PI_DESC=@PI_DESC and PI_GW=@PI_GW and use_char01=@use_char01 and use_char02=@use_char02 and use_dec01=@use_dec01 and pi_pallet_no=@pi_pallet_no ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
-					new SqlParameter("@TTL", SqlDbType.Int,4),
+					new SqlParameter("@plr_LineID", SqlDbType.Int,4),
 					new SqlParameter("@PI_CARTON_NO", SqlDbType.NVarChar,14),
+					new SqlParameter("@TTL", SqlDbType.Int,4),
 					new SqlParameter("@PI_DESC", SqlDbType.NVarChar,16),
 					new SqlParameter("@PI_GW", SqlDbType.Decimal,5),
 					new SqlParameter("@use_char01", SqlDbType.VarChar,1),
 					new SqlParameter("@use_char02", SqlDbType.VarChar,1),
-					new SqlParameter("@use_dec01", SqlDbType.Int,4)			};
+					new SqlParameter("@use_dec01", SqlDbType.Int,4),
+					new SqlParameter("@pi_pallet_no", SqlDbType.NVarChar,50)			};
             parameters[0].Value = PI_NO;
-            parameters[1].Value = pi_pallet_no;
-            parameters[2].Value = TTL;
-            parameters[3].Value = PI_CARTON_NO;
+            parameters[1].Value = plr_LineID;
+            parameters[2].Value = PI_CARTON_NO;
+            parameters[3].Value = TTL;
             parameters[4].Value = PI_DESC;
             parameters[5].Value = PI_GW;
             parameters[6].Value = use_char01;
             parameters[7].Value = use_char02;
             parameters[8].Value = use_dec01;
+            parameters[9].Value = pi_pallet_no;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
@@ -53,28 +55,30 @@ namespace PIE.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into vpi_report_palletCount(");
-            strSql.Append("PI_NO,pi_pallet_no,TTL,PI_CARTON_NO,PI_DESC,PI_GW,use_char01,use_char02,use_dec01)");
+            strSql.Append("PI_NO,plr_LineID,PI_CARTON_NO,TTL,PI_DESC,PI_GW,use_char01,use_char02,use_dec01,pi_pallet_no)");
             strSql.Append(" values (");
-            strSql.Append("@PI_NO,@pi_pallet_no,@TTL,@PI_CARTON_NO,@PI_DESC,@PI_GW,@use_char01,@use_char02,@use_dec01)");
+            strSql.Append("@PI_NO,@plr_LineID,@PI_CARTON_NO,@TTL,@PI_DESC,@PI_GW,@use_char01,@use_char02,@use_dec01,@pi_pallet_no)");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
-					new SqlParameter("@TTL", SqlDbType.Int,4),
+					new SqlParameter("@plr_LineID", SqlDbType.Int,4),
 					new SqlParameter("@PI_CARTON_NO", SqlDbType.NVarChar,14),
+					new SqlParameter("@TTL", SqlDbType.Int,4),
 					new SqlParameter("@PI_DESC", SqlDbType.NVarChar,16),
 					new SqlParameter("@PI_GW", SqlDbType.Decimal,5),
 					new SqlParameter("@use_char01", SqlDbType.VarChar,1),
 					new SqlParameter("@use_char02", SqlDbType.VarChar,1),
-					new SqlParameter("@use_dec01", SqlDbType.Int,4)};
+					new SqlParameter("@use_dec01", SqlDbType.Int,4),
+					new SqlParameter("@pi_pallet_no", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.PI_NO;
-            parameters[1].Value = model.pi_pallet_no;
-            parameters[2].Value = model.TTL;
-            parameters[3].Value = model.PI_CARTON_NO;
+            parameters[1].Value = model.plr_LineID;
+            parameters[2].Value = model.PI_CARTON_NO;
+            parameters[3].Value = model.TTL;
             parameters[4].Value = model.PI_DESC;
             parameters[5].Value = model.PI_GW;
             parameters[6].Value = model.use_char01;
             parameters[7].Value = model.use_char02;
             parameters[8].Value = model.use_dec01;
+            parameters[9].Value = model.pi_pallet_no;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -94,34 +98,37 @@ namespace PIE.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update vpi_report_palletCount set ");
             strSql.Append("PI_NO=@PI_NO,");
-            strSql.Append("pi_pallet_no=@pi_pallet_no,");
-            strSql.Append("TTL=@TTL,");
+            strSql.Append("plr_LineID=@plr_LineID,");
             strSql.Append("PI_CARTON_NO=@PI_CARTON_NO,");
+            strSql.Append("TTL=@TTL,");
             strSql.Append("PI_DESC=@PI_DESC,");
             strSql.Append("PI_GW=@PI_GW,");
             strSql.Append("use_char01=@use_char01,");
             strSql.Append("use_char02=@use_char02,");
-            strSql.Append("use_dec01=@use_dec01");
-            strSql.Append(" where PI_NO=@PI_NO and pi_pallet_no=@pi_pallet_no and TTL=@TTL and PI_CARTON_NO=@PI_CARTON_NO and PI_DESC=@PI_DESC and PI_GW=@PI_GW and use_char01=@use_char01 and use_char02=@use_char02 and use_dec01=@use_dec01 ");
+            strSql.Append("use_dec01=@use_dec01,");
+            strSql.Append("pi_pallet_no=@pi_pallet_no");
+            strSql.Append(" where PI_NO=@PI_NO and plr_LineID=@plr_LineID and PI_CARTON_NO=@PI_CARTON_NO and TTL=@TTL and PI_DESC=@PI_DESC and PI_GW=@PI_GW and use_char01=@use_char01 and use_char02=@use_char02 and use_dec01=@use_dec01 and pi_pallet_no=@pi_pallet_no ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
-					new SqlParameter("@TTL", SqlDbType.Int,4),
+					new SqlParameter("@plr_LineID", SqlDbType.Int,4),
 					new SqlParameter("@PI_CARTON_NO", SqlDbType.NVarChar,14),
+					new SqlParameter("@TTL", SqlDbType.Int,4),
 					new SqlParameter("@PI_DESC", SqlDbType.NVarChar,16),
 					new SqlParameter("@PI_GW", SqlDbType.Decimal,5),
 					new SqlParameter("@use_char01", SqlDbType.VarChar,1),
 					new SqlParameter("@use_char02", SqlDbType.VarChar,1),
-					new SqlParameter("@use_dec01", SqlDbType.Int,4)};
+					new SqlParameter("@use_dec01", SqlDbType.Int,4),
+					new SqlParameter("@pi_pallet_no", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.PI_NO;
-            parameters[1].Value = model.pi_pallet_no;
-            parameters[2].Value = model.TTL;
-            parameters[3].Value = model.PI_CARTON_NO;
+            parameters[1].Value = model.plr_LineID;
+            parameters[2].Value = model.PI_CARTON_NO;
+            parameters[3].Value = model.TTL;
             parameters[4].Value = model.PI_DESC;
             parameters[5].Value = model.PI_GW;
             parameters[6].Value = model.use_char01;
             parameters[7].Value = model.use_char02;
             parameters[8].Value = model.use_dec01;
+            parameters[9].Value = model.pi_pallet_no;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -137,31 +144,33 @@ namespace PIE.DAL
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public bool Delete(string PI_NO, int pi_pallet_no, int TTL, string PI_CARTON_NO, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01)
+        public bool Delete(string PI_NO, int plr_LineID, string PI_CARTON_NO, int TTL, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01, string pi_pallet_no)
         {
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from vpi_report_palletCount ");
-            strSql.Append(" where PI_NO=@PI_NO and pi_pallet_no=@pi_pallet_no and TTL=@TTL and PI_CARTON_NO=@PI_CARTON_NO and PI_DESC=@PI_DESC and PI_GW=@PI_GW and use_char01=@use_char01 and use_char02=@use_char02 and use_dec01=@use_dec01 ");
+            strSql.Append(" where PI_NO=@PI_NO and plr_LineID=@plr_LineID and PI_CARTON_NO=@PI_CARTON_NO and TTL=@TTL and PI_DESC=@PI_DESC and PI_GW=@PI_GW and use_char01=@use_char01 and use_char02=@use_char02 and use_dec01=@use_dec01 and pi_pallet_no=@pi_pallet_no ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
-					new SqlParameter("@TTL", SqlDbType.Int,4),
+					new SqlParameter("@plr_LineID", SqlDbType.Int,4),
 					new SqlParameter("@PI_CARTON_NO", SqlDbType.NVarChar,14),
+					new SqlParameter("@TTL", SqlDbType.Int,4),
 					new SqlParameter("@PI_DESC", SqlDbType.NVarChar,16),
 					new SqlParameter("@PI_GW", SqlDbType.Decimal,5),
 					new SqlParameter("@use_char01", SqlDbType.VarChar,1),
 					new SqlParameter("@use_char02", SqlDbType.VarChar,1),
-					new SqlParameter("@use_dec01", SqlDbType.Int,4)			};
+					new SqlParameter("@use_dec01", SqlDbType.Int,4),
+					new SqlParameter("@pi_pallet_no", SqlDbType.NVarChar,50)			};
             parameters[0].Value = PI_NO;
-            parameters[1].Value = pi_pallet_no;
-            parameters[2].Value = TTL;
-            parameters[3].Value = PI_CARTON_NO;
+            parameters[1].Value = plr_LineID;
+            parameters[2].Value = PI_CARTON_NO;
+            parameters[3].Value = TTL;
             parameters[4].Value = PI_DESC;
             parameters[5].Value = PI_GW;
             parameters[6].Value = use_char01;
             parameters[7].Value = use_char02;
             parameters[8].Value = use_dec01;
+            parameters[9].Value = pi_pallet_no;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -178,31 +187,33 @@ namespace PIE.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public PIE.Model.vpi_report_palletCount GetModel(string PI_NO, int pi_pallet_no, int TTL, string PI_CARTON_NO, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01)
+        public PIE.Model.vpi_report_palletCount GetModel(string PI_NO, int plr_LineID, string PI_CARTON_NO, int TTL, string PI_DESC, decimal PI_GW, string use_char01, string use_char02, int use_dec01, string pi_pallet_no)
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 PI_NO,pi_pallet_no,TTL,PI_CARTON_NO,PI_DESC,PI_GW,use_char01,use_char02,use_dec01 from vpi_report_palletCount ");
-            strSql.Append(" where PI_NO=@PI_NO and pi_pallet_no=@pi_pallet_no and TTL=@TTL and PI_CARTON_NO=@PI_CARTON_NO and PI_DESC=@PI_DESC and PI_GW=@PI_GW and use_char01=@use_char01 and use_char02=@use_char02 and use_dec01=@use_dec01 ");
+            strSql.Append("select  top 1 PI_NO,plr_LineID,PI_CARTON_NO,TTL,PI_DESC,PI_GW,use_char01,use_char02,use_dec01,pi_pallet_no from vpi_report_palletCount ");
+            strSql.Append(" where PI_NO=@PI_NO and plr_LineID=@plr_LineID and PI_CARTON_NO=@PI_CARTON_NO and TTL=@TTL and PI_DESC=@PI_DESC and PI_GW=@PI_GW and use_char01=@use_char01 and use_char02=@use_char02 and use_dec01=@use_dec01 and pi_pallet_no=@pi_pallet_no ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PI_NO", SqlDbType.NVarChar,50),
-					new SqlParameter("@pi_pallet_no", SqlDbType.Int,4),
-					new SqlParameter("@TTL", SqlDbType.Int,4),
+					new SqlParameter("@plr_LineID", SqlDbType.Int,4),
 					new SqlParameter("@PI_CARTON_NO", SqlDbType.NVarChar,14),
+					new SqlParameter("@TTL", SqlDbType.Int,4),
 					new SqlParameter("@PI_DESC", SqlDbType.NVarChar,16),
 					new SqlParameter("@PI_GW", SqlDbType.Decimal,5),
 					new SqlParameter("@use_char01", SqlDbType.VarChar,1),
 					new SqlParameter("@use_char02", SqlDbType.VarChar,1),
-					new SqlParameter("@use_dec01", SqlDbType.Int,4)			};
+					new SqlParameter("@use_dec01", SqlDbType.Int,4),
+					new SqlParameter("@pi_pallet_no", SqlDbType.NVarChar,50)			};
             parameters[0].Value = PI_NO;
-            parameters[1].Value = pi_pallet_no;
-            parameters[2].Value = TTL;
-            parameters[3].Value = PI_CARTON_NO;
+            parameters[1].Value = plr_LineID;
+            parameters[2].Value = PI_CARTON_NO;
+            parameters[3].Value = TTL;
             parameters[4].Value = PI_DESC;
             parameters[5].Value = PI_GW;
             parameters[6].Value = use_char01;
             parameters[7].Value = use_char02;
             parameters[8].Value = use_dec01;
+            parameters[9].Value = pi_pallet_no;
 
             PIE.Model.vpi_report_palletCount model = new PIE.Model.vpi_report_palletCount();
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
@@ -229,17 +240,17 @@ namespace PIE.DAL
                 {
                     model.PI_NO = row["PI_NO"].ToString();
                 }
-                if (row["pi_pallet_no"] != null && row["pi_pallet_no"].ToString() != "")
+                if (row["plr_LineID"] != null && row["plr_LineID"].ToString() != "")
                 {
-                    model.pi_pallet_no = int.Parse(row["pi_pallet_no"].ToString());
-                }
-                if (row["TTL"] != null && row["TTL"].ToString() != "")
-                {
-                    model.TTL = int.Parse(row["TTL"].ToString());
+                    model.plr_LineID = int.Parse(row["plr_LineID"].ToString());
                 }
                 if (row["PI_CARTON_NO"] != null)
                 {
                     model.PI_CARTON_NO = row["PI_CARTON_NO"].ToString();
+                }
+                if (row["TTL"] != null && row["TTL"].ToString() != "")
+                {
+                    model.TTL = int.Parse(row["TTL"].ToString());
                 }
                 if (row["PI_DESC"] != null)
                 {
@@ -261,6 +272,10 @@ namespace PIE.DAL
                 {
                     model.use_dec01 = int.Parse(row["use_dec01"].ToString());
                 }
+                if (row["pi_pallet_no"] != null)
+                {
+                    model.pi_pallet_no = row["pi_pallet_no"].ToString();
+                }
             }
             return model;
         }
@@ -271,7 +286,7 @@ namespace PIE.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select PI_NO,pi_pallet_no,TTL,PI_CARTON_NO,PI_DESC,PI_GW,use_char01,use_char02,use_dec01 ");
+            strSql.Append("select PI_NO,plr_LineID,PI_CARTON_NO,TTL,PI_DESC,PI_GW,use_char01,use_char02,use_dec01,pi_pallet_no ");
             strSql.Append(" FROM vpi_report_palletCount ");
             if (strWhere.Trim() != "")
             {
@@ -291,7 +306,7 @@ namespace PIE.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" PI_NO,pi_pallet_no,TTL,PI_CARTON_NO,PI_DESC,PI_GW,use_char01,use_char02,use_dec01 ");
+            strSql.Append(" PI_NO,plr_LineID,PI_CARTON_NO,TTL,PI_DESC,PI_GW,use_char01,use_char02,use_dec01,pi_pallet_no ");
             strSql.Append(" FROM vpi_report_palletCount ");
             if (strWhere.Trim() != "")
             {
@@ -336,7 +351,7 @@ namespace PIE.DAL
             }
             else
             {
-                strSql.Append("order by T.use_dec01 desc");
+                strSql.Append("order by T.pi_pallet_no desc");
             }
             strSql.Append(")AS Row, T.*  from vpi_report_palletCount T ");
             if (!string.IsNullOrEmpty(strWhere.Trim()))
@@ -364,7 +379,7 @@ namespace PIE.DAL
                     new SqlParameter("@strWhere", SqlDbType.VarChar,1000),
                     };
             parameters[0].Value = "vpi_report_palletCount";
-            parameters[1].Value = "use_dec01";
+            parameters[1].Value = "pi_pallet_no";
             parameters[2].Value = PageSize;
             parameters[3].Value = PageIndex;
             parameters[4].Value = 0;

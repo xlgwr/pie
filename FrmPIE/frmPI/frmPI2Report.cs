@@ -405,10 +405,12 @@ namespace frmPI
                 //add TTL for pallet
                 PI.Model.PI_DET_Remote pI_DET_Remote_model_ttl = new PI.Model.PI_DET_Remote();
 
-                if (((decimal)itemPall.pi_pallet_no == itemPall.PI_GW) || itemPall.PI_GW == 0)
+                if ((itemPall.pi_pallet_no == itemPall.PI_GW.ToString()) || itemPall.PI_GW == 0)
                 {
                     currmsg = "Error: Please Add PI:" + txt0PINum_piReport.Text + " GW for Pallet " + itemPall.pi_pallet_no.ToString();
                     cf.SetCtlTextdelegate(lblMsg, currmsg, true, true);
+                    var de = new KeyEventArgs(Keys.Enter);
+                    _idr_show.tabScanAddNwForPallet("Add NW for Pallet", txt0PINum_piReport.Text, _idr_show, new object(), de);
                     return;
                 }
                 pI_DET_Remote_model_ttl.PI_NO = itemPall.PI_NO;

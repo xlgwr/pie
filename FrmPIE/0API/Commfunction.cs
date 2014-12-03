@@ -389,7 +389,7 @@ namespace FrmIDR._0API
                     strSql = new StringBuilder();
                     strSql.Append("select ");
                     strSql.Append("Batch_ID,LineID,plr_status,plr_pallet_no,InvoiceID,plr_po,packingListID,plr_partno,CartonType,");
-                    strSql.Append("CartonID,plr_carton_qty,plr_qty,plr_rcp_date,plr_deli_date,carton_id_prifix,carton_id_from,carton_id_to,");
+                    strSql.Append("CartonID,carton_id_prifix,plr_carton_qty,plr_qty,plr_rcp_date,plr_deli_date,carton_id_prifix,carton_id_from,carton_id_to,");
                     strSql.Append("re_mark,plr_site,plr_co,plr_date_code,plr_vend_mfgr,");
                     strSql.Append("Plr_vm_partno,plr_doc_type,plr_ttl,plr_um,plr_nw,plr_gw,");
                     strSql.Append("plr_msm,plr_cre_date,");
@@ -427,7 +427,7 @@ namespace FrmIDR._0API
                     strSql = new StringBuilder();
                     strSql.Append("select ");
                     strSql.Append("Batch_ID,LineID,plr_status,plr_pallet_no,InvoiceID,plr_po,packingListID,plr_partno,CartonType,");
-                    strSql.Append("CartonID,plr_carton_qty,plr_qty,plr_rcp_date,plr_deli_date,carton_id_prifix,carton_id_from,carton_id_to,");
+                    strSql.Append("CartonID,carton_id_prifix,plr_carton_qty,plr_qty,plr_rcp_date,plr_deli_date,carton_id_prifix,carton_id_from,carton_id_to,");
                     strSql.Append("re_mark,plr_site,plr_co,plr_date_code,plr_vend_mfgr,");
                     strSql.Append("Plr_vm_partno,plr_doc_type,plr_ttl,plr_um,plr_nw,plr_gw,");
                     strSql.Append("plr_msm,plr_cre_date,");
@@ -444,7 +444,7 @@ namespace FrmIDR._0API
                     strSql = new StringBuilder();
                     strSql.Append("select ");
                     strSql.Append("Batch_ID,LineID,plr_status,plr_pallet_no,InvoiceID,plr_po,packingListID,plr_partno,CartonType,");
-                    strSql.Append("CartonID,plr_carton_qty,plr_qty,plr_rcp_date,plr_deli_date,carton_id_prifix,carton_id_from,carton_id_to,");
+                    strSql.Append("CartonID,carton_id_prifix,plr_carton_qty,plr_qty,plr_rcp_date,plr_deli_date,carton_id_prifix,carton_id_from,carton_id_to,");
                     strSql.Append("re_mark,plr_site,plr_co,plr_date_code,plr_vend_mfgr,");
                     strSql.Append("Plr_vm_partno,plr_doc_type,plr_ttl,plr_um,plr_nw,plr_gw,");
                     strSql.Append("plr_msm,plr_cre_date,");
@@ -495,7 +495,7 @@ namespace FrmIDR._0API
 
                     strSql = new StringBuilder();
                     strSql.Append("select ");
-                    strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,plr_wec_ctn,plr_po,");
+                    strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,carton_id_prifix,plr_wec_ctn,plr_po,");
                     strSql.Append("plr_partno,CartonType,plr_carton_qty,plr_qty,packingListID,InvoiceID,");
                     strSql.Append("plr_rcp_date,plr_deli_date,");
                     strSql.Append("Plr_vm_partno,carton_id_prifix,re_mark,plr_cre_date");
@@ -544,7 +544,7 @@ namespace FrmIDR._0API
                     }
                     strSql = new StringBuilder();
                     strSql.Append("select ");
-                    strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,plr_wec_ctn,plr_po,");
+                    strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,carton_id_prifix,plr_wec_ctn,plr_po,");
                     strSql.Append("plr_partno,CartonType,plr_carton_qty,plr_qty,packingListID,InvoiceID,");
                     strSql.Append("plr_rcp_date,plr_deli_date,");
                     strSql.Append("Plr_vm_partno,carton_id_prifix,re_mark,plr_cre_date");
@@ -559,7 +559,7 @@ namespace FrmIDR._0API
                 {
                     strSql = new StringBuilder();
                     strSql.Append("select ");
-                    strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,plr_wec_ctn,plr_po,");
+                    strSql.Append("Batch_ID,LineID,Wec_Ctn,plr_status,plr_status_msg,plr_pallet_no,CartonNo,CartonID,carton_id_prifix,plr_wec_ctn,plr_po,");
                     strSql.Append("plr_partno,CartonType,plr_carton_qty,plr_qty,packingListID,InvoiceID,");
                     strSql.Append("plr_rcp_date,plr_deli_date,");
                     strSql.Append("Plr_vm_partno,carton_id_prifix,re_mark,plr_cre_date");

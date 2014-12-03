@@ -1220,6 +1220,13 @@ namespace frmPI
 
         private void btnAddPalletNW_Click(object sender, EventArgs e)
         {
+            var de = new KeyEventArgs(Keys.Enter);
+            _idr_show.tabScanAddNwForPallet("Add NW for Pallet", txt1PIID_ScanWECCtnLable.Text, _idr_show, sender, de);
+
+        }
+
+        private void addNWScan()
+        {
             if (string.IsNullOrEmpty(cmb4Pallet_PIScan.Text) || string.IsNullOrEmpty(txtPalletNW.Text))
             {
                 lbl0msg.Text = " Please select Pallet and NW must no null";
@@ -1232,7 +1239,6 @@ namespace frmPI
                 txt2SanWecCtnLable.Focus();
                 lbl0msg.Text = "Update NW of Pallet#: " + cmb4Pallet_PIScan.Text + " success.";
             }
-
         }
 
         private void cmb4Pallet_PIScan_SelectedIndexChanged(object sender, EventArgs e)
@@ -1278,7 +1284,7 @@ namespace frmPI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btnAddPalletNW_Click(sender, e);
+                addNWScan();              
             }
         }
 
@@ -1599,6 +1605,12 @@ namespace frmPI
         private void txtPalletNW_Enter(object sender, EventArgs e)
         {
             _idr_show.AcceptButton = btnAddPalletNW;
+        }
+
+        private void txt1PIID_ScanWECCtnLable_Enter(object sender, EventArgs e)
+        {
+            
+            _idr_show.AcceptButton = btn0Scan;
         }
 
 
