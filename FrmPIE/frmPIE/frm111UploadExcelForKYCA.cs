@@ -1273,6 +1273,9 @@ namespace FrmPIE
         private void btn3QuickUploadExcel_Click(object sender, EventArgs e)
         {
             btn3QuickUploadExcel.Enabled = false;
+            addrowscount = 0;
+            strCartonID = "";
+
             if (!_hasrun)
             {
                 getDataGV();
@@ -1281,7 +1284,6 @@ namespace FrmPIE
             }
 
             initLoadExcelFile();
-
 
             txt0ExcelFileUploadExcel.Text = "";
             btn2GoUploadToERP.Visible = true;

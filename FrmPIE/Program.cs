@@ -681,6 +681,8 @@ namespace FrmPIE
         {
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
             psi.Arguments = "/e,/select," + fileFullName;
+            //psi.UseShellExecute = true;
+            //psi.Verb = "open";
             System.Diagnostics.Process.Start(psi);
         }
         public static bool showNewVersion(LinkLabel lk)
