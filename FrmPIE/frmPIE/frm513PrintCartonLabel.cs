@@ -10,6 +10,7 @@ using FrmIDR._0API;
 using PIE.DBUtility;
 using System.Data.SqlClient;
 using System.Threading;
+using System.Drawing.Printing;
 
 namespace FrmPIE
 {
@@ -40,6 +41,20 @@ namespace FrmPIE
 
             data2GV2CartonNO_PrintCtnLbl.RowEnter += data2GV2CartonNO_RowEnter;
             data2GV2CartonNO_PrintCtnLbl.CellClick += data2GV2CartonNO_CellClick;
+
+            //init printer
+            PrintDocument prtdoc = new PrintDocument();
+            string strDefaultPrinter = prtdoc.PrinterSettings.PrinterName;//获取默认的打印机名 
+            foreach (String strPrinter in PrinterSettings.InstalledPrinters)
+            //在列表框中列出所有的打印机, 
+            {
+                cmb3Printer.Items.Add(strPrinter);
+                if (strPrinter == strDefaultPrinter)//把默认打印机设为缺省值 
+                {
+                    cmb3Printer.SelectedIndex = cmb3Printer.Items.IndexOf(strPrinter);
+                }
+
+            } 
 
         }
 
@@ -100,7 +115,7 @@ namespace FrmPIE
         }
         private void frm513PrintCartonLabel_Load(object sender, EventArgs e)
         {
-
+            
         }
         private void initDGV(object doWorkobj)
         {
@@ -211,7 +226,7 @@ namespace FrmPIE
                 return;
             }
 
-            CartonFromTo cft = new CartonFromTo(this, wec_ctn_Fr, wec_ctn_To, cmb0Printer_PrintCartonLabel.Text, cmb1Port_PrintCartonLabel.Text);
+            CartonFromTo cft = new CartonFromTo(this, wec_ctn_Fr, wec_ctn_To, cmb0Printer_PrintCartonLabel.Text, cmb1Port_PrintCartonLabel.Text,cmb3Printer.Text);
 
             _idr_show._tprintCtn = new Thread(new ParameterizedThreadStart(cf.PrinTXTFile));
             if (_idr_show._tprintCtn.ThreadState == ThreadState.Running)
@@ -256,6 +271,11 @@ namespace FrmPIE
                 return;
             }
             cf.EnquireByPart(data2GV2CartonNO_PrintCtnLbl, "plr_partno", _frmET.textBox1.Text.Trim());
+        }
+
+        private void cmb3Printer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbl0Printer.Text = "Printer:" + cmb3Printer.Text;
         }
     }
 }

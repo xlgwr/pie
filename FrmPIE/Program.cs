@@ -49,12 +49,12 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141203;
+            _frm4VersionMain = 20141204;
 
-            _frm5VersionSecond = 16;
+            _frm5VersionSecond = 14;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
-            _frm10VersionFixMsg = "1.add nw for pallel";
+            _frm10VersionFixMsg = "1.add new cartonid for upload erp";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 

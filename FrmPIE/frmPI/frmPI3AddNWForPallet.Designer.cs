@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gb0PIAddNWForPallet = new System.Windows.Forms.GroupBox();
+            this.btn00More = new System.Windows.Forms.Button();
             this.btn1Search = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txt4PIID_search = new System.Windows.Forms.TextBox();
@@ -46,7 +47,6 @@
             this.txt1PI_id_PIMstr = new System.Windows.Forms.TextBox();
             this.gb2det_PIdet = new System.Windows.Forms.GroupBox();
             this.data1GV1_PIPalletList = new System.Windows.Forms.DataGridView();
-            this.btn00More = new System.Windows.Forms.Button();
             this.gb0PIAddNWForPallet.SuspendLayout();
             this.gb1mstr_PIMstr.SuspendLayout();
             this.gb2det_PIdet.SuspendLayout();
@@ -67,6 +67,20 @@
             this.gb0PIAddNWForPallet.Size = new System.Drawing.Size(455, 443);
             this.gb0PIAddNWForPallet.TabIndex = 1;
             this.gb0PIAddNWForPallet.TabStop = false;
+            // 
+            // btn00More
+            // 
+            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
+            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn00More.FlatAppearance.BorderSize = 0;
+            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
+            this.btn00More.Location = new System.Drawing.Point(253, 166);
+            this.btn00More.Name = "btn00More";
+            this.btn00More.Size = new System.Drawing.Size(23, 23);
+            this.btn00More.TabIndex = 24;
+            this.btn00More.UseVisualStyleBackColor = true;
             // 
             // btn1Search
             // 
@@ -152,7 +166,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 16);
             this.label1.TabIndex = 10;
-            this.label1.Text = "NW:";
+            this.label1.Text = "GW:";
             // 
             // label8
             // 
@@ -200,52 +214,38 @@
             // 
             // data1GV1_PIPalletList
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1_PIPalletList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1_PIPalletList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.data1GV1_PIPalletList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data1GV1_PIPalletList.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data1GV1_PIPalletList.DefaultCellStyle = dataGridViewCellStyle2;
             this.data1GV1_PIPalletList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.data1GV1_PIPalletList.Location = new System.Drawing.Point(3, 17);
             this.data1GV1_PIPalletList.MultiSelect = false;
             this.data1GV1_PIPalletList.Name = "data1GV1_PIPalletList";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1_PIPalletList.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1_PIPalletList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.data1GV1_PIPalletList.RowTemplate.Height = 23;
             this.data1GV1_PIPalletList.Size = new System.Drawing.Size(437, 221);
             this.data1GV1_PIPalletList.TabIndex = 16;
-            // 
-            // btn00More
-            // 
-            this.btn00More.BackgroundImage = global::FrmPIE.Properties.Resources._26;
-            this.btn00More.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn00More.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn00More.FlatAppearance.BorderSize = 0;
-            this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
-            this.btn00More.Location = new System.Drawing.Point(253, 166);
-            this.btn00More.Name = "btn00More";
-            this.btn00More.Size = new System.Drawing.Size(23, 23);
-            this.btn00More.TabIndex = 24;
-            this.btn00More.UseVisualStyleBackColor = true;
             // 
             // frmPI3AddNWForPallet
             // 

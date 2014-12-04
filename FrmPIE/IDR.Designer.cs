@@ -685,7 +685,7 @@
             this.tool1StripMenuItem21ScanCartronLabel,
             this.addNWForPalletToolStripMenuItem});
             this.cMenuStrip21ScanCartronLabel.Name = "cMenuStrip1ScanCartronLabel";
-            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(183, 70);
+            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(183, 48);
             // 
             // tool1StripMenuItem21ScanCartronLabel
             // 
@@ -801,7 +801,7 @@
             this.btn00More.FlatAppearance.BorderSize = 0;
             this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
-            this.btn00More.Location = new System.Drawing.Point(423, 15);
+            this.btn00More.Location = new System.Drawing.Point(425, 15);
             this.btn00More.Name = "btn00More";
             this.btn00More.Size = new System.Drawing.Size(23, 23);
             this.btn00More.TabIndex = 6;

@@ -188,12 +188,12 @@ namespace FrmPIE.frmPI
             _currentIndex = e.RowIndex;
             txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
             txt2_Plant_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["Pallet"].Value.ToString();
-            txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["NW"].Value.ToString();
+            txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["GW"].Value.ToString();
         }
 
         void data1GV1ePackingDet1_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1_PIPalletList, 3, e.RowIndex, Color.LightGreen, "Pallet", "NW", "0", Color.LightGray);
+            DoWrokObject dwo = new DoWrokObject(data1GV1_PIPalletList, 3, e.RowIndex, Color.LightGreen, "Pallet", "GW", "0", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         private void frmPI3AddNWForPallet_Load(object sender, EventArgs e)
@@ -217,12 +217,12 @@ namespace FrmPIE.frmPI
             _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
             {
                 var strPIID = o.ToString();
-                string sql_pallet = "select distinct pi_id as PI_ID,pi_chr03 as Pallet,pi_pallet_no as NW FROM pi_det where PI_ID='" + strPIID + "' order by pi_chr03,pi_pallet_no";
+                string sql_pallet = "select distinct pi_id as PI_ID,pi_chr03 as Pallet,pi_pallet_no as GW FROM pi_det where PI_ID='" + strPIID + "' order by pi_chr03,pi_pallet_no";
                 var ds_piid = DbHelperSQL.Query(sql_pallet);
                 if (ds_piid != null && ds_piid.Tables[0].Rows.Count > 0)
                 {
                     data1GV1_PIPalletList.DataSource = ds_piid.Tables[0].DefaultView;
-                    if (_currentIndex<data1GV1_PIPalletList.Rows.Count && _currentIndex>0)
+                    if (_currentIndex < data1GV1_PIPalletList.Rows.Count && _currentIndex > 0)
                     {
                         data1GV1_PIPalletList.Rows[_currentIndex].Cells[0].Selected = true;
                     }
@@ -257,6 +257,13 @@ namespace FrmPIE.frmPI
             {
                 if (PageValidate.IsNumber(txt3NW.Text))
                 {
+                    if (string.IsNullOrEmpty(txt1PI_id_PIMstr.Text) || string.IsNullOrEmpty(txt2_Plant_PIMstr.Text))
+                    {
+                        txt3NW.Focus();
+                        _idr_show.AcceptButton = btn0Add;
+                        lbl0Msg.Text = "please select a right data, please try again. ";
+                        return;
+                    }
                     string sql_update = "update pi_det set pi_pallet_no='" + txt3NW.Text.Trim() + "' where pi_id='" + txt1PI_id_PIMstr.Text.Trim() + "' and pi_chr03='" + txt2_Plant_PIMstr.Text.Trim() + "'";
                     var updateflag = DbHelperSQL.ExecuteSql(sql_update);
                     if (updateflag > 0)

@@ -24,6 +24,7 @@ using System.IO;
 using Microsoft.Reporting.WinForms;
 using FrmPIE;
 using System.Drawing.Printing;
+using XPrint;
 
 namespace FrmIDR._0API
 {
@@ -1495,7 +1496,7 @@ namespace FrmIDR._0API
                                                      item.plr_qty + "@" + "" + "@" +
                                                      item.plr_wec_ctn + "@" + item.CartonNo + "@" + item.plr_carton_qty + "@" +
                                                      "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" + "" + "@" +
-                                                     item.CartonID + "@" + item.plr_pallet_no + "@" + item.LineID;
+                                                     item.carton_id_prifix + "@" + item.plr_pallet_no + "@" + item.LineID;
                         strPO = @strPO.ToString();
 
                         currint++;
@@ -1641,6 +1642,7 @@ namespace FrmIDR._0API
             decimal wec_ctn_To = _cartonfromto._wec_ctn_To;
             string print_Type = _cartonfromto._print_Type;
             string print_port = _cartonfromto._print_port;
+            string printer_name = _cartonfromto._printer_name;
 
             StringBuilder strtxt = new StringBuilder();
 
@@ -1895,19 +1897,47 @@ namespace FrmIDR._0API
                     {
                         if (print_port.Equals("USB"))
                         {
-                            xprintdocument(strtxt.ToString());
-                            resultmsg += " 成功。";
+                            //xprintdocument(strtxt.ToString());
+                            if (RemotePrinter.SendStringToPrinter(printer_name, strfromto,strtxt.ToString()))
+                            {
+                                resultmsg += " 传送到打印机成功。";
+                            }
+                            else
+                            {
+                                resultmsg += " 失败,打印机:" + printer_name + " 打开失败或打印机未就绪。";
+                            }
+
+
                         }
                         else
                         {
-                            if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+                            var printer = new Printer();
+                            if (!printer.Open(print_port))
                             {
-                                resultmsg += " 成功。";
+                                resultmsg += "未能连接打印机，请确认打印机是否安装正确并接通电源。";
+                                return;
+                            }
+                            if (printer.Write(strtxt.ToString()))
+                            {
+                                resultmsg += " 传送到打印机成功。";
                             }
                             else
                             {
                                 resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
                             }
+                            if (!printer.Close())
+                            {
+                                resultmsg += "未能关闭与打印机之间的连接，这可能意味着严重的错误，请重启电脑及打印机。";
+                                return;
+                            }
+                            //if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+                            //{
+                            //    resultmsg += " 成功。";
+                            //}
+                            //else
+                            //{
+                            //    resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
+                            //}
                         }
 
                     }
@@ -1928,13 +1958,49 @@ namespace FrmIDR._0API
             {
                 resultmsg = "Notice: 打印 " + strprefix + strfromto;
 
-                if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+                if (print_port.Equals("USB"))
                 {
-                    resultmsg += " 成功。";
+                    //xprintdocument(strtxt.ToString());
+                    if (RemotePrinter.SendStringToPrinter(printer_name, strfromto, strtxt.ToString()))
+                    {
+                        resultmsg += " 传送到打印机成功。";
+                    }
+                    else
+                    {
+                        resultmsg += " 失败,打印机:" + printer_name + " 打开失败或打印机未就绪。";
+                    }
+
+
                 }
                 else
                 {
-                    resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
+                    var printer = new Printer();
+                    if (!printer.Open(print_port))
+                    {
+                        resultmsg += "未能连接打印机，请确认打印机是否安装正确并接通电源。";
+                        return;
+                    }
+                    if (printer.Write(strtxt.ToString()))
+                    {
+                        resultmsg += " 传送到打印机成功。";
+                    }
+                    else
+                    {
+                        resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
+                    }
+                    if (!printer.Close())
+                    {
+                        resultmsg += "未能关闭与打印机之间的连接，这可能意味着严重的错误，请重启电脑及打印机。";
+                        return;
+                    }
+                    //if (Xprint.XPrint.Print(strtxt.ToString(), print_port))
+                    //{
+                    //    resultmsg += " 成功。";
+                    //}
+                    //else
+                    //{
+                    //    resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
+                    //}
                 }
             }
 

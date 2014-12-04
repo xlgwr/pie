@@ -109,10 +109,10 @@ namespace Xprint
                 System.IO.Directory.CreateDirectory(pathname);
 
             }
-            if (System.IO.File.Exists(logofile) && !System.IO.File.Exists(@"D:\logo.png"))
-            {
-                System.IO.File.Copy(logofile, @"D:\logo.png", true);
-            }
+            //if (System.IO.File.Exists(logofile) && !System.IO.File.Exists(@"C:\logo.png"))
+            //{
+            //    System.IO.File.Copy(logofile, @"C:\logo.png", true);
+            //}
             FileStream filetxt = new FileStream(allfileNamepath, FileMode.OpenOrCreate);
             StreamWriter fileWrite = new StreamWriter(filetxt, Encoding.UTF8);
             try
