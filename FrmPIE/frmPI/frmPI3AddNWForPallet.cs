@@ -46,7 +46,11 @@ namespace FrmPIE.frmPI
 
             initWidth();
             data1GV1_PIPalletList.ReadOnly = true;
+            data1GV1_PIPalletList.BorderStyle = BorderStyle.None;
             btn00More.Click += btn00More0_Click;
+
+
+
         }
 
         void btn00More0_Click(object sender, EventArgs e)
@@ -185,7 +189,7 @@ namespace FrmPIE.frmPI
         {
             DoWrokObject dwo = new DoWrokObject(data1GV1_PIPalletList, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo, _idr_show._pi_mstr_model.PI_ID);
-            _currentIndex = e.RowIndex;
+            _currentIndex = e.RowIndex + 1;
             txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
             txt2_Plant_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["Pallet"].Value.ToString();
             txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["GW"].Value.ToString();
@@ -195,6 +199,12 @@ namespace FrmPIE.frmPI
         {
             DoWrokObject dwo = new DoWrokObject(data1GV1_PIPalletList, 3, e.RowIndex, Color.LightGreen, "Pallet", "GW", "0", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
+            if (e.RowIndex == _currentIndex && e.RowIndex > 0 && e.RowIndex < data1GV1_PIPalletList.Rows.Count)
+            {
+                txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
+                txt2_Plant_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["Pallet"].Value.ToString();
+                txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["GW"].Value.ToString();
+            }
         }
         private void frmPI3AddNWForPallet_Load(object sender, EventArgs e)
         {
@@ -260,6 +270,7 @@ namespace FrmPIE.frmPI
                     if (string.IsNullOrEmpty(txt1PI_id_PIMstr.Text) || string.IsNullOrEmpty(txt2_Plant_PIMstr.Text))
                     {
                         txt3NW.Focus();
+                        txt3NW.SelectAll();
                         _idr_show.AcceptButton = btn0Add;
                         lbl0Msg.Text = "please select a right data, please try again. ";
                         return;
@@ -275,6 +286,7 @@ namespace FrmPIE.frmPI
                     else
                     {
                         txt3NW.Focus();
+                        txt3NW.SelectAll();
                         _idr_show.AcceptButton = btn0Add;
                         lbl0Msg.Text = "Error: Update pi_id='" + txt1PI_id_PIMstr.Text.Trim() + "' and pi_chr03='" + txt2_Plant_PIMstr.Text + "' to " + txt3NW.Text + " Fail, please try again. ";
 
@@ -283,6 +295,7 @@ namespace FrmPIE.frmPI
                 else
                 {
                     txt3NW.Focus();
+                    txt3NW.SelectAll();
                     _idr_show.AcceptButton = btn0Add;
                     lbl0Msg.Text = "Please enter a right number.";
                 }
@@ -290,6 +303,7 @@ namespace FrmPIE.frmPI
             else
             {
                 txt3NW.Focus();
+                txt3NW.SelectAll();
                 _idr_show.AcceptButton = btn0Add;
                 lbl0Msg.Text = "Please enter a right number.";
             }

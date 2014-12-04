@@ -155,7 +155,8 @@ namespace frmPI
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
-            cf.initThreadDowrokColor(dwo);
+            // cf.initThreadDowrokColor(dwo);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(cf.cellSelectMethod), dwo);
 
         }
         void enquireByForReferenct(object sender, EventArgs e)
@@ -224,33 +225,32 @@ namespace frmPI
 
         public void btn_enquire_piReport_Click(object sender, EventArgs e)
         {
-            _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
-            {
-                if (string.IsNullOrEmpty(txt0PINum_piReport.Text.Trim()) || txt0PINum_piReport.Text.Length > 12)
-                {
-                    txt0PINum_piReport.Focus();
-                    currmsg = "Error: Please enter right PI Num (leng 12).";
-                    cf.SetCtlTextdelegate(lblMsg, currmsg, true, true);
-                    return;
-                }
-                string strsql = @"select * from vpi_report where ";
-                string strwhere = @"PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
-                string strorderby = @" ORDER BY plr_LineID_tran ";
-                vpi_report_ds = DbHelperSQL.Query(strsql + strwhere + strorderby);
 
-                if (vpi_report_ds.Tables[0].Rows.Count <= 0)
-                {
-                    lblMsg.Text = txt0PINum_piReport.Text + " is not exist.";
-                    txt0PINum_piReport.Focus();
-                    data0GVPiReport.DataSource = null;
-                    return;
-                }
-                data0GVPiReport.DataSource = vpi_report_ds.Tables[0].DefaultView;
-                cf.initHeaderTextPIDetGrr(data0GVPiReport);
-                data0GVPiReport.Refresh();
-                btn2UploadToHKPIDB.Enabled = true;
-                btn0RetryUpload.Enabled = true;
-            }));
+            if (string.IsNullOrEmpty(txt0PINum_piReport.Text.Trim()) || txt0PINum_piReport.Text.Length > 12)
+            {
+                txt0PINum_piReport.Focus();
+                currmsg = "Error: Please enter right PI Num (leng 12).";
+                cf.SetCtlTextdelegate(lblMsg, currmsg, true, true);
+                return;
+            }
+            string strsql = @"select * from vpi_report where ";
+            string strwhere = @"PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
+            string strorderby = @" ORDER BY plr_LineID_tran ";
+            vpi_report_ds = DbHelperSQL.Query(strsql + strwhere + strorderby);
+
+            if (vpi_report_ds.Tables[0].Rows.Count <= 0)
+            {
+                lblMsg.Text = txt0PINum_piReport.Text + " is not exist.";
+                txt0PINum_piReport.Focus();
+                data0GVPiReport.DataSource = null;
+                return;
+            }
+            data0GVPiReport.DataSource = vpi_report_ds.Tables[0].DefaultView;
+            cf.initHeaderTextPIDetGrr(data0GVPiReport);
+            data0GVPiReport.Refresh();
+            btn2UploadToHKPIDB.Enabled = true;
+            btn0RetryUpload.Enabled = true;
+
 
             //lblpino.Visible = true;
             //txt1Change.Visible = true;
@@ -331,7 +331,7 @@ namespace frmPI
 
                 if (pi_mstr_remote_exit)
                 {
-                    string msg = "Notice7: " + txt0PINum_piReport.Text.Trim() + " was exist in Remote HK Database(PI pi_mstr),\n If OK ,the HK Database（PI_NO):"+ txt0PINum_piReport.Text.Trim()+" Will be Delete";
+                    string msg = "Notice7: " + txt0PINum_piReport.Text.Trim() + " was exist in Remote HK Database(PI pi_mstr),\n If OK ,the HK Database（PI_NO):" + txt0PINum_piReport.Text.Trim() + " Will be Delete";
 
                     if (System.Windows.Forms.MessageBox.Show(msg + "\n Are you sure Continue to Upload " + txt0PINum_piReport.Text.Trim(), "Notice", MessageBoxButtons.YesNo) == DialogResult.No)
                     {

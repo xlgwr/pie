@@ -83,7 +83,7 @@
             this.btn21ScanCartronLabel21 = new System.Windows.Forms.Button();
             this.cMenuStrip21ScanCartronLabel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tool1StripMenuItem21ScanCartronLabel = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNWForPalletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addGWForPalletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn24PIReports = new System.Windows.Forms.Button();
@@ -683,25 +683,25 @@
             // 
             this.cMenuStrip21ScanCartronLabel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tool1StripMenuItem21ScanCartronLabel,
-            this.addNWForPalletToolStripMenuItem});
+            this.addGWForPalletToolStripMenuItem});
             this.cMenuStrip21ScanCartronLabel.Name = "cMenuStrip1ScanCartronLabel";
-            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(183, 48);
+            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(182, 70);
             // 
             // tool1StripMenuItem21ScanCartronLabel
             // 
             this.tool1StripMenuItem21ScanCartronLabel.Image = global::FrmPIE.Properties.Resources.bar1;
             this.tool1StripMenuItem21ScanCartronLabel.Name = "tool1StripMenuItem21ScanCartronLabel";
-            this.tool1StripMenuItem21ScanCartronLabel.Size = new System.Drawing.Size(182, 22);
+            this.tool1StripMenuItem21ScanCartronLabel.Size = new System.Drawing.Size(181, 22);
             this.tool1StripMenuItem21ScanCartronLabel.Text = "&Scan Ctn label";
             this.tool1StripMenuItem21ScanCartronLabel.Click += new System.EventHandler(this.tool1StripMenuItem21ScanCartronLabel_Click);
             // 
-            // addNWForPalletToolStripMenuItem
+            // addGWForPalletToolStripMenuItem
             // 
-            this.addNWForPalletToolStripMenuItem.Image = global::FrmPIE.Properties.Resources.package;
-            this.addNWForPalletToolStripMenuItem.Name = "addNWForPalletToolStripMenuItem";
-            this.addNWForPalletToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.addNWForPalletToolStripMenuItem.Text = "&Add NW for Pallet";
-            this.addNWForPalletToolStripMenuItem.Click += new System.EventHandler(this.addNWForPalletToolStripMenuItem_Click);
+            this.addGWForPalletToolStripMenuItem.Image = global::FrmPIE.Properties.Resources.package;
+            this.addGWForPalletToolStripMenuItem.Name = "addGWForPalletToolStripMenuItem";
+            this.addGWForPalletToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.addGWForPalletToolStripMenuItem.Text = "&Add GW for Pallet";
+            this.addGWForPalletToolStripMenuItem.Click += new System.EventHandler(this.addNWForPalletToolStripMenuItem_Click);
             // 
             // linkLabel4
             // 
@@ -1085,7 +1085,7 @@
         private System.Windows.Forms.LinkLabel link0NewVersion;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timerColor;
-        private System.Windows.Forms.ToolStripMenuItem addNWForPalletToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addGWForPalletToolStripMenuItem;
 
 
 
