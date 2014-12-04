@@ -154,111 +154,109 @@ namespace FrmIDR._0API
         }
         public void cellSelectMethod(object dwko)
         {
-            _idr_show.Invoke(new Action(delegate()
+            _idr_show._sameColumnCount = 0;
+            _idr_show._sameColumnNameCount = 0;
+
+            _idr_show.status16toolLabelstrSameColumnCount.Text = "";
+            DoWrokObject dwo = (DoWrokObject)dwko;
+            int mcount = 0;
+            int minValue = 0;
+            int maxValue = 0;
+            int minresult = 0;
+            int maxreuslt = 0;
+
+            if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
             {
-                _idr_show._sameColumnCount = 0;
-                _idr_show._sameColumnNameCount = 0;
+                var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
 
-                _idr_show.status16toolLabelstrSameColumnCount.Text = "";
-                DoWrokObject dwo = (DoWrokObject)dwko;
-                int mcount = 0;
-                int minValue = 0;
-                int maxValue = 0;
-                int minresult = 0;
-                int maxreuslt = 0;
-
-                if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
+                if (!string.IsNullOrEmpty(dwo._selectColumnNameValue))
                 {
-                    var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
-
-                    if (!string.IsNullOrEmpty(dwo._selectColumnNameValue))
+                    _idr_show._selectColumnNameValue = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                    if (dwo._FrmForRefeHas)
                     {
-                        _idr_show._selectColumnNameValue = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
-                        if (dwo._FrmForRefeHas)
+                        dwo._FrmForRefe.lbl2SelectValue.Text = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                        dwo._FrmForRefe.lbl1SelectNotice.Text = dwo._FrmForRefeLblMsg + dwo._FrmForRefe.lbl2SelectValue.Text;
+                    }
+                }
+                //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
+
+                //m
+                for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
+                {
+                    if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                    {
+                        if (dwo._dgv.Rows[i].Cells[dwo._sameColumnNameCount].Value.ToString().Equals(dwo._sameColumnNameCountValut))
                         {
-                            dwo._FrmForRefe.lbl2SelectValue.Text = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
-                            dwo._FrmForRefe.lbl1SelectNotice.Text = dwo._FrmForRefeLblMsg + dwo._FrmForRefe.lbl2SelectValue.Text;
+                            _idr_show._sameColumnCount++;
                         }
                     }
-                    //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
 
-                    //m
-                    for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
+
+                    if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
                     {
-                        if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                        dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                        if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
                         {
-                            if (dwo._dgv.Rows[i].Cells[dwo._sameColumnNameCount].Value.ToString().Equals(dwo._sameColumnNameCountValut))
-                            {
-                                _idr_show._sameColumnCount++;
-                            }
+                            dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
                         }
 
-
-                        if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
+                    }
+                    var cartonid = dwo._dgv.Rows[i].Cells[dwo._sameColumnName].Value;
+                    if (cartonid != DBNull.Value)
+                    {
+                        if (cartonid.ToString() == cartonidenter.ToString())
                         {
-                            dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                            _idr_show._sameColumnNameCount++;
+                            mcount++;
+                            dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
+
                             if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
                             {
                                 dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
                             }
-
-                        }
-                        var cartonid = dwo._dgv.Rows[i].Cells[dwo._sameColumnName].Value;
-                        if (cartonid != DBNull.Value)
-                        {
-                            if (cartonid.ToString() == cartonidenter.ToString())
+                            if (!string.IsNullOrEmpty(dwo._compMaxMin))
                             {
-                                _idr_show._sameColumnNameCount++;
-                                mcount++;
-                                dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
-
-                                if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
+                                if (mcount == 1)
                                 {
-                                    dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
+                                    minValue = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
+                                    maxValue = minValue;
                                 }
-                                if (!string.IsNullOrEmpty(dwo._compMaxMin))
+                                else
                                 {
-                                    if (mcount == 1)
+                                    minresult = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
+                                    maxreuslt = minresult;
+                                    if (minresult < minValue)
                                     {
-                                        minValue = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
-                                        maxValue = minValue;
+                                        minValue = minresult;
                                     }
-                                    else
+                                    if (maxreuslt > maxValue)
                                     {
-                                        minresult = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
-                                        maxreuslt = minresult;
-                                        if (minresult < minValue)
-                                        {
-                                            minValue = minresult;
-                                        }
-                                        if (maxreuslt > maxValue)
-                                        {
-                                            maxValue = maxreuslt;
-                                        }
+                                        maxValue = maxreuslt;
                                     }
                                 }
-
                             }
+
                         }
                     }
-                    _idr_show._intFrom = minValue;
-                    _idr_show._intTo = maxValue;
-
-                    if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
-                    {
-                        _idr_show.status16toolLabelstrSameColumnCount.Text = dwo._sameColumnNameCountHeaderText + " : " + dwo._sameColumnNameCountValut + " has " + _idr_show._sameColumnCount.ToString() + " items";
-                    }
-                    if (string.IsNullOrEmpty(_idr_show.status16toolLabelstrSameColumnCount.Text))
-                    {
-                        _idr_show.status16toolLabelstrSameColumnCount.Text = " Same Rows:" + _idr_show._sameColumnNameCount;
-                    }
-                    else
-                    {
-                        _idr_show.status16toolLabelstrSameColumnCount.Text += ", Same Rows:" + _idr_show._sameColumnNameCount;
-                    }
-
                 }
-            }));
+                _idr_show._intFrom = minValue;
+                _idr_show._intTo = maxValue;
+
+                if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                {
+                    _idr_show.status16toolLabelstrSameColumnCount.Text = dwo._sameColumnNameCountHeaderText + " : " + dwo._sameColumnNameCountValut + " has " + _idr_show._sameColumnCount.ToString() + " items";
+                }
+                if (string.IsNullOrEmpty(_idr_show.status16toolLabelstrSameColumnCount.Text))
+                {
+                    _idr_show.status16toolLabelstrSameColumnCount.Text = " Same Rows:" + _idr_show._sameColumnNameCount;
+                }
+                else
+                {
+                    _idr_show.status16toolLabelstrSameColumnCount.Text += ", Same Rows:" + _idr_show._sameColumnNameCount;
+                }
+
+            }
+
         }
 
         public void setControlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
@@ -1898,7 +1896,7 @@ namespace FrmIDR._0API
                         if (print_port.Equals("USB"))
                         {
                             //xprintdocument(strtxt.ToString());
-                            if (RemotePrinter.SendStringToPrinter(printer_name, strfromto,strtxt.ToString()))
+                            if (RemotePrinter.SendStringToPrinter(printer_name, strfromto, strtxt.ToString()))
                             {
                                 resultmsg += " 传送到打印机成功。";
                             }
@@ -2014,8 +2012,6 @@ namespace FrmIDR._0API
         {
             if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount)
             {
-
-
                 _idr_show._tDoWorkBackClorThread = new Thread(new ParameterizedThreadStart(DoWorkCellSelectColordelegate));
                 if (_idr_show._tDoWorkBackClorThread.ThreadState == ThreadState.Running)
                 {

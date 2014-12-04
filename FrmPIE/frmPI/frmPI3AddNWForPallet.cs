@@ -140,6 +140,7 @@ namespace FrmPIE.frmPI
         void button1_DoubleClick(object sender, EventArgs e)
         {
             _FrmForRefe.Close();
+            _currentIndex = 0;
             btn1Search_Click(sender, e);
         }
 
@@ -189,7 +190,7 @@ namespace FrmPIE.frmPI
         {
             DoWrokObject dwo = new DoWrokObject(data1GV1_PIPalletList, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo, _idr_show._pi_mstr_model.PI_ID);
-            _currentIndex = e.RowIndex + 1;
+            _currentIndex = e.RowIndex;
             txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
             txt2_Plant_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["Pallet"].Value.ToString();
             txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["GW"].Value.ToString();
@@ -199,12 +200,6 @@ namespace FrmPIE.frmPI
         {
             DoWrokObject dwo = new DoWrokObject(data1GV1_PIPalletList, 3, e.RowIndex, Color.LightGreen, "Pallet", "GW", "0", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
-            if (e.RowIndex == _currentIndex && e.RowIndex > 0 && e.RowIndex < data1GV1_PIPalletList.Rows.Count)
-            {
-                txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
-                txt2_Plant_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["Pallet"].Value.ToString();
-                txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["GW"].Value.ToString();
-            }
         }
         private void frmPI3AddNWForPallet_Load(object sender, EventArgs e)
         {
@@ -216,9 +211,9 @@ namespace FrmPIE.frmPI
             if (!string.IsNullOrEmpty(txt4PIID_search.Text))
             {
                 initGV(txt4PIID_search.Text.Trim());
-
                 // ThreadPool.QueueUserWorkItem(new WaitCallback(doGenCarton), o);
                 ThreadPool.QueueUserWorkItem(new WaitCallback(initGV), txt4PIID_search.Text);
+
             }
         }
 
@@ -227,14 +222,26 @@ namespace FrmPIE.frmPI
             _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
             {
                 var strPIID = o.ToString();
-                string sql_pallet = "select distinct pi_id as PI_ID,pi_chr03 as Pallet,pi_pallet_no as GW FROM pi_det where PI_ID='" + strPIID + "' order by pi_chr03,pi_pallet_no";
+                string sql_pallet = "select [PI_NO] as PI_ID,[pi_pallet_no] as Pallet,[PI_GW] as GW FROM [dbo].[vpi_report_palletCount] where PI_NO='" + strPIID + "' order by PI_NO,plr_LineID";
+                
                 var ds_piid = DbHelperSQL.Query(sql_pallet);
                 if (ds_piid != null && ds_piid.Tables[0].Rows.Count > 0)
                 {
                     data1GV1_PIPalletList.DataSource = ds_piid.Tables[0].DefaultView;
-                    if (_currentIndex < data1GV1_PIPalletList.Rows.Count && _currentIndex > 0)
+                    var intcurr = _currentIndex + 1;
+                    if (intcurr < data1GV1_PIPalletList.Rows.Count && _currentIndex>0)
                     {
-                        data1GV1_PIPalletList.Rows[_currentIndex].Cells[0].Selected = true;
+                        data1GV1_PIPalletList.Rows[intcurr].Cells[0].Selected = true;
+                        _currentIndex++;
+                        if (_currentIndex == data1GV1_PIPalletList.Rows.Count - 1)
+                        {
+                            _currentIndex = 0;
+                            data1GV1_PIPalletList.Rows[_currentIndex].Cells[0].Selected = true;
+                        }
+                        txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
+                        txt2_Plant_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["Pallet"].Value.ToString();
+                        txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["GW"].Value.ToString();
+                        txt3NW.SelectAll();
                     }
                     data1GV1_PIPalletList.Refresh();
                     lbl0Msg.Text = "PI NO: " + strPIID + " load success.";
@@ -269,7 +276,7 @@ namespace FrmPIE.frmPI
                 {
                     if (string.IsNullOrEmpty(txt1PI_id_PIMstr.Text) || string.IsNullOrEmpty(txt2_Plant_PIMstr.Text))
                     {
-                        txt3NW.Focus();
+                        //txt3NW.Focus();
                         txt3NW.SelectAll();
                         _idr_show.AcceptButton = btn0Add;
                         lbl0Msg.Text = "please select a right data, please try again. ";
@@ -285,7 +292,7 @@ namespace FrmPIE.frmPI
                     }
                     else
                     {
-                        txt3NW.Focus();
+                        //txt3NW.Focus();
                         txt3NW.SelectAll();
                         _idr_show.AcceptButton = btn0Add;
                         lbl0Msg.Text = "Error: Update pi_id='" + txt1PI_id_PIMstr.Text.Trim() + "' and pi_chr03='" + txt2_Plant_PIMstr.Text + "' to " + txt3NW.Text + " Fail, please try again. ";
@@ -294,7 +301,7 @@ namespace FrmPIE.frmPI
                 }
                 else
                 {
-                    txt3NW.Focus();
+                    //txt3NW.Focus();
                     txt3NW.SelectAll();
                     _idr_show.AcceptButton = btn0Add;
                     lbl0Msg.Text = "Please enter a right number.";
@@ -302,7 +309,7 @@ namespace FrmPIE.frmPI
             }
             else
             {
-                txt3NW.Focus();
+                //txt3NW.Focus();
                 txt3NW.SelectAll();
                 _idr_show.AcceptButton = btn0Add;
                 lbl0Msg.Text = "Please enter a right number.";
