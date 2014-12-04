@@ -51,10 +51,10 @@ namespace FrmPIE
             _frm3VersionDotNet = 2;
             _frm4VersionMain = 20141204;
 
-            _frm5VersionSecond = 18;
+            _frm5VersionSecond = 22;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
-            _frm10VersionFixMsg = "1.add new cartonid for upload erp";
+            _frm10VersionFixMsg = "1.fix bug";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 

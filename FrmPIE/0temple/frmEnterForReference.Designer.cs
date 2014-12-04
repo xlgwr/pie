@@ -38,6 +38,7 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn2OK = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gb0ForReference.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data0GVForReference)).BeginInit();
@@ -45,6 +46,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn2OK);
             this.groupBox1.Controls.Add(this.chkTop50);
             this.groupBox1.Controls.Add(this.lbl1SelectNotice);
             this.groupBox1.Controls.Add(this.lbl2SelectValue);
@@ -63,7 +65,7 @@
             // chkTop50
             // 
             this.chkTop50.AutoSize = true;
-            this.chkTop50.Location = new System.Drawing.Point(378, 19);
+            this.chkTop50.Location = new System.Drawing.Point(356, 19);
             this.chkTop50.Name = "chkTop50";
             this.chkTop50.Size = new System.Drawing.Size(60, 16);
             this.chkTop50.TabIndex = 104;
@@ -73,7 +75,7 @@
             // lbl1SelectNotice
             // 
             this.lbl1SelectNotice.AutoSize = true;
-            this.lbl1SelectNotice.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl1SelectNotice.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl1SelectNotice.ForeColor = System.Drawing.Color.Red;
             this.lbl1SelectNotice.Location = new System.Drawing.Point(20, 51);
             this.lbl1SelectNotice.Name = "lbl1SelectNotice";
@@ -84,7 +86,7 @@
             // lbl2SelectValue
             // 
             this.lbl2SelectValue.AutoSize = true;
-            this.lbl2SelectValue.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl2SelectValue.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl2SelectValue.ForeColor = System.Drawing.Color.Red;
             this.lbl2SelectValue.Location = new System.Drawing.Point(392, 54);
             this.lbl2SelectValue.Name = "lbl2SelectValue";
@@ -129,7 +131,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(288, 15);
+            this.button1.Location = new System.Drawing.Point(275, 15);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -138,10 +140,20 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(131, 17);
+            this.textBox1.Location = new System.Drawing.Point(118, 17);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(151, 21);
             this.textBox1.TabIndex = 4;
+            // 
+            // btn2OK
+            // 
+            this.btn2OK.Location = new System.Drawing.Point(436, 15);
+            this.btn2OK.Name = "btn2OK";
+            this.btn2OK.Size = new System.Drawing.Size(75, 23);
+            this.btn2OK.TabIndex = 105;
+            this.btn2OK.Text = "&OK";
+            this.btn2OK.UseVisualStyleBackColor = true;
+            this.btn2OK.Click += new System.EventHandler(this.btn2OK_Click);
             // 
             // frmEnterForReference
             // 
@@ -175,6 +187,7 @@
         protected internal System.Windows.Forms.Label lbl2SelectValue;
         protected internal System.Windows.Forms.Label lbl1SelectNotice;
         protected internal System.Windows.Forms.CheckBox chkTop50;
+        protected internal System.Windows.Forms.Button btn2OK;
 
     }
 }

@@ -181,7 +181,7 @@
             // 
             // cmb1SearchType
             // 
-            this.cmb1SearchType.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb1SearchType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmb1SearchType.FormattingEnabled = true;
             this.cmb1SearchType.Items.AddRange(new object[] {
             "BatchID",
@@ -284,7 +284,7 @@
             // 
             // txt0SearchID
             // 
-            this.txt0SearchID.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0SearchID.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txt0SearchID.Location = new System.Drawing.Point(282, 14);
             this.txt0SearchID.Name = "txt0SearchID";
             this.txt0SearchID.Size = new System.Drawing.Size(144, 26);
@@ -615,7 +615,7 @@
             this.lblSystemName.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblSystemName, 2);
             this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSystemName.Font = new System.Drawing.Font("Microsoft YaHei", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSystemName.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSystemName.Location = new System.Drawing.Point(212, 0);
             this.lblSystemName.Name = "lblSystemName";
             this.lblSystemName.Size = new System.Drawing.Size(246, 65);
@@ -685,7 +685,7 @@
             this.tool1StripMenuItem21ScanCartronLabel,
             this.addGWForPalletToolStripMenuItem});
             this.cMenuStrip21ScanCartronLabel.Name = "cMenuStrip1ScanCartronLabel";
-            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(182, 70);
+            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(182, 48);
             // 
             // tool1StripMenuItem21ScanCartronLabel
             // 
@@ -801,7 +801,7 @@
             this.btn00More.FlatAppearance.BorderSize = 0;
             this.btn00More.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn00More.ForeColor = System.Drawing.SystemColors.Control;
-            this.btn00More.Location = new System.Drawing.Point(425, 15);
+            this.btn00More.Location = new System.Drawing.Point(427, 15);
             this.btn00More.Name = "btn00More";
             this.btn00More.Size = new System.Drawing.Size(23, 23);
             this.btn00More.TabIndex = 6;

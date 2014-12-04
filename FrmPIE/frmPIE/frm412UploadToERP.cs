@@ -62,6 +62,7 @@ namespace FrmPIE
             //
             _FrmForRefe.button1.Click += enquireByForReferenct;
             _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
+            _FrmForRefe.btn2OK.Click += button1_DoubleClick;
             //
             _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
             //

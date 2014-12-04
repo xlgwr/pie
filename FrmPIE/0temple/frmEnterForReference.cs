@@ -152,6 +152,11 @@ namespace FrmPIE
             gb0ForReference.Height = groupBox1.Height - gb0ForReference.Top - 5;
         }
 
+        private void btn2OK_Click(object sender, EventArgs e)
+        {
+
+        }
+
        
     }
 }

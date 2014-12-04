@@ -32,6 +32,7 @@ namespace FrmPIE.frmPI
         public string _sameColumnName;
         public string _deffCellName;
         public string _deffCellValue;
+        public bool _selectFlag;
 
 
         public string _clickCellname = "pi_pallet_no";
@@ -67,7 +68,7 @@ namespace FrmPIE.frmPI
             //
             _FrmForRefe.button1.Click += enquireByForReferenct;
             _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
-            _FrmForRefe.FormClosing += _FrmForRefe_FormClosing;
+            _FrmForRefe.btn2OK.Click += button1_DoubleClick;
             //
             _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
             //
@@ -79,13 +80,6 @@ namespace FrmPIE.frmPI
 
             _FrmForRefe.ShowDialog();
         }
-
-
-        void _FrmForRefe_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            btn1Search_Click(sender, e);
-        }
-
         void chkTop50_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -208,10 +202,11 @@ namespace FrmPIE.frmPI
 
         public void btn1Search_Click(object sender, EventArgs e)
         {
+
             if (!string.IsNullOrEmpty(txt4PIID_search.Text))
             {
-                initGV(txt4PIID_search.Text.Trim());
-                // ThreadPool.QueueUserWorkItem(new WaitCallback(doGenCarton), o);
+                //initGV(txt4PIID_search.Text.Trim());
+                _selectFlag = true;
                 ThreadPool.QueueUserWorkItem(new WaitCallback(initGV), txt4PIID_search.Text);
 
             }
@@ -223,13 +218,13 @@ namespace FrmPIE.frmPI
             {
                 var strPIID = o.ToString();
                 string sql_pallet = "select [PI_NO] as PI_ID,[pi_pallet_no] as Pallet,[PI_GW] as GW FROM [dbo].[vpi_report_palletCount] where PI_NO='" + strPIID + "' order by PI_NO,plr_LineID";
-                
+
                 var ds_piid = DbHelperSQL.Query(sql_pallet);
                 if (ds_piid != null && ds_piid.Tables[0].Rows.Count > 0)
                 {
                     data1GV1_PIPalletList.DataSource = ds_piid.Tables[0].DefaultView;
                     var intcurr = _currentIndex + 1;
-                    if (intcurr < data1GV1_PIPalletList.Rows.Count && _currentIndex>0)
+                    if (intcurr < data1GV1_PIPalletList.Rows.Count && _selectFlag == false)
                     {
                         data1GV1_PIPalletList.Rows[intcurr].Cells[0].Selected = true;
                         _currentIndex++;
@@ -238,11 +233,11 @@ namespace FrmPIE.frmPI
                             _currentIndex = 0;
                             data1GV1_PIPalletList.Rows[_currentIndex].Cells[0].Selected = true;
                         }
-                        txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
-                        txt2_Plant_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["Pallet"].Value.ToString();
-                        txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["GW"].Value.ToString();
-                        txt3NW.SelectAll();
                     }
+                    txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
+                    txt2_Plant_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["Pallet"].Value.ToString();
+                    txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["GW"].Value.ToString();
+                    txt3NW.SelectAll();
                     data1GV1_PIPalletList.Refresh();
                     lbl0Msg.Text = "PI NO: " + strPIID + " load success.";
                 }
@@ -283,11 +278,16 @@ namespace FrmPIE.frmPI
                         return;
                     }
                     string sql_update = "update pi_det set pi_pallet_no='" + txt3NW.Text.Trim() + "' where pi_id='" + txt1PI_id_PIMstr.Text.Trim() + "' and pi_chr03='" + txt2_Plant_PIMstr.Text.Trim() + "'";
+                    if (chk0AllSame.Checked)
+                    {
+                        sql_update = "update pi_det set pi_pallet_no='" + txt3NW.Text.Trim() + "' where pi_id='" + txt1PI_id_PIMstr.Text.Trim() + "'";
+
+                    }
                     var updateflag = DbHelperSQL.ExecuteSql(sql_update);
                     if (updateflag > 0)
                     {
                         lbl0Msg.Text = "Success: Update pi_id='" + txt1PI_id_PIMstr.Text.Trim() + "' and pi_chr03='" + txt2_Plant_PIMstr.Text + "' to " + txt3NW.Text + " Success";
-
+                        _selectFlag = false;
                         ThreadPool.QueueUserWorkItem(new WaitCallback(initGV), txt1PI_id_PIMstr.Text);
                     }
                     else

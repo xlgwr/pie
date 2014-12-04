@@ -47,6 +47,7 @@
             this.txt1PI_id_PIMstr = new System.Windows.Forms.TextBox();
             this.gb2det_PIdet = new System.Windows.Forms.GroupBox();
             this.data1GV1_PIPalletList = new System.Windows.Forms.DataGridView();
+            this.chk0AllSame = new System.Windows.Forms.CheckBox();
             this.gb0PIAddNWForPallet.SuspendLayout();
             this.gb1mstr_PIMstr.SuspendLayout();
             this.gb2det_PIdet.SuspendLayout();
@@ -95,7 +96,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(8, 170);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 16);
@@ -113,6 +114,7 @@
             // gb1mstr_PIMstr
             // 
             this.gb1mstr_PIMstr.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gb1mstr_PIMstr.Controls.Add(this.chk0AllSame);
             this.gb1mstr_PIMstr.Controls.Add(this.lbl0Msg);
             this.gb1mstr_PIMstr.Controls.Add(this.btn0Add);
             this.gb1mstr_PIMstr.Controls.Add(this.label6);
@@ -131,7 +133,7 @@
             // lbl0Msg
             // 
             this.lbl0Msg.AutoSize = true;
-            this.lbl0Msg.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl0Msg.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl0Msg.ForeColor = System.Drawing.Color.Red;
             this.lbl0Msg.Location = new System.Drawing.Point(17, 135);
             this.lbl0Msg.Name = "lbl0Msg";
@@ -140,7 +142,7 @@
             // 
             // btn0Add
             // 
-            this.btn0Add.Location = new System.Drawing.Point(187, 106);
+            this.btn0Add.Location = new System.Drawing.Point(165, 106);
             this.btn0Add.Name = "btn0Add";
             this.btn0Add.Size = new System.Drawing.Size(75, 23);
             this.btn0Add.TabIndex = 11;
@@ -151,8 +153,8 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(94, 29);
+            this.label6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(72, 29);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 16);
             this.label6.TabIndex = 8;
@@ -161,8 +163,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(118, 81);
+            this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(96, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 16);
             this.label1.TabIndex = 10;
@@ -171,8 +173,8 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(86, 53);
+            this.label8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(64, 53);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(64, 16);
             this.label8.TabIndex = 10;
@@ -180,7 +182,7 @@
             // 
             // txt3NW
             // 
-            this.txt3NW.Location = new System.Drawing.Point(150, 79);
+            this.txt3NW.Location = new System.Drawing.Point(128, 79);
             this.txt3NW.Name = "txt3NW";
             this.txt3NW.Size = new System.Drawing.Size(175, 21);
             this.txt3NW.TabIndex = 3;
@@ -188,7 +190,7 @@
             // 
             // txt2_Plant_PIMstr
             // 
-            this.txt2_Plant_PIMstr.Location = new System.Drawing.Point(150, 53);
+            this.txt2_Plant_PIMstr.Location = new System.Drawing.Point(128, 53);
             this.txt2_Plant_PIMstr.Name = "txt2_Plant_PIMstr";
             this.txt2_Plant_PIMstr.ReadOnly = true;
             this.txt2_Plant_PIMstr.Size = new System.Drawing.Size(175, 21);
@@ -196,7 +198,7 @@
             // 
             // txt1PI_id_PIMstr
             // 
-            this.txt1PI_id_PIMstr.Location = new System.Drawing.Point(150, 27);
+            this.txt1PI_id_PIMstr.Location = new System.Drawing.Point(128, 27);
             this.txt1PI_id_PIMstr.Name = "txt1PI_id_PIMstr";
             this.txt1PI_id_PIMstr.ReadOnly = true;
             this.txt1PI_id_PIMstr.Size = new System.Drawing.Size(175, 21);
@@ -216,7 +218,7 @@
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -225,7 +227,7 @@
             this.data1GV1_PIPalletList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -237,7 +239,7 @@
             this.data1GV1_PIPalletList.Name = "data1GV1_PIPalletList";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -246,6 +248,16 @@
             this.data1GV1_PIPalletList.RowTemplate.Height = 23;
             this.data1GV1_PIPalletList.Size = new System.Drawing.Size(437, 221);
             this.data1GV1_PIPalletList.TabIndex = 16;
+            // 
+            // chk0AllSame
+            // 
+            this.chk0AllSame.AutoSize = true;
+            this.chk0AllSame.Location = new System.Drawing.Point(251, 110);
+            this.chk0AllSame.Name = "chk0AllSame";
+            this.chk0AllSame.Size = new System.Drawing.Size(174, 16);
+            this.chk0AllSame.TabIndex = 13;
+            this.chk0AllSame.Text = "All Pallet is the same GW";
+            this.chk0AllSame.UseVisualStyleBackColor = true;
             // 
             // frmPI3AddNWForPallet
             // 
@@ -284,6 +296,7 @@
         protected internal System.Windows.Forms.TextBox txt4PIID_search;
         private System.Windows.Forms.Label lbl0Msg;
         private System.Windows.Forms.Button btn00More;
+        private System.Windows.Forms.CheckBox chk0AllSame;
 
     }
 }

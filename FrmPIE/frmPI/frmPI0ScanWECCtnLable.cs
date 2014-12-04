@@ -105,7 +105,6 @@ namespace frmPI
         void button1_DoubleClick(object sender, EventArgs e)
         {
             _FrmForRefe.Close();
-
             txt1PIID_ScanWECCtnLable.Focus();
             KeyEventArgs eenter = new KeyEventArgs(Keys.Enter);
             piidenter(sender, eenter);
@@ -125,7 +124,7 @@ namespace frmPI
             //
             _FrmForRefe.button1.Click += enquireByForReferenct;
             _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
-            _FrmForRefe.FormClosing += _FrmForRefe_FormClosing;
+            _FrmForRefe.btn2OK.Click += button1_DoubleClick;
             //
             _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
             //
@@ -138,13 +137,6 @@ namespace frmPI
             _FrmForRefe.ShowDialog();
         }
 
-        void _FrmForRefe_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //throw new NotImplementedException();
-            txt1PIID_ScanWECCtnLable.Focus();
-            KeyEventArgs eenter = new KeyEventArgs(Keys.Enter);
-            piidenter(sender, eenter);
-        }
 
         void chkTop50_CheckedChanged(object sender, EventArgs e)
         {

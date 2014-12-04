@@ -69,7 +69,7 @@ namespace frmPI
             //
             _FrmForRefe.button1.Click += enquireByForReferenct;
             _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
-            _FrmForRefe.FormClosing += _FrmForRefe_FormClosing;
+            _FrmForRefe.btn2OK.Click += button1_DoubleClick;
             //
             _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
             //
@@ -84,7 +84,12 @@ namespace frmPI
 
         void _FrmForRefe_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btn_enquire_piReport_Click(sender, e);
+            _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
+            {
+
+                _FrmForRefe.lbl1SelectNotice.Text = "Load " + _FrmForRefe.lbl2SelectValue.Text;
+                btn_enquire_piReport_Click(sender, e);
+            }));
         }
 
         void chkTop50_CheckedChanged(object sender, EventArgs e)
@@ -155,8 +160,8 @@ namespace frmPI
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
-            // cf.initThreadDowrokColor(dwo);
-            ThreadPool.QueueUserWorkItem(new WaitCallback(cf.cellSelectMethod), dwo);
+            cf.initThreadDowrokColor(dwo);
+            // ThreadPool.QueueUserWorkItem(new WaitCallback(cf.cellSelectMethod), dwo);
 
         }
         void enquireByForReferenct(object sender, EventArgs e)
@@ -201,6 +206,7 @@ namespace frmPI
         {
             DoWrokObject dwo = new DoWrokObject(data0GVPiReport, 3, e.RowIndex, Color.LightGreen, _clickCellname, "pi_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
+            
         }
 
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
