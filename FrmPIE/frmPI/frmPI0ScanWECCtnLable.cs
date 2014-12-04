@@ -187,7 +187,7 @@ namespace frmPI
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
-            cf.initThreadDowrokColor(dwo);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(cf.cellSelectMethod), dwo);
 
         }
         void enquireByForReferenct(object sender, EventArgs e)
@@ -334,38 +334,19 @@ namespace frmPI
         }
         private void initDGV(object strBatchID)
         {
-            CartonFromTo ctftmstr = new CartonFromTo(data1GVSanWecCtnLable, (string)strBatchID, 1, "add", _idr_show._custip, _idr_show._custip);
-            CartonFromTo ctftdet = new CartonFromTo(data1GVSanWecCtnLable, (string)strBatchID, 0, "add", _idr_show._custip, _idr_show._custip);
+            _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
+            {
 
-            var reobjmstr = cf.initDataGVpi_mstr(ctftmstr, false, "model");
-            _reobjdet = (DataSet)cf.initDataGVpi_det_join_grr(ctftdet, true, "ds");
-            if (reobjmstr != null)
-            {
-                initDatasetToTxt((PI.Model.pi_mstr)reobjmstr);
-            }
-        }
-        private void initDGVDelegate(object strBatchID)
-        {
-            Commfunction.dinitDataGVSource me = new Commfunction.dinitDataGVSource(initDGV);
-            _idr_show.Invoke(me, strBatchID);
-        }
-        private void threadinitDVdelegate()
-        {
-            _idr_show._tInitGDV = new Thread(initDGVDelegate);
-            if (_idr_show._tInitGDV.ThreadState == ThreadState.Running)
-            {
-                _idr_show._tInitGDV.Abort();
-            }
+                CartonFromTo ctftmstr = new CartonFromTo(data1GVSanWecCtnLable, (string)strBatchID, 1, "add", _idr_show._custip, _idr_show._custip);
+                CartonFromTo ctftdet = new CartonFromTo(data1GVSanWecCtnLable, (string)strBatchID, 0, "add", _idr_show._custip, _idr_show._custip);
 
-            if (_idr_show._tInitGDV.ThreadState == ThreadState.Unstarted)
-            {
-                _idr_show._tInitGDV.Start(_pi_mstr_model.PI_ID);
-            }
-            if (_idr_show._tInitGDV.ThreadState == ThreadState.Stopped)
-            {
-                _idr_show._tInitGDV = new Thread(initDGVDelegate);
-                _idr_show._tInitGDV.Start(_pi_mstr_model.PI_ID);
-            }
+                var reobjmstr = cf.initDataGVpi_mstr(ctftmstr, false, "model");
+                _reobjdet = (DataSet)cf.initDataGVpi_det_join_grr(ctftdet, true, "ds");
+                if (reobjmstr != null)
+                {
+                    initDatasetToTxt((PI.Model.pi_mstr)reobjmstr);
+                }
+            }));
         }
 
         private void btn0Scan_Click(object sender, EventArgs e)
@@ -555,7 +536,7 @@ namespace frmPI
                     frmcomain.ShowDialog();
                 }
                 //////////////************************
-                threadinitDVdelegate();
+                ThreadPool.QueueUserWorkItem(new WaitCallback(initDGV), strPIID);
 
 
                 if (string.IsNullOrEmpty(txtPalletNW.Text.Trim()))
@@ -798,7 +779,7 @@ namespace frmPI
                     lbl3COScanWECCtnLable.Text = "";
                     //lbl0noticePiId.Text = "changed";
                     //////////////************************
-                    threadinitDVdelegate();
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(initDGV), txt1PIID_ScanWECCtnLable.Text);
 
 
                 }
@@ -1170,7 +1151,8 @@ namespace frmPI
 
                 cf.SetCtlTextdelegate(btn0AddFromePackingList0, "&Add From ePacking List", true, true);
                 //////////////************************
-                threadinitDVdelegate();
+
+                ThreadPool.QueueUserWorkItem(new WaitCallback(initDGV), txt1PIID_ScanWECCtnLable.Text);
             }
             catch (Exception ex)
             {
@@ -1293,7 +1275,7 @@ namespace frmPI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                addNWScan();              
+                addNWScan();
             }
         }
 
@@ -1478,7 +1460,7 @@ namespace frmPI
         }
         public void addGrr(object o)
         {
-            var strPIID = o.ToString(); 
+            var strPIID = o.ToString();
             cf.SetCtlTextdelegate(btn1RefreshPI, "Get RIR# (ERP)", false, true);
             cf.SetCtlTextdelegate(btn0AddFromePackingList0, "&Add From ePacking List", false, true);
             int dscount = webserviceDS.Tables[0].Rows.Count;
@@ -1618,7 +1600,7 @@ namespace frmPI
 
         private void txt1PIID_ScanWECCtnLable_Enter(object sender, EventArgs e)
         {
-            
+
             _idr_show.AcceptButton = btn0Scan;
         }
 

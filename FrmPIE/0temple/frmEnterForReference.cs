@@ -1,6 +1,7 @@
 ﻿using FrmIDR._0API;
 using frmPI;
 using FrmPIE;
+using FrmPIE.frmPI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,8 @@ namespace FrmPIE
 
         frmEnterTxt _frmEnterTxt;
 
+        frmPI3AddNWForPallet _frmPI3AddNWForPallet;
+
         public frmEnterForReference()
         {
             InitializeComponent();
@@ -46,6 +49,15 @@ namespace FrmPIE
             _idr_show = idr;
 
             _frmEnterTxt = frmEnterTxt;
+
+            InitializeComponent();
+        }
+        public frmEnterForReference(frmIDR idr, frmPI3AddNWForPallet frmPI3AddNWForPallet)
+        {
+            cf = new Commfunction(idr);
+            _idr_show = idr;
+
+            _frmPI3AddNWForPallet = frmPI3AddNWForPallet;
 
             InitializeComponent();
         }

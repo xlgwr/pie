@@ -153,110 +153,111 @@ namespace FrmIDR._0API
         }
         public void cellSelectMethod(object dwko)
         {
-            _idr_show._sameColumnCount = 0;
-            _idr_show._sameColumnNameCount = 0;
-
-            _idr_show.status16toolLabelstrSameColumnCount.Text = "";
-            DoWrokObject dwo = (DoWrokObject)dwko;
-            int mcount = 0;
-            int minValue = 0;
-            int maxValue = 0;
-            int minresult = 0;
-            int maxreuslt = 0;
-
-            if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
+            _idr_show.Invoke(new Action(delegate()
             {
-                var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
+                _idr_show._sameColumnCount = 0;
+                _idr_show._sameColumnNameCount = 0;
 
-                if (!string.IsNullOrEmpty(dwo._selectColumnNameValue))
-                {
-                    _idr_show._selectColumnNameValue = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
-                    if (dwo._FrmForRefeHas)
-                    {
-                        dwo._FrmForRefe.lbl2SelectValue.Text = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
-                        dwo._FrmForRefe.lbl1SelectNotice.Text = dwo._FrmForRefeLblMsg + dwo._FrmForRefe.lbl2SelectValue.Text;
-                    }
-                }
-                //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
+                _idr_show.status16toolLabelstrSameColumnCount.Text = "";
+                DoWrokObject dwo = (DoWrokObject)dwko;
+                int mcount = 0;
+                int minValue = 0;
+                int maxValue = 0;
+                int minresult = 0;
+                int maxreuslt = 0;
 
-                //m
-                for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
+                if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
                 {
-                    if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                    var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
+
+                    if (!string.IsNullOrEmpty(dwo._selectColumnNameValue))
                     {
-                        if (dwo._dgv.Rows[i].Cells[dwo._sameColumnNameCount].Value.ToString().Equals(dwo._sameColumnNameCountValut))
+                        _idr_show._selectColumnNameValue = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                        if (dwo._FrmForRefeHas)
                         {
-                            _idr_show._sameColumnCount++;
+                            dwo._FrmForRefe.lbl2SelectValue.Text = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                            dwo._FrmForRefe.lbl1SelectNotice.Text = dwo._FrmForRefeLblMsg + dwo._FrmForRefe.lbl2SelectValue.Text;
                         }
                     }
+                    //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
 
-
-                    if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
+                    //m
+                    for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
                     {
-                        dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
-                        if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
+                        if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
                         {
-                            dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
+                            if (dwo._dgv.Rows[i].Cells[dwo._sameColumnNameCount].Value.ToString().Equals(dwo._sameColumnNameCountValut))
+                            {
+                                _idr_show._sameColumnCount++;
+                            }
                         }
 
-                    }
-                    var cartonid = dwo._dgv.Rows[i].Cells[dwo._sameColumnName].Value;
-                    if (cartonid != DBNull.Value)
-                    {
-                        if (cartonid.ToString() == cartonidenter.ToString())
-                        {
-                            _idr_show._sameColumnNameCount++;
-                            mcount++;
-                            dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
 
+                        if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
+                        {
+                            dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
                             if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
                             {
                                 dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
                             }
-                            if (!string.IsNullOrEmpty(dwo._compMaxMin))
-                            {
-                                if (mcount == 1)
-                                {
-                                    minValue = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
-                                    maxValue = minValue;
-                                }
-                                else
-                                {
-                                    minresult = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
-                                    maxreuslt = minresult;
-                                    if (minresult < minValue)
-                                    {
-                                        minValue = minresult;
-                                    }
-                                    if (maxreuslt > maxValue)
-                                    {
-                                        maxValue = maxreuslt;
-                                    }
-                                }
-                            }
 
                         }
+                        var cartonid = dwo._dgv.Rows[i].Cells[dwo._sameColumnName].Value;
+                        if (cartonid != DBNull.Value)
+                        {
+                            if (cartonid.ToString() == cartonidenter.ToString())
+                            {
+                                _idr_show._sameColumnNameCount++;
+                                mcount++;
+                                dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
+
+                                if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
+                                {
+                                    dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
+                                }
+                                if (!string.IsNullOrEmpty(dwo._compMaxMin))
+                                {
+                                    if (mcount == 1)
+                                    {
+                                        minValue = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
+                                        maxValue = minValue;
+                                    }
+                                    else
+                                    {
+                                        minresult = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
+                                        maxreuslt = minresult;
+                                        if (minresult < minValue)
+                                        {
+                                            minValue = minresult;
+                                        }
+                                        if (maxreuslt > maxValue)
+                                        {
+                                            maxValue = maxreuslt;
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
                     }
-                }
-                _idr_show._intFrom = minValue;
-                _idr_show._intTo = maxValue;
+                    _idr_show._intFrom = minValue;
+                    _idr_show._intTo = maxValue;
 
-                if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
-                {
-                    _idr_show.status16toolLabelstrSameColumnCount.Text = dwo._sameColumnNameCountHeaderText + " : " + dwo._sameColumnNameCountValut + " has " + _idr_show._sameColumnCount.ToString() + " items";
-                }
-                if (string.IsNullOrEmpty(_idr_show.status16toolLabelstrSameColumnCount.Text))
-                {
-                    _idr_show.status16toolLabelstrSameColumnCount.Text = " Same Rows:" + _idr_show._sameColumnNameCount;
-                }
-                else
-                {
-                    _idr_show.status16toolLabelstrSameColumnCount.Text += ", Same Rows:" + _idr_show._sameColumnNameCount;
-                }
+                    if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                    {
+                        _idr_show.status16toolLabelstrSameColumnCount.Text = dwo._sameColumnNameCountHeaderText + " : " + dwo._sameColumnNameCountValut + " has " + _idr_show._sameColumnCount.ToString() + " items";
+                    }
+                    if (string.IsNullOrEmpty(_idr_show.status16toolLabelstrSameColumnCount.Text))
+                    {
+                        _idr_show.status16toolLabelstrSameColumnCount.Text = " Same Rows:" + _idr_show._sameColumnNameCount;
+                    }
+                    else
+                    {
+                        _idr_show.status16toolLabelstrSameColumnCount.Text += ", Same Rows:" + _idr_show._sameColumnNameCount;
+                    }
 
-            }
-
-
+                }
+            }));
         }
 
         public void setControlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
@@ -1894,7 +1895,7 @@ namespace FrmIDR._0API
                     {
                         if (print_port.Equals("USB"))
                         {
-                            xprintdocument(strtxt.ToString());  
+                            xprintdocument(strtxt.ToString());
                             resultmsg += " 成功。";
                         }
                         else
@@ -2224,31 +2225,36 @@ namespace FrmIDR._0API
         }
         public void EnquireByPart(DataGridView dgv, string cellsHeader, string strcontains)
         {
-            int rowcount = dgv.Rows.Count;
-
-            if (rowcount > 0)
+            _idr_show.Invoke(new Action(delegate()
             {
-                for (int i = intnext; i < rowcount - 1; i++)
+                int rowcount = dgv.Rows.Count;
+
+                if (rowcount > 0)
                 {
-                    if (dgv.Rows[i].Cells[cellsHeader].Value.ToString().ToLower().Contains(strcontains.ToLower()))
+                    for (int i = intnext; i < rowcount - 1; i++)
                     {
+                        if (dgv.Rows[i].Cells[cellsHeader].Value.ToString().ToLower().Contains(strcontains.ToLower()))
+                        {
 
-                        dgv.Rows[i].Cells[cellsHeader].Selected = true;
+                            dgv.Rows[i].Cells[cellsHeader].Selected = true;
 
-                        intnext = i + 1;
-                        if (intnext >= rowcount - 1)
+                            intnext = i + 1;
+                            if (intnext >= rowcount - 1)
+                            {
+                                intnext = 0;
+                            }
+                            break;
+                        }
+                        if (i >= rowcount - 2)
                         {
                             intnext = 0;
+                            dgv.ClearSelection();
                         }
-                        break;
-                    }
-                    if (i >= rowcount - 2)
-                    {
-                        intnext = 0;
-                        dgv.ClearSelection();
                     }
                 }
-            }
+            }));
+
+
         }
         public Hashtable nameList0vpi_report_ds()
         {
@@ -2382,43 +2388,47 @@ namespace FrmIDR._0API
 
         public void downLoadExcel(DataSet ds, ToolStripItem ctMessage, Hashtable nameList, string filenamePrefix)
         {
-            if (ds == null)
+            _idr_show.Invoke(new Action(delegate()
             {
-                ctMessage.Text = "Error: no data.";
-                return;
-            }
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                ctMessage.Text = "notice: start download excel.";
-                string FilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
-
-
-                //利用excel对象
-                DataToExcel dte = new DataToExcel();
-                string filename = "";
-                try
+                if (ds == null)
                 {
-                    if (ds.Tables[0].Rows.Count > 0)
+                    ctMessage.Text = "Error: no data.";
+                    return;
+                }
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    ctMessage.Text = "notice: start download excel.";
+                    string FilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+
+
+                    //利用excel对象
+                    DataToExcel dte = new DataToExcel();
+                    string filename = "";
+                    try
                     {
-                        filename = dte.DataExcel(ds.Tables[0], "标题", FilePath, nameList, filenamePrefix);
+                        if (ds.Tables[0].Rows.Count > 0)
+                        {
+                            filename = dte.DataExcel(ds.Tables[0], "标题", FilePath, nameList, filenamePrefix);
+                        }
+                    }
+                    catch
+                    {
+                        dte.KillExcelProcess();
+                    }
+
+                    if (filename != "")
+                    {
+                        _idr_show._strDownLoadExcel = FilePath + @"\" + filename;
+                        ctMessage.Text = "Success: excel file is at " + _idr_show._strDownLoadExcel;
+                        OpenFolderAndSelectFile(_idr_show._strDownLoadExcel);
                     }
                 }
-                catch
+                else
                 {
-                    dte.KillExcelProcess();
+                    ctMessage.Text = "Error: has 0 count data.";
                 }
+            }));
 
-                if (filename != "")
-                {
-                    _idr_show._strDownLoadExcel = FilePath + @"\" + filename;
-                    ctMessage.Text = "Success: excel file is at " + _idr_show._strDownLoadExcel;
-                    OpenFolderAndSelectFile(_idr_show._strDownLoadExcel);
-                }
-            }
-            else
-            {
-                ctMessage.Text = "Error: has 0 count data.";
-            }
         }
         public void downLoadExcel(DataSet ds, Control ctMessage, Hashtable nameList, string filenamePrefix)
         {

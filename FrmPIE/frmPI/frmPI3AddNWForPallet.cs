@@ -26,6 +26,16 @@ namespace FrmPIE.frmPI
         frmEnterTxt _frmET;
         DataSet _reobjdet;
 
+
+        frmEnterForReference _FrmForRefe;
+        public string _strCellColName;
+        public string _sameColumnName;
+        public string _deffCellName;
+        public string _deffCellValue;
+
+
+        public string _clickCellname = "pi_pallet_no";
+
         public frmPI3AddNWForPallet(frmIDR idr)
         {
             _idr_show = idr;
@@ -36,7 +46,125 @@ namespace FrmPIE.frmPI
 
             initWidth();
             data1GV1_PIPalletList.ReadOnly = true;
+            btn00More.Click += btn00More0_Click;
         }
+
+        void btn00More0_Click(object sender, EventArgs e)
+        {
+            _FrmForRefe = new frmEnterForReference(_idr_show, this);
+
+            _FrmForRefe.textBox1.Text = txt4PIID_search.Text;
+            _FrmForRefe.textBox1.Focus();
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            //
+            _FrmForRefe.data0GVForReference.RowEnter += data0GVForReference_RowEnter;
+            _FrmForRefe.data0GVForReference.CellClick += data0GVForReference_Click;
+            //
+            _FrmForRefe.button1.Click += enquireByForReferenct;
+            _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
+            _FrmForRefe.FormClosing += _FrmForRefe_FormClosing;
+            //
+            _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
+            //
+            _FrmForRefe.gb0ForReference.Text = "Enquire Result";
+            //
+            initSelectCondition();
+            //
+            init_FrmForRefeDGV("");
+
+            _FrmForRefe.ShowDialog();
+        }
+
+
+        void _FrmForRefe_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            btn1Search_Click(sender, e);
+        }
+
+        void chkTop50_CheckedChanged(object sender, EventArgs e)
+        {
+
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            if (_FrmForRefe.chkTop50.Checked)
+            {
+                //
+                initSelectCondition();
+                //
+                init_FrmForRefeDGV("");
+            }
+            else
+            {
+                enquireByForReferenct(sender, e);
+            }
+        }
+        private void initSelectCondition()
+        {
+            _FrmForRefe.lblTitle.Text = "PI ID# OR IP:";
+            _FrmForRefe.Text = "Enquire by PI ID";
+            //
+            _strCellColName = "PI_ID";
+            _sameColumnName = "pi_user_ip";
+            _clickCellname = "CartonID";
+            _deffCellName = "pi_status";
+            _deffCellValue = "Yes";
+
+        }
+        private void init_FrmForRefeDGV(string strwhere)
+        {
+            strwhere = _strCellColName + @" like '%" + strwhere + @"%' or " + _sameColumnName + @" like '%" + strwhere + @"%'";
+            if (_strCellColName.Equals("batch_id"))
+            {
+                var batch_ds = new PIE.DAL.plr_batch_mstr_ext().GetList(50, strwhere, "batch_id desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPlrBatchMstr1(_FrmForRefe.data0GVForReference);
+            }
+            else if (_strCellColName.Equals("PI_ID"))
+            {
+                var batch_ds = new PI.DAL.pi_mstr_ext().GetList(50, strwhere, "PI_ID desc", true);
+                _FrmForRefe.data0GVForReference.DataSource = batch_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPIMstrForEquire(_FrmForRefe.data0GVForReference);
+            }
+            else
+            {
+                _FrmForRefe.data0GVForReference.DataSource = null;
+            }
+            _FrmForRefe.data0GVForReference.Refresh();
+
+        }
+        void button1_DoubleClick(object sender, EventArgs e)
+        {
+            _FrmForRefe.Close();
+            btn1Search_Click(sender, e);
+        }
+
+        void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
+            string strBatchID = cf.selectCellMethod(dwo);
+            txt4PIID_search.Text = strBatchID;
+        }
+
+        void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
+            cf.initThreadDowrokColor(dwo);
+
+        }
+        void enquireByForReferenct(object sender, EventArgs e)
+        {
+            _FrmForRefe.chkTop50.Checked = false;
+            if (string.IsNullOrEmpty(_FrmForRefe.textBox1.Text))
+            {
+                _FrmForRefe.textBox1.Focus();
+                return;
+            }
+            init_FrmForRefeDGV(_FrmForRefe.textBox1.Text.Trim());
+            //txt0SearchID.Text = _FrmForRefe.textBox1.Text.Trim();
+            //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
+        }
+
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
         {
             initWidth();
@@ -57,6 +185,7 @@ namespace FrmPIE.frmPI
         {
             DoWrokObject dwo = new DoWrokObject(data1GV1_PIPalletList, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo, _idr_show._pi_mstr_model.PI_ID);
+            _currentIndex = e.RowIndex;
             txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
             txt2_Plant_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["Pallet"].Value.ToString();
             txt3NW.Text = data1GV1_PIPalletList.CurrentRow.Cells["NW"].Value.ToString();
@@ -93,6 +222,10 @@ namespace FrmPIE.frmPI
                 if (ds_piid != null && ds_piid.Tables[0].Rows.Count > 0)
                 {
                     data1GV1_PIPalletList.DataSource = ds_piid.Tables[0].DefaultView;
+                    if (_currentIndex<data1GV1_PIPalletList.Rows.Count && _currentIndex>0)
+                    {
+                        data1GV1_PIPalletList.Rows[_currentIndex].Cells[0].Selected = true;
+                    }
                     data1GV1_PIPalletList.Refresh();
                     lbl0Msg.Text = "PI NO: " + strPIID + " load success.";
                 }
@@ -155,5 +288,7 @@ namespace FrmPIE.frmPI
             }
         }
 
+
+        public int _currentIndex { get; set; }
     }
 }

@@ -218,7 +218,7 @@ namespace FrmPIE
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
-            cf.initThreadDowrokColor(dwo);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(cf.cellSelectMethod), dwo);
         }
         void enquireByForReferenct(object sender, EventArgs e)
         {
