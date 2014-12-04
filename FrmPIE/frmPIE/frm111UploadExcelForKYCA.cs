@@ -44,7 +44,9 @@ namespace FrmPIE
 
         string _strprefix = "";
         string[] _cartonid;
+        string strCartonID;
         int _numCell = 0;
+        int addrowscount = 0;
         bool _numCellVal = false;
 
         System.Data.DataTable _dt_downToExela = new System.Data.DataTable();
@@ -809,7 +811,6 @@ namespace FrmPIE
             //{
             //    dt.Columns.Add(Convert.ToChar(((int)'A') + j).ToString());
             //}
-            int addrowscount = 0;
             int rowscount = 0;
             int rowserrscount = 0;
             int rowscountsum = sheet.LastRowNum;
@@ -1049,7 +1050,6 @@ namespace FrmPIE
                         int intfrom = Convert.ToInt32(_cartonid[0]);
                         int into = Convert.ToInt32(_cartonid[1]);
                         int countCTN = into - intfrom + 1;
-                        string strCartonID;
 
                         if (_cartonid[0].Equals(_cartonid[1]))
                         {
@@ -1065,138 +1065,35 @@ namespace FrmPIE
 
                         if (intcell9 > 0)
                         {
-                            if (_numCell == countCTN)
-                            {
-                                if (_cartonid[0].Equals(_cartonid[1]))
-                                {
-                                    dr[7] = strCartonID;
-                                }
-                                else
-                                {
-                                    dr[7] = _strprefix + intfrom.ToString();
-                                    //getAvgCarton(intcell9, dr, intfrom, into);
-                                }
-
-                            }
-                            else
-                            {
-                                dr[7] = _strprefix + intfrom.ToString();
-
-                            }
-                            //po-qty
-                            dr[10] = intcell9;
-                            //po
-                            dr[12] = cell8.ToString().Trim();
-
-                            //file cartonid
-                            dr[16] = strCartonID;
-
-                            dt.Rows.Add(dr);
-                            addrowscount++;
+                            //carton
+                            initCartonID(dt, dr, intcell9, cell8, 1, intfrom, into, countCTN);
                         }
                         if (intcell11 > 0)
                         {
-                            //po
-                            DataRow drnew = dt.NewRow();
-                            for (int i = 0; i < dr.ItemArray.Length; i++)
-                            {
-                                drnew[i] = dr[i];
-                            }
-
-                            drnew[1] = addrowscount;
-
                             //carton
-                            initCartonID(dr, intcell11, 2, intfrom, into, countCTN, drnew);
+                            initCartonID(dt, dr, intcell11, cell10, 2, intfrom, into, countCTN);
 
-                            //qty
-                            drnew[10] = intcell11;
-
-                            drnew[12] = cell10.ToString().Trim();
-
-                            drnew[16] = strCartonID;
-                            dt.Rows.Add(drnew);
-
-                            addrowscount++;
                         }
                         if (intcell13 > 0)
                         {
-                            DataRow drnew = dt.NewRow();
-                            for (int i = 0; i < dr.ItemArray.Length; i++)
-                            {
-                                drnew[i] = dr[i];
-                            }
-
-                            //qty
-                            drnew[1] = addrowscount;
-
                             //gen cartonid
-                            initCartonID(dr, intcell13, 3, intfrom, into, countCTN, drnew);
-
-                            drnew[10] = intcell13;
-                            drnew[12] = cell12.ToString().Trim();
-
-                            drnew[16] = strCartonID;
-                            dt.Rows.Add(drnew);
-                            addrowscount++;
+                            initCartonID(dt, dr, intcell13, cell12, 3, intfrom, into, countCTN);
                         }
                         if (intcell15 > 0)
                         {
-                            DataRow drnew = dt.NewRow();
-                            for (int i = 0; i < dr.ItemArray.Length; i++)
-                            {
-                                drnew[i] = dr[i];
-                            }
-                            drnew[1] = addrowscount;
                             //carton id
-                            initCartonID(dr, intcell15, 4, intfrom, into, countCTN, drnew);
-                            //qty
-                            drnew[10] = intcell15;
-
-                            drnew[12] = cell14.ToString().Trim();
-
-                            drnew[16] = strCartonID;
-                            dt.Rows.Add(drnew);
-                            addrowscount++;
+                            initCartonID(dt, dr, intcell15, cell14, 4, intfrom, into, countCTN);
                         }
                         if (intcell17 > 0)
                         {
-
-                            DataRow drnew = dt.NewRow();
-                            for (int i = 0; i < dr.ItemArray.Length; i++)
-                            {
-                                drnew[i] = dr[i];
-                            }
-                            drnew[1] = addrowscount;
                             //carton id
-                            initCartonID(dr, intcell17, 5, intfrom, into, countCTN, drnew);
-                            //qty
-                            drnew[10] = intcell17;
-
-                            drnew[12] = cell16.ToString().Trim();
-
-                            drnew[16] = strCartonID;
-                            dt.Rows.Add(drnew);
-                            addrowscount++;
+                            initCartonID(dt, dr, intcell17, cell16, 5, intfrom, into, countCTN);
                         }
                         if (intcell19 > 0)
                         {
-                            DataRow drnew = dt.NewRow();
-                            for (int i = 0; i < dr.ItemArray.Length; i++)
-                            {
-                                drnew[i] = dr[i];
-                            }
-                            drnew[1] = addrowscount;
+
                             //carton id
-                            initCartonID(dr, intcell19, 6, intfrom, into, countCTN, drnew);
-
-                            //qty
-                            drnew[10] = intcell19;
-
-                            drnew[12] = cell18.ToString().Trim();
-
-                            drnew[16] = strCartonID;
-                            dt.Rows.Add(drnew);
-                            addrowscount++;
+                            initCartonID(dt, dr, intcell19, cell18, 6, intfrom, into, countCTN);
                         }
                         rowscount++;
                     }
@@ -1214,8 +1111,17 @@ namespace FrmPIE
             //data0set_npoi.Tables.Add(dt);
         }
 
-        private void initCartonID(DataRow dr, double intcell11, int currentnumber, int intfrom, int into, int countCTN, DataRow drnew)
+        private void initCartonID(System.Data.DataTable dt, DataRow dr, double intcell, ICell cell, int currentnumber, int intfrom, int into, int countCTN)
         {
+            //po
+            DataRow drnew = dt.NewRow();
+            for (int i = 0; i < dr.ItemArray.Length; i++)
+            {
+                drnew[i] = dr[i];
+            }
+
+            drnew[1] = addrowscount;
+
             if (_cartonid[0].Equals(_cartonid[1]))
             {
                 dr[7] = _strprefix + intfrom.ToString();
@@ -1249,9 +1155,18 @@ namespace FrmPIE
                 else if (_numCell <= currentnumber)
                 {
                     drnew[7] = _strprefix + (intfrom + _numCell - 1).ToString() + '-' + into.ToString();
-                    getAvgCarton(intcell11, drnew, intfrom, into);
+                    getAvgCarton(intcell, drnew, intfrom, into);
                 }
             }
+
+            //qty
+            drnew[10] = intcell;
+
+            drnew[12] = cell.ToString().Trim();
+
+            drnew[16] = strCartonID;
+            dt.Rows.Add(drnew);
+            addrowscount++;
         }
 
         private void getAvgCarton(double intcellValue, DataRow drnew, int intfrom, int into)
