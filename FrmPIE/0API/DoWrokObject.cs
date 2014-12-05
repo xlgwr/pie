@@ -37,6 +37,10 @@ namespace FrmIDR._0API
         public int _maxValue;
         public int _minValue;
         public string _compMaxMin;
+        
+        //temp
+        public string _cartonidenter;
+        public int _fori;
 
 
         public DoWrokObject(DataGridView dgv, int selectedindex, int eIndex, Color colors, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors)

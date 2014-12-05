@@ -82,15 +82,6 @@ namespace frmPI
             _FrmForRefe.ShowDialog();
         }
 
-        void _FrmForRefe_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
-            {
-
-                _FrmForRefe.lbl1SelectNotice.Text = "Load " + _FrmForRefe.lbl2SelectValue.Text;
-                btn_enquire_piReport_Click(sender, e);
-            }));
-        }
 
         void chkTop50_CheckedChanged(object sender, EventArgs e)
         {
@@ -206,7 +197,7 @@ namespace frmPI
         {
             DoWrokObject dwo = new DoWrokObject(data0GVPiReport, 3, e.RowIndex, Color.LightGreen, _clickCellname, "pi_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
-            
+
         }
 
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
@@ -231,31 +222,39 @@ namespace frmPI
 
         public void btn_enquire_piReport_Click(object sender, EventArgs e)
         {
+            //            enquireData("dd");
+            lblMsg.Text = "";
+            ThreadPool.QueueUserWorkItem(new WaitCallback(enquireData), "dd");
 
-            if (string.IsNullOrEmpty(txt0PINum_piReport.Text.Trim()) || txt0PINum_piReport.Text.Length > 12)
-            {
-                txt0PINum_piReport.Focus();
-                currmsg = "Error: Please enter right PI Num (leng 12).";
-                cf.SetCtlTextdelegate(lblMsg, currmsg, true, true);
-                return;
-            }
-            string strsql = @"select * from vpi_report where ";
-            string strwhere = @"PI_ID='" + txt0PINum_piReport.Text.Trim() + "'";
-            string strorderby = @" ORDER BY plr_LineID_tran ";
-            vpi_report_ds = DbHelperSQL.Query(strsql + strwhere + strorderby);
+        }
 
-            if (vpi_report_ds.Tables[0].Rows.Count <= 0)
+        private void enquireData(object o)
+        {
+            _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
             {
-                lblMsg.Text = txt0PINum_piReport.Text + " is not exist.";
-                txt0PINum_piReport.Focus();
-                data0GVPiReport.DataSource = null;
-                return;
-            }
-            data0GVPiReport.DataSource = vpi_report_ds.Tables[0].DefaultView;
-            cf.initHeaderTextPIDetGrr(data0GVPiReport);
-            data0GVPiReport.Refresh();
-            btn2UploadToHKPIDB.Enabled = true;
-            btn0RetryUpload.Enabled = true;
+                if (string.IsNullOrEmpty(txt0PINum_piReport.Text.Trim()) || txt0PINum_piReport.Text.Length > 12)
+                {
+                    txt0PINum_piReport.Focus();
+                    currmsg = "Error: Please enter right PI Num (leng 12).";
+                    cf.SetCtlTextdelegate(lblMsg, currmsg, true, true);
+                    return;
+                }
+                string strsql = @"select * from vpi_report where PI_ID='" + txt0PINum_piReport.Text.Trim() + "' ORDER BY PI_ID,plr_LineID_tran ";
+                vpi_report_ds = DbHelperSQL.Query(strsql);
+
+                if (vpi_report_ds.Tables[0].Rows.Count <= 0)
+                {
+                    lblMsg.Text = txt0PINum_piReport.Text + " is not exist.";
+                    txt0PINum_piReport.Focus();
+                    data0GVPiReport.DataSource = null;
+                    return;
+                }
+                data0GVPiReport.DataSource = vpi_report_ds.Tables[0].DefaultView;
+                cf.initHeaderTextPIDetGrr(data0GVPiReport);
+                data0GVPiReport.Refresh();
+                btn2UploadToHKPIDB.Enabled = true;
+                btn0RetryUpload.Enabled = true;
+            }));
 
 
             //lblpino.Visible = true;

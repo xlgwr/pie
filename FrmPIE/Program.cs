@@ -49,9 +49,9 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141204;
+            _frm4VersionMain = 20141205;
 
-            _frm5VersionSecond = 22;
+            _frm5VersionSecond = 08;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
             _frm10VersionFixMsg = "1.fix bug";

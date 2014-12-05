@@ -34,20 +34,22 @@ namespace FrmPIE
         StringBuilder strsql;
         ISheet sheet;
         IRow row;
-        string _strext;
         System.Data.DataTable _dterr;
 
         bool _hasrun = false;
         bool _addHeadForDownExcel = false;
+        bool _numCellVal = false;
+
         string _strBatchID = "";
+        string _strext;
+        string _strprefix = "";
+
         DateTime oldtime;
 
-        string _strprefix = "";
         string[] _cartonid;
         string strCartonID;
         int _numCell = 0;
         int addrowscount = 0;
-        bool _numCellVal = false;
 
         System.Data.DataTable _dt_downToExela = new System.Data.DataTable();
 
@@ -1275,6 +1277,7 @@ namespace FrmPIE
             btn3QuickUploadExcel.Enabled = false;
             addrowscount = 0;
             strCartonID = "";
+            _strBatchID = "";
 
             if (!_hasrun)
             {
