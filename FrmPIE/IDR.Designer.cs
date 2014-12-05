@@ -181,7 +181,7 @@
             // 
             // cmb1SearchType
             // 
-            this.cmb1SearchType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmb1SearchType.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmb1SearchType.FormattingEnabled = true;
             this.cmb1SearchType.Items.AddRange(new object[] {
             "BatchID",
@@ -284,7 +284,7 @@
             // 
             // txt0SearchID
             // 
-            this.txt0SearchID.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt0SearchID.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txt0SearchID.Location = new System.Drawing.Point(282, 14);
             this.txt0SearchID.Name = "txt0SearchID";
             this.txt0SearchID.Size = new System.Drawing.Size(144, 26);
@@ -344,6 +344,8 @@
             this.btn1Home1.BackgroundImage = global::FrmPIE.Properties.Resources.j__11_;
             this.btn1Home1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn1Home1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn1Home1.FlatAppearance.BorderSize = 0;
+            this.btn1Home1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn1Home1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btn1Home1.Location = new System.Drawing.Point(3, 3);
             this.btn1Home1.Name = "btn1Home1";
@@ -452,6 +454,8 @@
             this.btn1PackingListMaintain1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn1PackingListMaintain1.ContextMenuStrip = this.cMenuStrip1PacklingListMain;
             this.btn1PackingListMaintain1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn1PackingListMaintain1.FlatAppearance.BorderSize = 0;
+            this.btn1PackingListMaintain1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn1PackingListMaintain1.Location = new System.Drawing.Point(3, 3);
             this.btn1PackingListMaintain1.Name = "btn1PackingListMaintain1";
             this.btn1PackingListMaintain1.Size = new System.Drawing.Size(145, 82);
@@ -522,6 +526,8 @@
             this.btn2GenCarton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn2GenCarton2.ContextMenuStrip = this.cMenuStrip2CartonIDMain;
             this.btn2GenCarton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn2GenCarton2.FlatAppearance.BorderSize = 0;
+            this.btn2GenCarton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn2GenCarton2.Location = new System.Drawing.Point(3, 3);
             this.btn2GenCarton2.Name = "btn2GenCarton2";
             this.btn2GenCarton2.Size = new System.Drawing.Size(176, 82);
@@ -575,6 +581,8 @@
             this.btn3PrintCartonLabel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn3PrintCartonLabel3.ContextMenuStrip = this.cMenuStrip3PrintCartonLabel;
             this.btn3PrintCartonLabel3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn3PrintCartonLabel3.FlatAppearance.BorderSize = 0;
+            this.btn3PrintCartonLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn3PrintCartonLabel3.Location = new System.Drawing.Point(3, 3);
             this.btn3PrintCartonLabel3.Name = "btn3PrintCartonLabel3";
             this.btn3PrintCartonLabel3.Size = new System.Drawing.Size(148, 82);
@@ -615,7 +623,7 @@
             this.lblSystemName.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblSystemName, 2);
             this.lblSystemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSystemName.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSystemName.Font = new System.Drawing.Font("Microsoft YaHei", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSystemName.Location = new System.Drawing.Point(212, 0);
             this.lblSystemName.Name = "lblSystemName";
             this.lblSystemName.Size = new System.Drawing.Size(246, 65);
@@ -671,6 +679,8 @@
             this.btn21ScanCartronLabel21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn21ScanCartronLabel21.ContextMenuStrip = this.cMenuStrip21ScanCartronLabel;
             this.btn21ScanCartronLabel21.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn21ScanCartronLabel21.FlatAppearance.BorderSize = 0;
+            this.btn21ScanCartronLabel21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn21ScanCartronLabel21.Location = new System.Drawing.Point(3, 3);
             this.btn21ScanCartronLabel21.Name = "btn21ScanCartronLabel21";
             this.btn21ScanCartronLabel21.Size = new System.Drawing.Size(145, 82);
@@ -732,6 +742,8 @@
             this.btn24PIReports.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn24PIReports.ContextMenuStrip = this.c22MenuStripPiSystem;
             this.btn24PIReports.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn24PIReports.FlatAppearance.BorderSize = 0;
+            this.btn24PIReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn24PIReports.Location = new System.Drawing.Point(3, 3);
             this.btn24PIReports.Name = "btn24PIReports";
             this.btn24PIReports.Size = new System.Drawing.Size(176, 82);
