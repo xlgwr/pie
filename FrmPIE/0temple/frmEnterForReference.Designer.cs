@@ -57,7 +57,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(557, 350);
+            this.groupBox1.Size = new System.Drawing.Size(557, 343);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Resize += new System.EventHandler(this.groupBox1_Resize);
@@ -89,7 +89,7 @@
             this.lbl1SelectNotice.AutoSize = true;
             this.lbl1SelectNotice.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl1SelectNotice.ForeColor = System.Drawing.Color.Red;
-            this.lbl1SelectNotice.Location = new System.Drawing.Point(20, 51);
+            this.lbl1SelectNotice.Location = new System.Drawing.Point(20, 45);
             this.lbl1SelectNotice.Name = "lbl1SelectNotice";
             this.lbl1SelectNotice.Size = new System.Drawing.Size(0, 16);
             this.lbl1SelectNotice.TabIndex = 11;
@@ -100,7 +100,7 @@
             this.lbl2SelectValue.AutoSize = true;
             this.lbl2SelectValue.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl2SelectValue.ForeColor = System.Drawing.Color.Red;
-            this.lbl2SelectValue.Location = new System.Drawing.Point(392, 54);
+            this.lbl2SelectValue.Location = new System.Drawing.Point(392, 45);
             this.lbl2SelectValue.Name = "lbl2SelectValue";
             this.lbl2SelectValue.Size = new System.Drawing.Size(107, 16);
             this.lbl2SelectValue.TabIndex = 8;
@@ -111,7 +111,7 @@
             // gb0ForReference
             // 
             this.gb0ForReference.Controls.Add(this.data0GVForReference);
-            this.gb0ForReference.Location = new System.Drawing.Point(8, 73);
+            this.gb0ForReference.Location = new System.Drawing.Point(8, 67);
             this.gb0ForReference.Name = "gb0ForReference";
             this.gb0ForReference.Size = new System.Drawing.Size(543, 271);
             this.gb0ForReference.TabIndex = 7;
@@ -163,7 +163,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(557, 350);
+            this.ClientSize = new System.Drawing.Size(557, 343);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
