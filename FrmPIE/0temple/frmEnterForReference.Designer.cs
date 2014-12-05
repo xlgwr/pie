@@ -64,6 +64,8 @@
             // 
             // btn2OK
             // 
+            this.btn2OK.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2OK.ForeColor = System.Drawing.Color.Red;
             this.btn2OK.Location = new System.Drawing.Point(436, 15);
             this.btn2OK.Name = "btn2OK";
             this.btn2OK.Size = new System.Drawing.Size(75, 23);
