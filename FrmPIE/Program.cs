@@ -51,7 +51,7 @@ namespace FrmPIE
             _frm3VersionDotNet = 2;
             _frm4VersionMain = 20141205;
 
-            _frm5VersionSecond = 10;
+            _frm5VersionSecond = 15;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
             _frm10VersionFixMsg = "1.fix bug";

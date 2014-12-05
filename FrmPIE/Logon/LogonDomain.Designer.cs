@@ -162,7 +162,7 @@
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSubmit.Location = new System.Drawing.Point(143, 244);
+            this.btnSubmit.Location = new System.Drawing.Point(160, 244);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(110, 37);
             this.btnSubmit.TabIndex = 3;
@@ -211,7 +211,7 @@
             this.lblmsg.AutoSize = true;
             this.lblmsg.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblmsg.ForeColor = System.Drawing.Color.Red;
-            this.lblmsg.Location = new System.Drawing.Point(253, 258);
+            this.lblmsg.Location = new System.Drawing.Point(270, 256);
             this.lblmsg.Name = "lblmsg";
             this.lblmsg.Size = new System.Drawing.Size(0, 12);
             this.lblmsg.TabIndex = 12;

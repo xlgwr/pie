@@ -268,7 +268,7 @@ namespace FrmPIE.frmPI
             lbl0Msg.Text = "";
             if (!string.IsNullOrEmpty(txt3NW.Text))
             {
-                if (PageValidate.IsNumber(txt3NW.Text))
+                if (PageValidate.IsDecimal(txt3NW.Text))
                 {
                     if (string.IsNullOrEmpty(txt1PI_id_PIMstr.Text) || string.IsNullOrEmpty(txt2_Plant_PIMstr.Text))
                     {
