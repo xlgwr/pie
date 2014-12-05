@@ -144,7 +144,7 @@ namespace FrmPIE
         }
         private void frmEnterForReference_Load(object sender, EventArgs e)
         {
-
+            this.Location = new Point { X = Control.MousePosition.X - this.Width / 3, Y = Control.MousePosition.Y + 15 };
         }
         private void groupBox1_Resize(object sender, EventArgs e)
         {
@@ -157,6 +157,6 @@ namespace FrmPIE
 
         }
 
-       
+
     }
 }

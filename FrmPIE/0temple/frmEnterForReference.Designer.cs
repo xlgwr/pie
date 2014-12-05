@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEnterForReference));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn2OK = new System.Windows.Forms.Button();
             this.chkTop50 = new System.Windows.Forms.CheckBox();
             this.lbl1SelectNotice = new System.Windows.Forms.Label();
             this.lbl2SelectValue = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btn2OK = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gb0ForReference.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data0GVForReference)).BeginInit();
@@ -62,6 +62,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Resize += new System.EventHandler(this.groupBox1_Resize);
             // 
+            // btn2OK
+            // 
+            this.btn2OK.Location = new System.Drawing.Point(436, 15);
+            this.btn2OK.Name = "btn2OK";
+            this.btn2OK.Size = new System.Drawing.Size(75, 23);
+            this.btn2OK.TabIndex = 105;
+            this.btn2OK.Text = "&OK";
+            this.btn2OK.UseVisualStyleBackColor = true;
+            this.btn2OK.Click += new System.EventHandler(this.btn2OK_Click);
+            // 
             // chkTop50
             // 
             this.chkTop50.AutoSize = true;
@@ -75,7 +85,7 @@
             // lbl1SelectNotice
             // 
             this.lbl1SelectNotice.AutoSize = true;
-            this.lbl1SelectNotice.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl1SelectNotice.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl1SelectNotice.ForeColor = System.Drawing.Color.Red;
             this.lbl1SelectNotice.Location = new System.Drawing.Point(20, 51);
             this.lbl1SelectNotice.Name = "lbl1SelectNotice";
@@ -86,7 +96,7 @@
             // lbl2SelectValue
             // 
             this.lbl2SelectValue.AutoSize = true;
-            this.lbl2SelectValue.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl2SelectValue.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl2SelectValue.ForeColor = System.Drawing.Color.Red;
             this.lbl2SelectValue.Location = new System.Drawing.Point(392, 54);
             this.lbl2SelectValue.Name = "lbl2SelectValue";
@@ -145,16 +155,6 @@
             this.textBox1.Size = new System.Drawing.Size(151, 21);
             this.textBox1.TabIndex = 4;
             // 
-            // btn2OK
-            // 
-            this.btn2OK.Location = new System.Drawing.Point(436, 15);
-            this.btn2OK.Name = "btn2OK";
-            this.btn2OK.Size = new System.Drawing.Size(75, 23);
-            this.btn2OK.TabIndex = 105;
-            this.btn2OK.Text = "&OK";
-            this.btn2OK.UseVisualStyleBackColor = true;
-            this.btn2OK.Click += new System.EventHandler(this.btn2OK_Click);
-            // 
             // frmEnterForReference
             // 
             this.AcceptButton = this.button1;
@@ -166,7 +166,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "frmEnterForReference";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmEnterForReference_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
