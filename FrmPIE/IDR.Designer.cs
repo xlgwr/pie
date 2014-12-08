@@ -450,6 +450,7 @@
             // 
             // btn1PackingListMaintain1
             // 
+            this.btn1PackingListMaintain1.BackColor = System.Drawing.SystemColors.Control;
             this.btn1PackingListMaintain1.BackgroundImage = global::FrmPIE.Properties.Resources.add_file;
             this.btn1PackingListMaintain1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn1PackingListMaintain1.ContextMenuStrip = this.cMenuStrip1PacklingListMain;
@@ -462,7 +463,7 @@
             this.btn1PackingListMaintain1.TabIndex = 2;
             this.btn1PackingListMaintain1.Text = "1";
             this.btn1PackingListMaintain1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn1PackingListMaintain1.UseVisualStyleBackColor = true;
+            this.btn1PackingListMaintain1.UseVisualStyleBackColor = false;
             // 
             // cMenuStrip1PacklingListMain
             // 
@@ -522,6 +523,7 @@
             // 
             // btn2GenCarton2
             // 
+            this.btn2GenCarton2.BackColor = System.Drawing.SystemColors.Control;
             this.btn2GenCarton2.BackgroundImage = global::FrmPIE.Properties.Resources.updatepackage;
             this.btn2GenCarton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn2GenCarton2.ContextMenuStrip = this.cMenuStrip2CartonIDMain;
@@ -534,7 +536,7 @@
             this.btn2GenCarton2.TabIndex = 2;
             this.btn2GenCarton2.Text = "2";
             this.btn2GenCarton2.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn2GenCarton2.UseVisualStyleBackColor = true;
+            this.btn2GenCarton2.UseVisualStyleBackColor = false;
             // 
             // cMenuStrip2CartonIDMain
             // 
@@ -577,6 +579,7 @@
             // 
             // btn3PrintCartonLabel3
             // 
+            this.btn3PrintCartonLabel3.BackColor = System.Drawing.SystemColors.Control;
             this.btn3PrintCartonLabel3.BackgroundImage = global::FrmPIE.Properties.Resources.bar1;
             this.btn3PrintCartonLabel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn3PrintCartonLabel3.ContextMenuStrip = this.cMenuStrip3PrintCartonLabel;
@@ -589,7 +592,7 @@
             this.btn3PrintCartonLabel3.TabIndex = 2;
             this.btn3PrintCartonLabel3.Text = "3";
             this.btn3PrintCartonLabel3.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn3PrintCartonLabel3.UseVisualStyleBackColor = true;
+            this.btn3PrintCartonLabel3.UseVisualStyleBackColor = false;
             // 
             // cMenuStrip3PrintCartonLabel
             // 
@@ -675,6 +678,7 @@
             // 
             // btn21ScanCartronLabel21
             // 
+            this.btn21ScanCartronLabel21.BackColor = System.Drawing.SystemColors.Control;
             this.btn21ScanCartronLabel21.BackgroundImage = global::FrmPIE.Properties.Resources.scanBar;
             this.btn21ScanCartronLabel21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn21ScanCartronLabel21.ContextMenuStrip = this.cMenuStrip21ScanCartronLabel;
@@ -687,7 +691,7 @@
             this.btn21ScanCartronLabel21.TabIndex = 7;
             this.btn21ScanCartronLabel21.Text = "1";
             this.btn21ScanCartronLabel21.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn21ScanCartronLabel21.UseVisualStyleBackColor = true;
+            this.btn21ScanCartronLabel21.UseVisualStyleBackColor = false;
             // 
             // cMenuStrip21ScanCartronLabel
             // 
@@ -738,6 +742,7 @@
             // 
             // btn24PIReports
             // 
+            this.btn24PIReports.BackColor = System.Drawing.SystemColors.Control;
             this.btn24PIReports.BackgroundImage = global::FrmPIE.Properties.Resources.doc;
             this.btn24PIReports.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn24PIReports.ContextMenuStrip = this.c22MenuStripPiSystem;
@@ -750,7 +755,7 @@
             this.btn24PIReports.TabIndex = 13;
             this.btn24PIReports.Text = "2";
             this.btn24PIReports.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn24PIReports.UseVisualStyleBackColor = true;
+            this.btn24PIReports.UseVisualStyleBackColor = false;
             // 
             // c22MenuStripPiSystem
             // 
