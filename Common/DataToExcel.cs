@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Excel;
-namespace PIE.Common
+namespace IDR.Common
 {
     /// <summary>
     /// 操作EXCEL导出数据报表的类

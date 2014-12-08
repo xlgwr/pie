@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-namespace PIE.Common
+namespace IDR.Common
 {
 	/// <summary>
 	/// 显示消息提示对话框。

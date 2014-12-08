@@ -7,14 +7,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-using PIE.Model;
-using PIE.DBUtility;
-using PIE.DAL;
-using PIE.BLL;
-using PIE.Common;
-using PI.Model;
-using PI.DAL;
-using PI.BLL;
+using IDR.Common;
+using IDR.EF.PIE;
+using IDR.EF.PIRemote;
+
 using System.Threading;
 
 namespace FrmPIE.frmPI

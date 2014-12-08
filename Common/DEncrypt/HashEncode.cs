@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Security.Cryptography;
-namespace PIE.Common.DEncrypt
+namespace IDR.Common.DEncrypt
 {
 	/// <summary>
 	/// 得到随机安全码（哈希加密）。

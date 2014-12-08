@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;  
 using System.Text;
-namespace PIE.Common.DEncrypt
+namespace IDR.Common.DEncrypt
 {
 	/// <summary>
 	/// Encrypt 的摘要说明。
@@ -9,6 +9,8 @@ namespace PIE.Common.DEncrypt
 	/// </summary>
 	public class DEncrypt
 	{
+
+        static string _key = "xlgwr";
 		/// <summary>
 		/// 构造方法
 		/// </summary>
@@ -25,7 +27,7 @@ namespace PIE.Common.DEncrypt
 		/// <returns>密文</returns>
 		public static string Encrypt(string original)
 		{
-			return Encrypt(original,"MATICSOFT");
+			return Encrypt(original,_key);
 		}
 		/// <summary>
 		/// 使用缺省密钥字符串解密string
@@ -34,7 +36,7 @@ namespace PIE.Common.DEncrypt
 		/// <returns>明文</returns>
 		public static string Decrypt(string original)
 		{
-			return Decrypt(original,"MATICSOFT",System.Text.Encoding.Default);
+			return Decrypt(original,_key,System.Text.Encoding.Default);
 		}
 
 		#endregion
@@ -88,7 +90,7 @@ namespace PIE.Common.DEncrypt
 		/// <returns>明文</returns>
 		public static byte[] Decrypt(byte[] encrypted)  
 		{  
-			byte[] key = System.Text.Encoding.Default.GetBytes("MATICSOFT"); 
+			byte[] key = System.Text.Encoding.Default.GetBytes(_key); 
 			return Decrypt(encrypted,key);     
 		}
 		/// <summary>
@@ -99,7 +101,7 @@ namespace PIE.Common.DEncrypt
 		/// <returns>密文</returns>
 		public static byte[] Encrypt(byte[] original)  
 		{  
-			byte[] key = System.Text.Encoding.Default.GetBytes("MATICSOFT"); 
+			byte[] key = System.Text.Encoding.Default.GetBytes(_key); 
 			return Encrypt(original,key);     
 		}  
 		#endregion

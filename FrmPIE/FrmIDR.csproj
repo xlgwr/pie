@@ -382,6 +382,10 @@
       <Project>{e3d8759a-c5eb-402d-9f10-f5c6029a8d1a}</Project>
       <Name>IDR.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IDR.EF\IDR.EF.csproj">
+      <Project>{d3a3ac64-cc27-43e4-bdc2-5ec992f7170b}</Project>
+      <Name>IDR.EF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Print\ClassLibrary1\Xprint.csproj">
       <Project>{76c2a76d-23b4-454d-a8c8-ca83343cd2fe}</Project>
       <Name>Xprint</Name>

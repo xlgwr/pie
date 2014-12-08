@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Text;
 using System.Data;
 
-namespace PIE.Common
+namespace IDR.Common
 {
 	/// <summary>
 	/// Assistant 的摘要说明。

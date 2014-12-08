@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PIE.Common
+namespace IDR.Common
 {
     /// <summary> 
     /// Rmb 的摘要说明。 

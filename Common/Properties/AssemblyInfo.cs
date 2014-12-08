@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle("PIE.Common")]
-[assembly: AssemblyDescription("PIE.Common")]
+[assembly: AssemblyTitle("IDR.Common")]
+[assembly: AssemblyDescription("IDR.Common")]
 [assembly: AssemblyConfiguration("Maticsoft")]
-[assembly: AssemblyCompany("WEC")]
-[assembly: AssemblyProduct("PIE.Common")]
+[assembly: AssemblyCompany("xlgwr")]
+[assembly: AssemblyProduct("IDR.Common")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]	

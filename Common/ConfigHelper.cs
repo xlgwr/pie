@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace PIE.Common
+namespace IDR.Common
 {
 	/// <summary>
 	/// web.config操作类

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PIE.Common
+namespace IDR.Common
 {
     public class StringPlus
     {

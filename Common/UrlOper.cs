@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Collections.Specialized;
 
-namespace PIE.Common
+namespace IDR.Common
 {
     /// <summary>
     /// URL的操作类

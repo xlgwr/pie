@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
 
-namespace PIE.Common
+namespace IDR.Common
 {
     /// <summary>
     /// INI文件读写类。
