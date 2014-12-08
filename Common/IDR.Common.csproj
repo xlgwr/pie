@@ -11,7 +11,7 @@
     </ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>PIE.Common</AssemblyName>
+    <AssemblyName>IDR.Common</AssemblyName>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
@@ -19,7 +19,7 @@
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
     <OutputType>Library</OutputType>
-    <RootNamespace>PIE.Common</RootNamespace>
+    <RootNamespace>IDR.Common</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <StartupObject>
     </StartupObject>
@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DEncrypt\PubConstant.cs" />
+    <Compile Include="GetClientIP.cs" />
     <Compile Include="HttpProc.cs" />
     <Compile Include="MailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

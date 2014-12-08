@@ -302,13 +302,11 @@ namespace FrmPIE
         {
             MessageBox.Show(msg);
             tb.SelectAll();
-            tb.Focus();
         }
         private void txtIsNullOrEmpty(string msg, ComboBox tb)
         {
             MessageBox.Show(msg);
             tb.SelectAll();
-            tb.Focus();
         }
         private void LogonDomain_Load(object sender, EventArgs e)
         {
