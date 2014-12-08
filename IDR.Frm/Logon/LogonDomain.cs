@@ -25,6 +25,11 @@ namespace IDR.Frm.Logon
         PIE _dbpie;
         sys_user _system_user_exists;
 
+        //
+        public bool _logonUserBool { get; set; }
+        public DateTime _startDateTime { get; set; }
+        public int _logonCount { get; set; }
+
         public LogonDomain()
         {
             InitializeComponent();
@@ -38,6 +43,11 @@ namespace IDR.Frm.Logon
 
             _comm = new CommonAPI();
             _dbpie = new PIE();
+
+            //init param
+            _logonCount = 0;
+            _logonUserBool = false;
+            _system_user_exists = null;
 
         }
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -73,11 +83,22 @@ namespace IDR.Frm.Logon
             };
             // existUser(tmpuser);
             btnSubmit.Enabled = false;
-            lbl0Msg.Text = "Logon ...";
+            _startDateTime = DateTime.Now;
+            _logonUserBool = true;
+
             ThreadPool.QueueUserWorkItem(new WaitCallback(existUser), tmpuser);
 
-        }
+            ThreadPool.QueueUserWorkItem(new WaitCallback(initLbl0Msg), "Logon...");
 
+        }
+        void initLbl0Msg(object o)
+        {
+            while (_logonUserBool)
+            {
+                var tmpDateNow = DateTime.Now - _startDateTime;
+                initBtn(o.ToString() + tmpDateNow.Minutes + ":" + tmpDateNow.Seconds + "," + tmpDateNow.Milliseconds, lbl0Msg);
+            }
+        }
         /// <summary>
         /// string strUserName, string strdomain, string strPassword1, string strPass2
         /// sys_user tmpuser = new sys_user()
@@ -95,52 +116,107 @@ namespace IDR.Frm.Logon
         /// <param name="strPass2"></param>
         private void existUser(object o)
         {
-
-            sys_user tmpuser = (sys_user)o;
-            _system_user_exists = _dbpie.sys_user.Where(u => (u.user_name == tmpuser.user_name && u.user_comp == tmpuser.user_comp)).SingleOrDefault();
-            if (_system_user_exists != null)
+            try
             {
-                if (_system_user_exists.user_password.Equals(DESEncrypt.Encrypt(tmpuser.user_password + "," + tmpuser.user_desc)))
+                sys_user tmpuser = (sys_user)o;
+                initBtn("Start Check User is exist...", false);
+                _system_user_exists = _dbpie.sys_user.Where(u => (u.user_name == tmpuser.user_name && u.user_comp == tmpuser.user_comp)).SingleOrDefault();
+                if (_system_user_exists != null)
                 {
-                    _system_user_exists.update_time = DateTime.Now;
-                    _system_user_exists.re_mark = GetClientIP.getClientIP();
-                    _system_user_exists.update_user_id = Program._frm0Version;
-                }
-                var updateuser = _dbpie.SaveChanges();
+                    initBtn("Start Check User PassWord...", false);
+                    if (_system_user_exists.user_password.Equals(DESEncrypt.Encrypt(tmpuser.user_password + "," + tmpuser.user_desc)))
+                    {
 
-                if (!_system_user_exists.flag_status.Equals("T"))
-                {
-                    MessageBox.Show("User Name:[" + _system_user_exists.user_name + "] not activated,Please ask for admin.Ths");
+                        _system_user_exists.update_time = DateTime.Now;
+                        _system_user_exists.re_mark = GetClientIP.getClientIP();
+                        _system_user_exists.update_user_id = Program._frm0Version;
+
+                    }
+                    else
+                    {
+                        if (_logonCount > 3)
+                        {
+                            this.Invoke(new Action(delegate()
+                            {
+                                MessageBox.Show("Enter password more than 3, windows will be close.");
+                                this.Close();
+                            }));
+                        }
+                        initBtn("User Name:[" + _system_user_exists.user_name + "],Please enter a right password or Pass Phrase.Ths", true, txtPassword1);
+
+                        _logonCount++;
+
+                        //return false;
+                        return;
+                    }
+                    initBtn("Start Save Logon Log...", false);
+                    var updateuser = _dbpie.SaveChanges();
+
+                    initBtn("Start Check User is activated?", false);
+                    if (!_system_user_exists.flag_status.Equals("T"))
+                    {
+                        initBtn("User Name:[" + _system_user_exists.user_name + "] not activated,Please ask for admin.Ths", true);
+                        //return false;
+                        return;
+
+                    }
+                    initBtn("Start Check User has Role to Visit it...", false);
+                    if (!getrole())
+                    {
+                        initBtn(_system_user_exists.user_name + " 没有授权访问Packing Information Entry，请联系管理员。", true);
+                        return;
+                    }
+                    else
+                    {
+                        initBtn("Start Show Main Windows for User...", true);
+                        initfrmShow();
+                        //return;
+                    }
+
                     //return false;
-                    initBtn("", true);
-                    return;
 
-                }
-                if (!getrole())
-                {
-                    MessageBox.Show(_system_user_exists.user_name + " 没有授权访问Packing Information Entry，请联系管理员。");
-                    initBtn("", true);
-                    return;
                 }
                 else
                 {
-                    initfrmShow();
-                    //return;
+                    initBtn("User Name:[" + _system_user_exists.user_name + "] is not exist,Please enter a right user", true, txtUserName);
                 }
 
-                //return false;
-
             }
-            else
+            catch (Exception ex)
             {
-                initBtn("System Error,Please retry.", true);
+                initBtn(ex.Message, lk0Msg);
             }
+
             //throw new NotImplementedException();
         }
         public void initBtn(string msg, bool bl)
         {
-            lbl0Msg.Text = msg;
-            btnSubmit.Enabled = bl;
+            this.Invoke(new Action(delegate()
+                {
+                    lk0Msg.Text = msg;
+                    lk0Msg.Visible = true;
+                    if (bl)
+                    {
+                        _logonUserBool = false;
+                    }
+                    btnSubmit.Enabled = bl;
+                }));
+        }
+        public void initBtn(string msg, bool bl, Control cl)
+        {
+            initBtn(msg, bl);
+            this.Invoke(new Action(delegate()
+                {
+                    cl.Focus();
+                }));
+        }
+        public void initBtn(string msg, Control cl)
+        {
+            this.Invoke(new Action(delegate()
+                {
+                    cl.Text = msg;
+                    cl.Visible = true;
+                }));
         }
         private bool getrole()
         {
@@ -150,16 +226,21 @@ namespace IDR.Frm.Logon
 
         private void initfrmShow()
         {
-            this.Hide();
+            this.Invoke(new Action(delegate()
+               {
+                   this.Hide();
+                   //var FrmPIE = new FrmPIE(this, system_user_model);
+                   //FrmPIE.Text += Program.frmVersion;
+                   //FrmPIE.Show();
 
-            //var FrmPIE = new FrmPIE(this, system_user_model);
-            //FrmPIE.Text += Program.frmVersion;
-            //FrmPIE.Show();
+                   var _default = new Default(this, _system_user_exists);
 
-            var _default = new Default(this, _system_user_exists);
-            _default.Text += Program._frm0Version + "    Welcome : " + txtUserName.Text;
-            _default.Show();
+                   _default.Text += Program._frm0Version + "    Welcome : " + txtUserName.Text;
+                   _logonUserBool = false;
+                   _default.Show();
+               }));
         }
+
 
 
 

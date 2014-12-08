@@ -39,8 +39,7 @@
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblmsg = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lk0Msg = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnSubmit = new System.Windows.Forms.Button();
@@ -52,7 +51,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(99, 27);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
@@ -81,7 +80,7 @@
             // 
             this.combDomain.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.combDomain.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.combDomain.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.combDomain.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.combDomain.FormattingEnabled = true;
             this.combDomain.Items.AddRange(new object[] {
             "WWTS",
@@ -95,7 +94,7 @@
             // 
             // txtPassPhrase2
             // 
-            this.txtPassPhrase2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtPassPhrase2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtPassPhrase2.Location = new System.Drawing.Point(121, 143);
             this.txtPassPhrase2.Name = "txtPassPhrase2";
             this.txtPassPhrase2.PasswordChar = '*';
@@ -104,7 +103,7 @@
             // 
             // txtPassword1
             // 
-            this.txtPassword1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtPassword1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtPassword1.Location = new System.Drawing.Point(121, 104);
             this.txtPassword1.Name = "txtPassword1";
             this.txtPassword1.PasswordChar = '*';
@@ -114,7 +113,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(11, 146);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(104, 16);
@@ -124,7 +123,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(35, 108);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 16);
@@ -133,7 +132,7 @@
             // 
             // txtUserName
             // 
-            this.txtUserName.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtUserName.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtUserName.Location = new System.Drawing.Point(121, 65);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(215, 26);
@@ -142,7 +141,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(27, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 16);
@@ -152,42 +151,33 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(11, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "Domain Name:";
             // 
-            // lblmsg
+            // lk0Msg
             // 
-            this.lblmsg.AutoSize = true;
-            this.lblmsg.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblmsg.ForeColor = System.Drawing.Color.Red;
-            this.lblmsg.Location = new System.Drawing.Point(270, 253);
-            this.lblmsg.Name = "lblmsg";
-            this.lblmsg.Size = new System.Drawing.Size(0, 12);
-            this.lblmsg.TabIndex = 19;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.linkLabel1.ForeColor = System.Drawing.Color.Red;
-            this.linkLabel1.LinkColor = System.Drawing.Color.Red;
-            this.linkLabel1.Location = new System.Drawing.Point(0, 278);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(430, 23);
-            this.linkLabel1.TabIndex = 18;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Update Soft";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.linkLabel1.Visible = false;
+            this.lk0Msg.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lk0Msg.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lk0Msg.ForeColor = System.Drawing.Color.Red;
+            this.lk0Msg.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lk0Msg.LinkColor = System.Drawing.Color.Red;
+            this.lk0Msg.Location = new System.Drawing.Point(0, 278);
+            this.lk0Msg.Name = "lk0Msg";
+            this.lk0Msg.Size = new System.Drawing.Size(430, 23);
+            this.lk0Msg.TabIndex = 18;
+            this.lk0Msg.TabStop = true;
+            this.lk0Msg.Text = "Update Soft";
+            this.lk0Msg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lk0Msg.Visible = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.Location = new System.Drawing.Point(94, 7);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(71, 16);
@@ -207,7 +197,7 @@
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSubmit.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSubmit.Location = new System.Drawing.Point(160, 241);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(110, 37);
@@ -219,11 +209,11 @@
             // lbl0Msg
             // 
             this.lbl0Msg.AutoSize = true;
-            this.lbl0Msg.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl0Msg.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl0Msg.ForeColor = System.Drawing.Color.Red;
-            this.lbl0Msg.Location = new System.Drawing.Point(276, 253);
+            this.lbl0Msg.Location = new System.Drawing.Point(275, 253);
             this.lbl0Msg.Name = "lbl0Msg";
-            this.lbl0Msg.Size = new System.Drawing.Size(0, 14);
+            this.lbl0Msg.Size = new System.Drawing.Size(0, 12);
             this.lbl0Msg.TabIndex = 20;
             // 
             // LogonDomain
@@ -235,8 +225,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.lblmsg);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.lk0Msg);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnSubmit);
             this.MaximizeBox = false;
@@ -262,8 +251,7 @@
         protected internal System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblmsg;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel lk0Msg;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnSubmit;
