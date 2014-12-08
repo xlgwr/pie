@@ -40,6 +40,7 @@ namespace IDR.Frm.Logon
         {
             this.StartPosition = FormStartPosition.CenterScreen;
             this.AcceptButton = btnSubmit;
+            this.FormClosing += LogonDomain_FormClosing;
 
             _comm = new CommonAPI();
             _dbpie = new PIE();
@@ -49,6 +50,12 @@ namespace IDR.Frm.Logon
             _logonUserBool = false;
             _system_user_exists = null;
 
+        }
+
+        void LogonDomain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Dispose();
+            GC.Collect();
         }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -134,6 +141,7 @@ namespace IDR.Frm.Logon
                     }
                     else
                     {
+                        _logonCount++;
                         if (_logonCount > 3)
                         {
                             this.Invoke(new Action(delegate()
@@ -142,9 +150,8 @@ namespace IDR.Frm.Logon
                                 this.Close();
                             }));
                         }
-                        initBtn("User Name:[" + _system_user_exists.user_name + "],Please enter a right password or Pass Phrase.Ths", true, txtPassword1);
+                        initBtn("Your have " + (3 - _logonCount) + " Change,Please enter a right password or Pass Phrase.Ths", true, txtPassword1);
 
-                        _logonCount++;
 
                         //return false;
                         return;
@@ -178,13 +185,13 @@ namespace IDR.Frm.Logon
                 }
                 else
                 {
-                    initBtn("User Name:[" + _system_user_exists.user_name + "] is not exist,Please enter a right user", true, txtUserName);
+                    initBtn("User :[" + tmpuser.user_comp + "->" + tmpuser.user_name + "] is not exist,Please enter a right user", true, txtUserName);
                 }
 
             }
             catch (Exception ex)
             {
-                initBtn(ex.Message, lk0Msg);
+                initBtn(ex.Message, true, txtUserName);
             }
 
             //throw new NotImplementedException();
