@@ -5,7 +5,7 @@ namespace IDR.Common.DEncrypt
 {
 	/// <summary>
 	/// DES加密/解密类。
-    /// Copyright (C) Maticsoft
+    
 	/// </summary>
 	public class DESEncrypt
 	{

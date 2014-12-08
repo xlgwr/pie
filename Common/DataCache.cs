@@ -5,7 +5,7 @@ namespace IDR.Common
 {
 	/// <summary>
 	/// 缓存相关的操作类
-    /// Copyright (C) Maticsoft
+    
 	/// </summary>
 	public class DataCache
 	{

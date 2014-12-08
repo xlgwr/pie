@@ -7,7 +7,7 @@ namespace IDR.Common
 {
     /// <summary>
     /// INI文件读写类。
-    /// Copyright (C) Maticsoft
+    
     /// </summary>
 	public class INIFile
 	{

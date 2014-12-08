@@ -8,7 +8,7 @@ namespace IDR.Common
 {
 	/// <summary>
 	/// 页面数据校验类
-    /// Copyright (C) Maticsoft 2004-2012
+     2004-2012
 	/// </summary>
 	public class PageValidate
 	{

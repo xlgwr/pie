@@ -5,7 +5,7 @@ namespace IDR.Common
 {
 	/// <summary>
 	/// web.config操作类
-    /// Copyright (C) Maticsoft
+    
 	/// </summary>
 	public sealed class ConfigHelper
 	{

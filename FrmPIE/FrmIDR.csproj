@@ -201,18 +201,6 @@
     <Compile Include="Logon\EnterPassword.Designer.cs">
       <DependentUpon>EnterPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="OldPIE\frmPIE.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OldPIE\frmPIE.Designer.cs">
-      <DependentUpon>frmPIE.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OldPIE\frmplMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OldPIE\frmplMain.Designer.cs">
-      <DependentUpon>frmplMain.cs</DependentUpon>
-    </Compile>
     <Compile Include="0temple\indextemple.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,12 +218,6 @@
     </Compile>
     <Compile Include="Logon\LogonDomain.Designer.cs">
       <DependentUpon>LogonDomain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OldPIE\MaximunSizeFrm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OldPIE\MaximunSizeFrm.Designer.cs">
-      <DependentUpon>MaximunSizeFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -303,12 +285,6 @@
     <EmbeddedResource Include="Logon\EnterPassword.resx">
       <DependentUpon>EnterPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OldPIE\frmPIE.resx">
-      <DependentUpon>frmPIE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OldPIE\frmplMain.resx">
-      <DependentUpon>frmplMain.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="0temple\indextemple.resx">
       <DependentUpon>indextemple.cs</DependentUpon>
     </EmbeddedResource>
@@ -317,9 +293,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Logon\LogonDomain.resx">
       <DependentUpon>LogonDomain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OldPIE\MaximunSizeFrm.resx">
-      <DependentUpon>MaximunSizeFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

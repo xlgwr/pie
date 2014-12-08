@@ -4,7 +4,7 @@ namespace IDR.Common
 {
 	/// <summary>
 	/// 显示消息提示对话框。
-    /// Copyright (C) Maticsoft
+    
 	/// </summary>
 	public class MessageBox
 	{		
