@@ -277,7 +277,7 @@ namespace FrmPIE.reports.DataSet {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class vpi_reportDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class vpi_reportDataTable : global::System.Data.TypedTableBase<vpi_reportRow> {
             
             private global::System.Data.DataColumn columnPI_ID;
             
@@ -880,12 +880,6 @@ namespace FrmPIE.reports.DataSet {
                             PI_ID,
                             pi_LineID,
                             pi_wec_ctn})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

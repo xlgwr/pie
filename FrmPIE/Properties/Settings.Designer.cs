@@ -26,20 +26,20 @@ namespace FrmPIE.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.99/mfgpgm/Service.asmx")]
-        public string IDR_System_WebReferenceRTM99_Service {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx")]
+        public string IDR_System_WebReference208_UserLoginCheck {
             get {
-                return ((string)(this["IDR_System_WebReferenceRTM99_Service"]));
+                return ((string)(this["IDR_System_WebReference208_UserLoginCheck"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.208/WFService/External/UserLogin/UserLoginCheck.asmx")]
-        public string IDR_System_WebReference208_UserLoginCheck {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://142.2.70.99/mfgpgm/Service.asmx")]
+        public string IDR_System_WebReferenceRTM99_Service {
             get {
-                return ((string)(this["IDR_System_WebReference208_UserLoginCheck"]));
+                return ((string)(this["IDR_System_WebReferenceRTM99_Service"]));
             }
         }
     }

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FrmPIE</RootNamespace>
     <AssemblyName>IDR System</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -89,6 +89,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
@@ -377,25 +378,9 @@
     <None Include="Web References\WebReferenceRTM99\Service.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\IDR.BLL.csproj">
-      <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
-      <Name>IDR.BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common\IDR.Common.csproj">
       <Project>{e3d8759a-c5eb-402d-9f10-f5c6029a8d1a}</Project>
       <Name>IDR.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAL\IDR.DAL.csproj">
-      <Project>{9fe00521-3a8b-42b1-814e-585e99407b2e}</Project>
-      <Name>IDR.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DBUtility\IDR.DBUtility.csproj">
-      <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
-      <Name>IDR.DBUtility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\IDR.Model.csproj">
-      <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
-      <Name>IDR.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Print\ClassLibrary1\Xprint.csproj">
       <Project>{76c2a76d-23b4-454d-a8c8-ca83343cd2fe}</Project>
