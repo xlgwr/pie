@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCmdUpdUploadExcel = new System.Windows.Forms.Button();
             this.txt5batch_cre_dateUploadExcel = new System.Windows.Forms.TextBox();
             this.txt4batch_dec01UploadExcel = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -84,17 +83,6 @@
             this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
             this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
-            // 
-            // btnCmdUpdUploadExcel
-            // 
-            this.btnCmdUpdUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCmdUpdUploadExcel.Location = new System.Drawing.Point(547, 90);
-            this.btnCmdUpdUploadExcel.Name = "btnCmdUpdUploadExcel";
-            this.btnCmdUpdUploadExcel.Size = new System.Drawing.Size(114, 36);
-            this.btnCmdUpdUploadExcel.TabIndex = 12;
-            this.btnCmdUpdUploadExcel.Text = "&Upload";
-            this.btnCmdUpdUploadExcel.UseVisualStyleBackColor = true;
-            this.btnCmdUpdUploadExcel.Visible = false;
             // 
             // txt5batch_cre_dateUploadExcel
             // 
@@ -169,7 +157,7 @@
             // 
             // btn3QuickUploadExcel
             // 
-            this.btn3QuickUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn3QuickUploadExcel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn3QuickUploadExcel.Location = new System.Drawing.Point(238, 90);
             this.btn3QuickUploadExcel.Name = "btn3QuickUploadExcel";
             this.btn3QuickUploadExcel.Size = new System.Drawing.Size(114, 36);
@@ -180,7 +168,7 @@
             // 
             // btnSelectfileUploadExcel
             // 
-            this.btnSelectfileUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSelectfileUploadExcel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSelectfileUploadExcel.Location = new System.Drawing.Point(6, 21);
             this.btnSelectfileUploadExcel.Name = "btnSelectfileUploadExcel";
             this.btnSelectfileUploadExcel.Size = new System.Drawing.Size(129, 36);
@@ -218,7 +206,7 @@
             // 
             // btn2TempleFileUploadExcel
             // 
-            this.btn2TempleFileUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2TempleFileUploadExcel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2TempleFileUploadExcel.Location = new System.Drawing.Point(15, 90);
             this.btn2TempleFileUploadExcel.Name = "btn2TempleFileUploadExcel";
             this.btn2TempleFileUploadExcel.Size = new System.Drawing.Size(108, 36);
@@ -229,35 +217,35 @@
             // data1GV1ePackingDet1UploadExcel
             // 
             this.data1GV1ePackingDet1UploadExcel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1ePackingDet1UploadExcel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1ePackingDet1UploadExcel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.data1GV1ePackingDet1UploadExcel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.data1GV1ePackingDet1UploadExcel.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data1GV1ePackingDet1UploadExcel.DefaultCellStyle = dataGridViewCellStyle8;
             this.data1GV1ePackingDet1UploadExcel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.data1GV1ePackingDet1UploadExcel.Location = new System.Drawing.Point(3, 17);
             this.data1GV1ePackingDet1UploadExcel.MultiSelect = false;
             this.data1GV1ePackingDet1UploadExcel.Name = "data1GV1ePackingDet1UploadExcel";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.data1GV1ePackingDet1UploadExcel.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data1GV1ePackingDet1UploadExcel.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.data1GV1ePackingDet1UploadExcel.RowTemplate.Height = 23;
             this.data1GV1ePackingDet1UploadExcel.Size = new System.Drawing.Size(662, 211);
             this.data1GV1ePackingDet1UploadExcel.TabIndex = 16;
@@ -274,7 +262,7 @@
             // 
             // btn2GoUploadToERP
             // 
-            this.btn2GoUploadToERP.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2GoUploadToERP.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2GoUploadToERP.ForeColor = System.Drawing.Color.Red;
             this.btn2GoUploadToERP.Location = new System.Drawing.Point(409, 90);
             this.btn2GoUploadToERP.Name = "btn2GoUploadToERP";
@@ -308,7 +296,7 @@
             // 
             this.lbl1UploadExcelThreadMsg.AutoSize = true;
             this.lbl1UploadExcelThreadMsg.ForeColor = System.Drawing.Color.Red;
-            this.lbl1UploadExcelThreadMsg.Location = new System.Drawing.Point(13, 142);
+            this.lbl1UploadExcelThreadMsg.Location = new System.Drawing.Point(13, 137);
             this.lbl1UploadExcelThreadMsg.Name = "lbl1UploadExcelThreadMsg";
             this.lbl1UploadExcelThreadMsg.Size = new System.Drawing.Size(0, 12);
             this.lbl1UploadExcelThreadMsg.TabIndex = 14;
@@ -322,7 +310,6 @@
             this.gb0frmUploadExcel.Controls.Add(this.lbl1UploadExcelThreadMsg);
             this.gb0frmUploadExcel.Controls.Add(this.groupBox1browseUploadExcel);
             this.gb0frmUploadExcel.Controls.Add(this.btn3QuickUploadExcel);
-            this.gb0frmUploadExcel.Controls.Add(this.btnCmdUpdUploadExcel);
             this.gb0frmUploadExcel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb0frmUploadExcel.Location = new System.Drawing.Point(0, 0);
             this.gb0frmUploadExcel.Name = "gb0frmUploadExcel";
@@ -356,7 +343,6 @@
         private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
         private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
         private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
-        private System.Windows.Forms.Button btnCmdUpdUploadExcel;
         private System.Windows.Forms.TextBox txt5batch_cre_dateUploadExcel;
         private System.Windows.Forms.TextBox txt4batch_dec01UploadExcel;
         private System.Windows.Forms.Label label5;

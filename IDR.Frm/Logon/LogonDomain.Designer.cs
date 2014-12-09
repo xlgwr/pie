@@ -208,13 +208,13 @@
             // 
             // lbl0Msg
             // 
-            this.lbl0Msg.AutoSize = true;
             this.lbl0Msg.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl0Msg.ForeColor = System.Drawing.Color.Red;
-            this.lbl0Msg.Location = new System.Drawing.Point(275, 253);
+            this.lbl0Msg.Location = new System.Drawing.Point(275, 249);
             this.lbl0Msg.Name = "lbl0Msg";
-            this.lbl0Msg.Size = new System.Drawing.Size(0, 12);
+            this.lbl0Msg.Size = new System.Drawing.Size(143, 25);
             this.lbl0Msg.TabIndex = 20;
+            this.lbl0Msg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LogonDomain
             // 
