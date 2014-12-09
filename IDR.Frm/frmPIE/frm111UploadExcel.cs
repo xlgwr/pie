@@ -224,6 +224,7 @@ namespace IDR.Frm.frmPIE
             {
                 var currmsg = "Total:" + rowCount + ",Start Generate Carton ID For BatchID: " + dr.Batch_ID + ",LineID:" + dr.LineID;
                 cf.setControlText(lbl1UploadExcelThreadMsg, currmsg, true, true);
+                cf.setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
                 int intresutl = cf.GenCartonNo(dr);
                 batchid = dr.Batch_ID;
                 ///0: success 1:error 3:has upload to erp;
@@ -238,7 +239,7 @@ namespace IDR.Frm.frmPIE
             }
             var msgCarton = "\nGenerate Carton ID For BatchID " + batchid + " Success.";
             var currtime = DateTime.Now - oldtime;
-            string difftime = "\tUse Time: " + currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
+            string difftime = "\t\tUse Time: " + currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
             btnEnable(true, true);
             cf.setControlText(lbl1UploadExcelThreadMsg, "\t" + o.ToString() + msgCarton + difftime, true, true);
         }
