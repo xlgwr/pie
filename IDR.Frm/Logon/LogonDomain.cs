@@ -22,8 +22,8 @@ namespace IDR.Frm.Logon
     public partial class LogonDomain : Form
     {
         CommonAPI _comm;
-        PIE _dbpie;
-        sys_user _system_user_exists;
+        public PIE _dbpie { get; set; }
+        public sys_user _system_user_exists { get; set; }
 
         //
         public bool _logonUserBool { get; set; }
@@ -55,6 +55,10 @@ namespace IDR.Frm.Logon
         void LogonDomain_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Dispose();
+            if (_dbpie != null)
+            {
+                _dbpie.Dispose();
+            }
             GC.Collect();
         }
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -127,7 +131,8 @@ namespace IDR.Frm.Logon
             {
                 sys_user tmpuser = (sys_user)o;
                 initBtn("Start Check User is exist...", false);
-                _system_user_exists = _dbpie.sys_user.Where(u => (u.user_name == tmpuser.user_name && u.user_comp == tmpuser.user_comp)).SingleOrDefault();
+                //_system_user_exists = _dbpie.sys_user.Where(u => (u.user_name == tmpuser.user_name && u.user_comp == tmpuser.user_comp)).SingleOrDefault();
+                _system_user_exists = _dbpie.sys_user.Find(tmpuser.user_name, tmpuser.user_comp);
                 if (_system_user_exists != null)
                 {
                     initBtn("Start Check User PassWord...", false);
@@ -170,7 +175,7 @@ namespace IDR.Frm.Logon
                     initBtn("Start Check User has Role to Visit it...", false);
                     if (!getrole())
                     {
-                        initBtn(_system_user_exists.user_name + " 没有授权访问Packing Information Entry，请联系管理员。", true);
+                        initBtn(_system_user_exists.user_name + " have not Role to Visit Packing Information Entry，Please ask for admin.Ths。", true);
                         return;
                     }
                     else
@@ -227,7 +232,26 @@ namespace IDR.Frm.Logon
         }
         private bool getrole()
         {
-            return true;
+            var hasone = false;
+            var roleList = _dbpie.sys_role.Where(r => (r.role_name.Equals("packing") || r.role_name.Equals("admin")));
+            if (roleList == null)
+            {
+                return false;
+            }
+            foreach (var item in roleList)
+            {
+                var getUserInRole = _dbpie.sys_userInrole.Find(_system_user_exists.user_name, item.role_id);
+                if (getUserInRole != null)
+                {
+                    hasone = true;
+                    break;
+                }
+                else
+                {
+                    hasone = false;
+                }
+            }
+            return hasone;
             //throw new NotImplementedException();
         }
 

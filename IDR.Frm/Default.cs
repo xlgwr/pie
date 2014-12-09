@@ -43,7 +43,7 @@ namespace IDR.Frm
             InitializeComponent();
             //////////////////////
 
-            initFrm();
+            initFrm(logonDomain._dbpie);
             //////end
         }
         void initFrm()
@@ -54,8 +54,11 @@ namespace IDR.Frm
 
             _comm = new CommonAPI();
             _dbpie = new PIE();
-
-
+        }
+        void initFrm(PIE dbpie)
+        {
+            initFrm();
+            _dbpie = dbpie;
         }
         void Default_FormClosing(object sender, FormClosingEventArgs e)
         {

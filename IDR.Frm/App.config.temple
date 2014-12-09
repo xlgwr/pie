@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+		<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+	<!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 --></configSections>
+	<entityFramework>
+		<defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
+		<providers>
+			<provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+		</providers>
+	</entityFramework>
+	<connectionStrings>
+		<!--<add name="PIE" connectionString="data source=142.2.70.140,50000;initial catalog=PIE;user id=sa;password=;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
+		<add name="PIRemote" connectionString="data source=142.2.47.149;initial catalog=pi;user id=sa;password=;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />-->
+	</connectionStrings>
+	<appSettings>
+		<!--<add key="ConStringEncrypt" value="false"/>
+		<add key="ConnectionStringPIE" value="data source=.;initial catalog=PIE;user id=sa;password=123;MultipleActiveResultSets=True;App=EntityFramework"/>-->
+		<add key="ConStringEncrypt" value="true" />
+
+		<!--test PIE 140,50000-->
+		<add key="ConnectionStringPIE" value="52FBA299B2CD8B82D5E1A5BE9C84F0F76F65B54281B4579197749C622356A23144021FBC46E00F17D5507965DDBA398E2A33AF3CBD096C2FB2EE1C7258309156AD6E0BD8EAEEBE0749D499A17FF66D02A88455E2192161A1701FD8FE6328384702879C162B3DDF1A939A60192E3D9DEA7FBC14C02A12450F374DE635083A1FBC3C33273F7A151423" />
+
+		<!--test Remote 47.149 PI-->
+		<add key="ConnectionStringPIRemote" value="52FBA299B2CD8B82D5E1A5BE9C84F0F7569BCFC54F22237FF50B1E20228579A8FD4BD888C1E47ED78851988B275A13AF7A504BB92C2AC955F0EAAAB5E1A5DECA3760A7828823242385F495462E7718BBA99D78055E88C0EAC8D99659533D3C9B7DC708D7842BC608B7A8BD708664F36C2F9F1ABB13E0ECA4" />
+
+		<!--**********************************************************************-->
+		<!--PIE 209-->
+		<!--<add key="ConnectionString" value="" />-->
+
+		<!--Remote 3.4.7 PI-->
+
+		<!--<add key="ConnectionStringRemote" value="" />-->
+	</appSettings>
+</configuration>
