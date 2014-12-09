@@ -136,10 +136,10 @@ namespace FrmPIE
         }
         private void initwidthUploadExcel()
         {
-            groupBox2mstrUploadExcel.Width = groupBox0frmUploadExcel.Width - groupBox2mstrUploadExcel.Left - 5;
+            groupBox2mstrUploadExcel.Width = gb0frmUploadExcel.Width - groupBox2mstrUploadExcel.Left - 5;
             groupBox3detUploadExcel.Width = groupBox2mstrUploadExcel.Width;
 
-            groupBox3detUploadExcel.Height = groupBox0frmUploadExcel.Height - groupBox3detUploadExcel.Top - 10;
+            groupBox3detUploadExcel.Height = gb0frmUploadExcel.Height - groupBox3detUploadExcel.Top - 10;
 
         }
         private void btnSelectfileUploadExcel_Click(object sender, EventArgs e)
@@ -858,9 +858,7 @@ namespace FrmPIE
                 btnSelectfileUploadExcel.Focus();
             }
             else
-            {
-
-                //Init0ializeWorkbook(txtExcelFileUploadExcel.Text);     
+            {    
                 oldtime = DateTime.Now;
                 Init0ializeWorkbookdelegate(txt0ExcelFileUploadExcel.Text);
             }

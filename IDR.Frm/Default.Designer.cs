@@ -167,6 +167,7 @@
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.Image = global::IDR.Frm.Properties.Resources.down;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(178, 22);
             this.toolStripMenuItem1.Text = "&Enquire Pi Report";
@@ -208,6 +209,7 @@
             // 
             // toolStripMenuItem31btnPrintCartonLabel3
             // 
+            this.toolStripMenuItem31btnPrintCartonLabel3.Image = global::IDR.Frm.Properties.Resources.print;
             this.toolStripMenuItem31btnPrintCartonLabel3.Name = "toolStripMenuItem31btnPrintCartonLabel3";
             this.toolStripMenuItem31btnPrintCartonLabel3.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem31btnPrintCartonLabel3.Text = "&Print Carton Label";
@@ -246,12 +248,14 @@
             // 
             // tool1StripMenuItem21ScanCartronLabel
             // 
+            this.tool1StripMenuItem21ScanCartronLabel.Image = global::IDR.Frm.Properties.Resources.bar1;
             this.tool1StripMenuItem21ScanCartronLabel.Name = "tool1StripMenuItem21ScanCartronLabel";
             this.tool1StripMenuItem21ScanCartronLabel.Size = new System.Drawing.Size(181, 22);
             this.tool1StripMenuItem21ScanCartronLabel.Text = "&Scan Ctn label";
             // 
             // addGWForPalletToolStripMenuItem
             // 
+            this.addGWForPalletToolStripMenuItem.Image = global::IDR.Frm.Properties.Resources.package;
             this.addGWForPalletToolStripMenuItem.Name = "addGWForPalletToolStripMenuItem";
             this.addGWForPalletToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.addGWForPalletToolStripMenuItem.Text = "&Add GW for Pallet";
@@ -399,6 +403,7 @@
             this.btn0Find9.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.toolTip1.SetToolTip(this.btn0Find9, "Find Result");
             this.btn0Find9.UseVisualStyleBackColor = false;
+            this.btn0Find9.Click += new System.EventHandler(this.btn0Find9_Click);
             // 
             // btn0Print6
             // 
@@ -466,21 +471,27 @@
             // 
             // closeAllButThisToolStripMenuItem3
             // 
+            this.closeAllButThisToolStripMenuItem3.Image = global::IDR.Frm.Properties.Resources.remove_file;
             this.closeAllButThisToolStripMenuItem3.Name = "closeAllButThisToolStripMenuItem3";
             this.closeAllButThisToolStripMenuItem3.Size = new System.Drawing.Size(176, 22);
             this.closeAllButThisToolStripMenuItem3.Text = "Close All But This";
+            this.closeAllButThisToolStripMenuItem3.Click += new System.EventHandler(this.closeAllButThisToolStripMenuItem3_Click);
             // 
             // closeAllToolStripMenuItem2
             // 
+            this.closeAllToolStripMenuItem2.Image = global::IDR.Frm.Properties.Resources.remove;
             this.closeAllToolStripMenuItem2.Name = "closeAllToolStripMenuItem2";
             this.closeAllToolStripMenuItem2.Size = new System.Drawing.Size(176, 22);
             this.closeAllToolStripMenuItem2.Text = "Close All";
+            this.closeAllToolStripMenuItem2.Click += new System.EventHandler(this.closeAllToolStripMenuItem2_Click);
             // 
             // closeToolStripMenuItem1
             // 
+            this.closeToolStripMenuItem1.Image = global::IDR.Frm.Properties.Resources.remove_window;
             this.closeToolStripMenuItem1.Name = "closeToolStripMenuItem1";
             this.closeToolStripMenuItem1.Size = new System.Drawing.Size(176, 22);
             this.closeToolStripMenuItem1.Text = "Close";
+            this.closeToolStripMenuItem1.Click += new System.EventHandler(this.closeToolStripMenuItem1_Click);
             // 
             // linkLabel2
             // 
@@ -504,6 +515,7 @@
             // toolStripMenuItem22UploadCartonIDToERP
             // 
             this.toolStripMenuItem22UploadCartonIDToERP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStripMenuItem22UploadCartonIDToERP.Image = global::IDR.Frm.Properties.Resources.up_button;
             this.toolStripMenuItem22UploadCartonIDToERP.Name = "toolStripMenuItem22UploadCartonIDToERP";
             this.toolStripMenuItem22UploadCartonIDToERP.Size = new System.Drawing.Size(220, 22);
             this.toolStripMenuItem22UploadCartonIDToERP.Text = "&Upload CartonID To ERP";
@@ -626,6 +638,7 @@
             this.btn1Home1.Text = "1";
             this.btn1Home1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btn1Home1.UseVisualStyleBackColor = true;
+            this.btn1Home1.Click += new System.EventHandler(this.btn1Home1_Click);
             // 
             // linkLabel9
             // 
@@ -637,6 +650,7 @@
             this.linkLabel9.TabStop = true;
             this.linkLabel9.Text = "HOME";
             this.linkLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkLabel9.Click += new System.EventHandler(this.btn1Home1_Click);
             // 
             // statusStrip2
             // 
@@ -744,18 +758,22 @@
             // 
             // toolcMenu11UploadEPackingListExcel
             // 
+            this.toolcMenu11UploadEPackingListExcel.Image = global::IDR.Frm.Properties.Resources.up;
             this.toolcMenu11UploadEPackingListExcel.Name = "toolcMenu11UploadEPackingListExcel";
             this.toolcMenu11UploadEPackingListExcel.Size = new System.Drawing.Size(297, 22);
             this.toolcMenu11UploadEPackingListExcel.Text = "&Upload EPacking List (Excel)";
+            this.toolcMenu11UploadEPackingListExcel.Click += new System.EventHandler(this.toolcMenu11UploadEPackingListExcel_Click);
             // 
             // toolcMenu10UploadEPackingListExcelForKYCA
             // 
+            this.toolcMenu10UploadEPackingListExcelForKYCA.Image = global::IDR.Frm.Properties.Resources._23;
             this.toolcMenu10UploadEPackingListExcelForKYCA.Name = "toolcMenu10UploadEPackingListExcelForKYCA";
             this.toolcMenu10UploadEPackingListExcelForKYCA.Size = new System.Drawing.Size(297, 22);
             this.toolcMenu10UploadEPackingListExcelForKYCA.Text = "&Upload EPacking List (Excel For KYCA)";
             // 
             // toolcMenu12AddOneByOneBatchID
             // 
+            this.toolcMenu12AddOneByOneBatchID.Image = global::IDR.Frm.Properties.Resources.add;
             this.toolcMenu12AddOneByOneBatchID.Name = "toolcMenu12AddOneByOneBatchID";
             this.toolcMenu12AddOneByOneBatchID.Size = new System.Drawing.Size(297, 22);
             this.toolcMenu12AddOneByOneBatchID.Text = "&Add New(Edit BatchID)";
@@ -825,12 +843,14 @@
             this.status11toolBtnleft.Name = "status11toolBtnleft";
             this.status11toolBtnleft.Size = new System.Drawing.Size(32, 20);
             this.status11toolBtnleft.Text = "&Hide Left Bar";
+            this.status11toolBtnleft.ButtonClick += new System.EventHandler(this.status11toolBtnleft_ButtonClick);
             // 
             // hideLeftToolStripMenuItem3
             // 
             this.hideLeftToolStripMenuItem3.Name = "hideLeftToolStripMenuItem3";
             this.hideLeftToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
             this.hideLeftToolStripMenuItem3.Text = "Hide Left Bar";
+            this.hideLeftToolStripMenuItem3.Click += new System.EventHandler(this.hideLeftToolStripMenuItem3_Click);
             // 
             // status125toolBtnClear
             // 
@@ -890,18 +910,21 @@
             this.t1AboutAToolStripMenuItem.Name = "t1AboutAToolStripMenuItem";
             this.t1AboutAToolStripMenuItem.Size = new System.Drawing.Size(64, 21);
             this.t1AboutAToolStripMenuItem.Text = "Help(&H)";
+            this.t1AboutAToolStripMenuItem.Click += new System.EventHandler(this.t1AboutAToolStripMenuItem_Click);
             // 
             // hideLeftBarToolStripMenuItem2
             // 
             this.hideLeftBarToolStripMenuItem2.Name = "hideLeftBarToolStripMenuItem2";
             this.hideLeftBarToolStripMenuItem2.Size = new System.Drawing.Size(157, 22);
             this.hideLeftBarToolStripMenuItem2.Text = "Hide &Left Bar";
+            this.hideLeftBarToolStripMenuItem2.Click += new System.EventHandler(this.hideLeftBarToolStripMenuItem2_Click);
             // 
             // hideToolBarToolStripMenuItem1
             // 
             this.hideToolBarToolStripMenuItem1.Name = "hideToolBarToolStripMenuItem1";
             this.hideToolBarToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             this.hideToolBarToolStripMenuItem1.Text = "&Hide Tool Bar";
+            this.hideToolBarToolStripMenuItem1.Click += new System.EventHandler(this.hideToolBarToolStripMenuItem1_Click);
             // 
             // t0WindowsWToolStripMenuItem
             // 

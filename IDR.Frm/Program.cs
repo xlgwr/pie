@@ -4,6 +4,10 @@ using System.Linq;
 using System.Windows.Forms;
 
 using IDR.Frm.Logon;
+using IDR.Common;
+
+
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace IDR.Frm
 {
@@ -29,6 +33,9 @@ namespace IDR.Frm
         public static string _strURL = "";
 
         static LogonDomain LogonOn = null;
+        //attribute
+
+        public static string _clientIP { get; set; }
 
         #endregion
         /// <summary>
@@ -51,6 +58,8 @@ namespace IDR.Frm
 
         private static void initValue()
         {
+            //clientIP
+            _clientIP = GetClientIP.getClientIP();
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
             _frm4VersionMain = 20141208;

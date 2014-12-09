@@ -374,8 +374,6 @@ namespace FrmPIE
             HideOrShowLeftBar(splitContainer1, 1, hideToolBarToolStripMenuItem1, "&Hide Tool Bar", "&Show Tool Bar");
             HideOrShowleftorToolImg(splitContainer1, new object[] { hideToolBarToolStripMenuItem1 }, 2);
 
-
-
         }
 
         private void hideLeftBarToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -386,7 +384,6 @@ namespace FrmPIE
         private void hideLeftToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             HideOrShowLeftBar(splitContainer2, 1, hideLeftToolStripMenuItem3, "Hide Left &Bar", "Show Left &Bar");
-
             HideOrShowleftorToolImg(splitContainer2, new object[] { status11toolBtnleft, hideLeftBarToolStripMenuItem2, hideLeftToolStripMenuItem3 }, 1);
         }
         private void HideOrShowleftorToolImg(SplitContainer sc, object[] ts, int imagIndex)
@@ -731,7 +728,7 @@ namespace FrmPIE
         {
             addNewTabPage("Upload EPacking List From Excel");
             frmUploadExcel fu = new frmUploadExcel(this);
-            addGBToTC(tabCtlRight1, fu.groupBox0frmUploadExcel);
+            addGBToTC(tabCtlRight1, fu.gb0frmUploadExcel);
         }
 
         private void toolcMenu10UploadEPackingListExcelForKYCA_Click(object sender, EventArgs e)

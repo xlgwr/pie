@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmIDR));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.t0WindowsWToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,19 +59,19 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn1PackingListMaintain1 = new System.Windows.Forms.Button();
-            this.cMenuStrip1PacklingListMain = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMenuStrip1PacklingListMain = new System.Windows.Forms.ContextMenuStrip();
             this.toolcMenu11UploadEPackingListExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolcMenu10UploadEPackingListExcelForKYCA = new System.Windows.Forms.ToolStripMenuItem();
             this.toolcMenu12AddOneByOneBatchID = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn2GenCarton2 = new System.Windows.Forms.Button();
-            this.cMenuStrip2CartonIDMain = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMenuStrip2CartonIDMain = new System.Windows.Forms.ContextMenuStrip();
             this.toolStripMenuItem22UploadCartonIDToERP = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn3PrintCartonLabel3 = new System.Windows.Forms.Button();
-            this.cMenuStrip3PrintCartonLabel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMenuStrip3PrintCartonLabel = new System.Windows.Forms.ContextMenuStrip();
             this.toolStripMenuItem31btnPrintCartonLabel3 = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.lblSystemName = new System.Windows.Forms.Label();
@@ -81,13 +80,13 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn21ScanCartronLabel21 = new System.Windows.Forms.Button();
-            this.cMenuStrip21ScanCartronLabel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMenuStrip21ScanCartronLabel = new System.Windows.Forms.ContextMenuStrip();
             this.tool1StripMenuItem21ScanCartronLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.addGWForPalletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn24PIReports = new System.Windows.Forms.Button();
-            this.c22MenuStripPiSystem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.c22MenuStripPiSystem = new System.Windows.Forms.ContextMenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel8 = new System.Windows.Forms.LinkLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -97,18 +96,19 @@
             this.btn0Print6 = new System.Windows.Forms.Button();
             this.btn0Edit2 = new System.Windows.Forms.Button();
             this.btn0Add1 = new System.Windows.Forms.Button();
-            this.ctmenusClose = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctmenusClose = new System.Windows.Forms.ContextMenuStrip();
             this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllButThisToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.tool110StripMenuItemVoid = new System.Windows.Forms.ToolStripMenuItem();
-            this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.c11MenuStripVoid = new System.Windows.Forms.ContextMenuStrip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.link0NewVersion = new System.Windows.Forms.LinkLabel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timerColor = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer();
+            this.timerColor = new System.Windows.Forms.Timer();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -131,6 +131,7 @@
             this.cMenuStrip21ScanCartronLabel.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
             this.c22MenuStripPiSystem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -991,6 +992,7 @@
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel9.ResumeLayout(false);
@@ -1016,6 +1018,7 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ctmenusClose.ResumeLayout(false);
             this.c11MenuStripVoid.ResumeLayout(false);

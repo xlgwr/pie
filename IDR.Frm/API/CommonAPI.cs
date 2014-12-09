@@ -33,7 +33,7 @@ namespace IDR.Frm.API
             }
             return false;
         }
-        
+
         /// <summary>
         ///  ControlIsNullOrEmpty
         /// </summary>
@@ -50,7 +50,44 @@ namespace IDR.Frm.API
             }
             return false;
         }
-        //////////////////////////////////add new
+        /// <summary>
+        /// set control text
+        /// </summary>
+        /// <param name="ctl"></param>
+        /// <param name="strMsg"></param>
+        /// <param name="enable"></param>
+        /// <param name="visible"></param>
+        public void setControlText(System.Windows.Forms.Control ctl, string strMsg, bool enable, bool visible)
+        {
+            _frmDefault.Invoke(new Action(delegate
+            {
+                ctl.Text = strMsg;
+                ctl.Enabled = enable;
+                ctl.Visible = visible;
+            }));
 
+        }
+        /// <summary>
+        /// set toolstriptitem state bar
+        /// </summary>
+        /// <param name="ctl"></param>
+        /// <param name="strMsg"></param>
+        /// <param name="enable"></param>
+        /// <param name="visible"></param>
+        public void setControlText(System.Windows.Forms.ToolStripItem ctl, string strMsg, bool enable, bool visible)
+        {
+            _frmDefault.Invoke(new Action(delegate
+            {
+                ctl.Text = strMsg;
+                ctl.Enabled = enable;
+                ctl.Visible = visible;
+            }));
+
+        }
+        internal void OpenFolderAndSelectFile(string pathname)
+        {
+            throw new NotImplementedException();
+        }
+        //////////////////////////////////add new
     }
 }

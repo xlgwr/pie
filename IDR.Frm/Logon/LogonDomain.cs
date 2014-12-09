@@ -29,6 +29,7 @@ namespace IDR.Frm.Logon
         public bool _logonUserBool { get; set; }
         public DateTime _startDateTime { get; set; }
         public int _logonCount { get; set; }
+        public string _clientIP { get; set; }
 
         public LogonDomain()
         {
@@ -46,12 +47,16 @@ namespace IDR.Frm.Logon
             _dbpie = new PIE();
 
             //init param
+            initPara();
+        }
+
+        private void initPara()
+        {
             _logonCount = 0;
             _logonUserBool = false;
             _system_user_exists = null;
-
+            _clientIP = Program._clientIP;
         }
-
         void LogonDomain_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Dispose();
@@ -140,7 +145,7 @@ namespace IDR.Frm.Logon
                     {
 
                         _system_user_exists.update_time = DateTime.Now;
-                        _system_user_exists.re_mark = GetClientIP.getClientIP();
+                        _system_user_exists.re_mark = _clientIP;
                         _system_user_exists.update_user_id = Program._frm0Version;
 
                     }

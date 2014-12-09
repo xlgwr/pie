@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUploadExcel));
-            this.groupBox0frmUploadExcel = new System.Windows.Forms.GroupBox();
+            this.gb0frmUploadExcel = new System.Windows.Forms.GroupBox();
             this.btn2GoUploadToERP = new System.Windows.Forms.Button();
             this.groupBox2mstrUploadExcel = new System.Windows.Forms.GroupBox();
             this.txt5batch_cre_dateUploadExcel = new System.Windows.Forms.TextBox();
@@ -58,7 +58,7 @@
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox0frmUploadExcel.SuspendLayout();
+            this.gb0frmUploadExcel.SuspendLayout();
             this.groupBox2mstrUploadExcel.SuspendLayout();
             this.groupBox3detUploadExcel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV1ePackingDet1UploadExcel)).BeginInit();
@@ -66,23 +66,23 @@
             this.ctmenu0EnquireByPart.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox0frmUploadExcel
+            // gb0frmUploadExcel
             // 
-            this.groupBox0frmUploadExcel.Controls.Add(this.btn2GoUploadToERP);
-            this.groupBox0frmUploadExcel.Controls.Add(this.groupBox2mstrUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.groupBox3detUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.btn2TempleFileUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.lbl1UploadExcelThreadMsg);
-            this.groupBox0frmUploadExcel.Controls.Add(this.groupBox1browseUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.btn3QuickUploadExcel);
-            this.groupBox0frmUploadExcel.Controls.Add(this.btnCmdUpdUploadExcel);
-            this.groupBox0frmUploadExcel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox0frmUploadExcel.Location = new System.Drawing.Point(0, 0);
-            this.groupBox0frmUploadExcel.Name = "groupBox0frmUploadExcel";
-            this.groupBox0frmUploadExcel.Size = new System.Drawing.Size(683, 472);
-            this.groupBox0frmUploadExcel.TabIndex = 0;
-            this.groupBox0frmUploadExcel.TabStop = false;
-            this.groupBox0frmUploadExcel.Resize += new System.EventHandler(this.groupBox1frmUpload_Resize);
+            this.gb0frmUploadExcel.Controls.Add(this.btn2GoUploadToERP);
+            this.gb0frmUploadExcel.Controls.Add(this.groupBox2mstrUploadExcel);
+            this.gb0frmUploadExcel.Controls.Add(this.groupBox3detUploadExcel);
+            this.gb0frmUploadExcel.Controls.Add(this.btn2TempleFileUploadExcel);
+            this.gb0frmUploadExcel.Controls.Add(this.lbl1UploadExcelThreadMsg);
+            this.gb0frmUploadExcel.Controls.Add(this.groupBox1browseUploadExcel);
+            this.gb0frmUploadExcel.Controls.Add(this.btn3QuickUploadExcel);
+            this.gb0frmUploadExcel.Controls.Add(this.btnCmdUpdUploadExcel);
+            this.gb0frmUploadExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gb0frmUploadExcel.Location = new System.Drawing.Point(0, 0);
+            this.gb0frmUploadExcel.Name = "gb0frmUploadExcel";
+            this.gb0frmUploadExcel.Size = new System.Drawing.Size(683, 472);
+            this.gb0frmUploadExcel.TabIndex = 0;
+            this.gb0frmUploadExcel.TabStop = false;
+            this.gb0frmUploadExcel.Resize += new System.EventHandler(this.groupBox1frmUpload_Resize);
             // 
             // btn2GoUploadToERP
             // 
@@ -322,7 +322,7 @@
             this.enquireByPartToolStripMenuItem,
             this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 70);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
             // 
             // enquireByPartToolStripMenuItem
             // 
@@ -344,7 +344,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(683, 472);
-            this.Controls.Add(this.groupBox0frmUploadExcel);
+            this.Controls.Add(this.gb0frmUploadExcel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -352,8 +352,8 @@
             this.Text = "e-Packing Upload";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUploadExcel_FormClosing);
             this.Load += new System.EventHandler(this.frmUpload_Load);
-            this.groupBox0frmUploadExcel.ResumeLayout(false);
-            this.groupBox0frmUploadExcel.PerformLayout();
+            this.gb0frmUploadExcel.ResumeLayout(false);
+            this.gb0frmUploadExcel.PerformLayout();
             this.groupBox2mstrUploadExcel.ResumeLayout(false);
             this.groupBox2mstrUploadExcel.PerformLayout();
             this.groupBox3detUploadExcel.ResumeLayout(false);
@@ -370,7 +370,7 @@
         private System.Windows.Forms.GroupBox groupBox1browseUploadExcel;
         private System.Windows.Forms.Button btnSelectfileUploadExcel;
         private System.Windows.Forms.Button btnCmdUpdUploadExcel;
-        protected internal System.Windows.Forms.GroupBox groupBox0frmUploadExcel;
+        protected internal System.Windows.Forms.GroupBox gb0frmUploadExcel;
         private System.Windows.Forms.Label lbl1UploadExcelThreadMsg;
         private System.Windows.Forms.Button btn2TempleFileUploadExcel;
         protected internal System.Windows.Forms.TextBox txt0ExcelFileUploadExcel;
