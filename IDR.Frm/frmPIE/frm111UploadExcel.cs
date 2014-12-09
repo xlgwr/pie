@@ -308,8 +308,9 @@ namespace IDR.Frm.frmPIE
                 tmp_plr_batch_mstr_model.plr_update_date = servedate;
                 tmp_plr_batch_mstr_model.plr_user_ip = _frmDefault._clientIP;
 
-                cf.setControlText(lbl1UploadExcelThreadMsg, "Total: " + rows_countsum + ",Load Current Rows at:" + rows_current, true, true);
-                cf.setControlText(_frmDefault.status15toolLabelstrResult, "Total: " + rows_countsum + ",Load Current Rows at:" + rows_current, true, true);
+                var tmpmsg = "Excel File has Total: " + rows_countsum + " rows,Load Current Rows at:" + rows_current;
+                cf.setControlText(lbl1UploadExcelThreadMsg, tmpmsg, true, true);
+                cf.setControlText(_frmDefault.status15toolLabelstrResult, tmpmsg, true, true);
 
                 #region inittmp
                 tmp_plr_batch_mstr_model.packingListID = addCelltoData(row, 0) == null ? "" : addCelltoData(row, 0).ToString();
