@@ -204,7 +204,7 @@ namespace IDR.Frm.frmPIE
 
             if (!getNewBatchID(ref _strBatchID))
             {
-                return "Error: BatchID is Error";
+                return "Error: BatchID is Error.";
             };
 
             //for (int j = 0; j < 13; j++)
@@ -241,19 +241,20 @@ namespace IDR.Frm.frmPIE
                     throw new Exception("Error1: this file is not the xls or xlsx file .");
                 }
                 var tmp_plr_batch_mstr_model = new plr_mstr();
+
+                tmp_plr_batch_mstr_model.Batch_ID = _strBatchID;
+                tmp_plr_batch_mstr_model.LineID = rowscount;
+                tmp_plr_batch_mstr_model.plr_status = "No";
+                tmp_plr_batch_mstr_model.plr_doc_type = "e-Packing";
+                tmp_plr_batch_mstr_model.plr_rcp_date = servedate;
+                tmp_plr_batch_mstr_model.plr_deli_date = servedate;
+                tmp_plr_batch_mstr_model.plr_cre_date = servedate; // DateTime.FromOADate(double型)    如果excel为日期时
+                tmp_plr_batch_mstr_model.plr_update_date = servedate;
+                tmp_plr_batch_mstr_model.plr_user_ip = _frmDefault._clientIP;
+
                 cf.setControlText(_frmDefault.status15toolLabelstrResult, "Load Rows at:" + rowscount, true, true);
                 for (int i = 0; i < 13; i++)
                 {
-                    tmp_plr_batch_mstr_model.Batch_ID = _strBatchID;
-                    tmp_plr_batch_mstr_model.LineID = rowscount;
-                    tmp_plr_batch_mstr_model.plr_status = "No";
-                    tmp_plr_batch_mstr_model.plr_doc_type = "e-Packing";
-                    tmp_plr_batch_mstr_model.plr_rcp_date = servedate;
-                    tmp_plr_batch_mstr_model.plr_deli_date = servedate;
-                    tmp_plr_batch_mstr_model.plr_cre_date = servedate; // DateTime.FromOADate(double型)    如果excel为日期时
-                    tmp_plr_batch_mstr_model.plr_update_date = servedate;
-                    tmp_plr_batch_mstr_model.plr_user_ip = _frmDefault._clientIP;
-
 
                     ICell cell = row.GetCell(i);
 
@@ -276,6 +277,7 @@ namespace IDR.Frm.frmPIE
                     else
                     {
                         var tmpValue = new object();
+
                         if (cell.CellType == CellType.Numeric)
                         {
                             tmpValue = cell.NumericCellValue;
@@ -290,57 +292,57 @@ namespace IDR.Frm.frmPIE
                             tmpValue = cell.ToString();
                         }
                         #region inittmp
-                        if (i == 1)
+                        if (i == 0)
                         {
                             tmp_plr_batch_mstr_model.packingListID = tmpValue.ToString();
                         }
-                        else if (i == 2)
+                        else if (i == 1)
                         {
                             tmp_plr_batch_mstr_model.InvoiceID = tmpValue.ToString();
                         }
-                        else if (i == 3)
+                        else if (i == 2)
                         {
                             tmp_plr_batch_mstr_model.plr_pallet_no = tmpValue.ToString();
                         }
-                        else if (i == 4)
+                        else if (i == 3)
                         {
                             tmp_plr_batch_mstr_model.CartonType = tmpValue.ToString();
                         }
-                        else if (i == 5)
+                        else if (i == 4)
                         {
                             tmp_plr_batch_mstr_model.CartonID = tmpValue.ToString();
                         }
-                        else if (i == 6)
+                        else if (i == 5)
                         {
                             tmp_plr_batch_mstr_model.plr_po = tmpValue.ToString();
                         }
-                        else if (i == 7)
+                        else if (i == 6)
                         {
                             tmp_plr_batch_mstr_model.plr_co = tmpValue.ToString();
                         }
-                        else if (i == 8)
+                        else if (i == 7)
                         {
                             tmp_plr_batch_mstr_model.plr_partno = tmpValue.ToString();
                         }
-                        else if (i == 9)
+                        else if (i == 8)
                         {
                             tmp_plr_batch_mstr_model.plr_date_code = tmpValue.ToString();
                         }
-                        else if (i == 10)
+                        else if (i == 9)
                         {
                             tmp_plr_batch_mstr_model.plr_vend_mfgr = tmpValue.ToString();
                         }
-                        else if (i == 11)
+                        else if (i == 10)
                         {
                             tmp_plr_batch_mstr_model.Plr_vm_partno = tmpValue.ToString();
                         }
+                        else if (i == 11)
+                        {
+                            tmp_plr_batch_mstr_model.plr_carton_qty = Convert.ToDecimal(tmpValue);
+                        }
                         else if (i == 12)
                         {
-                            tmp_plr_batch_mstr_model.plr_carton_qty = (decimal)tmpValue;
-                        }
-                        else if (i == 13)
-                        {
-                            tmp_plr_batch_mstr_model.plr_qty = (int)tmpValue;
+                            tmp_plr_batch_mstr_model.plr_qty = Convert.ToInt32(tmpValue);
                         }
                         #endregion
 
@@ -375,7 +377,7 @@ namespace IDR.Frm.frmPIE
                                         };
             parameters[0].Direction = ParameterDirection.Output;
 
-            _dbpie.Database.SqlQuery<string>("exec sp_GetBatchID @BatchID", parameters[0]);
+            _dbpie.Database.SqlQuery<object>("exec sp_GetBatchID @BatchID output", parameters[0]).SingleOrDefault();
             _strBatchID = parameters[0].Value != null ? parameters[0].Value.ToString() : "";
 
             if (string.IsNullOrEmpty(_strBatchID))
@@ -394,7 +396,7 @@ namespace IDR.Frm.frmPIE
         bool insertNewplr_batch_mstr()
         {
             //batch master
-
+            _plr_batch_mstr_model = new plr_batch_mstr();
             _plr_batch_mstr_model.batch_id = _strBatchID;
             //_plr_batch_mstr_model.plr_suppliers_id = "";
             _plr_batch_mstr_model.batch_doc = "e-Packing";
