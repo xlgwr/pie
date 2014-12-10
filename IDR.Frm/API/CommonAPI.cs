@@ -285,7 +285,7 @@ namespace IDR.Frm.API
                         plr_cre_userid = p.plr_cre_userid,
                         plr_user_ip = p.plr_user_ip
 
-                    }).ToList<plr_mstr_ext>().AsQueryable();
+                    });
         }
         /// <summary>
         /// plr_mstr
@@ -340,49 +340,63 @@ namespace IDR.Frm.API
             return _frmDefault._dbpie.plr_mstr_tran.Where(m => m.Batch_ID.Equals(_strBatchID))
                     .Select(p => new plr_mstr_tran_ext
                     {
-                         Batch_ID=p.Batch_ID,
-                        LineID=p.LineID,
-                        plr_status=p.plr_status,
+                        Batch_ID = p.Batch_ID,
+                        LineID = p.LineID,
+                        plr_status = p.plr_status,
 
-                        plr_status_msg=p.plr_status_msg,
-                        plr_wec_ctn=p.plr_wec_ctn,
+                        plr_status_msg = p.plr_status_msg,
+                        plr_wec_ctn = p.plr_wec_ctn,
 
-                        plr_pallet_no=p.plr_pallet_no,
-                        CartonType=p.CartonType,
-                        CartonNo=p.CartonNo,
-                        CartonID=p.CartonID,
-                        carton_id_prifix=p.carton_id_prifix,
-                        plr_po=p.plr_po,
+                        plr_pallet_no = p.plr_pallet_no,
+                        CartonType = p.CartonType,
+                        CartonNo = p.CartonNo,
+                        CartonID = p.CartonID,
+                        carton_id_prifix = p.carton_id_prifix,
+                        plr_po = p.plr_po,
 
-                        plr_partno=p.plr_partno,
-                        plr_carton_qty=p.plr_carton_qty,
-                        plr_qty=p.plr_qty,
+                        plr_partno = p.plr_partno,
+                        plr_carton_qty = p.plr_carton_qty,
+                        plr_qty = p.plr_qty,
 
-                        plr_rcp_date=p.plr_rcp_date,
-                        plr_deli_date=p.plr_deli_date,
-                        re_mark=p.re_mark,
+                        plr_rcp_date = p.plr_rcp_date,
+                        plr_deli_date = p.plr_deli_date,
+                        re_mark = p.re_mark,
 
-                        plr_cre_date=p.plr_cre_date,
-                        plr_update_date=p.plr_update_date,
-                        plr_cre_userid=p.plr_cre_userid,
-                        plr_user_ip=p.plr_user_ip
-                        
-                    }).ToList<plr_mstr_tran_ext>().AsQueryable();
+                        plr_cre_date = p.plr_cre_date,
+                        plr_update_date = p.plr_update_date,
+                        plr_cre_userid = p.plr_cre_userid,
+                        plr_user_ip = p.plr_user_ip
+
+                    });
         }
         #endregion
         #region init data gric view head text
+        /// <summary>
+        /// dgvAttritubeInit(dgv, 1, true);
+        /// </summary>
+        /// <param name="dgv">DataGridView</param>
+        /// <param name="intFrozen">0--n</param>
+        /// <param name="readOnly">readOnly</param>
+        private static void dgvAttritubeInit(DataGridView dgv, int intFrozen, bool readOnly)
+        {
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.AllowUserToOrderColumns = true;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgv.ReadOnly = readOnly;
+            for (int i = 0; i <= intFrozen; i++)
+            {
+                dgv.Columns[i].Frozen = true;
+            }
+
+
+        }
         public void initHeaderText_plr_mstr(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
             {
                 return;
             }
-            dgv.BorderStyle = BorderStyle.None;
-            dgv.AllowUserToOrderColumns = true;
-            //dgv.ReadOnly = true;
-            dgv.Columns[0].Frozen = true;
-            dgv.Columns[1].Frozen = true;
-            dgv.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
+            dgvAttritubeInit(dgv, 1, true);
 
             dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
             dgv.Columns["LineID"].HeaderText = "LineID";
@@ -436,9 +450,9 @@ namespace IDR.Frm.API
             dgv.Columns["LineID"].ReadOnly = true;
             dgv.Columns["plr_status"].ReadOnly = true;
 
-            dgv.Columns["LineID"].Width = 25;
-            dgv.Columns["plr_status"].Width = 50;
-            dgv.Columns["plr_pallet_no"].Width = 50;
+            //dgv.Columns["LineID"].Width = 25;
+            //dgv.Columns["plr_status"].Width = 50;
+            //dgv.Columns["plr_pallet_no"].Width = 50;
 
             dgv.Columns["plr_rcp_date"].ValueType = Type.GetType("System.DateTime");
             dgv.Columns["plr_deli_date"].ValueType = Type.GetType("System.DateTime");
@@ -449,23 +463,13 @@ namespace IDR.Frm.API
             {
                 return;
             }
-            dgv.BorderStyle = BorderStyle.None;
-            dgv.AllowUserToOrderColumns = true;
-            dgv.ReadOnly = true;
-            dgv.Columns[0].Frozen = true;
-            dgv.Columns[1].Frozen = true;
+            dgvAttritubeInit(dgv,1,true);
 
             dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
             dgv.Columns["LineID"].HeaderText = "Line";
             dgv.Columns["plr_status"].HeaderText = "Status";
             dgv.Columns["plr_status_msg"].HeaderText = "Msg";
             dgv.Columns["plr_wec_ctn"].HeaderText = "WEC CTN";
-
-            //dgv.Columns["Wec_Ctn"].HeaderText = "WEC Ctn ID";
-            //dgv.Columns["plr_suppliers_id"].HeaderText = "Suppliers ID";
-            //dgv.Columns["Plr_vm_partno"].HeaderText = "MFGR-Part";
-            //dgv.Columns["InvoiceID"].HeaderText = "Invoice ID";
-            //dgv.Columns["packingListID"].HeaderText = "PackingListID";
 
             dgv.Columns["plr_pallet_no"].HeaderText = "Pallet No";
             dgv.Columns["CartonType"].HeaderText = "Remainder";
@@ -487,10 +491,18 @@ namespace IDR.Frm.API
             dgv.Columns["plr_cre_userid"].HeaderText = "User Id";
             dgv.Columns["plr_user_ip"].HeaderText = "Client IP";
 
-            dgv.Columns["LineID"].Width = 25;
-            dgv.Columns["plr_status"].Width = 50;
-            dgv.Columns["plr_pallet_no"].Width = 50;
+            //dgv.Columns["Wec_Ctn"].HeaderText = "WEC Ctn ID";
+            //dgv.Columns["plr_suppliers_id"].HeaderText = "Suppliers ID";
+            //dgv.Columns["Plr_vm_partno"].HeaderText = "MFGR-Part";
+            //dgv.Columns["InvoiceID"].HeaderText = "Invoice ID";
+            //dgv.Columns["packingListID"].HeaderText = "PackingListID";
+
+            //dgv.Columns["LineID"].Width = 25;
+            //dgv.Columns["plr_status"].Width = 50;
+            //dgv.Columns["plr_pallet_no"].Width = 50;
         }
+
+
         public void initHeaderTextPIMstr(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)

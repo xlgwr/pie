@@ -33,6 +33,7 @@
             this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gb2det_BatchInfo = new System.Windows.Forms.GroupBox();
+            this.data1GV_plr_mstr_BatchInfo = new System.Windows.Forms.DataGridView();
             this.txt5batch_cre_date_BatchInfo = new System.Windows.Forms.TextBox();
             this.txt4batch_dec01_BatchInfo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,16 +46,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gb1mstr_BatchInfo = new System.Windows.Forms.GroupBox();
             this.gb3CartonNo = new System.Windows.Forms.GroupBox();
-            this.gb0BatchInfo0 = new System.Windows.Forms.GroupBox();
-            this.data1GV_plr_mstr_BatchInfo = new System.Windows.Forms.DataGridView();
             this.data2GV2_plr_mstr_tran = new System.Windows.Forms.DataGridView();
+            this.gb0BatchInfo0 = new System.Windows.Forms.GroupBox();
             this.ctmenu0EnquireByPart.SuspendLayout();
             this.gb2det_BatchInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.data1GV_plr_mstr_BatchInfo)).BeginInit();
             this.gb1mstr_BatchInfo.SuspendLayout();
             this.gb3CartonNo.SuspendLayout();
-            this.gb0BatchInfo0.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.data1GV_plr_mstr_BatchInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2_plr_mstr_tran)).BeginInit();
+            this.gb0BatchInfo0.SuspendLayout();
             this.SuspendLayout();
             // 
             // downLoad1ToExceltoolStripMenuItem2
@@ -86,6 +86,21 @@
             this.gb2det_BatchInfo.TabIndex = 17;
             this.gb2det_BatchInfo.TabStop = false;
             this.gb2det_BatchInfo.Text = "Batch ePacking Det";
+            // 
+            // data1GV_plr_mstr_BatchInfo
+            // 
+            this.data1GV_plr_mstr_BatchInfo.AllowUserToAddRows = false;
+            this.data1GV_plr_mstr_BatchInfo.AllowUserToDeleteRows = false;
+            this.data1GV_plr_mstr_BatchInfo.AllowUserToOrderColumns = true;
+            this.data1GV_plr_mstr_BatchInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
+            this.data1GV_plr_mstr_BatchInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.data1GV_plr_mstr_BatchInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.data1GV_plr_mstr_BatchInfo.Location = new System.Drawing.Point(3, 17);
+            this.data1GV_plr_mstr_BatchInfo.Name = "data1GV_plr_mstr_BatchInfo";
+            this.data1GV_plr_mstr_BatchInfo.ReadOnly = true;
+            this.data1GV_plr_mstr_BatchInfo.RowTemplate.Height = 23;
+            this.data1GV_plr_mstr_BatchInfo.Size = new System.Drawing.Size(708, 217);
+            this.data1GV_plr_mstr_BatchInfo.TabIndex = 0;
             // 
             // txt5batch_cre_date_BatchInfo
             // 
@@ -197,32 +212,6 @@
             this.gb3CartonNo.TabStop = false;
             this.gb3CartonNo.Text = "Wec Carton No Det";
             // 
-            // gb0BatchInfo0
-            // 
-            this.gb0BatchInfo0.Controls.Add(this.gb3CartonNo);
-            this.gb0BatchInfo0.Controls.Add(this.gb1mstr_BatchInfo);
-            this.gb0BatchInfo0.Controls.Add(this.gb2det_BatchInfo);
-            this.gb0BatchInfo0.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gb0BatchInfo0.Location = new System.Drawing.Point(0, 0);
-            this.gb0BatchInfo0.Name = "gb0BatchInfo0";
-            this.gb0BatchInfo0.Size = new System.Drawing.Size(729, 559);
-            this.gb0BatchInfo0.TabIndex = 1;
-            this.gb0BatchInfo0.TabStop = false;
-            // 
-            // data1GV_plr_mstr_BatchInfo
-            // 
-            this.data1GV_plr_mstr_BatchInfo.AllowUserToAddRows = false;
-            this.data1GV_plr_mstr_BatchInfo.AllowUserToDeleteRows = false;
-            this.data1GV_plr_mstr_BatchInfo.AllowUserToOrderColumns = true;
-            this.data1GV_plr_mstr_BatchInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.data1GV_plr_mstr_BatchInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.data1GV_plr_mstr_BatchInfo.Location = new System.Drawing.Point(3, 17);
-            this.data1GV_plr_mstr_BatchInfo.Name = "data1GV_plr_mstr_BatchInfo";
-            this.data1GV_plr_mstr_BatchInfo.ReadOnly = true;
-            this.data1GV_plr_mstr_BatchInfo.RowTemplate.Height = 23;
-            this.data1GV_plr_mstr_BatchInfo.Size = new System.Drawing.Size(708, 217);
-            this.data1GV_plr_mstr_BatchInfo.TabIndex = 0;
-            // 
             // data2GV2_plr_mstr_tran
             // 
             this.data2GV2_plr_mstr_tran.AllowUserToAddRows = false;
@@ -237,6 +226,18 @@
             this.data2GV2_plr_mstr_tran.Size = new System.Drawing.Size(708, 217);
             this.data2GV2_plr_mstr_tran.TabIndex = 0;
             // 
+            // gb0BatchInfo0
+            // 
+            this.gb0BatchInfo0.Controls.Add(this.gb3CartonNo);
+            this.gb0BatchInfo0.Controls.Add(this.gb1mstr_BatchInfo);
+            this.gb0BatchInfo0.Controls.Add(this.gb2det_BatchInfo);
+            this.gb0BatchInfo0.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gb0BatchInfo0.Location = new System.Drawing.Point(0, 0);
+            this.gb0BatchInfo0.Name = "gb0BatchInfo0";
+            this.gb0BatchInfo0.Size = new System.Drawing.Size(729, 559);
+            this.gb0BatchInfo0.TabIndex = 1;
+            this.gb0BatchInfo0.TabStop = false;
+            // 
             // frm0BatchInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -247,12 +248,12 @@
             this.Text = "frm0BatchInfo";
             this.ctmenu0EnquireByPart.ResumeLayout(false);
             this.gb2det_BatchInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.data1GV_plr_mstr_BatchInfo)).EndInit();
             this.gb1mstr_BatchInfo.ResumeLayout(false);
             this.gb1mstr_BatchInfo.PerformLayout();
             this.gb3CartonNo.ResumeLayout(false);
-            this.gb0BatchInfo0.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.data1GV_plr_mstr_BatchInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2_plr_mstr_tran)).EndInit();
+            this.gb0BatchInfo0.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
