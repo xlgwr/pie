@@ -252,7 +252,7 @@ namespace IDR.Frm.frmPIE
                 _plr_mstr_list_success = _dbpie.plr_mstr.Local.Where(m => m.Batch_ID.Equals(_strBatchID)).AsQueryable();
                 _list_plr_mstr = cf.getSelectList_plr_mstr(_plr_mstr_list_success);
                 data1GV1ePackingDet1UploadExcel.DataSource = _list_plr_mstr.ToList();
-
+                cf.initHeaderText_plr_mstr(data1GV1ePackingDet1UploadExcel);
                 data1GV1ePackingDet1UploadExcel.Refresh();
             }));
             ///gen carton ID

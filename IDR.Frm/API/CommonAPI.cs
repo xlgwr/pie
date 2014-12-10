@@ -768,8 +768,8 @@ namespace IDR.Frm.API
         /// <returns></returns>
         public string dgv_cellClick(DoWorkObject dwo)
         {
-
-            _frmDefault.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
+            //- 1
+            _frmDefault.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
             //_idr_show.status13toolSStatusLblMsg.Text = "";
             _frmDefault.status15toolLabelstrResult.Text = "";
             try
@@ -807,7 +807,7 @@ namespace IDR.Frm.API
         {
 
 
-            _frmDefault.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
+            _frmDefault.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
             try
             {
                 if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount) //- 1
