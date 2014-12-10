@@ -118,13 +118,13 @@ namespace FrmPIE
         }
         void data1GV1ePackingDet1UploadExcel_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1UploadExcel, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingDet1UploadExcel, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
 
         void data1GV1ePackingDet1UploadExcel_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1UploadExcel, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingDet1UploadExcel, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo);
         }
 

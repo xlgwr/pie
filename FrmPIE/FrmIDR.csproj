@@ -103,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="0API\CartonFromTo.cs" />
-    <Compile Include="0API\DoWrokObject.cs" />
+    <Compile Include="0API\DoWorkObject.cs" />
     <Compile Include="0temple\frmEnterForReference.cs">
       <SubType>Form</SubType>
     </Compile>

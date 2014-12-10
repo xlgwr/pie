@@ -28,11 +28,16 @@ using System.ComponentModel;
 using System.Collections;
 using System.Reflection;
 using System.Linq.Expressions;
+using System.Drawing;
 
 namespace IDR.Frm.API
 {
     class CommonAPI
     {
+        //attr
+        public bool _isSortAscending { get; set; }
+        public DataGridViewColumn _sortColumn { get; set; }
+
         Default _frmDefault;
 
         public CommonAPI() { }
@@ -292,7 +297,7 @@ namespace IDR.Frm.API
         /// </summary>
         /// <param name="plr_mstr_list"></param>
         /// <returns>List<object></returns>
-        public List<plr_mstr_ext> getSelectList_plr_mstr(IList<plr_mstr> plr_mstr_list)
+        public IQueryable<plr_mstr_ext> getSelectList_plr_mstr(IQueryable<plr_mstr> plr_mstr_list)
         {
             return plr_mstr_list
                     .Select(p => new plr_mstr_ext
@@ -327,7 +332,7 @@ namespace IDR.Frm.API
                         plr_update_date = p.plr_update_date,
                         plr_cre_userid = p.plr_cre_userid,
                         plr_user_ip = p.plr_user_ip
-                    }).ToList<plr_mstr_ext>();
+                    });
         }
 
         /// <summary>
@@ -382,6 +387,7 @@ namespace IDR.Frm.API
             dgv.BorderStyle = BorderStyle.None;
             dgv.AllowUserToOrderColumns = true;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgv.MultiSelect = false;
             dgv.ReadOnly = readOnly;
             for (int i = 0; i <= intFrozen; i++)
             {
@@ -463,7 +469,7 @@ namespace IDR.Frm.API
             {
                 return;
             }
-            dgvAttritubeInit(dgv,1,true);
+            dgvAttritubeInit(dgv, 1, true);
 
             dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
             dgv.Columns["LineID"].HeaderText = "Line";
@@ -669,7 +675,7 @@ namespace IDR.Frm.API
             throw new NotImplementedException();
         }
         ///////
-
+        #region datagridview sort
         public IQueryable<T> SortBy<T>(IQueryable<T> source, string sortExpression)
         {
             if (source == null)
@@ -711,19 +717,236 @@ namespace IDR.Frm.API
             return source.Provider.CreateQuery<T>(methodCallExpression);
         }
 
+        public void DGV_ColumnHeaderMouseClick<T>(object sender, DataGridViewCellMouseEventArgs e, DataGridView dgv, IQueryable<T> iQuery)
+            where T : class
+        {
+            if (iQuery.Count() < 0)
+            {
+                return;
+            }
+            DataGridViewColumn column = dgv.Columns[e.ColumnIndex];
+
+            _isSortAscending = (_sortColumn == null || _isSortAscending == false);
+
+            string direction = _isSortAscending ? "ASC" : "DESC";
+
+            dgv.DataSource = Sort<T>(iQuery, column.DataPropertyName, direction).ToList();
+
+            dgv.Refresh();
+
+            if (_sortColumn != null) dgv.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.None;
+            dgv.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = _isSortAscending ? System.Windows.Forms.SortOrder.Ascending : System.Windows.Forms.SortOrder.Descending;
+
+            _sortColumn = column;
+        }
+
+        #endregion
+
+
+        #region datagridview cell click
+        /// <summary>
+        /// cell click
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="colName"></param>
+        /// <param name="colValue"></param>
+        public void selectNextDGVRow(DataGridView dgv, string colName, string colValue)
+        {
+            for (int i = 0; i < dgv.RowCount; i++)// - 1
+            {
+                if (dgv.Rows[i].Cells[colName].Value.ToString().Equals(colValue))
+                {
+                    dgv.Rows[i].Cells[0].Selected = true;
+                    break;
+                }
+            }
+        }
+        /// <summary>
+        /// cell click normal
+        /// </summary>
+        /// <param name="dwo"></param>
+        /// <returns></returns>
+        public string dgv_cellClick(DoWorkObject dwo)
+        {
+
+            _frmDefault.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
+            //_idr_show.status13toolSStatusLblMsg.Text = "";
+            _frmDefault.status15toolLabelstrResult.Text = "";
+            try
+            {
+                if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount)// - 1
+                {
+                    string str_ID = dwo._dgv.Rows[dwo._eX].Cells[dwo._strCellColName].Value.ToString().Trim();
+                    _frmDefault.status14toolLabelCellRowColXY.Text += "," + str_ID;
+                    if (dwo._strCellColName.Equals("Batch_ID"))
+                    {
+                        _frmDefault.Batch_ID = str_ID;
+                    }
+                    else if (dwo._strCellColName.Equals("PI_ID"))
+                    {
+                        _frmDefault.PI_ID = str_ID;
+                    }
+
+                    return str_ID;
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return "";
+            }
+
+        }
+        /// <summary>
+        /// cell click main-item
+        /// </summary>
+        /// <param name="dwo"></param>
+        /// <param name="mainDataGV"></param>
+        public void dgv_cellClick(DoWorkObject dwo, bool mainDataGV)
+        {
+
+
+            _frmDefault.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
+            try
+            {
+                if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount) //- 1
+                {
+                    _frmDefault._plr_mstr_model.Batch_ID = dwo._dgv.Rows[dwo._eX].Cells["Batch_ID"].Value.ToString().Trim();
+
+                    _frmDefault._plr_mstr_model.LineID = Convert.ToInt32(dwo._dgv.Rows[dwo._eX].Cells["LineID"].Value);
+                    _frmDefault._plr_mstr_model.CartonID = dwo._dgv.Rows[dwo._eX].Cells["CartonID"].Value.ToString().Trim();
+
+                    selectNextDGVRow(dwo._dgv1, "LineID", _frmDefault._plr_mstr_model.LineID.ToString());
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        /// <summary>
+        /// row enter
+        /// </summary>
+        /// <param name="dwko"></param>
+        public void dgv_rowEnter(object dwko)
+        {
+            _frmDefault.Invoke(new Action(delegate()
+            {
+                _frmDefault._sameColumnCount = 0;
+                _frmDefault._sameColumnNameCount = 0;
+
+                _frmDefault.status16toolLabelstrSameColumnCount.Text = "";
+                DoWorkObject dwo = (DoWorkObject)dwko;
+                int mcount = 0;
+                int minValue = 0;
+                int maxValue = 0;
+                int minresult = 0;
+                int maxreuslt = 0;
+
+                if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount)// - 1
+                {
+                    var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
+
+                    if (!string.IsNullOrEmpty(dwo._selectColumnNameValue))
+                    {
+                        _frmDefault._selectColumnNameValue = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                        if (dwo._FrmForRefeHas)
+                        {
+
+                            dwo._FrmForRefe.lbl2SelectValue.Text = dwo._dgv.Rows[dwo._eX].Cells[dwo._selectColumnNameValue].Value.ToString();
+                            dwo._FrmForRefe.lbl1SelectNotice.Text = dwo._FrmForRefeLblMsg + dwo._FrmForRefe.lbl2SelectValue.Text;
+
+
+                        }
+                    }
+                    //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
+
+                    //m
+                    for (int i = 0; i < dwo._dgv.RowCount; i++)// - 1
+                    {
+                        if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                        {
+                            if (dwo._dgv.Rows[i].Cells[dwo._sameColumnNameCount].Value.ToString().Equals(dwo._sameColumnNameCountValut))
+                            {
+                                _frmDefault._sameColumnCount++;
+                            }
+                        }
+
+
+                        if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
+                        {
+                            dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                            if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
+                            {
+                                dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
+                            }
+
+                        }
+                        var cartonid = dwo._dgv.Rows[i].Cells[dwo._sameColumnName].Value;
+                        if (cartonid != DBNull.Value)
+                        {
+                            if (cartonid.ToString() == cartonidenter.ToString())
+                            {
+                                _frmDefault._sameColumnNameCount++;
+                                mcount++;
+                                dwo._dgv.Rows[i].DefaultCellStyle.BackColor = dwo._colors;
+
+                                if (dwo._dgv.Rows[i].Cells[dwo._deffCellName].Value.ToString().Equals(dwo._deffCellValue))
+                                {
+                                    dwo._dgv.Rows[i].Cells[dwo._deffCellName].Style.BackColor = dwo._deffcolors;
+                                }
+                                if (!string.IsNullOrEmpty(dwo._compMaxMin))
+                                {
+                                    if (mcount == 1)
+                                    {
+                                        minValue = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
+                                        maxValue = minValue;
+                                    }
+                                    else
+                                    {
+                                        minresult = (int)dwo._dgv.Rows[i].Cells[dwo._compMaxMin].Value;
+                                        maxreuslt = minresult;
+                                        if (minresult < minValue)
+                                        {
+                                            minValue = minresult;
+                                        }
+                                        if (maxreuslt > maxValue)
+                                        {
+                                            maxValue = maxreuslt;
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    _frmDefault._intFrom = minValue;
+                    _frmDefault._intTo = maxValue;
+
+                    if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
+                    {
+                        _frmDefault.status16toolLabelstrSameColumnCount.Text = dwo._sameColumnNameCountHeaderText + " : " + dwo._sameColumnNameCountValut + " has " + _frmDefault._sameColumnCount.ToString() + " items";
+                    }
+                    if (string.IsNullOrEmpty(_frmDefault.status16toolLabelstrSameColumnCount.Text))
+                    {
+                        _frmDefault.status16toolLabelstrSameColumnCount.Text = " Same Rows:" + _frmDefault._sameColumnNameCount;
+                    }
+                    else
+                    {
+                        _frmDefault.status16toolLabelstrSameColumnCount.Text += ", Same Rows:" + _frmDefault._sameColumnNameCount;
+                    }
+
+                }
+            }));
+        }
+        public void dgv_rowEnter_ThreadPool(object dwko)
+        {
+            ThreadPool.QueueUserWorkItem(new WaitCallback(dgv_rowEnter), dwko);
+        }
+        #endregion
         //////////////////////////////////add new
     }
 
-    public class ObservableListSource<T> : ObservableCollection<T>, IListSource
-        where T : class
-    {
-        private IBindingList _bindingList;
-
-        bool IListSource.ContainsListCollection { get { return false; } }
-
-        IList IListSource.GetList()
-        {
-            return _bindingList ?? (_bindingList = this.ToBindingList());
-        }
-    }
 }

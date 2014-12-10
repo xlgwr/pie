@@ -60,7 +60,7 @@ namespace FrmPIE
 
         void data2GV2CartonNO_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data2GV2CartonNO_PrintCtnLbl, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data2GV2CartonNO_PrintCtnLbl, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo);
             txt0CartonIDFrom_PrintCartonLabel.Text = _idr_show._intFrom.ToString();
             txt1CartonIDTo_PrintCartonLabel.Text = _idr_show._intTo.ToString();
@@ -69,14 +69,14 @@ namespace FrmPIE
 
         void data2GV2CartonNO_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_idr_show, data2GV2CartonNO_PrintCtnLbl, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray, "Wec_Ctn");
+            DoWorkObject dwo = new DoWorkObject(_idr_show, data2GV2CartonNO_PrintCtnLbl, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray, "Wec_Ctn");
             cf.initThreadDowrokColor(dwo);
         }
 
 
         void data1GV1ePackingDet1_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingMstr_PrintCtnLbl, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingMstr_PrintCtnLbl, e.RowIndex, e.ColumnIndex);
             string strBatchID = cf.selectCellMethod(dwo);
             if (!String.IsNullOrEmpty(strBatchID))
             {
@@ -94,7 +94,7 @@ namespace FrmPIE
 
         void data1GV1ePackingDet1_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingMstr_PrintCtnLbl, 3, e.RowIndex, Color.Yellow, "batch_user_ip", "batch_status", "Yes", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingMstr_PrintCtnLbl, 3, e.RowIndex, Color.Yellow, "batch_user_ip", "batch_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
 
@@ -119,7 +119,7 @@ namespace FrmPIE
         }
         private void initDGV(object doWorkobj)
         {
-            DoWrokObject obj = (DoWrokObject)doWorkobj;
+            DoWorkObject obj = (DoWorkObject)doWorkobj;
 
             CartonFromTo ctftPlrMstr = new CartonFromTo(obj._dgv, obj._strBatchId, 0, "refresh", _idr_show._custip, _idr_show._custip);
             var reobjmstr = cf.initDataGVPlrBatchMstr(ctftPlrMstr, true, "nothing");
@@ -145,7 +145,7 @@ namespace FrmPIE
                 {
                     lbl0SearchMsg.Text = "Error: " + strbatchid + " is not exist.";
                 }
-                DoWrokObject obj = new DoWrokObject(data1GV1ePackingMstr_PrintCtnLbl, data2GV2CartonNO_PrintCtnLbl, strbatchid);
+                DoWorkObject obj = new DoWorkObject(data1GV1ePackingMstr_PrintCtnLbl, data2GV2CartonNO_PrintCtnLbl, strbatchid);
                 _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
 
                 if (_idr_show._tInitGDV.ThreadState == ThreadState.Running)

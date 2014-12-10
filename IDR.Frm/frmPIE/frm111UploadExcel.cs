@@ -39,7 +39,8 @@ namespace IDR.Frm.frmPIE
         //for excel
         public ISheet sheet { get; set; }
         public IRow row { get; set; }
-        public IList<plr_mstr> _plr_mstr_list_success { get; set; }
+        public IQueryable<plr_mstr> _plr_mstr_list_success { get; set; }
+        public IQueryable<plr_mstr_ext> _list_plr_mstr { get; set; }
         //model
         public plr_batch_mstr _plr_batch_mstr_model { get; set; }
         //param
@@ -73,12 +74,32 @@ namespace IDR.Frm.frmPIE
             //function,db
             _dbpie = new PIE();
             cf = new CommonAPI(_frmDefault);
+            data1GV1ePackingDet1UploadExcel.ColumnHeaderMouseClick += data1GV1ePackingDet1UploadExcel_ColumnHeaderMouseClick;
+
             //attribute
             _plr_batch_mstr_model = new plr_batch_mstr();
             _strBatchID = "";
             _strext = "";
             _cellNullFlag = false;
+            //dgv cell click or row enter
+            data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
+            data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
         }
+
+        void data1GV1ePackingDet1UploadExcel_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingDet1UploadExcel, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray);
+            cf.dgv_rowEnter_ThreadPool(dwo);
+            //throw new NotImplementedException();
+        }
+
+        void data1GV1ePackingDet1UploadExcel_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingDet1UploadExcel, e.RowIndex, e.ColumnIndex);
+            cf.dgv_cellClick(dwo);
+            //throw new NotImplementedException();
+        }
+
         void initFrm()
         {
             this.FormClosing += Default_FormClosing;
@@ -105,6 +126,11 @@ namespace IDR.Frm.frmPIE
 
             groupBox3detUploadExcel.Height = gb0frmUploadExcel.Height - groupBox3detUploadExcel.Top - 10;
 
+        }
+
+        void data1GV1ePackingDet1UploadExcel_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            cf.DGV_ColumnHeaderMouseClick<plr_mstr_ext>(sender, e, data1GV1ePackingDet1UploadExcel, _list_plr_mstr);
         }
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
         {
@@ -223,16 +249,16 @@ namespace IDR.Frm.frmPIE
             cf.setControlText(lbl1UploadExcelThreadMsg, "Start: Load Data to DataGridView.", true, true);
             _frmDefault.Invoke(new Action(delegate()
             {
-                _plr_mstr_list_success = _dbpie.plr_mstr.Local.Where(m => m.Batch_ID.Equals(_strBatchID)).ToList();         
-
-                data1GV1ePackingDet1UploadExcel.DataSource = cf.getSelectList_plr_mstr(_plr_mstr_list_success);
+                _plr_mstr_list_success = _dbpie.plr_mstr.Local.Where(m => m.Batch_ID.Equals(_strBatchID)).AsQueryable();
+                _list_plr_mstr = cf.getSelectList_plr_mstr(_plr_mstr_list_success);
+                data1GV1ePackingDet1UploadExcel.DataSource = _list_plr_mstr.ToList();
 
                 data1GV1ePackingDet1UploadExcel.Refresh();
             }));
             ///gen carton ID
             ///
             cf.setControlText(lbl1UploadExcelThreadMsg, "Start: Generate Carton No and Wec Ctn.", true, true);
-            if (_plr_mstr_list_success.Count > 0)
+            if (_plr_mstr_list_success.Count() > 0)
             {
 
                 ThreadPool.QueueUserWorkItem(new WaitCallback(doGenCarton), strmsg);
@@ -243,7 +269,7 @@ namespace IDR.Frm.frmPIE
             int countsuccess = 0;
             int counterror = 0;
             string batchid = "";
-            int rowCount = _plr_mstr_list_success.Count;
+            int rowCount = _plr_mstr_list_success.Count();
             foreach (var dr in _plr_mstr_list_success)
             {
                 var currmsg = "Total:" + rowCount + ",Start Generate Carton ID For BatchID: " + dr.Batch_ID + ",LineID:" + dr.LineID;
@@ -377,6 +403,8 @@ namespace IDR.Frm.frmPIE
 
             if (updatebathccount > 0)
             {
+                cf.setControlText(_frmDefault.txt0SearchID, _strBatchID, true, true);
+
                 _frmDefault._plr_batch_mstr_model = _plr_batch_mstr_model;
 
                 init_plr_batch_mstrToTxt(_frmDefault._plr_batch_mstr_model, true);

@@ -28,17 +28,24 @@ namespace IDR.Frm
 {
     public partial class Default : Form
     {
+        #region define attr
         CommonAPI cf;
         public PIE _dbpie { get; set; }
         public sys_user _system_user_exists { get; set; }
         //attribute
-
         public int _icurrMouseX { get; set; }
         public int _icurrMouseY { get; set; }
-
+        public int _sameColumnCount { get; set; }
+        public int _sameColumnNameCount { get; set; }
+        public int _intFrom { get; set; }
+        public int _intTo { get; set; }
+        public string _selectColumnNameValue { get; set; }
+        public string Batch_ID { get; set; }
+        public string PI_ID { get; set; }
         public string _clientIP { get; set; }
         //model
         public plr_batch_mstr _plr_batch_mstr_model { get; set; }
+        public plr_mstr _plr_mstr_model { get; set; }
         public pi_mstr _pi_mstr_model { get; set; }
 
         //attr for excel 
@@ -50,6 +57,8 @@ namespace IDR.Frm
 
         //frm win
         LogonDomain _logonDomain;
+
+        #endregion
 
         public Default()
         {
@@ -87,8 +96,19 @@ namespace IDR.Frm
             //init param
             _clientIP = Program._clientIP;
             _plr_batch_mstr_model = new plr_batch_mstr();
+            _plr_mstr_model = new plr_mstr();
+
             _pi_mstr_model = new pi_mstr();
             _system_user_exists = new sys_user();
+            //init attr
+            _sameColumnCount = 0;
+            _sameColumnNameCount = 0;
+            _intFrom = 0;
+            _intTo = 0;
+            _selectColumnNameValue = "";
+            Batch_ID = "";
+            PI_ID = "";
+
         }
         void initFrm()
         {
@@ -123,7 +143,7 @@ namespace IDR.Frm
                 this._dbpie.Dispose();
             }
             GC.Collect();
-            
+
         }
         void txt0SearchID_Enter(object sender, EventArgs e)
         {
@@ -476,6 +496,8 @@ namespace IDR.Frm
                 }
             }
         }
+
+
 
     }
 }

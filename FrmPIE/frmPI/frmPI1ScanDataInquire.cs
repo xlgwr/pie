@@ -28,7 +28,7 @@ namespace frmPI
             initWidth();
             data1GV1_PIdet.ReadOnly = true;
 
-            DoWrokObject obj = new DoWrokObject(data0GVPIMstr,data1GV1_PIdet, _idr_show._pi_mstr_model.PI_ID);
+            DoWorkObject obj = new DoWorkObject(data0GVPIMstr,data1GV1_PIdet, _idr_show._pi_mstr_model.PI_ID);
 
             _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
 
@@ -91,28 +91,28 @@ namespace frmPI
         }
         void data0GVPIMstr_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data0GVPIMstr,data1GV1_PIdet, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data0GVPIMstr,data1GV1_PIdet, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo, _idr_show._pi_mstr_model.PI_ID,true,this);
         }
         void data0GVPIMstr_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data0GVPIMstr, 3, e.RowIndex, Color.Yellow, "pi_user_ip", "pi_status", "Yes", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data0GVPIMstr, 3, e.RowIndex, Color.Yellow, "pi_user_ip", "pi_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         void data1GV1ePackingDet1_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1_PIdet, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data1GV1_PIdet, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo, _idr_show._pi_mstr_model.PI_ID);
         }
 
         void data1GV1ePackingDet1_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1_PIdet, 3, e.RowIndex, Color.LightGreen, "CartonID", "pi_status", "Yes", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data1GV1_PIdet, 3, e.RowIndex, Color.LightGreen, "CartonID", "pi_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         private void initDGV(object doWorkobj)
         {
-            DoWrokObject obj = (DoWrokObject)doWorkobj;
+            DoWorkObject obj = (DoWorkObject)doWorkobj;
 
             CartonFromTo ctftPlrMstr = new CartonFromTo(obj._dgv, obj._strBatchId, 1, "upload", _idr_show._custip, _idr_show._custip);
             CartonFromTo ctftPlrMstrall = new CartonFromTo(obj._dgv, obj._strBatchId, 0, "upload", _idr_show._custip, _idr_show._custip,100);

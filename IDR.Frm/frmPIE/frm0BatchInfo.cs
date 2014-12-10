@@ -26,8 +26,6 @@ namespace IDR.Frm.frmPIE
     public partial class frm0BatchInfo : Form
     {
         //attribute
-        public bool _isSortAscending { get; set; }
-        public DataGridViewColumn _sortColumn { get; set; }
         public IQueryable<plr_mstr_ext> _list_plr_mstr { get; set; }
         public IQueryable<plr_mstr_tran_ext> _list_plr_mstr_tran { get; set; }
 
@@ -64,6 +62,13 @@ namespace IDR.Frm.frmPIE
             //datagridview sort
             data1GV_plr_mstr_BatchInfo.ColumnHeaderMouseClick += data1GV_plr_mstr_BatchInfo_ColumnHeaderMouseClick;
             data2GV2_plr_mstr_tran.ColumnHeaderMouseClick += data2GV2_plr_mstr_tran_ColumnHeaderMouseClick;
+
+            //datagridview row enter,cell click
+            data1GV_plr_mstr_BatchInfo.RowEnter += data1GV_plr_mstr_BatchInfo_RowEnter;
+            data1GV_plr_mstr_BatchInfo.CellClick += data1GV_plr_mstr_BatchInfo_CellClick;
+
+            data2GV2_plr_mstr_tran.CellClick += data2GV2_plr_mstr_tran_CellClick;
+            data2GV2_plr_mstr_tran.RowEnter += data2GV2_plr_mstr_tran_RowEnter;
         }
 
 
@@ -95,37 +100,42 @@ namespace IDR.Frm.frmPIE
 
         }
 
+        #region dgv cell click and row enter
+        void data2GV2_plr_mstr_tran_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWorkObject dwo = new DoWorkObject(data2GV2_plr_mstr_tran, e.RowIndex, e.ColumnIndex);
+            cf.dgv_cellClick(dwo);
+
+        }
+        void data2GV2_plr_mstr_tran_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWorkObject dwo = new DoWorkObject(data2GV2_plr_mstr_tran, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray);
+            cf.dgv_rowEnter_ThreadPool(dwo);
+        }
+
+        void data1GV_plr_mstr_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWorkObject dwo = new DoWorkObject(data1GV_plr_mstr_BatchInfo, data2GV2_plr_mstr_tran, e.RowIndex, e.ColumnIndex);
+            cf.dgv_cellClick(dwo, true);
+        }
+
+        void data1GV_plr_mstr_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWorkObject dwo = new DoWorkObject(data1GV_plr_mstr_BatchInfo, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
+            cf.dgv_rowEnter_ThreadPool(dwo);
+        }
         void data1GV_plr_mstr_BatchInfo_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DGV_ColumnHeaderMouseClick<plr_mstr_ext>(sender, e, data1GV_plr_mstr_BatchInfo,_list_plr_mstr);
+            cf.DGV_ColumnHeaderMouseClick<plr_mstr_ext>(sender, e, data1GV_plr_mstr_BatchInfo, _list_plr_mstr);
         }
 
         void data2GV2_plr_mstr_tran_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DGV_ColumnHeaderMouseClick<plr_mstr_tran_ext>(sender, e, data2GV2_plr_mstr_tran, _list_plr_mstr_tran);
+            cf.DGV_ColumnHeaderMouseClick<plr_mstr_tran_ext>(sender, e, data2GV2_plr_mstr_tran, _list_plr_mstr_tran);
         }
-        private void DGV_ColumnHeaderMouseClick<T>(object sender, DataGridViewCellMouseEventArgs e, DataGridView dgv,IQueryable<T> iQuery)
-            where T : class
-        {
-            if (iQuery.Count()<0)
-            {
-                return;
-            }
-            DataGridViewColumn column = dgv.Columns[e.ColumnIndex];
 
-            _isSortAscending = (_sortColumn == null || _isSortAscending == false);
+        #endregion
 
-            string direction = _isSortAscending ? "ASC" : "DESC";
-
-            dgv.DataSource = cf.Sort<T>(iQuery, column.DataPropertyName, direction).ToList();
-
-            dgv.Refresh();
-
-            if (_sortColumn != null) dgv.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.None;
-            dgv.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = _isSortAscending ? SortOrder.Ascending : SortOrder.Descending;
-
-            _sortColumn = column;
-        }
         void SelectedTab_Layout(object sender, LayoutEventArgs e)
         {
             //btnSelectfileUploadExcel.Focus();

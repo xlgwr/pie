@@ -205,14 +205,14 @@ namespace FrmPIE
 
         public void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
             string strBatchID = cf.selectCellMethod(dwo);
             txt0SearchID.Text = strBatchID;
         }
 
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
             ThreadPool.QueueUserWorkItem(new WaitCallback(cf.cellSelectMethod), dwo);
         }
         void enquireByForReferenct(object sender, EventArgs e)
@@ -845,7 +845,7 @@ namespace FrmPIE
         {
             if (_voidDGV != null)
             {
-                DoWrokObject dwo = new DoWrokObject(_voidDGV, _voideX, _voideX, _voidhasLineID, "plr_status");
+                DoWorkObject dwo = new DoWorkObject(_voidDGV, _voideX, _voideX, _voidhasLineID, "plr_status");
                 cf.initVoid(dwo);
                 _voidRefresh = true;
             }

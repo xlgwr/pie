@@ -137,14 +137,14 @@ namespace FrmPIE
 
         void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
             string strBatchID = cf.selectCellMethod(dwo);
             txt0BatchIDUploadToERP.Text = strBatchID;
         }
 
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
             cf.initThreadDowrokColor(dwo);
 
         }
@@ -163,13 +163,13 @@ namespace FrmPIE
 
         void data1GVUploadToERP_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GVUploadToERP, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data1GVUploadToERP, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo);
         }
 
         void data1GVUploadToERP_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GVUploadToERP, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data1GVUploadToERP, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         void SelectedTab_Resize(object sender, EventArgs e)
@@ -218,7 +218,7 @@ namespace FrmPIE
         }
         private void initDGV(object doWorkobj)
         {
-            DoWrokObject obj = (DoWrokObject)doWorkobj;
+            DoWorkObject obj = (DoWorkObject)doWorkobj;
 
             CartonFromTo ctftPlrMstr = new CartonFromTo(obj._dgv, txt0BatchIDUploadToERP.Text, 0, "upload", _idr_show._custip, _idr_show._custip);
             if (chk0UploadToERP.Checked)
@@ -262,7 +262,7 @@ namespace FrmPIE
                 //toolStripStatusLabelMessage.Text = "Notice: Uploading to ERP END";
                 SetCtlTextdelegate(lbl0MsgUploadToERP, strresult, true, true);
 
-                DoWrokObject obj = new DoWrokObject(data1GVUploadToERP, txt0BatchIDUploadToERP.Text);
+                DoWorkObject obj = new DoWorkObject(data1GVUploadToERP, txt0BatchIDUploadToERP.Text);
 
                 _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
 

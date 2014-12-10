@@ -136,14 +136,14 @@ namespace FrmPIE.frmPI
 
         void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
             string strBatchID = cf.selectCellMethod(dwo);
             txt4PIID_search.Text = strBatchID;
         }
 
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
             cf.initThreadDowrokColor(dwo);
 
         }
@@ -178,7 +178,7 @@ namespace FrmPIE.frmPI
         }
         void data1GV1ePackingDet1_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1_PIPalletList, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data1GV1_PIPalletList, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo, _idr_show._pi_mstr_model.PI_ID);
             _currentIndex = e.RowIndex;
             txt1PI_id_PIMstr.Text = data1GV1_PIPalletList.CurrentRow.Cells["PI_ID"].Value.ToString();
@@ -189,7 +189,7 @@ namespace FrmPIE.frmPI
 
         void data1GV1ePackingDet1_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1_PIPalletList, 3, e.RowIndex, Color.LightGreen, "Pallet", "GW", "0", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data1GV1_PIPalletList, 3, e.RowIndex, Color.LightGreen, "Pallet", "GW", "0", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         private void frmPI3AddNWForPallet_Load(object sender, EventArgs e)

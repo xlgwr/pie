@@ -30,7 +30,7 @@ namespace FrmPIE
             data1GV1ePackingDet1_BatchInfo.ReadOnly = true;
             data2GV2CartonNO.ReadOnly = true;
 
-            DoWrokObject obj = new DoWrokObject(data1GV1ePackingDet1_BatchInfo, data2GV2CartonNO, _idr_show._plr_batch_mstr_model.batch_id);
+            DoWorkObject obj = new DoWorkObject(data1GV1ePackingDet1_BatchInfo, data2GV2CartonNO, _idr_show._plr_batch_mstr_model.batch_id);
             _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
 
             if (_idr_show._tInitGDV.ThreadState == ThreadState.Running)
@@ -61,26 +61,26 @@ namespace FrmPIE
 
         void data2GV2CartonNO_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data2GV2CartonNO, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data2GV2CartonNO, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo);
         }
 
         void data2GV2CartonNO_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data2GV2CartonNO, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data2GV2CartonNO, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
         
 
         void data1GV1ePackingDet1_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1_BatchInfo, data2GV2CartonNO, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingDet1_BatchInfo, data2GV2CartonNO, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo, true);
         }
 
         void data1GV1ePackingDet1_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1_BatchInfo, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingDet1_BatchInfo, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
 
@@ -104,7 +104,7 @@ namespace FrmPIE
 
         private void initDGV(object doWorkobj)
         {
-            DoWrokObject obj = (DoWrokObject)doWorkobj;
+            DoWorkObject obj = (DoWorkObject)doWorkobj;
 
             CartonFromTo ctftPlrMstr = new CartonFromTo(obj._dgv, obj._strBatchId, 0, "upload", _idr_show._custip, _idr_show._custip);
 

@@ -65,7 +65,7 @@ namespace FrmPIE
         void data1GV1ePackingDet1UploadExcel_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
 
-            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1_AddNewBatchID, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingDet1_AddNewBatchID, 3, e.RowIndex, Color.Yellow, "CartonID", "plr_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
 
@@ -535,7 +535,7 @@ namespace FrmPIE
 
         private void data1GV1ePackingDet1_AddNewBatchID_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1_AddNewBatchID, e.RowIndex, e.ColumnIndex);
+            DoWorkObject dwo = new DoWorkObject(data1GV1ePackingDet1_AddNewBatchID, e.RowIndex, e.ColumnIndex);
             cf.selectCellMethod(dwo);
 
             if (e.RowIndex >= 0 && e.RowIndex < data1GV1ePackingDet1_AddNewBatchID.RowCount - 1)
@@ -770,7 +770,7 @@ namespace FrmPIE
                 else
                 {
                     _strbatch = txtb1batch_id_AddNewBatchID.Text;
-                    DoWrokObject dwo = new DoWrokObject(data1GV1ePackingDet1_AddNewBatchID, 0, 0, false, "plr_status");
+                    DoWorkObject dwo = new DoWorkObject(data1GV1ePackingDet1_AddNewBatchID, 0, 0, false, "plr_status");
                     cf.initVoid(dwo);
                     init0Update(_strbatch);
                 }

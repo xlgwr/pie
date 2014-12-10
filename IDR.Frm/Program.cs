@@ -19,7 +19,7 @@ namespace IDR.Frm
         public static string _frm1VersionLast;
         public static string _frm6Versionprefix;
 
-        public static int _frm3VersionDotNet;
+        public static double _frm3VersionDotNet;
         public static int _frm4VersionMain;
         public static int _frm5VersionSecond;
 
@@ -51,7 +51,9 @@ namespace IDR.Frm
             //add thread exception
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
             //
-            Application.Run(new LogonDomain());
+            var logon = new LogonDomain();
+            logon.Text += _frm0Version;
+            Application.Run(logon);
 
 
         }
@@ -61,17 +63,17 @@ namespace IDR.Frm
             //clientIP
             _clientIP = GetClientIP.getClientIP();
             //frmVersion = "@2V20141010H10-dev";
-            _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141208;
+            _frm3VersionDotNet = 4.5;
+            _frm4VersionMain = 20141210;
 
-            _frm5VersionSecond = 08;
-            _frm6Versionprefix = "RTM";//RTM
+            _frm5VersionSecond = 22;
+            _frm6Versionprefix = "Bate";//RTM
             //fix msg
             _frm10VersionFixMsg = "1.fix bug";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 
-            _strURL = "http://142.2.47.149/pisoft/net" + _frm3VersionDotNet + ".0/0" + _frm6Versionprefix;
+            _strURL = "http://142.2.47.149/pisoft/net" + _frm3VersionDotNet + "/" + _frm6Versionprefix;
         }
         private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {

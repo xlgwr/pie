@@ -143,14 +143,14 @@ namespace frmPI
 
         void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _strCellColName);
             string strBatchID = cf.selectCellMethod(dwo);
             txt0PINum_piReport.Text = strBatchID;
         }
 
         void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _strCellColName, "Current " + _strCellColName + "#:", _sameColumnName, _deffCellName, _deffCellValue, Color.LightGray);
             cf.initThreadDowrokColor(dwo);
             // ThreadPool.QueueUserWorkItem(new WaitCallback(cf.cellSelectMethod), dwo);
 
@@ -189,13 +189,13 @@ namespace frmPI
         }
         void data0GVPiReport_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data0GVPiReport, e.RowIndex, e.ColumnIndex, "PI_ID");
+            DoWorkObject dwo = new DoWorkObject(data0GVPiReport, e.RowIndex, e.ColumnIndex, "PI_ID");
             cf.selectCellMethod(dwo);
         }
 
         void data0GVPiReport_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DoWrokObject dwo = new DoWrokObject(data0GVPiReport, 3, e.RowIndex, Color.LightGreen, _clickCellname, "pi_status", "Yes", Color.LightGray);
+            DoWorkObject dwo = new DoWorkObject(data0GVPiReport, 3, e.RowIndex, Color.LightGreen, _clickCellname, "pi_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
 
         }

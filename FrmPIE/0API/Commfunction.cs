@@ -71,7 +71,7 @@ namespace FrmIDR._0API
         }
         public void DoWorkCellSelectColordelegate(object dwko)
         {
-            DoWrokObject dwo = (DoWrokObject)dwko;
+            DoWorkObject dwo = (DoWorkObject)dwko;
             dDoWorkCellSelectColor mi = new dDoWorkCellSelectColor(cellSelectMethod);
             _idr_show.Invoke(mi, dwo);
 
@@ -114,7 +114,7 @@ namespace FrmIDR._0API
         }
         public void cellSelectMethod(object dwko, bool oldflag)
         {
-            DoWrokObject dwo = (DoWrokObject)dwko;
+            DoWorkObject dwo = (DoWorkObject)dwko;
             if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
             {
                 var cartonidenter = dwo._dgv.Rows[dwo._eX].Cells[dwo._sameColumnName].Value;
@@ -160,7 +160,7 @@ namespace FrmIDR._0API
                 _idr_show._sameColumnNameCount = 0;
 
                 _idr_show.status16toolLabelstrSameColumnCount.Text = "";
-                DoWrokObject dwo = (DoWrokObject)dwko;
+                DoWorkObject dwo = (DoWorkObject)dwko;
                 int mcount = 0;
                 int minValue = 0;
                 int maxValue = 0;
@@ -2013,7 +2013,7 @@ namespace FrmIDR._0API
             SetToolTextdelegate(_idr_show.status15toolLabelstrResult, resultmsg, true, true);
 
         }
-        public void initThreadDowrokColor(DoWrokObject dwo)
+        public void initThreadDowrokColor(DoWorkObject dwo)
         {
             if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount)
             {
@@ -2041,7 +2041,7 @@ namespace FrmIDR._0API
         /// set dgv,dgv1,ex,ey;
         /// </summary>
         /// <param name="dwo">dgv,dgv1,ex,ey</param>
-        public void selectCellMethod(DoWrokObject dwo, bool mainDataGV)
+        public void selectCellMethod(DoWorkObject dwo, bool mainDataGV)
         {
 
 
@@ -2068,7 +2068,7 @@ namespace FrmIDR._0API
         /// set dgv,dgv1,ex,ey;
         /// </summary>
         /// <param name="dwo">dgv,dgv1,ex,ey</param>
-        public void selectCellMethod(DoWrokObject dwo, string strPIID, bool mainDataGV, frmPI.frmPI1ScanDataInquire frmpi1)
+        public void selectCellMethod(DoWorkObject dwo, string strPIID, bool mainDataGV, frmPI.frmPI1ScanDataInquire frmpi1)
         {
 
 
@@ -2101,7 +2101,7 @@ namespace FrmIDR._0API
                 MessageBox.Show(ex.Message);
             }
         }
-        public string selectCellMethod(DoWrokObject dwo)
+        public string selectCellMethod(DoWorkObject dwo)
         {
 
             _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
@@ -2133,7 +2133,7 @@ namespace FrmIDR._0API
             }
 
         }
-        public string selectCellMethod(DoWrokObject dwo, string strPIID)
+        public string selectCellMethod(DoWorkObject dwo, string strPIID)
         {
             _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
             //_idr_show.status13toolSStatusLblMsg.Text = "";
@@ -2198,7 +2198,7 @@ namespace FrmIDR._0API
         /// dgv,ex,haslineid
         /// </summary>
         /// <param name="dwo">dgv,ex,haslineid</param>
-        public void initVoid(DoWrokObject dwo)
+        public void initVoid(DoWorkObject dwo)
         {
             string resultmsg;
             string strwhere;
