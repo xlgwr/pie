@@ -49,12 +49,12 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141208;
+            _frm4VersionMain = 20141210;
 
-            _frm5VersionSecond = 08;
+            _frm5VersionSecond = 10;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
-            _frm10VersionFixMsg = "1.fix bug";
+            _frm10VersionFixMsg = "1.fix upload xls for kyca,add po number to 10.";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 

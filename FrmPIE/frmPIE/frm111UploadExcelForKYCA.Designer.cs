@@ -407,7 +407,7 @@
             this.groupBox1browseUploadExcel.Size = new System.Drawing.Size(668, 70);
             this.groupBox1browseUploadExcel.TabIndex = 13;
             this.groupBox1browseUploadExcel.TabStop = false;
-            this.groupBox1browseUploadExcel.Text = "选择上传的Excel文件(For KYCA)";
+            this.groupBox1browseUploadExcel.Text = "选择上传的Excel文件(For KYCA) Notice: Total PO Count: 10";
             // 
             // btnSelectfileUploadExcel
             // 

@@ -956,7 +956,12 @@ namespace FrmPIE
                     ICell cell13 = row.GetCell(13);
                     ICell cell15 = row.GetCell(15);
                     ICell cell17 = row.GetCell(17);
+
                     ICell cell19 = row.GetCell(19);
+                    ICell cell21 = row.GetCell(21);
+                    ICell cell23 = row.GetCell(23);
+                    ICell cell25 = row.GetCell(25);
+                    ICell cell27 = row.GetCell(27);
 
                     //po
                     ICell cell8 = row.GetCell(8);
@@ -964,7 +969,12 @@ namespace FrmPIE
                     ICell cell12 = row.GetCell(12);
                     ICell cell14 = row.GetCell(14);
                     ICell cell16 = row.GetCell(16);
+
                     ICell cell18 = row.GetCell(18);
+                    ICell cell20 = row.GetCell(20);
+                    ICell cell22 = row.GetCell(22);
+                    ICell cell24 = row.GetCell(24);
+                    ICell cell26 = row.GetCell(26);
 
                     double intcell6 = getICellToDouble(cell6);
                     _numCellVal = false;
@@ -994,14 +1004,35 @@ namespace FrmPIE
                     {
                         _numCell++;
                     }
+                    //new 5
                     double intcell19 = getICellToDouble(cell19, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell21 = getICellToDouble(cell21, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell23 = getICellToDouble(cell23, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell25 = getICellToDouble(cell25, out _numCellVal);
+                    if (_numCellVal)
+                    {
+                        _numCell++;
+                    }
+                    double intcell27 = getICellToDouble(cell27, out _numCellVal);
                     if (_numCellVal)
                     {
                         _numCell++;
                     }
 
 
-                    var ttl = intcell9 + intcell11 + intcell13 + intcell15 + intcell17 + intcell19;
+                    var ttl = intcell9 + intcell11 + intcell13 + intcell15 + intcell17 + intcell19 + intcell21 + intcell23 + intcell25 + intcell27;
                     if (intcell6 != ttl)
                     {
                         strerrnullrows += ",QtyError:" + rowscount.ToString();
@@ -1032,9 +1063,26 @@ namespace FrmPIE
                         {
                             strmsgint += " +" + " PO:" + cell16 + ",Qty:" + intcell17.ToString();
                         }
+                        //next 5
                         if (intcell19 != 0)
                         {
                             strmsgint += " +" + " PO:" + cell18 + ",Qty:" + intcell19.ToString();
+                        }
+                        if (intcell21 != 0)
+                        {
+                            strmsgint += " +" + " PO:" + cell10 + ",Qty:" + intcell21.ToString();
+                        }
+                        if (intcell23 != 0)
+                        {
+                            strmsgint += " +" + " PO:" + cell12 + ",Qty:" + intcell23.ToString();
+                        }
+                        if (intcell25 != 0)
+                        {
+                            strmsgint += " +" + " PO:" + cell14 + ",Qty:" + intcell25.ToString();
+                        }
+                        if (intcell27 != 0)
+                        {
+                            strmsgint += " +" + " PO:" + cell16 + ",Qty:" + intcell27.ToString();
                         }
                         drerr[3] = strmsgint;
                         _dterr.Rows.Add(drerr);
@@ -1091,12 +1139,34 @@ namespace FrmPIE
                             //carton id
                             initCartonID(dt, dr, intcell17, cell16, 5, intfrom, into, countCTN);
                         }
+                        //next 5
                         if (intcell19 > 0)
                         {
-
                             //carton id
                             initCartonID(dt, dr, intcell19, cell18, 6, intfrom, into, countCTN);
                         }
+                        if (intcell21 > 0)
+                        {
+                            //carton
+                            initCartonID(dt, dr, intcell21, cell20, 7, intfrom, into, countCTN);
+
+                        }
+                        if (intcell23 > 0)
+                        {
+                            //gen cartonid
+                            initCartonID(dt, dr, intcell23, cell22, 8, intfrom, into, countCTN);
+                        }
+                        if (intcell25 > 0)
+                        {
+                            //carton id
+                            initCartonID(dt, dr, intcell25, cell24, 9, intfrom, into, countCTN);
+                        }
+                        if (intcell27 > 0)
+                        {
+                            //carton id
+                            initCartonID(dt, dr, intcell27, cell26, 10, intfrom, into, countCTN);
+                        }
+
                         rowscount++;
                     }
                 }
