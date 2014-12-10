@@ -17,12 +17,13 @@ using IDR.Frm.API;
 using IDR.EF.PIE;
 using IDR.EF.PIRemote;
 
+///
 using IDR.Frm.Logon;
 using IDR.Frm.Properties;
 
 using System.IO;
-using System.Data.SqlClient;
 using System.Threading;
+using System.Data.SqlClient;
 
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
@@ -222,41 +223,10 @@ namespace IDR.Frm.frmPIE
             cf.setControlText(lbl1UploadExcelThreadMsg, "Start: Load Data to DataGridView.", true, true);
             _frmDefault.Invoke(new Action(delegate()
             {
-                _plr_mstr_list_success = _dbpie.plr_mstr.Local.Where(m => m.Batch_ID.Equals(_strBatchID)).ToList();
-                var dd=_plr_mstr_list_success
-                    .Select(p => new
-                    {
-                        Batch_ID = p.Batch_ID,
-                        LineID = p.LineID,
-                        plr_void_status = p.plr_void_status,
-                        packingListID = p.packingListID,
-                        InvoiceID = p.InvoiceID,
+                _plr_mstr_list_success = _dbpie.plr_mstr.Local.Where(m => m.Batch_ID.Equals(_strBatchID)).ToList();         
 
-                        plr_pallet_no = p.plr_pallet_no,
-                        CartonType = p.CartonType,
-                        CartonID = p.CartonID,
-                        plr_po = p.plr_po,
+                data1GV1ePackingDet1UploadExcel.DataSource = cf.getSelectList_plr_mstr(_plr_mstr_list_success);
 
-                        plr_co = p.plr_co,
-                        plr_partno = p.plr_partno,
-                        plr_date_code = p.plr_date_code,
-                        plr_vend_mfgr = p.plr_vend_mfgr,
-                        Plr_vm_partno = p.Plr_vm_partno,
-
-                        plr_carton_qty = p.plr_carton_qty,
-                        plr_qty = p.plr_qty,
-                        plr_suppliers_id = p.plr_suppliers_id,
-                        plr_rcp_date = p.plr_rcp_date,
-                        plr_deli_date = p.plr_deli_date,
-
-                        plr_doc_type = p.plr_doc_type,
-                        plr_cre_date = p.plr_cre_date,
-                        plr_update_date = p.plr_update_date,
-                        plr_cre_userid = p.plr_cre_userid,
-                        plr_user_ip = p.plr_user_ip
-                    }).ToList<object>();
-
-                data1GV1ePackingDet1UploadExcel.DataSource = dd;
                 data1GV1ePackingDet1UploadExcel.Refresh();
             }));
             ///gen carton ID
@@ -409,7 +379,7 @@ namespace IDR.Frm.frmPIE
             {
                 _frmDefault._plr_batch_mstr_model = _plr_batch_mstr_model;
 
-                initDatasetToTxt(_frmDefault._plr_batch_mstr_model, true);
+                init_plr_batch_mstrToTxt(_frmDefault._plr_batch_mstr_model, true);
             }
             else
             {
@@ -499,12 +469,16 @@ namespace IDR.Frm.frmPIE
                 return false;
             }
             _frmDefault._plr_batch_mstr_model = _plr_batch_mstr_model;
-            initDatasetToTxt(_frmDefault._plr_batch_mstr_model, true);
+            init_plr_batch_mstrToTxt(_frmDefault._plr_batch_mstr_model, true);
             return true;
         }
 
-        private void initDatasetToTxt(plr_batch_mstr model, bool breadonly)
+        private void init_plr_batch_mstrToTxt(plr_batch_mstr model, bool breadonly)
         {
+            if (string.IsNullOrEmpty(model.batch_id))
+            {
+                return;
+            }
             _frmDefault.Invoke(new Action(delegate()
            {
                txt1batch_idUploadExcel.Text = model.batch_id;

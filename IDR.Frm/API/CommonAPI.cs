@@ -23,6 +23,12 @@ using System.Data.SqlClient;
 using System.Threading;
 using System.Data;
 
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Collections;
+using System.Reflection;
+using System.Linq.Expressions;
+
 namespace IDR.Frm.API
 {
     class CommonAPI
@@ -35,6 +41,8 @@ namespace IDR.Frm.API
         {
             _frmDefault = frmDefault;
         }
+        #region base function
+
         /// <summary>
         ///  ControlIsNullOrEmpty
         /// </summary>
@@ -118,6 +126,9 @@ namespace IDR.Frm.API
             }));
 
         }
+        #endregion
+        #region gen carton id
+
         /// <summary>
         /// get prefix for cartonid
         /// </summary>
@@ -231,10 +242,476 @@ namespace IDR.Frm.API
             result = Convert.ToInt16(parameters[12].Value);
             return result;
         }
+        #endregion
+        #region select data function
+        /// <summary>
+        /// plr_mstr
+        /// </summary>
+        /// <param name="_strBatchID"></param>
+        /// <returns>List<object></returns>
+        public IQueryable<plr_mstr_ext> getSelectList_plr_mstr(string _strBatchID)
+        {
+            return _frmDefault._dbpie.plr_mstr.Where(m => m.Batch_ID.Equals(_strBatchID))
+                    .Select(p => new plr_mstr_ext
+                    {
+                        Batch_ID = p.Batch_ID,
+                        LineID = p.LineID,
+                        plr_status = p.plr_status,
+                        packingListID = p.packingListID,
+                        InvoiceID = p.InvoiceID,
+
+                        plr_pallet_no = p.plr_pallet_no,
+                        CartonType = p.CartonType,
+                        CartonID = p.CartonID,
+                        carton_id_prifix = p.carton_id_prifix,
+                        plr_po = p.plr_po,
+
+                        plr_co = p.plr_co,
+                        plr_partno = p.plr_partno,
+                        plr_date_code = p.plr_date_code,
+                        plr_vend_mfgr = p.plr_vend_mfgr,
+                        Plr_vm_partno = p.Plr_vm_partno,
+
+                        plr_carton_qty = p.plr_carton_qty,
+                        plr_qty = p.plr_qty,
+                        plr_suppliers_id = p.plr_suppliers_id,
+                        plr_rcp_date = p.plr_rcp_date,
+                        plr_deli_date = p.plr_deli_date,
+                        re_mark = p.re_mark,
+
+                        plr_doc_type = p.plr_doc_type,
+                        plr_cre_date = p.plr_cre_date,
+                        plr_update_date = p.plr_update_date,
+                        plr_cre_userid = p.plr_cre_userid,
+                        plr_user_ip = p.plr_user_ip
+
+                    }).ToList<plr_mstr_ext>().AsQueryable();
+        }
+        /// <summary>
+        /// plr_mstr
+        /// </summary>
+        /// <param name="plr_mstr_list"></param>
+        /// <returns>List<object></returns>
+        public List<plr_mstr_ext> getSelectList_plr_mstr(IList<plr_mstr> plr_mstr_list)
+        {
+            return plr_mstr_list
+                    .Select(p => new plr_mstr_ext
+                    {
+                        Batch_ID = p.Batch_ID,
+                        LineID = p.LineID,
+                        plr_status = p.plr_status,
+                        packingListID = p.packingListID,
+                        InvoiceID = p.InvoiceID,
+
+                        plr_pallet_no = p.plr_pallet_no,
+                        CartonType = p.CartonType,
+                        CartonID = p.CartonID,
+                        carton_id_prifix = p.carton_id_prifix,
+                        plr_po = p.plr_po,
+
+                        plr_co = p.plr_co,
+                        plr_partno = p.plr_partno,
+                        plr_date_code = p.plr_date_code,
+                        plr_vend_mfgr = p.plr_vend_mfgr,
+                        Plr_vm_partno = p.Plr_vm_partno,
+
+                        plr_carton_qty = p.plr_carton_qty,
+                        plr_qty = p.plr_qty,
+                        plr_suppliers_id = p.plr_suppliers_id,
+                        plr_rcp_date = p.plr_rcp_date,
+                        plr_deli_date = p.plr_deli_date,
+                        re_mark = p.re_mark,
+
+                        plr_doc_type = p.plr_doc_type,
+                        plr_cre_date = p.plr_cre_date,
+                        plr_update_date = p.plr_update_date,
+                        plr_cre_userid = p.plr_cre_userid,
+                        plr_user_ip = p.plr_user_ip
+                    }).ToList<plr_mstr_ext>();
+        }
+
+        /// <summary>
+        /// getSelectList_plr_mstr_tran
+        /// </summary>
+        /// <param name="_strBatchID"></param>
+        /// <returns></returns>
+        public IQueryable<plr_mstr_tran_ext> getSelectList_plr_mstr_tran(string _strBatchID)
+        {
+            return _frmDefault._dbpie.plr_mstr_tran.Where(m => m.Batch_ID.Equals(_strBatchID))
+                    .Select(p => new plr_mstr_tran_ext
+                    {
+                         Batch_ID=p.Batch_ID,
+                        LineID=p.LineID,
+                        plr_status=p.plr_status,
+
+                        plr_status_msg=p.plr_status_msg,
+                        plr_wec_ctn=p.plr_wec_ctn,
+
+                        plr_pallet_no=p.plr_pallet_no,
+                        CartonType=p.CartonType,
+                        CartonNo=p.CartonNo,
+                        CartonID=p.CartonID,
+                        carton_id_prifix=p.carton_id_prifix,
+                        plr_po=p.plr_po,
+
+                        plr_partno=p.plr_partno,
+                        plr_carton_qty=p.plr_carton_qty,
+                        plr_qty=p.plr_qty,
+
+                        plr_rcp_date=p.plr_rcp_date,
+                        plr_deli_date=p.plr_deli_date,
+                        re_mark=p.re_mark,
+
+                        plr_cre_date=p.plr_cre_date,
+                        plr_update_date=p.plr_update_date,
+                        plr_cre_userid=p.plr_cre_userid,
+                        plr_user_ip=p.plr_user_ip
+                        
+                    }).ToList<plr_mstr_tran_ext>().AsQueryable();
+        }
+        #endregion
+        #region init data gric view head text
+        public void initHeaderText_plr_mstr(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.AllowUserToOrderColumns = true;
+            //dgv.ReadOnly = true;
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+            dgv.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
+
+            dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
+            dgv.Columns["LineID"].HeaderText = "LineID";
+            dgv.Columns["plr_status"].HeaderText = "Void";
+            dgv.Columns["packingListID"].HeaderText = "PackingListID";
+            dgv.Columns["InvoiceID"].HeaderText = "Invoice ID";
+
+            dgv.Columns["plr_pallet_no"].HeaderText = "Pallet No";
+            dgv.Columns["CartonType"].HeaderText = "Remainder";
+            dgv.Columns["CartonID"].HeaderText = "Carton ID";
+            dgv.Columns["carton_id_prifix"].HeaderText = "Carton Prefix";
+            dgv.Columns["plr_po"].HeaderText = "PO#";
+
+            dgv.Columns["plr_co"].HeaderText = "CO";
+            dgv.Columns["plr_partno"].HeaderText = "Part";
+            dgv.Columns["plr_date_code"].HeaderText = "Date Code";
+            dgv.Columns["plr_vend_mfgr"].HeaderText = "MFGR";
+            dgv.Columns["Plr_vm_partno"].HeaderText = "MFGR-Part";
+
+
+
+            dgv.Columns["plr_carton_qty"].HeaderText = "Qty/Carton";
+            dgv.Columns["plr_qty"].HeaderText = "Total/Qty";
+            dgv.Columns["plr_suppliers_id"].HeaderText = "Suppliers";
+            dgv.Columns["plr_rcp_date"].HeaderText = "Rcp Date";
+            dgv.Columns["plr_deli_date"].HeaderText = "Deli Date";
+
+            dgv.Columns["re_mark"].HeaderText = "Remark";
+
+            dgv.Columns["plr_doc_type"].HeaderText = "Batch Type";
+            dgv.Columns["plr_cre_date"].HeaderText = "Create Date";
+            dgv.Columns["plr_update_date"].HeaderText = "Update Date";
+            dgv.Columns["plr_cre_userid"].HeaderText = "User Id";
+            dgv.Columns["plr_user_ip"].HeaderText = "Client IP";
+
+            ///no use
+            //dgv.Columns["carton_id_from"].HeaderText = "Carton No From";
+            //dgv.Columns["carton_id_to"].HeaderText = "To";
+
+            //dgv.Columns["plr_site"].HeaderText = "MG";
+            //dgv.Columns["plr_ttl"].HeaderText = "Total";
+
+            //dgv.Columns["plr_um"].HeaderText = "UM";
+            //dgv.Columns["plr_nw"].HeaderText = "Net-Wt (KG)";
+            //dgv.Columns["plr_gw"].HeaderText = "Gross-Wt (KG)";
+            //dgv.Columns["plr_msm"].HeaderText = "Measurement";
+            //dgv.Columns["re_mark"].HeaderText = "Remark";
+
+            //other set
+            dgv.Columns["Batch_ID"].ReadOnly = true;
+            dgv.Columns["LineID"].ReadOnly = true;
+            dgv.Columns["plr_status"].ReadOnly = true;
+
+            dgv.Columns["LineID"].Width = 25;
+            dgv.Columns["plr_status"].Width = 50;
+            dgv.Columns["plr_pallet_no"].Width = 50;
+
+            dgv.Columns["plr_rcp_date"].ValueType = Type.GetType("System.DateTime");
+            dgv.Columns["plr_deli_date"].ValueType = Type.GetType("System.DateTime");
+        }
+        public void initHeaderText_plr_mstr_tran(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.AllowUserToOrderColumns = true;
+            dgv.ReadOnly = true;
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+
+            dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
+            dgv.Columns["LineID"].HeaderText = "Line";
+            dgv.Columns["plr_status"].HeaderText = "Status";
+            dgv.Columns["plr_status_msg"].HeaderText = "Msg";
+            dgv.Columns["plr_wec_ctn"].HeaderText = "WEC CTN";
+
+            //dgv.Columns["Wec_Ctn"].HeaderText = "WEC Ctn ID";
+            //dgv.Columns["plr_suppliers_id"].HeaderText = "Suppliers ID";
+            //dgv.Columns["Plr_vm_partno"].HeaderText = "MFGR-Part";
+            //dgv.Columns["InvoiceID"].HeaderText = "Invoice ID";
+            //dgv.Columns["packingListID"].HeaderText = "PackingListID";
+
+            dgv.Columns["plr_pallet_no"].HeaderText = "Pallet No";
+            dgv.Columns["CartonType"].HeaderText = "Remainder";
+            dgv.Columns["CartonID"].HeaderText = "Carton ID";
+            dgv.Columns["carton_id_prifix"].HeaderText = "Carton Prefix";
+            dgv.Columns["plr_po"].HeaderText = "PO#";
+
+            dgv.Columns["plr_partno"].HeaderText = "Part";
+            dgv.Columns["plr_qty"].HeaderText = "Total/QTY";
+            dgv.Columns["plr_carton_qty"].HeaderText = "Qty/Carton";
+
+
+            dgv.Columns["plr_rcp_date"].HeaderText = "Rcp Date";
+            dgv.Columns["plr_deli_date"].HeaderText = "Deli Date";
+            dgv.Columns["re_mark"].HeaderText = "Remark";
+
+            dgv.Columns["plr_cre_date"].HeaderText = "Create Date";
+            dgv.Columns["plr_update_date"].HeaderText = "Update Date";
+            dgv.Columns["plr_cre_userid"].HeaderText = "User Id";
+            dgv.Columns["plr_user_ip"].HeaderText = "Client IP";
+
+            dgv.Columns["LineID"].Width = 25;
+            dgv.Columns["plr_status"].Width = 50;
+            dgv.Columns["plr_pallet_no"].Width = 50;
+        }
+        public void initHeaderTextPIMstr(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.ReadOnly = true;
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+
+            dgv.Columns["PI_ID"].HeaderText = "PI ID";
+            dgv.Columns["Plant"].HeaderText = "Plant";
+
+            dgv.Columns["pi_type"].HeaderText = "Type";
+
+            dgv.Columns["pi_remark"].HeaderText = "Remark";
+
+            dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
+            dgv.Columns["pi_update_date"].HeaderText = "Update Date";
+            //dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
+            //dgv.Columns["pi_user_ip"].HeaderText = "Client IP";
+        }
+        public void initHeaderTextPIMstrForEquire(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+
+            dgv.BorderStyle = BorderStyle.None;
+            //PI_ID,pi_status,Plant,pi_type,pi_user_ip,pi_remark,pi_cre_date,pi_chr01
+            dgv.ReadOnly = true;
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+
+            dgv.Columns["PI_ID"].HeaderText = "PI ID";
+            dgv.Columns["pi_status"].HeaderText = "Upload Status";
+
+            dgv.Columns["Plant"].HeaderText = "Plant";
+
+            dgv.Columns["pi_type"].HeaderText = "Type";
+            dgv.Columns["pi_user_ip"].HeaderText = "Client IP";
+
+            dgv.Columns["pi_remark"].HeaderText = "Remark";
+
+            dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
+            //dgv.Columns["pi_update_date"].HeaderText = "Update Date";
+            //dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
+            dgv.Columns["pi_chr01"].HeaderText = "from BatchID";
+        }
+        public void initHeaderTextPIDet(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            dgv.ReadOnly = true;
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+            dgv.Columns["PI_ID"].HeaderText = "PI ID";
+            dgv.Columns["pi_LineID"].HeaderText = "Line";
+
+            dgv.Columns["pi_wec_ctn"].HeaderText = "Scan SN";
+
+            dgv.Columns["pi_pallet_no"].HeaderText = "Pallet";
+            dgv.Columns["CartonNo"].HeaderText = "CartonNo";
+
+            dgv.Columns["CartonID"].HeaderText = "CartonID";
+
+
+        }
+        public void initHeaderTextPIDetGrr(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.ReadOnly = true;
+            dgv.Columns[0].Frozen = true;
+            dgv.Columns[1].Frozen = true;
+            dgv.Columns[2].Frozen = true;
+            dgv.Columns["PI_ID"].HeaderText = "PI ID";
+            dgv.Columns["pi_LineID"].HeaderText = "Line";
+
+            dgv.Columns["pi_wec_ctn"].HeaderText = "Scan SN";
+
+            dgv.Columns["pi_pallet_no"].HeaderText = "Pallet";
+            dgv.Columns["plr_LineID_tran"].HeaderText = "Scan Line";
+
+            dgv.Columns["CartonNo"].HeaderText = "CartonNo";
+
+            dgv.Columns["CartonID"].HeaderText = "CartonID";
+
+            dgv.Columns["pi_chr01"].HeaderText = "CO";
+
+            dgv.Columns["pisr_rir"].HeaderText = "RIR #";
+            dgv.Columns["pisr_invoice"].HeaderText = "Invoice";
+            dgv.Columns["pisr_part"].HeaderText = "WEC-Part";
+            dgv.Columns["Pisr_receiver"].HeaderText = "Receiver";
+            dgv.Columns["pisr_site"].HeaderText = "MG";
+            dgv.Columns["pisr_po_nbr"].HeaderText = "PO-Number";
+            dgv.Columns["pisr_qty"].HeaderText = "Qty";
+            dgv.Columns["pisr_curr"].HeaderText = "Curr";
+            dgv.Columns["pisr_cost"].HeaderText = "U/P";
+            dgv.Columns["pisr_base_cost"].HeaderText = "U/P(Base)";
+            dgv.Columns["pisr_us_cost"].HeaderText = "U/P(USD)";
+            dgv.Columns["pisr_seq"].HeaderText = "Seq";
+
+            dgv.Columns["pisr_con_code"].HeaderText = "Custom Conn";
+
+            //dgv.Columns["pisr_ch_desc"].HeaderText = "Description";
+            dgv.Columns["pi_status"].HeaderText = "Upload Status";
+            dgv.Columns["sq_name"].HeaderText = "Description";
+
+            dgv.Columns["pisr_net_wt"].HeaderText = "Net Weight";
+            dgv.Columns["pisr_rec_type"].HeaderText = "STS/IQC/SI";
+            dgv.Columns["pisr_abc"].HeaderText = "ABC";
+            dgv.Columns["pisr_code"].HeaderText = "商检";
+            //
+            dgv.Columns["pisr_lic_req"].HeaderText = "Lic. Req";
+
+            dgv.Columns["pisr_sbu"].HeaderText = "SBU";
+            dgv.Columns["pisr_vend"].HeaderText = "Vend";
+            //dgv.Columns["mfgr_name"].HeaderText = "MFGR Name";
+
+            //dgv.Columns["pisr_char01"].HeaderText = "MFGR";
+            //dgv.Columns["pisr_char02"].HeaderText = "Vend Name";
+
+            dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
+            dgv.Columns["pisr_dec01"].HeaderText = "k200 NW";
+            dgv.Columns["pisr_dec02"].HeaderText = "NW";
+
+
+        }
+        #endregion
+        #region gen LambdaExpression
+        public LambdaExpression orderby_LambdaExpression<T>(string propertyName) where T : class
+        {
+            Type type = typeof(T);
+
+            PropertyInfo property = type.GetProperty(propertyName);
+            if (property == null)
+                throw new ArgumentException("propertyName", "Not Exist");
+
+            ParameterExpression param = Expression.Parameter(type, "p");
+            Expression propertyAccessExpression = Expression.MakeMemberAccess(param, property);
+            LambdaExpression orderByExpression = Expression.Lambda(propertyAccessExpression, param);
+
+            return orderByExpression;
+
+        }
+
+        public IQueryable<T> Sort<T>(IQueryable<T> q, string SortField, string SortDirection)
+            where T : class
+        {
+            return SortBy(q, SortField + " " + SortDirection);
+        }
+        #endregion
         internal void OpenFolderAndSelectFile(string pathname)
         {
             throw new NotImplementedException();
         }
+        ///////
+
+        public IQueryable<T> SortBy<T>(IQueryable<T> source, string sortExpression)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException("source");
+            }
+
+            string sortDirection = String.Empty;
+            string propertyName = String.Empty;
+
+            sortExpression = sortExpression.Trim();
+            int spaceIndex = sortExpression.Trim().IndexOf(" ");
+            if (spaceIndex < 0)
+            {
+                propertyName = sortExpression;
+                sortDirection = "ASC";
+            }
+            else
+            {
+                propertyName = sortExpression.Substring(0, spaceIndex);
+                sortDirection = sortExpression.Substring(spaceIndex + 1).Trim();
+            }
+
+            if (String.IsNullOrEmpty(propertyName))
+            {
+                return source;
+            }
+
+            ParameterExpression parameter = Expression.Parameter(source.ElementType, String.Empty);
+            MemberExpression property = Expression.Property(parameter, propertyName);
+            LambdaExpression lambda = Expression.Lambda(property, parameter);
+
+            string methodName = (sortDirection == "ASC") ? "OrderBy" : "OrderByDescending";
+
+            Expression methodCallExpression = Expression.Call(typeof(Queryable), methodName,
+                                                new Type[] { source.ElementType, property.Type },
+                                                source.Expression, Expression.Quote(lambda));
+
+            return source.Provider.CreateQuery<T>(methodCallExpression);
+        }
+
         //////////////////////////////////add new
+    }
+
+    public class ObservableListSource<T> : ObservableCollection<T>, IListSource
+        where T : class
+    {
+        private IBindingList _bindingList;
+
+        bool IListSource.ContainsListCollection { get { return false; } }
+
+        IList IListSource.GetList()
+        {
+            return _bindingList ?? (_bindingList = this.ToBindingList());
+        }
     }
 }

@@ -9,15 +9,19 @@ using System.Windows.Forms;
 
 using MessageBox = System.Windows.Forms.MessageBox;
 
+using IDR.Frm.Logon;
+using IDR.Frm.Properties;
+
 using System.Data.Entity;
 using IDR.Common;
 using IDR.Common.DEncrypt;
 using IDR.Frm.API;
+
 using IDR.EF.PIE;
 using IDR.EF.PIRemote;
-using IDR.Frm.Logon;
-using IDR.Frm.Properties;
 using IDR.Frm.frmPIE;
+using IDR.Frm.frmPI;
+
 using System.Data.SqlClient;
 
 namespace IDR.Frm
@@ -35,6 +39,7 @@ namespace IDR.Frm
         public string _clientIP { get; set; }
         //model
         public plr_batch_mstr _plr_batch_mstr_model { get; set; }
+        public pi_mstr _pi_mstr_model { get; set; }
 
         //attr for excel 
         public NPOI.HSSF.UserModel.HSSFWorkbook _hssfworkbook { get; set; }//xls
@@ -53,15 +58,15 @@ namespace IDR.Frm
         }
         public Default(LogonDomain logonDomain, sys_user system_user_exists)
         {
-            _logonDomain = logonDomain;
-            _system_user_exists = system_user_exists;
-
             /////////////////init
             InitializeComponent();
             //////////////////////
 
             initFrm(logonDomain._dbpie);
             //////end
+
+            _logonDomain = logonDomain;
+            _system_user_exists = system_user_exists;
         }
         #region init
         private void initPara()
@@ -81,13 +86,16 @@ namespace IDR.Frm
             this.tabCtlRight1.MouseUp += tabCtlRight1_MouseUp;
             //init param
             _clientIP = Program._clientIP;
+            _plr_batch_mstr_model = new plr_batch_mstr();
+            _pi_mstr_model = new pi_mstr();
+            _system_user_exists = new sys_user();
         }
         void initFrm()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
             this.WindowState = FormWindowState.Maximized;
-            this.FormClosing += Default_FormClosing;
 
+            this.txt0SearchID.Enter += txt0SearchID_Enter;
             //init fun,para;
             initPara();
         }
@@ -95,6 +103,32 @@ namespace IDR.Frm
         {
             initFrm();
             _dbpie = dbpie;
+        }
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            //
+            if (this._logonDomain != null)
+            {
+                this._logonDomain.Dispose();
+
+            }
+            if (this._dbpie != null)
+            {
+                this._dbpie.Dispose();
+            }
+            GC.Collect();
+            
+        }
+        void txt0SearchID_Enter(object sender, EventArgs e)
+        {
+            this.AcceptButton = btn0Find9;
+            //throw new NotImplementedException();
         }
         void tabCtlRight1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -132,20 +166,7 @@ namespace IDR.Frm
             }
             //throw new NotImplementedException();
         }
-        void Default_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (_logonDomain != null)
-            {
-                _logonDomain.Close();
-                _logonDomain.Dispose();
 
-            }
-            if (_dbpie != null)
-            {
-                _dbpie.Dispose();
-            }
-            GC.Collect();
-        }
         public DateTime getServerGetDate()
         {
             try
@@ -323,6 +344,11 @@ namespace IDR.Frm
             tc.SelectedTab.Controls.Add(cl);
             clearnotice();
         }
+        public void addGBToTC(TabPage tp, GroupBox gb)
+        {
+            tp.Controls.Add(gb);
+            clearnotice();
+        }
         private TabPage addNewTabPage(string pagename)
         {
             tabCtlRight1.TabPages.Add(tabCtlRight1.TabCount + ":" + pagename, tabCtlRight1.TabCount + ":" + pagename);
@@ -411,7 +437,44 @@ namespace IDR.Frm
 
         private void btn0Find9_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(getServerGetDate().ToString());
+            if (!string.IsNullOrEmpty(txt0SearchID.Text.Trim()))
+            {
+                if (cmb1SearchType.Text.Equals("BatchID"))
+                {
+                    var exist = _dbpie.plr_batch_mstr.Find(txt0SearchID.Text.Trim());
+                    if (exist != null)
+                    {
+                        string strtitle = "Find " + cmb1SearchType.Text + ":" + txt0SearchID.Text.Trim() + "Result";
+                        var tpg = addNewTabPage(strtitle);
+                        this._plr_batch_mstr_model.batch_id = txt0SearchID.Text.Trim();
+                        frm0BatchInfo bi = new frm0BatchInfo(this);
+                        addGBToTC(tpg, bi.gb0BatchInfo0);
+                    }
+                    else
+                    {
+                        lbl0SearchError.Text = "Error:Batch Mstr " + txt0SearchID.Text + " is not exist.";
+                        txt0SearchID.SelectionStart = txt0SearchID.Text.Length;
+                    }
+
+                }
+                else if (cmb1SearchType.Text.Equals("PI ID"))
+                {
+                    var exist = _dbpie.pi_mstr.Find(txt0SearchID.Text.Trim(), 1);
+                    if (exist != null)
+                    {
+                        string strtitle = "Find " + cmb1SearchType.Text + ":" + txt0SearchID.Text.Trim() + "Result";
+                        var tpg = addNewTabPage(strtitle);
+                        this._pi_mstr_model.PI_ID = txt0SearchID.Text.Trim();
+                        frmPI0PIInfo bi = new frmPI0PIInfo(this);
+                        addGBToTC(tpg, bi.gb00PIScanPIDataitemInquire);
+                    }
+                    else
+                    {
+                        lbl0SearchError.Text = "Error:PI Mstr " + txt0SearchID.Text + " is not exist.";
+                        txt0SearchID.SelectionStart = txt0SearchID.Text.Length;
+                    }
+                }
+            }
         }
 
     }

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IDR.Frm</RootNamespace>
     <AssemblyName>IDR.Frm</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,16 +32,19 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>irobot256.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\Lib\Npoi\dotnet4\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -76,11 +81,23 @@
     <Compile Include="Default.Designer.cs">
       <DependentUpon>Default.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPIE\frm0BatchInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPIE\frm0BatchInfo.Designer.cs">
+      <DependentUpon>frm0BatchInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPIE\frm111UploadExcel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPIE\frm111UploadExcel.Designer.cs">
       <DependentUpon>frm111UploadExcel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPI\frmPI0PIInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPI\frmPI0PIInfo.Designer.cs">
+      <DependentUpon>frmPI0PIInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Logon\LogonDomain.cs">
       <SubType>Form</SubType>
@@ -99,8 +116,14 @@
     <EmbeddedResource Include="Default.resx">
       <DependentUpon>Default.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPIE\frm0BatchInfo.resx">
+      <DependentUpon>frm0BatchInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPIE\frm111UploadExcel.resx">
       <DependentUpon>frm111UploadExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPI\frmPI0PIInfo.resx">
+      <DependentUpon>frmPI0PIInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Logon\LogonDomain.resx">
       <DependentUpon>LogonDomain.cs</DependentUpon>
@@ -924,9 +947,7 @@
   <ItemGroup>
     <Content Include="irobot256.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="frmPI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

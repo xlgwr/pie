@@ -4,7 +4,6 @@ namespace IDR.EF.PIRemote
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-
     using IDR.Common;
 
     public partial class PIRemote : DbContext
