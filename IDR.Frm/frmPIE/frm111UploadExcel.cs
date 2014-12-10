@@ -153,47 +153,68 @@ namespace IDR.Frm.frmPIE
 
         private void btn3QuickUploadExcel_Click(object sender, EventArgs e)
         {
-            btnEnable(false, true);
-            cf.setControlText(lbl1UploadExcelThreadMsg, "Notiec: Load Excel File ......", true, true);
-            cf.setControlText(_frmDefault.status15toolLabelstrResult, "Notiec: Load Excel File ......", true, true);
+            try
+            {
+                btnEnable(false, true);
+                cf.setControlText(lbl1UploadExcelThreadMsg, "Notiec: Load Excel File ......", true, true);
+                cf.setControlText(_frmDefault.status15toolLabelstrResult, "Notiec: Load Excel File ......", true, true);
 
-            if (txt0ExcelFileUploadExcel.Text.Trim() == "")
+                if (txt0ExcelFileUploadExcel.Text.Trim() == "")
+                {
+                    cf.setControlText(lbl1UploadExcelThreadMsg, "Error,没选择Excel， 不能完成上传操作,请选择正确的文件，谢谢！", true, true);
+                    btnEnable(true, true);
+                }
+                else
+                {
+                    oldtime = DateTime.Now;
+                    //Init0ializeWorkbook(txt0ExcelFileUploadExcel.Text);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(Init0ializeWorkbook), txt0ExcelFileUploadExcel.Text);
+                }
+            }
+            catch (Exception ex)
             {
-                cf.setControlText(lbl1UploadExcelThreadMsg, "Error,没选择Excel， 不能完成上传操作,请选择正确的文件，谢谢！", true, true);
                 btnEnable(true, true);
+                MessageBox.Show(ex.Message, "Error");
             }
-            else
-            {
-                oldtime = DateTime.Now;
-                //Init0ializeWorkbook(txt0ExcelFileUploadExcel.Text);
-                ThreadPool.QueueUserWorkItem(new WaitCallback(Init0ializeWorkbook), txt0ExcelFileUploadExcel.Text);
-            }
+
         }
 
         #region init excel for xls xlsx
 
         void Init0ializeWorkbook(object path)
         {
-            //read xls
-            using (FileStream file = new FileStream((string)path, FileMode.Open, FileAccess.Read))
+            try
             {
-                if (Path.GetExtension((string)path).ToLower().Equals(".xls"))
+                //read xls
+                using (FileStream file = new FileStream((string)path, FileMode.Open, FileAccess.Read))
                 {
-                    _strext = ".xls";
-                    _frmDefault._hssfworkbook = new HSSFWorkbook(file);
-                    sheet = _frmDefault._hssfworkbook.GetSheetAt(0);
+                    if (Path.GetExtension((string)path).ToLower().Equals(".xls"))
+                    {
+                        _strext = ".xls";
+                        _frmDefault._hssfworkbook = new HSSFWorkbook(file);
+                        sheet = _frmDefault._hssfworkbook.GetSheetAt(0);
+                    }
+                    else if (Path.GetExtension((string)path).ToLower().Equals(".xlsx"))
+                    {
+                        _strext = ".xlsx";
+                        _frmDefault._xssfworkbook = new XSSFWorkbook(file);
+                        sheet = _frmDefault._xssfworkbook.GetSheetAt(0);
+                    }
+                    else
+                    {
+                        btnEnable(true, true);
+                        var tmpmsg = "Error0: this file is not the xls or xlsx file.0";
+                        cf.setControlText(lbl1UploadExcelThreadMsg, tmpmsg, true, true);
+                        return;
+                    }
                 }
-                else if (Path.GetExtension((string)path).ToLower().Equals(".xlsx"))
-                {
-                    _strext = ".xlsx";
-                    _frmDefault._xssfworkbook = new XSSFWorkbook(file);
-                    sheet = _frmDefault._xssfworkbook.GetSheetAt(0);
-                }
-                else
-                {
-                    btnEnable(true, true);
-                    throw new Exception("Error0: this file is not the xls or xlsx file.0");
-                }
+            }
+            catch (Exception ex)
+            {
+                btnEnable(true, true);
+                cf.setControlText(lbl1UploadExcelThreadMsg, ex.Message, true, true);
+                return;
+
             }
 
             var strmsg = Convert0ToDataTable();
@@ -202,7 +223,40 @@ namespace IDR.Frm.frmPIE
             _frmDefault.Invoke(new Action(delegate()
             {
                 _plr_mstr_list_success = _dbpie.plr_mstr.Local.Where(m => m.Batch_ID.Equals(_strBatchID)).ToList();
-                data1GV1ePackingDet1UploadExcel.DataSource = _plr_mstr_list_success;
+                var dd=_plr_mstr_list_success
+                    .Select(p => new
+                    {
+                        Batch_ID = p.Batch_ID,
+                        LineID = p.LineID,
+                        plr_void_status = p.plr_void_status,
+                        packingListID = p.packingListID,
+                        InvoiceID = p.InvoiceID,
+
+                        plr_pallet_no = p.plr_pallet_no,
+                        CartonType = p.CartonType,
+                        CartonID = p.CartonID,
+                        plr_po = p.plr_po,
+
+                        plr_co = p.plr_co,
+                        plr_partno = p.plr_partno,
+                        plr_date_code = p.plr_date_code,
+                        plr_vend_mfgr = p.plr_vend_mfgr,
+                        Plr_vm_partno = p.Plr_vm_partno,
+
+                        plr_carton_qty = p.plr_carton_qty,
+                        plr_qty = p.plr_qty,
+                        plr_suppliers_id = p.plr_suppliers_id,
+                        plr_rcp_date = p.plr_rcp_date,
+                        plr_deli_date = p.plr_deli_date,
+
+                        plr_doc_type = p.plr_doc_type,
+                        plr_cre_date = p.plr_cre_date,
+                        plr_update_date = p.plr_update_date,
+                        plr_cre_userid = p.plr_cre_userid,
+                        plr_user_ip = p.plr_user_ip
+                    }).ToList<object>();
+
+                data1GV1ePackingDet1UploadExcel.DataSource = dd;
                 data1GV1ePackingDet1UploadExcel.Refresh();
             }));
             ///gen carton ID
@@ -306,6 +360,7 @@ namespace IDR.Frm.frmPIE
                 tmp_plr_batch_mstr_model.plr_deli_date = servedate;
                 tmp_plr_batch_mstr_model.plr_cre_date = servedate; // DateTime.FromOADate(double型)    如果excel为日期时
                 tmp_plr_batch_mstr_model.plr_update_date = servedate;
+                tmp_plr_batch_mstr_model.plr_cre_userid = _frmDefault._system_user_exists.user_name;
                 tmp_plr_batch_mstr_model.plr_user_ip = _frmDefault._clientIP;
 
                 var tmpmsg = "Excel File has Total: " + rows_countsum + " rows,Load Current Rows at:" + rows_current;

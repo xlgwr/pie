@@ -218,7 +218,7 @@ namespace IDR.Frm.API
             parameters[8].Value = cartonFrTo[0];
             parameters[9].Value = cartonFrTo[1];
 
-            parameters[10].Value = "";
+            parameters[10].Value = plr_mstr_model.plr_cre_userid;
 
             //parameters[11].Value = plr_mstr_model.plr_partno;
 

@@ -26,7 +26,7 @@ namespace IDR.Frm
     {
         CommonAPI cf;
         public PIE _dbpie { get; set; }
-        sys_user _system_user_exists;
+        public sys_user _system_user_exists { get; set; }
         //attribute
 
         public int _icurrMouseX { get; set; }
