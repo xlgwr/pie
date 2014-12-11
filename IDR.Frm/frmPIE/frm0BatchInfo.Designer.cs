@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctmenu0EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi01downLoad1ToExceltoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsm0menu_EnquireByPart = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmi00enquireByPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gb2det_BatchInfo = new System.Windows.Forms.GroupBox();
             this.data1GV_plr_mstr_BatchInfo = new System.Windows.Forms.DataGridView();
             this.txt5batch_cre_date_BatchInfo = new System.Windows.Forms.TextBox();
@@ -48,7 +48,7 @@
             this.gb3CartonNo = new System.Windows.Forms.GroupBox();
             this.data2GV2_plr_mstr_tran = new System.Windows.Forms.DataGridView();
             this.gb0BatchInfo0 = new System.Windows.Forms.GroupBox();
-            this.ctmenu0EnquireByPart.SuspendLayout();
+            this.tsm0menu_EnquireByPart.SuspendLayout();
             this.gb2det_BatchInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV_plr_mstr_BatchInfo)).BeginInit();
             this.gb1mstr_BatchInfo.SuspendLayout();
@@ -57,25 +57,25 @@
             this.gb0BatchInfo0.SuspendLayout();
             this.SuspendLayout();
             // 
-            // downLoad1ToExceltoolStripMenuItem2
+            // tsmi01downLoad1ToExceltoolStripMenuItem2
             // 
-            this.downLoad1ToExceltoolStripMenuItem2.Name = "downLoad1ToExceltoolStripMenuItem2";
-            this.downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
-            this.downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.tsmi01downLoad1ToExceltoolStripMenuItem2.Name = "tsmi01downLoad1ToExceltoolStripMenuItem2";
+            this.tsmi01downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.tsmi01downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
             // 
-            // ctmenu0EnquireByPart
+            // tsm0menu_EnquireByPart
             // 
-            this.ctmenu0EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enquireByPartToolStripMenuItem,
-            this.downLoad1ToExceltoolStripMenuItem2});
-            this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
+            this.tsm0menu_EnquireByPart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmi00enquireByPartToolStripMenuItem,
+            this.tsmi01downLoad1ToExceltoolStripMenuItem2});
+            this.tsm0menu_EnquireByPart.Name = "ctmenu0EnquireByPart";
+            this.tsm0menu_EnquireByPart.Size = new System.Drawing.Size(191, 70);
             // 
-            // enquireByPartToolStripMenuItem
+            // tsmi00enquireByPartToolStripMenuItem
             // 
-            this.enquireByPartToolStripMenuItem.Name = "enquireByPartToolStripMenuItem";
-            this.enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
+            this.tsmi00enquireByPartToolStripMenuItem.Name = "tsmi00enquireByPartToolStripMenuItem";
+            this.tsmi00enquireByPartToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.tsmi00enquireByPartToolStripMenuItem.Text = "Enquire by &Part";
             // 
             // gb2det_BatchInfo
             // 
@@ -152,15 +152,15 @@
             // 
             // txt2batch_do_BatchInfo
             // 
-            this.txt2batch_do_BatchInfo.Location = new System.Drawing.Point(182, 21);
+            this.txt2batch_do_BatchInfo.Location = new System.Drawing.Point(171, 21);
             this.txt2batch_do_BatchInfo.Name = "txt2batch_do_BatchInfo";
-            this.txt2batch_do_BatchInfo.Size = new System.Drawing.Size(68, 21);
+            this.txt2batch_do_BatchInfo.Size = new System.Drawing.Size(79, 21);
             this.txt2batch_do_BatchInfo.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(147, 25);
+            this.label2.Location = new System.Drawing.Point(138, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 2;
@@ -168,9 +168,9 @@
             // 
             // txt1batch_id_BatchInfo
             // 
-            this.txt1batch_id_BatchInfo.Location = new System.Drawing.Point(59, 21);
+            this.txt1batch_id_BatchInfo.Location = new System.Drawing.Point(55, 21);
             this.txt1batch_id_BatchInfo.Name = "txt1batch_id_BatchInfo";
-            this.txt1batch_id_BatchInfo.Size = new System.Drawing.Size(88, 21);
+            this.txt1batch_id_BatchInfo.Size = new System.Drawing.Size(82, 21);
             this.txt1batch_id_BatchInfo.TabIndex = 1;
             // 
             // label1
@@ -246,7 +246,7 @@
             this.Controls.Add(this.gb0BatchInfo0);
             this.Name = "frm0BatchInfo";
             this.Text = "frm0BatchInfo";
-            this.ctmenu0EnquireByPart.ResumeLayout(false);
+            this.tsm0menu_EnquireByPart.ResumeLayout(false);
             this.gb2det_BatchInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data1GV_plr_mstr_BatchInfo)).EndInit();
             this.gb1mstr_BatchInfo.ResumeLayout(false);
@@ -260,9 +260,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
-        private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
-        private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmi01downLoad1ToExceltoolStripMenuItem2;
+        private System.Windows.Forms.ContextMenuStrip tsm0menu_EnquireByPart;
+        private System.Windows.Forms.ToolStripMenuItem tsmi00enquireByPartToolStripMenuItem;
         private System.Windows.Forms.GroupBox gb2det_BatchInfo;
         private System.Windows.Forms.TextBox txt5batch_cre_date_BatchInfo;
         private System.Windows.Forms.TextBox txt4batch_dec01_BatchInfo;

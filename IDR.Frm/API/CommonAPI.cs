@@ -38,13 +38,23 @@ namespace IDR.Frm.API
         public bool _isSortAscending { get; set; }
         public DataGridViewColumn _sortColumn { get; set; }
 
+
+        public int _intnext { get; set; }
+
         Default _frmDefault;
 
-        public CommonAPI() { }
+        public CommonAPI() { initPara(); }
 
         public CommonAPI(Default frmDefault)
         {
             _frmDefault = frmDefault;
+            initPara();
+        }
+
+        private void initPara()
+        {
+            _isSortAscending = false;
+            _intnext = 0;
         }
         #region base function
 
@@ -345,7 +355,6 @@ namespace IDR.Frm.API
 
             };
         }
-
         public static Expression<Func<plr_mstr_tran, plr_mstr_tran_ext>> select_plr_mstr_tran_ext()
         {
             return p => new plr_mstr_tran_ext
@@ -1065,6 +1074,90 @@ namespace IDR.Frm.API
             ThreadPool.QueueUserWorkItem(new WaitCallback(dgv_rowEnter), dwko);
         }
         #endregion
+
+        /// <summary>
+        /// EnquireByPart
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="cellsHeader"></param>
+        /// <param name="strcontains"></param>
+        public void EnquireByPart(DataGridView dgv, string cellsHeader, string strcontains)
+        {
+            _frmDefault.Invoke(new Action(delegate()
+            {
+                int rowcount = dgv.Rows.Count;
+
+                if (rowcount > 0)
+                {
+                    for (int i = _intnext; i < rowcount - 1; i++)
+                    {
+                        if (dgv.Rows[i].Cells[cellsHeader].Value.ToString().ToLower().Contains(strcontains.ToLower()))
+                        {
+
+                            dgv.Rows[i].Cells[cellsHeader].Selected = true;
+
+                            _intnext = i + 1;
+                            if (_intnext >= rowcount - 1)
+                            {
+                                _intnext = 0;
+                            }
+                            break;
+                        }
+                        if (i >= rowcount - 2)
+                        {
+                            _intnext = 0;
+                            dgv.ClearSelection();
+                        }
+                    }
+                }
+            }));
+
+
+        }
+
+        public string EnquireByHeadText(DataGridView dgv, string headerText, string strcontains)
+        {
+            var tmpStartnext = _intnext;
+            var _columnIndex = 2;
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                if (dgv.Columns[i].HeaderText.Equals(headerText))
+                {
+                    _columnIndex = i;
+                    break;
+                }
+            }
+            int rowcount = dgv.Rows.Count;
+            if (rowcount > 0)
+            {
+                for (int i = _intnext; i < rowcount - 1; i++)
+                {
+                    if (dgv.Rows[i].Cells[_columnIndex].Value.ToString().ToLower().Contains(strcontains.ToLower()))
+                    {
+
+                        dgv.Rows[i].Cells[_columnIndex].Selected = true;
+
+                        _intnext = i + 1;
+                        if (_intnext >= rowcount - 1)
+                        {
+                            _intnext = 0;
+                        }
+
+                        return "success: find in [" + headerText + "] with " + strcontains + " at " + _intnext + " Row," + " start " + tmpStartnext;
+                        break;
+                    }
+                    if (i >= rowcount - 2)
+                    {
+                        _intnext = 0;
+                        dgv.ClearSelection();
+                    }
+                }
+                return "Error: No find in [" + headerText + "] with " + strcontains + " start " + tmpStartnext;
+            }
+            return "No Data";
+
+
+        }
         //////////////////////////////////add new
     }
 

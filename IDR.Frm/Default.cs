@@ -273,7 +273,17 @@ namespace IDR.Frm
                 return;
             }
             init_FrmForRefeDGV(_FrmForRefe.textBox1.Text.Trim());
-            _FrmForRefe.data0GVForReference.Focus();
+            if (_FrmForRefe.data0GVForReference.RowCount <= 0)
+            {
+                _FrmForRefe.lbl1SelectNotice.Text = " has no data, please try again.";
+                _FrmForRefe.lbl2SelectValue.Text = "";
+                _FrmForRefe.textBox1.SelectAll();
+                this.AcceptButton = _FrmForRefe.button1;
+            }
+            else
+            {
+                _FrmForRefe.data0GVForReference.Focus();
+            }
             //txt0SearchID.Text = _FrmForRefe.textBox1.Text.Trim();
             //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
         }

@@ -14,10 +14,6 @@ namespace IDR.EF.PIE
 
         //[StringLength(50)]
         //public string plr_suppliers_id { get; set; }
-
-        [StringLength(50)]
-        public string batch_doc { get; set; }
-
         [StringLength(50)]
         public string batch_status { get; set; }
 
@@ -27,6 +23,8 @@ namespace IDR.EF.PIE
         public string batch_chr01 { get; set; }
 
         //public short? batch_void { get; set; }
+        [StringLength(50)]
+        public string batch_doc { get; set; }
 
         public DateTime? batch_cre_date { get; set; }
 

@@ -20,6 +20,7 @@ using IDR.EF.PIRemote;
 using System.Threading;
 using System.Reflection;
 using System.Linq.Expressions;
+using IDR.Frm.Temple;
 
 namespace IDR.Frm.frmPIE
 {
@@ -29,6 +30,8 @@ namespace IDR.Frm.frmPIE
         public IQueryable<plr_mstr_ext> _list_plr_mstr { get; set; }
         public IQueryable<plr_mstr_tran_ext> _list_plr_mstr_tran { get; set; }
 
+        public DataGridView _dgv_ToolScriptMenu { get; set; }
+
 
         //commonfunction
         CommonAPI cf;
@@ -36,6 +39,7 @@ namespace IDR.Frm.frmPIE
 
         ////frm win
         Default _frmDefault;
+        frmEnterTxt _frmET;
 
         public frm0BatchInfo()
         {
@@ -69,9 +73,63 @@ namespace IDR.Frm.frmPIE
 
             data2GV2_plr_mstr_tran.CellClick += data2GV2_plr_mstr_tran_CellClick;
             data2GV2_plr_mstr_tran.RowEnter += data2GV2_plr_mstr_tran_RowEnter;
+            //equire by part
+            data1GV_plr_mstr_BatchInfo.ContextMenuStrip = tsm0menu_EnquireByPart;
+            data2GV2_plr_mstr_tran.ContextMenuStrip = tsm0menu_EnquireByPart;
+
+            tsm0menu_EnquireByPart.Click += tsm0menu_EnquireByPart_Click;
+            tsmi00enquireByPartToolStripMenuItem.Click += ctmenu0EnquireByPart_Click;
+        }
+        #region equire by part
+        void tsm0menu_EnquireByPart_Click(object sender, EventArgs e)
+        {
+            var tmpDGV = (DataGridView)tsm0menu_EnquireByPart.SourceControl;
+            if (_dgv_ToolScriptMenu == null)
+            {
+                _dgv_ToolScriptMenu = tmpDGV;
+                return;
+            }
+            if (_dgv_ToolScriptMenu != tmpDGV)
+            {
+                cf._intnext = 0;
+                _dgv_ToolScriptMenu = tmpDGV;
+            }
         }
 
-
+        void ctmenu0EnquireByPart_Click(object sender, EventArgs e)
+        {
+            _frmET = new frmEnterTxt(_frmDefault);
+            _frmET._frm0BatchInfo = this;
+            _frmET._title = "Enquire by ";
+            //_frmET.lblTitle.Text = "Part#:";
+            for (int i = 0; i < _dgv_ToolScriptMenu.ColumnCount; i++)
+            {
+                var tmpHeaderText = _dgv_ToolScriptMenu.Columns[i].HeaderText;
+                _frmET.comb0TextValue.Items.Add(tmpHeaderText);
+                if (tmpHeaderText.StartsWith("Part"))
+                {
+                    _frmET.comb0TextValue.SelectedIndex = i;
+                }
+            }
+            if (_frmET.comb0TextValue.Items.Count <= 0)
+            {
+                MessageBox.Show("No data");
+                return;
+            }
+            _frmET.button1.Click += enquireByPart;
+            _frmET.ShowDialog();
+            //throw new NotImplementedException();
+        }
+        void enquireByPart(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_frmET.textBox1.Text))
+            {
+                _frmET.textBox1.Focus();
+                return;
+            }
+            _frmET.lblMsg.Text = cf.EnquireByHeadText(_dgv_ToolScriptMenu, _frmET.comb0TextValue.Text, _frmET.textBox1.Text.Trim());
+        }
+        #endregion
         void initFrm()
         {
             this.FormClosing += Default_FormClosing;

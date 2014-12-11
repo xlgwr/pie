@@ -113,5 +113,10 @@ namespace IDR.Frm.Temple
             //}
         }
         #endregion
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            this.AcceptButton = button1;
+        }
     }
 }

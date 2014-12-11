@@ -62,7 +62,7 @@
             // 
             // btn2OK
             // 
-            this.btn2OK.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2OK.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2OK.ForeColor = System.Drawing.Color.Red;
             this.btn2OK.Location = new System.Drawing.Point(436, 15);
             this.btn2OK.Name = "btn2OK";
@@ -84,7 +84,7 @@
             // lbl1SelectNotice
             // 
             this.lbl1SelectNotice.AutoSize = true;
-            this.lbl1SelectNotice.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl1SelectNotice.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl1SelectNotice.ForeColor = System.Drawing.Color.Red;
             this.lbl1SelectNotice.Location = new System.Drawing.Point(20, 45);
             this.lbl1SelectNotice.Name = "lbl1SelectNotice";
@@ -95,7 +95,7 @@
             // lbl2SelectValue
             // 
             this.lbl2SelectValue.AutoSize = true;
-            this.lbl2SelectValue.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl2SelectValue.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl2SelectValue.ForeColor = System.Drawing.Color.Red;
             this.lbl2SelectValue.Location = new System.Drawing.Point(392, 45);
             this.lbl2SelectValue.Name = "lbl2SelectValue";
@@ -153,6 +153,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(151, 21);
             this.textBox1.TabIndex = 4;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // frmEnterForReference
             // 
