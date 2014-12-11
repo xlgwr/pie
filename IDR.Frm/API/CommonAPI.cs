@@ -292,6 +292,93 @@ namespace IDR.Frm.API
             IQueryable<plr_batch_mstr> query = _frmDefault._dbpie.plr_batch_mstr.AsQueryable()
                 .Provider.CreateQuery<plr_batch_mstr>(expr);
         }
+
+        public static Expression<Func<plr_batch_mstr, plr_batch_mstr_ext>> select_plr_batch_mstr_ext()
+        {
+            return p => new plr_batch_mstr_ext
+            {
+                batch_id = p.batch_id,
+                batch_doc = p.batch_doc,
+                batch_status = p.batch_status,
+                batch_dec01 = p.batch_dec01,
+                batch_chr01 = p.batch_chr01,
+                batch_cre_date = p.batch_cre_date,
+                batch_cre_user = p.batch_cre_user,
+                batch_user_ip = p.batch_user_ip
+
+            };
+        }
+        public static Expression<Func<plr_mstr, plr_mstr_ext>> select_plr_mstr_ext()
+        {
+            return p => new plr_mstr_ext
+            {
+                Batch_ID = p.Batch_ID,
+                LineID = p.LineID,
+                plr_status = p.plr_status,
+                packingListID = p.packingListID,
+                InvoiceID = p.InvoiceID,
+
+                plr_pallet_no = p.plr_pallet_no,
+                CartonType = p.CartonType,
+                CartonID = p.CartonID,
+                carton_id_prifix = p.carton_id_prifix,
+                plr_po = p.plr_po,
+
+                plr_co = p.plr_co,
+                plr_partno = p.plr_partno,
+                plr_date_code = p.plr_date_code,
+                plr_vend_mfgr = p.plr_vend_mfgr,
+                Plr_vm_partno = p.Plr_vm_partno,
+
+                plr_carton_qty = p.plr_carton_qty,
+                plr_qty = p.plr_qty,
+                plr_suppliers_id = p.plr_suppliers_id,
+                plr_rcp_date = p.plr_rcp_date,
+                plr_deli_date = p.plr_deli_date,
+                re_mark = p.re_mark,
+
+                plr_doc_type = p.plr_doc_type,
+                plr_cre_date = p.plr_cre_date,
+                plr_update_date = p.plr_update_date,
+                plr_cre_userid = p.plr_cre_userid,
+                plr_user_ip = p.plr_user_ip
+
+            };
+        }
+
+        public static Expression<Func<plr_mstr_tran, plr_mstr_tran_ext>> select_plr_mstr_tran_ext()
+        {
+            return p => new plr_mstr_tran_ext
+            {
+                Batch_ID = p.Batch_ID,
+                LineID = p.LineID,
+                plr_status = p.plr_status,
+
+                plr_status_msg = p.plr_status_msg,
+                plr_wec_ctn = p.plr_wec_ctn,
+
+                plr_pallet_no = p.plr_pallet_no,
+                CartonType = p.CartonType,
+                CartonNo = p.CartonNo,
+                CartonID = p.CartonID,
+                carton_id_prifix = p.carton_id_prifix,
+                plr_po = p.plr_po,
+
+                plr_partno = p.plr_partno,
+                plr_carton_qty = p.plr_carton_qty,
+                plr_qty = p.plr_qty,
+
+                plr_rcp_date = p.plr_rcp_date,
+                plr_deli_date = p.plr_deli_date,
+                re_mark = p.re_mark,
+
+                plr_cre_date = p.plr_cre_date,
+                plr_update_date = p.plr_update_date,
+                plr_cre_userid = p.plr_cre_userid,
+                plr_user_ip = p.plr_user_ip
+
+            };
+        }
         /// <summary>
         /// plr_batch_mstr
         /// </summary>
@@ -300,34 +387,13 @@ namespace IDR.Frm.API
         public IQueryable<plr_batch_mstr_ext> getSelectList_plr_batch_mstr(string _strBatchID)
         {
             return _frmDefault._dbpie.plr_batch_mstr.Where(m => m.batch_id.Equals(_strBatchID))
-                    .Select(p => new plr_batch_mstr_ext
-                    {
-                        batch_id = p.batch_id,
-                        batch_doc = p.batch_doc,
-                        batch_status = p.batch_status,
-                        batch_dec01 = p.batch_dec01,
-                        batch_chr01 = p.batch_chr01,
-                        batch_cre_date = p.batch_cre_date,
-                        batch_cre_user = p.batch_cre_user,
-                        batch_user_ip = p.batch_user_ip
-
-                    });
+                    .Select(select_plr_batch_mstr_ext());
         }
+
         public IQueryable<plr_batch_mstr_ext> getSelectList_plr_batch_mstr(Expression<Func<plr_batch_mstr, bool>> lambdex)
         {
             return _frmDefault._dbpie.plr_batch_mstr.Where(lambdex)
-                    .Select(p => new plr_batch_mstr_ext
-                    {
-                        batch_id = p.batch_id,
-                        batch_doc = p.batch_doc,
-                        batch_status = p.batch_status,
-                        batch_dec01 = p.batch_dec01,
-                        batch_chr01 = p.batch_chr01,
-                        batch_cre_date = p.batch_cre_date,
-                        batch_cre_user = p.batch_cre_user,
-                        batch_user_ip = p.batch_user_ip
-
-                    });
+                    .Select(select_plr_batch_mstr_ext());
         }
         /// <summary>
         /// plr_batch_mstr_ext top num
@@ -339,6 +405,7 @@ namespace IDR.Frm.API
         {
             return getSelectList_plr_batch_mstr(lambdex).Take(topnum);
         }
+
         /// <summary>
         /// plr_mstr
         /// </summary>
@@ -347,40 +414,7 @@ namespace IDR.Frm.API
         public IQueryable<plr_mstr_ext> getSelectList_plr_mstr(string _strBatchID)
         {
             return _frmDefault._dbpie.plr_mstr.Where(m => m.Batch_ID.Equals(_strBatchID))
-                    .Select(p => new plr_mstr_ext
-                    {
-                        Batch_ID = p.Batch_ID,
-                        LineID = p.LineID,
-                        plr_status = p.plr_status,
-                        packingListID = p.packingListID,
-                        InvoiceID = p.InvoiceID,
-
-                        plr_pallet_no = p.plr_pallet_no,
-                        CartonType = p.CartonType,
-                        CartonID = p.CartonID,
-                        carton_id_prifix = p.carton_id_prifix,
-                        plr_po = p.plr_po,
-
-                        plr_co = p.plr_co,
-                        plr_partno = p.plr_partno,
-                        plr_date_code = p.plr_date_code,
-                        plr_vend_mfgr = p.plr_vend_mfgr,
-                        Plr_vm_partno = p.Plr_vm_partno,
-
-                        plr_carton_qty = p.plr_carton_qty,
-                        plr_qty = p.plr_qty,
-                        plr_suppliers_id = p.plr_suppliers_id,
-                        plr_rcp_date = p.plr_rcp_date,
-                        plr_deli_date = p.plr_deli_date,
-                        re_mark = p.re_mark,
-
-                        plr_doc_type = p.plr_doc_type,
-                        plr_cre_date = p.plr_cre_date,
-                        plr_update_date = p.plr_update_date,
-                        plr_cre_userid = p.plr_cre_userid,
-                        plr_user_ip = p.plr_user_ip
-
-                    });
+                    .Select(select_plr_mstr_ext());
         }
         /// <summary>
         /// plr_mstr
@@ -390,39 +424,7 @@ namespace IDR.Frm.API
         public IQueryable<plr_mstr_ext> getSelectList_plr_mstr(IQueryable<plr_mstr> plr_mstr_list)
         {
             return plr_mstr_list
-                    .Select(p => new plr_mstr_ext
-                    {
-                        Batch_ID = p.Batch_ID,
-                        LineID = p.LineID,
-                        plr_status = p.plr_status,
-                        packingListID = p.packingListID,
-                        InvoiceID = p.InvoiceID,
-
-                        plr_pallet_no = p.plr_pallet_no,
-                        CartonType = p.CartonType,
-                        CartonID = p.CartonID,
-                        carton_id_prifix = p.carton_id_prifix,
-                        plr_po = p.plr_po,
-
-                        plr_co = p.plr_co,
-                        plr_partno = p.plr_partno,
-                        plr_date_code = p.plr_date_code,
-                        plr_vend_mfgr = p.plr_vend_mfgr,
-                        Plr_vm_partno = p.Plr_vm_partno,
-
-                        plr_carton_qty = p.plr_carton_qty,
-                        plr_qty = p.plr_qty,
-                        plr_suppliers_id = p.plr_suppliers_id,
-                        plr_rcp_date = p.plr_rcp_date,
-                        plr_deli_date = p.plr_deli_date,
-                        re_mark = p.re_mark,
-
-                        plr_doc_type = p.plr_doc_type,
-                        plr_cre_date = p.plr_cre_date,
-                        plr_update_date = p.plr_update_date,
-                        plr_cre_userid = p.plr_cre_userid,
-                        plr_user_ip = p.plr_user_ip
-                    });
+                    .Select(select_plr_mstr_ext());
         }
 
         /// <summary>
@@ -433,47 +435,18 @@ namespace IDR.Frm.API
         public IQueryable<plr_mstr_tran_ext> getSelectList_plr_mstr_tran(string _strBatchID)
         {
             return _frmDefault._dbpie.plr_mstr_tran.Where(m => m.Batch_ID.Equals(_strBatchID))
-                    .Select(p => new plr_mstr_tran_ext
-                    {
-                        Batch_ID = p.Batch_ID,
-                        LineID = p.LineID,
-                        plr_status = p.plr_status,
-
-                        plr_status_msg = p.plr_status_msg,
-                        plr_wec_ctn = p.plr_wec_ctn,
-
-                        plr_pallet_no = p.plr_pallet_no,
-                        CartonType = p.CartonType,
-                        CartonNo = p.CartonNo,
-                        CartonID = p.CartonID,
-                        carton_id_prifix = p.carton_id_prifix,
-                        plr_po = p.plr_po,
-
-                        plr_partno = p.plr_partno,
-                        plr_carton_qty = p.plr_carton_qty,
-                        plr_qty = p.plr_qty,
-
-                        plr_rcp_date = p.plr_rcp_date,
-                        plr_deli_date = p.plr_deli_date,
-                        re_mark = p.re_mark,
-
-                        plr_cre_date = p.plr_cre_date,
-                        plr_update_date = p.plr_update_date,
-                        plr_cre_userid = p.plr_cre_userid,
-                        plr_user_ip = p.plr_user_ip
-
-                    });
+                    .Select(select_plr_mstr_tran_ext());
         }
 
         //PI
         public IQueryable<pi_mstr> getSelectList_pi_mstr(Expression<Func<pi_mstr, bool>> lambdex)
         {
             return _frmDefault._dbpie.pi_mstr.Where(lambdex);
-                    //.Select(p => new pi_mstr
-                    //{
-                        
+            //.Select(p => new pi_mstr
+            //{
 
-                    //});
+
+            //});
         }
         /// <summary>
         /// top num
@@ -494,8 +467,8 @@ namespace IDR.Frm.API
 
             //});
         }
-        
-        
+
+
         #endregion
         #region init data gric view head text
         /// <summary>
