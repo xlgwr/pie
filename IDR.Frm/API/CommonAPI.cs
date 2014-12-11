@@ -250,6 +250,96 @@ namespace IDR.Frm.API
         #endregion
         #region select data function
         /// <summary>
+        /// 获取对应的字段名
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="keySelector"></param>
+        /// <returns></returns>
+        public static string GetMemberName<TSource, TKey>(Expression<Func<TSource, TKey>> keySelector)
+        {
+            string fieldName = null;
+            var exp = keySelector.Body as UnaryExpression;
+            if (exp == null)
+            {
+                var body = keySelector.Body as MemberExpression;
+                fieldName = body.Member.Name;
+            }
+            else
+            {
+                fieldName = (exp.Operand as MemberExpression).Member.Name;
+            }
+            return fieldName;
+        }
+
+        public void genexprexsswhere(string getProperty, string rightConstant, string methodName)
+        {
+            IQueryable<plr_batch_mstr> plr_batch_mstr = _frmDefault._dbpie.plr_batch_mstr;
+            //创建一个参数c
+            ParameterExpression param =
+                Expression.Parameter(typeof(plr_batch_mstr), "c");
+            //c.City=="London"
+            Expression left = Expression.Property(param,
+            typeof(plr_batch_mstr).GetProperty(getProperty));//"City"
+            Expression right = Expression.Constant(rightConstant);//"London"
+            Expression filter = Expression.Equal(left, right);
+
+            Expression pred = Expression.Lambda(filter, param);
+            //Where(c=>c.City=="London")
+            Expression expr = Expression.Call(typeof(Queryable), methodName,//"Where"
+            new Type[] { typeof(plr_batch_mstr) },
+                Expression.Constant(plr_batch_mstr), pred);
+            //生成动态查询
+            IQueryable<plr_batch_mstr> query = _frmDefault._dbpie.plr_batch_mstr.AsQueryable()
+                .Provider.CreateQuery<plr_batch_mstr>(expr);
+        }
+        /// <summary>
+        /// plr_batch_mstr
+        /// </summary>
+        /// <param name="_strBatchID"></param>
+        /// <returns>List<object></returns>
+        public IQueryable<plr_batch_mstr_ext> getSelectList_plr_batch_mstr(string _strBatchID)
+        {
+            return _frmDefault._dbpie.plr_batch_mstr.Where(m => m.batch_id.Equals(_strBatchID))
+                    .Select(p => new plr_batch_mstr_ext
+                    {
+                        batch_id = p.batch_id,
+                        batch_doc = p.batch_doc,
+                        batch_status = p.batch_status,
+                        batch_dec01 = p.batch_dec01,
+                        batch_chr01 = p.batch_chr01,
+                        batch_cre_date = p.batch_cre_date,
+                        batch_cre_user = p.batch_cre_user,
+                        batch_user_ip = p.batch_user_ip
+
+                    });
+        }
+        public IQueryable<plr_batch_mstr_ext> getSelectList_plr_batch_mstr(Expression<Func<plr_batch_mstr, bool>> lambdex)
+        {
+            return _frmDefault._dbpie.plr_batch_mstr.Where(lambdex)
+                    .Select(p => new plr_batch_mstr_ext
+                    {
+                        batch_id = p.batch_id,
+                        batch_doc = p.batch_doc,
+                        batch_status = p.batch_status,
+                        batch_dec01 = p.batch_dec01,
+                        batch_chr01 = p.batch_chr01,
+                        batch_cre_date = p.batch_cre_date,
+                        batch_cre_user = p.batch_cre_user,
+                        batch_user_ip = p.batch_user_ip
+
+                    });
+        }
+        /// <summary>
+        /// plr_batch_mstr_ext top num
+        /// </summary>
+        /// <param name="_strBatchID"></param>
+        /// <param name="topnum"></param>
+        /// <returns></returns>
+        public IQueryable<plr_batch_mstr_ext> getSelectList_plr_batch_mstr(Expression<Func<plr_batch_mstr, bool>> lambdex, int topnum)
+        {
+            return getSelectList_plr_batch_mstr(lambdex).Take(topnum);
+        }
+        /// <summary>
         /// plr_mstr
         /// </summary>
         /// <param name="_strBatchID"></param>
@@ -374,6 +464,38 @@ namespace IDR.Frm.API
 
                     });
         }
+
+        //PI
+        public IQueryable<pi_mstr> getSelectList_pi_mstr(Expression<Func<pi_mstr, bool>> lambdex)
+        {
+            return _frmDefault._dbpie.pi_mstr.Where(lambdex);
+                    //.Select(p => new pi_mstr
+                    //{
+                        
+
+                    //});
+        }
+        /// <summary>
+        /// top num
+        /// </summary>
+        /// <param name="_strBatchID"></param>
+        /// <param name="topnum"></param>
+        /// <returns></returns>
+        public IQueryable<pi_mstr> getSelectList_pi_mstr(Expression<Func<pi_mstr, bool>> lambdex, int topnum)
+        {
+            return getSelectList_pi_mstr(lambdex).Take(topnum);
+        }
+        public IQueryable<pi_det> getSelectList_pi_det(Expression<Func<pi_det, bool>> lambdex)
+        {
+            return _frmDefault._dbpie.pi_det.Where(lambdex);
+            //.Select(p => new pi_mstr
+            //{
+
+
+            //});
+        }
+        
+        
         #endregion
         #region init data gric view head text
         /// <summary>
@@ -394,6 +516,29 @@ namespace IDR.Frm.API
                 dgv.Columns[i].Frozen = true;
             }
 
+
+        }
+        public void initHeaderText_plr_batch_mstr(DataGridView dgv)
+        {
+            if (dgv.Rows.Count < 0)
+            {
+                return;
+            }
+            dgvAttritubeInit(dgv, 1, true);
+
+            dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
+            //dgv.Columns["plr_suppliers_id"].HeaderText = "Suppliers";
+            dgv.Columns["batch_doc"].HeaderText = "Batch Type";
+            dgv.Columns["batch_status"].HeaderText = "Void";//"Status";
+            //dgv.Columns["batch_void"].HeaderText = "Void";
+
+            dgv.Columns["batch_cre_date"].HeaderText = "Create Date";
+            //dgv.Columns["batch_update_date"].HeaderText = "Update Date";
+            dgv.Columns["batch_cre_user"].HeaderText = "User Id";
+            //dgv.Columns["batch_chr01"].HeaderText = "other";
+            dgv.Columns["batch_dec01"].HeaderText = "Items Count";
+            dgv.Columns["batch_chr01"].HeaderText = "PI Status";
+            dgv.Columns["batch_user_ip"].HeaderText = "Create IP";
 
         }
         public void initHeaderText_plr_mstr(DataGridView dgv)
@@ -676,6 +821,7 @@ namespace IDR.Frm.API
         }
         ///////
         #region datagridview sort
+
         public IQueryable<T> SortBy<T>(IQueryable<T> source, string sortExpression)
         {
             if (source == null)

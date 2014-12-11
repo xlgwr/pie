@@ -39,6 +39,9 @@ namespace IDR.EF.PIE
         [StringLength(50)]
         public string CartonID { get; set; }
 
+        [StringLength(50)]
+        public string carton_id_prifix { get; set; }
+
         [StringLength(30)]
         public string plr_po { get; set; }
         //5
@@ -66,9 +69,6 @@ namespace IDR.EF.PIE
         public DateTime? plr_rcp_date { get; set; }
 
         public DateTime? plr_deli_date { get; set; }
-
-        [StringLength(50)]
-        public string carton_id_prifix { get; set; }
 
         //5
         [StringLength(50)]

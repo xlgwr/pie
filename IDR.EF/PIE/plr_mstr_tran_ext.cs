@@ -33,6 +33,9 @@ namespace IDR.EF.PIE
         [StringLength(50)]
         public string CartonID { get; set; }
 
+        [StringLength(50)]
+        public string carton_id_prifix { get; set; }
+
         [Key]
         [Column(Order = 3)]
         [StringLength(50)]
@@ -61,9 +64,6 @@ namespace IDR.EF.PIE
         public string plr_pallet_no { get; set; }
 
         public DateTime? plr_deli_date { get; set; }
-
-        [StringLength(50)]
-        public string carton_id_prifix { get; set; }
 
         [Column(TypeName = "text")]
         public string re_mark { get; set; }

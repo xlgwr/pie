@@ -16,6 +16,7 @@ namespace IDR.Frm.API
         public DataGridView _dgv1;
         public frmEnterForReference _FrmForRefe;
         public bool _FrmForRefeHas = false;
+
         public string _strBatchId;
         public int _selectedindex;
         public int _eX;
@@ -46,6 +47,7 @@ namespace IDR.Frm.API
         //temp
         public string _cartonidenter;
         public int _fori;
+
         public DoWorkObject()
         {
 
@@ -78,6 +80,22 @@ namespace IDR.Frm.API
             _dgv1 = dgv1;
             _eX = ex;
             _eY = ey;
+
+        }
+        /// <summary>
+        /// for btnmore reference,cell click
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="ex"></param>
+        /// <param name="ey"></param>
+        /// <param name="strCellColName"></param>
+        public DoWorkObject(DataGridView dgv, int ex, int ey, string strCellColName)
+        {
+            _FrmForRefeHas = false;
+            _dgv = dgv;
+            _eX = ex;
+            _eY = ey;
+            _strCellColName = strCellColName;
 
         }
         /// <summary>
@@ -133,5 +151,37 @@ namespace IDR.Frm.API
             _deffcolors = Deffcolors;
 
         }
+        /// <summary>
+        /// btnmore row enter
+        /// </summary>
+        /// <param name="FrmForRefe"></param>
+        /// <param name="dgv"></param>
+        /// <param name="selectedindex"></param>
+        /// <param name="eIndex"></param>
+        /// <param name="colors"></param>
+        /// <param name="selectColumnNameValue"></param>
+        /// <param name="FrmForRefeLblMsg"></param>
+        /// <param name="sameColumnName"></param>
+        /// <param name="deffCellName"></param>
+        /// <param name="deffCellValue"></param>
+        /// <param name="Deffcolors"></param>
+        public DoWorkObject(frmEnterForReference FrmForRefe, DataGridView dgv, int selectedindex, int eIndex, Color colors, string selectColumnNameValue, string FrmForRefeLblMsg, string sameColumnName, string deffCellName, string deffCellValue, Color Deffcolors)
+        {
+            _FrmForRefe = FrmForRefe;
+            _FrmForRefeLblMsg = FrmForRefeLblMsg;
+            _FrmForRefeHas = true;
+            _dgv = dgv;
+            _selectedindex = selectedindex;
+            _eX = eIndex;
+            _colors = colors;
+            _selectColumnNameValue = selectColumnNameValue;
+            _sameColumnName = sameColumnName;
+            _deffCellName = deffCellName;
+            _deffCellValue = deffCellValue;
+            _deffcolors = Deffcolors;
+
+        }
+
+       
     }
 }

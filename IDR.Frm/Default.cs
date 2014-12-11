@@ -23,6 +23,8 @@ using IDR.Frm.frmPIE;
 using IDR.Frm.frmPI;
 
 using System.Data.SqlClient;
+using IDR.Frm.Temple;
+using System.Linq.Expressions;
 
 namespace IDR.Frm
 {
@@ -47,6 +49,14 @@ namespace IDR.Frm
         public plr_batch_mstr _plr_batch_mstr_model { get; set; }
         public plr_mstr _plr_mstr_model { get; set; }
         public pi_mstr _pi_mstr_model { get; set; }
+        //iquery list
+        public IQueryable<plr_batch_mstr_ext> _list_plr_batch_mstr { get; set; }
+
+        public IQueryable<plr_mstr_ext> _list_plr_mstr { get; set; }
+        public IQueryable<plr_mstr_tran_ext> _list_plr_mstr_tran { get; set; }
+
+        public IQueryable<pi_mstr> _list_pi_mstr { get; set; }
+
 
         //attr for excel 
         public NPOI.HSSF.UserModel.HSSFWorkbook _hssfworkbook { get; set; }//xls
@@ -57,6 +67,7 @@ namespace IDR.Frm
 
         //frm win
         LogonDomain _logonDomain;
+        frmEnterForReference _FrmForRefe;
 
         #endregion
 
@@ -93,6 +104,7 @@ namespace IDR.Frm
             //tab mouse right
             this.tabCtlRight1.MouseMove += tabCtlRight1_MouseMove;
             this.tabCtlRight1.MouseUp += tabCtlRight1_MouseUp;
+
             //init param
             _clientIP = Program._clientIP;
             _plr_batch_mstr_model = new plr_batch_mstr();
@@ -108,6 +120,9 @@ namespace IDR.Frm
             _selectColumnNameValue = "";
             Batch_ID = "";
             PI_ID = "";
+
+            //Reference
+            btn00More.Click += btn00More0_Click;
 
         }
         void initFrm()
@@ -145,6 +160,150 @@ namespace IDR.Frm
             GC.Collect();
 
         }
+
+        #region btnmore reference
+
+        void btn00More0_Click(object sender, EventArgs e)
+        {
+            _FrmForRefe = new frmEnterForReference(this);
+
+            _FrmForRefe.textBox1.Text = txt0SearchID.Text;
+            _FrmForRefe.textBox1.Focus();
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            //
+            _FrmForRefe.data0GVForReference.RowEnter += data0GVForReference_RowEnter;
+            _FrmForRefe.data0GVForReference.CellClick += data0GVForReference_Click;
+            _FrmForRefe.data0GVForReference.KeyDown += data0GVForReference_KeyDown;
+            //
+            _FrmForRefe.button1.Click += enquireByForReferenct;
+            _FrmForRefe.data0GVForReference.CellDoubleClick += button1_DoubleClick;
+            _FrmForRefe.btn2OK.Click += button1_DoubleClick;
+            //
+            _FrmForRefe.chkTop50.CheckedChanged += chkTop50_CheckedChanged;
+            //
+            _FrmForRefe.gb0ForReference.Text = "Enquire Result";
+            //
+            initSelectCondition();
+
+            //
+            init_FrmForRefeDGV("");
+
+            _FrmForRefe.ShowDialog();
+        }
+
+        void data0GVForReference_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (!string.IsNullOrEmpty(_FrmForRefe.lbl2SelectValue.Text))
+                {
+                    txt0SearchID.Text = _FrmForRefe.lbl2SelectValue.Text;
+                    button1_DoubleClick(sender, e);
+                    _FrmForRefe.Hide();
+                }
+            }
+        }
+
+        void chkTop50_CheckedChanged(object sender, EventArgs e)
+        {
+
+            _FrmForRefe.lbl1SelectNotice.Text = "";
+            _FrmForRefe.lbl2SelectValue.Text = "";
+            if (_FrmForRefe.chkTop50.Checked)
+            {
+                //
+                initSelectCondition();
+                //
+                init_FrmForRefeDGV("");
+            }
+            else
+            {
+                enquireByForReferenct(sender, e);
+            }
+        }
+
+        private void initSelectCondition()
+        {
+            if (cmb1SearchType.Text.Equals("BatchID"))
+            {
+                _FrmForRefe.lblTitle.Text = "BatchID# OR IP:";
+                _FrmForRefe.Text = "Enquire by BatchID";
+                //
+                _columnNameOne = "batch_id";
+                _columnNameTwo = "batch_user_ip";
+                _deffCellName = "batch_status";
+                _deffCellValue = "Yes";
+            }
+            else if (cmb1SearchType.Text.Equals("PI ID"))
+            {
+                _FrmForRefe.lblTitle.Text = "PI ID# OR IP:";
+                _FrmForRefe.Text = "Enquire by PI ID";
+                //
+                _columnNameOne = "PI_ID";
+                _columnNameTwo = "pi_user_ip";
+                _deffCellName = "pi_status";
+                _deffCellValue = "Yes";
+            }
+        }
+
+        void button1_DoubleClick(object sender, EventArgs e)
+        {
+            _FrmForRefe.Close();
+            btn0Find9_Click(sender, e);
+        }
+
+        public void data0GVForReference_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe.data0GVForReference, e.RowIndex, e.ColumnIndex, _columnNameOne);
+            string strBatchID = cf.dgv_cellClick(dwo);
+            txt0SearchID.Text = strBatchID;
+        }
+        void data0GVForReference_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DoWorkObject dwo = new DoWorkObject(_FrmForRefe, _FrmForRefe.data0GVForReference, 3, e.RowIndex, Color.LightGreen, _columnNameOne, "Current " + _columnNameOne + "#:", _columnNameTwo, _deffCellName, _deffCellValue, Color.LightGray);
+            cf.dgv_rowEnter_ThreadPool(dwo);
+        }
+        void enquireByForReferenct(object sender, EventArgs e)
+        {
+            _FrmForRefe.chkTop50.Checked = false;
+            if (string.IsNullOrEmpty(_FrmForRefe.textBox1.Text))
+            {
+                _FrmForRefe.textBox1.Focus();
+                return;
+            }
+            init_FrmForRefeDGV(_FrmForRefe.textBox1.Text.Trim());
+            _FrmForRefe.data0GVForReference.Focus();
+            //txt0SearchID.Text = _FrmForRefe.textBox1.Text.Trim();
+            //cf.EnquireByPart(data0GVPiReport, "pisr_part", _FrmForRefe.textBox1.Text.Trim());
+        }
+
+        private void init_FrmForRefeDGV(string strwhere)
+        {
+            //strwhere = _columnNameOne + @" like '%" + strwhere + @"%' or " + _columnNameTwo + @" like '%" + strwhere + @"%'";
+            if (_columnNameOne.Equals("batch_id"))
+            {
+                Expression<Func<plr_batch_mstr, bool>> lambdex = p => (p.batch_id.Contains(strwhere) || p.batch_user_ip.Contains(strwhere));
+                _list_plr_batch_mstr = cf.getSelectList_plr_batch_mstr(lambdex, 50);
+                _FrmForRefe.data0GVForReference.DataSource = _list_plr_batch_mstr.ToList();
+                cf.initHeaderText_plr_batch_mstr(_FrmForRefe.data0GVForReference);
+            }
+            else if (_columnNameOne.Equals("PI_ID"))
+            {
+                Expression<Func<pi_mstr, bool>> lambdex = p => (p.PI_ID.Contains(strwhere) || p.pi_user_ip.Contains(strwhere));
+                _list_pi_mstr = cf.getSelectList_pi_mstr(lambdex, 50);
+                _FrmForRefe.data0GVForReference.DataSource = _list_pi_mstr.ToList();
+                cf.initHeaderTextPIMstrForEquire(_FrmForRefe.data0GVForReference);
+            }
+            else
+            {
+                _FrmForRefe.data0GVForReference.DataSource = null;
+            }
+            _FrmForRefe.data0GVForReference.Refresh();
+
+        }
+        #endregion
+
         void txt0SearchID_Enter(object sender, EventArgs e)
         {
             this.AcceptButton = btn0Find9;
@@ -499,5 +658,13 @@ namespace IDR.Frm
 
 
 
+
+        public string _columnNameOne { get; set; }
+
+        public string _columnNameTwo { get; set; }
+
+        public string _deffCellName { get; set; }
+
+        public string _deffCellValue { get; set; }
     }
 }

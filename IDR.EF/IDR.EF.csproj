@@ -63,6 +63,7 @@
     <Compile Include="PIE\pi_sq.cs" />
     <Compile Include="PIE\pkey_ctl.cs" />
     <Compile Include="PIE\plr_batch_mstr.cs" />
+    <Compile Include="PIE\plr_batch_mstr_ext.cs" />
     <Compile Include="PIE\plr_mstr_ext.cs" />
     <Compile Include="PIE\plr_mstr.cs" />
     <Compile Include="PIE\plr_mstr_err.cs" />
