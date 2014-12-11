@@ -24,7 +24,7 @@ namespace IDR.Frm.frmPI
     public partial class frmPI0PIInfo : Form
     {
         //attribute
-        public IQueryable<vpi_detApisr_grr> _list_pi_det { get; set; }
+        public IQueryable<vpi_detApisr_grr> _list_pi_det_join_grr { get; set; }
 
         public DataGridView _dgv_ToolScriptMenu { get; set; }
 
@@ -94,19 +94,19 @@ namespace IDR.Frm.frmPI
             gb1mstr_PIMstr.Width = gb00PIScanPIDataitemInquire.Width - gb1mstr_PIMstr.Left - 5;
             gb2det_PIdet.Width = gb1mstr_PIMstr.Width;
 
-            gb2det_PIdet.Height = gb1mstr_PIMstr.Height - gb2det_PIdet.Top - 10;
+            gb2det_PIdet.Height = gb00PIScanPIDataitemInquire.Height - gb2det_PIdet.Top - 10;
 
         }
 
         #region dgv cell click and row enter
         void data1GV_plr_mstr_BatchInfo_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            cf.DGV_ColumnHeaderMouseClick<vpi_detApisr_grr>(sender, e, data1GV1_PIdet, _list_pi_det);
+            cf.DGV_ColumnHeaderMouseClick<vpi_detApisr_grr>(sender, e, data1GV1_PIdet, _list_pi_det_join_grr);
         }
         void data1GV_plr_mstr_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DoWorkObject dwo = new DoWorkObject(data1GV1_PIdet, e.RowIndex, e.ColumnIndex);
-            cf.dgv_cellClick(dwo);
+            cf.dgv_cellClick(dwo,_frmDefault._pi_mstr_model.PI_ID);
         }
 
         void data1GV_plr_mstr_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -142,7 +142,7 @@ namespace IDR.Frm.frmPI
             {
                 var tmpHeaderText = _dgv_ToolScriptMenu.Columns[i].HeaderText;
                 _frmET.comb0TextValue.Items.Add(tmpHeaderText);
-                if (tmpHeaderText.StartsWith("Part"))
+                if (tmpHeaderText.StartsWith("rir",true,null))
                 {
                     _frmET.comb0TextValue.SelectedIndex = i;
                 }
@@ -191,17 +191,17 @@ namespace IDR.Frm.frmPI
 
         private void initGVpi_mstr(object o)
         {
-            var tmp_model = _dbpie.pi_mstr.Find(o.ToString());
+            var tmp_model = _dbpie.pi_mstr.Find(o.ToString(),1);
             init_ModelToTxt(tmp_model, true);
         }
         private void initGVpi_det_join_grr(object o)
         {
             _frmDefault.Invoke(new Action(delegate()
             {
-                _list_pi_det = cf.getSelectList_plr_mstr(o.ToString());
-                data1GV_plr_mstr_BatchInfo.DataSource = _list_plr_mstr.ToList();
-                cf.initHeaderText_plr_mstr(data1GV_plr_mstr_BatchInfo);
-                data1GV_plr_mstr_BatchInfo.Refresh();
+                _list_pi_det_join_grr = cf.getSelectList_vpi_detApisr_grr(o.ToString());
+                data1GV1_PIdet.DataSource = _list_pi_det_join_grr.ToList();
+                cf.initHeaderText_pi_det_join_grr(data1GV1_PIdet);
+                data1GV1_PIdet.Refresh();
             }));
         }
 

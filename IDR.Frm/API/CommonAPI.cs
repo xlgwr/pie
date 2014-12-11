@@ -476,9 +476,9 @@ namespace IDR.Frm.API
 
             //});
         }
-        public IQueryable<vpi_detApisr_grr> getSelectList_vpi_detApisr_grr(Expression<Func<vpi_detApisr_grr, bool>> lambdex)
+        public IQueryable<vpi_detApisr_grr> getSelectList_vpi_detApisr_grr(string keyid)
         {
-            return _frmDefault._dbpie.vpi_detApisr_grr.Where(lambdex);
+            return _frmDefault._dbpie.vpi_detApisr_grr.Where(p => p.PI_ID.Equals(keyid));
             //.Select(p => new pi_mstr
             //{
 
@@ -652,42 +652,14 @@ namespace IDR.Frm.API
             //dgv.Columns["plr_pallet_no"].Width = 50;
         }
 
-
-        public void initHeaderTextPIMstr(DataGridView dgv)
-        {
-            if (dgv.Rows.Count < 0)
-            {
-                return;
-            }
-            dgv.BorderStyle = BorderStyle.None;
-            dgv.ReadOnly = true;
-            dgv.Columns[0].Frozen = true;
-            dgv.Columns[1].Frozen = true;
-
-            dgv.Columns["PI_ID"].HeaderText = "PI ID";
-            dgv.Columns["Plant"].HeaderText = "Plant";
-
-            dgv.Columns["pi_type"].HeaderText = "Type";
-
-            dgv.Columns["pi_remark"].HeaderText = "Remark";
-
-            dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
-            dgv.Columns["pi_update_date"].HeaderText = "Update Date";
-            //dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
-            //dgv.Columns["pi_user_ip"].HeaderText = "Client IP";
-        }
-        public void initHeaderTextPIMstrForEquire(DataGridView dgv)
+        public void initHeaderText_pi_mstr(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
             {
                 return;
             }
 
-            dgv.BorderStyle = BorderStyle.None;
-            //PI_ID,pi_status,Plant,pi_type,pi_user_ip,pi_remark,pi_cre_date,pi_chr01
-            dgv.ReadOnly = true;
-            dgv.Columns[0].Frozen = true;
-            dgv.Columns[1].Frozen = true;
+            dgvAttritubeInit(dgv, 1, true);
 
             dgv.Columns["PI_ID"].HeaderText = "PI ID";
             dgv.Columns["pi_status"].HeaderText = "Upload Status";
@@ -701,10 +673,11 @@ namespace IDR.Frm.API
 
             dgv.Columns["pi_cre_date"].HeaderText = "Create Date";
             //dgv.Columns["pi_update_date"].HeaderText = "Update Date";
-            //dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
+
+            dgv.Columns["pi_cre_userid"].HeaderText = "User Id";
             dgv.Columns["pi_chr01"].HeaderText = "from BatchID";
         }
-        public void initHeaderTextPIDet(DataGridView dgv)
+        public void initHeaderText_PIDet(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
             {
@@ -726,17 +699,14 @@ namespace IDR.Frm.API
 
 
         }
-        public void initHeaderTextPIDetGrr(DataGridView dgv)
+        public void initHeaderText_pi_det_join_grr(DataGridView dgv)
         {
             if (dgv.Rows.Count < 0)
             {
                 return;
             }
-            dgv.BorderStyle = BorderStyle.None;
-            dgv.ReadOnly = true;
-            dgv.Columns[0].Frozen = true;
-            dgv.Columns[1].Frozen = true;
-            dgv.Columns[2].Frozen = true;
+            dgvAttritubeInit(dgv, 2, true);
+
             dgv.Columns["PI_ID"].HeaderText = "PI ID";
             dgv.Columns["pi_LineID"].HeaderText = "Line";
 
@@ -933,6 +903,33 @@ namespace IDR.Frm.API
                     }
 
                     return str_ID;
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return "";
+            }
+
+        }
+        /// <summary>
+        /// dgv PI cell click
+        /// </summary>
+        /// <param name="dwo"></param>
+        /// <param name="strPIID"></param>
+        /// <returns></returns>
+        public string dgv_cellClick(DoWorkObject dwo, string strPIID)
+        {
+            _frmDefault.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
+            //_idr_show.status13toolSStatusLblMsg.Text = "";
+            _frmDefault.status15toolLabelstrResult.Text = "";
+            try
+            {
+                if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
+                {
+                    _frmDefault._pi_mstr_model.PI_ID = dwo._dgv.Rows[dwo._eX].Cells["PI_ID"].Value.ToString().Trim();
+                    return _frmDefault._pi_mstr_model.PI_ID;
                 }
                 return "";
             }

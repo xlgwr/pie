@@ -104,7 +104,6 @@ namespace IDR.Frm
             //tab mouse right
             this.tabCtlRight1.MouseMove += tabCtlRight1_MouseMove;
             this.tabCtlRight1.MouseUp += tabCtlRight1_MouseUp;
-
             //init param
             _clientIP = Program._clientIP;
             _plr_batch_mstr_model = new plr_batch_mstr();
@@ -125,6 +124,7 @@ namespace IDR.Frm
             btn00More.Click += btn00More0_Click;
 
         }
+
         void initFrm()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -303,7 +303,7 @@ namespace IDR.Frm
                 Expression<Func<pi_mstr, bool>> lambdex = p => (p.PI_ID.Contains(strwhere) || p.pi_user_ip.Contains(strwhere));
                 _list_pi_mstr = cf.getSelectList_pi_mstr(lambdex, 50);
                 _FrmForRefe.data0GVForReference.DataSource = _list_pi_mstr.ToList();
-                cf.initHeaderTextPIMstrForEquire(_FrmForRefe.data0GVForReference);
+                cf.initHeaderText_pi_mstr(_FrmForRefe.data0GVForReference);
             }
             else
             {

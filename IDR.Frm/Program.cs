@@ -64,9 +64,9 @@ namespace IDR.Frm
             _clientIP = GetClientIP.getClientIP();
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 4.5;
-            _frm4VersionMain = 20141210;
+            _frm4VersionMain = 20141211;
 
-            _frm5VersionSecond = 22;
+            _frm5VersionSecond = 19;
             _frm6Versionprefix = "Bate";//RTM
             //fix msg
             _frm10VersionFixMsg = "1.fix bug";

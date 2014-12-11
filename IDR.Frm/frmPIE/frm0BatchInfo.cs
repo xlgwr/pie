@@ -135,7 +135,7 @@ namespace IDR.Frm.frmPIE
             {
                 var tmpHeaderText = _dgv_ToolScriptMenu.Columns[i].HeaderText;
                 _frmET.comb0TextValue.Items.Add(tmpHeaderText);
-                if (tmpHeaderText.StartsWith("Part"))
+                if (tmpHeaderText.StartsWith("part", true, null))
                 {
                     _frmET.comb0TextValue.SelectedIndex = i;
                 }
