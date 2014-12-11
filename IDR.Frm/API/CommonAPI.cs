@@ -476,7 +476,24 @@ namespace IDR.Frm.API
 
             //});
         }
+        public IQueryable<vpi_detApisr_grr> getSelectList_vpi_detApisr_grr(Expression<Func<vpi_detApisr_grr, bool>> lambdex)
+        {
+            return _frmDefault._dbpie.vpi_detApisr_grr.Where(lambdex);
+            //.Select(p => new pi_mstr
+            //{
 
+
+            //});
+        }
+        public IQueryable<vpi_detApisr_grr> getSelectList_vpi_detApisr_grr(Expression<Func<vpi_detApisr_grr, bool>> lambdex)
+        {
+            return _frmDefault._dbpie.vpi_detApisr_grr.Where(lambdex);
+            //.Select(p => new pi_mstr
+            //{
+
+
+            //});
+        }
 
         #endregion
         #region init data gric view head text

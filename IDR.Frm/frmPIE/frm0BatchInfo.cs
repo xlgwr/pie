@@ -80,6 +80,35 @@ namespace IDR.Frm.frmPIE
             tsm0menu_EnquireByPart.Click += tsm0menu_EnquireByPart_Click;
             tsmi00enquireByPartToolStripMenuItem.Click += ctmenu0EnquireByPart_Click;
         }
+        void initFrm()
+        {
+            this.FormClosing += Default_FormClosing;
+            //init width
+            this.gb0BatchInfo0.Resize += gb0frmUploadExcel_Resize;
+            //initpara
+            initPara();
+        }
+        void initFrm(PIE dbpie)
+        {
+            initFrm();
+            _dbpie = dbpie;
+        }
+        void initForDefault(Default frmDefault)
+        {
+            _frmDefault = frmDefault;
+            _frmDefault.tabCtlRight1.SelectedTab.Layout += SelectedTab_Layout;
+        }
+        private void initwidth()
+        {
+            gb1mstr_BatchInfo.Width = gb0BatchInfo0.Width - gb1mstr_BatchInfo.Left - 5;
+            gb2det_BatchInfo.Width = gb1mstr_BatchInfo.Width;
+            gb3CartonNo.Width = gb1mstr_BatchInfo.Width;
+
+            gb3CartonNo.Height = gb0BatchInfo0.Height - gb3CartonNo.Top - 10;
+
+        }
+
+
         #region equire by part
         void tsm0menu_EnquireByPart_Click(object sender, EventArgs e)
         {
@@ -130,34 +159,6 @@ namespace IDR.Frm.frmPIE
             _frmET.lblMsg.Text = cf.EnquireByHeadText(_dgv_ToolScriptMenu, _frmET.comb0TextValue.Text, _frmET.textBox1.Text.Trim());
         }
         #endregion
-        void initFrm()
-        {
-            this.FormClosing += Default_FormClosing;
-            //init width
-            this.gb0BatchInfo0.Resize += gb0frmUploadExcel_Resize;
-            //initpara
-            initPara();
-        }
-        void initFrm(PIE dbpie)
-        {
-            initFrm();
-            _dbpie = dbpie;
-        }
-        void initForDefault(Default frmDefault)
-        {
-            _frmDefault = frmDefault;
-            _frmDefault.tabCtlRight1.SelectedTab.Layout += SelectedTab_Layout;
-        }
-        private void initwidth()
-        {
-            gb1mstr_BatchInfo.Width = gb0BatchInfo0.Width - gb1mstr_BatchInfo.Left - 5;
-            gb2det_BatchInfo.Width = gb1mstr_BatchInfo.Width;
-            gb3CartonNo.Width = gb1mstr_BatchInfo.Width;
-
-            gb3CartonNo.Height = gb0BatchInfo0.Height - gb3CartonNo.Top - 10;
-
-        }
-
         #region dgv cell click and row enter
         void data2GV2_plr_mstr_tran_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -221,7 +222,7 @@ namespace IDR.Frm.frmPIE
         void initGVplr_batch_mstr(object o)
         {
             var tmpplr_batch_mstr = _dbpie.plr_batch_mstr.Find(o.ToString());
-            init_plr_batch_mstrToTxt(tmpplr_batch_mstr, true);
+            init_ModelToTxt(tmpplr_batch_mstr, true);
         }
         void initGVplr_mstr(object o)
         {
@@ -243,7 +244,7 @@ namespace IDR.Frm.frmPIE
                    data2GV2_plr_mstr_tran.Refresh();
                }));
         }
-        private void init_plr_batch_mstrToTxt(plr_batch_mstr model, bool breadonly)
+        private void init_ModelToTxt(plr_batch_mstr model, bool breadonly)
         {
             if (string.IsNullOrEmpty(model.batch_id))
             {
