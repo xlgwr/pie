@@ -274,7 +274,7 @@ namespace IDR.Frm.frmPIE
             {
                 strprefix = "10BID_";
             }
-            var dwo = new DoWorkObject(_dgv_ToolScriptMenu, "xlsx", strprefix + _frmDefault.txt0SearchID.Text, "");
+            var dwo = new DoWorkObject(_dgv_ToolScriptMenu, "xlsx", strprefix + _frmDefault.txt0SearchID.Text, "",true);
             cf.downLoadExcel_Thread(dwo);
             // cf.downLoadExcel(data1GV_plr_mstr_BatchInfo, _idr_show.status15toolLabelstrResult, cf.nameList12UploadToERP(), "10BatchInfo" + _idr_show._plr_batch_mstr_model.batch_id);
         }

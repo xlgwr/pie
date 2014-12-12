@@ -1414,7 +1414,7 @@ namespace IDR.Frm.API
             }
         }
         /// <summary>
-        /// DataGridView dgv, string xlsType, string filenamePrefix, string filepath
+        /// DataGridView dgv, string xlsType, string filenamePrefix, string filepath,bool autoOpen
         /// </summary>
         /// <param name="dgv"></param>
         /// <param name="xlsType"></param>
@@ -1517,9 +1517,12 @@ namespace IDR.Frm.API
                     xssfworkbook_xlsx.Write(f);
                     currmsg = "Success: save Excel file to " + tmpAllFilepathAndName;
                     setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
-                    _frmDefault._strDownLoadExcel = tmpAllFilepathAndName;    
+                    _frmDefault._strDownLoadExcel = tmpAllFilepathAndName;
                 }
-
+                if (dwo._autoOpen)
+                {
+                    OpenFolderAndSelectFile(tmpAllFilepathAndName);
+                }
             }
             catch (Exception ex)
             {

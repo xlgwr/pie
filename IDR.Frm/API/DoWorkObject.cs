@@ -187,13 +187,14 @@ namespace IDR.Frm.API
         /// <param name="dgv"></param>
         /// <param name="xlsType"></param>
         /// <param name="filenamePrefix"></param>
-        /// <param name="filepath"></param>
-        public DoWorkObject(DataGridView dgv, string xlsType, string filenamePrefix, string filepath)
+        /// <param name="filepath">isnull the path use System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel"</param>
+        public DoWorkObject(DataGridView dgv, string xlsType, string filenamePrefix, string filepath,bool autoOpen)
         {
             _dgv = dgv;
             _xlsType = xlsType;
             _filenamePrefix = filenamePrefix;
             _filepath = filepath;
+            _autoOpen=autoOpen;
 
         }
 
@@ -203,5 +204,7 @@ namespace IDR.Frm.API
         public string _filenamePrefix { get; set; }
 
         public string _xlsType { get; set; }
+
+        public bool _autoOpen { get; set; }
     }
 }
