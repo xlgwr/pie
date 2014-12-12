@@ -100,11 +100,10 @@ namespace IDR.Frm.frmPIE
         }
         private void initwidth()
         {
-            gb1mstr_BatchInfo.Width = gb0BatchInfo0.Width - gb1mstr_BatchInfo.Left - 5;
-            gb2det_BatchInfo.Width = gb1mstr_BatchInfo.Width;
-            gb3CartonNo.Width = gb1mstr_BatchInfo.Width;
+            gb0Split2.Width = gb0BatchInfo0.Width - gb1mstr_BatchInfo.Left - 5;
 
-            gb3CartonNo.Height = gb0BatchInfo0.Height - gb3CartonNo.Top - 10;
+
+            gb0Split2.Height = gb0BatchInfo0.Height - gb0Split2.Top - 10;
 
         }
 

@@ -48,6 +48,8 @@
             this.gb3CartonNo = new System.Windows.Forms.GroupBox();
             this.data2GV2_plr_mstr_tran = new System.Windows.Forms.DataGridView();
             this.gb0BatchInfo0 = new System.Windows.Forms.GroupBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.gb0Split2 = new System.Windows.Forms.GroupBox();
             this.tsm0menu_EnquireByPart.SuspendLayout();
             this.gb2det_BatchInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data1GV_plr_mstr_BatchInfo)).BeginInit();
@@ -55,6 +57,11 @@
             this.gb3CartonNo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2_plr_mstr_tran)).BeginInit();
             this.gb0BatchInfo0.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.gb0Split2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsmi01downLoad1ToExceltoolStripMenuItem2
@@ -70,7 +77,7 @@
             this.tsmi00enquireByPartToolStripMenuItem,
             this.tsmi01downLoad1ToExceltoolStripMenuItem2});
             this.tsm0menu_EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.tsm0menu_EnquireByPart.Size = new System.Drawing.Size(191, 70);
+            this.tsm0menu_EnquireByPart.Size = new System.Drawing.Size(191, 48);
             // 
             // tsmi00enquireByPartToolStripMenuItem
             // 
@@ -81,9 +88,10 @@
             // gb2det_BatchInfo
             // 
             this.gb2det_BatchInfo.Controls.Add(this.data1GV_plr_mstr_BatchInfo);
-            this.gb2det_BatchInfo.Location = new System.Drawing.Point(6, 67);
+            this.gb2det_BatchInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gb2det_BatchInfo.Location = new System.Drawing.Point(0, 0);
             this.gb2det_BatchInfo.Name = "gb2det_BatchInfo";
-            this.gb2det_BatchInfo.Size = new System.Drawing.Size(714, 237);
+            this.gb2det_BatchInfo.Size = new System.Drawing.Size(708, 211);
             this.gb2det_BatchInfo.TabIndex = 17;
             this.gb2det_BatchInfo.TabStop = false;
             this.gb2det_BatchInfo.Text = "Batch ePacking Det";
@@ -100,7 +108,7 @@
             this.data1GV_plr_mstr_BatchInfo.Name = "data1GV_plr_mstr_BatchInfo";
             this.data1GV_plr_mstr_BatchInfo.ReadOnly = true;
             this.data1GV_plr_mstr_BatchInfo.RowTemplate.Height = 23;
-            this.data1GV_plr_mstr_BatchInfo.Size = new System.Drawing.Size(708, 217);
+            this.data1GV_plr_mstr_BatchInfo.Size = new System.Drawing.Size(702, 191);
             this.data1GV_plr_mstr_BatchInfo.TabIndex = 0;
             // 
             // txt5batch_cre_date_BatchInfo
@@ -206,9 +214,10 @@
             // gb3CartonNo
             // 
             this.gb3CartonNo.Controls.Add(this.data2GV2_plr_mstr_tran);
-            this.gb3CartonNo.Location = new System.Drawing.Point(6, 304);
+            this.gb3CartonNo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gb3CartonNo.Location = new System.Drawing.Point(0, 0);
             this.gb3CartonNo.Name = "gb3CartonNo";
-            this.gb3CartonNo.Size = new System.Drawing.Size(714, 237);
+            this.gb3CartonNo.Size = new System.Drawing.Size(708, 251);
             this.gb3CartonNo.TabIndex = 19;
             this.gb3CartonNo.TabStop = false;
             this.gb3CartonNo.Text = "Wec Carton No Det";
@@ -224,26 +233,52 @@
             this.data2GV2_plr_mstr_tran.Name = "data2GV2_plr_mstr_tran";
             this.data2GV2_plr_mstr_tran.ReadOnly = true;
             this.data2GV2_plr_mstr_tran.RowTemplate.Height = 23;
-            this.data2GV2_plr_mstr_tran.Size = new System.Drawing.Size(708, 217);
+            this.data2GV2_plr_mstr_tran.Size = new System.Drawing.Size(702, 231);
             this.data2GV2_plr_mstr_tran.TabIndex = 0;
             // 
             // gb0BatchInfo0
             // 
-            this.gb0BatchInfo0.Controls.Add(this.gb3CartonNo);
             this.gb0BatchInfo0.Controls.Add(this.gb1mstr_BatchInfo);
-            this.gb0BatchInfo0.Controls.Add(this.gb2det_BatchInfo);
+            this.gb0BatchInfo0.Controls.Add(this.gb0Split2);
             this.gb0BatchInfo0.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb0BatchInfo0.Location = new System.Drawing.Point(0, 0);
             this.gb0BatchInfo0.Name = "gb0BatchInfo0";
-            this.gb0BatchInfo0.Size = new System.Drawing.Size(729, 559);
+            this.gb0BatchInfo0.Size = new System.Drawing.Size(724, 559);
             this.gb0BatchInfo0.TabIndex = 1;
             this.gb0BatchInfo0.TabStop = false;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 17);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.gb2det_BatchInfo);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.gb3CartonNo);
+            this.splitContainer1.Size = new System.Drawing.Size(708, 466);
+            this.splitContainer1.SplitterDistance = 211;
+            this.splitContainer1.TabIndex = 20;
+            // 
+            // gb0Split2
+            // 
+            this.gb0Split2.Controls.Add(this.splitContainer1);
+            this.gb0Split2.Location = new System.Drawing.Point(6, 62);
+            this.gb0Split2.Name = "gb0Split2";
+            this.gb0Split2.Size = new System.Drawing.Size(714, 486);
+            this.gb0Split2.TabIndex = 21;
+            this.gb0Split2.TabStop = false;
             // 
             // frm0BatchInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 559);
+            this.ClientSize = new System.Drawing.Size(724, 559);
             this.Controls.Add(this.gb0BatchInfo0);
             this.Name = "frm0BatchInfo";
             this.Text = "frm0BatchInfo";
@@ -255,6 +290,11 @@
             this.gb3CartonNo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.data2GV2_plr_mstr_tran)).EndInit();
             this.gb0BatchInfo0.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.gb0Split2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -280,5 +320,7 @@
         protected internal System.Windows.Forms.GroupBox gb0BatchInfo0;
         private System.Windows.Forms.DataGridView data1GV_plr_mstr_BatchInfo;
         private System.Windows.Forms.DataGridView data2GV2_plr_mstr_tran;
+        private System.Windows.Forms.GroupBox gb0Split2;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
