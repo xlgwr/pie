@@ -109,6 +109,8 @@ namespace IDR.Frm
             //tab mouse right
             this.tabCtlRight1.MouseMove += tabCtlRight1_MouseMove;
             this.tabCtlRight1.MouseUp += tabCtlRight1_MouseUp;
+            
+            this.HOME.BackColor = Color.White;
             //init param
             _clientIP = Program._clientIP;
             _plr_batch_mstr_model = new plr_batch_mstr();
@@ -553,7 +555,8 @@ namespace IDR.Frm
 
             tabCtlRight1.SelectedIndex = tabCtlRight1.TabCount - 1;
             status13toolSStatusLblMsg.Text = tabCtlRight1.SelectedIndex.ToString() + "," + pagename;
-
+            
+            //tabCtlRight1.SelectedTab.BackColor = Color.White;
             tabCtlRight1.SelectedTab.AutoScroll = true;
 
             return tabCtlRight1.SelectedTab;
@@ -566,6 +569,7 @@ namespace IDR.Frm
             tabCtlRight1.SelectedIndex = tabCtlRight1.TabCount - 1;
             status13toolSStatusLblMsg.Text = tabCtlRight1.SelectedIndex.ToString() + "," + pagename;
 
+            //tabCtlRight1.SelectedTab.BackColor = Color.White;
             tabCtlRight1.SelectedTab.AutoScroll = true;
 
             Label lb = new Label();
