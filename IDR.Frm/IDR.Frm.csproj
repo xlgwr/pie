@@ -956,6 +956,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="irobot256.ico" />
+    <None Include="Resources\14a.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
