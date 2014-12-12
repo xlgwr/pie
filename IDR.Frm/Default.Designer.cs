@@ -882,6 +882,7 @@
             this.openDownloadExcelFileToolStripMenuItem.Name = "openDownloadExcelFileToolStripMenuItem";
             this.openDownloadExcelFileToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.openDownloadExcelFileToolStripMenuItem.Text = "Open &Download Excel File";
+            this.openDownloadExcelFileToolStripMenuItem.Click += new System.EventHandler(this.openDownloadExcelFileToolStripMenuItem_Click);
             // 
             // status13toolSStatusLblMsg
             // 

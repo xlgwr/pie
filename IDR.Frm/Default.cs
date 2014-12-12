@@ -45,6 +45,11 @@ namespace IDR.Frm
         public string Batch_ID { get; set; }
         public string PI_ID { get; set; }
         public string _clientIP { get; set; }
+        public string _columnNameOne { get; set; }
+        public string _columnNameTwo { get; set; }
+        public string _deffCellName { get; set; }
+        public string _deffCellValue { get; set; }
+        public string _strDownLoadExcel { get; set; }
         //model
         public plr_batch_mstr _plr_batch_mstr_model { get; set; }
         public plr_mstr _plr_mstr_model { get; set; }
@@ -119,7 +124,11 @@ namespace IDR.Frm
             _selectColumnNameValue = "";
             Batch_ID = "";
             PI_ID = "";
-
+            _columnNameOne = "";
+            _columnNameTwo = "";
+            _deffCellName = "";
+            _deffCellValue = "";
+            _strDownLoadExcel = "";
             //Reference
             btn00More.Click += btn00More0_Click;
 
@@ -668,15 +677,9 @@ namespace IDR.Frm
 
 
 
-
-        public string _columnNameOne { get; set; }
-
-        public string _columnNameTwo { get; set; }
-
-        public string _deffCellName { get; set; }
-
-        public string _deffCellValue { get; set; }
-
-        public string _strDownLoadExcel { get; set; }
+        private void openDownloadExcelFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cf.initOpenFile("0DownLoadExcel", _strDownLoadExcel);
+        }
     }
 }

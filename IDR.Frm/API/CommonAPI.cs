@@ -835,10 +835,6 @@ namespace IDR.Frm.API
             return SortBy(q, SortField + " " + SortDirection);
         }
         #endregion
-        internal void OpenFolderAndSelectFile(string pathname)
-        {
-            throw new NotImplementedException();
-        }
         ///////
         #region datagridview sort
 
@@ -1452,7 +1448,7 @@ namespace IDR.Frm.API
 
                 ISheet sheet1 = xssfworkbook_xlsx.CreateSheet(filename);
 
-                int tmpColumnsCount = getControlInt(dwo._dgv,false);//dwo._dgv.Columns.Count;
+                int tmpColumnsCount = getControlInt(dwo._dgv, false);//dwo._dgv.Columns.Count;
                 int tmpRowsCount = getControlInt(dwo._dgv, true);// dwo._dgv.Rows.Count;
 
                 currmsg = "Start create excel file,it has Rows:" + tmpRowsCount + ",Columns:" + tmpColumnsCount;
@@ -1509,7 +1505,7 @@ namespace IDR.Frm.API
                             row.CreateCell(j).SetCellValue(tmpCellValue.ToString());
                         }
 
-                        currmsg = "That has Rows:" + tmpRowsCount + ",Columns:" + tmpColumnsCount+",Start write at Rows:" + (i + 1) + ",Columns:" + (j + 1) + ",Value:" + tmpCellValue.ToString();
+                        currmsg = "That has Rows:" + tmpRowsCount + ",Columns:" + tmpColumnsCount + ",Start write at Rows:" + (i + 1) + ",Columns:" + (j + 1) + ",Value:" + tmpCellValue.ToString();
                         setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
 
                     }
@@ -1521,7 +1517,7 @@ namespace IDR.Frm.API
                     xssfworkbook_xlsx.Write(f);
                     currmsg = "Success: save Excel file to " + tmpAllFilepathAndName;
                     setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
-
+                    _frmDefault._strDownLoadExcel = tmpAllFilepathAndName;    
                 }
 
             }
@@ -1536,6 +1532,32 @@ namespace IDR.Frm.API
         public void downLoadExcel_Thread(object o)
         {
             ThreadPool.QueueUserWorkItem(new WaitCallback(downLoadExcel), o);
+        }
+        // open file from path
+        #region open file from path
+        public void OpenFolderAndSelectFile(String fileFullName)
+        {
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
+            psi.Arguments = "/e,/select," + fileFullName;
+            //psi.UseShellExecute = true;
+            //psi.Verb = "open";
+            System.Diagnostics.Process.Start(psi);
+        }
+        public void initOpenFile(string file, string filename)
+        {
+            string allfileNamepath;
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + file;
+            if (string.IsNullOrEmpty(filename))
+            {
+
+                allfileNamepath = pathname;
+            }
+            else
+            {
+
+                allfileNamepath = System.IO.Path.Combine(pathname, filename);
+            }
+            OpenFolderAndSelectFile(allfileNamepath);
         }
         #endregion
         #region  清理过时的Excel文件
@@ -1558,6 +1580,9 @@ namespace IDR.Frm.API
                 }
             }
         }
+        #endregion
+
+
         #endregion
         //////////////////////////////////add new
 
