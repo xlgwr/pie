@@ -29,6 +29,10 @@ using System.Collections;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Drawing;
+using NPOI.HSSF.UserModel;
+using NPOI.HPSF;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 
 namespace IDR.Frm.API
 {
@@ -140,6 +144,56 @@ namespace IDR.Frm.API
                 ctl.Visible = visible;
             }));
 
+        }
+
+        /// <summary>
+        /// dgv true: rowcount,false: column count
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="isRowCount">true: rowcount,false: column count</param>
+        /// <returns></returns>
+        public int getControlInt(DataGridView dgv, bool isRowCount)
+        {
+            int tmpText = 0;
+            _frmDefault.Invoke(new Action(delegate
+            {
+                if (isRowCount)
+                {
+                    tmpText = dgv.Rows.Count;
+                }
+                else
+                {
+                    tmpText = dgv.ColumnCount;
+                }
+            }));
+            return tmpText;
+        }
+        public string getControlText(Control ctl)
+        {
+            string tmpText = "";
+            _frmDefault.Invoke(new Action(delegate
+            {
+                tmpText = ctl.Text;
+            }));
+            return tmpText;
+        }
+        public object getControlText(DataGridView dgv, int xindex, int yxindex)
+        {
+            object tmpText = null;
+            _frmDefault.Invoke(new Action(delegate
+            {
+                tmpText = dgv.Rows[xindex].Cells[yxindex].Value;
+            }));
+            return tmpText;
+        }
+        public string getControlText(DataGridView dgv, int yindex)
+        {
+            string tmpText = "";
+            _frmDefault.Invoke(new Action(delegate
+            {
+                tmpText = dgv.Columns[yindex].HeaderText;
+            }));
+            return tmpText;
         }
         #endregion
         #region gen carton id
@@ -478,7 +532,7 @@ namespace IDR.Frm.API
         }
         public IQueryable<vpi_detApisr_grr> getSelectList_vpi_detApisr_grr(string keyid)
         {
-            return _frmDefault._dbpie.vpi_detApisr_grr.Where(p => p.PI_ID.Equals(keyid));
+            return _frmDefault._dbpie.vpi_detApisr_grr.Where(p => p.PI_ID.Equals(keyid)).OrderBy(p => p.plr_LineID_tran);
             //.Select(p => new pi_mstr
             //{
 
@@ -505,7 +559,7 @@ namespace IDR.Frm.API
         /// <param name="readOnly">readOnly</param>
         private static void dgvAttritubeInit(DataGridView dgv, int intFrozen, bool readOnly)
         {
-            dgv.BorderStyle = BorderStyle.None;
+            dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dgv.AllowUserToOrderColumns = true;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgv.MultiSelect = false;
@@ -683,10 +737,7 @@ namespace IDR.Frm.API
             {
                 return;
             }
-            dgv.ReadOnly = true;
-            dgv.BorderStyle = BorderStyle.None;
-            dgv.Columns[0].Frozen = true;
-            dgv.Columns[1].Frozen = true;
+            dgvAttritubeInit(dgv, 1, true);
             dgv.Columns["PI_ID"].HeaderText = "PI ID";
             dgv.Columns["pi_LineID"].HeaderText = "Line";
 
@@ -1172,7 +1223,348 @@ namespace IDR.Frm.API
 
 
         }
+        #region down xls for data
+        #region xls
+        MemoryStream GetExcelStream()
+        {
+            //Write the stream data of workbook to the root directory
+            MemoryStream file = new MemoryStream();
+            hssfworkbook_xls.Write(file);
+            return file;
+        }
+
+        void GenerateData()
+        {
+            ISheet sheet1 = hssfworkbook_xls.CreateSheet("Sheet1");
+
+            sheet1.CreateRow(0).CreateCell(0).SetCellValue("This is a Sample");
+            int x = 1;
+            for (int i = 1; i <= 15; i++)
+            {
+                IRow row = sheet1.CreateRow(i);
+                for (int j = 0; j < 15; j++)
+                {
+                    row.CreateCell(j).SetCellValue(x++);
+                }
+            }
+        }
+
+        void InitializeWorkbook()
+        {
+            hssfworkbook_xls = new HSSFWorkbook();
+
+            ////create a entry of DocumentSummaryInformation
+            DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();
+            dsi.Company = "NPOI Team";
+            hssfworkbook_xls.DocumentSummaryInformation = dsi;
+
+            ////create a entry of SummaryInformation
+            SummaryInformation si = PropertySetFactory.CreateSummaryInformation();
+            si.Subject = "NPOI SDK Example";
+            hssfworkbook_xls.SummaryInformation = si;
+        }
+        #endregion
+        #region xlsx
+
+        #endregion
+        //遍历获取类的属性及属性的值：
+        public string getProperties<T>(T t)
+        {
+            string tStr = string.Empty;
+            if (t == null)
+            {
+                return tStr;
+            }
+            System.Reflection.PropertyInfo[] properties = t.GetType().GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+
+            if (properties.Length <= 0)
+            {
+                return tStr;
+            }
+            foreach (System.Reflection.PropertyInfo item in properties)
+            {
+                string name = item.Name;
+                object value = item.GetValue(t, null);
+                if (item.PropertyType.IsValueType || item.PropertyType.Name.StartsWith("String"))
+                {
+                    tStr += string.Format("{0}:{1},", name, value);
+                }
+                else
+                {
+                    getProperties(value);
+                }
+            }
+            return tStr;
+        }
+        public void downLoadExcel(DataSet ds, ToolStripItem ctMessage, Hashtable nameList, string filenamePrefix)
+        {
+            _frmDefault.Invoke(new Action(delegate()
+            {
+                if (ds == null)
+                {
+                    ctMessage.Text = "Error: no data.";
+                    return;
+                }
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    ctMessage.Text = "notice: start download excel.";
+                    string FilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+
+
+                    //利用excel对象
+                    DataToExcel dte = new DataToExcel();
+                    string filename = "";
+                    try
+                    {
+                        if (ds.Tables[0].Rows.Count > 0)
+                        {
+                            filename = dte.DataExcel(ds.Tables[0], "标题", FilePath, nameList, filenamePrefix);
+                        }
+                    }
+                    catch
+                    {
+                        dte.KillExcelProcess();
+                    }
+
+                    if (filename != "")
+                    {
+                        _frmDefault._strDownLoadExcel = FilePath + @"\" + filename;
+                        ctMessage.Text = "Success: excel file is at " + _frmDefault._strDownLoadExcel;
+                        OpenFolderAndSelectFile(_frmDefault._strDownLoadExcel);
+                    }
+                }
+                else
+                {
+                    ctMessage.Text = "Error: has 0 count data.";
+                }
+            }));
+
+        }
+
+        public void downLoadExcel<T>(IList<T> listT, string xlsType, string filenamePrefix, string filepath)
+          where T : class
+        {
+            xssfworkbook_xlsx = new XSSFWorkbook();
+
+            string filename = filenamePrefix + "D" + DateTime.Now.ToString("yyMMddHHms") + ".xlsx";//yyyyMMddHHmmssff
+
+            if (string.IsNullOrEmpty(filepath))
+            {
+                filepath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+            }
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            string tmpAllFilepathAndName = System.IO.Path.Combine(filepath, filename);
+
+            ISheet sheet1 = xssfworkbook_xlsx.CreateSheet(filename);
+
+
+            int tmpColumnsCount = typeof(T).GetProperties().Count();
+            int tmpRowsCount = listT.Count;
+
+            int x = 1;
+            IRow rowHeader = sheet1.CreateRow(0);
+            for (int i = 0; i < tmpColumnsCount; i++)
+            {
+                rowHeader.CreateCell(i).SetCellValue(x++);
+            }
+
+            for (int i = 1; i <= tmpRowsCount; i++)
+            {
+                IRow row = sheet1.CreateRow(i);
+
+                System.Reflection.PropertyInfo[] properties = listT[i - 1].GetType().GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+
+                for (int j = 0; j < tmpColumnsCount; j++)
+                {
+                    var tmpCellValue = properties.ElementAt(j).GetValue(listT[i - 1], null);
+
+                    if (tmpCellValue == null)
+                    {
+                        tmpCellValue = "";
+                    }
+
+                    if (tmpCellValue.GetType() == System.TypeCode.String.GetType())
+                    {
+                        row.CreateCell(j).SetCellValue(tmpCellValue.ToString());
+                    }
+                    else if (tmpCellValue.GetType() == System.TypeCode.Decimal.GetType())
+                    {
+                        var tmpCellValue_convert = Convert.ToDouble(tmpCellValue);
+                        row.CreateCell(j).SetCellValue(tmpCellValue_convert);
+                    }
+                    else if (tmpCellValue.GetType() == System.TypeCode.Double.GetType())
+                    {
+                        var tmpCellValue_convert = Convert.ToDouble(tmpCellValue);
+                        row.CreateCell(j).SetCellValue(tmpCellValue_convert);
+                    }
+                    else if (tmpCellValue.GetType() == System.TypeCode.DateTime.GetType())
+                    {
+                        var tmpCellValue_convert = Convert.ToDateTime(tmpCellValue);
+                        row.CreateCell(j).SetCellValue(tmpCellValue_convert);
+                    }
+                    else
+                    {
+                        row.CreateCell(j).SetCellValue(tmpCellValue.ToString());
+                    }
+                }
+            }
+            using (var f = File.Create(@tmpAllFilepathAndName))
+            {
+                xssfworkbook_xlsx.Write(f);
+            }
+        }
+        /// <summary>
+        /// DataGridView dgv, string xlsType, string filenamePrefix, string filepath
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="xlsType"></param>
+        /// <param name="filenamePrefix"></param>
+        /// <param name="filepath"></param>
+        public void downLoadExcel(object o)
+        {
+
+            var dwo = (DoWorkObject)o;
+            try
+            {
+                currmsg = "Start init excel file name and path.";
+                setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
+
+                xssfworkbook_xlsx = new XSSFWorkbook();
+
+                string filename = dwo._filenamePrefix + "_" + DateTime.Now.ToString("yyMMddHH") + ".xlsx";//yyyyMMddHHmmssff
+
+                if (string.IsNullOrEmpty(dwo._filepath))
+                {
+                    dwo._filepath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0DownLoadExcel";
+
+                }
+                if (!Directory.Exists(dwo._filepath))
+                {
+                    Directory.CreateDirectory(dwo._filepath);
+                }
+                string tmpAllFilepathAndName = System.IO.Path.Combine(dwo._filepath, filename);
+
+
+
+                ISheet sheet1 = xssfworkbook_xlsx.CreateSheet(filename);
+
+                int tmpColumnsCount = getControlInt(dwo._dgv,false);//dwo._dgv.Columns.Count;
+                int tmpRowsCount = getControlInt(dwo._dgv, true);// dwo._dgv.Rows.Count;
+
+                currmsg = "Start create excel file,it has Rows:" + tmpRowsCount + ",Columns:" + tmpColumnsCount;
+                setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
+
+                int x = 1;
+                IRow rowHeader = sheet1.CreateRow(0);
+                for (int i = 0; i < tmpColumnsCount; i++)
+                {
+                    var tmpHeadText = getControlText(dwo._dgv, i);//dwo._dgv.Columns[i].HeaderText;
+                    if (tmpHeadText == null)
+                    {
+                        tmpHeadText = x++.ToString();
+                    }
+                    currmsg = "Start write Header text at:" + (i + 1) + ", value:" + tmpHeadText.ToString();
+                    setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
+
+                    rowHeader.CreateCell(i).SetCellValue(tmpHeadText.ToString());
+                }
+
+                for (int i = 1; i <= tmpRowsCount; i++)
+                {
+                    IRow row = sheet1.CreateRow(i);
+                    for (int j = 0; j < tmpColumnsCount; j++)
+                    {
+                        var tmpCellValue = getControlText(dwo._dgv, i - 1, j);// dwo._dgv.Rows[i - 1].Cells[j].Value;
+
+                        if (tmpCellValue == null)
+                        {
+                            tmpCellValue = "";
+                        }
+
+                        if (tmpCellValue.GetType() == System.TypeCode.String.GetType())
+                        {
+                            row.CreateCell(j).SetCellValue(tmpCellValue.ToString());
+                        }
+                        else if (tmpCellValue.GetType() == System.TypeCode.Decimal.GetType())
+                        {
+                            var tmpCellValue_convert = Convert.ToDouble(tmpCellValue);
+                            row.CreateCell(j).SetCellValue(tmpCellValue_convert);
+                        }
+                        else if (tmpCellValue.GetType() == System.TypeCode.Double.GetType())
+                        {
+                            var tmpCellValue_convert = Convert.ToDouble(tmpCellValue);
+                            row.CreateCell(j).SetCellValue(tmpCellValue_convert);
+                        }
+                        else if (tmpCellValue.GetType() == System.TypeCode.DateTime.GetType())
+                        {
+                            var tmpCellValue_convert = Convert.ToDateTime(tmpCellValue);
+                            row.CreateCell(j).SetCellValue(tmpCellValue_convert);
+                        }
+                        else
+                        {
+                            row.CreateCell(j).SetCellValue(tmpCellValue.ToString());
+                        }
+
+                        currmsg = "That has Rows:" + tmpRowsCount + ",Columns:" + tmpColumnsCount+",Start write at Rows:" + (i + 1) + ",Columns:" + (j + 1) + ",Value:" + tmpCellValue.ToString();
+                        setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
+
+                    }
+                }
+                using (var f = File.Create(@tmpAllFilepathAndName))
+                {
+                    currmsg = "Start save Excel file to " + tmpAllFilepathAndName;
+                    setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
+                    xssfworkbook_xlsx.Write(f);
+                    currmsg = "Success: save Excel file to " + tmpAllFilepathAndName;
+                    setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                currmsg = "Error:" + ex.Message;
+                setControlText(_frmDefault.status15toolLabelstrResult, currmsg, true, true);
+            }
+
+        }
+        public void downLoadExcel_Thread(object o)
+        {
+            ThreadPool.QueueUserWorkItem(new WaitCallback(downLoadExcel), o);
+        }
+        #endregion
+        #region  清理过时的Excel文件
+
+        private void ClearFile(string FilePath)
+        {
+            String[] Files = System.IO.Directory.GetFiles(FilePath);
+            if (Files.Length > 10)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    try
+                    {
+                        System.IO.File.Delete(Files[i]);
+                    }
+                    catch
+                    {
+                    }
+
+                }
+            }
+        }
+        #endregion
         //////////////////////////////////add new
+
+        public HSSFWorkbook hssfworkbook_xls { get; set; }
+        public XSSFWorkbook xssfworkbook_xlsx { get; set; }
+
+        public string currmsg { get; set; }
     }
 
 }

@@ -181,7 +181,27 @@ namespace IDR.Frm.API
             _deffcolors = Deffcolors;
 
         }
+        /// <summary>
+        /// down xls for dgv
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="xlsType"></param>
+        /// <param name="filenamePrefix"></param>
+        /// <param name="filepath"></param>
+        public DoWorkObject(DataGridView dgv, string xlsType, string filenamePrefix, string filepath)
+        {
+            _dgv = dgv;
+            _xlsType = xlsType;
+            _filenamePrefix = filenamePrefix;
+            _filepath = filepath;
 
-       
+        }
+
+        //down xls for dgv
+        public string _filepath { get; set; }
+
+        public string _filenamePrefix { get; set; }
+
+        public string _xlsType { get; set; }
     }
 }

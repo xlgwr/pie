@@ -676,5 +676,7 @@ namespace IDR.Frm
         public string _deffCellName { get; set; }
 
         public string _deffCellValue { get; set; }
+
+        public string _strDownLoadExcel { get; set; }
     }
 }

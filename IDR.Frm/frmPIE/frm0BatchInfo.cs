@@ -266,6 +266,18 @@ namespace IDR.Frm.frmPIE
                 //throw new NotImplementedException();
             }));
         }
+
+        private void tsmi01downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string strprefix = "10BIM_";
+            if (_dgv_ToolScriptMenu.Name.Equals("data2GV2_plr_mstr_tran"))
+            {
+                strprefix = "10BID_";
+            }
+            var dwo = new DoWorkObject(_dgv_ToolScriptMenu, "xlsx", strprefix + _frmDefault.txt0SearchID.Text, "");
+            cf.downLoadExcel_Thread(dwo);
+            // cf.downLoadExcel(data1GV_plr_mstr_BatchInfo, _idr_show.status15toolLabelstrResult, cf.nameList12UploadToERP(), "10BatchInfo" + _idr_show._plr_batch_mstr_model.batch_id);
+        }
         //
     }
 

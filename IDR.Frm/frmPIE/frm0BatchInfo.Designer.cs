@@ -62,6 +62,7 @@
             this.tsmi01downLoad1ToExceltoolStripMenuItem2.Name = "tsmi01downLoad1ToExceltoolStripMenuItem2";
             this.tsmi01downLoad1ToExceltoolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
             this.tsmi01downLoad1ToExceltoolStripMenuItem2.Text = "&DownLoad To Excel";
+            this.tsmi01downLoad1ToExceltoolStripMenuItem2.Click += new System.EventHandler(this.tsmi01downLoad1ToExceltoolStripMenuItem2_Click);
             // 
             // tsm0menu_EnquireByPart
             // 
