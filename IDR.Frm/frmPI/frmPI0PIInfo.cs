@@ -106,7 +106,7 @@ namespace IDR.Frm.frmPI
         void data1GV_plr_mstr_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DoWorkObject dwo = new DoWorkObject(data1GV1_PIdet, e.RowIndex, e.ColumnIndex);
-            cf.dgv_cellClick(dwo,_frmDefault._pi_mstr_model.PI_ID);
+            cf.dgv_cellClick(dwo, _frmDefault._pi_mstr_model.PI_ID);
         }
 
         void data1GV_plr_mstr_BatchInfo_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -142,7 +142,7 @@ namespace IDR.Frm.frmPI
             {
                 var tmpHeaderText = _dgv_ToolScriptMenu.Columns[i].HeaderText;
                 _frmET.comb0TextValue.Items.Add(tmpHeaderText);
-                if (tmpHeaderText.StartsWith("rir",true,null))
+                if (tmpHeaderText.StartsWith("rir", true, null))
                 {
                     _frmET.comb0TextValue.SelectedIndex = i;
                 }
@@ -191,7 +191,7 @@ namespace IDR.Frm.frmPI
 
         private void initGVpi_mstr(object o)
         {
-            var tmp_model = _dbpie.pi_mstr.Find(o.ToString(),1);
+            var tmp_model = _dbpie.pi_mstr.Find(o.ToString(), 1);
             init_ModelToTxt(tmp_model, true);
         }
         private void initGVpi_det_join_grr(object o)
@@ -224,6 +224,13 @@ namespace IDR.Frm.frmPI
                 txt5_cre_date_PIMstr.ReadOnly = breadonly;
                 //throw new NotImplementedException();
             }));
+        }
+
+        private void tsmi01downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            var strprefix = "21PII";
+            var dwo = new DoWorkObject(_dgv_ToolScriptMenu, "xlsx", strprefix + "_" + _frmDefault.txt0SearchID.Text, "", true);
+            cf.downLoadExcel_Thread(dwo);
         }
     }
 }
