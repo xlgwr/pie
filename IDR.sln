@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xprint", "Print\XPrint\Xpri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.Frm", "IDR.Frm\IDR.Frm.csproj", "{ACE8BE39-85D4-49F0-8EC4-4A44843302E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.MVC", "IDR.MVC\IDR.MVC.csproj", "{B1092F86-25D1-4E77-B2AE-203AB03D7E77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -85,6 +87,18 @@ Global
 		{ACE8BE39-85D4-49F0-8EC4-4A44843302E0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{ACE8BE39-85D4-49F0-8EC4-4A44843302E0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{ACE8BE39-85D4-49F0-8EC4-4A44843302E0}.Release|x86.ActiveCfg = Release|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Release|.NET.ActiveCfg = Release|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
