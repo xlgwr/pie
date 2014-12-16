@@ -423,6 +423,7 @@
     <None Include="Web References\WebReference208\UserLoginCheck.disco" />
     <None Include="Web References\WebReferenceRTM99\Service.disco" />
     <None Include="Resources\updatepackage.png" />
+    <None Include="Resources\14a.png" />
     <Content Include="t %2825%29.ico" />
     <None Include="0DownLoadExcel\text.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
