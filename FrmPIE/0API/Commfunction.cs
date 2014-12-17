@@ -2133,11 +2133,18 @@ namespace FrmIDR._0API
             }
 
         }
+        public void selectCellMethod(DoWrokObject dwo,int nothing)
+        {
+            _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
+            //_idr_show.status13toolSStatusLblMsg.Text = "";
+            _idr_show.status15toolLabelstrResult.Text = "";
+        }
         public string selectCellMethod(DoWrokObject dwo, string strPIID)
         {
             _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
             //_idr_show.status13toolSStatusLblMsg.Text = "";
             _idr_show.status15toolLabelstrResult.Text = "";
+
             try
             {
                 if (dwo._eX >= 0 && dwo._eX < dwo._dgv.RowCount - 1)
