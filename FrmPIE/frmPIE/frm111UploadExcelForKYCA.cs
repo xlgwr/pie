@@ -897,18 +897,18 @@ namespace FrmPIE
 
                     if (cell == null || string.IsNullOrEmpty(cell.ToString()))
                     {
-                        if (rowscount == 0)
+                        if (rowscount == 1)
                         {
 
-                            strerrnullrows += rowscount.ToString();
+                            strerrnullrows += (rowscount + 1).ToString();
                         }
                         else
                         {
-                            strerrnullrows += "," + rowscount.ToString();
+                            strerrnullrows += ",null row:" + (rowscount+1).ToString();
 
                         }
-                        rowserrscount++;
                         rowscount++;
+                        rowserrscount++;
                         nextrow = false;
                         break;
                         //dr[i] = null;
