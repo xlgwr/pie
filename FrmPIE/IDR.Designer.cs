@@ -693,7 +693,7 @@
             this.btn21ScanCartronLabel21.Name = "btn21ScanCartronLabel21";
             this.btn21ScanCartronLabel21.Size = new System.Drawing.Size(145, 82);
             this.btn21ScanCartronLabel21.TabIndex = 7;
-            this.btn21ScanCartronLabel21.Text = "1";
+            this.btn21ScanCartronLabel21.Text = "4";
             this.btn21ScanCartronLabel21.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btn21ScanCartronLabel21.UseVisualStyleBackColor = false;
             // 
@@ -705,7 +705,7 @@
             this.addCoForPalletToolStripMenuItem,
             this.addSQRMForPalletToolStripMenuItem});
             this.cMenuStrip21ScanCartronLabel.Name = "cMenuStrip1ScanCartronLabel";
-            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(214, 114);
+            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(214, 92);
             // 
             // tool1StripMenuItem21ScanCartronLabel
             // 
@@ -775,7 +775,7 @@
             this.btn24PIReports.Name = "btn24PIReports";
             this.btn24PIReports.Size = new System.Drawing.Size(176, 82);
             this.btn24PIReports.TabIndex = 13;
-            this.btn24PIReports.Text = "2";
+            this.btn24PIReports.Text = "5";
             this.btn24PIReports.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btn24PIReports.UseVisualStyleBackColor = false;
             // 
