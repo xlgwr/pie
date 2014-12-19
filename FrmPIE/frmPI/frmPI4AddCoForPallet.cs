@@ -91,7 +91,7 @@ namespace FrmPIE.frmPI
         {
             _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
             {
-                var strPIID = o.ToString();
+                var strPIID = o.ToString().Replace("'","");
                 string sql_pallet = "select top 100 t_value as Name,t_desc as Value from pkey_ctl where t_name='co' and t_value like '%" + strPIID + "%'  order by t_value";
 
                 var ds_piid = DbHelperSQL.Query(sql_pallet);

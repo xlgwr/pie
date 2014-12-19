@@ -85,6 +85,7 @@
             this.tool1StripMenuItem21ScanCartronLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.addGWForPalletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addCoForPalletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addSQRMForPalletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn24PIReports = new System.Windows.Forms.Button();
@@ -108,7 +109,6 @@
             this.link0NewVersion = new System.Windows.Forms.LinkLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerColor = new System.Windows.Forms.Timer(this.components);
-            this.addSQRMForPalletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -474,30 +474,30 @@
             this.toolcMenu10UploadEPackingListExcelForKYCA,
             this.toolcMenu12AddOneByOneBatchID});
             this.cMenuStrip1PacklingListMain.Name = "cMenuPacklingListMain1";
-            this.cMenuStrip1PacklingListMain.Size = new System.Drawing.Size(298, 70);
+            this.cMenuStrip1PacklingListMain.Size = new System.Drawing.Size(308, 70);
             // 
             // toolcMenu11UploadEPackingListExcel
             // 
             this.toolcMenu11UploadEPackingListExcel.Image = global::FrmPIE.Properties.Resources.up;
             this.toolcMenu11UploadEPackingListExcel.Name = "toolcMenu11UploadEPackingListExcel";
-            this.toolcMenu11UploadEPackingListExcel.Size = new System.Drawing.Size(297, 22);
-            this.toolcMenu11UploadEPackingListExcel.Text = "&Upload EPacking List (Excel)";
+            this.toolcMenu11UploadEPackingListExcel.Size = new System.Drawing.Size(307, 22);
+            this.toolcMenu11UploadEPackingListExcel.Text = "1.&Upload EPacking List (Excel)";
             this.toolcMenu11UploadEPackingListExcel.Click += new System.EventHandler(this.toolcMenu11UploadEPackingListExcel_Click);
             // 
             // toolcMenu10UploadEPackingListExcelForKYCA
             // 
             this.toolcMenu10UploadEPackingListExcelForKYCA.Image = global::FrmPIE.Properties.Resources._23;
             this.toolcMenu10UploadEPackingListExcelForKYCA.Name = "toolcMenu10UploadEPackingListExcelForKYCA";
-            this.toolcMenu10UploadEPackingListExcelForKYCA.Size = new System.Drawing.Size(297, 22);
-            this.toolcMenu10UploadEPackingListExcelForKYCA.Text = "&Upload EPacking List (Excel For KYCA)";
+            this.toolcMenu10UploadEPackingListExcelForKYCA.Size = new System.Drawing.Size(307, 22);
+            this.toolcMenu10UploadEPackingListExcelForKYCA.Text = "2.&Upload EPacking List (Excel For KYCA)";
             this.toolcMenu10UploadEPackingListExcelForKYCA.Click += new System.EventHandler(this.toolcMenu10UploadEPackingListExcelForKYCA_Click);
             // 
             // toolcMenu12AddOneByOneBatchID
             // 
             this.toolcMenu12AddOneByOneBatchID.Image = global::FrmPIE.Properties.Resources.add;
             this.toolcMenu12AddOneByOneBatchID.Name = "toolcMenu12AddOneByOneBatchID";
-            this.toolcMenu12AddOneByOneBatchID.Size = new System.Drawing.Size(297, 22);
-            this.toolcMenu12AddOneByOneBatchID.Text = "&Add New(Edit BatchID)";
+            this.toolcMenu12AddOneByOneBatchID.Size = new System.Drawing.Size(307, 22);
+            this.toolcMenu12AddOneByOneBatchID.Text = "3.&Add New(Edit BatchID)";
             this.toolcMenu12AddOneByOneBatchID.Click += new System.EventHandler(this.toolcMenu12AddOneByOneBatchID_Click);
             // 
             // linkLabel1
@@ -705,31 +705,39 @@
             this.addCoForPalletToolStripMenuItem,
             this.addSQRMForPalletToolStripMenuItem});
             this.cMenuStrip21ScanCartronLabel.Name = "cMenuStrip1ScanCartronLabel";
-            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(204, 114);
+            this.cMenuStrip21ScanCartronLabel.Size = new System.Drawing.Size(214, 114);
             // 
             // tool1StripMenuItem21ScanCartronLabel
             // 
             this.tool1StripMenuItem21ScanCartronLabel.Image = global::FrmPIE.Properties.Resources.bar1;
             this.tool1StripMenuItem21ScanCartronLabel.Name = "tool1StripMenuItem21ScanCartronLabel";
-            this.tool1StripMenuItem21ScanCartronLabel.Size = new System.Drawing.Size(203, 22);
-            this.tool1StripMenuItem21ScanCartronLabel.Text = "&Scan Ctn label";
+            this.tool1StripMenuItem21ScanCartronLabel.Size = new System.Drawing.Size(213, 22);
+            this.tool1StripMenuItem21ScanCartronLabel.Text = "1.&Scan Ctn label";
             this.tool1StripMenuItem21ScanCartronLabel.Click += new System.EventHandler(this.tool1StripMenuItem21ScanCartronLabel_Click);
             // 
             // addGWForPalletToolStripMenuItem
             // 
             this.addGWForPalletToolStripMenuItem.Image = global::FrmPIE.Properties.Resources.package;
             this.addGWForPalletToolStripMenuItem.Name = "addGWForPalletToolStripMenuItem";
-            this.addGWForPalletToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.addGWForPalletToolStripMenuItem.Text = "&Add GW for Pallet";
+            this.addGWForPalletToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.addGWForPalletToolStripMenuItem.Text = "2.&Add GW for Pallet";
             this.addGWForPalletToolStripMenuItem.Click += new System.EventHandler(this.addNWForPalletToolStripMenuItem_Click);
             // 
             // addCoForPalletToolStripMenuItem
             // 
             this.addCoForPalletToolStripMenuItem.Image = global::FrmPIE.Properties.Resources.web_search;
             this.addCoForPalletToolStripMenuItem.Name = "addCoForPalletToolStripMenuItem";
-            this.addCoForPalletToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.addCoForPalletToolStripMenuItem.Text = "Add Co For Pallet";
+            this.addCoForPalletToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.addCoForPalletToolStripMenuItem.Text = "3.Add Co For Pallet";
             this.addCoForPalletToolStripMenuItem.Click += new System.EventHandler(this.addCoForPalletToolStripMenuItem_Click);
+            // 
+            // addSQRMForPalletToolStripMenuItem
+            // 
+            this.addSQRMForPalletToolStripMenuItem.Image = global::FrmPIE.Properties.Resources.file_warning;
+            this.addSQRMForPalletToolStripMenuItem.Name = "addSQRMForPalletToolStripMenuItem";
+            this.addSQRMForPalletToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.addSQRMForPalletToolStripMenuItem.Text = "4.Add SQ RM For Pallet";
+            this.addSQRMForPalletToolStripMenuItem.Click += new System.EventHandler(this.addSQRMForPalletToolStripMenuItem_Click);
             // 
             // linkLabel4
             // 
@@ -979,14 +987,6 @@
             // timerColor
             // 
             this.timerColor.Tick += new System.EventHandler(this.timerColor_Tick);
-            // 
-            // addSQRMForPalletToolStripMenuItem
-            // 
-            this.addSQRMForPalletToolStripMenuItem.Image = global::FrmPIE.Properties.Resources.file_warning;
-            this.addSQRMForPalletToolStripMenuItem.Name = "addSQRMForPalletToolStripMenuItem";
-            this.addSQRMForPalletToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.addSQRMForPalletToolStripMenuItem.Text = "Add SQ RM For Pallet";
-            this.addSQRMForPalletToolStripMenuItem.Click += new System.EventHandler(this.addSQRMForPalletToolStripMenuItem_Click);
             // 
             // frmIDR
             // 

@@ -93,7 +93,7 @@ namespace FrmPIE.frmPI
         {
             _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
             {
-                var strPIID = o.ToString();
+                var strPIID = o.ToString().Replace("'", ""); ;
                 //,[co_id],[co_desc]
                 string sql_pallet = "SELECT TOP 100 [sq_id],[sq_name],[sq_desc] FROM [dbo].[pi_sq] where [sq_type]='RM' and ([sq_id] = '" + strPIID + "' or [sq_name] like '%" + strPIID + "%')  order by [sq_id]";
 

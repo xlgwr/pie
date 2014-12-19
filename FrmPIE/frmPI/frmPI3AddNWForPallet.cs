@@ -217,7 +217,7 @@ namespace FrmPIE.frmPI
         {
             _idr_show.Invoke(new FrmIDR._0API.Commfunction.Action(delegate()
             {
-                var strPIID = o.ToString();
+                var strPIID = o.ToString().Replace("'", ""); ;
                 string sql_pallet = "select [PI_NO] as PI_ID,[pi_pallet_no] as Pallet,[PI_GW] as GW FROM [dbo].[vpi_report_palletCount] where PI_NO='" + strPIID + "' order by PI_NO,plr_LineID";
 
                 var ds_piid = DbHelperSQL.Query(sql_pallet);
