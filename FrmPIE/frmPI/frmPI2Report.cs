@@ -289,11 +289,22 @@ namespace frmPI
                 string strwhereRiR = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and (pisr_rir='' or pisr_rir is null) ";
                 string strwhereYes = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='Yes'";
                 string strwhereNo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and pi_status='No'";
+                //check vpi_report data is ok
+
+                string strwhereHasNullUSDPrice = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and (pisr_us_cost='' or pisr_us_cost is null) ";
+                string strwhereHasNullCo = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and (CoDesc='' or CoDesc is null) ";
+                string strwhereHasNullPartDesc = "PI_ID='" + txt0PINum_piReport.Text.Trim() + "' and (sq_name='' or sq_name is null) ";
+
 
                 int listcountAll = new PIE.DAL.vpi_report_ext().getCount(strwhereAll);
                 int listcountRir = new PIE.DAL.vpi_report_ext().getCount(strwhereRiR);
                 int listcountno = new PIE.DAL.vpi_report_ext().getCount(strwhereNo);
                 int listcountYes = new PIE.DAL.vpi_report_ext().getCount(strwhereYes);
+                //check vpi_report data is ok
+
+                int intHasNullCo = new PIE.DAL.vpi_report_ext().getCount(strwhereHasNullCo);
+                int intHasNullPartDesc = new PIE.DAL.vpi_report_ext().getCount(strwhereHasNullPartDesc);
+
 
                 if (listcountAll <= 0)
                 {
@@ -328,10 +339,64 @@ namespace frmPI
                     _idr_show.tabScanCartonLabel("Refresh RiR NO", txt0PINum_piReport.Text.Trim(), _idr_show, sender, rire);
                     return;
                 }
+                //check data is ok
+                if (intHasNullCo > 0)
+                {
+                    var msg = "Notice7: " + txt0PINum_piReport.Text.Trim() + " has some CO DESC are not exists. that will be open new tab to Add that";
+                    System.Windows.Forms.MessageBox.Show(msg);
+                    var tmp_vreport_nullco = new PIE.BLL.vpi_report().GetModelList(strwhereHasNullCo);
+                    if (tmp_vreport_nullco != null)
+                    {
+                        //string tmpColist = "";
+
+                        //foreach (var item in tmp_vreport_nullco)
+                        //{
+                        //    tmpColist += item.pi_chr01 + ",";
+                        //}
+                        if (tmp_vreport_nullco.Count > 0)
+                        {
+                            var rire = new KeyEventArgs(Keys.Escape);
+                            _idr_show.tabScanAddCoForPallet("Add Co [" + tmp_vreport_nullco[0].pi_chr01 + "] for Pallet", tmp_vreport_nullco[0].pi_chr01, _idr_show, sender, rire, false);
+                        }
+                    }
+                    return;
+                }
+                if (intHasNullPartDesc > 0)
+                {
+                    var msg = "Notice8: " + txt0PINum_piReport.Text.Trim() + " has some Description are not exists. that will be open new tab to Add that";
+                    System.Windows.Forms.MessageBox.Show(msg);
+                    var tmp_vreport_nullco = new PIE.BLL.vpi_report().GetModelList(strwhereHasNullPartDesc);
+                    if (tmp_vreport_nullco != null)
+                    {
+                        //string tmpColist = "";
+                        //foreach (var item in tmp_vreport_nullco)
+                        //{
+                        //    tmpColist += item.pisr_seq + ",";
+                        //}
+                        if (tmp_vreport_nullco.Count > 0)
+                        {
+                            var rire = new KeyEventArgs(Keys.Escape);
+                            _idr_show.tabScanAddSQForPallet("Add Seq [" + tmp_vreport_nullco[0].pisr_seq + "] for Pallet", tmp_vreport_nullco[0].pisr_seq, _idr_show, sender, rire, false);
+                        }
+                    }
+                    return;
+                }
+
+
                 if (GetPriceOfUSD(txt0PINum_piReport.Text.Trim()).Equals("Error"))
                 {
                     return;
                 };
+
+                //check data is ok
+                int intHasNullUSDPrice = new PIE.DAL.vpi_report_ext().getCount(strwhereHasNullUSDPrice);
+
+                if (intHasNullUSDPrice > 0)
+                {
+                    lblMsg.Text = "Notice9: " + txt0PINum_piReport.Text.Trim() + " has some USD Price is null, Please Wait some time, And try again.";
+                    return;
+                }
+
                 var pi_mstr_remote_exit = new PI.BLL.PI_MSTR_Remote().Exists(txt0PINum_piReport.Text.Trim());
 
                 if (pi_mstr_remote_exit)

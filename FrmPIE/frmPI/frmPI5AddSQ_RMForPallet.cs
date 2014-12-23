@@ -146,7 +146,7 @@ namespace FrmPIE.frmPI
                 //txt3NW.Focus();
                 txt1SQID_PIMstr.Focus();
                 _idr_show.AcceptButton = btn0Add;
-                lbl0Msg.Text = "please select a right data 1, please try again. ";
+                lbl0Msg.Text = "please enter a right data 1, please try again. ";
                 return;
             }
 

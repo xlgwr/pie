@@ -140,14 +140,14 @@ namespace FrmPIE.frmPI
                 //txt3NW.Focus();
                 txt1Co_Name_PIMstr.Focus();
                 _idr_show.AcceptButton = btn0Add;
-                lbl0Msg.Text = "please select a right data1, please try again. ";
+                lbl0Msg.Text = "please enter a right data1, please try again. ";
                 return;
             }
             if (string.IsNullOrEmpty(txt3CO_Value.Text))
             {
                 txt3CO_Value.Focus();
                 _idr_show.AcceptButton = btn0Add;
-                lbl0Msg.Text = "please select a right data2, please try again. ";
+                lbl0Msg.Text = "please enter a right data2, please try again. ";
                 return;
             }
             var str_tmp_coName = txt1Co_Name_PIMstr.Text.Trim().ToUpper();

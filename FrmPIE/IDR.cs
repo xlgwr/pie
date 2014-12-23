@@ -770,7 +770,7 @@ namespace FrmPIE
         private void addSQRMForPalletToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var rire = new KeyEventArgs(Keys.Enter);
-            tabScanAddSQForPallet("Add SQ RM for Pallet", "", this, sender, rire);
+            tabScanAddSQForPallet("Add SQ RM for Pallet", "", this, sender, rire, true);
         }
         public void tabScanAddNwForPallet(string headtext, string piid, frmIDR idr, object sender, KeyEventArgs e)
         {
@@ -787,33 +787,53 @@ namespace FrmPIE
             }
             addGBToTC(tabpagenew, fanb.gb0PIAddNWForPallet);
         }
-        public void tabScanAddCoForPallet(string headtext, string piid, frmIDR idr, object sender, KeyEventArgs e)
+        public void tabScanAddCoForPallet(string headtext, string coname, frmIDR idr, object sender, KeyEventArgs e, bool searchflag)
         {
             var tabpagenew = addNewTabPage(headtext);
             frmPI4AddCoForPallet fanb = new frmPI4AddCoForPallet(this);
 
-            fanb.txt4PIID_search.Text = piid;
+            fanb.lbl0Msg.Text = headtext;
+            fanb.txt1Co_Name_PIMstr.Text = coname;
+            fanb.txt4PIID_search.Text = coname;
             fanb.txt4PIID_search.Focus();
 
             this.AcceptButton = fanb.btn1Search;
-            if (!string.IsNullOrEmpty(piid))
+            if (!string.IsNullOrEmpty(coname))
             {
-                fanb.btn1Search_Click(sender, e);
+                if (searchflag)
+                {
+                    fanb.btn1Search_Click(sender, e);
+                }
+                else
+                {
+                    fanb.txt3CO_Value.Focus();
+                    this.AcceptButton = fanb.btn0Add;
+                }
             }
             addGBToTC(tabpagenew, fanb.gb0PIAddCoForPallet);
         }
-        public void tabScanAddSQForPallet(string headtext, string piid, frmIDR idr, object sender, KeyEventArgs e)
+        public void tabScanAddSQForPallet(string headtext, string piid, frmIDR idr, object sender, KeyEventArgs e, bool searchflag)
         {
             var tabpagenew = addNewTabPage(headtext);
             frmPI5AddSQ_RMForPallet fanb = new frmPI5AddSQ_RMForPallet(this);
 
+            fanb.lbl0Msg.Text = headtext;
+            fanb.txt1SQID_PIMstr.Text = piid;
             fanb.txt4PIID_search.Text = piid;
             fanb.txt4PIID_search.Focus();
 
             this.AcceptButton = fanb.btn1Search;
             if (!string.IsNullOrEmpty(piid))
             {
-                fanb.btn1Search_Click(sender, e);
+                if (searchflag)
+                {
+                    fanb.btn1Search_Click(sender, e);
+                }
+                else
+                {
+                    fanb.txtSQ2Name.Focus();
+                    this.AcceptButton = fanb.btn0Add;
+                }
             }
             addGBToTC(tabpagenew, fanb.gb0PIAddCoForPallet);
         }
@@ -829,7 +849,7 @@ namespace FrmPIE
         private void addCoForPalletToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var rire = new KeyEventArgs(Keys.Enter);
-            tabScanAddCoForPallet("Add Co for Pallet", "", this, sender, rire);
+            tabScanAddCoForPallet("Add Co for Pallet", "", this, sender, rire, true);
         }
         private void txt0SearchID_KeyUp(object sender, KeyEventArgs e)
         {
