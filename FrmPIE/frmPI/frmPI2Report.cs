@@ -564,6 +564,9 @@ namespace frmPI
                     //add
                     //pI_DET_Remote_model.pi_Lic_req = " - ";
 
+                    //add mbq
+                    pI_DET_Remote_model.PI_PO_price = item.REC_NO == "" ? 0 : Convert.ToDecimal(item.REC_NO.Trim());
+
                     var intresutl = new PI.BLL.PI_DET_Remote().Add(pI_DET_Remote_model);
                     if (intresutl > 0)
                     {

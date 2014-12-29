@@ -1031,6 +1031,9 @@ namespace frmPI
                                                 pisr_grr_model.pisr_dec01 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_k200_nw"]);
                                                 pisr_grr_model.pisr_dec02 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_nw"]);
 
+                                                //add mpq
+                                                pisr_grr_model.pisr_int01 = Convert.ToInt32(ds.Tables[0].Rows[y]["wsas017_mpq"]);
+
                                                 pisr_grr_model.pi_cre_date = DateTime.Now;
                                                 pisr_grr_model.pi_update_date = DateTime.Now;
                                                 pisr_grr_model.pi_user_ip = _idr_show._custip;
@@ -1535,6 +1538,8 @@ namespace frmPI
 
                 pisr_grr_model_add.pisr_dec01 = Convert.ToDecimal(dr["wsas018_k200_nw"]);
                 pisr_grr_model_add.pisr_dec02 = Convert.ToDecimal(dr["wsas018_nw"]);
+                //add mpq
+                pisr_grr_model_add.pisr_int01 = Convert.ToInt32(dr["wsas018_mpq"]);
 
                 pisr_grr_model_add.pi_cre_date = DateTime.Now;
                 pisr_grr_model_add.pi_update_date = DateTime.Now;
@@ -1544,6 +1549,8 @@ namespace frmPI
                 //add 
                 pisr_grr_model_add.pisr_char03 = _strbatchid;
                 pisr_grr_model_add.pi_chr02 = strPIID;
+
+                //add 
 
                 var pisgrradd = new PI.BLL.pisr_grr().Add(pisr_grr_model_add);
                 #endregion

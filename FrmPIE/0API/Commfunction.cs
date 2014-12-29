@@ -1235,6 +1235,9 @@ namespace FrmIDR._0API
             dgv.Columns["pisr_dec01"].HeaderText = "k200 NW";
             dgv.Columns["pisr_dec02"].HeaderText = "NW";
 
+            //add mpq
+            dgv.Columns["REC_NO"].HeaderText = "MPQ";
+
 
         }
         public static void getBatchiLineId(DataGridView dgv, int eIndex, PIE.Model.plr_mstr plr_mstr_model)
