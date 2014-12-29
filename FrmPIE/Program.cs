@@ -54,7 +54,7 @@ namespace FrmPIE
             _frm5VersionSecond = 14;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
-            _frm10VersionFixMsg = "1.fix bug for upload report pi,if co、usd price、part description are null will be notice.";
+            _frm10VersionFixMsg = "1.add mqp for pi report.";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 
