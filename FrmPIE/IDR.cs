@@ -263,6 +263,8 @@ namespace FrmPIE
                                            linkLabel1, linkLabel2,linkLabel3,linkLabel4,linkLabel8 });
             //Control.CheckForIllegalCrossThreadCalls = false;
 
+            HOME.BackColor = Color.White;
+
         }
         private void frmIDR_FormClosing(object sender, FormClosingEventArgs e)
         {
