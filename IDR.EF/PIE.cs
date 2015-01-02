@@ -537,15 +537,11 @@ namespace IDR.EF.PIE
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.pisr_cost)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
                 .Property(e => e.pisr_base_cost)
                 .HasPrecision(18, 4);
 
             modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.pisr_us_cost)
+                .Property(e => e.pisr_cost)
                 .HasPrecision(18, 4);
 
             modelBuilder.Entity<vpi_detApisr_grr>()
@@ -558,15 +554,11 @@ namespace IDR.EF.PIE
 
             modelBuilder.Entity<vpi_detApisr_grr>()
                 .Property(e => e.pisr_dec01)
-                .HasPrecision(18, 8);
+                .HasPrecision(23, 13);
 
             modelBuilder.Entity<vpi_detApisr_grr>()
                 .Property(e => e.pisr_dec02)
-                .HasPrecision(18, 8);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.REC_NO)
-                .IsUnicode(false);
+                .HasPrecision(37, 8);
 
             modelBuilder.Entity<vpi_detApisr_grr>()
                 .Property(e => e.Contract)
@@ -635,10 +627,6 @@ namespace IDR.EF.PIE
             modelBuilder.Entity<vpi_report_base>()
                 .Property(e => e.pisr_dec02)
                 .HasPrecision(37, 8);
-
-            modelBuilder.Entity<vpi_report_base>()
-                .Property(e => e.REC_NO)
-                .IsUnicode(false);
 
             modelBuilder.Entity<vpi_report_base>()
                 .Property(e => e.Contract)

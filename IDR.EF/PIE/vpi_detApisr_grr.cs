@@ -36,14 +36,14 @@ namespace IDR.EF.PIE
         [StringLength(50)]
         public string CartonNo { get; set; }
 
-        [StringLength(50)]
+        [StringLength(51)]
         public string CartonID { get; set; }
 
         [StringLength(50)]
-        public string pi_chr01 { get; set; }
+        public string pi_pallet_no { get; set; }
 
         [StringLength(50)]
-        public string pi_pallet_no { get; set; }
+        public string pi_chr01 { get; set; }
 
         [StringLength(4000)]
         public string CoDesc { get; set; }
@@ -71,11 +71,12 @@ namespace IDR.EF.PIE
         [StringLength(50)]
         public string pisr_curr { get; set; }
 
-        public decimal? pisr_cost { get; set; }
+        [StringLength(50)]
+        public string pisr_us_cost { get; set; }
 
         public decimal? pisr_base_cost { get; set; }
 
-        public decimal? pisr_us_cost { get; set; }
+        public decimal? pisr_cost { get; set; }
 
         [StringLength(50)]
         public string pisr_seq { get; set; }
@@ -132,14 +133,14 @@ namespace IDR.EF.PIE
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int GW { get; set; }
 
+        public int? REC_NO { get; set; }
+
         [Key]
         [Column(Order = 6)]
         [StringLength(1)]
-        public string REC_NO { get; set; }
-
-        [Key]
-        [Column(Order = 7)]
-        [StringLength(1)]
         public string Contract { get; set; }
+
+        [StringLength(50)]
+        public string CartonID_No { get; set; }
     }
 }
