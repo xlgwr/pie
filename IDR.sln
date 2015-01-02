@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrmIDR", "FrmPIE\FrmIDR.csproj", "{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.Common", "Common\IDR.Common.csproj", "{E3D8759A-C5EB-402D-9F10-F5C6029A8D1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.EF", "IDR.EF\IDR.EF.csproj", "{D3A3AC64-CC27-43E4-BDC2-5EC992F7170B}"
@@ -14,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.Frm", "IDR.Frm\IDR.Frm.csproj", "{ACE8BE39-85D4-49F0-8EC4-4A44843302E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.MVC", "IDR.MVC\IDR.MVC.csproj", "{B1092F86-25D1-4E77-B2AE-203AB03D7E77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.Server", "IDR.Server\IDR.Server.csproj", "{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,18 +27,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Debug|.NET.ActiveCfg = Debug|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Debug|x86.ActiveCfg = Debug|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Debug|x86.Build.0 = Debug|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Release|.NET.ActiveCfg = Release|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Release|Any CPU.ActiveCfg = Release|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Release|Mixed Platforms.Build.0 = Release|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Release|x86.ActiveCfg = Release|x86
-		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Release|x86.Build.0 = Release|x86
 		{E3D8759A-C5EB-402D-9F10-F5C6029A8D1A}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{E3D8759A-C5EB-402D-9F10-F5C6029A8D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3D8759A-C5EB-402D-9F10-F5C6029A8D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -99,6 +87,18 @@ Global
 		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B1092F86-25D1-4E77-B2AE-203AB03D7E77}.Release|x86.ActiveCfg = Release|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Release|.NET.ActiveCfg = Release|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A8D5AAB1-9013-4872-8249-5CA0E5405DF2}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
