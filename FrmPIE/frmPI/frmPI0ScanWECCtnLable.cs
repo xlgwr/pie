@@ -966,35 +966,6 @@ namespace frmPI
                                                 var existgrr = new PI.BLL.pisr_grr().Exists(pisr_grr_model.pi_wec_ctn, pisr_grr_model.plr_LineID_tran);
                                                 pisr_grr_model.Plant = "0";
 
-                                                if (existgrr)
-                                                {
-                                                    //if (i % 5 == 0)
-                                                    //{
-
-                                                    //    existrirsuccess += pi_det_list[i].pi_wec_ctn + ":" + pisr_grr_model.plr_LineID_tran + ",\n\t";
-                                                    //}
-                                                    //else
-                                                    //{
-                                                    //    existrirsuccess += pi_det_list[i].pi_wec_ctn + ":" + pisr_grr_model.plr_LineID_tran + ",";
-
-                                                    //}
-                                                    //if (string.IsNullOrEmpty(existrir))
-                                                    //{
-
-                                                    //    ShowMsg(existrirsuccess + " RiR 已更新.", "Notice0");
-                                                    //}
-                                                    //else
-                                                    //{
-                                                    //    ShowMsg(existrirsuccess + " RiR 已更新.\n\t" + existrir, "Notice0");
-                                                    //}
-                                                    dsexist++;
-                                                    //if (dsexist >= dscount)
-                                                    //{
-
-                                                    //    ShowMsg(" All rows has alread Refresh RiR OK.", "Notice0");
-                                                    //}
-                                                    continue;
-                                                }
                                                 #region add pisr_grr_model_fromBatchid
                                                 pisr_grr_model.pi_wec_ctn = ds.Tables[0].Rows[y]["wsas017_wec_id"].ToString();
                                                 pisr_grr_model.plr_LineID_tran = ds.Tables[0].Rows[y]["wsas017_line"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[y]["wsas017_line"]);
@@ -1042,47 +1013,18 @@ namespace frmPI
                                                 //
                                                 pisr_grr_model.pi_chr02 = txt1PIID_ScanWECCtnLable.Text.Trim();
 
-                                                addPisgrr = new PI.BLL.pisr_grr().Add(pisr_grr_model);
                                                 #endregion
-                                                #region old
-                                                //pisr_grr_model.pisr_rir = ds.Tables[0].Rows[y]["wsas017_rir"].ToString();
-                                                //pisr_grr_model.pisr_invoice = ds.Tables[0].Rows[y]["wsas017_invoice"].ToString();
-
-                                                //pisr_grr_model.pisr_part = ds.Tables[0].Rows[y]["wsas017_part"].ToString();
-                                                //pisr_grr_model.pisr_site = ds.Tables[0].Rows[y]["wsas017_site"].ToString();
-                                                //pisr_grr_model.Pisr_receiver = ds.Tables[0].Rows[y]["wsas017_receiver"].ToString();
-                                                //pisr_grr_model.pisr_po_nbr = ds.Tables[0].Rows[y]["wsas017_po_nbr"].ToString();
-                                                //pisr_grr_model.pisr_qty = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_qty"].ToString());
-                                                //pisr_grr_model.pisr_curr = ds.Tables[0].Rows[y]["wsas017_curr"].ToString();
-                                                //pisr_grr_model.pisr_base_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_base_cost"].ToString());
-                                                //pisr_grr_model.pisr_us_cost = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_us_cost"].ToString());
-                                                //pisr_grr_model.pisr_seq = ds.Tables[0].Rows[y]["wsas017_seq"].ToString();
-                                                //pisr_grr_model.pisr_con_code = ds.Tables[0].Rows[y]["wsas017_con_code"].ToString();
-                                                //pisr_grr_model.pisr_ch_desc = ds.Tables[0].Rows[y]["wsas017_ch_desc"].ToString();
-                                                //pisr_grr_model.pisr_net_wt = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_net_wt"].ToString());
-                                                //pisr_grr_model.pisr_rec_type = ds.Tables[0].Rows[y]["wsas017_rec_type"].ToString();
-                                                //pisr_grr_model.pisr_abc = ds.Tables[0].Rows[y]["wsas017_abc"].ToString();
-                                                //pisr_grr_model.pisr_code = ds.Tables[0].Rows[y]["wsas017_code"].ToString();
-                                                //pisr_grr_model.pisr_lic_req = ds.Tables[0].Rows[y]["wsas017_lic_req"].ToString();
-
-                                                //pisr_grr_model.pisr_sbu = ds.Tables[0].Rows[y]["wsas017_sbu"].ToString();
-                                                //pisr_grr_model.pisr_vend = ds.Tables[0].Rows[y]["wsas017_vend"].ToString();
-                                                //pisr_grr_model.pisr_mfgr_name = ds.Tables[0].Rows[y]["wsas017_mfgr_name"].ToString();
-
-
-                                                //pisr_grr_model.pisr_char01 = ds.Tables[0].Rows[y]["wsas017_mfgr"].ToString();
-                                                //pisr_grr_model.pisr_char02 = ds.Tables[0].Rows[y]["wsas017_vend_name"].ToString();
-
-                                                //pisr_grr_model.pisr_dec01 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_k200_nw"].ToString()) / 1000;
-                                                //pisr_grr_model.pisr_dec02 = Convert.ToDecimal(ds.Tables[0].Rows[y]["wsas017_nw"].ToString()) / 1000;
-
-                                                //pisr_grr_model.pi_cre_date = DateTime.Now;
-                                                //pisr_grr_model.pi_update_date = DateTime.Now;
-                                                //pisr_grr_model.pi_user_ip = _idr_show._custip;
-                                                //pisr_grr_model.pi_cre_userid = _idr_show._sys_user_model.user_name;
-                                                //addPisgrr = new PI.BLL.pisr_grr().Add(pisr_grr_model);
-                                                #endregion
-
+                                                if (existgrr)
+                                                {
+                                                    dsexist++;
+                                                    var updatePisgrr = new PI.BLL.pisr_grr().Update(pisr_grr_model);
+                                                    //continue;
+                                                }
+                                                else
+                                                {
+                                                    //add grr
+                                                    addPisgrr = new PI.BLL.pisr_grr().Add(pisr_grr_model);
+                                                }
                                             }
                                             //ShowMsg(" Refresh RiR OK.", "Notice1");
                                         }
