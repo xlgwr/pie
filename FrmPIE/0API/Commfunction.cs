@@ -122,8 +122,12 @@ namespace FrmIDR._0API
                 //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
 
                 //m
+                dwo._dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
                 for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
                 {
+                    int j = i + 1;
+                    dwo._dgv.Rows[i].HeaderCell.Value = j.ToString();
+
                     if (dwo._dgv.Rows[i].DefaultCellStyle.BackColor != Color.White)
                     {
                         dwo._dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
@@ -186,8 +190,12 @@ namespace FrmIDR._0API
                     //dgv.Rows[dgv.CurrentRow.Index].Cells[selectedindex].Selected = true;
 
                     //m
+                    dwo._dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
                     for (int i = 0; i < dwo._dgv.RowCount - 1; i++)
                     {
+                        int j = i + 1;
+                        dwo._dgv.Rows[i].HeaderCell.Value = j.ToString();
+
                         if (!string.IsNullOrEmpty(dwo._sameColumnNameCount))
                         {
                             if (dwo._dgv.Rows[i].Cells[dwo._sameColumnNameCount].Value.ToString().Equals(dwo._sameColumnNameCountValut))
