@@ -49,12 +49,12 @@ namespace FrmPIE
 
             //frmVersion = "@2V20141010H10-dev";
             _frm3VersionDotNet = 2;
-            _frm4VersionMain = 20141229;
+            _frm4VersionMain = 20150105;
 
-            _frm5VersionSecond = 14;
+            _frm5VersionSecond = 17;
             _frm6Versionprefix = "RTM";//RTM
             //fix msg
-            _frm10VersionFixMsg = "1.add mqp for pi report.";
+            _frm10VersionFixMsg = "1.fix if carton count > po qty.";
             //dev  main
             _frm0Version = "@" + _frm3VersionDotNet + "V" + _frm4VersionMain + "H" + _frm5VersionSecond + "-" + _frm6Versionprefix;
 

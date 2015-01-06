@@ -904,7 +904,7 @@ namespace FrmPIE
                         }
                         else
                         {
-                            strerrnullrows += ",null row:" + (rowscount+1).ToString();
+                            strerrnullrows += ",null row:" + (rowscount + 1).ToString();
 
                         }
                         rowscount++;
@@ -1243,9 +1243,24 @@ namespace FrmPIE
 
         private void getAvgCarton(double intcellValue, DataRow drnew, int intfrom, int into)
         {
-            double modevalue = intcellValue % (into - intfrom - _numCell + 2);
-            drnew[13] = (intcellValue - modevalue) / (into - intfrom - _numCell + 2);
-            drnew[14] = modevalue;
+            double tmpint = (into - intfrom - _numCell + 2);
+            if (intcellValue < tmpint)
+            {
+                var tmpmsg = "Number error. PO Qty:" + intcellValue.ToString() + ",Carton Count:" + tmpint.ToString() + "\n\tCarton ID:" + drnew[7] + ",Part:" + drnew[9].ToString() + "\t\n Please Check the Excel File of PO and Qty,change PO position";
+                cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, tmpmsg, true, true);
+                throw new Exception(tmpmsg);
+                ////MessageBox.Show(tmpmsg);
+                //drnew[13] = 0;
+                //drnew[14] = 0;
+            }
+            else
+            {
+                double modevalue = intcellValue % tmpint;
+
+                drnew[13] = (intcellValue - modevalue) / tmpint;
+                drnew[14] = modevalue;
+            }
+
         }
 
 
@@ -1324,8 +1339,8 @@ namespace FrmPIE
         }
         void initLoadExcelFile()
         {
-            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "Notiec: Load Excel File ......", true, true);
-            _idr_show.status15toolLabelstrResult.Text = "Notiec: Load Excel File ......";
+            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "Notice: Load Excel File ......", true, true);
+            _idr_show.status15toolLabelstrResult.Text = "Notice: Load Excel File ......";
 
             if (txt0ExcelFileUploadExcel.Text.Trim() == "")
             {
