@@ -9,7 +9,7 @@ namespace IDR.EF.PIE
     public partial class PIE : DbContext
     {
         public PIE()
-            : base(PubConstant.GetConnectionString("ConnectionStringPIE"))//"name=PIE"
+            : base(PubConstant.GetConnectionString("PIEServiceContext"))//"name=PIE"
         {
         }
 

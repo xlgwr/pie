@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PIE\codetable.cs" />
     <Compile Include="PIE\Irh_comp.cs" />
     <Compile Include="PIE\OCR_mstr.cs" />

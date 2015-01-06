@@ -17,7 +17,7 @@ namespace IDR.API.Controllers
     [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
-        private PIEServiceContext db = new PIEServiceContext();
+        private IDR.EF.PIE.PIE db = new IDR.EF.PIE.PIE();
 
         // GET: api/User
         public IQueryable<sys_user> Getsys_user()
@@ -29,9 +29,9 @@ namespace IDR.API.Controllers
         //Keys?name=admin&comp=WWTS
         [ResponseType(typeof(sys_user))]
         [Route("Keys")]
-        public async Task<IHttpActionResult> Getsys_user(string name,string comp)
+        public async Task<IHttpActionResult> Getsys_user(string name, string comp)
         {
-            sys_user sys_user = await db.sys_user.FindAsync(name,comp);
+            sys_user sys_user = await db.sys_user.FindAsync(name, comp);
             if (sys_user == null)
             {
                 return NotFound();
