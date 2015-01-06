@@ -9,7 +9,7 @@ namespace IDR.EF.PIE
     public partial class PIE : DbContext
     {
         public PIE()
-            : base(PubConstant.GetConnectionString("PIEServiceContext"))//"name=PIE"
+            : base("name=PIEServiceContext")//PubConstant.GetConnectionString("PIEServiceContext")
         {
         }
 
@@ -27,16 +27,12 @@ namespace IDR.EF.PIE
         public virtual DbSet<plr_mstr_err> plr_mstr_err { get; set; }
         public virtual DbSet<plr_mstr_log> plr_mstr_log { get; set; }
         public virtual DbSet<plr_mstr_tran> plr_mstr_tran { get; set; }
-        public virtual DbSet<sys_role> sys_role { get; set; }
-        public virtual DbSet<sys_user> sys_user { get; set; }
-        public virtual DbSet<sys_userInrole> sys_userInrole { get; set; }
-        public virtual DbSet<ticketingPTMR> ticketingPTMR { get; set; }
         public virtual DbSet<OCR_mstr> OCR_mstr { get; set; }
-        public virtual DbSet<vpi_detApisr_grr> vpi_detApisr_grr { get; set; }
-        public virtual DbSet<vpi_report> vpi_report { get; set; }
-        public virtual DbSet<vpi_report_base> vpi_report_base { get; set; }
-        public virtual DbSet<vpi_report_palletCount> vpi_report_palletCount { get; set; }
-        public virtual DbSet<vplr_carton> vplr_carton { get; set; }
+        //public virtual DbSet<vpi_detApisr_grr> vpi_detApisr_grr { get; set; }
+        //public virtual DbSet<vpi_report> vpi_report { get; set; }
+        //public virtual DbSet<vpi_report_base> vpi_report_base { get; set; }
+        //public virtual DbSet<vpi_report_palletCount> vpi_report_palletCount { get; set; }
+        //public virtual DbSet<vplr_carton> vplr_carton { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -428,27 +424,7 @@ namespace IDR.EF.PIE
 
             modelBuilder.Entity<plr_mstr_tran>()
                 .Property(e => e.plr_deci2)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<sys_role>()
-                .Property(e => e.re_mark)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<sys_user>()
-                .Property(e => e.re_mark)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<sys_userInrole>()
-                .Property(e => e.re_mark)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ticketingPTMR>()
-                .Property(e => e.t_dec01)
-                .HasPrecision(18, 5);
-
-            modelBuilder.Entity<ticketingPTMR>()
-                .Property(e => e.t_dec02)
-                .HasPrecision(18, 5);
+                .HasPrecision(18, 0);          
 
             modelBuilder.Entity<OCR_mstr>()
                 .Property(e => e.packingListID)
@@ -530,123 +506,7 @@ namespace IDR.EF.PIE
 
             modelBuilder.Entity<OCR_mstr>()
                 .Property(e => e.plr_deci2)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.pisr_qty)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.pisr_base_cost)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.pisr_cost)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.pisr_net_wt)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.MFGR_Part)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.pisr_dec01)
-                .HasPrecision(23, 13);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.pisr_dec02)
-                .HasPrecision(37, 8);
-
-            modelBuilder.Entity<vpi_detApisr_grr>()
-                .Property(e => e.Contract)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vpi_report>()
-                .Property(e => e.pisr_qty)
-                .HasPrecision(38, 0);
-
-            modelBuilder.Entity<vpi_report>()
-                .Property(e => e.pisr_cost)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_report>()
-                .Property(e => e.pisr_base_cost)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_report>()
-                .Property(e => e.pisr_net_wt)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_report>()
-                .Property(e => e.MFGR_Part)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vpi_report>()
-                .Property(e => e.pisr_dec01)
-                .HasPrecision(23, 13);
-
-            modelBuilder.Entity<vpi_report>()
-                .Property(e => e.pisr_dec02)
-                .HasPrecision(38, 6);
-
-            modelBuilder.Entity<vpi_report>()
-                .Property(e => e.REC_NO)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vpi_report>()
-                .Property(e => e.Contract)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vpi_report_base>()
-                .Property(e => e.pisr_qty)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<vpi_report_base>()
-                .Property(e => e.pisr_base_cost)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_report_base>()
-                .Property(e => e.pisr_cost)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_report_base>()
-                .Property(e => e.pisr_net_wt)
-                .HasPrecision(18, 4);
-
-            modelBuilder.Entity<vpi_report_base>()
-                .Property(e => e.MFGR_Part)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vpi_report_base>()
-                .Property(e => e.pisr_dec01)
-                .HasPrecision(23, 13);
-
-            modelBuilder.Entity<vpi_report_base>()
-                .Property(e => e.pisr_dec02)
-                .HasPrecision(37, 8);
-
-            modelBuilder.Entity<vpi_report_base>()
-                .Property(e => e.Contract)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vpi_report_palletCount>()
-                .Property(e => e.PI_GW)
-                .HasPrecision(8, 2);
-
-            modelBuilder.Entity<vpi_report_palletCount>()
-                .Property(e => e.use_char01)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vpi_report_palletCount>()
-                .Property(e => e.use_char02)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vplr_carton>()
-                .Property(e => e.plr_po)
-                .IsUnicode(false);
+                .HasPrecision(18, 0);            
         }
     }
 }

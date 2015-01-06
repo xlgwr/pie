@@ -53,6 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201501060925552_initfirst.cs" />
+    <Compile Include="Migrations\201501060925552_initfirst.Designer.cs">
+      <DependentUpon>201501060925552_initfirst.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PIE\codetable.cs" />
     <Compile Include="PIE\Irh_comp.cs" />
@@ -71,12 +75,8 @@
     <Compile Include="PIE\plr_mstr.cs" />
     <Compile Include="PIE\plr_mstr_err.cs" />
     <Compile Include="PIE\plr_mstr_log.cs" />
-    <Compile Include="PIE\plr_mstr_tran_ext.cs" />
     <Compile Include="PIE\plr_mstr_tran.cs" />
-    <Compile Include="PIE\sys_role.cs" />
-    <Compile Include="PIE\sys_user.cs" />
-    <Compile Include="PIE\sys_userInrole.cs" />
-    <Compile Include="PIE\ticketingPTMR.cs" />
+    <Compile Include="PIE\plr_mstr_tran_ext.cs" />
     <Compile Include="PIE\vpi_detApisr_grr.cs" />
     <Compile Include="PIE\vpi_report.cs" />
     <Compile Include="PIE\vpi_report_base.cs" />
@@ -98,6 +98,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201501060925552_initfirst.resx">
+      <DependentUpon>201501060925552_initfirst.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
