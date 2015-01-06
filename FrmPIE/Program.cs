@@ -38,6 +38,8 @@ namespace FrmPIE
         public static string _strURL = "";
 
         static LogonDomain LogonOn = null;
+
+        public static string _OSVersion { get; set; }
         #endregion
 
         /// <summary>
@@ -177,8 +179,9 @@ namespace FrmPIE
             //Application.Run(FrmPIE);
 
             //logon on
+            getOSVersion();
             LogonOn = new LogonDomain();
-            LogonOn.Text += _frm0Version;
+            LogonOn.Text += _frm0Version;// +",OS:" + _OSVersion;
             Application.Run(LogonOn);
 
             //var index = new IndexTemple();
@@ -190,6 +193,119 @@ namespace FrmPIE
 
         }
 
+        //操作系统PlatformID主版本号副版本号    
+        public enum OsVer
+        {
+            Windows95 = 140,
+            Windows98 = 1410,
+            WindowsMe = 1490,
+            WindowsNT35 = 230,
+            WindowsNT40 = 240,
+            Windows2000 = 250,
+            WindowsXP = 251,
+            Windows2003 = 252,
+            WindowsVista = 260,
+            Windows7 = 261,
+            Windows8 = 271
+        }
+        public static string getOSVersion()
+        {
+            //判断
+            string iniPath = System.Environment.GetFolderPath(Environment.SpecialFolder.System);
+            //获取系统信息
+            System.OperatingSystem osInfo = System.Environment.OSVersion;
+            //获取操作系统ID
+            System.PlatformID platformID = osInfo.Platform;
+            //获取主版本号
+            int versionMajor = osInfo.Version.Major;
+            //获取副版本号
+            int versionMinor = osInfo.Version.Minor;
+
+            string servicePack = " " + Environment.OSVersion.ServicePack;
+
+            string osInfor = platformID.GetHashCode().ToString() + versionMajor.ToString() + versionMinor.ToString();
+
+            if (osInfor == OsVer.Windows7.GetHashCode().ToString())
+            {
+                _OSVersion = "Windows7/2008 R2";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.WindowsXP.GetHashCode().ToString())
+            {
+                _OSVersion = "WindowsXP";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.Windows8.GetHashCode().ToString())
+            {
+                _OSVersion = "Windows8";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.WindowsVista.GetHashCode().ToString())
+            {
+                _OSVersion = "WindowsVista/2008";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.Windows2003.GetHashCode().ToString())
+            {
+                _OSVersion = "Windows2003";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.Windows2000.GetHashCode().ToString())
+            {
+                _OSVersion = "Windows2000";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.Windows98.GetHashCode().ToString())
+            {
+                _OSVersion = "Windows98";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.Windows95.GetHashCode().ToString())
+            {
+                _OSVersion = "Windows95";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.WindowsMe.GetHashCode().ToString())
+            {
+                _OSVersion = "WindowsMe";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.WindowsNT40.GetHashCode().ToString())
+            {
+                _OSVersion = "Windows40";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.WindowsNT35.GetHashCode().ToString())
+            {
+                _OSVersion = "Windows35";
+                return _OSVersion + servicePack;
+            }
+            _OSVersion = "OtherWindows" + osInfor;
+            return _OSVersion + servicePack;
+        }
+        public static string getOSPath()
+        {
+            //判断
+            string iniPath = System.Environment.GetFolderPath(Environment.SpecialFolder.System);
+            //获取系统信息
+            System.OperatingSystem osInfo = System.Environment.OSVersion;
+            //获取操作系统ID
+            System.PlatformID platformID = osInfo.Platform;
+            //获取主版本号
+            int versionMajor = osInfo.Version.Major;
+            //获取副版本号
+            int versionMinor = osInfo.Version.Minor;
+            string osInfor = platformID.GetHashCode().ToString() + versionMajor.ToString() + versionMinor.ToString();
+            if (osInfor == OsVer.Windows7.GetHashCode().ToString())
+            {
+                iniPath = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            }
+            if (osInfor == OsVer.WindowsXP.GetHashCode().ToString())
+            {
+                iniPath = System.Environment.GetFolderPath(Environment.SpecialFolder.System);
+            }
+            return iniPath;
+        }
         public static void checkNewVersion()
         {
             string t_name_m = "version";
@@ -735,6 +851,7 @@ namespace FrmPIE
             }
         }
         ///////////////////////////////////new
+
     }
 
 }

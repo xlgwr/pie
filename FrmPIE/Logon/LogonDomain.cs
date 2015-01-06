@@ -55,7 +55,7 @@ namespace FrmPIE
             //FrmPIE.Show();
 
             var frmIDR = new frmIDR(this, system_user_model);
-            frmIDR.Text += Program._frm0Version + "    Welcome : " + txtUserName.Text;
+            frmIDR.Text += Program._frm0Version + "," + Program._OSVersion + "          Welcome to: " + txtUserName.Text;
             frmIDR.Show();
         }
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -96,7 +96,7 @@ namespace FrmPIE
                     if (systemuserexists.user_password.Equals(DESEncrypt.Encrypt(txtPassword1.Text + "," + txtPassPhrase2.Text)))
                     {
                         systemuserexists.update_time = DateTime.Now;
-                        systemuserexists.re_mark = Program.getClientIP();
+                        systemuserexists.re_mark = Program.getClientIP() + ",OS:" + Program._OSVersion;
                         systemuserexists.update_user_id = Program._frm0Version;
 
                         var updateuser = new PIE.BLL.sys_user().Update(systemuserexists);
@@ -185,7 +185,7 @@ namespace FrmPIE
 
                         systemuserexists.update_time = DbHelperSQL.getServerGetDate();
                         systemuserexists.user_password = system_user_model.user_password;
-                        systemuserexists.re_mark = Program.getClientIP();
+                        systemuserexists.re_mark = Program.getClientIP() + ",OS:" + Program._OSVersion;
                         systemuserexists.update_user_id = Program._frm0Version;
 
                         var sysuserUpdate = new PIE.BLL.sys_user().Update(systemuserexists);

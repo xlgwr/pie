@@ -1246,7 +1246,7 @@ namespace FrmPIE
             double tmpint = (into - intfrom - _numCell + 2);
             if (intcellValue < tmpint)
             {
-                var tmpmsg = "Number error. PO Qty:" + intcellValue.ToString() + ",Carton Count:" + tmpint.ToString() + "\n\tCarton ID:" + drnew[7] + ",Part:" + drnew[9].ToString() + "\t\n Please Check the Excel File of PO and Qty,change PO position";
+                var tmpmsg = "Number error. PO Qty:" + intcellValue.ToString() + " < Carton Count:" + tmpint.ToString() + "\n\tCarton ID:" + drnew[7] + ",Part:" + drnew[9].ToString() + "\t\n Please Check the Excel File of PO and Qty,change PO position";
                 cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, tmpmsg, true, true);
                 throw new Exception(tmpmsg);
                 ////MessageBox.Show(tmpmsg);
