@@ -912,7 +912,7 @@ namespace FrmIDR._0API
             dgv.Columns[0].Frozen = true;
             dgv.Columns[1].Frozen = true;
             dgv.Columns["batch_dec01"].Width = 60;
-            dgv.Columns["batch_status"].Width = 60;
+            dgv.Columns["batch_status"].Width = 40;
             dgv.Columns["Batch_ID"].HeaderText = "Batch ID";
             //dgv.Columns["plr_suppliers_id"].HeaderText = "Suppliers";
             dgv.Columns["batch_doc"].HeaderText = "Batch Type";
