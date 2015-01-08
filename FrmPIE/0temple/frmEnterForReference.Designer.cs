@@ -64,7 +64,7 @@
             // 
             // btn2OK
             // 
-            this.btn2OK.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2OK.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn2OK.ForeColor = System.Drawing.Color.Red;
             this.btn2OK.Location = new System.Drawing.Point(436, 15);
             this.btn2OK.Name = "btn2OK";
@@ -87,7 +87,7 @@
             // lbl1SelectNotice
             // 
             this.lbl1SelectNotice.AutoSize = true;
-            this.lbl1SelectNotice.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl1SelectNotice.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl1SelectNotice.ForeColor = System.Drawing.Color.Red;
             this.lbl1SelectNotice.Location = new System.Drawing.Point(20, 45);
             this.lbl1SelectNotice.Name = "lbl1SelectNotice";
@@ -98,7 +98,7 @@
             // lbl2SelectValue
             // 
             this.lbl2SelectValue.AutoSize = true;
-            this.lbl2SelectValue.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl2SelectValue.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl2SelectValue.ForeColor = System.Drawing.Color.Red;
             this.lbl2SelectValue.Location = new System.Drawing.Point(392, 45);
             this.lbl2SelectValue.Name = "lbl2SelectValue";
@@ -120,7 +120,6 @@
             // 
             // data0GVForReference
             // 
-            this.data0GVForReference.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.data0GVForReference.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.data0GVForReference.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.data0GVForReference.Dock = System.Windows.Forms.DockStyle.Fill;

@@ -690,6 +690,10 @@ namespace FrmPIE
             var iPos = CartonId.IndexOf('-');
             var strCtnId = CartonId;
 
+            if(string.IsNullOrEmpty(strCtnId))
+            {
+                throw new Exception("Carton id is null.");
+            }
             string[] strCtnIdArr = new string[2];
 
             Match m = RegPrefix.Match(strCtnId);
@@ -737,7 +741,10 @@ namespace FrmPIE
             //    return 0;
             //}
             string[] cartonFrTo = initCartonFromTo(plr_mstr_model.CartonID, plr_mstr_model.CartonType, out strprefix);
-
+            if (string.IsNullOrEmpty(cartonFrTo[0]) || string.IsNullOrEmpty(cartonFrTo[0]))
+            {
+                throw new Exception("Carton No is Error Format.");
+            }
             if (Convert.ToInt32(cartonFrTo[0]) > Convert.ToInt32(cartonFrTo[1]))
             {
                 MessageBox.Show("CartonFrom :" + cartonFrTo[0] + " > " + cartonFrTo[1] + ",Batch ID:" + plr_mstr_model.Batch_ID + ",LineID: " + plr_mstr_model.LineID + ",无法生成 Wec Carton");

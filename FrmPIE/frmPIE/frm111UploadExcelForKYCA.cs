@@ -787,10 +787,28 @@ namespace FrmPIE
                     countsuccess++;
                 }
             }
-            var msgCarton = "\nGenerate Carton ID For BatchID " + batchid + " Success.";
+            string tmpsql = "select sum(plr_carton_qty) from  [dbo].[plr_mstr_tran] where batch_id='" + batchid + "'";
+            var ttlqty = DbHelperSQL.GetSingle(tmpsql);
+
+            var msgCarton = "\nGenerate Carton ID For BatchID " + batchid + " Success.Carton of Total Qty:" + ttlqty.ToString();
             var currtime = DateTime.Now - oldtime;
-            string difftime = "\tUse Time: " + currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
-            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "\t" + o.ToString() + msgCarton + difftime, true, true);
+            string difftime = ",\t\t Use Time: " + currtime.Minutes + " Minutes " + currtime.Seconds + " Secconds " + currtime.Milliseconds + " Milliseconds";
+            if (_gblTTlQty.ToString().Equals(ttlqty.ToString()))
+            {
+                cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, "\t" + o.ToString() + msgCarton + difftime, true, true);
+            }
+            else
+            {
+                MessageBox.Show("Error:Excel file Total Qty:" + _gblTTlQty + " <> " + ttlqty.ToString() + " Carton of Total Qty,\n Can't be Upload to ERP. \nPlease check Excel file.");
+
+                string strupdate_plr_batch_mstr = @"update [plr_batch_mstr] set batch_status='Yes' where batch_id='" + batchid + "'";
+                string strupdateplr_mstr = @"update plr_mstr set plr_status='Yes' where batch_id='" + batchid + "'";
+                string strupdateplr_mstr_tran = @"update plr_mstr_tran set plr_status='Yes',plr_status_msg='Void' where batch_id='" + batchid + "'";
+
+                var resultmstrPlr = DbHelperSQL.ExecuteSql(strupdate_plr_batch_mstr);
+                var resultmstr = DbHelperSQL.ExecuteSql(strupdateplr_mstr);
+                var resultmstr_tran = DbHelperSQL.ExecuteSql(strupdateplr_mstr_tran);
+            }
         }
         string Convert0ToDataTable()
         {
@@ -976,6 +994,7 @@ namespace FrmPIE
                     ICell cell26 = row.GetCell(26);
 
                     _ttlQtyIntcell6 = getICellToDouble(cell6);
+                    _gblTTlQty += _ttlQtyIntcell6;
                     _numCellVal = false;
                     _poCountnumCell = 0;
                     double intcell9 = getICellToDouble(cell9, out _numCellVal);
@@ -1188,13 +1207,15 @@ namespace FrmPIE
                 }
             }
             _plr_batch_mstr_model.batch_dec01 = (addrowscount - 1);
+            _plr_batch_mstr_model.batch_cre_user = _gblTTlQty.ToString();
+
             var updatebathccount = new PIE.BLL.plr_batch_mstr().Update(_plr_batch_mstr_model);
             if (updatebathccount)
             {
                 _idr_show._plr_batch_mstr_model = _plr_batch_mstr_model;
                 initDatasetToTxt(_idr_show._plr_batch_mstr_model, true);
             }
-            return "Notice: Total Rows: " + rowscountsum + ",Total PO: " + (addrowscount - 1 + rowserrscount) + " ,Update " + (addrowscount - 1) + " items Success, Error: has " + rowserrscount + " Rows has Error (" + strerrnullrows + ").";
+            return "Notice:Excel file has Total Rows: " + rowscountsum + " and Total Qty: " + _gblTTlQty.ToString() + ",Total PO: " + (addrowscount - 1 + rowserrscount) + " ,Update " + (addrowscount - 1) + " items Success, Error: has " + rowserrscount + " Rows has Error (" + strerrnullrows + ").";
 
             //data0set_npoi.Tables.Add(dt);
         }
@@ -1234,28 +1255,26 @@ namespace FrmPIE
             if (_cartonid[0].Equals(_cartonid[1]))
             {
                 drnew7 = _strprefix + intfrom.ToString();
-                addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+                addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, intcellQty, 0);
             }
             else if (intcellQty == _avgCurrRowQty)
             {
                 if (_tmpDiffQty <= 0)
                 {
+                    drnew7 = _strprefix + _tmpcurrCartonID.ToString();
                     if (_tmpcurrCartonID >= into)
                     {
                         drnew7 = _strprefix + into.ToString();
-                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
                     }
-                    else
-                    {
-                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
-                    }
+                    addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, intcellQty, 0);
+                    _tmpcurrCartonID++;
                 }
                 else
                 {
                     if (_tmpcurrCartonID >= into)
                     {
                         drnew7 = _strprefix + into.ToString();
-                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, intcellQty, 0);
                     }
                     else
                     {
@@ -1278,9 +1297,9 @@ namespace FrmPIE
                     {
                         drnew7 = _strprefix + into.ToString();
                     }
-                    addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+                    addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, intcellQty, 0);
                     _tmpDiffQty = intcellQty;
-                    _tmpcurrCartonID++;
+                    //_tmpcurrCartonID++;
                 }
                 else
                 {
@@ -1288,7 +1307,7 @@ namespace FrmPIE
                     if (_tmpcurrCartonID >= into)
                     {
                         drnew7 = _strprefix + into.ToString();
-                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, intcellQty, 0);
                     }
                     else
                     {
@@ -1311,7 +1330,7 @@ namespace FrmPIE
                         {
 
                             var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
-                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, 0, 0);
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQty, 0);
                         }
                     }
                 }
@@ -1323,36 +1342,57 @@ namespace FrmPIE
                 {
                     var tmpmod = intcellQty % _avgCurrRowQty;
                     var intDel = (intcellQty - tmpmod) / _avgCurrRowQty;
+                    double currToCartonNo = _tmpcurrCartonID;
 
-                    var currToCartonNo = _tmpcurrCartonID + intDel - 1;
-                    var drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + currToCartonNo.ToString();
-
-
-                    if (currToCartonNo >= into)
+                    if (intDel > 0)
                     {
-                        if (_tmpcurrCartonID >= into)
+                        currToCartonNo = _tmpcurrCartonID + intDel - 1;
+                        var drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + currToCartonNo.ToString();
+                        if (intDel == 1)
                         {
-
-                            drnew7avg = _strprefix + into.ToString();
+                            drnew7avg = _strprefix + _tmpcurrCartonID.ToString();
                         }
-                        else
+
+                        if (currToCartonNo >= into)
                         {
                             drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + into.ToString();
                             addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, _avgCurrRowQty, 0);
+                            if (tmpmod > 0)
+                            {
+                                drnew7avg = _strprefix + into.ToString();
+                                addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, tmpmod, 0);
+                                _tmpDiffQty = tmpmod;
+                            }
+                        }
+                        else
+                        {
+                            var drnew7diff = _strprefix + (currToCartonNo + 1);
+
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, _avgCurrRowQty, 0);
+                            if (tmpmod > 0)
+                            {
+                                addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7diff, tmpmod, 0);
+                                _tmpDiffQty = tmpmod;
+                            }
 
                         }
-
+                        _tmpcurrCartonID = currToCartonNo + 2;
                     }
                     else
                     {
-                        var drnew7diff = _strprefix + (currToCartonNo + 1);
+                        var drnew7avg = _strprefix + _tmpcurrCartonID.ToString();
+                        if (_tmpcurrCartonID >= into)
+                        {
+                            drnew7avg = _strprefix + into.ToString();
+                        }
+                        var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
 
-                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, _avgCurrRowQty, 0);
-                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7diff, tmpmod, 0);
+                        _tmpDiffQty = intcellQty;
 
-                        _tmpDiffQty = tmpmod;
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, _tmpDiffQty, 0);
+
+                        _tmpcurrCartonID++;
                     }
-                    _tmpcurrCartonID = currToCartonNo + 2;
                 }
                 else
                 {
@@ -1369,8 +1409,10 @@ namespace FrmPIE
                         currToCartonNo = _tmpcurrCartonID + intDel - 1;
                         var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
                         var drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + currToCartonNo.ToString();
-
-
+                        if (intDel == 1)
+                        {
+                            drnew7avg = _strprefix + _tmpcurrCartonID.ToString();
+                        }
                         if (currToCartonNo >= into)
                         {
                             drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + into.ToString();
@@ -1631,6 +1673,7 @@ namespace FrmPIE
             addrowscount = 0;
             strCartonID = "";
             _strBatchID = "";
+            _gblTTlQty = 0;
 
             if (!_hasrun)
             {
@@ -1747,5 +1790,7 @@ namespace FrmPIE
         public double _tmpcurrCartonID { get; set; }
 
         public double _tmpDiffQty { get; set; }
+
+        public double _gblTTlQty { get; set; }
     }
 }

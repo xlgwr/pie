@@ -22,7 +22,7 @@ namespace PIE.DAL
                 strSql.Append(" top " + Top.ToString());
             }
             strSql.Append(" batch_id,batch_status," +
-                            "batch_dec01,batch_user_ip,batch_chr01,batch_doc,batch_cre_date");
+                            "batch_dec01,batch_user_ip,batch_chr01,batch_cre_user,batch_doc,batch_cre_date");
             strSql.Append(" FROM plr_batch_mstr ");
             if (strWhere.Trim() != "")
             {
