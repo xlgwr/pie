@@ -206,7 +206,8 @@ namespace FrmPIE
             Windows2003 = 252,
             WindowsVista = 260,
             Windows7 = 261,
-            Windows8 = 271
+            Windows8 = 271,
+            Windows10 = 262
         }
         public static string getOSVersion()
         {
@@ -228,6 +229,11 @@ namespace FrmPIE
             if (osInfor == OsVer.Windows7.GetHashCode().ToString())
             {
                 _OSVersion = "Windows7/2008 R2";
+                return _OSVersion + servicePack;
+            }
+            if (osInfor == OsVer.Windows10.GetHashCode().ToString())
+            {
+                _OSVersion = "Windows10";
                 return _OSVersion + servicePack;
             }
             if (osInfor == OsVer.WindowsXP.GetHashCode().ToString())
