@@ -48,7 +48,6 @@ namespace FrmPIE
 
         string[] _cartonid;
         string strCartonID;
-        int _numCell = 0;
         int addrowscount = 0;
 
         System.Data.DataTable _dt_downToExela = new System.Data.DataTable();
@@ -976,76 +975,76 @@ namespace FrmPIE
                     ICell cell24 = row.GetCell(24);
                     ICell cell26 = row.GetCell(26);
 
-                    double intcell6 = getICellToDouble(cell6);
+                    _ttlQtyIntcell6 = getICellToDouble(cell6);
                     _numCellVal = false;
-                    _numCell = 0;
+                    _poCountnumCell = 0;
                     double intcell9 = getICellToDouble(cell9, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
                     double intcell11 = getICellToDouble(cell11, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
                     double intcell13 = getICellToDouble(cell13, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
                     double intcell15 = getICellToDouble(cell15, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
                     double intcell17 = getICellToDouble(cell17, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
                     //new 5
                     double intcell19 = getICellToDouble(cell19, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
                     double intcell21 = getICellToDouble(cell21, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
                     double intcell23 = getICellToDouble(cell23, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
                     double intcell25 = getICellToDouble(cell25, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
                     double intcell27 = getICellToDouble(cell27, out _numCellVal);
                     if (_numCellVal)
                     {
-                        _numCell++;
+                        _poCountnumCell++;
                     }
 
 
                     var ttl = intcell9 + intcell11 + intcell13 + intcell15 + intcell17 + intcell19 + intcell21 + intcell23 + intcell25 + intcell27;
-                    if (intcell6 != ttl)
+                    if (_ttlQtyIntcell6 != ttl)
                     {
                         strerrnullrows += ",QtyError:" + rowscount.ToString();
 
                         DataRow drerr = _dterr.NewRow();
                         drerr[0] = rowscount;
                         drerr[1] = cell5.ToString();
-                        drerr[2] = intcell6;
+                        drerr[2] = _ttlQtyIntcell6;
 
                         string strmsgint = "";
                         if (intcell9 != 0)
                         {
-                            strmsgint = "TTL/Qty: [" + intcell6.ToString() + "] no Equal(<>) [" + ttl + "] PO:" + cell8 + ",Qty:" + intcell9.ToString();
+                            strmsgint = "TTL/Qty: [" + _ttlQtyIntcell6.ToString() + "] no Equal(<>) [" + ttl + "] PO:" + cell8 + ",Qty:" + intcell9.ToString();
                         }
                         if (intcell11 != 0)
                         {
@@ -1097,9 +1096,26 @@ namespace FrmPIE
                     {
                         addRowsToDownExcel(_dt_downToExela, dr_downexcel, "Upload Success", row);
 
-                        int intfrom = Convert.ToInt32(_cartonid[0]);
-                        int into = Convert.ToInt32(_cartonid[1]);
-                        int countCTN = into - intfrom + 1;
+                        double intfrom = Convert.ToInt32(_cartonid[0]);
+                        double into = Convert.ToInt32(_cartonid[1]);
+
+                        //count of carton
+                        _cartonCount = into - intfrom + 1;
+                        _tmpDiffQty = 0;
+                        _tmpcurrCartonID = intfrom;
+
+                        if (_ttlQtyIntcell6 < _cartonCount)
+                        {
+                            var tmpmsg = "Number error. TTL Qty:" + _ttlQtyIntcell6 + " < Carton Count:" + _cartonCount + "\t\n Please Check the Excel File of PO,TTLQty,CartonID.";
+                            cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, tmpmsg, true, true);
+                            throw new Exception(tmpmsg);
+                        }
+                        else
+                        {
+                            _remainderCurrRow = _ttlQtyIntcell6 % _cartonCount;
+                            _avgCurrRowQty = (_ttlQtyIntcell6 - _remainderCurrRow) / _cartonCount;
+                        }
+                        //
 
                         if (_cartonid[0].Equals(_cartonid[1]))
                         {
@@ -1116,55 +1132,55 @@ namespace FrmPIE
                         if (intcell9 > 0)
                         {
                             //carton
-                            initCartonID(dt, dr, intcell9, cell8, 1, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell9, cell8, 1, intfrom, into, _cartonCount);
                         }
                         if (intcell11 > 0)
                         {
                             //carton
-                            initCartonID(dt, dr, intcell11, cell10, 2, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell11, cell10, 2, intfrom, into, _cartonCount);
 
                         }
                         if (intcell13 > 0)
                         {
                             //gen cartonid
-                            initCartonID(dt, dr, intcell13, cell12, 3, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell13, cell12, 3, intfrom, into, _cartonCount);
                         }
                         if (intcell15 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell15, cell14, 4, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell15, cell14, 4, intfrom, into, _cartonCount);
                         }
                         if (intcell17 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell17, cell16, 5, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell17, cell16, 5, intfrom, into, _cartonCount);
                         }
                         //next 5
                         if (intcell19 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell19, cell18, 6, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell19, cell18, 6, intfrom, into, _cartonCount);
                         }
                         if (intcell21 > 0)
                         {
                             //carton
-                            initCartonID(dt, dr, intcell21, cell20, 7, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell21, cell20, 7, intfrom, into, _cartonCount);
 
                         }
                         if (intcell23 > 0)
                         {
                             //gen cartonid
-                            initCartonID(dt, dr, intcell23, cell22, 8, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell23, cell22, 8, intfrom, into, _cartonCount);
                         }
                         if (intcell25 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell25, cell24, 9, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell25, cell24, 9, intfrom, into, _cartonCount);
                         }
                         if (intcell27 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell27, cell26, 10, intfrom, into, countCTN);
+                            initCartonID(dt, dr, intcell27, cell26, 10, intfrom, into, _cartonCount);
                         }
 
                         rowscount++;
@@ -1183,7 +1199,230 @@ namespace FrmPIE
             //data0set_npoi.Tables.Add(dt);
         }
 
-        private void initCartonID(System.Data.DataTable dt, DataRow dr, double intcell, ICell cell, int currentnumber, int intfrom, int into, int countCTN)
+        private void addNewRowFromCarton(System.Data.DataTable dt, DataRow newdr, double intcellQty, ICell cellPO, string drnew7, double drnew13, double drnew14)
+        {
+            DataRow drnew = dt.NewRow();
+            for (int i = 0; i < newdr.ItemArray.Length; i++)
+            {
+                drnew[i] = newdr[i];
+            }
+
+            drnew[1] = addrowscount;
+
+            //carton
+
+            drnew[7] = drnew7;
+
+            //qty
+            drnew[10] = intcellQty;
+
+            drnew[12] = cellPO.ToString().Trim();
+
+            drnew[13] = drnew13;
+            drnew[14] = drnew14;
+
+            drnew[16] = strCartonID;
+            dt.Rows.Add(drnew);
+            addrowscount++;
+        }
+        private void initCartonID(System.Data.DataTable dt, DataRow dr, double intcellQty, ICell cellPO, double currentnumber, double intfrom, double into, double countCTN)
+        {
+
+            //start 
+            string drnew7 = "";
+
+            if (_cartonid[0].Equals(_cartonid[1]))
+            {
+                drnew7 = _strprefix + intfrom.ToString();
+                addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+            }
+            else if (intcellQty == _avgCurrRowQty)
+            {
+                if (_tmpDiffQty <= 0)
+                {
+                    if (_tmpcurrCartonID >= into)
+                    {
+                        drnew7 = _strprefix + into.ToString();
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+                    }
+                    else
+                    {
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+                    }
+                }
+                else
+                {
+                    if (_tmpcurrCartonID >= into)
+                    {
+                        drnew7 = _strprefix + into.ToString();
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+                    }
+                    else
+                    {
+                        var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
+                        var drnew7Next = _strprefix + _tmpcurrCartonID.ToString();
+
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQty - _tmpDiffQty, 0);
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Next, _tmpDiffQty, 0);
+                    }
+                }
+                _tmpcurrCartonID++;
+                //add cartonNo
+            }
+            else if (intcellQty < _avgCurrRowQty)
+            {
+                if (_tmpDiffQty <= 0)
+                {
+                    drnew7 = _strprefix + _tmpcurrCartonID.ToString();
+                    if (_tmpcurrCartonID >= into)
+                    {
+                        drnew7 = _strprefix + into.ToString();
+                    }
+                    addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+                    _tmpDiffQty = intcellQty;
+                    _tmpcurrCartonID++;
+                }
+                else
+                {
+
+                    if (_tmpcurrCartonID >= into)
+                    {
+                        drnew7 = _strprefix + into.ToString();
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, 0, 0);
+                    }
+                    else
+                    {
+                        var tmpnewsum = intcellQty + _tmpDiffQty;
+
+                        if (tmpnewsum > _avgCurrRowQty)
+                        {
+                            _tmpDiffQty = tmpnewsum - _avgCurrRowQty;
+                            var tmpPre = intcellQty - _tmpDiffQty;
+
+                            var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
+                            var drnew7Next = _strprefix + _tmpcurrCartonID.ToString();
+
+
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, tmpPre, 0);
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Next, _tmpDiffQty, 0);
+                            _tmpcurrCartonID++;
+                        }
+                        else
+                        {
+
+                            var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, 0, 0);
+                        }
+                    }
+                }
+                //change next Cartonno
+            }
+            else if (intcellQty > _avgCurrRowQty)
+            {
+                if (_tmpDiffQty <= 0)
+                {
+                    var tmpmod = intcellQty % _avgCurrRowQty;
+                    var intDel = (intcellQty - tmpmod) / _avgCurrRowQty;
+
+                    var currToCartonNo = _tmpcurrCartonID + intDel - 1;
+                    var drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + currToCartonNo.ToString();
+
+
+                    if (currToCartonNo >= into)
+                    {
+                        if (_tmpcurrCartonID >= into)
+                        {
+
+                            drnew7avg = _strprefix + into.ToString();
+                        }
+                        else
+                        {
+                            drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + into.ToString();
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, _avgCurrRowQty, 0);
+
+                        }
+
+                    }
+                    else
+                    {
+                        var drnew7diff = _strprefix + (currToCartonNo + 1);
+
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, _avgCurrRowQty, 0);
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7diff, tmpmod, 0);
+
+                        _tmpDiffQty = tmpmod;
+                    }
+                    _tmpcurrCartonID = currToCartonNo + 2;
+                }
+                else
+                {
+                    var intcellQtyPre = _avgCurrRowQty - _tmpDiffQty;
+
+                    var tmpintcellQty = intcellQty - intcellQtyPre;
+
+                    var tmpmod = tmpintcellQty % _avgCurrRowQty;
+                    var intDel = (tmpintcellQty - tmpmod) / _avgCurrRowQty;
+                    double currToCartonNo = _tmpcurrCartonID;
+
+                    if (intDel > 0)
+                    {
+                        currToCartonNo = _tmpcurrCartonID + intDel - 1;
+                        var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
+                        var drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + currToCartonNo.ToString();
+
+
+                        if (currToCartonNo >= into)
+                        {
+                            drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + into.ToString();
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQtyPre, 0);
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, _avgCurrRowQty, 0);
+                            if (tmpmod > 0)
+                            {
+                                drnew7avg = _strprefix + into.ToString();
+                                addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, tmpmod, 0);
+                                _tmpDiffQty = tmpmod;
+                            }
+                        }
+                        else
+                        {
+                            var drnew7diff = _strprefix + (currToCartonNo + 1);
+
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQtyPre, 0);
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, _avgCurrRowQty, 0);
+                            if (tmpmod > 0)
+                            {
+                                addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7diff, tmpmod, 0);
+                                _tmpDiffQty = tmpmod;
+
+                            }
+
+                        }
+                        _tmpcurrCartonID = currToCartonNo + 2;
+                    }
+                    else
+                    {
+                        var drnew7avg = _strprefix + _tmpcurrCartonID.ToString();
+                        if (_tmpcurrCartonID >= into)
+                        {
+                            drnew7avg = _strprefix + into.ToString();
+                        }
+                        var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
+                        _tmpDiffQty = intcellQty - intcellQtyPre;
+
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQtyPre, 0);
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7avg, _tmpDiffQty, 0);
+
+                        _tmpcurrCartonID++;
+                    }
+                }
+
+
+            }
+
+
+
+        }
+        private void initCartonIDOld(System.Data.DataTable dt, DataRow dr, double intcell, ICell cell, double currentnumber, double intfrom, double into, double countCTN)
         {
             //po
             DataRow drnew = dt.NewRow();
@@ -1198,13 +1437,13 @@ namespace FrmPIE
             {
                 dr[7] = _strprefix + intfrom.ToString();
             }
-            else if (_numCell == countCTN)
+            else if (_poCountnumCell == countCTN)
             {
 
                 drnew[7] = _strprefix + (intfrom + currentnumber - 1).ToString();
 
             }
-            else if (_numCell > countCTN)
+            else if (_poCountnumCell > countCTN)
             {
 
                 if (countCTN > currentnumber)
@@ -1217,16 +1456,16 @@ namespace FrmPIE
                     //getAvgCarton(intcell11, drnew, intfrom, into);
                 }
             }
-            else if (_numCell < countCTN)
+            else if (_poCountnumCell < countCTN)
             {
 
-                if (_numCell > currentnumber)
+                if (_poCountnumCell > currentnumber)
                 {
                     drnew[7] = _strprefix + (intfrom + currentnumber - 1).ToString();
                 }
-                else if (_numCell <= currentnumber)
+                else if (_poCountnumCell <= currentnumber)
                 {
-                    drnew[7] = _strprefix + (intfrom + _numCell - 1).ToString() + '-' + into.ToString();
+                    drnew[7] = _strprefix + (intfrom + _poCountnumCell - 1).ToString() + '-' + into.ToString();
                     getAvgCarton(intcell, drnew, intfrom, into);
                 }
             }
@@ -1241,9 +1480,39 @@ namespace FrmPIE
             addrowscount++;
         }
 
-        private void getAvgCarton(double intcellValue, DataRow drnew, int intfrom, int into)
+        private List<double> getAvgCarton(double intcellValue, double intfrom, double into)
         {
-            double tmpint = (into - intfrom - _numCell + 2);
+            List<double> tmplist = new List<double>();
+
+            double tmpint = (into - intfrom - _poCountnumCell + 2);
+            if (intcellValue < tmpint)
+            {
+                var tmpmsg = "Number error. PO Qty:" + intcellValue.ToString() + " < Carton Count:" + tmpint.ToString() + "\t\n Please Check the Excel File of PO and Qty,change PO position";
+                cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, tmpmsg, true, true);
+                throw new Exception(tmpmsg);
+                ////MessageBox.Show(tmpmsg);
+                //drnew[13] = 0;
+                //drnew[14] = 0;
+            }
+            else
+            {
+                double modevalue14 = intcellValue % tmpint;
+                double avgList13 = (intcellValue - modevalue14) / tmpint;
+
+                tmplist.Add(avgList13);
+                tmplist.Add(modevalue14);
+
+                return tmplist;
+            }
+            tmplist.Add(0);
+            tmplist.Add(0);
+            return tmplist;
+
+        }
+        private void getAvgCarton(double intcellValue, DataRow drnew, double intfrom, double into)
+        {
+
+            double tmpint = (into - intfrom - _poCountnumCell + 2);
             if (intcellValue < tmpint)
             {
                 var tmpmsg = "Number error. PO Qty:" + intcellValue.ToString() + " < Carton Count:" + tmpint.ToString() + "\n\tCarton ID:" + drnew[7] + ",Part:" + drnew[9].ToString() + "\t\n Please Check the Excel File of PO and Qty,change PO position";
@@ -1262,7 +1531,6 @@ namespace FrmPIE
             }
 
         }
-
 
         public double getICellToDouble(ICell cell)
         {
@@ -1465,5 +1733,19 @@ namespace FrmPIE
 
 
 
+
+        public double _cartonCount { get; set; }
+
+        public double _ttlQtyIntcell6 { get; set; }
+
+        public double _poCountnumCell { get; set; }
+
+        public double _remainderCurrRow { get; set; }
+
+        public double _avgCurrRowQty { get; set; }
+
+        public double _tmpcurrCartonID { get; set; }
+
+        public double _tmpDiffQty { get; set; }
     }
 }
