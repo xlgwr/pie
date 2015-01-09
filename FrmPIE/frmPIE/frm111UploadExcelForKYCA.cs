@@ -71,6 +71,8 @@ namespace FrmPIE
             data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
             data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
 
+            chk0UseArr.Visible = false;
+
         }
         void tableColumnsAdd(System.Data.DataTable dt, string strcolnumname)
         {
@@ -250,7 +252,7 @@ namespace FrmPIE
 
         private void UploadExcel()
         {
-            btnCmdUpdUploadExcel.Enabled = false;
+            //btnCmdUpdUploadExcel.Enabled = false;
             //cf.setControlText(btnCmdUpd, "Uploading...", false, true);
             try
             {
@@ -264,7 +266,7 @@ namespace FrmPIE
             }
             finally
             {
-                btnCmdUpdUploadExcel.Enabled = true;
+                //btnCmdUpdUploadExcel.Enabled = true;
                 //cf.setControlText(btnCmdUpd, "&Upload", true, true);
             }
         }
@@ -802,7 +804,10 @@ namespace FrmPIE
             }
             else
             {
-                MessageBox.Show("Error:Excel file Total Qty:" + _gblTTlQty + " <> " + ttlqty.ToString() + " Carton of Total Qty,\n Can't be Upload to ERP. \nPlease check Excel file.");
+                MessageBox.Show("Error:Excel file Total Qty:" + _gblTTlQty + " <> " + ttlqty.ToString() + " Carton of Total Qty,\n Can't be Upload to ERP. \nPlease check Excel file.\n Or Use Normal Split Po.");
+               
+                chk0UseArr.Visible = true;
+                chk0UseArr.Checked = true;
 
                 string strupdate_plr_batch_mstr = @"update [plr_batch_mstr] set batch_status='Yes' where batch_id='" + batchid + "'";
                 string strupdateplr_mstr = @"update plr_mstr set plr_status='Yes' where batch_id='" + batchid + "'";
@@ -1234,70 +1239,70 @@ namespace FrmPIE
 
             //data0set_npoi.Tables.Add(dt);
         }
-        private void addNewRowFromCarton(System.Data.DataTable dt, DataRow newdr, List<ListPoQty> listpoqty)
+        private void addNewRowFromCarton(System.Data.DataTable dt, DataRow newdr, List<ListPoQty> listpoqty, bool setArr)
         {
-            var tmpCount = listpoqty.Count;
-            var currAt = 0;
-            var poCount = 0;
-            for (int i = 0; i < tmpCount; i++)
+            if (setArr)
             {
-                currAt++;
-                var item = listpoqty[i];
-                if (tmpCount > 1)
-                {
-                    if (currAt == 1)
-                    {
-                        continue;
-                    }
-                    if (item._po == listpoqty[i - 1]._po && item._qty == listpoqty[i - 1]._qty)
-                    {
-                        poCount++;
-                        if (i + 1 >= tmpCount)
-                        {
-                            newRow(dt, newdr, item, poCount);
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        if (i + 1 < tmpCount)
-                        {
-                            newRow(dt, newdr, listpoqty[i - 1], poCount);
-                            poCount = 0;
-
-                        }
-                        else
-                        {
-                            if (poCount > 0)
-                            {
-                                newRow(dt, newdr, listpoqty[i - 1], poCount);
-                                poCount = 0;
-                            }
-                            else
-                            {
-                                newRow(dt, newdr, listpoqty[i - 1], 0);
-                                newRow(dt, newdr, item, 0);
-                            }
-                            break;
-                        }
-
-
-
-
-                    }
-
-                }
-                else
+                foreach (var item in listpoqty)
                 {
                     newRow(dt, newdr, item, 0);
                 }
             }
+            else
+            {
+                var tmpCount = listpoqty.Count;
+                var currAt = 0;
+                var poCount = 0;
+                for (int i = 0; i < tmpCount; i++)
+                {
+                    currAt++;
+                    var item = listpoqty[i];
+                    if (tmpCount > 1)
+                    {
+                        if (currAt == 1)
+                        {
+                            continue;
+                        }
+                        if (item._po == listpoqty[i - 1]._po && item._qty == listpoqty[i - 1]._qty)
+                        {
+                            poCount++;
+                            if (i + 1 >= tmpCount)
+                            {
+                                newRow(dt, newdr, item, poCount);
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            if (i + 1 < tmpCount)
+                            {
+                                newRow(dt, newdr, listpoqty[i - 1], poCount);
+                                poCount = 0;
+
+                            }
+                            else
+                            {
+                                newRow(dt, newdr, listpoqty[i - 1], poCount);
+                                poCount = 0;
+                                newRow(dt, newdr, item, 0);
+
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+                        newRow(dt, newdr, item, 0);
+                    }
+                }
+            }
+
 
         }
-
         private void newRow(System.Data.DataTable dt, DataRow newdr, ListPoQty item, int pocount)
         {
             DataRow drnew = dt.NewRow();
@@ -1398,7 +1403,7 @@ namespace FrmPIE
                 }
             }
             _listCtnPoQty[_listCtnPoQty.Count - 1]._qty += remainQty;
-            addNewRowFromCarton(dt, dr, _listCtnPoQty);
+            addNewRowFromCarton(dt, dr, _listCtnPoQty, chk0UseArr.Checked);
             _listCtnPoQty.Clear();
         }
         private void initCartonID(System.Data.DataTable dt, DataRow dr, double intcellQty, ICell cellPO, double currentnumber, double intfrom, double into, double countCTN)
@@ -1718,6 +1723,7 @@ namespace FrmPIE
             {
                 var tmpmsg = "Number error. PO Qty:" + intcellValue.ToString() + " < Carton Count:" + tmpint.ToString() + "\t\n Please Check the Excel File of PO and Qty,change PO position";
                 cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, tmpmsg, true, true);
+              
                 throw new Exception(tmpmsg);
                 ////MessageBox.Show(tmpmsg);
                 //drnew[13] = 0;
@@ -1746,6 +1752,7 @@ namespace FrmPIE
             {
                 var tmpmsg = "Number error. PO Qty:" + intcellValue.ToString() + " < Carton Count:" + tmpint.ToString() + "\n\tCarton ID:" + drnew[7] + ",Part:" + drnew[9].ToString() + "\t\n Please Check the Excel File of PO and Qty,change PO position";
                 cf.SetCtlTextdelegate(lbl1UploadExcelThreadMsg, tmpmsg, true, true);
+
                 throw new Exception(tmpmsg);
                 ////MessageBox.Show(tmpmsg);
                 //drnew[13] = 0;
@@ -1903,7 +1910,7 @@ namespace FrmPIE
 
         private void txt0ExcelFileUploadExcel_TextChanged(object sender, EventArgs e)
         {
-            _idr_show.AcceptButton = btnCmdUpdUploadExcel;
+            _idr_show.AcceptButton = btn3QuickUploadExcel;
         }
 
         private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
