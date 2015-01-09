@@ -205,9 +205,12 @@ namespace FrmPIE
                 // initLoadExcelFile();
                 ///
                 btnSelectfileUploadExcel.Enabled = true;
+                btn3QuickUploadExcel.Enabled = true;
             }
             catch (Exception ex)
             {
+
+                btn3QuickUploadExcel.Enabled = true;
                 btnSelectfileUploadExcel.Enabled = true;
                 MessageBox.Show(ex.Message, "Error");
             }
@@ -1303,36 +1306,43 @@ namespace FrmPIE
                 }
                 else
                 {
-
+                    var tmpnewsum = intcellQty + _tmpDiffQty;
+                    double tmpPre = 0;
                     if (_tmpcurrCartonID >= into)
                     {
                         drnew7 = _strprefix + into.ToString();
-                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, intcellQty, 0);
                     }
-                    else
+                    if (tmpnewsum > _avgCurrRowQty)
                     {
-                        var tmpnewsum = intcellQty + _tmpDiffQty;
+                        tmpPre = _avgCurrRowQty - _tmpDiffQty;
+                        _tmpDiffQty = intcellQty - tmpPre;
 
-                        if (tmpnewsum > _avgCurrRowQty)
+                        var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
+                        var drnew7Next = _strprefix + _tmpcurrCartonID.ToString();
+                        if (_tmpcurrCartonID >= into)
                         {
-                            _tmpDiffQty = tmpnewsum - _avgCurrRowQty;
-                            var tmpPre = intcellQty - _tmpDiffQty;
+                            drnew7Next = _strprefix + into.ToString();
 
-                            var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
-                            var drnew7Next = _strprefix + _tmpcurrCartonID.ToString();
-
-
-                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, tmpPre, 0);
-                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Next, _tmpDiffQty, 0);
-                            _tmpcurrCartonID++;
+                        }
+                        if (_poCountnumCell == currentnumber)
+                        {
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Next, intcellQty, 0);
                         }
                         else
                         {
 
-                            var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
-                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQty, 0);
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, tmpPre, 0);
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Next, _tmpDiffQty, 0);
                         }
+
+                        _tmpcurrCartonID++;
                     }
+                    else
+                    {
+                        var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
+                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQty, 0);
+                    }
+
                 }
                 //change next Cartonno
             }
@@ -1356,7 +1366,7 @@ namespace FrmPIE
                         if (currToCartonNo >= into)
                         {
                             drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + into.ToString();
-                            if (_tmpcurrCartonID==into)
+                            if (_tmpcurrCartonID == into)
                             {
                                 drnew7avg = _strprefix + _tmpcurrCartonID.ToString();
                             }
@@ -1371,7 +1381,7 @@ namespace FrmPIE
                         else
                         {
                             var drnew7diff = _strprefix + (currToCartonNo + 1);
-                            if (_tmpcurrCartonID==into)
+                            if (_tmpcurrCartonID == into)
                             {
                                 drnew7avg = _strprefix + _tmpcurrCartonID.ToString();
                             }
@@ -1423,7 +1433,7 @@ namespace FrmPIE
                         if (currToCartonNo >= into)
                         {
                             drnew7avg = _strprefix + _tmpcurrCartonID.ToString() + '-' + into.ToString();
-                            if (_tmpcurrCartonID==into)
+                            if (_tmpcurrCartonID == into)
                             {
                                 drnew7avg = _strprefix + _tmpcurrCartonID.ToString("###");
                             }
@@ -1439,7 +1449,7 @@ namespace FrmPIE
                         else
                         {
                             var drnew7diff = _strprefix + (currToCartonNo + 1);
-                            if (_tmpcurrCartonID==into)
+                            if (_tmpcurrCartonID == into)
                             {
                                 drnew7avg = _strprefix + _tmpcurrCartonID.ToString();
                             }
