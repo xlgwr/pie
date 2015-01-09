@@ -1274,16 +1274,23 @@ namespace FrmPIE
                 }
                 else
                 {
+                    var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
+                    var drnew7Next = _strprefix + _tmpcurrCartonID.ToString();
                     if (_tmpcurrCartonID >= into)
                     {
                         drnew7 = _strprefix + into.ToString();
-                        addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, intcellQty, 0);
+                        if (_poCountnumCell == currentnumber)
+                        {
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7, intcellQty, 0);
+                        }
+                        else
+                        {
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQty - _tmpDiffQty, 0);
+                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Next, _tmpDiffQty, 0);
+                        }
                     }
                     else
                     {
-                        var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
-                        var drnew7Next = _strprefix + _tmpcurrCartonID.ToString();
-
                         addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQty - _tmpDiffQty, 0);
                         addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Next, _tmpDiffQty, 0);
                     }
@@ -1312,7 +1319,7 @@ namespace FrmPIE
                     {
                         drnew7 = _strprefix + into.ToString();
                     }
-                    if (tmpnewsum > _avgCurrRowQty)
+                    if (tmpnewsum >= _avgCurrRowQty)
                     {
                         tmpPre = _avgCurrRowQty - _tmpDiffQty;
                         _tmpDiffQty = intcellQty - tmpPre;
@@ -1332,7 +1339,10 @@ namespace FrmPIE
                         {
 
                             addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, tmpPre, 0);
-                            addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Next, _tmpDiffQty, 0);
+                            if (_tmpDiffQty > 0)
+                            {
+                                addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Next, _tmpDiffQty, 0);
+                            }
                         }
 
                         _tmpcurrCartonID++;
@@ -1341,6 +1351,7 @@ namespace FrmPIE
                     {
                         var drnew7Pre = _strprefix + (_tmpcurrCartonID - 1).ToString();
                         addNewRowFromCarton(dt, dr, intcellQty, cellPO, drnew7Pre, intcellQty, 0);
+                        _tmpDiffQty = _tmpDiffQty + intcellQty;
                     }
 
                 }
