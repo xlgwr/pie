@@ -1139,6 +1139,7 @@ namespace FrmPIE
                         }
                         //
 
+
                         if (_cartonid[0].Equals(_cartonid[1]))
                         {
                             strCartonID = _strprefix + _cartonid[0];
@@ -1154,57 +1155,68 @@ namespace FrmPIE
                         if (intcell9 > 0)
                         {
                             //carton
-                            initCartonID(dt, dr, intcell9, cell8, 1, intfrom, into, _cartonCount);
+                            //initCartonID(dt, dr, intcell9, cell8, 1, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell8.ToString(), intcell9));
                         }
                         if (intcell11 > 0)
                         {
                             //carton
-                            initCartonID(dt, dr, intcell11, cell10, 2, intfrom, into, _cartonCount);
-
+                            //initCartonID(dt, dr, intcell11, cell10, 2, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell10.ToString(), intcell11));
                         }
                         if (intcell13 > 0)
                         {
                             //gen cartonid
-                            initCartonID(dt, dr, intcell13, cell12, 3, intfrom, into, _cartonCount);
+                            //initCartonID(dt, dr, intcell13, cell12, 3, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell12.ToString(), intcell13));
                         }
                         if (intcell15 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell15, cell14, 4, intfrom, into, _cartonCount);
+                            //initCartonID(dt, dr, intcell15, cell14, 4, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell14.ToString(), intcell15));
                         }
                         if (intcell17 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell17, cell16, 5, intfrom, into, _cartonCount);
+                            //initCartonID(dt, dr, intcell17, cell16, 5, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell16.ToString(), intcell17));
                         }
                         //next 5
                         if (intcell19 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell19, cell18, 6, intfrom, into, _cartonCount);
+                            //initCartonID(dt, dr, intcell19, cell18, 6, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell18.ToString(), intcell19));
                         }
                         if (intcell21 > 0)
                         {
                             //carton
-                            initCartonID(dt, dr, intcell21, cell20, 7, intfrom, into, _cartonCount);
+                            //initCartonID(dt, dr, intcell21, cell20, 7, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell20.ToString(), intcell21));
 
                         }
                         if (intcell23 > 0)
                         {
                             //gen cartonid
-                            initCartonID(dt, dr, intcell23, cell22, 8, intfrom, into, _cartonCount);
+                            //initCartonID(dt, dr, intcell23, cell22, 8, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell22.ToString(), intcell23));
                         }
                         if (intcell25 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell25, cell24, 9, intfrom, into, _cartonCount);
+                            //initCartonID(dt, dr, intcell25, cell24, 9, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell24.ToString(), intcell25));
                         }
                         if (intcell27 > 0)
                         {
                             //carton id
-                            initCartonID(dt, dr, intcell27, cell26, 10, intfrom, into, _cartonCount);
-                        }
+                            //initCartonID(dt, dr, intcell27, cell26, 10, intfrom, into, _cartonCount);
+                            _listPoQty.Add(new ListPoQty(cell26.ToString(), intcell27));
 
+                        }
+                        initCartonID(dt, dr, _listPoQty, intfrom, _cartonCount, _poCountnumCell, _avgCurrRowQty, _remainderCurrRow);
+                        _listPoQty.Clear();
                         rowscount++;
                     }
                 }
@@ -1222,7 +1234,36 @@ namespace FrmPIE
 
             //data0set_npoi.Tables.Add(dt);
         }
+        private void addNewRowFromCarton(System.Data.DataTable dt, DataRow newdr, List<ListPoQty> listpoqty)
+        {
+            foreach (var item in listpoqty)
+            {
+                DataRow drnew = dt.NewRow();
+                for (int i = 0; i < newdr.ItemArray.Length; i++)
+                {
+                    drnew[i] = newdr[i];
+                }
 
+                drnew[1] = addrowscount;
+
+                //carton
+
+                drnew[7] = item._ctn;
+
+                //qty
+                drnew[10] = item._ttlQty;
+
+                drnew[12] = item._po;
+
+                drnew[13] = item._qty;
+                drnew[14] = 0;
+
+                drnew[16] = strCartonID;
+                dt.Rows.Add(drnew);
+                addrowscount++;
+            }
+
+        }
         private void addNewRowFromCarton(System.Data.DataTable dt, DataRow newdr, double intcellQty, ICell cellPO, string drnew7, double drnew13, double drnew14)
         {
             DataRow drnew = dt.NewRow();
@@ -1248,6 +1289,48 @@ namespace FrmPIE
             drnew[16] = strCartonID;
             dt.Rows.Add(drnew);
             addrowscount++;
+        }
+        private void initCartonID(System.Data.DataTable dt, DataRow dr, List<ListPoQty> listpoqty, double ctnFrom, double CtnCount, double PoCount, double poQtyAvg, double remainQty)
+        {
+            double tmpRemain = 0;
+            for (int j = 0; j < CtnCount; j++)
+            {
+                tmpRemain = poQtyAvg;
+
+                for (int i = 0; i < listpoqty.Count; i++)
+                {
+                    if (listpoqty[i]._qty > 0)
+                    {
+                        ListPoQty tmplitpoqyt = new ListPoQty();
+
+                        tmplitpoqyt._ctnIndex = j;
+                        tmplitpoqyt._ctn = _strprefix + (ctnFrom + j);
+                        tmplitpoqyt._po = listpoqty[i]._po;
+                        tmplitpoqyt._ttlQty = listpoqty[i]._ttlQty;
+
+                        if (tmpRemain >= listpoqty[i]._qty)
+                        {
+                            tmplitpoqyt._qty = listpoqty[i]._qty;
+                            tmpRemain = tmpRemain - listpoqty[i]._qty;
+                            listpoqty[i]._qty = 0;
+                        }
+                        else
+                        {
+                            tmplitpoqyt._qty = tmpRemain;
+                            listpoqty[i]._qty = listpoqty[i]._qty - tmpRemain;
+                            tmpRemain = 0;
+                        }
+                        _listCtnPoQty.Add(tmplitpoqyt);
+                        if (tmpRemain == 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            _listCtnPoQty[_listCtnPoQty.Count - 1]._qty += remainQty;
+            addNewRowFromCarton(dt, dr, _listCtnPoQty);
+            _listCtnPoQty.Clear();
         }
         private void initCartonID(System.Data.DataTable dt, DataRow dr, double intcellQty, ICell cellPO, double currentnumber, double intfrom, double into, double countCTN)
         {
@@ -1709,6 +1792,10 @@ namespace FrmPIE
             strCartonID = "";
             _strBatchID = "";
             _gblTTlQty = 0;
+            _listPoQty = new List<ListPoQty>();
+            _listCtnPoQty = new List<ListPoQty>();
+            _listPoQty.Clear();
+            _listCtnPoQty.Clear();
 
             if (!_hasrun)
             {
@@ -1827,5 +1914,27 @@ namespace FrmPIE
         public double _tmpDiffQty { get; set; }
 
         public double _gblTTlQty { get; set; }
+
+        public List<ListPoQty> _listPoQty { get; set; }
+        public List<ListPoQty> _listCtnPoQty { get; set; }
+    }
+
+}
+public class ListPoQty
+{
+    public double _ctnIndex { get; set; }
+    public string _ctn { get; set; }
+    public string _po { get; set; }
+    public double _qty { get; set; }
+    public double _ttlQty { get; set; }
+    public ListPoQty()
+    {
+
+    }
+    public ListPoQty(string po, double qty)
+    {
+        _po = po;
+        _qty = qty;
+        _ttlQty = qty;
     }
 }
