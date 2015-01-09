@@ -1236,9 +1236,64 @@ namespace FrmPIE
         }
         private void addNewRowFromCarton(System.Data.DataTable dt, DataRow newdr, List<ListPoQty> listpoqty)
         {
-            foreach (var item in listpoqty)
+            var tmpCount = listpoqty.Count;
+            var currAt = 0;
+            var poCount = 0;
+            for (int i = 0; i < tmpCount; i++)
             {
-                newRow(dt, newdr, item, 0);
+                currAt++;
+                var item = listpoqty[i];
+                if (tmpCount > 1)
+                {
+                    if (currAt == 1)
+                    {
+                        continue;
+                    }
+                    if (item._po == listpoqty[i - 1]._po && item._qty == listpoqty[i - 1]._qty)
+                    {
+                        poCount++;
+                        if (i + 1 >= tmpCount)
+                        {
+                            newRow(dt, newdr, item, poCount);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if (i + 1 < tmpCount)
+                        {
+                            newRow(dt, newdr, listpoqty[i - 1], poCount);
+                            poCount = 0;
+
+                        }
+                        else
+                        {
+                            if (poCount > 0)
+                            {
+                                newRow(dt, newdr, listpoqty[i - 1], poCount);
+                                poCount = 0;
+                            }
+                            else
+                            {
+                                newRow(dt, newdr, listpoqty[i - 1], 0);
+                                newRow(dt, newdr, item, 0);
+                            }
+                            break;
+                        }
+
+
+
+
+                    }
+
+                }
+                else
+                {
+                    newRow(dt, newdr, item, 0);
+                }
             }
 
         }
