@@ -1238,31 +1238,43 @@ namespace FrmPIE
         {
             foreach (var item in listpoqty)
             {
-                DataRow drnew = dt.NewRow();
-                for (int i = 0; i < newdr.ItemArray.Length; i++)
-                {
-                    drnew[i] = newdr[i];
-                }
-
-                drnew[1] = addrowscount;
-
-                //carton
-
-                drnew[7] = item._ctn;
-
-                //qty
-                drnew[10] = item._ttlQty;
-
-                drnew[12] = item._po;
-
-                drnew[13] = item._qty;
-                drnew[14] = 0;
-
-                drnew[16] = strCartonID;
-                dt.Rows.Add(drnew);
-                addrowscount++;
+                newRow(dt, newdr, item, 0);
             }
 
+        }
+
+        private void newRow(System.Data.DataTable dt, DataRow newdr, ListPoQty item, int pocount)
+        {
+            DataRow drnew = dt.NewRow();
+            for (int i = 0; i < newdr.ItemArray.Length; i++)
+            {
+                drnew[i] = newdr[i];
+            }
+            drnew[1] = addrowscount;
+
+            //carton
+            if (pocount > 0)
+            {
+
+                drnew[7] = item._ctnPrefix + (item._ctn - pocount) + "-" + item._ctn;
+            }
+            else
+            {
+
+                drnew[7] = item._ctnPrefix + item._ctn;
+            }
+
+            //qty
+            drnew[10] = item._ttlQty;
+
+            drnew[12] = item._po;
+
+            drnew[13] = item._qty;
+            drnew[14] = 0;
+
+            drnew[16] = strCartonID;
+            dt.Rows.Add(drnew);
+            addrowscount++;
         }
         private void addNewRowFromCarton(System.Data.DataTable dt, DataRow newdr, double intcellQty, ICell cellPO, string drnew7, double drnew13, double drnew14)
         {
@@ -1304,7 +1316,9 @@ namespace FrmPIE
                         ListPoQty tmplitpoqyt = new ListPoQty();
 
                         tmplitpoqyt._ctnIndex = j;
-                        tmplitpoqyt._ctn = _strprefix + (ctnFrom + j);
+                        tmplitpoqyt._ctnFrom = ctnFrom;
+                        tmplitpoqyt._ctnPrefix = _strprefix;
+                        tmplitpoqyt._ctn = ctnFrom + j;
                         tmplitpoqyt._po = listpoqty[i]._po;
                         tmplitpoqyt._ttlQty = listpoqty[i]._ttlQty;
 
@@ -1923,7 +1937,9 @@ namespace FrmPIE
 public class ListPoQty
 {
     public double _ctnIndex { get; set; }
-    public string _ctn { get; set; }
+    public string _ctnPrefix { get; set; }
+    public double _ctnFrom { get; set; }
+    public double _ctn { get; set; }
     public string _po { get; set; }
     public double _qty { get; set; }
     public double _ttlQty { get; set; }
@@ -1937,4 +1953,5 @@ public class ListPoQty
         _qty = qty;
         _ttlQty = qty;
     }
+
 }
