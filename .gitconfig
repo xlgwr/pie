@@ -1,0 +1,8 @@
+[user]
+	name = xlgwr
+	email = xlgwr@163.com
+[http]
+	proxy = http://127.0.0.1:5865
+[https]
+	proxy = http://127.0.0.1:5865
+	sslverify = true
