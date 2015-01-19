@@ -1,0 +1,18 @@
+def var w_pims as char format 'x(15)'.
+
+repeat:
+update w_pims.
+
+for each wse869f1 where wse869f1_pims = w_pims
+no-lock:
+
+disp wse869f1_site wse869f1_part wse869f1_rir.
+    find first wse658f1 where wse658f1_site = wse869f1_site
+                          and wse658f1_part = wse869f1_part
+                          and wse658f1_lot = wse869f1_rir
+                          no-lock no-error.
+    if avail wse658f1 then
+       disp wse658f1_no wse658f1_pallet.
+
+end.
+end.
