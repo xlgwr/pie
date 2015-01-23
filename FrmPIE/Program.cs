@@ -686,7 +686,7 @@ namespace FrmPIE
         }
         public static string[] initCartonFromTo(string CartonId, string CartonType, out string carprefix)
         {
-            Regex RegPrefix = new Regex(@"[a-zA-Z\.,@?^=%&amp;:/~\+#]+");
+            Regex RegPrefix = new Regex(@"[a-zA-Z\.,@?^=%{};:/~\+#]+");
             var iPos = CartonId.IndexOf('-');
             var strCtnId = CartonId;
 

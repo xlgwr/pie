@@ -22,6 +22,7 @@ namespace IDR.TicketingProcessTimeMeasurement
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
             if (String.IsNullOrEmpty(comboBox1.Text))
             {
                 comboBox1.Focus();
@@ -54,7 +55,7 @@ namespace IDR.TicketingProcessTimeMeasurement
             }
             while (numfrom <= numto)
             {
-                strBar = comboBox1.Text + numfrom;
+                strBar = comboBox1.Text + numfrom.ToString("00#");
                 printtwc(strBar);
                 numfrom++;
             }
@@ -67,6 +68,8 @@ namespace IDR.TicketingProcessTimeMeasurement
                 resultmsg += " 失败,本地打印端口:" + print_port + "打开失败或打印机未就绪。";
             }
             lblMsg.Text = resultmsg;
+            
+            button1.Enabled = true;
         }
         public void printtwc(string strXBRB)
         {
