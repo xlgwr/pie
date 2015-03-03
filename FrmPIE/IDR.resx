@@ -211,7 +211,7 @@
         unalVLR9mej1c9HzcxTIArbh768q8/2v2NvRDzMfo6KEb0H6J3QjaxrdSH+UbqT1p2upD6PLmEhXMuYi
         CnxOlzI/owvpn1BR2lJ0JsPJY2uxZeks4An98m12J8xB0+wX1tPcVOLfAL4HTgOugCcqdp9q1SigTh0K
         btjQFAXQ9sXfdx8ld+9O6b17UwZqgcNo8eaUKx49VvS/j5K8HOn385tNM4iZE+hGxhMQwFAIYCBdT+1D
-        vyX1pEtxXako5n66kPKiiALn0z6iwtQPKCvqdQrY38wQwXIH7Xd8tW0uuVMGkt6XZHGe/xI4CTDxEu5l
+        vyX1pEtxXako5n66kPKiiALn0z6iwtQPKCvqdQrY38wQwTIH7Xd8tW0uuVMGkt6XZHGe/xI4CTDxEu5l
         y9LZypXJr2ZNUxRo2pQiW7emuI4dKQlRwAVieM8iz7/TvAH5bX+Hfr94CLl+Jd3Ifhme/ywEMAkYAxGM
         gAgegQj60dXkB+lyAsiPuY8KIttRQcwgOp/6NhWlLqWClPcpL/Ed1Cj91EjAKWGds7NWVr8Nm/0ZA+G9
         BmjaDSaMvX4foBIv4YZw7oUo4Fu9OgWi7w9p1IgiWrQgb2AZIoNK/OwqFemIwwz6Le8o/X5hN93IX2ry
@@ -369,8 +369,8 @@
         6mvkeeR55ftYEs3XxddXGuF8b3yPTLjM65ae/j9BekkmxaDWCyUJggfJmigshaGKQwrEUiQqJHElQT1W
         nkMSbI1kS6ItyZYerhIuvZzvncdB5vX/SdJLs9IEUZooLIWhikMKRIpEhSTsZlBfI8+lEsyQJFsSXRrZ
         0sNVwv/fkV6a8WBwoaOmDB60koShikMKRBWJFIqEJKw0qMcz1HNZEixJVokuiWy+LxvZf9JUYcgugwdX
-        jRqqQCSYFAlJ1K1Cfa3leSXBkmQGX5eN6H/JpECkSCSYFCkYVTSlQR7LkK+X55Pk2gi22X/dNO3/AJKx
-        GGJPh42uAAAAAElFTkSuQmCC
+        jRqqQCSYFAlJ1K1Cfa3leSXBkmQGX5eN6H/JpECkSCSYFCkYVTSlQR7LkK+X55Pk2gi22X/dNO3/AIzz
+        GFxF7L37AAAAAElFTkSuQmCC
 </value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -378,12 +378,6 @@
   </metadata>
   <metadata name="statusStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>423, 17</value>
-  </metadata>
-  <metadata name="cMenuStrip21ScanCartronLabel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
-  </metadata>
-  <metadata name="c22MenuStripPiSystem.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>232, 57</value>
   </metadata>
   <metadata name="cMenuStrip1PacklingListMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>544, 17</value>
@@ -393,6 +387,12 @@
   </metadata>
   <metadata name="cMenuStrip3PrintCartonLabel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>980, 17</value>
+  </metadata>
+  <metadata name="cMenuStrip21ScanCartronLabel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
+  </metadata>
+  <metadata name="c22MenuStripPiSystem.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>232, 57</value>
   </metadata>
   <metadata name="ctmenusClose.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>137, 17</value>
@@ -410,7 +410,7 @@
     <value>776, 57</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>104</value>
+    <value>91</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
