@@ -28,9 +28,19 @@ using XPrint;
 
 namespace FrmIDR._0API
 {
+    class Commfunction<T> : Commfunction
+           where T : Form
+    {
+        T _objFrom;
+        public Commfunction(frmIDR idr, T objFrom)
+        {
+            _idr_show = idr;
+            _objFrom = objFrom;
+        }
+    }
     class Commfunction
     {
-        frmIDR _idr_show;
+        public frmIDR _idr_show;
         public static string _uploaderpmsg = "";
         public static string _uploaderrows = "";
         public static bool _updateflag = false;
@@ -51,10 +61,12 @@ namespace FrmIDR._0API
         PIE.Model.plr_mstr _plr_mstr_model = new PIE.Model.plr_mstr();
         PI.Model.pi_mstr _pi_mstr_model = new PI.Model.pi_mstr();
         public int intnext = 0;
+        public Commfunction() { }
         public Commfunction(frmIDR idr)
         {
             _idr_show = idr;
         }
+
         public void xprintdocument(string strzpl)
         {
             _strzpl = strzpl;
@@ -2150,7 +2162,7 @@ namespace FrmIDR._0API
             }
 
         }
-        public void selectCellMethod(DoWrokObject dwo,int nothing)
+        public void selectCellMethod(DoWrokObject dwo, int nothing)
         {
             _idr_show.status14toolLabelCellRowColXY.Text = "总计:" + (dwo._dgv.Rows.Count - 1) + ",当前行:" + (dwo._eX + 1) + ",列:" + (dwo._eY + 1);
             //_idr_show.status13toolSStatusLblMsg.Text = "";
@@ -2713,6 +2725,7 @@ namespace FrmIDR._0API
         /////////////////////////////////
 
     }
+
     public class SetControlObj
     {
         public System.Windows.Forms.Control _ctl;

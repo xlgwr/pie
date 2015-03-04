@@ -39,6 +39,7 @@
             this.gb3CartonNo = new System.Windows.Forms.GroupBox();
             this.data2GV2CartonNO = new System.Windows.Forms.DataGridView();
             this.gb1mstr_BatchInfo = new System.Windows.Forms.GroupBox();
+            this.btn0Scan = new System.Windows.Forms.Button();
             this.txt5batch_cre_date_BatchInfo = new System.Windows.Forms.TextBox();
             this.txt4batch_dec01_BatchInfo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -71,7 +72,7 @@
             this.groupBox0BatchInfo0.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox0BatchInfo0.Location = new System.Drawing.Point(0, 0);
             this.groupBox0BatchInfo0.Name = "groupBox0BatchInfo0";
-            this.groupBox0BatchInfo0.Size = new System.Drawing.Size(729, 559);
+            this.groupBox0BatchInfo0.Size = new System.Drawing.Size(766, 559);
             this.groupBox0BatchInfo0.TabIndex = 0;
             this.groupBox0BatchInfo0.TabStop = false;
             this.groupBox0BatchInfo0.Resize += new System.EventHandler(this.groupBox0BatchInfo0_Resize);
@@ -81,7 +82,7 @@
             this.gb3CartonNo.Controls.Add(this.data2GV2CartonNO);
             this.gb3CartonNo.Location = new System.Drawing.Point(6, 304);
             this.gb3CartonNo.Name = "gb3CartonNo";
-            this.gb3CartonNo.Size = new System.Drawing.Size(714, 237);
+            this.gb3CartonNo.Size = new System.Drawing.Size(754, 237);
             this.gb3CartonNo.TabIndex = 19;
             this.gb3CartonNo.TabStop = false;
             this.gb3CartonNo.Text = "Wec Carton No Det";
@@ -118,12 +119,13 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data2GV2CartonNO.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.data2GV2CartonNO.RowTemplate.Height = 23;
-            this.data2GV2CartonNO.Size = new System.Drawing.Size(708, 217);
+            this.data2GV2CartonNO.Size = new System.Drawing.Size(748, 217);
             this.data2GV2CartonNO.TabIndex = 16;
             // 
             // gb1mstr_BatchInfo
             // 
             this.gb1mstr_BatchInfo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gb1mstr_BatchInfo.Controls.Add(this.btn0Scan);
             this.gb1mstr_BatchInfo.Controls.Add(this.txt5batch_cre_date_BatchInfo);
             this.gb1mstr_BatchInfo.Controls.Add(this.txt4batch_dec01_BatchInfo);
             this.gb1mstr_BatchInfo.Controls.Add(this.label5);
@@ -136,10 +138,23 @@
             this.gb1mstr_BatchInfo.Controls.Add(this.label1);
             this.gb1mstr_BatchInfo.Location = new System.Drawing.Point(6, 12);
             this.gb1mstr_BatchInfo.Name = "gb1mstr_BatchInfo";
-            this.gb1mstr_BatchInfo.Size = new System.Drawing.Size(714, 55);
+            this.gb1mstr_BatchInfo.Size = new System.Drawing.Size(754, 55);
             this.gb1mstr_BatchInfo.TabIndex = 18;
             this.gb1mstr_BatchInfo.TabStop = false;
             this.gb1mstr_BatchInfo.Text = "BatchID Info Mstr";
+            // 
+            // btn0Scan
+            // 
+            this.btn0Scan.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn0Scan.ForeColor = System.Drawing.Color.Red;
+            this.btn0Scan.Location = new System.Drawing.Point(679, 19);
+            this.btn0Scan.Name = "btn0Scan";
+            this.btn0Scan.Size = new System.Drawing.Size(69, 23);
+            this.btn0Scan.TabIndex = 8;
+            this.btn0Scan.Text = "ScanASN";
+            this.btn0Scan.UseVisualStyleBackColor = true;
+            this.btn0Scan.Visible = false;
+            this.btn0Scan.Click += new System.EventHandler(this.btn0Scan_Click);
             // 
             // txt5batch_cre_date_BatchInfo
             // 
@@ -195,6 +210,7 @@
             this.txt2batch_do_BatchInfo.Name = "txt2batch_do_BatchInfo";
             this.txt2batch_do_BatchInfo.Size = new System.Drawing.Size(68, 21);
             this.txt2batch_do_BatchInfo.TabIndex = 3;
+            this.txt2batch_do_BatchInfo.TextChanged += new System.EventHandler(this.txt2batch_do_BatchInfo_TextChanged);
             // 
             // label2
             // 
@@ -226,7 +242,7 @@
             this.gb2det_BatchInfo.Controls.Add(this.data1GV1ePackingDet1_BatchInfo);
             this.gb2det_BatchInfo.Location = new System.Drawing.Point(6, 67);
             this.gb2det_BatchInfo.Name = "gb2det_BatchInfo";
-            this.gb2det_BatchInfo.Size = new System.Drawing.Size(714, 237);
+            this.gb2det_BatchInfo.Size = new System.Drawing.Size(754, 237);
             this.gb2det_BatchInfo.TabIndex = 17;
             this.gb2det_BatchInfo.TabStop = false;
             this.gb2det_BatchInfo.Text = "Batch ePacking Det";
@@ -263,7 +279,7 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.data1GV1ePackingDet1_BatchInfo.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.data1GV1ePackingDet1_BatchInfo.RowTemplate.Height = 23;
-            this.data1GV1ePackingDet1_BatchInfo.Size = new System.Drawing.Size(708, 214);
+            this.data1GV1ePackingDet1_BatchInfo.Size = new System.Drawing.Size(748, 214);
             this.data1GV1ePackingDet1_BatchInfo.TabIndex = 16;
             // 
             // ctmenu0EnquireByPart
@@ -272,7 +288,7 @@
             this.enquireByPartToolStripMenuItem,
             this.downLoad1ToExceltoolStripMenuItem2});
             this.ctmenu0EnquireByPart.Name = "ctmenu0EnquireByPart";
-            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 70);
+            this.ctmenu0EnquireByPart.Size = new System.Drawing.Size(191, 48);
             // 
             // enquireByPartToolStripMenuItem
             // 
@@ -293,7 +309,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 559);
+            this.ClientSize = new System.Drawing.Size(766, 559);
             this.Controls.Add(this.groupBox0BatchInfo0);
             this.Name = "frm0BatchInfo";
             this.Text = "BatchInfo_list";
@@ -331,5 +347,6 @@
         private System.Windows.Forms.ContextMenuStrip ctmenu0EnquireByPart;
         private System.Windows.Forms.ToolStripMenuItem enquireByPartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
+        protected internal System.Windows.Forms.Button btn0Scan;
     }
 }

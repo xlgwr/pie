@@ -1,4 +1,5 @@
 ﻿using FrmIDR._0API;
+using FrmPIE.frmPIE;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -70,7 +71,7 @@ namespace FrmPIE
             DoWrokObject dwo = new DoWrokObject(data2GV2CartonNO, 3, e.RowIndex, Color.LightGreen, "plr_status", "U", "CartonID", "plr_status", "Yes", Color.LightGray);
             cf.initThreadDowrokColor(dwo);
         }
-        
+
 
         void data1GV1ePackingDet1_BatchInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -150,7 +151,7 @@ namespace FrmPIE
         }
         private void enquireByPartToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _frmET = new frmEnterTxt(_idr_show,this);
+            _frmET = new frmEnterTxt(_idr_show, this);
             _frmET.button1.Click += enquireByPart;
             _frmET.lblTitle.Text = "Part#:";
             _frmET.Text = "Enquire by Part:";
@@ -170,6 +171,22 @@ namespace FrmPIE
         private void downLoad1ToExceltoolStripMenuItem2_Click(object sender, EventArgs e)
         {
             cf.downLoadExcel(_reobjdet, _idr_show.status15toolLabelstrResult, cf.nameList12UploadToERP(), "10BatchInfo" + _idr_show._plr_batch_mstr_model.batch_id);
+        }
+
+        private void txt2batch_do_BatchInfo_TextChanged(object sender, EventArgs e)
+        {
+            if (txt2batch_do_BatchInfo.Text.Equals("e-Packing-asn"))
+            {
+                btn0Scan.Visible = true;
+                this.AcceptButton = btn0Scan;
+            }
+        }
+
+        private void btn0Scan_Click(object sender, EventArgs e)
+        {
+            frm614ScanForASN<frm0BatchInfo, DataGridView> tmpfrom = new frm614ScanForASN<frm0BatchInfo, DataGridView>
+                (_idr_show, this, data1GV1ePackingDet1_BatchInfo, "Scan For ASN");
+            tmpfrom.ShowDialog();
         }
 
 

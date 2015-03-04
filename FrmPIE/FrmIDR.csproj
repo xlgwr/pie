@@ -163,6 +163,12 @@
     <Compile Include="frmPIE\frm513PrintCartonLabel.Designer.cs">
       <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPIE\frm614ScanForASN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPIE\frm614ScanForASN.Designer.cs">
+      <DependentUpon>frm614ScanForASN.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPI\frmCoMaint.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -301,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPIE\frm513PrintCartonLabel.resx">
       <DependentUpon>frm513PrintCartonLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPIE\frm614ScanForASN.resx">
+      <DependentUpon>frm614ScanForASN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPI\frmCoMaint.resx">
       <DependentUpon>frmCoMaint.cs</DependentUpon>
@@ -454,6 +463,7 @@
     <None Include="Web References\WebReferenceRTM99\Service.disco" />
     <None Include="Resources\updatepackage.png" />
     <None Include="Resources\14a.png" />
+    <None Include="Resources\t %2813%29.ico" />
     <Content Include="t %2825%29.ico" />
     <None Include="0DownLoadExcel\text.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
