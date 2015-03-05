@@ -1,9 +1,9 @@
 ﻿using System.Windows.Forms;
 namespace FrmPIE.frmPIE
 {
-    partial class frm614ScanForASN<T,G>
-        where T:Form
-        where G:DataGridView
+    partial class frm614ScanForASN<T, G>
+        where T : Form, iform
+        where G : DataGridView
     {
         /// <summary>
         /// Required designer variable.
@@ -58,7 +58,7 @@ namespace FrmPIE.frmPIE
             this.lblMsg = new System.Windows.Forms.Label();
             this.gb2det_BatchInfo = new System.Windows.Forms.GroupBox();
             this.btn1Clear = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn0Save = new System.Windows.Forms.Button();
             this.groupBox0BatchInfo0.SuspendLayout();
             this.gb0ScanTxt.SuspendLayout();
             this.gb2det_BatchInfo.SuspendLayout();
@@ -285,7 +285,7 @@ namespace FrmPIE.frmPIE
             // gb2det_BatchInfo
             // 
             this.gb2det_BatchInfo.Controls.Add(this.btn1Clear);
-            this.gb2det_BatchInfo.Controls.Add(this.button1);
+            this.gb2det_BatchInfo.Controls.Add(this.btn0Save);
             this.gb2det_BatchInfo.Controls.Add(this.label1);
             this.gb2det_BatchInfo.Controls.Add(this.txt3PalletNoAddNewBatchID);
             this.gb2det_BatchInfo.Controls.Add(this.label8);
@@ -325,16 +325,17 @@ namespace FrmPIE.frmPIE
             this.btn1Clear.UseVisualStyleBackColor = true;
             this.btn1Clear.Click += new System.EventHandler(this.btn1Clear_Click);
             // 
-            // button1
+            // btn0Save
             // 
-            this.button1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.ForeColor = System.Drawing.Color.Red;
-            this.button1.Location = new System.Drawing.Point(263, 93);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 47);
-            this.button1.TabIndex = 100;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn0Save.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn0Save.ForeColor = System.Drawing.Color.Red;
+            this.btn0Save.Location = new System.Drawing.Point(263, 93);
+            this.btn0Save.Name = "btn0Save";
+            this.btn0Save.Size = new System.Drawing.Size(75, 47);
+            this.btn0Save.TabIndex = 100;
+            this.btn0Save.Text = "Save";
+            this.btn0Save.UseVisualStyleBackColor = true;
+            this.btn0Save.Click += new System.EventHandler(this.btn0Save_Click);
             // 
             // frm614ScanForASN
             // 
@@ -382,7 +383,7 @@ namespace FrmPIE.frmPIE
         protected internal System.Windows.Forms.TextBox txt0Scan;
         private GroupBox gb0ScanTxt;
         protected internal Label lblMsg;
-        private Button button1;
+        private Button btn0Save;
         private Button btn1Clear;
     }
 }

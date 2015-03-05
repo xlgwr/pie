@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace FrmPIE.frmPIE
 {
     public partial class frm614ScanForASN<T, G> : Form
-        where T : Form
+        where T : Form, iform
         where G : DataGridView
     {
         frmEnterTxt _frmET;
@@ -72,7 +72,7 @@ namespace FrmPIE.frmPIE
             lblMsg.Width = txt0Scan.Width;
 
             gb2det_BatchInfo.Width = gb0ScanTxt.Width;
-            gb2det_BatchInfo.Height = this.Height - gb2det_BatchInfo.Top - 30;
+            gb2det_BatchInfo.Height = this.Height - gb2det_BatchInfo.Top - 50;
         }
 
         private void frm614ScanForASN_Load(object sender, EventArgs e)
@@ -101,7 +101,7 @@ namespace FrmPIE.frmPIE
                     }
                     else
                     {
-                        if (tmpScanTxt.Length == 5)
+                        if (tmpScanTxt.Length == 5 || tmpScanTxt.Length == 4)
                         {
                             if (PageValidate.IsNumber(tmpScanTxt.Substring(1)))
                             {
@@ -260,11 +260,164 @@ namespace FrmPIE.frmPIE
             txt9QTYAddNewBatchID.Text = "";
             txt10CartonIDAddNewBatchID.Text = "";
             txt12CartonprifixAddNewBatchID.Text = "";
-            txt14CartonIDFromAddNewBatchID.Text = "";
-            txt15CartonIDToAddNewBatchID.Text = "";
+            txt14CartonIDFromAddNewBatchID.Text = "0";
+            txt15CartonIDToAddNewBatchID.Text = "0";
 
             txt0Scan.Focus();
 
+        }
+        private void ShowMsg(string msg, string title)
+        {
+            this.lblMsg.Visible = true;
+            this.lblMsg.Text = title + ":" + msg;
+        }
+        private void ShowMsg(Control ct, string msg, string title)
+        {
+            ct.Visible = true;
+            ct.Text = title + ":" + msg;
+        }
+        public bool isNumber(TextBox tb)
+        {
+            if (!PageValidate.IsNumber(tb.Text))
+            {
+                tb.Focus();
+                tb.SelectAll();
+                ShowMsg("请输入正确的数字，谢谢.", "Notice");
+
+                return true;
+            }
+            return false;
+        }
+        public bool isnullempty(TextBox tb, string msg, string title)
+        {
+            if (string.IsNullOrEmpty(tb.Text))
+            {
+                ShowMsg(msg, title);
+                tb.Focus();
+                return true;
+            }
+            return false;
+        }
+
+        private bool isnulltxt()
+        {
+            if (isnullempty(txt1BatchIDAddNewBatchID, "BatchID must has one", "Error"))
+            {
+                return false;
+            }
+            if (isnullempty(txt2LineIDAddNewBatchID, "LineId must has one", "Error"))
+            {
+                return false;
+            }
+            if (isnullempty(txt3PalletNoAddNewBatchID, "PalletNo must has one", "Error"))
+            {
+                return false;
+            }
+            //if (isnullempty(txt4InvoiceIDAddNewBatchID, "InvoiceID must has one", "Error"))
+            //{
+            //    return false;
+            //}
+            if (isnullempty(txt5POAddNewBatchID, "PO must be has.", "Error"))
+            {
+                return false;
+            }
+            //if (isnullempty(txt6PackingListIDAddNewBatchID, " PackingListID  must has one", "Error"))
+            //{
+            //    return false;
+            //}
+            if (isnullempty(txt7PartAddNewBatchID, "Part must be has.", "Error"))
+            {
+                return false;
+            }
+            if (isnullempty(txt8CartonQtyAddNewBatchID, "CartonQty must be has.", "Error"))
+            {
+                return false;
+            }
+            //number
+            if (isNumber(txt8CartonQtyAddNewBatchID))
+            {
+                return false;
+            }
+            if (isnullempty(txt9QTYAddNewBatchID, "QTY must be has.", "Error"))
+            {
+                return false;
+            }
+            //number 
+            if (isNumber(txt9QTYAddNewBatchID))
+            {
+                return false;
+            }
+            if (isnullempty(txt10CartonIDAddNewBatchID, "CartonID must be has.", "Error"))
+            {
+                return false;
+            }
+            //if (isnullempty(txt11CartonTypeAddNewBatchID, "Number of Carton must be has.", "Error"))
+            //{
+            //    return false;
+            //}
+            ////number
+            //if (isNumber(txt11CartonTypeAddNewBatchID))
+            //{
+            //    return false;
+            //}
+
+
+            if (!PageValidate.IsNumber(txt14CartonIDFromAddNewBatchID.Text) || !PageValidate.IsNumber(txt15CartonIDToAddNewBatchID.Text))
+            {
+                ShowMsg("Carton ID must like Numert or NumA-NumB,example C1-10 or 10 or 1-10.", "Error");
+                txt10CartonIDAddNewBatchID.SelectAll();
+                txt10CartonIDAddNewBatchID.Focus();
+                return false;
+            }
+            var cartonfrom = Convert.ToInt32(txt14CartonIDFromAddNewBatchID.Text);
+            var cartonto = Convert.ToInt32(txt15CartonIDToAddNewBatchID.Text);
+
+            if (cartonfrom > cartonto)
+            {
+                ShowMsg("Carton ID must like 10 or 1-10", "Error");
+                txt10CartonIDAddNewBatchID.SelectAll();
+                txt10CartonIDAddNewBatchID.Focus();
+                return false;
+            }
+            return true;
+
+        }
+        private void btn0Save_Click(object sender, EventArgs e)
+        {
+            if (!isnulltxt())
+            {
+                return;
+            };
+
+            PIE.Model.plr_mstr plr_mstr_model = new PIE.Model.plr_mstr();
+
+            plr_mstr_model.plr_doc_type = "e-Packing-asn";
+            plr_mstr_model.CartonType = "";
+
+            plr_mstr_model.Batch_ID = txt1BatchIDAddNewBatchID.Text.Trim();
+            plr_mstr_model.LineID = Convert.ToInt32(txt2LineIDAddNewBatchID.Text.Trim());
+            plr_mstr_model.plr_pallet_no = txt3PalletNoAddNewBatchID.Text.Trim();
+            plr_mstr_model.plr_po = txt5POAddNewBatchID.Text.Trim();
+            plr_mstr_model.plr_partno = txt7PartAddNewBatchID.Text.Trim();
+            plr_mstr_model.plr_carton_qty = Convert.ToDecimal(txt8CartonQtyAddNewBatchID.Text.Trim());
+            plr_mstr_model.plr_qty = Convert.ToDecimal(txt9QTYAddNewBatchID.Text.Trim());
+            plr_mstr_model.CartonID = txt10CartonIDAddNewBatchID.Text.Trim();
+            plr_mstr_model.carton_id_prifix = txt12CartonprifixAddNewBatchID.Text.Trim();
+            plr_mstr_model.carton_id_from = Convert.ToInt32(txt14CartonIDFromAddNewBatchID.Text.Trim());
+            plr_mstr_model.carton_id_to = Convert.ToInt32(txt15CartonIDToAddNewBatchID.Text.Trim());
+
+
+            var intresutl = Program.GenCartonNoAsn(plr_mstr_model);
+            if (intresutl == 0)
+            {
+                _obj0from.refreshDGV();
+                lblMsg.Text = "Success: Save Ok";
+
+            }
+            else if (intresutl == 3)
+            {
+                lblMsg.Text = "Error: Carton ID->" + txt10CartonIDAddNewBatchID.Text + " is exist";
+            }
         }
     }
 }

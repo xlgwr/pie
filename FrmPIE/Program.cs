@@ -731,6 +731,57 @@ namespace FrmPIE
             return strCtnIdArr;
         }
 
+        public static int GenCartonNoAsn(PIE.Model.plr_mstr plr_mstr_model)
+        {
+            int result;
+            int intEffected;
+            
+            SqlParameter[] parameters = {
+                                                new SqlParameter("@Batch_ID",SqlDbType.NVarChar,20),
+                                                new SqlParameter("@LineID",SqlDbType.Int),
+                                                new SqlParameter("@plr_doc_type",SqlDbType.NVarChar,50),
+                                                new SqlParameter("@CartonID",SqlDbType.NVarChar,30),
+                                                new SqlParameter("@CartonType",SqlDbType.NVarChar,30),
+
+                                                new SqlParameter("@plr_po",SqlDbType.NVarChar,50),
+                                                new SqlParameter("@plr_qty",SqlDbType.Decimal,18),
+                                                new SqlParameter("@ctnPre",SqlDbType.NVarChar,10),
+                                                new SqlParameter("@ctnFr",SqlDbType.Int),
+                                                new SqlParameter("@ctnTo",SqlDbType.Int),
+
+                                                new SqlParameter("@plr_cre_userid",SqlDbType.NVarChar,50),
+                                               // new SqlParameter("@plr_partno",SqlDbType.NVarChar,30),   
+                                             
+                                                new SqlParameter("@plr_user_ip",SqlDbType.NVarChar,50),
+
+                                                new SqlParameter("@result",SqlDbType.SmallInt)                    
+                                            }
+                                        ;
+            parameters[0].Value = plr_mstr_model.Batch_ID;
+            parameters[1].Value = plr_mstr_model.LineID;
+            parameters[2].Value = plr_mstr_model.plr_pallet_no;//plr_mstr_model.plr_doc_type;
+            parameters[3].Value = plr_mstr_model.CartonID;
+            parameters[4].Value = plr_mstr_model.CartonType;
+
+            parameters[5].Value = plr_mstr_model.plr_po;
+            parameters[6].Value = plr_mstr_model.plr_qty;
+
+
+            parameters[7].Value = "";///////////////////change to pallet
+            parameters[8].Value = 0;
+            parameters[9].Value = 0;
+
+            parameters[10].Value = "";
+
+            //parameters[11].Value = plr_mstr_model.plr_partno;
+
+            parameters[11].Value = Program.getClientIP();
+            parameters[12].Direction = ParameterDirection.Output;
+
+            DbHelperSQL.RunProcedure("sp_GenCtn_ASN", parameters, out intEffected);
+            result = Convert.ToInt16(parameters[12].Value);
+            return result;
+        }
         public static int GenCartonNo(PIE.Model.plr_mstr plr_mstr_model)
         {
             int result;

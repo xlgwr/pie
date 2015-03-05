@@ -11,7 +11,11 @@ using System.Windows.Forms;
 
 namespace FrmPIE
 {
-    public partial class frm0BatchInfo : Form
+    public interface iform
+    {
+        void refreshDGV();
+    }
+    public partial class frm0BatchInfo : Form, iform
     {
         frmEnterTxt _frmET;
         frmIDR _idr_show;
@@ -31,23 +35,23 @@ namespace FrmPIE
             data1GV1ePackingDet1_BatchInfo.ReadOnly = true;
             data2GV2CartonNO.ReadOnly = true;
 
-            DoWrokObject obj = new DoWrokObject(data1GV1ePackingDet1_BatchInfo, data2GV2CartonNO, _idr_show._plr_batch_mstr_model.batch_id);
-            _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
+            refreshDGV();
+            //_idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
 
-            if (_idr_show._tInitGDV.ThreadState == ThreadState.Running)
-            {
-                _idr_show._tInitGDV.Abort();
-            }
+            //if (_idr_show._tInitGDV.ThreadState == ThreadState.Running)
+            //{
+            //    _idr_show._tInitGDV.Abort();
+            //}
 
-            if (_idr_show._tInitGDV.ThreadState == ThreadState.Unstarted)
-            {
-                _idr_show._tInitGDV.Start(obj);
-            }
-            if (_idr_show._tInitGDV.ThreadState == ThreadState.Stopped)
-            {
-                _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
-                _idr_show._tInitGDV.Start(obj);
-            }
+            //if (_idr_show._tInitGDV.ThreadState == ThreadState.Unstarted)
+            //{
+            //    _idr_show._tInitGDV.Start(obj);
+            //}
+            //if (_idr_show._tInitGDV.ThreadState == ThreadState.Stopped)
+            //{
+            //    _idr_show._tInitGDV = new Thread(new ParameterizedThreadStart(initDGVDelegate));
+            //    _idr_show._tInitGDV.Start(obj);
+            //}
 
             data1GV1ePackingDet1_BatchInfo.RowEnter += data1GV1ePackingDet1_BatchInfo_RowEnter;
             data1GV1ePackingDet1_BatchInfo.CellClick += data1GV1ePackingDet1_BatchInfo_CellClick;
@@ -60,6 +64,11 @@ namespace FrmPIE
             enquireByPartToolStripMenuItem.Click += enquireByPartToolStripMenuItem_Click;
         }
 
+        public void refreshDGV()
+        {
+            DoWrokObject obj = new DoWrokObject(data1GV1ePackingDet1_BatchInfo, data2GV2CartonNO, _idr_show._plr_batch_mstr_model.batch_id);
+            ThreadPool.QueueUserWorkItem(initDGVDelegate, obj);
+        }
         void data2GV2CartonNO_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DoWrokObject dwo = new DoWrokObject(data2GV2CartonNO, e.RowIndex, e.ColumnIndex);
