@@ -79,65 +79,86 @@ namespace FrmPIE.frmPIE
         {
 
         }
+        public string[] removePrefxi(string scantxt)
+        {
+            string tmpprefix = "3N3;3N4;3N5";
+            string tmpSplit = "/ ";
 
+            var tmpPF = tmpprefix.Split(';');
+
+            foreach (var item in tmpPF)
+            {
+                if (scantxt.StartsWith(item, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    scantxt = scantxt.Substring(item.Length);
+                }
+            }
+            return scantxt.Split(tmpSplit.ToCharArray());
+        }
         private void txt0Scan_TextChanged(object sender, EventArgs e)
         {
 
         }
         private void txt0Scan_KeyDown(object sender, KeyEventArgs e)
         {
+
             if (e.KeyCode == Keys.Enter)
             {
                 string tmpScanTxt = txt0Scan.Text.Trim();
 
-
-                if (tmpScanTxt.Length < 8)
+                var tmpScanTxtSplit = removePrefxi(tmpScanTxt);
+                foreach (var item in tmpScanTxtSplit)
                 {
-                    if (PageValidate.IsNumber(tmpScanTxt))
+                    tmpScanTxt = item;
+                    if (tmpScanTxt.Length < 8)
                     {
-                        findinDgvCheckScanQty(txt9QTYAddNewBatchID, txt8CartonQtyAddNewBatchID, tmpScanTxt);
-                        txt0Scan.Text = "";
-                        return;
-                    }
-                    else
-                    {
-                        if (tmpScanTxt.Length == 5 || tmpScanTxt.Length == 4)
+                        if (PageValidate.IsNumber(tmpScanTxt))
                         {
-                            if (PageValidate.IsNumber(tmpScanTxt.Substring(1)))
+                            findinDgvCheckScanQty(txt9QTYAddNewBatchID, txt8CartonQtyAddNewBatchID, tmpScanTxt);
+                            txt0Scan.Text = "";
+                            return;
+                        }
+                        else
+                        {
+                            if (tmpScanTxt.Length == 5 || tmpScanTxt.Length == 4)
                             {
-                                txt10CartonIDAddNewBatchID.Text = tmpScanTxt;
-                                txt0Scan.Text = "";
-                                return;
+                                if (PageValidate.IsNumber(tmpScanTxt.Substring(1)))
+                                {
+                                    txt10CartonIDAddNewBatchID.Text = tmpScanTxt;
+                                    txt0Scan.Text = "";
+                                    return;
+                                }
                             }
                         }
-                    }
-                }
 
-                if (string.IsNullOrEmpty(txt7PartAddNewBatchID.Text)
+                    }
+                    if (string.IsNullOrEmpty(txt7PartAddNewBatchID.Text)
                     || string.IsNullOrEmpty(txt5POAddNewBatchID.Text))
-                {
-                    var tmpresult = findinDgv(tmpScanTxt, _tmpSearchTxT);
+                    {
+                        var tmpresult = findinDgv(tmpScanTxt, _tmpSearchTxT);
 
-                    if (tmpresult.Equals("plr_partno"))
-                    {
-                        txt7PartAddNewBatchID.Text = tmpScanTxt;
-                        lblMsg.Text = "Success: Find PartNo->" + tmpScanTxt + " in Data Items.";
-                        findinDgvCheck(txt5POAddNewBatchID, txt7PartAddNewBatchID);
-                    }
-                    else if (tmpresult.Equals("plr_po"))
-                    {
-                        txt5POAddNewBatchID.Text = tmpScanTxt;
-                        lblMsg.Text = "Success: Find Po->" + tmpScanTxt + " in Data Items.";
-                        findinDgvCheck(txt5POAddNewBatchID, txt7PartAddNewBatchID);
+                        if (tmpresult.Equals("plr_partno"))
+                        {
+                            txt7PartAddNewBatchID.Text = tmpScanTxt;
+                            lblMsg.Text = "Success: Find PartNo->" + tmpScanTxt + " in Data Items.";
+                            findinDgvCheck(txt5POAddNewBatchID, txt7PartAddNewBatchID);
+                        }
+                        else if (tmpresult.Equals("plr_po"))
+                        {
+                            txt5POAddNewBatchID.Text = tmpScanTxt;
+                            lblMsg.Text = "Success: Find Po->" + tmpScanTxt + " in Data Items.";
+                            findinDgvCheck(txt5POAddNewBatchID, txt7PartAddNewBatchID);
+                        }
+                        else
+                        {
+                            lblMsg.Text = "Error: Can't Find " + tmpScanTxt + " in Data Items.";
+                        }
                     }
                     else
                     {
-                        lblMsg.Text = "Error: Can't Find " + tmpScanTxt + " in Data Items.";
+                        findinDgvCheck(txt5POAddNewBatchID, txt7PartAddNewBatchID);
                     }
-                }
-                else
-                {
-                    findinDgvCheck(txt5POAddNewBatchID, txt7PartAddNewBatchID);
+
                 }
 
                 txt0Scan.Text = "";
@@ -250,6 +271,11 @@ namespace FrmPIE.frmPIE
         }
 
         private void btn1Clear_Click(object sender, EventArgs e)
+        {
+            clear();
+
+        }
+        void clear()
         {
             txt0Scan.Text = "";
             txt2LineIDAddNewBatchID.Text = "";
@@ -411,7 +437,8 @@ namespace FrmPIE.frmPIE
             if (intresutl == 0)
             {
                 _obj0from.refreshDGV();
-                lblMsg.Text = "Success: Save Ok";
+                clear();
+                lblMsg.Text = "Success: Save Ok,Scan Next";
 
             }
             else if (intresutl == 3)
