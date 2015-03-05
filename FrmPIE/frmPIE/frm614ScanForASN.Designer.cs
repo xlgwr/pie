@@ -86,7 +86,7 @@ namespace FrmPIE.frmPIE
             this.txt12CartonprifixAddNewBatchID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt12CartonprifixAddNewBatchID.Location = new System.Drawing.Point(342, 13);
             this.txt12CartonprifixAddNewBatchID.Name = "txt12CartonprifixAddNewBatchID";
-            this.txt12CartonprifixAddNewBatchID.Size = new System.Drawing.Size(152, 21);
+            this.txt12CartonprifixAddNewBatchID.Size = new System.Drawing.Size(96, 21);
             this.txt12CartonprifixAddNewBatchID.TabIndex = 97;
             // 
             // label17
@@ -253,6 +253,7 @@ namespace FrmPIE.frmPIE
             // 
             // gb0ScanTxt
             // 
+            this.gb0ScanTxt.Controls.Add(this.btn1Clear);
             this.gb0ScanTxt.Controls.Add(this.txt0Scan);
             this.gb0ScanTxt.Controls.Add(this.lblMsg);
             this.gb0ScanTxt.Location = new System.Drawing.Point(6, 0);
@@ -268,7 +269,7 @@ namespace FrmPIE.frmPIE
             this.txt0Scan.Location = new System.Drawing.Point(6, 16);
             this.txt0Scan.Multiline = true;
             this.txt0Scan.Name = "txt0Scan";
-            this.txt0Scan.Size = new System.Drawing.Size(488, 84);
+            this.txt0Scan.Size = new System.Drawing.Size(432, 84);
             this.txt0Scan.TabIndex = 0;
             this.txt0Scan.TextChanged += new System.EventHandler(this.txt0Scan_TextChanged);
             this.txt0Scan.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt0Scan_KeyDown);
@@ -284,7 +285,6 @@ namespace FrmPIE.frmPIE
             // 
             // gb2det_BatchInfo
             // 
-            this.gb2det_BatchInfo.Controls.Add(this.btn1Clear);
             this.gb2det_BatchInfo.Controls.Add(this.btn0Save);
             this.gb2det_BatchInfo.Controls.Add(this.label1);
             this.gb2det_BatchInfo.Controls.Add(this.txt3PalletNoAddNewBatchID);
@@ -317,9 +317,10 @@ namespace FrmPIE.frmPIE
             // btn1Clear
             // 
             this.btn1Clear.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn1Clear.Location = new System.Drawing.Point(263, 151);
+            this.btn1Clear.ForeColor = System.Drawing.Color.Red;
+            this.btn1Clear.Location = new System.Drawing.Point(442, 16);
             this.btn1Clear.Name = "btn1Clear";
-            this.btn1Clear.Size = new System.Drawing.Size(75, 47);
+            this.btn1Clear.Size = new System.Drawing.Size(60, 84);
             this.btn1Clear.TabIndex = 121;
             this.btn1Clear.Text = "Clear";
             this.btn1Clear.UseVisualStyleBackColor = true;
