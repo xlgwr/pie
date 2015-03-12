@@ -15,13 +15,11 @@ namespace FrmPIE.frmPIE
         where T : Form, iform
         where G : DataGridView
     {
-        frmEnterTxt _frmET;
         frmIDR _idr_show;
         T _obj0from;
         G _obj1DGV;
         IList<string> _tmpSearchTxT;
         Commfunction<T> cf;
-        DataSet _reobjdet;
         public frm614ScanForASN()
         {
             InitializeComponent();
@@ -68,7 +66,8 @@ namespace FrmPIE.frmPIE
         {
             gb0ScanTxt.Width = this.Width - 30;
 
-            txt0Scan.Width = gb0ScanTxt.Width - 15;
+            txt0Scan.Width = gb0ScanTxt.Width - 65;
+            btn1Clear.Left = gb0ScanTxt.Width - 55;
             lblMsg.Width = txt0Scan.Width;
 
             gb2det_BatchInfo.Width = gb0ScanTxt.Width;

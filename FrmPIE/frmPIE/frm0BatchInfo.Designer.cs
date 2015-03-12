@@ -151,7 +151,7 @@
             this.btn0Scan.Name = "btn0Scan";
             this.btn0Scan.Size = new System.Drawing.Size(69, 23);
             this.btn0Scan.TabIndex = 8;
-            this.btn0Scan.Text = "ScanASN";
+            this.btn0Scan.Text = "Scan&ASN";
             this.btn0Scan.UseVisualStyleBackColor = true;
             this.btn0Scan.Visible = false;
             this.btn0Scan.Click += new System.EventHandler(this.btn0Scan_Click);

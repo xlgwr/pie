@@ -86,7 +86,7 @@ namespace FrmPIE.frmPIE
             this.txt12CartonprifixAddNewBatchID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txt12CartonprifixAddNewBatchID.Location = new System.Drawing.Point(342, 13);
             this.txt12CartonprifixAddNewBatchID.Name = "txt12CartonprifixAddNewBatchID";
-            this.txt12CartonprifixAddNewBatchID.Size = new System.Drawing.Size(96, 21);
+            this.txt12CartonprifixAddNewBatchID.Size = new System.Drawing.Size(152, 21);
             this.txt12CartonprifixAddNewBatchID.TabIndex = 97;
             // 
             // label17
@@ -318,11 +318,11 @@ namespace FrmPIE.frmPIE
             // 
             this.btn1Clear.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn1Clear.ForeColor = System.Drawing.Color.Red;
-            this.btn1Clear.Location = new System.Drawing.Point(442, 16);
+            this.btn1Clear.Location = new System.Drawing.Point(439, 16);
             this.btn1Clear.Name = "btn1Clear";
-            this.btn1Clear.Size = new System.Drawing.Size(60, 84);
+            this.btn1Clear.Size = new System.Drawing.Size(55, 84);
             this.btn1Clear.TabIndex = 121;
-            this.btn1Clear.Text = "Clear";
+            this.btn1Clear.Text = "&Clear";
             this.btn1Clear.UseVisualStyleBackColor = true;
             this.btn1Clear.Click += new System.EventHandler(this.btn1Clear_Click);
             // 
@@ -334,7 +334,7 @@ namespace FrmPIE.frmPIE
             this.btn0Save.Name = "btn0Save";
             this.btn0Save.Size = new System.Drawing.Size(75, 47);
             this.btn0Save.TabIndex = 100;
-            this.btn0Save.Text = "Save";
+            this.btn0Save.Text = "&Save";
             this.btn0Save.UseVisualStyleBackColor = true;
             this.btn0Save.Click += new System.EventHandler(this.btn0Save_Click);
             // 
