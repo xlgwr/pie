@@ -208,12 +208,13 @@ namespace FrmPIE.frmPIE
         }
         private void findinDgvCheck(TextBox tbpo, TextBox tbpart)
         {
+
             if (!string.IsNullOrEmpty(tbpart.Text) && !string.IsNullOrEmpty(tbpo.Text))
             {
                 if (findinDgv(tbpo.Text.Trim(), tbpart.Text.Trim()))
                 {
                     lblMsg.Text = "Notice: Po and PartNo has been find OK.";
-                }
+                } 
                 else
                 {
                     lblMsg.Text = "Error: Po->" + tbpo.Text +

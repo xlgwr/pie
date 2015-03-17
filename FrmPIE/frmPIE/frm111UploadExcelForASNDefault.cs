@@ -24,7 +24,7 @@ using NPOI.XSSF.UserModel;
 
 namespace FrmPIE
 {
-    public partial class frm111UploadExcelForASN : Form
+    public partial class frm111UploadExcelForASNDefault : Form
     {
         frmEnterTxt _frmET;
 
@@ -53,7 +53,7 @@ namespace FrmPIE
         System.Data.DataTable _dt_downToExela = new System.Data.DataTable();
 
         PIE.Model.plr_batch_mstr _plr_batch_mstr_model = new PIE.Model.plr_batch_mstr();
-        public frm111UploadExcelForASN(frmIDR idr)
+        public frm111UploadExcelForASNDefault(frmIDR idr)
         {
             InitializeComponent();
 
@@ -703,7 +703,7 @@ namespace FrmPIE
 
         private void btn2TempleFile_Click(object sender, EventArgs e)
         {
-            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0temple\templesforASN.xlsx";
+            string pathname = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"0temple\templesforASNDefault.xlsx";
             Program.OpenFolderAndSelectFile(pathname);
         }
         void Init0ializeWorkbook(object path)

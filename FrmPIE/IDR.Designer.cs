@@ -61,9 +61,11 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn1PackingListMaintain1 = new System.Windows.Forms.Button();
             this.cMenuStrip1PacklingListMain = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolcMenu12AddOneByOneBatchID = new System.Windows.Forms.ToolStripMenuItem();
             this.toolcMenu11UploadEPackingListExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolcMenu10UploadEPackingListExcelForKYCA = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolcMenu12AddOneByOneBatchID = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolcMenu14UploadEPackingListExcelForASN2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolcMenu15ScanPackingListExcelForASN = new System.Windows.Forms.ToolStripMenuItem();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn2GenCarton2 = new System.Windows.Forms.Button();
@@ -109,8 +111,7 @@
             this.link0NewVersion = new System.Windows.Forms.LinkLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerColor = new System.Windows.Forms.Timer(this.components);
-            this.toolcMenu13UploadEPackingListExcelForASN = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolcMenu14ScanPackingListExcelForASN = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolcMenu13UploadEPackingListExcelForASN1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -475,16 +476,25 @@
             this.toolcMenu12AddOneByOneBatchID,
             this.toolcMenu11UploadEPackingListExcel,
             this.toolcMenu10UploadEPackingListExcelForKYCA,
-            this.toolcMenu13UploadEPackingListExcelForASN,
-            this.toolcMenu14ScanPackingListExcelForASN});
+            this.toolcMenu13UploadEPackingListExcelForASN1,
+            this.toolcMenu14UploadEPackingListExcelForASN2,
+            this.toolcMenu15ScanPackingListExcelForASN});
             this.cMenuStrip1PacklingListMain.Name = "cMenuPacklingListMain1";
-            this.cMenuStrip1PacklingListMain.Size = new System.Drawing.Size(308, 136);
+            this.cMenuStrip1PacklingListMain.Size = new System.Drawing.Size(313, 158);
+            // 
+            // toolcMenu12AddOneByOneBatchID
+            // 
+            this.toolcMenu12AddOneByOneBatchID.Image = global::FrmPIE.Properties.Resources.add;
+            this.toolcMenu12AddOneByOneBatchID.Name = "toolcMenu12AddOneByOneBatchID";
+            this.toolcMenu12AddOneByOneBatchID.Size = new System.Drawing.Size(312, 22);
+            this.toolcMenu12AddOneByOneBatchID.Text = "1.&Add New(Edit BatchID)";
+            this.toolcMenu12AddOneByOneBatchID.Click += new System.EventHandler(this.toolcMenu12AddOneByOneBatchID_Click);
             // 
             // toolcMenu11UploadEPackingListExcel
             // 
             this.toolcMenu11UploadEPackingListExcel.Image = global::FrmPIE.Properties.Resources.up;
             this.toolcMenu11UploadEPackingListExcel.Name = "toolcMenu11UploadEPackingListExcel";
-            this.toolcMenu11UploadEPackingListExcel.Size = new System.Drawing.Size(307, 22);
+            this.toolcMenu11UploadEPackingListExcel.Size = new System.Drawing.Size(312, 22);
             this.toolcMenu11UploadEPackingListExcel.Text = "2.&Upload EPacking List (Excel)";
             this.toolcMenu11UploadEPackingListExcel.Click += new System.EventHandler(this.toolcMenu11UploadEPackingListExcel_Click);
             // 
@@ -492,17 +502,24 @@
             // 
             this.toolcMenu10UploadEPackingListExcelForKYCA.Image = global::FrmPIE.Properties.Resources._23;
             this.toolcMenu10UploadEPackingListExcelForKYCA.Name = "toolcMenu10UploadEPackingListExcelForKYCA";
-            this.toolcMenu10UploadEPackingListExcelForKYCA.Size = new System.Drawing.Size(307, 22);
+            this.toolcMenu10UploadEPackingListExcelForKYCA.Size = new System.Drawing.Size(312, 22);
             this.toolcMenu10UploadEPackingListExcelForKYCA.Text = "3.&Upload EPacking List (Excel For KYCA)";
             this.toolcMenu10UploadEPackingListExcelForKYCA.Click += new System.EventHandler(this.toolcMenu10UploadEPackingListExcelForKYCA_Click);
             // 
-            // toolcMenu12AddOneByOneBatchID
+            // toolcMenu14UploadEPackingListExcelForASN2
             // 
-            this.toolcMenu12AddOneByOneBatchID.Image = global::FrmPIE.Properties.Resources.add;
-            this.toolcMenu12AddOneByOneBatchID.Name = "toolcMenu12AddOneByOneBatchID";
-            this.toolcMenu12AddOneByOneBatchID.Size = new System.Drawing.Size(307, 22);
-            this.toolcMenu12AddOneByOneBatchID.Text = "1.&Add New(Edit BatchID)";
-            this.toolcMenu12AddOneByOneBatchID.Click += new System.EventHandler(this.toolcMenu12AddOneByOneBatchID_Click);
+            this.toolcMenu14UploadEPackingListExcelForASN2.Image = global::FrmPIE.Properties.Resources._23;
+            this.toolcMenu14UploadEPackingListExcelForASN2.Name = "toolcMenu14UploadEPackingListExcelForASN2";
+            this.toolcMenu14UploadEPackingListExcelForASN2.Size = new System.Drawing.Size(312, 22);
+            this.toolcMenu14UploadEPackingListExcelForASN2.Text = "5.&Upload EPacking List (Excel For ASN 2)";
+            this.toolcMenu14UploadEPackingListExcelForASN2.Click += new System.EventHandler(this.toolcMenu13UploadEPackingListExcelForASN_Click);
+            // 
+            // toolcMenu15ScanPackingListExcelForASN
+            // 
+            this.toolcMenu15ScanPackingListExcelForASN.Image = global::FrmPIE.Properties.Resources.scanBar;
+            this.toolcMenu15ScanPackingListExcelForASN.Name = "toolcMenu15ScanPackingListExcelForASN";
+            this.toolcMenu15ScanPackingListExcelForASN.Size = new System.Drawing.Size(312, 22);
+            this.toolcMenu15ScanPackingListExcelForASN.Text = "6.&Scan ASN For EPacking List";
             // 
             // linkLabel1
             // 
@@ -992,20 +1009,13 @@
             // 
             this.timerColor.Tick += new System.EventHandler(this.timerColor_Tick);
             // 
-            // toolcMenu13UploadEPackingListExcelForASN
+            // toolcMenu13UploadEPackingListExcelForASN1
             // 
-            this.toolcMenu13UploadEPackingListExcelForASN.Image = global::FrmPIE.Properties.Resources._23;
-            this.toolcMenu13UploadEPackingListExcelForASN.Name = "toolcMenu13UploadEPackingListExcelForASN";
-            this.toolcMenu13UploadEPackingListExcelForASN.Size = new System.Drawing.Size(307, 22);
-            this.toolcMenu13UploadEPackingListExcelForASN.Text = "4.&Upload EPacking List (Excel For ASN)";
-            this.toolcMenu13UploadEPackingListExcelForASN.Click += new System.EventHandler(this.toolcMenu13UploadEPackingListExcelForASN_Click);
-            // 
-            // toolcMenu14ScanPackingListExcelForASN
-            // 
-            this.toolcMenu14ScanPackingListExcelForASN.Image = global::FrmPIE.Properties.Resources.scanBar;
-            this.toolcMenu14ScanPackingListExcelForASN.Name = "toolcMenu14ScanPackingListExcelForASN";
-            this.toolcMenu14ScanPackingListExcelForASN.Size = new System.Drawing.Size(307, 22);
-            this.toolcMenu14ScanPackingListExcelForASN.Text = "5.&Scan ASN For EPacking List";
+            this.toolcMenu13UploadEPackingListExcelForASN1.Image = global::FrmPIE.Properties.Resources.up;
+            this.toolcMenu13UploadEPackingListExcelForASN1.Name = "toolcMenu13UploadEPackingListExcelForASN1";
+            this.toolcMenu13UploadEPackingListExcelForASN1.Size = new System.Drawing.Size(312, 22);
+            this.toolcMenu13UploadEPackingListExcelForASN1.Text = "4.&Upload EPacking List (Excel For ASN 1)";
+            this.toolcMenu13UploadEPackingListExcelForASN1.Click += new System.EventHandler(this.toolcMenu13UploadEPackingListExcelForASN1_Click);
             // 
             // frmIDR
             // 
@@ -1146,8 +1156,9 @@
         private System.Windows.Forms.ToolStripMenuItem addGWForPalletToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addCoForPalletToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addSQRMForPalletToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolcMenu13UploadEPackingListExcelForASN;
-        private System.Windows.Forms.ToolStripMenuItem toolcMenu14ScanPackingListExcelForASN;
+        private System.Windows.Forms.ToolStripMenuItem toolcMenu14UploadEPackingListExcelForASN2;
+        private System.Windows.Forms.ToolStripMenuItem toolcMenu15ScanPackingListExcelForASN;
+        private System.Windows.Forms.ToolStripMenuItem toolcMenu13UploadEPackingListExcelForASN1;
 
 
 

@@ -26,6 +26,7 @@ namespace FrmPIE
         frm0BatchInfo _frm0BatchInfo;
         frm111UploadExcelForKYCA _frm111UploadExcelForKYCA;
         frm111UploadExcelForASN _frm111UploadExcelForASN;
+        frm111UploadExcelForASNDefault _frm111UploadExcelForASNDefault;
         frmUploadExcel _frmUploadExcel;
 
         frm513PrintCartonLabel _frm513PrintCartonLabel;
@@ -228,6 +229,15 @@ namespace FrmPIE
             _idr_show = idr;
 
             _frm111UploadExcelForKYCA = frm111UploadExcelForKYCA;
+
+            InitializeComponent();
+        }
+        public frmEnterTxt(frmIDR idr, frm111UploadExcelForASNDefault frm111UploadExcelForA)
+        {
+            cf = new Commfunction(idr);
+            _idr_show = idr;
+
+            _frm111UploadExcelForASNDefault = frm111UploadExcelForA;
 
             InitializeComponent();
         }

@@ -127,6 +127,12 @@
     <Compile Include="frmPIE\frm0BatchInfo.Designer.cs">
       <DependentUpon>frm0BatchInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPIE\frm111UploadExcelForASNDefault.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPIE\frm111UploadExcelForASNDefault.Designer.cs">
+      <DependentUpon>frm111UploadExcelForASNDefault.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPIE\frm111UploadExcelForASN.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +296,9 @@
     <EmbeddedResource Include="frmPIE\frm0BatchInfo.resx">
       <DependentUpon>frm0BatchInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPIE\frm111UploadExcelForASNDefault.resx">
+      <DependentUpon>frm111UploadExcelForASNDefault.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPIE\frm111UploadExcelForASN.resx">
       <DependentUpon>frm111UploadExcelForASN.cs</DependentUpon>
     </EmbeddedResource>
@@ -370,6 +379,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="0temple\templesforASN.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="0temple\templesforASNDefault.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="0temple\templesforKYCA.xlsx">

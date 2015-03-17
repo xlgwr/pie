@@ -963,9 +963,17 @@ namespace FrmPIE
 
         private void toolcMenu13UploadEPackingListExcelForASN_Click(object sender, EventArgs e)
         {
-            addNewTabPage("Upload EPacking List From Excel For ASN");
+            addNewTabPage("Upload EPacking List From Excel For ASN 2");
             frm111UploadExcelForASN fus = new frm111UploadExcelForASN(this);
             addGBToTC(tabCtlRight1, fus.groupBox0frmUploadExcelForKYCA);
+        }
+
+        private void toolcMenu13UploadEPackingListExcelForASN1_Click(object sender, EventArgs e)
+        {
+            addNewTabPage("Upload EPacking List From Excel For ASN 1");
+            frm111UploadExcelForASNDefault fus = new frm111UploadExcelForASNDefault(this);
+            addGBToTC(tabCtlRight1, fus.groupBox0frmUploadExcelForKYCA);
+
         }
 
 
