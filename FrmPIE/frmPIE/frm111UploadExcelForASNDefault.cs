@@ -112,14 +112,14 @@ namespace FrmPIE
             strsql = new StringBuilder();
             strsql.Append("select ");
             strsql.Append(" Batch_ID,LineID,plr_status, ");
-            strsql.Append(" InvoiceID,packingListID, ");
+            strsql.Append(" packingListID,plr_po,plr_partno, ");
 
-            strsql.Append(" plr_po,plr_partno,Plr_vm_partno,plr_co,plr_qty,[Plr_unitprice],[plr_chr01], ");
+            strsql.Append(" [plr_chr01],Plr_vm_partno,plr_qty,InvoiceID,carton_id_prifix, ");
 
-            strsql.Append(" plr_vend_mfgr,CartonID,plr_carton_qty,");
+            strsql.Append(" plr_pallet_no, plr_co,plr_date_code,[plr_chr02], ");
 
-            strsql.Append(" plr_pallet_no,  ");
-            strsql.Append(" CartonType,plr_date_code,carton_id_prifix, ");
+            strsql.Append(" CartonID,plr_carton_qty,plr_vend_mfgr, ");
+            strsql.Append(" CartonType, ");
 
             strsql.Append(" plr_doc_type,plr_rcp_date,plr_deli_date,plr_cre_date,plr_update_date,plr_user_ip ");
             strsql.Append(" from plr_mstr ");
@@ -151,8 +151,8 @@ namespace FrmPIE
 
                 cf.initHeaderTextPlrMstr2ExcelUpload(data1GV1ePackingDet1UploadExcel);
                 //add for asn
-                data1GV1ePackingDet1UploadExcel.Columns["Plr_unitprice"].HeaderText = "SP";
-                data1GV1ePackingDet1UploadExcel.Columns["plr_chr01"].HeaderText = "AMOUNT";
+                data1GV1ePackingDet1UploadExcel.Columns["plr_chr02"].HeaderText = "LotNumber";
+                data1GV1ePackingDet1UploadExcel.Columns["plr_chr01"].HeaderText = "Brand";
 
                 cmdb = new SqlCommandBuilder(command);
 
@@ -908,13 +908,13 @@ namespace FrmPIE
                 _idr_show.status15toolLabelstrResult.Text = "Load Rows at:" + rowscount;
 
 
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < 12; i++)
                 {
                     dr[0] = _strBatchID;
                     dr[1] = addrowscount;
                     dr["plr_status"] = "No";
 
-                    dr["plr_doc_type"] = "e-Packing-asn";
+                    dr["plr_doc_type"] = "e-Packing-asn1";
                     dr["plr_rcp_date"] = servedate;
                     dr["plr_deli_date"] = servedate;
                     dr["plr_cre_date"] = servedate; // DateTime.FromOADate(double型)    如果excel为日期时
@@ -932,46 +932,34 @@ namespace FrmPIE
                     {
                         if (rowscount == 1)
                         {
-
                             strerrnullrows += (rowscount + 1).ToString();
                         }
                         else
                         {
+
                             strerrnullrows += ",null row:" + (rowscount + 1).ToString();
 
                         }
                         rowscount++;
                         rowserrscount++;
                         nextrow = false;
-                        break;
+                        if (i < 10)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            dr[i + 3] = "";
+                        }
                         //dr[i] = null;
                     }
                     else
                     {
-                        if (i == 8)
+                        getCellValue(dr, i, cell);
+                        if (i == 5)
                         {
-                            dr[i + 3] = getCellValue(cell);
+                            _gblTTlQty += cell.NumericCellValue;
                         }
-                        else if (i == 2)
-                        {
-                            var tmpPo = getCellValue(cell);
-                            if (tmpPo.IndexOf('/') > 0)
-                            {
-                                tmpPo = tmpPo.Split('/')[0].Trim();
-                            }
-                            dr[i + 3] = tmpPo;
-                        }
-                        else if (i != 8)
-                        {
-                            getCellValue(dr, i, cell);
-                            if (i==6)
-                            {
-                                _gblTTlQty += cell.NumericCellValue;
-                            }
-                        }
-
-
-
                     }
 
                 }
