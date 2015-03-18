@@ -37,7 +37,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm111UploadExcelForASNDefault));
             this.groupBox0frmUploadExcelForKYCA = new System.Windows.Forms.GroupBox();
-            this.chk0UseArr = new System.Windows.Forms.CheckBox();
             this.btn2GoUploadToERP = new System.Windows.Forms.Button();
             this.groupBox2mstrUploadExcel = new System.Windows.Forms.GroupBox();
             this.txt5batch_cre_dateUploadExcel = new System.Windows.Forms.TextBox();
@@ -83,7 +82,6 @@
             // 
             // groupBox0frmUploadExcelForKYCA
             // 
-            this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.chk0UseArr);
             this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.btn2GoUploadToERP);
             this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.groupBox2mstrUploadExcel);
             this.groupBox0frmUploadExcelForKYCA.Controls.Add(this.groupBox3detUploadExcel);
@@ -98,18 +96,6 @@
             this.groupBox0frmUploadExcelForKYCA.TabIndex = 0;
             this.groupBox0frmUploadExcelForKYCA.TabStop = false;
             this.groupBox0frmUploadExcelForKYCA.Resize += new System.EventHandler(this.groupBox1frmUpload_Resize);
-            // 
-            // chk0UseArr
-            // 
-            this.chk0UseArr.AutoSize = true;
-            this.chk0UseArr.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chk0UseArr.ForeColor = System.Drawing.Color.Red;
-            this.chk0UseArr.Location = new System.Drawing.Point(400, 101);
-            this.chk0UseArr.Name = "chk0UseArr";
-            this.chk0UseArr.Size = new System.Drawing.Size(129, 16);
-            this.chk0UseArr.TabIndex = 18;
-            this.chk0UseArr.Text = "Normal Split PO";
-            this.chk0UseArr.UseVisualStyleBackColor = true;
             // 
             // btn2GoUploadToERP
             // 
@@ -445,9 +431,9 @@
             this.btn3QuickUploadExcel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn3QuickUploadExcel.Location = new System.Drawing.Point(206, 90);
             this.btn3QuickUploadExcel.Name = "btn3QuickUploadExcel";
-            this.btn3QuickUploadExcel.Size = new System.Drawing.Size(163, 36);
+            this.btn3QuickUploadExcel.Size = new System.Drawing.Size(183, 36);
             this.btn3QuickUploadExcel.TabIndex = 12;
-            this.btn3QuickUploadExcel.Text = "&Quick Upload(For ASN)";
+            this.btn3QuickUploadExcel.Text = "&Quick Upload(For ASN 1)";
             this.btn3QuickUploadExcel.UseVisualStyleBackColor = true;
             this.btn3QuickUploadExcel.Click += new System.EventHandler(this.btn3QuickUploadExcel_Click);
             // 
@@ -515,7 +501,6 @@
         private System.Windows.Forms.ToolStripMenuItem downLoad2ToExceltoolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem downLoad1ToExceltoolStripMenuItem2;
         private System.Windows.Forms.Button btn2GoUploadToERP;
-        private System.Windows.Forms.CheckBox chk0UseArr;
 
     }
 }

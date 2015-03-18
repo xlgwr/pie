@@ -71,7 +71,6 @@ namespace FrmPIE
             data1GV1ePackingDet1UploadExcel.CellClick += data1GV1ePackingDet1UploadExcel_CellClick;
             data1GV1ePackingDet1UploadExcel.RowEnter += data1GV1ePackingDet1UploadExcel_RowEnter;
 
-            chk0UseArr.Visible = false;
 
         }
         void tableColumnsAdd(System.Data.DataTable dt, string strcolnumname)
@@ -118,8 +117,8 @@ namespace FrmPIE
 
             strsql.Append(" plr_pallet_no, plr_co,plr_date_code,[plr_chr02], ");
 
-            strsql.Append(" CartonID,plr_carton_qty,plr_vend_mfgr, ");
-            strsql.Append(" CartonType, ");
+            strsql.Append(" CartonID,plr_carton_qty, ");
+            strsql.Append(" CartonType,plr_vend_mfgr, ");
 
             strsql.Append(" plr_doc_type,plr_rcp_date,plr_deli_date,plr_cre_date,plr_update_date,plr_user_ip ");
             strsql.Append(" from plr_mstr ");
@@ -644,7 +643,7 @@ namespace FrmPIE
 
             _plr_batch_mstr_model.batch_id = _strBatchID;
             //_plr_batch_mstr_model.plr_suppliers_id = "";
-            _plr_batch_mstr_model.batch_doc = "e-Packing-asn";
+            _plr_batch_mstr_model.batch_doc = "e-Packing-asn1";
             //plr_batch_mstr_model.batch_dec01 = row - 1;
             //_plr_batch_mstr_model.batch_void = 0;
             _plr_batch_mstr_model.batch_status = "No";
@@ -774,7 +773,7 @@ namespace FrmPIE
 
             //var intresutl = Program.GenCartonNo(data0set_npoi);
 
-            //ThreadPool.QueueUserWorkItem(new WaitCallback(doGenCarton), o);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(doGenCarton), o);
         }
         void doGenCarton(object o)
         {
@@ -811,9 +810,6 @@ namespace FrmPIE
             else
             {
                 MessageBox.Show("Error:Excel file Total Qty:" + _gblTTlQty + " <> " + ttlqty.ToString() + " Carton of Total Qty,\n Can't be Upload to ERP. \nPlease check Excel file.\n Or Use Normal Split Po.");
-
-                chk0UseArr.Visible = true;
-                chk0UseArr.Checked = true;
 
                 string strupdate_plr_batch_mstr = @"update [plr_batch_mstr] set batch_status='Yes' where batch_id='" + batchid + "'";
                 string strupdateplr_mstr = @"update plr_mstr set plr_status='Yes' where batch_id='" + batchid + "'";
@@ -921,10 +917,10 @@ namespace FrmPIE
                     dr["plr_update_date"] = servedate;
                     dr["plr_user_ip"] = _idr_show._custip;
 
-                    dr["plr_carton_qty"] = 0;
-                    dr["CartonType"] = 0;
+                    //dr["plr_carton_qty"] = 0;
+                    //dr["CartonType"] = 0;
 
-                    dr["CartonID"] = "";// add by asn
+                    //dr["CartonID"] = "";// add by asn
 
                     ICell cell = row.GetCell(i);
 
@@ -934,7 +930,7 @@ namespace FrmPIE
                         {
                             strerrnullrows += (rowscount + 1).ToString();
                         }
-                        else
+                        else if (i < 10)
                         {
 
                             strerrnullrows += ",null row:" + (rowscount + 1).ToString();
@@ -958,8 +954,29 @@ namespace FrmPIE
                         getCellValue(dr, i, cell);
                         if (i == 5)
                         {
+                            _currQty = cell.NumericCellValue;
                             _gblTTlQty += cell.NumericCellValue;
                         }
+                        else if (i == 7)
+                        {
+                            if (getCellValue(cell).Equals("1"))
+                            {
+                                dr["CartonID"] = (addrowscount * 200 + 1);
+                                dr["plr_carton_qty"] = _currQty;
+                                dr["CartonType"] = 0;
+                            }
+                            else
+                            {
+                                dr["CartonID"] = (addrowscount * 200 + 1) + "-" + (addrowscount * 200 + cell.NumericCellValue);
+
+                                _remainderCurrRow = _currQty % cell.NumericCellValue;
+                                _avgCurrRowQty = (_currQty - _remainderCurrRow) / cell.NumericCellValue;
+
+                                dr["plr_carton_qty"] = _avgCurrRowQty;
+                                dr["CartonType"] = _remainderCurrRow.ToString("###");
+                            }
+                        }
+
                     }
 
                 }
@@ -1176,7 +1193,7 @@ namespace FrmPIE
                 }
             }
             _listCtnPoQty[_listCtnPoQty.Count - 1]._qty += remainQty;
-            addNewRowFromCarton(dt, dr, _listCtnPoQty, chk0UseArr.Checked);
+            //addNewRowFromCarton(dt, dr, _listCtnPoQty, chk0UseArr.Checked);
             _listCtnPoQty.Clear();
         }
         private void initCartonID(System.Data.DataTable dt, DataRow dr, double intcellQty, ICell cellPO, double currentnumber, double intfrom, double into, double countCTN)
@@ -1766,6 +1783,8 @@ namespace FrmPIE
 
         public List<ListPoQty> _listPoQty { get; set; }
         public List<ListPoQty> _listCtnPoQty { get; set; }
+
+        public double _currQty { get; set; }
     }
 
 }
