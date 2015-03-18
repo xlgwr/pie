@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.BLL", "BLL\IDR.BLL.csproj", "{38D7AA58-C95B-449B-86C6-A8073A56E11F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.Model", "Model\IDR.Model.csproj", "{53995DBB-9836-4647-AD22-865884FDEB9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.DAL", "DAL\IDR.DAL.csproj", "{9FE00521-3A8B-42B1-814E-585E99407B2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xprint", "Print\ClassLibrary1\Xprint.csproj", "{76C2A76D-23B4-454D-A8C8-CA83343CD2FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrmIDR", "FrmPIE\FrmIDR.csproj", "{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.DBUtility", "DBUtility\IDR.DBUtility.csproj", "{0988C62E-247F-471F-A183-DB509C7A3839}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.Common", "Common\IDR.Common.csproj", "{E3D8759A-C5EB-402D-9F10-F5C6029A8D1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDR.TicketingProcessTimeMeasurement", "IDR.TicketingProcessTimeMeasurement\IDR.TicketingProcessTimeMeasurement.csproj", "{FA72B71E-E7E6-4921-BB8A-6A57A6BBFA8E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Debug|x86.ActiveCfg = Debug|x86
+		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Debug|x86.Build.0 = Debug|x86
+		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Release|x86.ActiveCfg = Release|x86
+		{22C2FC68-8C80-4861-BF90-DFBF2553B8B4}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
