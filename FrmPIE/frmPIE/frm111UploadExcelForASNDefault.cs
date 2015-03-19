@@ -959,22 +959,29 @@ namespace FrmPIE
                         }
                         else if (i == 7)
                         {
-                            if (getCellValue(cell).Equals("1"))
-                            {
-                                dr["CartonID"] = (addrowscount * 200 + 1);
-                                dr["plr_carton_qty"] = _currQty;
-                                dr["CartonType"] = 0;
-                            }
-                            else
-                            {
-                                dr["CartonID"] = (addrowscount * 200 + 1) + "-" + (addrowscount * 200 + cell.NumericCellValue);
+                            //***********catronid is number
+                            //if (getCellValue(cell).Equals("1"))
+                            //{
+                            //    dr["CartonID"] = (addrowscount * 200 + 1);
+                            //    dr["plr_carton_qty"] = _currQty;
+                            //    dr["CartonType"] = 0;
+                            //}
+                            //else
+                            //{
+                            //    dr["CartonID"] = (addrowscount * 200 + 1) + "-" + (addrowscount * 200 + cell.NumericCellValue);
 
-                                _remainderCurrRow = _currQty % cell.NumericCellValue;
-                                _avgCurrRowQty = (_currQty - _remainderCurrRow) / cell.NumericCellValue;
+                            //    _remainderCurrRow = _currQty % cell.NumericCellValue;
+                            //    _avgCurrRowQty = (_currQty - _remainderCurrRow) / cell.NumericCellValue;
 
-                                dr["plr_carton_qty"] = _avgCurrRowQty;
-                                dr["CartonType"] = _remainderCurrRow.ToString("###");
-                            }
+                            //    dr["plr_carton_qty"] = _avgCurrRowQty;
+                            //    dr["CartonType"] = _remainderCurrRow.ToString("###");
+                            //}
+
+                            /////**********only cartonid is list
+                            dr["CartonID"] = dr["InvoiceID"].ToString() + cell.NumericCellValue.ToString();
+                            dr["carton_id_prifix"] = dr["CartonID"];
+                            dr["plr_carton_qty"] = _currQty;
+                            dr["CartonType"] = 0;
                         }
 
                     }
